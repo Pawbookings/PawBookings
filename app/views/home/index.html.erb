@@ -1,0 +1,20 @@
+<div class="container-fluid" style="background-color:black">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h1 style="color:white;">PawBookings.com</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row text-center">
+    <% if current_user.nil? %>
+      <div class="col-xs-6">
+        <%= link_to "Customer Signup", new_user_registration_path(kennel_or_customer: "customer") %>
+      </div>
+      <div class="col-xs-6">
+        <%= link_to "Kennel Signup", new_user_registration_path(kennel_or_customer: "kennel") %>
+      </div>
+    <% end %>
+  </div>
+</div>

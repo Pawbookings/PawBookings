@@ -1,0 +1,2 @@
+class KennelsController < ApplicationController
+end
