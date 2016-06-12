@@ -1,0 +1,12 @@
+<h1>Amenities registration</h1>
+
+<%= form_for @amenity do |f| %>
+  <%= f.text_area :description, placeholder: " Amenity Description" %>
+  <br>
+  <br>
+  <%= f.text_field :price, placeholder: " Price" %>
+  <br>
+  <br>
+  <%= f.submit "Submit" %>
+  <%= f.submit "Submit and create another 'Amenity'", name: "create_another_amenity" %>
+<% end %>

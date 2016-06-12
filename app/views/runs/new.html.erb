@@ -1,0 +1,30 @@
+<h1>Runs registrations</h1>
+
+<%= form_for @run do |f| %>
+  <%= f.text_field :size, placeholder: " Size" %>
+  <br>
+  <%= f.text_field :title, placeholder: " Title" %>
+  <br>
+  <%= f.text_field :description, placeholder: " Description" %>
+  <br>
+  <%= f.label :indoor_or_outdoor %>
+  <%= f.select :indoor_or_outdoor, options_for_select(indoor_outdoor_option) %>
+  <br>
+  <%= f.label :private_or_shared %>
+  <%= f.select :private_or_shared, options_for_select(private_shared_option) %>
+  <br>
+  <%= f.text_field :pets_per_run, placeholder: " Pets allowed per run" %>
+  <br>
+  <%= f.text_field :price, placeholder: " Price per night" %>
+  <br>
+  <%= f.text_field :weight_limit, placeholder: " Weight Limit" %>
+  <br>
+  <%= f.label :breeds_restricted %>
+  <br>
+  <%= f.select :breeds_restricted, options_for_select(breed_restriction_option), {}, {:multiple => true, size: 4} %>
+  <br>
+  <%= f.text_field :number_of_rooms, placeholder: " Number of these runs" %>
+  <br>
+  <%= f.submit "Submit" %>
+  <%= f.submit "Submit and create another 'Run'", name: "create_another_run" %>
+<% end %>

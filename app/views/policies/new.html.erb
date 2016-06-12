@@ -1,0 +1,8 @@
+<h1>Facility Policies/Requirements Registration</h1>
+
+<%= form_for @policy do |f| %>
+  <%= f.text_area :description, placeholder: " Description" %>
+  <br>
+  <%= f.submit "Submit" %>
+  <%= f.submit "Submit and create another 'Policy'", name: "create_another_policy" %>
+<% end %>

@@ -11,21 +11,64 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610015033) do
+ActiveRecord::Schema.define(version: 20160612114838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "amenities", force: :cascade do |t|
+    t.integer  "kennel_id"
+    t.string   "description"
+    t.float    "price"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "amenities", ["kennel_id"], name: "index_amenities_on_kennel_id", using: :btree
+
   create_table "kennels", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "kennel_name"
     t.string   "kennel_address"
     t.string   "city"
     t.string   "state"
     t.string   "zip"
     t.string   "phone"
+    t.string   "drop_off_time"
+    t.string   "pick_up_time"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
+
+  add_index "kennels", ["user_id"], name: "index_kennels_on_user_id", using: :btree
+
+  create_table "policies", force: :cascade do |t|
+    t.integer  "kennel_id"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "policies", ["kennel_id"], name: "index_policies_on_kennel_id", using: :btree
+
+  create_table "runs", force: :cascade do |t|
+    t.integer  "kennel_id"
+    t.float    "price"
+    t.integer  "weight_limit"
+    t.integer  "number_of_rooms"
+    t.integer  "pets_per_run"
+    t.string   "size"
+    t.string   "title"
+    t.string   "description"
+    t.string   "indoor_or_outdoor"
+    t.string   "private_or_shared"
+    t.string   "breeds_restricted"
+    t.string   "dates_unavailable"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "runs", ["kennel_id"], name: "index_runs_on_kennel_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -33,6 +76,7 @@ ActiveRecord::Schema.define(version: 20160610015033) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "kennel_or_customer"
+    t.boolean  "completed_registration"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

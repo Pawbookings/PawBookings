@@ -1,0 +1,22 @@
+<h1>Kennel Registration</h1>
+
+
+<%= form_for @kennel do |f| %>
+  <%= f.text_field :kennel_name, placeholder: " Kennel Name" %>
+  <br>
+  <%= f.text_field :kennel_address, placeholder: " Kennel Address" %>
+  <br>
+  <%= f.text_field :city, placeholder: " City" %>
+  <br>
+  <%= f.select :state, options_for_select(states) %>
+  <br>
+  <%= f.text_field :zip, placeholder: " Zip" %>
+  <br>
+  <%= f.text_field :phone, placeholder: "Phone" %>
+  <br>
+  <%= f.select :drop_off_time, options_for_select(time_option) %>
+  <br>
+  <%= f.select :pick_up_time, options_for_select(time_option) %>
+  <br>
+  <%= f.submit "Sumbit" %>
+<% end %>
