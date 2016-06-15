@@ -9,7 +9,7 @@ class PoliciesController < ApplicationController
     @policy = Policy.new(policy_params)
     @user = User.where(id: current_user.id).first
     @user.completed_registration = true
-    @kennel = Kennel.where(user_id: @user.id).first
+  @kennel = Kennel.where(user_id: @user.id).last
     if @kennel.policies.create(kennel_id: @kennel.id, description: @policy.description) && @user.save
       if params[:create_another_policy] == "Submit and create another 'Policy'"
         redirect_to new_policy_path

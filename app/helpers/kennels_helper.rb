@@ -71,4 +71,6 @@ module KennelsHelper
       ['4:00 p.m', '4:00 p.m'],
     ]
   end
+
+  
 end

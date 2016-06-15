@@ -1,8 +1,10 @@
 <div class="container">
   <div class="row text-center">
     <div class="col-xs-12">
+      <h1>-LANDING PAGE-</h1>
+      <% if current_user.nil? %>
       <h2>Log in</h2>
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= form_for("user", :url => user_session_path, :html => { :class => "form-horizontal well"}) do |f|%>
           <div class="field">
             <%= f.label :email %><br />
             <%= f.email_field :email, autofocus: true %>
@@ -26,20 +28,11 @@
         <% end %>
 
         <%= render "devise/shared/links" %>
+
+        <!-- Customer/Kennel Signup Links -->
+        <%= render partial: "shared/user_signup_links" %>
+
+      <% end %>
     </div>
-  </div>
-</div>
-
-
-<div class="container-fluid">
-  <div class="row text-center">
-    <% if current_user.nil? %>
-      <div class="col-xs-6">
-        <%= link_to "Customer Signup", new_user_registration_path(kennel_or_customer: "customer") %>
-      </div>
-      <div class="col-xs-6">
-        <%= link_to "Kennel Signup", new_user_registration_path(kennel_or_customer: "kennel") %>
-      </div>
-    <% end %>
   </div>
 </div>

@@ -17,11 +17,21 @@ class KennelsController < ApplicationController
   def kennel_dashboard
     if !current_user.nil? && completed_registration?
       @kennels = Kennel.where(user_id: current_user.id)
-      kennel_id = []
-      @kennels.each {|k| kennel_id << k.id}
-      @runs = Run.where(kennel_id: kennel_id[0])
-      @amenties = Amenity.where(kennel_id: kennel_id[0])
-      @policies = Policy.where(kennel_id: kennel_id[0])
+    end
+  end
+
+  def my_kennel_info
+    @kennel = Kennel.where(id: params[:kennel_id])
+    if !@kennel.empty?
+      if current_user.id == @kennel.first.user_id
+        @runs = Run.where(kennel_id: params[:kennel_id])
+        @policies = Policy.where(kennel_id: params[:kennel_id])
+        @amenities = Amenity.where(kennel_id: params[:kennel_id])
+      else
+        redirect_to kennel_dashboard_path
+      end
+    else
+      redirect_to kennel_dashboard_path
     end
   end
 

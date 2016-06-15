@@ -1,0 +1,41 @@
+<!-- Runs -->
+<h3>Runs</h3>
+<% @runs.each do |r| %>
+  <%= r.title %>
+  <br>
+  <%= r.description %>
+  <br>
+  <%= r.price %>
+  <br>
+  <%= r.weight_limit %>
+  <br>
+  <%= r.number_of_rooms %>
+  <br>
+  <%= r.private_or_shared %>
+  <br>
+  <%= r.indoor_or_outdoor %>
+  <br>
+  <%= r.size %>
+  <br>
+  <%= r.breeds_restricted %>
+  <br>
+  <%= r.pets_per_run %>
+  <br>
+  <%= r.dates_unavailable %>
+  <br>
+<% end %>
+
+<!-- Amenities -->
+<h3>Amenities</h3>
+<% @amenities.each do |a| %>
+  <%= a.description %>
+  <br>
+  <%= a.price %>
+  <br>
+<% end %>
+<br>
+<!-- Policies -->
+<h3>Policies</h3>
+<% @policies.each do |pol| %>
+  <%= pol.description %>
+<% end %>

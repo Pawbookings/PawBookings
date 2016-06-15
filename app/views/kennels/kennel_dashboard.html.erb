@@ -2,8 +2,9 @@
 <p><strong>Manager: </strong><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
 <p><strong>Email: </strong><%= current_user.email.capitalize %></p>
 
-<h2 style="text-decoration:underline;">Kennel(s)</h2>
-<% @kennels.map do |k| %>
+<%= link_to "Create another Kennel", new_kennel_path %>
+
+<% @kennels.each do |k| %>
   <h3><strong><%= k.kennel_name %></strong></h3>
   <p><strong>Address:</strong> <%= k.kennel_address %></p>
   <p><strong>City:</strong> <%= k.city %></p>
@@ -12,66 +13,5 @@
   <p><strong>Phone:</strong> <%= k.phone %></p>
   <p><strong>Drop off time:</strong> <%= k.drop_off_time %></p>
   <p><strong>Pick up time:</strong> <%= k.pick_up_time %></p>
-  <%= link_to "View more", "#", class: "btn btn-primary", data: {toggle: "modal", target: ".bs-example-modal-lg"} %>
-
-  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-
-        <h2 style="text-decoration:underline;">Run(s) for: <%= k.kennel_name %></h2>
-
-        <% @runs.map do |r| %>
-          <% if r.kennel_id == k.id %>
-            <p><strong>Title: </strong><%= r.title %></p>
-            <p><strong>Price: </strong> <%= r.price %></p>
-            <p><strong>Weight Limit: </strong><%= r.weight_limit %></p>
-            <p><strong>Number of Rooms to offer: </strong><%= r.number_of_rooms %></p>
-            <p><strong>Size: </strong><%= r.size %></p>
-            <p><strong>Description: </strong><%= r.description %></p>
-            <p><strong>Indoor or Outdoor: </strong><%= r.indoor_or_outdoor %></p>
-            <p><strong>Private or Shared: </strong><%= r.private_or_shared %></p>
-            <p><strong>Pets allowed per run:</strong><%= r.pets_per_run %></p>
-            <p><strong>Breeds Restricted: </strong><%= r.breeds_restricted %></p>
-            <p><strong>Dates Unavailable: </strong><%= r.dates_unavailable %></p>
-            <br>
-            <br>
-          <% end %>
-        <% end %>
-
-        <br>
-        <br>
-        <h5>################################################################</h5>
-        <br>
-        <br>
-
-        <h2 style="text-decoration:underline;">Amenitie(s) for: <%= k.kennel_name %></h2>
-
-        <% @amenties.map do |r| %>
-          <% if r.kennel_id == k.id %>
-            <p><strong>Description: </strong><%= r.description %></p>
-            <p><strong>Price: </strong><%= r.price %></p>
-            <br>
-            <br>
-          <% end %>
-        <% end %>
-
-        <br>
-        <br>
-        <h5>################################################################</h5>
-        <br>
-        <br>
-
-        <h2 style="text-decoration:underline;">Policie(s) for: <%= k.kennel_name %></h2>
-
-        <% @policies.map do |r| %>
-          <% if r.kennel_id == k.id %>
-            <p><strong>Description: </strong><%= r.description %></p>
-            <br>
-            <br>
-          <% end %>
-        <% end %>
-
-      </div>
-    </div>
-  </div>
+  <%= link_to "View info", my_kennel_info_path(kennel_id: k.id) %>
 <% end %>
