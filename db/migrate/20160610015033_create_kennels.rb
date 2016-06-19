@@ -8,8 +8,8 @@ class CreateKennels < ActiveRecord::Migration
       t.string :state
       t.string :zip
       t.string :phone
-      t.string :drop_off_time
-      t.string :pick_up_time
+      t.string :kennel_opening_hours
+      t.string :kennel_closing_hours
       t.timestamps null: false
     end
   end

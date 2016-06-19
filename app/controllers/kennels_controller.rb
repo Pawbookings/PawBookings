@@ -9,14 +9,20 @@ class KennelsController < ApplicationController
   def create
     @kennel = Kennel.new(kennel_params)
     @user = User.where(id: current_user.id).first
-    if @user.kennels.create(user_id: @user.id, kennel_name: @kennel.kennel_name, kennel_address: @kennel.kennel_address, city: @kennel.city, state: @kennel.state, zip: @kennel.zip, phone: @kennel.phone, drop_off_time: @kennel.drop_off_time, pick_up_time: @kennel.pick_up_time )
-      redirect_to new_run_path
+    if !kennel_created? && @kennel.save && @user.kennel = @kennel
+      redirect_to new_drop_off_pick_up_path
+    else
+      redirect_to kennel_dashboard_path
     end
   end
 
+  def kennel_created?
+    true if !Kennel.where(user_id: current_user.id).empty?
+  end
+
   def kennel_dashboard
-    if !current_user.nil? && completed_registration?
-      @kennels = Kennel.where(user_id: current_user.id)
+    if !current_user.nil?
+      @kennel = Kennel.where(user_id: current_user.id)
     end
   end
 
@@ -38,7 +44,7 @@ class KennelsController < ApplicationController
   private
 
   def kennel_params
-    return params.require(:kennel).permit(:kennel_name, :kennel_address, :city, :state, :zip, :phone, :drop_off_time, :pick_up_time)
+    return params.require(:kennel).permit(:kennel_name, :kennel_address, :city, :state, :zip, :phone, :kennel_opening_hours, :kennel_closing_hours)
   end
 
 end

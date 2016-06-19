@@ -14,9 +14,9 @@
   <br>
   <%= f.text_field :phone, placeholder: "Phone" %>
   <br>
-  <%= f.select :drop_off_time, options_for_select(time_option) %>
+  <%= f.select :kennel_opening_hours, options_for_select(time_option) %>
   <br>
-  <%= f.select :pick_up_time, options_for_select(time_option) %>
+  <%= f.select :kennel_closing_hours, options_for_select(time_option) %>
   <br>
   <%= f.submit "Sumbit" %>
 <% end %>

@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+
   root to: "home#index"
-  devise_for :users, :controllers => { registrations: 'devise_registrations' }
+  devise_for :users, :controllers => { registrations: 'devise_registrations', passwords: "devise_passwords" }
   resources :home
   resources :kennels, only: [:new, :create]
   resources :runs, only: [:new, :create]
   resources :amenities, only: [:new, :create]
   resources :policies, only: [:new, :create]
+  resources :drop_off_pick_ups, only: [:new, :create]
 
   # KennelController
     get "/kennel_dashboard",   to: "kennels#kennel_dashboard",   as: :kennel_dashboard

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :kennels
+  has_one :kennel
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

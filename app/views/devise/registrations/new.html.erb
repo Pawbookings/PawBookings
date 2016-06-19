@@ -1,3 +1,8 @@
+<style>
+  .devise_password_1, .devise_password_2 {
+    display: none;
+  }
+</style>
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -20,21 +25,23 @@
   </div>
 
   <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, class: "devise_password_1", autocomplete: "off", value: random_password %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, class: "devise_password_2", autocomplete: "off", value: "" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: "user_signup_btn" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+<script type="text/javascript">
+  $(".user_signup_btn").on("click", function(){
+    var devise_password_2 = $(".devise_password_1").val();
+    $(".devise_password_2").val(devise_password_2);
+  });
+</script>

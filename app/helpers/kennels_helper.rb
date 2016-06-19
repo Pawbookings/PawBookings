@@ -72,5 +72,4 @@ module KennelsHelper
     ]
   end
 
-  
 end

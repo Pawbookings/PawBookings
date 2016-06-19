@@ -7,7 +7,14 @@ class HomeController < ApplicationController
         return redirect_to customer_dashboard_path
       end
     elsif !current_user.nil? && current_user.kennel_or_customer == "kennel"
-      return redirect_to new_kennel_path
+      if !request.referrer.include?("/users/password/edit?reset_password_token=")
+        UserMailer.user_reset_password(current_user).deliver_now
+        return redirect_to new_kennel_path
+      else
+        return redirect_to new_kennel_path
+      end
+    else
+      return root_path
     end
   end
 

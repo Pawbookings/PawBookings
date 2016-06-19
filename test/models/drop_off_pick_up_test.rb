@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RegistrationsControllerTest < ActionController::TestCase
+class DropOffPickUpTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

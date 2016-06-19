@@ -15,6 +15,7 @@
   <div class="field">
     <%= f.label :password_confirmation, "Confirm new password" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= hidden_field_tag "reset_password_true", "true" %>
   </div>
 
   <div class="actions">

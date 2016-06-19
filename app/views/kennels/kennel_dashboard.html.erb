@@ -2,16 +2,16 @@
 <p><strong>Manager: </strong><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
 <p><strong>Email: </strong><%= current_user.email.capitalize %></p>
 
-<%= link_to "Create another Kennel", new_kennel_path %>
-
-<% @kennels.each do |k| %>
-  <h3><strong><%= k.kennel_name %></strong></h3>
-  <p><strong>Address:</strong> <%= k.kennel_address %></p>
-  <p><strong>City:</strong> <%= k.city %></p>
-  <p><strong>State:</strong> <%= k.state %></p>
-  <p><strong>Zip:</strong> <%= k.zip %></p>
-  <p><strong>Phone:</strong> <%= k.phone %></p>
-  <p><strong>Drop off time:</strong> <%= k.drop_off_time %></p>
-  <p><strong>Pick up time:</strong> <%= k.pick_up_time %></p>
-  <%= link_to "View info", my_kennel_info_path(kennel_id: k.id) %>
+<% if !@kennel.nil? %>
+  <% @kennel.each do |k| %>
+    <h3><strong><%= k.kennel_name %></strong></h3>
+    <p><strong>Address:</strong> <%= k.kennel_address %></p>
+    <p><strong>City:</strong> <%= k.city %></p>
+    <p><strong>State:</strong> <%= k.state %></p>
+    <p><strong>Zip:</strong> <%= k.zip %></p>
+    <p><strong>Phone:</strong> <%= k.phone %></p>
+    <%= link_to "View info", my_kennel_info_path(kennel_id: k.id) %>
+  <% end %>
+  <% else %>
+  <h1>Register a Kennel</h1>
 <% end %>

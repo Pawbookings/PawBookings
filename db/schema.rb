@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612114838) do
+ActiveRecord::Schema.define(version: 20160618172747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,28 @@ ActiveRecord::Schema.define(version: 20160612114838) do
 
   add_index "amenities", ["kennel_id"], name: "index_amenities_on_kennel_id", using: :btree
 
+  create_table "drop_off_pick_ups", force: :cascade do |t|
+    t.integer  "kennel_id"
+    t.string   "monday_drop_off"
+    t.string   "monday_pick_up"
+    t.string   "tuesday_drop_off"
+    t.string   "tuesday_pick_up"
+    t.string   "wednesday_drop_off"
+    t.string   "wednesday_pick_up"
+    t.string   "thursday_drop_off"
+    t.string   "thursday_pick_up"
+    t.string   "friday_drop_off"
+    t.string   "friday_pick_up"
+    t.string   "saturday_drop_off"
+    t.string   "saturday_pick_up"
+    t.string   "sunday_drop_off"
+    t.string   "sunday_pick_up"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "drop_off_pick_ups", ["kennel_id"], name: "index_drop_off_pick_ups_on_kennel_id", using: :btree
+
   create_table "kennels", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "kennel_name"
@@ -34,10 +56,10 @@ ActiveRecord::Schema.define(version: 20160612114838) do
     t.string   "state"
     t.string   "zip"
     t.string   "phone"
-    t.string   "drop_off_time"
-    t.string   "pick_up_time"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "kennel_opening_hours"
+    t.string   "kennel_closing_hours"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "kennels", ["user_id"], name: "index_kennels_on_user_id", using: :btree
