@@ -1,0 +1,11 @@
+<h1>Holidays Registrations</h1>
+
+<%= form_for @holiday do |f| %>
+  <%= f.text_field :month, placeholder: " Month" %>
+  <br>
+  <%= f.text_field :day, placeholder: " Day"%>
+  <br>
+  <%= f.text_field :description, placeholder: " Description"%>
+  <br>
+  <%= f.submit "Submit" %>
+<% end %>

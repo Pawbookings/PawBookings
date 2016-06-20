@@ -10,7 +10,7 @@ class KennelsController < ApplicationController
     @kennel = Kennel.new(kennel_params)
     @user = User.where(id: current_user.id).first
     if !kennel_created? && @kennel.save && @user.kennel = @kennel
-      redirect_to new_drop_off_pick_up_path
+      redirect_to new_run_path
     else
       redirect_to kennel_dashboard_path
     end

@@ -1,0 +1,26 @@
+<h1>Hours of operation Registration</h1>
+
+<%= form_for @hours_of_operation do |f| %>
+  <%= f.text_field :monday_open, placeholder: " Monday opening hour" %>
+  <%= f.text_field :monday_closed, placeholder: " Monday closing hour" %>
+  <br>
+  <%= f.text_field :tuesday_open, placeholder: " Tuesday opening hour" %>
+  <%= f.text_field :tuesday_closed, placeholder: " Tuesday closing hour" %>
+  <br>
+  <%= f.text_field :wednesday_open, placeholder: " Wednesday opening hour" %>
+  <%= f.text_field :wednesday_closed, placeholder: " Wednesday closing hour" %>
+  <br>
+  <%= f.text_field :thursday_open, placeholder: " Thursday opening hour" %>
+  <%= f.text_field :thursday_closed, placeholder: " Thursday closing hour" %>
+  <br>
+  <%= f.text_field :friday_open, placeholder: " Friday opening hour" %>
+  <%= f.text_field :friday_closed, placeholder: " Friday closing hour" %>
+  <br>
+  <%= f.text_field :saturday_open, placeholder: " Saturday opening hour" %>
+  <%= f.text_field :saturday_closed, placeholder: " Saturday closing hour" %>
+  <br>
+  <%= f.text_field :sunday_open, placeholder: " Sunday opening hour" %>
+  <%= f.text_field :sunday_closed, placeholder: " Sunday closing hour" %>
+  <br>
+  <%= f.submit "Submit" %>
+<% end %>

@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
 
-  def user_reset_password(current_user)
+  def user_confirm_email(current_user)
     @current_user = current_user
     mail(to: current_user.email, subject: 'Confirm Email')
   end

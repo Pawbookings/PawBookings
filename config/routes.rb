@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'devise_registrations', passwords: "devise_passwords" }
   resources :home
   resources :kennels, only: [:new, :create]
+  resources :hours_of_operations, only: [:new, :create]
+  resources :holidays, only: [:new, :create]
   resources :runs, only: [:new, :create]
   resources :amenities, only: [:new, :create]
   resources :policies, only: [:new, :create]

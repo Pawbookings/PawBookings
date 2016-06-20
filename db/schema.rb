@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160618172747) do
+ActiveRecord::Schema.define(version: 20160619182925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,39 @@ ActiveRecord::Schema.define(version: 20160618172747) do
 
   add_index "drop_off_pick_ups", ["kennel_id"], name: "index_drop_off_pick_ups_on_kennel_id", using: :btree
 
+  create_table "holidays", force: :cascade do |t|
+    t.integer  "kennel_id"
+    t.string   "month"
+    t.string   "day"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "holidays", ["kennel_id"], name: "index_holidays_on_kennel_id", using: :btree
+
+  create_table "hours_of_operations", force: :cascade do |t|
+    t.integer  "kennel_id"
+    t.string   "monday_open"
+    t.string   "monday_closed"
+    t.string   "tuesday_open"
+    t.string   "tuesday_closed"
+    t.string   "wednesday_open"
+    t.string   "wednesday_closed"
+    t.string   "thursday_open"
+    t.string   "thursday_closed"
+    t.string   "friday_open"
+    t.string   "friday_closed"
+    t.string   "saturday_open"
+    t.string   "saturday_closed"
+    t.string   "sunday_open"
+    t.string   "sunday_closed"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "hours_of_operations", ["kennel_id"], name: "index_hours_of_operations_on_kennel_id", using: :btree
+
   create_table "kennels", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "kennel_name"
@@ -56,10 +89,8 @@ ActiveRecord::Schema.define(version: 20160618172747) do
     t.string   "state"
     t.string   "zip"
     t.string   "phone"
-    t.string   "kennel_opening_hours"
-    t.string   "kennel_closing_hours"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "kennels", ["user_id"], name: "index_kennels_on_user_id", using: :btree
@@ -76,10 +107,12 @@ ActiveRecord::Schema.define(version: 20160618172747) do
   create_table "runs", force: :cascade do |t|
     t.integer  "kennel_id"
     t.float    "price"
+    t.integer  "size_height"
+    t.integer  "size_width"
+    t.integer  "size_length"
     t.integer  "weight_limit"
     t.integer  "number_of_rooms"
     t.integer  "pets_per_run"
-    t.string   "size"
     t.string   "title"
     t.string   "description"
     t.string   "indoor_or_outdoor"
