@@ -1,13 +1,17 @@
 class HolidaysController < ApplicationController
   def new
-    @holdiday = Holiday.new
+    @holiday = Holiday.new
   end
 
   def create
     @holiday = Holiday.new(holiday_params)
     @kennel = Kennel.where(user_id: current_user.id).first
     if @holiday.save
-      redirect_to new_holiday_path
+      if params[:create_another_holiday] == "Submit and create another 'Holiday'"
+        redirect_to new_holiday_path
+      else
+        redirect_to new_amenity_path
+      end
     end
   end
 
