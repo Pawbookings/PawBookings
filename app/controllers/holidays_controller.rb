@@ -6,7 +6,7 @@ class HolidaysController < ApplicationController
   def create
     @holiday = Holiday.new(holiday_params)
     @kennel = Kennel.where(user_id: current_user.id).first
-    if @holiday.save
+    if @kennel.holidays.create(kennel_id: @kennel.id, month: @holiday.month, day: @holiday.day, description: @holiday.description)
       if params[:create_another_holiday] == "Submit and create another 'Holiday'"
         redirect_to new_holiday_path
       else

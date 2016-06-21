@@ -1,0 +1,12 @@
+<h1>Customer Emergency Contact Registration</h1>
+
+<%= form_for @customer_emergency_contact do |f| %>
+  <%= f.text_field :name, placeholder: " Emergency Full Name" %>
+  <br>
+  <%= f.text_field :email, placeholder: " Emergency Email" %>
+  <br>
+  <%= f.text_field :phone, placeholder: " Emergency Phone" %>
+  <br>
+  <%= f.submit "Submit" %>
+  <%= f.submit "Submit and create another 'Emergency Contact'", name: "create_another_emergency_contact" %>
+<% end %>

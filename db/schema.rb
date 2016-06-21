@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160619182925) do
+ActiveRecord::Schema.define(version: 20160620225822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20160619182925) do
   end
 
   add_index "amenities", ["kennel_id"], name: "index_amenities_on_kennel_id", using: :btree
+
+  create_table "customer_emergency_contacts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "customer_emergency_contacts", ["user_id"], name: "index_customer_emergency_contacts_on_user_id", using: :btree
 
   create_table "drop_off_pick_ups", force: :cascade do |t|
     t.integer  "kennel_id"
@@ -94,6 +105,22 @@ ActiveRecord::Schema.define(version: 20160619182925) do
   end
 
   add_index "kennels", ["user_id"], name: "index_kennels_on_user_id", using: :btree
+
+  create_table "pets", force: :cascade do |t|
+    t.integer  "customer_emergency_contact_id"
+    t.string   "name"
+    t.string   "cat_or_dog"
+    t.string   "breed"
+    t.string   "dob"
+    t.string   "temperament"
+    t.string   "vaccinations"
+    t.string   "primary_veterinarian"
+    t.string   "primary_veterinarian_phone"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "pets", ["customer_emergency_contact_id"], name: "index_pets_on_customer_emergency_contact_id", using: :btree
 
   create_table "policies", force: :cascade do |t|
     t.integer  "kennel_id"
