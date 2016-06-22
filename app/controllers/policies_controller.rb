@@ -8,7 +8,7 @@ class PoliciesController < ApplicationController
   def create
     @policy = Policy.new(policy_params)
     @user = User.where(id: current_user.id).first
-    if @user.completed_registration.nil? == true
+    if @user.completed_registration.nil? 
       UserMailer.new_kennel_registration(current_user).deliver_now
       @user.completed_registration = true
       @user.save

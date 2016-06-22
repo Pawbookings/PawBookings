@@ -9,4 +9,9 @@ class UserMailer < ApplicationMailer
     @current_user = current_user
     mail(to: current_user.email, subject: 'Kennel Registration Confirmation')
   end
+
+  def new_customer_registration(current_user)
+    @current_user = current_user
+    mail(to: current_user.email, subject: 'PawBookings Registration Confirmation')
+  end
 end
