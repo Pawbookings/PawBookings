@@ -3,7 +3,6 @@ class CreateRuns < ActiveRecord::Migration
     create_table :runs do |t|
       t.belongs_to :kennel, index: true
       t.float   :price
-      t.integer  :size_height
       t.integer  :size_width
       t.integer  :size_length
       t.integer :weight_limit

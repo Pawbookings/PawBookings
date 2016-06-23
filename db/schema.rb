@@ -134,7 +134,6 @@ ActiveRecord::Schema.define(version: 20160620225822) do
   create_table "runs", force: :cascade do |t|
     t.integer  "kennel_id"
     t.float    "price"
-    t.integer  "size_height"
     t.integer  "size_width"
     t.integer  "size_length"
     t.integer  "weight_limit"
