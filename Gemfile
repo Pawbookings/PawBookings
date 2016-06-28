@@ -9,6 +9,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'figaro'
+gem "paperclip", "~> 5.0.0.beta1"
 
 group :development, :test do
   gem "pry"

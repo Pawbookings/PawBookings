@@ -1,0 +1,6 @@
+<h1>Upload up to 3 photos</h1>
+
+<%= form_for @photo, url: photos_path, html: { multipart: true } do |f| %>
+  <%= f.file_field :image %>
+  <%= f.submit "Submit" %>
+<% end %>

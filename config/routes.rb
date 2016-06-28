@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :amenities, only: [:new, :create]
   resources :policies, only: [:new, :create]
   resources :drop_off_pick_ups, only: [:new, :create]
+  resources :photos, only: [:new, :create]
 
   # KennelsController
   resources :kennels, only: [:new, :create]

@@ -22,7 +22,8 @@ class KennelsController < ApplicationController
 
   def kennel_dashboard
     if !current_user.nil?
-      @kennel = Kennel.where(user_id: current_user.id)
+      @kennel = Kennel.where(user_id: current_user.id).first
+      @photo = Photo.where(kennel_id: @kennel.id).first
     end
   end
 
@@ -44,7 +45,7 @@ class KennelsController < ApplicationController
   private
 
   def kennel_params
-    return params.require(:kennel).permit(:kennel_name, :kennel_address, :city, :state, :zip, :phone, :kennel_opening_hours, :kennel_closing_hours)
+    return params.require(:kennel).permit(:avatar, :kennel_name, :kennel_address, :city, :state, :zip, :phone, :kennel_opening_hours, :kennel_closing_hours)
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620225822) do
+ActiveRecord::Schema.define(version: 20160628010035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,8 +100,14 @@ ActiveRecord::Schema.define(version: 20160620225822) do
     t.string   "state"
     t.string   "zip"
     t.string   "phone"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "kennels", ["user_id"], name: "index_kennels_on_user_id", using: :btree
@@ -121,6 +127,18 @@ ActiveRecord::Schema.define(version: 20160620225822) do
   end
 
   add_index "pets", ["customer_emergency_contact_id"], name: "index_pets_on_customer_emergency_contact_id", using: :btree
+
+  create_table "photos", force: :cascade do |t|
+    t.integer  "kennel_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "photos", ["kennel_id"], name: "index_photos_on_kennel_id", using: :btree
 
   create_table "policies", force: :cascade do |t|
     t.integer  "kennel_id"
