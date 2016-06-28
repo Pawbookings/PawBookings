@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root to: "home#index"
+  get "/users/sign_in" => redirect("/")
   devise_for :users, :controllers => { registrations: 'devise_registrations', passwords: "devise_passwords" }
   resources :home
   resources :customer_emergency_contacts, only: [:new, :create]
@@ -19,6 +20,6 @@ Rails.application.routes.draw do
     get "/my_kennel_info", to: "kennels#my_kennel_info", as: :my_kennel_info
 
   # CustomersController
-    get "customer_dashboard", to: "customers#customer_dashboard", as: :customer_dashboard
+    get "/customer_dashboard", to: "customers#customer_dashboard", as: :customer_dashboard
 
 end

@@ -8,7 +8,7 @@ class DeviseRegistrationsController < Devise::RegistrationsController
     if resource.active_for_authentication?
       set_flash_message :notice, :signed_up if is_flashing_format?
       sign_up(resource_name, resource)
-      respond_with resource, location: after_sign_up_path_for(resource)
+      respond_with resource, location: params[:user][:kennel_or_customer] == "customer" ? '/customer_dashboard' : '/kennel_dashboard'
       params[:confirm_email] = "true"
     else
       set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"

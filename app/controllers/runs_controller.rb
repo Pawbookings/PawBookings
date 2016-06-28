@@ -1,6 +1,6 @@
 class RunsController < ApplicationController
-  include RunsHelper
   before_action :authenticate_user!
+  
   def new
     @run = Run.new
   end

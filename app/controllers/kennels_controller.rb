@@ -1,5 +1,4 @@
 class KennelsController < ApplicationController
-  include KennelsHelper
   before_action :authenticate_user!
 
   def new
@@ -23,7 +22,7 @@ class KennelsController < ApplicationController
   def kennel_dashboard
     if !current_user.nil?
       @kennel = Kennel.where(user_id: current_user.id).first
-      @photo = Photo.where(kennel_id: @kennel.id).first
+      # @photo = Photo.where(kennel_id: @kennel.id).first
     end
   end
 

@@ -1,4 +1,6 @@
 class HolidaysController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @holiday = Holiday.new
   end

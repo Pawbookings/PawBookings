@@ -5,7 +5,10 @@
   <br>
   <%= f.text_field :cat_or_dog, placeholder: " Cat or Dog" %>
   <br>
-  <%= f.text_field :breed, placeholder: " Breed" %>
+  <%= f.label :breed %>
+  <%= f.select :breed, options_for_select(breed_option) %>
+  <br>
+  <%= f.text_field :weight, placeholder: " Pets weight" %>
   <br>
   <%= f.text_field :dob, placeholder: " Date of Birth" %>
   <br>

@@ -1,7 +1,7 @@
 <h1 style="text-decoration:underline;">Kennel Dashboard</h1>
 
-<%= image_tag @kennel.avatar.url(:thumb) if !@kennel.nil? %>
-<%= image_tag @photo.image.url(:thumb) if !@photo.nil? %>
+<%#= image_tag @kennel.avatar.url(:thumb) if !@kennel.nil? %>
+<%#= image_tag @photo.image.url(:thumb) if !@photo.nil? %>
 <p><strong>Manager: </strong><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
 <p><strong>Email: </strong><%= current_user.email.capitalize %></p>
 <% if !@kennel.nil? %>

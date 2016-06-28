@@ -1,4 +1,6 @@
 class HoursOfOperationsController < ApplicationController
+  before_action :authenticate_user!
+  
   def new
     @hours_of_operation = HoursOfOperation.new
   end

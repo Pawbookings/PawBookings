@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 20160628021451) do
     t.string   "name"
     t.string   "cat_or_dog"
     t.string   "breed"
+    t.integer  "weight"
     t.string   "dob"
     t.string   "temperament"
     t.string   "vaccinations"
