@@ -1,0 +1,17 @@
+<h1>Search Results</h1>
+<% if !@search_results.blank? %>
+  <% @filtered_results.each do |fr| %>
+    <%= link_to fr.kennel_name, search_path(fr.id) %>
+    <br>
+    <% if fr.cats_or_dogs == "both" %>
+      Cats and Dogs
+    <% else %>
+      <%= fr.cats_or_dogs.capitalize %>
+    <% end %>
+    <br>
+    <br>
+    <br>
+  <% end %>
+<% else %>
+  <p>No results found…</p>
+<% end %>

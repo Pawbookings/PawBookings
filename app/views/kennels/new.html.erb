@@ -4,6 +4,8 @@
 <%= form_for @kennel do |f| %>
   <%= f.text_field :kennel_name, placeholder: " Kennel Name" %>
   <br>
+  <%= f.text_field :cats_or_dogs, placeholder: " Drop Down of cats-dogs-both option" %>
+  <br>
   <%= f.text_field :kennel_address, placeholder: " Kennel Address" %>
   <br>
   <%= f.text_field :city, placeholder: " City" %>
@@ -12,7 +14,9 @@
   <br>
   <%= f.text_field :zip, placeholder: " Zip" %>
   <br>
-  <%= f.text_field :phone, placeholder: "Phone" %>
+  <%= f.text_field :phone, placeholder: " Phone" %>
+  <br>
+  <%= f.text_field :mission_statement, placeholder: " Mission Statement" %>
   <br>
   <%= f.file_field :avatar %>
   <br>

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :policies, only: [:new, :create]
   resources :drop_off_pick_ups, only: [:new, :create]
   resources :photos, only: [:new, :create]
+  resources :searches, only: [:show]
 
   # KennelsController
   resources :kennels, only: [:new, :create]
@@ -21,5 +22,8 @@ Rails.application.routes.draw do
 
   # CustomersController
     get "/customer_dashboard", to: "customers#customer_dashboard", as: :customer_dashboard
+
+  # SearchesController
+    get "/search_results", to: "searches#search_results", as: :search_results
 
 end

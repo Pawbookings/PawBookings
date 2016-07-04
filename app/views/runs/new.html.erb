@@ -12,9 +12,6 @@
   <%= f.label :indoor_or_outdoor %>
   <%= f.select :indoor_or_outdoor, options_for_select(indoor_outdoor_option) %>
   <br>
-  <%= f.label :private_or_shared %>
-  <%= f.select :private_or_shared, options_for_select(private_shared_option) %>
-  <br>
   <%= f.text_field :pets_per_run, placeholder: " Pets allowed per run" %>
   <br>
   <%= f.text_field :price, placeholder: " Price per night" %>

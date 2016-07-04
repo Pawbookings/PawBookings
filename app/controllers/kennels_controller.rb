@@ -44,7 +44,7 @@ class KennelsController < ApplicationController
   private
 
   def kennel_params
-    return params.require(:kennel).permit(:avatar, :kennel_name, :kennel_address, :city, :state, :zip, :phone, :kennel_opening_hours, :kennel_closing_hours)
+    return params.require(:kennel).permit(:avatar, :kennel_name, :cats_or_dogs, :kennel_address, :city, :state, :zip, :phone, :mission_statement )
   end
 
 end

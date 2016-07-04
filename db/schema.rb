@@ -85,21 +85,21 @@ ActiveRecord::Schema.define(version: 20160628021451) do
   create_table "hours_of_operations", force: :cascade do |t|
     t.integer  "kennel_id"
     t.string   "monday_open"
-    t.string   "monday_closed"
+    t.string   "monday_close"
     t.string   "tuesday_open"
-    t.string   "tuesday_closed"
+    t.string   "tuesday_close"
     t.string   "wednesday_open"
-    t.string   "wednesday_closed"
+    t.string   "wednesday_close"
     t.string   "thursday_open"
-    t.string   "thursday_closed"
+    t.string   "thursday_close"
     t.string   "friday_open"
-    t.string   "friday_closed"
+    t.string   "friday_close"
     t.string   "saturday_open"
-    t.string   "saturday_closed"
+    t.string   "saturday_close"
     t.string   "sunday_open"
-    t.string   "sunday_closed"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.string   "sunday_close"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "hours_of_operations", ["kennel_id"], name: "index_hours_of_operations_on_kennel_id", using: :btree
@@ -108,10 +108,12 @@ ActiveRecord::Schema.define(version: 20160628021451) do
     t.integer  "user_id"
     t.string   "kennel_name"
     t.string   "kennel_address"
+    t.string   "mission_statement"
     t.string   "city"
     t.string   "state"
     t.string   "zip"
     t.string   "phone"
+    t.string   "cats_or_dogs"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.float    "latitude"
@@ -173,7 +175,6 @@ ActiveRecord::Schema.define(version: 20160628021451) do
     t.string   "title"
     t.string   "description"
     t.string   "indoor_or_outdoor"
-    t.string   "private_or_shared"
     t.string   "breeds_restricted"
     t.string   "dates_unavailable"
     t.datetime "created_at",        null: false

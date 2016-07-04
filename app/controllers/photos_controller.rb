@@ -1,12 +1,11 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user!
-  
+
   def new
     @photo = Photo.new
   end
 
   def create
-    binding.pry
     @photo = Photo.new(photo_params)
     @kennel = Kennel.where(user_id: current_user.id).first
     if @kennel.photos.create(kennel_id: @kennel.id, image: @photo.image)

@@ -1,6 +1,6 @@
 class HoursOfOperationsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def new
     @hours_of_operation = HoursOfOperation.new
   end
@@ -16,6 +16,6 @@ class HoursOfOperationsController < ApplicationController
   private
 
   def hours_of_operation_params
-    return params.require(:hours_of_operation).permit(:monday_open, :monday_closed, :tuesday_open, :tuesday_closed, :wednesday_open, :wednesday_closed, :thursday_open, :thursday_closed, :friday_open, :friday_closed, :saturday_open, :saturday_closed, :sunday_open, :sunday_closed)
+    return params.require(:hours_of_operation).permit(:monday_open, :monday_close, :tuesday_open, :tuesday_close, :wednesday_open, :wednesday_close, :thursday_open, :thursday_close, :friday_open, :friday_close, :saturday_open, :saturday_close, :sunday_open, :sunday_close)
   end
 end

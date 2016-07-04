@@ -12,8 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require ahoy
 //  require turbolinks
 //= require_tree .
 
 ahoy.trackAll();
+
+$(function() {
+  $('.datepicker').datepicker({ minDate: 0 });
+});

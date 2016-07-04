@@ -5,14 +5,7 @@ module RunsHelper
       ['Outdoor', 'outdoor']
     ]
   end
-
-  def private_shared_option
-    [
-      ['Private', 'private'],
-      ['Shared', 'shared']
-    ]
-  end
-
+  
   def breed_restriction_option
     [
       ['Pitbull', 'pitbull'],
