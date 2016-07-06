@@ -6,15 +6,18 @@
         <br>
         <%= text_field_tag(:radius, nil, placeholder: " Radius") %>
         <br>
-        <p>Drop Off</p>
-        <%= text_field_tag(:customer_drop_off_date, nil, class: "datepicker") %>
+        <p>Drop Off Date</p>
+        <%= text_field_tag(:customer_drop_off_date, nil, class: "datepicker_drop_off") %>
         <br>
-        <p>Pick Up</p>
-        <%= text_field_tag(:customer_pick_up_date, nil, class: "datepicker") %>
+        <p>Pick Up Date</p>
+        <%= text_field_tag(:customer_pick_up_date, nil, class: "datepicker_pick_up") %>
         <br>
-        <%= select_tag(:pet_type, options_for_select(cat_or_dog_options)) %>
+        <p>Is this booking for a Dog or Cat?</p>
+        <%= select_tag(:cats_or_dogs, options_for_select(cat_or_dog_options)) %>
         <br>
         <%= submit_tag("Search") %>
+        <br>
+        <br>
       <% end %>
     </div>
   </div>

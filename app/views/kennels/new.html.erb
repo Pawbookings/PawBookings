@@ -4,13 +4,13 @@
 <%= form_for @kennel do |f| %>
   <%= f.text_field :kennel_name, placeholder: " Kennel Name" %>
   <br>
-  <%= f.text_field :cats_or_dogs, placeholder: " Drop Down of cats-dogs-both option" %>
+  <%= f.select :cats_or_dogs, options_for_select(cat_or_dog_options) %>
   <br>
   <%= f.text_field :kennel_address, placeholder: " Kennel Address" %>
   <br>
   <%= f.text_field :city, placeholder: " City" %>
   <br>
-  <%= f.select :state, options_for_select(states) %>
+  <%= f.select :state, options_for_select(states_options) %>
   <br>
   <%= f.text_field :zip, placeholder: " Zip" %>
   <br>

@@ -1,5 +1,5 @@
 module KennelsHelper
-    def states
+    def states_options
     [
       ['Alabama', 'AL'],
       ['Alaska', 'AK'],

@@ -1,9 +1,7 @@
 <h1>Holidays Registrations</h1>
 
 <%= form_for @holiday do |f| %>
-  <%= f.text_field :month, placeholder: " Month" %>
-  <br>
-  <%= f.text_field :day, placeholder: " Day"%>
+  <%= f.text_field :holiday_date, class: "holiday_datepicker", placeholder: "mm/dd/yyyy" %>
   <br>
   <%= f.text_field :description, placeholder: " Description"%>
   <br>

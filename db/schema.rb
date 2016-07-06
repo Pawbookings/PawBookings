@@ -73,11 +73,10 @@ ActiveRecord::Schema.define(version: 20160628021451) do
 
   create_table "holidays", force: :cascade do |t|
     t.integer  "kennel_id"
-    t.string   "month"
-    t.string   "day"
+    t.date     "holiday_date"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "holidays", ["kennel_id"], name: "index_holidays_on_kennel_id", using: :btree

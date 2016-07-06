@@ -6,9 +6,12 @@ class HolidaysController < ApplicationController
   end
 
   def create
+    sanitize_date(params[:holiday][:holiday_date])
+    new_date = @new_date
+    params[:holiday][:holiday_date] = Date.parse(new_date)
     @holiday = Holiday.new(holiday_params)
     @kennel = Kennel.where(user_id: current_user.id).first
-    if @kennel.holidays.create(kennel_id: @kennel.id, month: @holiday.month, day: @holiday.day, description: @holiday.description)
+    if @kennel.holidays.create(kennel_id: @kennel.id, holiday_date: @holiday.holiday_date, description: @holiday.description)
       if params[:create_another_holiday] == "Submit and create another 'Holiday'"
         redirect_to new_holiday_path
       else
@@ -20,6 +23,6 @@ class HolidaysController < ApplicationController
   private
 
   def holiday_params
-    return params.require(:holiday).permit(:month, :day, :description)
+    return params.require(:holiday).permit(:holiday_date, :description)
   end
 end

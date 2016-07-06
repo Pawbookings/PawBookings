@@ -1,6 +1,6 @@
 <h1>Search Results</h1>
-<% if !@search_results.blank? %>
-  <% @filtered_results.each do |fr| %>
+<% if !@final_search_results.blank? %>
+  <% @final_search_results.each do |fr| %>
     <%= link_to fr.kennel_name, search_path(fr.id) %>
     <br>
     <% if fr.cats_or_dogs == "both" %>

@@ -1,30 +1,76 @@
 class SearchesController < ApplicationController
+  include SearchesHelper
   def search_results
-    location_filtering
-    holiday_filtering
     @params = params
+
+    sanitize_date(params[:customer_drop_off_date])
+    params[:customer_drop_off_date] = Date.parse(@new_date)
+
+    sanitize_date(params[:customer_pick_up_date])
+    params[:customer_pick_up_date] = Date.parse(@new_date)
+
+    get_pet_stay_dates
+
+    location_filtering
+    pet_type_filtering
+    holiday_filtering
+    hours_of_operation_filtering
+  end
+
+  def get_pet_stay_dates
+    @pet_stay_date_range = (params[:customer_drop_off_date]..params[:customer_pick_up_date]).map{|date| date}
   end
 
   def location_filtering
-    @filtered_results = []
-    @search_results = Kennel.near(params[:search_zip], params[:radius]).to_a
-    @search_results.each do |sr|
-      @filtered_results << sr if sr.cats_or_dogs == "both" || sr.cats_or_dogs.include? params[:pet_type]
-    end
-    @filtered_results
+    @relevant_locations = Kennel.near(params[:search_zip], params[:radius]).to_a
+  end
+
+  def pet_type_filtering
+    @pet_type_filtered_results = []
+    @relevant_locations.each { |rl| @pet_type_filtered_results << rl if rl.cats_or_dogs == "both" || rl.cats_or_dogs == params[:cats_or_dogs] }
   end
 
   def holiday_filtering
-    @holiday_filtered_results = []
-    @filtered_results.each do |fr|
-      @kennel = Kennel.find(fr.id)
-      @holidays = Holiday.where(kennel_id: @kennel[:id])
-      
+    @kennels_with_holidays = []
+    @pet_type_filtered_results.each do |fr|
+      kennel = Kennel.find(fr.id)
+      holidays = Holiday.where(kennel_id: kennel[:id])
+      holidays.each do |h|
+        @pet_stay_date_range.each { |ps| @kennels_with_holidays << kennel if ps === h.holiday_date }
+      end
     end
+    @kennels_with_holidays.each do |k|
+      @pet_type_filtered_results.each do |pt|
+        @pet_type_filtered_results.delete pt if pt === k
+      end
+    end
+    @holiday_filtered_results = @pet_type_filtered_results
+  end
+
+  def hours_of_operation_filtering
+    @kennels_that_are_closed = []
+    @holiday_filtered_results.each do |fr|
+      kennel = Kennel.find(fr.id)
+      hours_of_operation = HoursOfOperation.where(kennel_id: kennel[:id])
+      hours_of_operation.to_a.each do |h|
+        counter = 0
+        @pet_stay_date_range.each do |ps|
+          days_of_week.each do |num, day|
+            counter += 1 if ps.wday.to_s == num && h.send(day) == "closed"
+          end
+        end
+        @kennels_that_are_closed << kennel if counter > 0
+      end
+    end
+    @kennels_that_are_closed.each do |k|
+      @holiday_filtered_results.each do |fr|
+        @holiday_filtered_results.delete fr if k === fr
+      end
+    end
+    @final_search_results = @holiday_filtered_results
   end
 
   def show
-    @searched_kennel = Kennel.where(id: params[:id])
-    @amenities = Amenity.where(kennel_id: @searched_kennel[:id])
+    @searched_kennel = Kennel.where(id: params[:id]).first
   end
 end
