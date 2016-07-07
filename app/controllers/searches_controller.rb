@@ -27,7 +27,15 @@ class SearchesController < ApplicationController
 
   def pet_type_filtering
     @pet_type_filtered_results = []
-    @relevant_locations.each { |rl| @pet_type_filtered_results << rl if rl.cats_or_dogs == "both" || rl.cats_or_dogs == params[:cats_or_dogs] }
+    @relevant_locations.each do |rl|
+      if params[:cats_or_dogs] == "both"
+        @pet_type_filtered_results = @relevant_locations
+      else
+        if rl.cats_or_dogs == "both" || rl.cats_or_dogs == params[:cats_or_dogs]
+          @pet_type_filtered_results << rl
+        end
+      end
+    end
   end
 
   def holiday_filtering
