@@ -15,7 +15,7 @@ class HolidaysController < ApplicationController
       if params[:create_another_holiday] == "Submit and create another 'Holiday'"
         redirect_to new_holiday_path
       else
-        redirect_to new_amenity_path
+        redirect_to kennel_dashboard_path
       end
     end
   end

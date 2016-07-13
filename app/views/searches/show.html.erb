@@ -1,8 +1,82 @@
 <h1>Show Kennel Selected</h1>
+<%= image_tag @searched_kennel.avatar.url(:thumb) if !@searched_kennel.nil? %>
+<br>
 <%= @searched_kennel[:kennel_name] %>
 <br>
 <%= @searched_kennel[:kennel_address] %>
 <br>
+<%= @searched_kennel[:city] %>
+<br>
 <%= @searched_kennel[:state] %>
 <br>
 <%= @searched_kennel[:zip] %>
+<br>
+<%= @searched_kennel[:phone] %>
+<br>
+<div class="my_booking">
+  <p>My Booking Info</p>
+
+  <div class="room_details">
+    <div class="dates_chosen">
+      <p>Date: <%= "#{@customer_drop_off_date} to #{@customer_pick_up_date}" %></p>
+      <p>Pets: <%= "Dogs #{params[:search_info][:number_of_dogs]}, Cats #{params[:search_info][:number_of_cats]}" %></p>
+      <p>Number of rooms: <%= params[:search_info][:number_of_rooms] %></p>
+      <p>Number of nights: <%= params[:search_info][:number_of_nights].to_i - 1 %></p>
+    </div>
+
+      <%= form_tag({action: 'new', controller: 'payments'}, method: :get) %>
+        <% counter = params[:search_info][:number_of_rooms].to_i %>
+          <% params[:search_info][:number_of_rooms].to_i.times do %>
+            <div id="room_<%= counter %>">Room <%= counter %>
+              <p>Nothing Selected</p>
+            </div>
+            <% counter -= 1 %>
+          <% end %>
+          <input type="hidden" name="kennel_ID" value="<%= @searched_kennel[:id] %>">
+          <input type="hidden" name="kennel_name" value="<%= @searched_kennel[:kennel_name] %>">
+          <input type="hidden" name="kennel_address" value="<%= @searched_kennel[:kennel_address] %>">
+          <input type="hidden" name="kennel_city" value="<%= @searched_kennel[:city] %>">
+          <input type="hidden" name="kennel_state" value="<%= @searched_kennel[:state] %>">
+          <input type="hidden" name="kennel_zip" value="<%= @searched_kennel[:zip] %>">
+          <input type="hidden" name="kennel_phone" value="<%= @searched_kennel[:phone] %>">
+          <input type="hidden" name="kennel_user_email" value="<%= @kennel_user[:email] %>">
+          <input type="hidden" name="number_of_nights" value="<%= params[:search_info][:number_of_nights] %>">
+          <input type="hidden" name="number_of_rooms" value="<%= params[:search_info][:number_of_rooms] %>">
+          <input type="hidden" name="number_of_cats" value="<%= params[:search_info][:number_of_cats] %>">
+          <input type="hidden" name="number_of_dogs" value="<%= params[:search_info][:number_of_dogs] %>">
+      <%= submit_tag "Go To Payments" %>
+    </div>
+
+</div>
+
+<h1>Runs Available</h1>
+<% counter = params[:search_info][:number_of_rooms].to_i %>
+<% params[:search_info][:number_of_rooms].to_i.times do %>
+  <div style="background-color:black;color:white;" class="container run_container_<%= counter %>">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Room <%= counter %></h2>
+        <% @runs.each do |r| %>
+          <p>Title: <%= r.title %></p>
+          <p>Price: <%= r.price %></p>
+          <p>Description: <%= r.description %></p>
+          <p style="color:blue;" onclick='addRunToRoom("<%= r.title %>", "room_<%= counter %>", <%= r.id %>, <%= r.price %>);'>Select Room</p>
+          <br>
+          <br>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <% counter -= 1 %>
+<% end %>
+
+
+<script text/javascript>
+var run_ids = [];
+  function addRunToRoom(title, room_number, id, price){
+    $("#" + room_number + " p").first().remove();
+    $("#" + room_number).append("<p>"+title+"<input type='hidden' name='"+room_number+"_ID' value='runID_"+id+"'><input type='hidden' name='price_"+room_number+"' value='"+price+"'><input type='hidden' name='"+room_number+"_name' value='"+title+"'></p>");
+  }
+</script>

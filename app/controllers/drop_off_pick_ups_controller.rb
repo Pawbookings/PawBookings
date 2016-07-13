@@ -9,7 +9,7 @@ class DropOffPickUpsController < ApplicationController
     @drop_off_pick_up = DropOffPickUp.new(drop_off_pick_up_params)
     @kennel = Kennel.where(user_id: current_user.id).first
     if @drop_off_pick_up.save && @kennel.drop_off_pick_up = @drop_off_pick_up
-      redirect_to new_run_path
+      redirect_to kennel_dashboard_path
     end
   end
 

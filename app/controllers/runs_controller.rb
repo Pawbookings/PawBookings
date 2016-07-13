@@ -13,7 +13,7 @@ class RunsController < ApplicationController
       if params[:create_another_run] == "Submit and create another 'Run'"
         redirect_to new_run_path
       else
-        redirect_to new_hours_of_operation_path
+        redirect_to kennel_dashboard_path
       end
     end
   end

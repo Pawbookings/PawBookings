@@ -12,7 +12,7 @@ class CustomerEmergencyContactsController < ApplicationController
       if params[:create_another_emergency_contact] == "Submit and create another 'Emergency Contact'"
         redirect_to new_customer_emergency_contact_path
       else
-        redirect_to new_pet_path
+        redirect_to kennel_dashboard_path
       end
     end
   end

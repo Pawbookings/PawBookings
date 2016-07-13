@@ -8,15 +8,15 @@ class KennelsController < ApplicationController
   def create
     @kennel = Kennel.new(kennel_params)
     @user = User.where(id: current_user.id).first
-    if !kennel_created? && @kennel.save && @user.kennel = @kennel
-      redirect_to new_run_path
+    if !kennel_completed_registration? && @kennel.save && @user.kennel = @kennel
+      UserMailer.new_kennel_registration(current_user).deliver_now
+      @user.completed_registration = true
+      @user.save
+      redirect_to kennel_dashboard_path
     else
+      flash[:notice]
       redirect_to kennel_dashboard_path
     end
-  end
-
-  def kennel_created?
-    true if !Kennel.where(user_id: current_user.id).empty?
   end
 
   def kennel_dashboard

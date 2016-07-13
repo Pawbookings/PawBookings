@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :drop_off_pick_ups, only: [:new, :create]
   resources :photos, only: [:new, :create]
   resources :searches, only: [:show]
+  resources :payments, only: [:new]
 
   # KennelsController
   resources :kennels, only: [:new, :create]
