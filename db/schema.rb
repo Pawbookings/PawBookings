@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628021451) do
+ActiveRecord::Schema.define(version: 20160714152938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,22 +125,35 @@ ActiveRecord::Schema.define(version: 20160628021451) do
 
   add_index "kennels", ["user_id"], name: "index_kennels_on_user_id", using: :btree
 
+  create_table "payments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "zip"
+    t.string   "ip_address"
+    t.string   "card_type"
+    t.string   "expiration_month"
+    t.string   "expiration_year"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "payments", ["user_id"], name: "index_payments_on_user_id", using: :btree
+
   create_table "pets", force: :cascade do |t|
-    t.integer  "customer_emergency_contact_id"
+    t.integer  "user_id"
     t.string   "name"
     t.string   "cat_or_dog"
     t.string   "breed"
     t.integer  "weight"
-    t.string   "dob"
-    t.string   "temperament"
     t.string   "vaccinations"
-    t.string   "primary_veterinarian"
-    t.string   "primary_veterinarian_phone"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.string   "spay_or_neutered"
+    t.string   "special_instructions"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
-  add_index "pets", ["customer_emergency_contact_id"], name: "index_pets_on_customer_emergency_contact_id", using: :btree
+  add_index "pets", ["user_id"], name: "index_pets_on_user_id", using: :btree
 
   create_table "photos", force: :cascade do |t|
     t.integer  "kennel_id"
@@ -162,6 +175,23 @@ ActiveRecord::Schema.define(version: 20160628021451) do
   end
 
   add_index "policies", ["kennel_id"], name: "index_policies_on_kennel_id", using: :btree
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "kennel_id"
+    t.date     "check_in"
+    t.date     "check_out"
+    t.float    "total_price"
+    t.string   "payment_first_name"
+    t.string   "payment_last_name"
+    t.string   "pet_ids"
+    t.string   "run_ids"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "reservations", ["kennel_id"], name: "index_reservations_on_kennel_id", using: :btree
+  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id", using: :btree
 
   create_table "runs", force: :cascade do |t|
     t.integer  "kennel_id"
@@ -187,6 +217,7 @@ ActiveRecord::Schema.define(version: 20160628021451) do
     t.string   "encrypted_password",     default: "", null: false
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "phone"
     t.string   "kennel_or_customer"
     t.boolean  "completed_registration"
     t.string   "reset_password_token"

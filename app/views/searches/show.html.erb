@@ -13,8 +13,8 @@
 <br>
 <%= @searched_kennel[:phone] %>
 <br>
-<div class="my_booking">
-  <p>My Booking Info</p>
+<div style="background-color:#397575;color:white;" class="my_booking">
+  <h4>My Booking Info</h4>
 
   <div class="room_details">
     <div class="dates_chosen">
@@ -32,7 +32,7 @@
             </div>
             <% counter -= 1 %>
           <% end %>
-          <input type="hidden" name="kennel_ID" value="<%= @searched_kennel[:id] %>">
+          <input type="hidden" name="kennel_id" value="<%= @searched_kennel[:id] %>">
           <input type="hidden" name="kennel_name" value="<%= @searched_kennel[:kennel_name] %>">
           <input type="hidden" name="kennel_address" value="<%= @searched_kennel[:kennel_address] %>">
           <input type="hidden" name="kennel_city" value="<%= @searched_kennel[:city] %>">
@@ -44,6 +44,8 @@
           <input type="hidden" name="number_of_rooms" value="<%= params[:search_info][:number_of_rooms] %>">
           <input type="hidden" name="number_of_cats" value="<%= params[:search_info][:number_of_cats] %>">
           <input type="hidden" name="number_of_dogs" value="<%= params[:search_info][:number_of_dogs] %>">
+          <input type="hidden" name="check_in" value="<%= params[:search_info][:check_in] %>">
+          <input type="hidden" name="check_out" value="<%= params[:search_info][:check_out] %>">
       <%= submit_tag "Go To Payments" %>
     </div>
 
@@ -77,6 +79,6 @@
 var run_ids = [];
   function addRunToRoom(title, room_number, id, price){
     $("#" + room_number + " p").first().remove();
-    $("#" + room_number).append("<p>"+title+"<input type='hidden' name='"+room_number+"_ID' value='runID_"+id+"'><input type='hidden' name='price_"+room_number+"' value='"+price+"'><input type='hidden' name='"+room_number+"_name' value='"+title+"'></p>");
+    $("#" + room_number).append("<p>"+title+"<input type='hidden' name='"+room_number+"_id' value='runid_"+id+"'><input type='hidden' name='price_"+room_number+"' value='"+price+"'><input type='hidden' name='"+room_number+"_name' value='"+title+"'></p>");
   }
 </script>

@@ -26,4 +26,19 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = false
 
   Paperclip.options[:command_path] = "/usr/local/bin/"
+
+  # config.after_initialize do
+  #   ActiveMerchant::Billing::Base.mode = :test
+  #   ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+  #     login: ENV["paypal_username"],
+  #     password: ENV["paypal_password"],
+  #     signature: ENV["paypal_signature"]
+  #   )
+  # end
+
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    ::GATEWAY = ActiveMerchant::Billing::BogusGateway.new
+  end
+
 end

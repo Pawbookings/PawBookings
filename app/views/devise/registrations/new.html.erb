@@ -25,6 +25,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </div>
+
+  <div class="field">
     <%= f.password_field :password, class: "devise_password_1", autocomplete: "off", value: random_password %>
   </div>
 

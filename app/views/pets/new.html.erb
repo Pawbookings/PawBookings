@@ -3,22 +3,18 @@
 <%= form_for @pet do |f| %>
   <%= f.text_field :name, placeholder: " Name" %>
   <br>
-  <%= f.text_field :cat_or_dog, placeholder: " Cat or Dog" %>
+  <%= f.label :cat_or_dog %>
+  <%= f.select :cat_or_dog, options_for_select(cat_or_dog_only_option) %>
   <br>
   <%= f.label :breed %>
   <%= f.select :breed, options_for_select(breed_option) %>
   <br>
   <%= f.text_field :weight, placeholder: " Pets weight" %>
   <br>
-  <%= f.text_field :dob, placeholder: " Date of Birth" %>
-  <br>
-  <%= f.text_field :temperament, placeholder: " Temperament" %>
+  <%= f.label :spay_or_neutered %>
+  <%= f.select :spay_or_neutered, options_for_select(yes_or_no_option)%>
   <br>
   <%= f.text_area :vaccinations, placeholder: " Vaccinations Given in Past 6 Months" %>
-  <br>
-  <%= f.text_area :primary_veterinarian, placeholder: " Primary Veterinarian" %>
-  <br>
-  <%= f.text_area :primary_veterinarian_phone, placeholder: " Primary Veterinaian Phone" %>
   <br>
   <%= f.submit "Submit" %>
   <%= f.submit "Submit and create another 'Pet'", name: "create_another_pet" %>

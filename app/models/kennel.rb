@@ -7,6 +7,8 @@ class Kennel < ActiveRecord::Base
   has_many   :amenities
   has_many   :policies
   has_many   :photos
+  has_many   :reservations
+  has_many   :users, through: :reservations
 
   geocoded_by :zip
   after_validation :geocode

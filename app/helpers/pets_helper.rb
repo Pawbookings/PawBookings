@@ -1,4 +1,12 @@
 module PetsHelper
+  def yes_or_no_option
+    [
+      ['Select', 'none_selected'],
+      ['Yes', 'yes'],
+      ['No', 'no']
+    ]
+  end
+
   def breed_option
     [
       ['Affenpinscher', 'Affenpinscher'],

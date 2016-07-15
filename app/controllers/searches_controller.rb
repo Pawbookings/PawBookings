@@ -1,11 +1,11 @@
 class SearchesController < ApplicationController
   include SearchesHelper
   def search_results
-    sanitize_date(params[:customer_drop_off_date])
-    params[:customer_drop_off_date] = Date.parse(@new_date)
+    sanitize_date(params[:check_in])
+    params[:check_in] = Date.parse(@new_date)
 
-    sanitize_date(params[:customer_pick_up_date])
-    params[:customer_pick_up_date] = Date.parse(@new_date)
+    sanitize_date(params[:check_out])
+    params[:check_out] = Date.parse(@new_date)
 
     get_pet_stay_dates
 
@@ -16,11 +16,12 @@ class SearchesController < ApplicationController
   end
 
   def get_pet_stay_dates
-    @pet_stay_date_range = (params[:customer_drop_off_date]..params[:customer_pick_up_date]).map{|date| date}
+    @pet_stay_date_range = (params[:check_in]..params[:check_out]).map{|date| date}
     params[:number_of_nights] = @pet_stay_date_range.count.to_s
   end
 
   def location_filtering
+    params[:radius] = 5 if params[:radius].blank?
     @relevant_locations = Kennel.near(params[:search_zip], params[:radius]).to_a
   end
 
@@ -81,8 +82,8 @@ class SearchesController < ApplicationController
     @searched_kennel = Kennel.find(params[:id])
     @kennel_user = User.find(@searched_kennel[:user_id])
     @runs = Run.where(kennel_id: @searched_kennel.id)
-    @customer_drop_off_date = unsanitize_date(params[:search_info][:customer_drop_off_date])
-    @customer_pick_up_date = unsanitize_date(params[:search_info][:customer_pick_up_date])
+    @customer_drop_off_date = unsanitize_date(params[:search_info][:check_in])
+    @customer_pick_up_date = unsanitize_date(params[:search_info][:check_out])
   end
 
 end

@@ -6,6 +6,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string  :encrypted_password, null: false, default: ""
       t.string  :first_name
       t.string  :last_name
+      t.string  :phone
       t.string  :kennel_or_customer
       t.boolean :completed_registration
 

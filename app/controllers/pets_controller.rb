@@ -1,20 +1,19 @@
 class PetsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def new
     @pet = Pet.new
   end
 
   def create
     @pet = Pet.new(pet_params)
-    @customer_emergency_contact = CustomerEmergencyContact.where(user_id: current_user.id).first
     @user = User.where(id: current_user.id).first
     if @user.completed_registration.nil?
       UserMailer.new_customer_registration(current_user).deliver_now
       @user.completed_registration = true
       @user.save
     end
-    if @customer_emergency_contact.pets.create(customer_emergency_contact_id: @customer_emergency_contact.id, name: @pet.name, cat_or_dog: @pet.cat_or_dog, breed: @pet.breed, dob: @pet.dob, weight: @pet.weight, temperament: @pet.temperament, vaccinations: @pet.vaccinations, primary_veterinarian: @pet.primary_veterinarian, primary_veterinarian_phone: @pet.primary_veterinarian_phone)
+    if @user.pets.create(user_id: @user.id, name: @pet.name, cat_or_dog: @pet.cat_or_dog, breed: @pet.breed, weight: @pet.weight, vaccinations: @pet.vaccinations, spay_or_neutered: @pet.spay_or_neutered)
       if params[:create_another_pet] == "Submit and create another 'Pet'"
         redirect_to new_pet_path
       else
@@ -26,6 +25,6 @@ class PetsController < ApplicationController
   private
 
   def pet_params
-    return params.require(:pet).permit(:name, :cat_or_dog, :breed, :dob, :weight, :temperament, :vaccinations, :primary_veterinarian, :primary_veterinarian_phone)
+    return params.require(:pet).permit(:name, :cat_or_dog, :breed, :weight, :vaccinations, :spay_or_neutered)
   end
 end

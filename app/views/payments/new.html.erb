@@ -1,2 +1,79 @@
 <h1>Payments Page</h1>
-<%= @total %>
+<p>Price <%= @total_price %></p>
+<p>Number of Pets <%= @total_pets %></p>
+<p>Number of Rooms <%= params[:number_of_rooms] %></p>
+
+
+<%= form_tag payments_path, method: :post %>
+  <%= hidden_field_tag :total_price, nil, value: @total_price %>
+  <%= hidden_field_tag :payment_card_type, nil, value: "visa" %>
+  <%= hidden_field_tag :kennel_info, nil, value: params %>
+
+  <h3>Owner Info</h3>
+  <div class="payment_info">
+    <h4>Credit Card Information</h4>
+    <%= text_field_tag :payment_first_name, nil, placeholder: " First Name" %>
+    <br>
+    <%= text_field_tag :payment_last_name, nil, placeholder: " Last Name" %>
+    <br>
+    <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number" %>
+    <br>
+    <%= text_field_tag :payment_expiration_month, nil, placeholder: " Expiration month" %>
+    <br>
+    <%= text_field_tag :payment_expiration_year, nil, placeholder: " Expiration year" %>
+    <br>
+    <%= text_field_tag :payment_cvv, nil, placeholder: " CVV" %>
+    <br>
+    <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode" %>
+  </div>
+
+<br>
+<div class="pets_contact">
+  <h4>Who should we contact incase of an emergency?</h4>
+  <%= text_field_tag :customer_first_name, nil, placeholder: " First Name" %>
+  <br>
+  <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name" %>
+  <br>
+  <%= text_field_tag :customer_email, nil, placeholder: " Email" %>
+  <br>
+  <%= text_field_tag :customer_phone, nil, placeholder: " Phone" %>
+</div>
+<br>
+  <h3>Pets Info</h3>
+
+  <div class="pet_details">
+    <% counter = @total_pets.to_i %>
+    <% (@total_pets.to_i).times do %>
+      <h4>Pet <%= counter %> Details</h4>
+      <%= text_field_tag "pet_name_#{counter}", nil, placeholder: " Pet Name" %>
+      <br>
+      <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), onclick: "petTypeOptions(#{counter});" %>
+      <div style="" class="pet_breed_selection_<%= counter %>">
+        <br>
+        <%= select_tag "pet_breed_#{counter}", options_for_select(breed_option) %>
+      </div>
+      <br>
+      <%= text_field_tag "pet_weight_#{counter}", nil, placeholder: " Pet Weight" %>
+      <br>
+      <%= text_field_tag "pet_special_instructions_#{counter}", nil, placeholder: " Pet Special Instructions" %>
+      <br>
+      <br>
+      <% counter -= 1 %>
+    <% end %>
+  </div>
+<%= submit_tag "Book Now!" %>
+<br>
+<br>
+<br>
+
+<script type='text/javascript'>
+  function petTypeOptions(counter){
+    var pet_type = $("#pet_type_" + counter).val();
+    if (pet_type == "dog"){
+      $(".pet_breed_selection_" + counter).show();
+    }
+    else {
+      $(".pet_breed_selection_" + counter).hide();
+    }
+  }
+</script>
