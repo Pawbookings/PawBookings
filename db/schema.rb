@@ -181,11 +181,14 @@ ActiveRecord::Schema.define(version: 20160714152938) do
     t.integer  "kennel_id"
     t.date     "check_in"
     t.date     "check_out"
-    t.float    "total_price"
     t.string   "payment_first_name"
     t.string   "payment_last_name"
     t.string   "pet_ids"
     t.string   "run_ids"
+    t.float    "total_price"
+    t.string   "trans_id"
+    t.string   "card_number"
+    t.string   "expiration_date"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
@@ -201,13 +204,14 @@ ActiveRecord::Schema.define(version: 20160714152938) do
     t.integer  "weight_limit"
     t.integer  "number_of_rooms"
     t.integer  "pets_per_run"
+    t.string   "type_of_pets_allowed"
     t.string   "title"
     t.string   "description"
     t.string   "indoor_or_outdoor"
     t.string   "breeds_restricted"
     t.string   "dates_unavailable"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "runs", ["kennel_id"], name: "index_runs_on_kennel_id", using: :btree

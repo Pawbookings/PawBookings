@@ -16,3 +16,21 @@
 <% else %>
   <p>No results found…</p>
 <% end %>
+<br>
+<h1>The Kennels listed below do NOT meet your reservation dates selected.</h1>
+<br>
+<% if !@negative_kennels.blank? %>
+  <% @negative_kennels.each do |fr| %>
+    <%= link_to fr.kennel_name, search_path(fr.id, search_info: params) %>
+    <br>
+    <% if fr.cats_or_dogs == "both" %>
+      Cats and Dogs
+    <% else %>
+      <%= fr.cats_or_dogs.capitalize %>
+    <% end %>
+    <br>
+    <%= fr.kennel_address %>
+    <br>
+    <br>
+  <% end %>
+<% end %>

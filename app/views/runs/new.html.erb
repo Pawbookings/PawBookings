@@ -14,6 +14,8 @@
   <br>
   <%= f.text_field :pets_per_run, placeholder: " Pets allowed per run" %>
   <br>
+  <%= f.select :type_of_pets_allowed, options_for_select(cat_or_dog_only_option) %>
+  <br>
   <%= f.text_field :price, placeholder: " Price per night" %>
   <br>
   <%= f.text_field :weight_limit, placeholder: " Weight Limit" %>

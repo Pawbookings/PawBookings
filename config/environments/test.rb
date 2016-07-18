@@ -20,9 +20,5 @@ Rails.application.configure do
   config.active_support.test_order = :random
 
   config.active_support.deprecation = :stderr
-
-  config.after_initialize do
-    ActiveMerchant::Billing::Base.mode = :test
-    ::GATEWAY = ActiveMerchant::Billing::BogusGateway.new
-  end
+  
 end

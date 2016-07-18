@@ -3,6 +3,8 @@ class PaymentsController < ApplicationController
   def new
     get_price_total
     get_pets_total
+    check_pets_type_for_runs
+    check_max_pets_allowed
   end
 
   def create
@@ -31,7 +33,7 @@ class PaymentsController < ApplicationController
           get_run_ids
           process_payment
         else
-          # if user has pets associated with them and handles new pets
+          # if user has pets associated with them and/or handles new pets
           pets = Pet.where(user_id: @user[:id])
           get_inputed_pet_names
           register_pets_not_registered
@@ -60,6 +62,54 @@ class PaymentsController < ApplicationController
         process_payment
       end
     end
+  end
+
+  def check_pets_type_for_runs
+    type_of_pets_allowed = []
+    params.each_pair do |k, v|
+      type_of_pets_allowed << v if k.include? "type_of_pets_allowed"
+    end
+
+    if (type_of_pets_allowed.include? "dog") && (type_of_pets_allowed.include? "cat")
+      if (params[:number_of_dogs].to_i > 0) && (params[:number_of_cats].to_i > 0)
+        return true
+      else
+        return redirect_to request.referrer
+      end
+    elsif type_of_pets_allowed.include? "dog"
+      if params[:number_of_dogs].to_i > 0
+        return true
+      else
+        return redirect_to request.referrer
+      end
+    else
+      if params[:number_of_cats].to_i > 0
+        return true
+      else
+        return redirect_to request.referrer
+      end
+    end
+  end
+
+  def check_max_pets_allowed
+    dog_room_max_num = 0
+    cat_room_max_num = 0
+    counter = params[:number_of_rooms].to_i
+    params[:number_of_rooms].to_i.times do
+      if params["room_#{counter}_type_of_pets_allowed"] == "dog"
+        dog_room_max_num += params["room_#{counter}_pets_per_run"].to_i
+      else
+        cat_room_max_num += params["room_#{counter}_pets_per_run"].to_i
+      end
+    end
+    if dog_room_max_num < params[:number_of_dogs].to_i
+      flash[:notice] = "Number of dogs exceeds the number of dogs allowed total."
+      return redirect_to request.referrer
+    elsif cat_room_max_num < params[:number_of_cats].to_i
+      flash[:notice] = "Number of cats exceeds the number of cats allowed total."
+      return redirect_to request.referrer
+    end
+    return true
   end
 
   def register_pets
@@ -117,13 +167,33 @@ class PaymentsController < ApplicationController
 
   def process_payment
     payment = Payment.new
-    if payment.purchase(card_info, billing_info, params[:total_price])
+    get_price_total
+    if payment.payment_successful?(params, @total_price)
       # Send email to new User with ConfirmationEmail
-      @kennel.reservations.create(user_id: @user.id, check_in: @kennel_info["check_in"], check_out: @kennel_info["check_out"], total_price: params[:total_price], payment_first_name: params[:payment_first_name], payment_last_name: params[:payment_last_name], pet_ids: @pet_ids, run_ids: @run_ids )
+      @kennel.reservations.create(user_id: @user.id,
+                                   check_in: @kennel_info["check_in"],
+                                   check_out: @kennel_info["check_out"],
+                                   total_price: params[:total_price],
+                                   payment_first_name: params[:payment_first_name],
+                                   payment_last_name: params[:payment_last_name],
+                                   pet_ids: @pet_ids,
+                                   run_ids: @run_ids,
+                                   trans_id: params[:transId],
+                                   card_number: get_credit_card_num.join(""),
+                                   expiration_date: params[:card_expiration_date] )
       return redirect_to reservation_path(id: @user[:id])
     else
-      # Payment Failed
+      return redirect_to request.referrer
     end
+  end
+
+  def get_credit_card_num
+    @last_four_card_numbers = []
+    split_param = params[:payment_card_number].split("")
+    @last_four_card_numbers << split_param[split_param.length - 4]
+    @last_four_card_numbers << split_param[split_param.length - 3]
+    @last_four_card_numbers << split_param[split_param.length - 2]
+    @last_four_card_numbers << split_param[split_param.length - 1]
   end
 
   def get_price_total
@@ -131,7 +201,8 @@ class PaymentsController < ApplicationController
     params.each_pair do |k, v|
       @total_price += v.to_f if k.to_s.include? "price"
     end
-    @total_price = @total_price * (params[:number_of_nights].to_i - 1)
+    number_of_nights = @kennel_info.nil? ? params["number_of_nights"] : @kennel_info["number_of_nights"]
+    @total_price = @total_price * (number_of_nights.to_i - 1)
   end
 
   def get_pets_total
@@ -141,34 +212,6 @@ class PaymentsController < ApplicationController
     else
       @total_pets = @kennel_info["number_of_dogs"].to_i + @kennel_info["number_of_cats"].to_i
     end
-  end
-
-  def card_info
-   {
-    brand: params[:payment_card_type],
-    number: params[:payment_card_number],
-    verification_value: params[:payment_cvv],
-    month: params[:payment_expiration_month],
-    year: params[:payment_expiration_year],
-    first_name: params[:payment_first_name],
-    last_name: params[:payment_last_name]
-    }
-  end
-
-  def billing_info
-   {
-    # ip will be: current_visit.ip
-    # Need to change hard coded values to dynamics
-    :ip => "71.122.154.82",
-      :billing_address => {
-        :name     => "#{params[:payment_first_name]} #{params[:payment_last_name]}",
-        :address1 => "123 Fake St",
-        :city     => "Kissimmee",
-        :state    => "FL",
-        :country  => "US",
-        :zip      => params[:payment_zipcode]
-      }
-    }
   end
 
 end
