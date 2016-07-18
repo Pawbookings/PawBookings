@@ -21,13 +21,14 @@
       <p>Date: <%= "#{@customer_drop_off_date} to #{@customer_pick_up_date}" %></p>
       <p>Pets: <%= "Dogs #{params[:search_info][:number_of_dogs]}, Cats #{params[:search_info][:number_of_cats]}" %></p>
       <p>Number of rooms: <%= params[:search_info][:number_of_rooms] %></p>
-      <p>Number of nights: <%= params[:search_info][:number_of_nights].to_i - 1 %></p>
+      <p class='testing123' value='3'>Number of nights: <%= params[:search_info][:number_of_nights].to_i - 1 %></p>
     </div>
 
       <%= form_tag({action: 'new', controller: 'payments'}, method: :get) %>
         <% counter = params[:search_info][:number_of_rooms].to_i %>
           <% params[:search_info][:number_of_rooms].to_i.times do %>
-            <div id="room_<%= counter %>">Room <%= counter %>
+            <div id="room_<%= counter %>">
+              Room <%= counter %>
               <p>Nothing Selected</p>
             </div>
             <% counter -= 1 %>
@@ -61,8 +62,9 @@
         <% @runs.each do |r| %>
           <p>Title: <%= r.title %></p>
           <p>Price: <%= r.price %></p>
+          <p><strong>Only <span style='color:red;'><%= r.type_of_pets_allowed.capitalize %>s</span> allowed.</strong></p>
           <p>Description: <%= r.description %></p>
-          <p style="color:blue;" onclick='addRunToRoom("<%= r.title %>", "room_<%= counter %>", <%= r.id %>, <%= r.price %>);'>Select Room</p>
+          <p style="color:blue;" onclick='addRunToRoom("<%= r.title %>", "room_<%= counter %>", <%= r.id %>, <%= r.price %>, "<%= r.type_of_pets_allowed %>", "<%= r.pets_per_run %>");'>Select Room</p>
           <br>
           <br>
         <% end %>
@@ -77,8 +79,8 @@
 
 <script text/javascript>
 var run_ids = [];
-  function addRunToRoom(title, room_number, id, price){
+  function addRunToRoom(title, room_number, id, price, type_of_pets_allowed, pets_per_run){
     $("#" + room_number + " p").first().remove();
-    $("#" + room_number).append("<p>"+title+"<input type='hidden' name='"+room_number+"_id' value='runid_"+id+"'><input type='hidden' name='price_"+room_number+"' value='"+price+"'><input type='hidden' name='"+room_number+"_name' value='"+title+"'></p>");
+    $("#" + room_number).append("<p class='"+room_number+"'>"+title+"<input type='hidden' name='"+room_number+"_id' value='runid_"+id+"'><input type='hidden' name='"+room_number+"_price' value='"+price+"'><input type='hidden' name='"+room_number+"_name' value='"+title+"'><input type='hidden' name='"+room_number+"_type_of_pets_allowed' value='"+type_of_pets_allowed+"'><input type='hidden' name='"+room_number+"_pets_per_run' value='"+pets_per_run+"'></p>");
   }
 </script>

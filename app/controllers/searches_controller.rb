@@ -47,6 +47,7 @@ class SearchesController < ApplicationController
         @pet_stay_date_range.each { |ps| @kennels_with_holidays << kennel if ps === h.holiday_date }
       end
     end
+    @negative_kennels = @kennels_with_holidays
     @kennels_with_holidays.each do |k|
       @pet_type_filtered_results.each do |pt|
         @pet_type_filtered_results.delete pt if pt === k
@@ -70,6 +71,7 @@ class SearchesController < ApplicationController
         @kennels_that_are_closed << kennel if counter > 0
       end
     end
+    @kennels_that_are_closed.each {|k| @negative_kennels << k }
     @kennels_that_are_closed.each do |k|
       @holiday_filtered_results.each do |fr|
         @holiday_filtered_results.delete fr if k === fr
