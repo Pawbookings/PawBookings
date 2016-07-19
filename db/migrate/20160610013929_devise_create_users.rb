@@ -8,6 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string  :last_name
       t.string  :phone
       t.string  :kennel_or_customer
+      t.string  :time_zone
       t.boolean :completed_registration
 
       ## Recoverable

@@ -1,6 +1,7 @@
 require "base64"
 
 class ApplicationController < ActionController::Base
+  before_filter :set_time_zone, if: :user_signed_in?
   protect_from_forgery with: :exception
 
   def kennel_completed_registration?
@@ -24,6 +25,15 @@ class ApplicationController < ActionController::Base
     @new_date << split_params[2]
     @new_date << split_params[0]
     @new_date = @new_date.join("/")
+  end
+
+
+private
+
+  def set_time_zone
+    if current_user
+      Time.zone = current_user.time_zone if current_user.time_zone
+    end
   end
 
 end

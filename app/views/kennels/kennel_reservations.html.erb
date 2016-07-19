@@ -1,0 +1,60 @@
+<h1>My Reservations Info</h1>
+
+<h3>Pets Staying Today</h3>
+<% if @no_reservations %>
+  <p>N/a</p>
+<% else %>
+  <% @pets.each do |pet| %>
+    Pet ID: <%= pet[:id] %>
+    <br>
+    Name: <%= pet[:name] %>
+    <br>
+    Cat or Dog: <%= pet[:cat_or_dog] %>
+    <br>
+    Breed: <%= pet[:breed] %>
+    <br>
+    Weight: <%= pet[:weight] %>
+    <br>
+    Check-In: <%= pet[:check_in] %>
+    <br>
+    Check-Out: <%= pet[:check_out] %>
+    <br>
+    <%= link_to "Get owner info", kennel_reservation_pet_owner_info_path(id: pet[:user_id]) %>
+    <br>
+    <br>
+  <% end %>
+<% end %>
+
+<h3>Rooms maxed out today</h3>
+<% if !@runs_maxed_today.blank? %>
+  <% @runs_maxed_today.each do |rm|  %>
+    <%= "•#{rm}" %>
+    <br>
+  <% end %>
+<% else %>
+  <p>•No runs maxed out</p>
+<% end %>
+
+<h3>Rooms available today</h3>
+<% if !@runs_with_days_left.blank? %>
+  <% @runs_with_days_left.each do |k, v| %>
+    <%= "•#{v} #{k}" %>
+    <br>
+  <% end %>
+<% elsif @no_reservations %>
+  <p>•All runs available</p>
+<% elsif !@run_names.blank? %>
+  <p>**Rooms available after check out time:</p>
+  <% @run_names.each do |k, v| %>
+    <p>Room Name: <%= "#{k}, #{v} room" %></p>
+  <% end %>
+<% else %>
+  <p>•No runs available today</p>
+<% end %>
+
+<% if !@pets_going_home.blank? %>
+  <h3>Pets going home after check out time</h3>
+  <% @pets_going_home.each do |ph| %>
+    <p>Pet ID: <%= ph[0] %></p>
+  <% end %>
+<% end  %>

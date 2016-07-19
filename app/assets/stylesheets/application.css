@@ -13,4 +13,10 @@
  *= require jquery-ui
  *= require_tree .
  *= require_self
+ *= require simple_calendar
  */
+
+/*
+.wday-0 {
+  background-color: red;
+}*/

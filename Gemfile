@@ -15,6 +15,10 @@ gem 'paperclip', '~> 5.0.0.beta1'
 gem 'ahoy_matey'
 gem 'geocoder'
 gem 'authorizenet'
+gem "simple_calendar", "~> 2.0"
+gem "sass"
+gem "sass-rails"
+gem "bootstrap-sass"
 
 group :development, :test do
   gem "pry"

@@ -14,4 +14,28 @@
     <%= link_to "View info", my_kennel_info_path(kennel_id: @kennel.id) %>
 <% else %>
   <h1>Register a Kennel</h1>
+  <%= link_to "Kennel registration", new_kennel_path %>
+<% end %>
+
+<br>
+<br>
+<%= month_calendar(attribute: :check_in) do |date| %>
+  <%= unsanitize_date(date.to_s) %>
+  <br>
+  <% counter = [] %>
+  <% if !@reservations.nil? %>
+    <% @reservations.each do |res| %>
+      <% @pet_stay_date_range = (res[:check_in]..res[:check_out]).map{|date| date} %>
+      <% if @pet_stay_date_range.include? date %>
+        <% counter << res %>
+        <%= "•#{res.payment_first_name}" %>
+        <br>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% if !@kennel.nil? %>
+  <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]) %>
+  <% else %>
+    <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s)) %>
+  <% end %>
 <% end %>

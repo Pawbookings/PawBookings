@@ -223,6 +223,7 @@ ActiveRecord::Schema.define(version: 20160714152938) do
     t.string   "last_name"
     t.string   "phone"
     t.string   "kennel_or_customer"
+    t.string   "time_zone"
     t.boolean  "completed_registration"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
