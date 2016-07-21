@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DropOffPickUpTest < ActiveSupport::TestCase
+class KennelCheckInCheckOutTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

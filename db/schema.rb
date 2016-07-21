@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714152938) do
+ActiveRecord::Schema.define(version: 20160720024204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,28 +49,6 @@ ActiveRecord::Schema.define(version: 20160714152938) do
 
   add_index "customer_emergency_contacts", ["user_id"], name: "index_customer_emergency_contacts_on_user_id", using: :btree
 
-  create_table "drop_off_pick_ups", force: :cascade do |t|
-    t.integer  "kennel_id"
-    t.string   "monday_drop_off"
-    t.string   "monday_pick_up"
-    t.string   "tuesday_drop_off"
-    t.string   "tuesday_pick_up"
-    t.string   "wednesday_drop_off"
-    t.string   "wednesday_pick_up"
-    t.string   "thursday_drop_off"
-    t.string   "thursday_pick_up"
-    t.string   "friday_drop_off"
-    t.string   "friday_pick_up"
-    t.string   "saturday_drop_off"
-    t.string   "saturday_pick_up"
-    t.string   "sunday_drop_off"
-    t.string   "sunday_pick_up"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-  end
-
-  add_index "drop_off_pick_ups", ["kennel_id"], name: "index_drop_off_pick_ups_on_kennel_id", using: :btree
-
   create_table "holidays", force: :cascade do |t|
     t.integer  "kennel_id"
     t.date     "holiday_date"
@@ -102,6 +80,13 @@ ActiveRecord::Schema.define(version: 20160714152938) do
   end
 
   add_index "hours_of_operations", ["kennel_id"], name: "index_hours_of_operations_on_kennel_id", using: :btree
+
+  create_table "kennel_check_in_check_outs", force: :cascade do |t|
+    t.string   "check_in"
+    t.string   "check_out"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "kennels", force: :cascade do |t|
     t.integer  "user_id"
@@ -179,16 +164,19 @@ ActiveRecord::Schema.define(version: 20160714152938) do
   create_table "reservations", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "kennel_id"
+    t.string   "contact_first_name"
+    t.string   "contact_last_name"
+    t.string   "pet_ids"
+    t.string   "run_ids"
     t.date     "check_in"
     t.date     "check_out"
     t.string   "payment_first_name"
     t.string   "payment_last_name"
-    t.string   "pet_ids"
-    t.string   "run_ids"
     t.float    "total_price"
     t.string   "trans_id"
     t.string   "card_number"
     t.string   "expiration_date"
+    t.boolean  "completed"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end

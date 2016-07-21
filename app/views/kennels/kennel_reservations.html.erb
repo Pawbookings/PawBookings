@@ -25,7 +25,7 @@
   <% end %>
 <% end %>
 
-<h3>Rooms maxed out today</h3>
+<h3>Rooms currently maxed out today</h3>
 <% if !@runs_maxed_today.blank? %>
   <% @runs_maxed_today.each do |rm|  %>
     <%= "•#{rm}" %>
@@ -44,7 +44,7 @@
 <% elsif @no_reservations %>
   <p>•All runs available</p>
 <% elsif !@run_names.blank? %>
-  <p>**Rooms available after check out time:</p>
+  <p>**Rooms are available only after check out time:</p>
   <% @run_names.each do |k, v| %>
     <p>Room Name: <%= "#{k}, #{v} room" %></p>
   <% end %>

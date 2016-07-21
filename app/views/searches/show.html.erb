@@ -60,21 +60,29 @@
       <div class="col-md-6">
         <h2>Room <%= counter %></h2>
         <% @runs.each do |r| %>
-          <p>Title: <%= r.title %></p>
-          <p>Price: <%= r.price %></p>
-          <p><strong>Only <span style='color:red;'><%= r.type_of_pets_allowed.capitalize %>s</span> allowed.</strong></p>
-          <p>Description: <%= r.description %></p>
-          <p style="color:blue;" onclick='addRunToRoom("<%= r.title %>", "room_<%= counter %>", <%= r.id %>, <%= r.price %>, "<%= r.type_of_pets_allowed %>", "<%= r.pets_per_run %>");'>Select Room</p>
+            <p>Title: <%= r.title %></p>
+            <p>Price: <%= r.price %></p>
+            <p><strong>Only <span style='color:red;'><%= r.type_of_pets_allowed.capitalize %>s</span> allowed.</strong></p>
+            <p>Description: <%= r.description %></p>
+            <% if !@run_ids_maxed.nil? %>
+              <% if @run_ids_maxed.include? r.id %>
+                <p style="color:orange;"><strong>This Room is currently unavailable</strong></p>
+              <% else %>
+                <p style="color:blue;" onclick='addRunToRoom("<%= r.title %>", "room_<%= counter %>", <%= r.id %>, <%= r.price %>, "<%= r.type_of_pets_allowed %>", "<%= r.pets_per_run %>");'>Select Room</p>
+              <% end %>
+            <% else %>
+              <p style="color:blue;" onclick='addRunToRoom("<%= r.title %>", "room_<%= counter %>", <%= r.id %>, <%= r.price %>, "<%= r.type_of_pets_allowed %>", "<%= r.pets_per_run %>");'>Select Room</p>
+            <% end %>
+          <% end %>
           <br>
           <br>
-        <% end %>
+        </div>
       </div>
     </div>
-  </div>
-  <br>
-  <br>
-  <% counter -= 1 %>
-<% end %>
+    <br>
+    <br>
+    <% counter -= 1 %>
+  <% end %>
 
 
 <script text/javascript>

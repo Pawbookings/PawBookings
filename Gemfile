@@ -19,6 +19,7 @@ gem "simple_calendar", "~> 2.0"
 gem "sass"
 gem "sass-rails"
 gem "bootstrap-sass"
+gem 'whenever', :require => false
 
 group :development, :test do
   gem "pry"

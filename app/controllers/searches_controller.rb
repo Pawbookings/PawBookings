@@ -86,6 +86,97 @@ class SearchesController < ApplicationController
     @runs = Run.where(kennel_id: @searched_kennel.id)
     @customer_drop_off_date = unsanitize_date(params[:search_info][:check_in])
     @customer_pick_up_date = unsanitize_date(params[:search_info][:check_out])
+    maxed_out?
+  end
+
+  def maxed_out?
+    @reservations = Reservation.where(kennel_id: @searched_kennel[:id], completed: nil)
+    get_res_dates
+  end
+
+  def get_res_dates
+    @res_ids_and_dates = []
+    @reservations.each do |res|
+      reservation_date_range = (res[:check_in]..res[:check_out]).map{|date| date}
+      reservation_date_range.delete_at(reservation_date_range.length - 1)
+      @res_ids_and_dates << [res[:id], reservation_date_range]
+    end
+    filter_res_dates
+  end
+
+  def filter_res_dates
+    @each_date_reservation = []
+    @guest_stay_date_range = (params[:search_info][:check_in]..params[:search_info][:check_out]).map{|date| date}
+    @guest_stay_date_range.delete_at(@guest_stay_date_range.length - 1)
+    @guest_stay_date_range.each do |gr|
+      @res_ids_and_dates.each do |k|
+        k[1].each do |i|
+          if i == Date.parse(gr)
+            @each_date_reservation << [i, k[0]]
+          end
+        end
+      end
+    end
+    group_res_dates
+  end
+
+  def group_res_dates
+    id_holder = []
+    @group_res_dates = []
+    @guest_stay_date_range.each do |gr|
+      @each_date_reservation.each do |k, v|
+        if Date.parse(gr) == k
+          if @group_res_dates.empty?
+            @group_res_dates << [id_holder << v, k]
+          else
+            @group_res_dates.each do |ke, va|
+              if va == k
+                ke << v
+              elsif !@group_res_dates.flatten.include? k
+                @group_res_dates << [id_holder << v, k]
+              end
+            end
+          end
+        end
+      end
+    end
+    @grouped_res_dates = @group_res_dates.map do |k, v|
+      [k.uniq, v]
+    end
+    get_number_of_runs_occupied
+  end
+
+  def get_number_of_runs_occupied
+    @runs_taken = []
+    @grouped_res_dates.each do |k, v|
+      k.each do |i|
+        reservation = Reservation.find(i)
+        run_ids = []
+        run_ids << JSON.parse(reservation[:run_ids])
+        run_ids.flatten.each do |rid|
+          run = Run.find(rid)
+          if @runs_taken.empty?
+            @runs_taken << [rid, 1, run[:number_of_rooms]]
+          else
+            @runs_taken = @runs_taken.map do |ke, va|
+              if ke == rid
+                [rid, va += 1, run[:number_of_rooms]]
+              else
+                @runs_taken << [rid, 1, run[:number_of_rooms]]
+              end
+            end
+          end
+        end
+      end
+      check_if_runs_maxed
+    end
+  end
+
+  def check_if_runs_maxed
+    @run_ids_maxed = []
+    @runs_taken.each do |rid, counter, total_rooms|
+      @run_ids_maxed << rid if counter == total_rooms
+    end
   end
 
 end
