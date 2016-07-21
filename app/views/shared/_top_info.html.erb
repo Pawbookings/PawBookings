@@ -13,7 +13,7 @@
   <div class="row text-center">
     <div class="col-xs-4 text-left">
       <% if !current_user.nil? %>
-        <p>Welcome, <%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %>!</p>
+        <p>Welcome, <%= "#{current_user.first_name.split("").each {|name| name.capitalize}.join}" %>!</p>
         <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
       <% end %>
     </div>

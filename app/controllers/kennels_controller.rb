@@ -33,6 +33,11 @@ class KennelsController < ApplicationController
   def kennel_reservations
     get_reservations_info
     pets_going_home?
+    get_all_runs
+  end
+
+  def get_all_runs
+    @runs = Run.where(kennel_id: params["kennel_id"].to_i)
   end
 
   def pets_going_home?
@@ -50,7 +55,7 @@ class KennelsController < ApplicationController
         pet = Pet.find(k)
         user = User.where(id: pet[:user_id]).first
         v = Date.parse(sanitize_date(v))
-        reservation = Reservation.where(kennel_id: params[:kennel_id], user_id: user[:id], check_out: v).first
+        reservation = Reservation.where(kennel_id: params[:kennel_id], user_id: user[:id], check_out: v, completed: nil).first
         JSON.parse(reservation[:run_ids]).each do |ri|
           @runs_becoming_available << ri
         end
@@ -58,16 +63,16 @@ class KennelsController < ApplicationController
         @runs_becoming_available.each do |ra|
           run = Run.find(ra)
           if !@run_names.flatten.include? run[:title]
-            counter += 1
-            @run_names << [run[:title], counter]
+            @run_names << [run[:title], counter += 1]
           else
-            @run_names.each do |k, v|
-              if k == run[:title]
-                v += 1
+            @run_names = @run_names.map do |ke, va|
+              if ke == run[:title]
+                [run[:title], va += 1]
               end
             end
           end
         end
+        @runs_becoming_available = []
       end
     end
   end
@@ -116,6 +121,7 @@ class KennelsController < ApplicationController
     @user = User.find(params[:id])
   end
 
+# TODO get rid of my_kennel_info
   def my_kennel_info
     @kennel = Kennel.where(id: params[:kennel_id])
     if !@kennel.empty?

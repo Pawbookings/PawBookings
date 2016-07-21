@@ -38,18 +38,31 @@
 <h3>Rooms available today</h3>
 <% if !@runs_with_days_left.blank? %>
   <% @runs_with_days_left.each do |k, v| %>
-    <%= "•#{v} #{k}" %>
+    <%= "•#{k}, #{v} room(s)" %>
     <br>
+  <% end %>
+  <% if !@runs.nil? %>
+    <% @runs.each do |run| %>
+      <% if !@runs_with_days_left.flatten.include? run[:title] %>
+        <%= "•#{run[:title]}, #{run[:number_of_rooms]} room(s)" %>
+      <% end %>
+    <% end %>
   <% end %>
 <% elsif @no_reservations %>
   <p>•All runs available</p>
 <% elsif !@run_names.blank? %>
   <p>**Rooms are available only after check out time:</p>
   <% @run_names.each do |k, v| %>
-    <p>Room Name: <%= "#{k}, #{v} room" %></p>
+    <p>Room Name: <%= "#{k}, #{v} room(s)" %></p>
   <% end %>
 <% else %>
-  <p>•No runs available today</p>
+<% if !@runs.nil? %>
+  <% @runs.each do |run| %>
+    <% if !@runs_maxed_today.include? run[:title] %>
+      <%= "•#{run[:title]}, #{run[:number_of_rooms]} room(s)" %>
+    <% end %>
+  <% end %>
+<% end %>
 <% end %>
 
 <% if !@pets_going_home.blank? %>
