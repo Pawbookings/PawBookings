@@ -174,8 +174,8 @@ class SearchesController < ApplicationController
     @run_ids_maxed = []
     @group_runs_by_count.each do |run_id, count|
       run = Run.find(run_id)
-      @run_ids_maxed << run_id if count == run[:pets_per_run]
+      @run_ids_maxed << run_id if count == run[:number_of_rooms]
     end
   end
-  
+
 end

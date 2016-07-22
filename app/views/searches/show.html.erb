@@ -58,7 +58,7 @@
   <div style="background-color:black;color:white;" class="container run_container_<%= counter %>">
     <div class="row">
       <div class="col-md-6">
-        <h2>Room <%= counter %></h2>
+        <h2>Room <%= counter %> options</h2>
         <% @runs.each do |r| %>
           <p>Title: <%= r.title %></p>
           <p>Price: <%= r.price %></p>
@@ -67,16 +67,24 @@
           <% if !@run_ids_maxed.nil? %>
             <% if @run_ids_maxed.include? r.id.to_s %>
               <p style="color:orange;"><strong>This Room is currently unavailable</strong></p>
+              <br>
+              <br>
             <% else %>
               <p style="color:blue;" onclick='addRunToRoom("<%= r.title %>", "room_<%= counter %>", <%= r.id %>, <%= r.price %>, "<%= r.type_of_pets_allowed %>", "<%= r.pets_per_run %>");'>Select Room</p>
+              <br>
+              <br>
             <% end %>
           <% else %>
             <p style="color:blue;" onclick='addRunToRoom("<%= r.title %>", "room_<%= counter %>", <%= r.id %>, <%= r.price %>, "<%= r.type_of_pets_allowed %>", "<%= r.pets_per_run %>");'>Select Room</p>
+            <br>
+            <br>
           <% end %>
         <% end %>
         </div>
       </div>
     </div>
+    <br>
+    <br>
     <br>
     <br>
     <% counter -= 1 %>
