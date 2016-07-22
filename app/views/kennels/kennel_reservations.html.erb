@@ -41,6 +41,7 @@
     <%= "•#{k}, #{v} room(s)" %>
     <br>
   <% end %>
+
   <% if !@runs.nil? %>
     <% @runs.each do |run| %>
       <% if (!@runs_with_days_left.flatten.include? run[:title]) && (!@runs_maxed_today.include? run[:title]) %>
@@ -48,8 +49,10 @@
       <% end %>
     <% end %>
   <% end %>
+
 <% elsif @no_reservations %>
   <p>•All runs available</p>
+
 <% else %>
   <% if !@runs.nil? %>
     <% @runs.each do |ru| %>

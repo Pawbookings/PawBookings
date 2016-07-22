@@ -1,7 +1,6 @@
 class DeviseRegistrationsController < Devise::RegistrationsController
   def create
   build_resource(sign_up_params)
-
   resource.save
   yield resource if block_given?
   if resource.persisted?
@@ -25,7 +24,6 @@ class DeviseRegistrationsController < Devise::RegistrationsController
   end
 end
 
-
   private
   def after_sign_up_path_for(resource)
     after_sign_in_path_for(resource)
@@ -33,13 +31,13 @@ end
 
   def sign_up_params
     if %w(customer kennel).include? params[:user][:kennel_or_customer]
-      params.require(:user).permit(:first_name, :last_name, :phone, :kennel_or_customer, :email, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :phone, :kennel_or_customer, :email, :password, :password_confirmation, :time_zone, :completed_registration)
     else
       return redirect_to root_path
     end
   end
 
   def account_update_params
-    params.require(:user).permit(:first_name, :last_name, :phone, :kennel_or_customer, :email, :password, :password_confirmation, :current_password)
+    params.require(:user).permit(:first_name, :last_name, :phone, :kennel_or_customer, :email, :password, :password_confirmation, :current_password, :time_zone, :completed_registration)
   end
 end

@@ -140,43 +140,42 @@ class SearchesController < ApplicationController
         end
       end
     end
-    @grouped_res_dates = @group_res_dates.map do |k, v|
-      [k.uniq, v]
-    end
+    @grouped_res_dates = @group_res_dates.map {|k, v| [k.uniq, v]}
     get_number_of_runs_occupied
   end
 
   def get_number_of_runs_occupied
-    @runs_taken = []
-    @grouped_res_dates.each do |k, v|
-      k.each do |i|
-        reservation = Reservation.find(i)
-        run_ids = []
-        run_ids << JSON.parse(reservation[:run_ids])
-        run_ids.flatten.each do |rid|
-          run = Run.find(rid)
-          if @runs_taken.empty?
-            @runs_taken << [rid, 1, run[:number_of_rooms]]
-          else
-            @runs_taken = @runs_taken.map do |ke, va|
-              if ke == rid
-                [rid, va += 1, run[:number_of_rooms]]
-              else
-                @runs_taken << [rid, 1, run[:number_of_rooms]]
-              end
-            end
-          end
-        end
+    @grouped_res_dates.each do |reservation_ids, date1|
+      @runs_for_today = []
+      reservation_ids.each do |res_id|
+        res = Reservation.find(res_id)
+        (JSON.parse res[:run_ids]).each {|i| @runs_for_today << i}
       end
-      check_if_runs_maxed
+      group_runs
     end
   end
 
-  def check_if_runs_maxed
+  def group_runs
+    @group_runs_by_count = []
+    counter = @runs_for_today.length - 1
+    @runs_for_today.length.times do
+      if @runs_for_today.count(@runs_for_today[0]) > 1
+        @group_runs_by_count << [@runs_for_today[0].to_s, @runs_for_today.count(@runs_for_today[0])]
+        @runs_for_today.delete(@runs_for_today[0])
+      elsif !@runs_for_today.empty?
+        @group_runs_by_count << [@runs_for_today[0].to_s, 1]
+        @runs_for_today.delete(@runs_for_today[0])
+      end
+    end
+    check_if_runs_maxed_today
+  end
+
+  def check_if_runs_maxed_today
     @run_ids_maxed = []
-    @runs_taken.each do |rid, counter, total_rooms|
-      @run_ids_maxed << rid if counter == total_rooms
+    @group_runs_by_count.each do |run_id, count|
+      run = Run.find(run_id)
+      @run_ids_maxed << run_id if count == run[:pets_per_run]
     end
   end
-
+  
 end
