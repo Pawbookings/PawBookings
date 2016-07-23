@@ -33,9 +33,9 @@
       <% end %>
     <% end %>
   <% end %>
-  <% if !@kennel.nil? %>
-  <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]) %>
-  <% else %>
+  <% if @kennel.nil? %>
     <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s)) %>
+  <% else %>
+    <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]) %>
   <% end %>
 <% end %>

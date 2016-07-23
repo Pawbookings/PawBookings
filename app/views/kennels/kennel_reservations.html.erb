@@ -1,77 +1,44 @@
-<h1>My Reservations Info</h1>
+<h1 style="color:blue;"><%= params[:date] %> Reservations Info</h1>
 
-<h3>Pets Staying Today</h3>
-<% if @no_reservations %>
-  <p>N/a</p>
-<% else %>
-  <% @pets.each do |pet| %>
-    Pet ID: <%= pet[:id] %>
-    <br>
-    Name: <%= pet[:name] %>
-    <br>
-    Cat or Dog: <%= pet[:cat_or_dog] %>
-    <br>
-    Breed: <%= pet[:breed] %>
-    <br>
-    Weight: <%= pet[:weight] %>
-    <br>
-    Check-In: <%= pet[:check_in] %>
-    <br>
-    Check-Out: <%= pet[:check_out] %>
-    <br>
-    <%= link_to "Get owner info", kennel_reservation_pet_owner_info_path(id: pet[:user_id]) %>
-    <br>
-    <br>
-  <% end %>
-<% end %>
-
-<h3>Rooms currently maxed out today</h3>
-<% if !@runs_maxed_today.blank? %>
-  <% @runs_maxed_today.each do |rm|  %>
-    <%= "•#{rm}" %>
-    <br>
-  <% end %>
-<% else %>
-  <p>•No runs maxed out</p>
-<% end %>
-
-<h3>Rooms available today</h3>
-<% if !@runs_with_days_left.blank? %>
-  <% @runs_with_days_left.each do |k, v| %>
-    <%= "•#{k}, #{v} room(s)" %>
-    <br>
+  <% @grouped_runs_occupied.each do |r_id, r_title, r_number_of_rooms, maxed| %>
+        <%= r_title %>
+        <br>
+        <% if maxed %>
+          <%= "#{r_number_of_rooms} occupied" %>
+          <p style="color:red;">This run is maxed out</p>
+        <% else %>
+          <%= "#{r_number_of_rooms} occupied" %>
+          <br>
+          <br>
+        <% end %>
   <% end %>
 
-  <% if !@runs.nil? %>
-    <% @runs.each do |run| %>
-      <% if (!@runs_with_days_left.flatten.include? run[:title]) && (!@runs_maxed_today.include? run[:title]) %>
-        <%= "•#{run[:title]}, #{run[:number_of_rooms]} room(s)" %>
+  <% if @grouped_runs_going_home_count.empty? %>
+    <h3>*No scheduled checkouts today</h3>
+  <% else %>
+    <h3>Runs occupied until checkout time today</h3>
+    <% @grouped_runs_going_home_count.each do |key, val| %>
+      <%= "#{key}, #{val} room(s)." %>
+      <br>
+    <% end  %>
+  <% end %>
+
+
+<h3>Reservations</h3>
+<% @grouped_formatted_reservations.each do |res| %>
+  <% run_going_home = false %>
+  <% res.each do |key, val| %>
+    <%= "#{key.to_s.split("_").each {|word| word.capitalize!}.join(" ")}: #{val}" %>
+    <br>
+    <% @reservations_going_home.each do |rgh| %>
+      <% if rgh[0].to_s.include? res[:reservation_id].to_s %>
+        <% run_going_home = true %>
       <% end %>
     <% end %>
   <% end %>
-
-<% elsif @no_reservations %>
-  <p>•All runs available</p>
-
-<% else %>
-  <% if !@runs.nil? %>
-    <% @runs.each do |ru| %>
-      <% if !@runs_maxed_today.include? ru[:title] %>
-        <%= "•#{ru[:title]}, #{ru[:number_of_rooms]} room(s)" %>
-      <% end %>
-    <% end %>
+  <% if run_going_home %>
+    <p style="color:red;">Reservation scheduled for check-out today.</p>
   <% end %>
+  <br>
+  <br>
 <% end %>
-
-<% if !@run_names.nil? %>
-  <% @run_names.each do |k, v| %>
-    <p><%= "•#{k}, #{v} room(s). Available only after checkout-time." %></p>
-  <% end %>
-<% end %>
-
-<% if !@pets_going_home.blank? %>
-  <h3>Pets going home after check out time</h3>
-  <% @pets_going_home.each do |ph| %>
-    <p>Pet ID: <%= ph[0] %></p>
-  <% end %>
-<% end  %>
