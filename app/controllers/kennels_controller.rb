@@ -44,6 +44,7 @@ class KennelsController < ApplicationController
       get_runs_available
       group_runs_available
       sanitize_group_runs_available
+      check_if_no_reservations
     end
   end
 
@@ -201,6 +202,17 @@ class KennelsController < ApplicationController
         else
           [r_id, r_title, r_number_of_rooms, maxed]
         end
+      end
+    end
+  end
+
+  def check_if_no_reservations
+    @grouped_runs_occupied.each do |r_id, r_title, r_number_of_rooms, maxed|
+      if r_number_of_rooms == 0
+        @no_reservations = true
+      else
+        @no_reservations = false
+        return @no_reservations
       end
     end
   end
