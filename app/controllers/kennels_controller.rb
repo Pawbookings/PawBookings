@@ -31,18 +31,20 @@ class KennelsController < ApplicationController
   end
 
   def kennel_reservations
-    @run_ids_going_home = []
-    @all_runs_purchased = []
-    @current_reservations = params[:reservation_ids].map do |i|
-      Reservation.find(i)
+    if !params[:reservation_ids].nil?
+      @run_ids_going_home = []
+      @all_runs_purchased = []
+      @current_reservations = params[:reservation_ids].map do |i|
+        Reservation.find(i)
+      end
+      format_reservations
+      get_reservations_going_home
+      grouped_runs_going_home
+      get_kennels_runs
+      get_runs_available
+      group_runs_available
+      sanitize_group_runs_available
     end
-    format_reservations
-    get_reservations_going_home
-    grouped_runs_going_home
-    get_kennels_runs
-    get_runs_available
-    group_runs_available
-    sanitize_group_runs_available
   end
 
   def format_reservations
@@ -189,6 +191,18 @@ class KennelsController < ApplicationController
       end
     end
     @grouped_runs_occupied = runs.uniq
+
+    if !@run_ids_going_home.empty?
+      @grouped_runs_occupied.map! do |r_id, r_title, r_number_of_rooms, maxed|
+        if @run_ids_going_home.include? r_id.to_i
+          amount = @run_ids_going_home.count(r_id.to_i)
+          @run_ids_going_home.delete(r_id.to_i)
+          [r_id, r_title, r_number_of_rooms -= amount, maxed]
+        else
+          [r_id, r_title, r_number_of_rooms, maxed]
+        end
+      end
+    end
   end
 
 

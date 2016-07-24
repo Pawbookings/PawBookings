@@ -1,6 +1,8 @@
 <h1 style="color:blue;"><%= params[:date] %> Reservations Info</h1>
 
-  <% @grouped_runs_occupied.each do |r_id, r_title, r_number_of_rooms, maxed| %>
+  <% if !@grouped_runs_occupied.nil? %>
+    <% @grouped_runs_occupied.each do |r_id, r_title, r_number_of_rooms, maxed| %>
+      <% if r_number_of_rooms > 0 %>
         <%= r_title %>
         <br>
         <% if maxed %>
@@ -11,34 +13,42 @@
           <br>
           <br>
         <% end %>
+      <% end %>
+    <% end %>
   <% end %>
 
-  <% if @grouped_runs_going_home_count.empty? %>
-    <h3>*No scheduled checkouts today</h3>
-  <% else %>
-    <h3>Runs occupied until checkout time today</h3>
-    <% @grouped_runs_going_home_count.each do |key, val| %>
-      <%= "#{key}, #{val} room(s)." %>
-      <br>
-    <% end  %>
+  <% if !@grouped_runs_going_home_count.nil? %>
+    <% if @grouped_runs_going_home_count.empty? %>
+      <h3>*No scheduled checkouts today</h3>
+    <% else %>
+      <h3>Runs occupied until checkout time today</h3>
+      <% @grouped_runs_going_home_count.each do |key, val| %>
+        <%= "#{key}, #{val} room(s)." %>
+        <br>
+      <% end  %>
+    <% end %>
   <% end %>
 
 
 <h3>Reservations</h3>
-<% @grouped_formatted_reservations.each do |res| %>
-  <% run_going_home = false %>
-  <% res.each do |key, val| %>
-    <%= "#{key.to_s.split("_").each {|word| word.capitalize!}.join(" ")}: #{val}" %>
-    <br>
-    <% @reservations_going_home.each do |rgh| %>
-      <% if rgh[0].to_s.include? res[:reservation_id].to_s %>
-        <% run_going_home = true %>
+<% if !@grouped_formatted_reservations.nil? %>
+  <% @grouped_formatted_reservations.each do |res| %>
+    <% run_going_home = false %>
+    <% res.each do |key, val| %>
+      <%= "#{key.to_s.split("_").each {|word| word.capitalize!}.join(" ")}: #{val}" %>
+      <br>
+      <% @reservations_going_home.each do |rgh| %>
+        <% if rgh[0].to_s.include? res[:reservation_id].to_s %>
+          <% run_going_home = true %>
+        <% end %>
       <% end %>
     <% end %>
+    <% if run_going_home %>
+      <p style="color:red;">Reservation scheduled for check-out today.</p>
+    <% end %>
+    <br>
+    <br>
   <% end %>
-  <% if run_going_home %>
-    <p style="color:red;">Reservation scheduled for check-out today.</p>
-  <% end %>
-  <br>
-  <br>
+<% else %>
+<p>No Reservations Today</p>
 <% end %>
