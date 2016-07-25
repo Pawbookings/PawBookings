@@ -1,13 +1,11 @@
 <h1 style="color:blue;"><%= params[:date] %> Reservations Info</h1>
 
   <% if !@grouped_runs_occupied.nil? %>
-    <% @grouped_runs_occupied.each do |r_id, r_title, r_number_of_rooms, maxed| %>
       <% if @no_reservations %>
         <h5>•No reservations made yet</h5>
       <% else %>
         <h3>Runs occupied today</h3>
       <% end %>
-    <% end %>
     <% @grouped_runs_occupied.each do |r_id, r_title, r_number_of_rooms, maxed| %>
       <% if r_number_of_rooms > 0 %>
         <%= r_title %>

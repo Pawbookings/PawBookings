@@ -4,7 +4,7 @@ class PaymentsController < ApplicationController
     get_price_total
     get_pets_total
     check_pets_type_for_runs
-    check_max_pets_allowed
+    # check_max_pets_allowed
   end
 
   def create
@@ -72,23 +72,24 @@ class PaymentsController < ApplicationController
 
     if (type_of_pets_allowed.include? "dog") && (type_of_pets_allowed.include? "cat")
       if (params[:number_of_dogs].to_i > 0) && (params[:number_of_cats].to_i > 0)
-        return true
       else
-        return redirect_to request.referrer
+        redirect_to request.referrer
+        return false
       end
     elsif type_of_pets_allowed.include? "dog"
       if params[:number_of_dogs].to_i > 0
-        return true
       else
-        return redirect_to request.referrer
+        redirect_to request.referrer
+        return false
       end
     else
       if params[:number_of_cats].to_i > 0
-        return true
       else
-        return redirect_to request.referrer
+        redirect_to request.referrer
+        return false
       end
     end
+    check_max_pets_allowed
   end
 
   def check_max_pets_allowed
@@ -104,10 +105,12 @@ class PaymentsController < ApplicationController
     end
     if dog_room_max_num < params[:number_of_dogs].to_i
       flash[:notice] = "Number of dogs exceeds the number of dogs allowed total."
-      return redirect_to request.referrer
+      redirect_to request.referrer
+      return false
     elsif cat_room_max_num < params[:number_of_cats].to_i
       flash[:notice] = "Number of cats exceeds the number of cats allowed total."
-      return redirect_to request.referrer
+      redirect_to request.referrer
+      return false
     end
     return true
   end
