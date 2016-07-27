@@ -9,8 +9,12 @@ class KennelsController < ApplicationController
     @kennel = Kennel.new(kennel_params)
     @user = User.where(id: current_user.id).first
     if !kennel_completed_registration? && @kennel.save && @user.kennel = @kennel
+      kennel = Kennel.where(user_id: @user[:id]).first
+      kennel.userID = @user[:id]
+      kennel.kennelID = kennel[:id]
+      kennel.save
       UserMailer.new_kennel_registration(current_user).deliver_now
-      @user.completed_registration = true
+      @user.completed_registration = "true"
       @user.save
       redirect_to kennel_dashboard_path
     else

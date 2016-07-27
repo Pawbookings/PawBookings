@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
+  ActiveAdmin.routes(self)
 
   root to: "home#index"
-  get "/users/sign_in" => redirect("/")
+
   devise_for :users, :controllers => { registrations: 'devise_registrations', passwords: "devise_passwords" }
+  get "/users/sign_in" => redirect("/")
+
   resources :home
   resources :customer_emergency_contacts, only: [:new, :create]
   resources :pets, only: [:new, :create]

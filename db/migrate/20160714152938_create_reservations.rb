@@ -3,8 +3,13 @@ class CreateReservations < ActiveRecord::Migration
     create_table :reservations do |t|
       t.belongs_to :user, index: true
       t.belongs_to :kennel, index: true
-      t.string :contact_first_name
-      t.string :contact_last_name
+      t.integer :reservationID
+      t.integer :kennelID
+      t.integer :userID
+      t.string :customer_first_name
+      t.string :customer_last_name
+      t.string :customer_email
+      t.string :customer_phone
       t.string :pet_ids
       t.string :run_ids
       t.date   :check_in
@@ -15,7 +20,7 @@ class CreateReservations < ActiveRecord::Migration
       t.string :trans_id
       t.string :card_number
       t.string :expiration_date
-      t.boolean :completed
+      t.string :completed
       t.timestamps null: false
     end
   end

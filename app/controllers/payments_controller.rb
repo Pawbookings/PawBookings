@@ -179,15 +179,31 @@ class PaymentsController < ApplicationController
                                    total_price: params[:total_price],
                                    payment_first_name: params[:payment_first_name],
                                    payment_last_name: params[:payment_last_name],
+                                   customer_first_name: params[:customer_first_name],
+                                   customer_last_name: params[:customer_last_name],
+                                   customer_email: params[:customer_email],
+                                   customer_phone: params[:customer_phone],
                                    pet_ids: @pet_ids,
                                    run_ids: @run_ids,
                                    trans_id: params[:transId],
                                    card_number: get_credit_card_num.join(""),
                                    expiration_date: params[:card_expiration_date] )
+
+      reservation = Reservation.where(customer_email: params[:customer_email]).first
+      reservation.kennelID = reservation[:kennel_id]
+      reservation.userID = reservation[:user_id]
+      reservation.reservationID = reservation[:id]
+      reservation.save
+
+      send_reservation_confirmation_email
       return redirect_to reservation_path(id: @user[:id])
     else
       return redirect_to request.referrer
     end
+  end
+
+  def send_reservation_confirmation_email
+    UserMailer.reservation_confirmation(params).deliver_now
   end
 
   def get_credit_card_num
