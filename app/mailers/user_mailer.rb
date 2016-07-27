@@ -14,4 +14,9 @@ class UserMailer < ApplicationMailer
     @current_user = current_user
     mail(to: current_user.email, subject: 'PawBookings Registration Confirmation')
   end
+
+  def reservation_confirmation(param)
+    @params = param
+    mail(to: param[:customer_email], subject: 'PawBookings Reservation Confirmation')
+  end
 end

@@ -20,6 +20,7 @@ gem "sass"
 gem "sass-rails"
 gem "bootstrap-sass"
 gem 'whenever', :require => false
+gem 'activeadmin', github: 'activeadmin'
 
 group :development, :test do
   gem "pry"

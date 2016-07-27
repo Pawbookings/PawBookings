@@ -26,5 +26,5 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = false
 
   Paperclip.options[:command_path] = "/usr/local/bin/"
-  
+
 end

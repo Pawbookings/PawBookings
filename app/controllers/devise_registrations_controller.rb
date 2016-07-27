@@ -22,6 +22,9 @@ class DeviseRegistrationsController < Devise::RegistrationsController
   if params[:confirm_email] == "true"
     UserMailer.user_confirm_email(current_user).deliver_now
   end
+  user = User.find(current_user[:id])
+  user.userID = user[:id]
+  user.save
 end
 
   private
@@ -31,13 +34,13 @@ end
 
   def sign_up_params
     if %w(customer kennel).include? params[:user][:kennel_or_customer]
-      params.require(:user).permit(:first_name, :last_name, :phone, :kennel_or_customer, :email, :password, :password_confirmation, :time_zone, :completed_registration)
+      params.require(:user).permit(:first_name, :last_name, :phone, :kennel_or_customer, :email, :password, :password_confirmation, :time_zone, :completed_registration, :userID)
     else
       return redirect_to root_path
     end
   end
 
   def account_update_params
-    params.require(:user).permit(:first_name, :last_name, :phone, :kennel_or_customer, :email, :password, :password_confirmation, :current_password, :time_zone, :completed_registration)
+    params.require(:user).permit(:first_name, :last_name, :phone, :kennel_or_customer, :email, :password, :password_confirmation, :current_password, :time_zone, :completed_registration, :userID)
   end
 end
