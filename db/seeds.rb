@@ -27,7 +27,7 @@ Pet.create!(user_id: 2, name: "Jolly", cat_or_dog: "dog", breed: "Cocker-Spaniel
 
 
 
-reservation = Reservation.create!(kennel_id: 1, user_id: 2, customer_first_name: 'John', customer_last_name: 'Smith', customer_email: 'johnsmith@gmail.com', customer_phone: '4071231234', pet_ids: '[1,2]', run_ids: '[1]', check_in_date: '2016-12-12', check_out_date: '2016-12-13', total_price: 90.0, room_details: '[[The Large Room, 90]]')
+reservation = Reservation.create!(kennel_id: 1, user_id: 2, customer_first_name: 'John', customer_last_name: 'Smith', customer_email: 'johnsmith@gmail.com', customer_phone: '4071231234', pet_ids: '[1,2]', run_ids: '[1]', check_in_date: '2016-12-12', check_out_date: '2016-12-13', total_price: 90.0, room_details: "[[\"The Large Room\", 90]]")
 reservation.reservationID = 1
 reservation.kennelID = 1
 reservation.userID = 2
