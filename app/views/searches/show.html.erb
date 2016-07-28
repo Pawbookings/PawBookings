@@ -1,9 +1,9 @@
 <h1>Show Kennel Selected</h1>
 <%= image_tag @searched_kennel.avatar.url(:thumb) if !@searched_kennel.nil? %>
 <br>
-<%= @searched_kennel[:kennel_name] %>
+<%= @searched_kennel[:name] %>
 <br>
-<%= @searched_kennel[:kennel_address] %>
+<%= @searched_kennel[:address] %>
 <br>
 <%= @searched_kennel[:city] %>
 <br>
@@ -34,8 +34,8 @@
             <% counter -= 1 %>
           <% end %>
           <input type="hidden" name="kennel_id" value="<%= @searched_kennel[:id] %>">
-          <input type="hidden" name="kennel_name" value="<%= @searched_kennel[:kennel_name] %>">
-          <input type="hidden" name="kennel_address" value="<%= @searched_kennel[:kennel_address] %>">
+          <input type="hidden" name="name" value="<%= @searched_kennel[:name] %>">
+          <input type="hidden" name="address" value="<%= @searched_kennel[:address] %>">
           <input type="hidden" name="kennel_city" value="<%= @searched_kennel[:city] %>">
           <input type="hidden" name="kennel_state" value="<%= @searched_kennel[:state] %>">
           <input type="hidden" name="kennel_zip" value="<%= @searched_kennel[:zip] %>">

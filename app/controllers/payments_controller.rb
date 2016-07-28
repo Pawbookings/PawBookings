@@ -1,10 +1,10 @@
 class PaymentsController < ApplicationController
   include UsersHelper
+
   def new
     get_price_total
     get_pets_total
     check_pets_type_for_runs
-    # check_max_pets_allowed
   end
 
   def create
@@ -24,7 +24,12 @@ class PaymentsController < ApplicationController
         process_payment
       else
         # if user not logged in but has an account
-        @user = User.where(email: params[:customer_email]).first
+        @user = User.where(email: params[:customer_email], kennel_or_customer: "customer").first
+        if @user.nil?
+          flash[:notice] = "This email cannot be used to make reservations. Please choose another email."
+          redirect_to request.referrer
+          return false
+        end
         if Pet.where(user_id: @user[:id]).blank?
           # if user doesnt have pets associated with them
           get_inputed_pet_names
@@ -71,20 +76,17 @@ class PaymentsController < ApplicationController
     end
 
     if (type_of_pets_allowed.include? "dog") && (type_of_pets_allowed.include? "cat")
-      if (params[:number_of_dogs].to_i > 0) && (params[:number_of_cats].to_i > 0)
-      else
+      if !(params[:number_of_dogs].to_i > 0) && !(params[:number_of_cats].to_i > 0)
         redirect_to request.referrer
         return false
       end
     elsif type_of_pets_allowed.include? "dog"
-      if params[:number_of_dogs].to_i > 0
-      else
+      if !(params[:number_of_dogs].to_i > 0)
         redirect_to request.referrer
         return false
       end
     else
-      if params[:number_of_cats].to_i > 0
-      else
+      if !(params[:number_of_cats].to_i > 0)
         redirect_to request.referrer
         return false
       end
@@ -172,10 +174,11 @@ class PaymentsController < ApplicationController
     payment = Payment.new
     get_price_total
     if payment.payment_successful?(params, @total_price)
-      # Send email to new User with ConfirmationEmail
-      @kennel.reservations.create(user_id: @user.id,
-                                   check_in: @kennel_info["check_in"],
-                                   check_out: @kennel_info["check_out"],
+      get_room_info
+      @kennel.reservations.create( user_id: @user.id,
+                                   check_in_date: @kennel_info["check_in"],
+                                   check_out_date: @kennel_info["check_out"],
+                                   room_details: @room_details,
                                    total_price: params[:total_price],
                                    payment_first_name: params[:payment_first_name],
                                    payment_last_name: params[:payment_last_name],
@@ -185,7 +188,7 @@ class PaymentsController < ApplicationController
                                    customer_phone: params[:customer_phone],
                                    pet_ids: @pet_ids,
                                    run_ids: @run_ids,
-                                   trans_id: params[:transId],
+                                   transID: params[:transId],
                                    card_number: get_credit_card_num.join(""),
                                    expiration_date: params[:card_expiration_date] )
 
@@ -193,17 +196,26 @@ class PaymentsController < ApplicationController
       reservation.kennelID = reservation[:kennel_id]
       reservation.userID = reservation[:user_id]
       reservation.reservationID = reservation[:id]
-      reservation.save
+      reservation.save!
 
-      send_reservation_confirmation_email
+      send_reservation_confirmation_email(reservation)
       return redirect_to reservation_path(id: @user[:id])
     else
       return redirect_to request.referrer
     end
   end
 
-  def send_reservation_confirmation_email
-    UserMailer.reservation_confirmation(params).deliver_now
+  def get_room_info
+    @room_details = []
+    counter = @kennel_info["number_of_rooms"].to_i
+    @kennel_info["number_of_rooms"].to_i.times do
+      @room_details << [@kennel_info["room_#{counter}_name"], @kennel_info["room_#{counter}_price"]]
+      counter -= 1
+    end
+  end
+
+  def send_reservation_confirmation_email(reservation)
+    UserMailer.reservation_confirmation(reservation).deliver_now
   end
 
   def get_credit_card_num

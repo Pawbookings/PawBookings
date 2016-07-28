@@ -2,11 +2,11 @@
 
 
 <%= form_for @kennel do |f| %>
-  <%= f.text_field :kennel_name, placeholder: " Kennel Name" %>
+  <%= f.text_field :name, placeholder: " Kennel-Name" %>
   <br>
   <%= f.select :cats_or_dogs, options_for_select(cat_or_dog_options) %>
   <br>
-  <%= f.text_field :kennel_address, placeholder: " Kennel Address" %>
+  <%= f.text_field :address, placeholder: " Address" %>
   <br>
   <%= f.text_field :city, placeholder: " City" %>
   <br>
@@ -14,7 +14,9 @@
   <br>
   <%= f.text_field :zip, placeholder: " Zip" %>
   <br>
-  <%= f.text_field :phone, placeholder: " Phone" %>
+  <%= f.text_field :phone, placeholder: " Kennel-Phone" %>
+  <br>
+  <%= f.text_field :email, placeholder: " Kennel-Email" %>
   <br>
   <%= f.text_field :mission_statement, placeholder: " Mission Statement" %>
   <br>

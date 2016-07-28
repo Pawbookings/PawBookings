@@ -1,17 +1,25 @@
 <h1>Payments Page</h1>
-<p>Price <%= @total_price %></p>
-<p>Number of Pets <%= @total_pets %></p>
-<p>Number of Rooms <%= params[:number_of_rooms] %></p>
+<p>Total-Price <%= @total_price %></p>
+<p>Total Number of Pets <%= @total_pets %></p>
+<p>Total Number of Rooms <%= params[:number_of_rooms] %></p>
 
+<% counter = params[:number_of_rooms].to_i %>
+<% params[:number_of_rooms].to_i.times do %>
+  <h3>Room <%= counter %></h3>
+  <p>Room title: <%= params["room_#{counter}_name"] %></p>
+  <p>Room price: $<%= params["room_#{counter}_price"] %></p>
+  <p>Maximum amount of pets allowed for this room: <%= params["room_#{counter}_pets_per_run"] %></p>
+  <% counter -= 1 %>
+<% end %>
 
 <%= form_tag payments_path, method: :post %>
   <%= hidden_field_tag :total_price, nil, value: @total_price %>
   <%= hidden_field_tag :payment_card_type, nil, value: "visa" %>
   <%= hidden_field_tag :kennel_info, nil, value: params %>
 
-  <h3>Owner Info</h3>
+  <h3 style="color:#b73c3c;">Owner Info</h3>
   <div class="payment_info">
-    <h4>Credit Card Information</h4>
+    <h4 style="color:green;">Credit Card</h4>
     <%= text_field_tag :payment_first_name, nil, placeholder: " First Name" %>
     <br>
     <%= text_field_tag :payment_last_name, nil, placeholder: " Last Name" %>
@@ -29,7 +37,7 @@
 
 <br>
 <div class="pets_contact">
-  <h4>Who should we contact incase of an emergency?</h4>
+  <h4 style="color:green;">Primary Contact</h4>
   <%= text_field_tag :customer_first_name, nil, placeholder: " First Name" %>
   <br>
   <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name" %>
@@ -39,12 +47,12 @@
   <%= text_field_tag :customer_phone, nil, placeholder: " Phone" %>
 </div>
 <br>
-  <h3>Pets Info</h3>
+  <h3 style="color:#b73c3c;">Pets Info</h3>
 
   <div class="pet_details">
     <% counter = @total_pets.to_i %>
     <% (@total_pets.to_i).times do %>
-      <h4>Pet <%= counter %> Details</h4>
+      <h4 style="color:green;">Pet <%= counter %> Details</h4>
       <%= text_field_tag "pet_name_#{counter}", nil, placeholder: " Pet Name" %>
       <br>
       <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), onclick: "petTypeOptions(#{counter});" %>

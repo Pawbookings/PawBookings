@@ -8,14 +8,14 @@ class KennelsController < ApplicationController
   def create
     @kennel = Kennel.new(kennel_params)
     @user = User.where(id: current_user.id).first
-    if !kennel_completed_registration? && @kennel.save && @user.kennel = @kennel
+    if !kennel_completed_registration? && @kennel.save! && @user.kennel = @kennel
       kennel = Kennel.where(user_id: @user[:id]).first
       kennel.userID = @user[:id]
       kennel.kennelID = kennel[:id]
-      kennel.save
+      kennel.save!
       UserMailer.new_kennel_registration(current_user).deliver_now
       @user.completed_registration = "true"
-      @user.save
+      @user.save!
       redirect_to kennel_dashboard_path
     else
       flash[:notice]
@@ -67,8 +67,8 @@ class KennelsController < ApplicationController
         last_name: @pet_owner[:last_name],
         phone: @pet_owner[:phone],
         email: @pet_owner[:email],
-        check_in: unsanitize_date(res[:check_in].to_s),
-        check_out: unsanitize_date(res[:check_out].to_s)
+        check_in: unsanitize_date(res[:check_in_date].to_s),
+        check_out: unsanitize_date(res[:check_out_date].to_s)
       }
 
       counter = 1
@@ -186,6 +186,18 @@ class KennelsController < ApplicationController
 
   def sanitize_group_runs_available
     runs = []
+    if !@run_ids_going_home.empty?
+      @grouped_runs_occupied.map! do |r_id, r_title, r_number_of_rooms|
+        if @run_ids_going_home.include? r_id.to_i
+          amount = @run_ids_going_home.count(r_id.to_i)
+          @run_ids_going_home.delete(r_id.to_i)
+          [r_id, r_title, r_number_of_rooms -= amount]
+        else
+          [r_id, r_title, r_number_of_rooms]
+        end
+      end
+    end
+
     @all_kennels_runs.each do |k_run|
       @grouped_runs_occupied.each do |r_id, r_title, r_number_of_rooms|
         if k_run[:number_of_rooms] == r_number_of_rooms
@@ -196,18 +208,6 @@ class KennelsController < ApplicationController
       end
     end
     @grouped_runs_occupied = runs.uniq
-
-    if !@run_ids_going_home.empty?
-      @grouped_runs_occupied.map! do |r_id, r_title, r_number_of_rooms, maxed|
-        if @run_ids_going_home.include? r_id.to_i
-          amount = @run_ids_going_home.count(r_id.to_i)
-          @run_ids_going_home.delete(r_id.to_i)
-          [r_id, r_title, r_number_of_rooms -= amount, maxed]
-        else
-          [r_id, r_title, r_number_of_rooms, maxed]
-        end
-      end
-    end
   end
 
   def check_if_no_reservations
@@ -243,7 +243,7 @@ class KennelsController < ApplicationController
   private
 
   def kennel_params
-    return params.require(:kennel).permit(:avatar, :kennel_name, :cats_or_dogs, :kennel_address, :city, :state, :zip, :phone, :mission_statement )
+    return params.require(:kennel).permit(:avatar, :name, :cats_or_dogs, :address, :city, :state, :zip, :phone, :email, :mission_statement )
   end
 
 end

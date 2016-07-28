@@ -1,5 +1,6 @@
 class SearchesController < ApplicationController
   include SearchesHelper
+
   def search_results
     sanitize_date(params[:check_in])
     params[:check_in] = Date.parse(@new_date)
@@ -97,7 +98,7 @@ class SearchesController < ApplicationController
   def get_res_dates
     @res_ids_and_dates = []
     @reservations.each do |res|
-      reservation_date_range = (res[:check_in]..res[:check_out]).map{|date| date}
+      reservation_date_range = (res[:check_in_date]..res[:check_out_date]).map{|date| date}
       reservation_date_range.delete_at(reservation_date_range.length - 1)
       @res_ids_and_dates << [res[:id], reservation_date_range]
     end

@@ -10,17 +10,23 @@ class CreateReservations < ActiveRecord::Migration
       t.string :customer_last_name
       t.string :customer_email
       t.string :customer_phone
+      t.string :room_details
       t.string :pet_ids
       t.string :run_ids
-      t.date   :check_in
-      t.date   :check_out
+      t.date   :check_in_date
+      t.date   :check_out_date
       t.string :payment_first_name
       t.string :payment_last_name
       t.float  :total_price
-      t.string :trans_id
+      t.string :transID
       t.string :card_number
       t.string :expiration_date
+      t.string :checked_in
+      t.string :checked_out
       t.string :completed
+      t.string :three_weeks_before_email_reminder
+      t.string :one_week_before_email_reminder
+      t.string :day_before_email_reminder
       t.timestamps null: false
     end
   end

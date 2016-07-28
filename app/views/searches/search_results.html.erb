@@ -1,7 +1,7 @@
 <h1>Search Results</h1>
 <% if !@final_search_results.blank? %>
   <% @final_search_results.each do |fr| %>
-    <%= link_to fr.kennel_name, search_path(fr.id, search_info: params) %>
+    <%= link_to fr.name, search_path(fr.id, search_info: params) %>
     <br>
     <% if fr.cats_or_dogs == "both" %>
       Cats and Dogs
@@ -9,7 +9,7 @@
       <%= fr.cats_or_dogs.capitalize %>
     <% end %>
     <br>
-    <%= fr.kennel_address %>
+    <%= fr.address %>
     <br>
     <br>
   <% end %>
@@ -21,7 +21,7 @@
 <br>
 <% if !@negative_kennels.blank? %>
   <% @negative_kennels.each do |fr| %>
-    <%= link_to fr.kennel_name, search_path(fr.id, search_info: params) %>
+    <%= link_to fr.name, search_path(fr.id, search_info: params) %>
     <br>
     <% if fr.cats_or_dogs == "both" %>
       Cats and Dogs
@@ -29,7 +29,7 @@
       <%= fr.cats_or_dogs.capitalize %>
     <% end %>
     <br>
-    <%= fr.kennel_address %>
+    <%= fr.address %>
     <br>
     <br>
   <% end %>

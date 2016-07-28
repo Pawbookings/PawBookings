@@ -5,8 +5,8 @@
 <p><strong>Manager: </strong><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
 <p><strong>Email: </strong><%= current_user.email.capitalize %></p>
 <% if !@kennel.nil? %>
-    <h3><strong><%= @kennel.kennel_name %></strong></h3>
-    <p><strong>Address:</strong> <%= @kennel.kennel_address %></p>
+    <h3><strong><%= @kennel.name %></strong></h3>
+    <p><strong>Address:</strong> <%= @kennel.address %></p>
     <p><strong>City:</strong> <%= @kennel.city %></p>
     <p><strong>State:</strong> <%= @kennel.state %></p>
     <p><strong>Zip:</strong> <%= @kennel.zip %></p>
@@ -19,13 +19,13 @@
 
 <br>
 <br>
-<%= month_calendar(attribute: :check_in) do |date| %>
+<%= month_calendar(attribute: :check_in_date) do |date| %>
   <%= unsanitize_date(date.to_s) %>
   <br>
   <% counter = [] %>
   <% if !@reservations.nil? %>
     <% @reservations.each do |res| %>
-      <% @pet_stay_date_range = (res[:check_in]..res[:check_out]).map{|date| date} %>
+      <% @pet_stay_date_range = (res[:check_in_date]..res[:check_out_date]).map{|date| date} %>
       <% if @pet_stay_date_range.include? date %>
         <% counter << res %>
         <%= "•#{res.payment_first_name}" %>

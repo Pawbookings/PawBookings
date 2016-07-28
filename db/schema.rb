@@ -125,13 +125,14 @@ ActiveRecord::Schema.define(version: 20160726014217) do
     t.integer  "user_id"
     t.integer  "kennelID"
     t.integer  "userID"
-    t.string   "kennel_name"
-    t.string   "kennel_address"
+    t.string   "name"
+    t.string   "address"
     t.string   "mission_statement"
     t.string   "city"
     t.string   "state"
     t.string   "zip"
     t.string   "phone"
+    t.string   "email"
     t.string   "cats_or_dogs"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
@@ -206,19 +207,25 @@ ActiveRecord::Schema.define(version: 20160726014217) do
     t.string   "customer_last_name"
     t.string   "customer_email"
     t.string   "customer_phone"
+    t.string   "room_details"
     t.string   "pet_ids"
     t.string   "run_ids"
-    t.date     "check_in"
-    t.date     "check_out"
+    t.date     "check_in_date"
+    t.date     "check_out_date"
     t.string   "payment_first_name"
     t.string   "payment_last_name"
     t.float    "total_price"
-    t.string   "trans_id"
+    t.string   "transID"
     t.string   "card_number"
     t.string   "expiration_date"
+    t.string   "checked_in"
+    t.string   "checked_out"
     t.string   "completed"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.string   "three_weeks_before_email_reminder"
+    t.string   "one_week_before_email_reminder"
+    t.string   "day_before_email_reminder"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   add_index "reservations", ["kennel_id"], name: "index_reservations_on_kennel_id", using: :btree
