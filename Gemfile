@@ -21,6 +21,7 @@ gem "sass-rails"
 gem "bootstrap-sass"
 gem 'whenever', :require => false
 gem 'activeadmin', github: 'activeadmin'
+gem "chartkick"
 
 group :development, :test do
   gem "pry"

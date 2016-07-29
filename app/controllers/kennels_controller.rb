@@ -32,6 +32,21 @@ class KennelsController < ApplicationController
         # @photo = Photo.where(kennel_id: @kennel.id).first
       end
     end
+    get_most_booked_runs
+  end
+
+  def get_most_booked_runs
+    run_names_and_counts = {}
+    @reservations.each do |res|
+      JSON.parse(res[:room_details]).each do |name, price|
+        if run_names_and_counts[name.to_sym].blank?
+          run_names_and_counts.merge!(name.to_sym => 1)
+        else
+          run_names_and_counts[name.to_sym] = (run_names_and_counts[name.to_sym] += 1)
+        end
+      end
+    end
+    @run_names_and_counts = run_names_and_counts
   end
 
   def kennel_reservations

@@ -1,4 +1,20 @@
-<h1 style="text-decoration:underline;">Kennel Dashboard</h1>
+
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h1 style="text-decoration:underline;">Kennel Dashboard</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-6">
+      <h3>Most Booked Runs</h3>
+      <%= pie_chart @run_names_and_counts %>
+    </div>
+  </div>
+</div>
 
 <%= image_tag @kennel.avatar.url(:thumb) if !@kennel.nil? %>
 <%#= image_tag @photo.image.url(:thumb) if !@photo.nil? %>

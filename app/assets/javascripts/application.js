@@ -15,6 +15,8 @@
 //= require jquery-ui
 //= require ahoy
 //  require turbolinks
+//= require Chart.bundle
+//= require chartkick
 //= require_tree .
 
 ahoy.trackAll();
