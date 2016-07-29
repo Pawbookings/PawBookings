@@ -244,7 +244,6 @@ ActiveRecord::Schema.define(version: 20160726014217) do
     t.string   "description"
     t.string   "indoor_or_outdoor"
     t.string   "breeds_restricted"
-    t.string   "dates_unavailable"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end

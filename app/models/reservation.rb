@@ -51,3 +51,5 @@ class Reservation < ActiveRecord::Base
     emails.each { |email| UserMailer.send_day_before_reservation_reminder(email).deliver_now }
     Reservation.where(id: res_ids).update_all(day_before_email_reminder: "sent")
   end
+  
+end
