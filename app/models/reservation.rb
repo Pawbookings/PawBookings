@@ -43,5 +43,5 @@ class Reservation < ActiveRecord::Base
     reservations.each do |key, val|
       emails << val if key == "customer_email"
     end
-    emails.each { |email| UserMailer.send_one_week_reservation_reminder(email).deliver_now }  end
+    emails.each { |email| UserMailer.send_day_before_reservation_reminder(email).deliver_now }  end
   end

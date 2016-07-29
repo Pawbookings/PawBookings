@@ -13,7 +13,6 @@ class CreateRuns < ActiveRecord::Migration
       t.string  :description
       t.string  :indoor_or_outdoor
       t.string  :breeds_restricted
-      t.string  :dates_unavailable
       t.timestamps null: false
     end
   end
