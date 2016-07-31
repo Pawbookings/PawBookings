@@ -1,0 +1,16 @@
+<h1>Rate this Kennel</h1>
+<h6>One a scale from 1-5, how does this Kennel rate?</h6>
+<%= form_for @kennel_rating do |f| %>
+  <h5>Rating</h5>
+  <%= f.select :rating, options_for_select(kennel_rating_option) %>
+  <br>
+  <br>
+  <h5>Comment</h5>
+  <%= f.text_area :comment %>
+  <br>
+  <%= f.hidden_field :kennelID, value: "#{params[:kennel_id].to_i}" %>
+  <%= f.hidden_field :userID, value: "#{params[:user_id].to_i}" %>
+  <%= f.hidden_field :reservationID, value: "#{params[:reservation_id].to_i}" %>
+
+  <%= f.submit "Submit" %>
+<% end %>
