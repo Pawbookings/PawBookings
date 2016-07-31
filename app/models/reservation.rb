@@ -1,13 +1,19 @@
 class Reservation < ActiveRecord::Base
+  has_one :kennel_rating
   belongs_to :user
   belongs_to :kennel
 
   def mark_completed_reservations
     res_ids = []
+    res_emails = []
     date = Date.today
     reservations = Reservation.where(completed: nil, check_out_date: date)
-    reservations.each { |res| res_ids << res[:id] }
+    reservations.each do |res|
+      res_ids << res[:id]
+      res_emails_and_ids << [res[:customer_email], res[:kennel_id], res[:user_id], res[:id]]
+    end
     Reservation.where(id: res_ids).update_all(completed: "true")
+    res_emails_and_ids.each { |email, k_id, u_id, res_id| UserMailer.send_kennel_rating_email(email, k_id, u_id, res_id).deliver_now }
   end
 
   def send_reservation_reminder_emails
@@ -51,5 +57,5 @@ class Reservation < ActiveRecord::Base
     emails.each { |email| UserMailer.send_day_before_reservation_reminder(email).deliver_now }
     Reservation.where(id: res_ids).update_all(day_before_email_reminder: "sent")
   end
-  
+
 end

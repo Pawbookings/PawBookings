@@ -8,9 +8,16 @@ class PaymentsController < ApplicationController
   end
 
   def create
+    @kennel_info = JSON.parse params[:kennel_info].gsub('=>', ':')
+    get_pet_stay_dates
+    reservation_maxes_runs?
+    if !@maxing_runs.empty?
+      redirect_to request.referrer
+      flash[:notice] = "The following rooms cannot be booked during the dates scheduled: #{@maxing_runs.flatten}"
+      return false
+    end
     if current_user.nil?
       random_password
-      @kennel_info = JSON.parse params[:kennel_info].gsub('=>', ':')
       @kennel = Kennel.find(@kennel_info["kennel_id"])
 
       # if user not logged in and doesnt have an account
@@ -66,6 +73,83 @@ class PaymentsController < ApplicationController
         process_payment
       end
     end
+  end
+
+  def get_pet_stay_dates
+    @pet_stay_date_range = (Date.parse(@kennel_info["check_in"])..Date.parse(@kennel_info["check_out"])).map {|date| date}
+  end
+
+  def reservation_maxes_runs?
+    @run_ids = []
+    counter = @kennel_info["number_of_rooms"].to_i
+    counter.times do
+      @run_ids << @kennel_info["room_#{counter}_id"].split("_")[1]
+    end
+    group_run_ids
+  end
+
+  def group_run_ids
+    @grouped_run_ids = []
+    @run_ids.each do |r_id|
+      if @grouped_run_ids.empty?
+        @grouped_run_ids << [r_id, 1]
+      else
+        @grouped_run_ids.map! do |key, val|
+          if key == r_id
+            [key, val += 1]
+          else
+            @grouped_run_ids << [r_id.to_s, 1]
+          end
+        end
+      end
+    end
+    get_relevant_reservations
+  end
+
+  def get_relevant_reservations
+    @reservations = Reservation.where(kennel_id: @kennel_info["kennel_id"], completed: nil)
+    filter_reservation_dates
+  end
+
+  def filter_reservation_dates
+    @relevant_runs_and_dates = []
+    @reservations.each do |res|
+      reservation_date_range = (res[:check_in_date]..res[:check_out_date]).map {|date| date}
+      reservation_date_range.each do |res_date|
+        if @pet_stay_date_range.include? res_date
+          JSON.parse(res[:run_ids]).each do |run_id|
+            @relevant_runs_and_dates << [run_id.to_s, res_date]
+          end
+        end
+      end
+    end
+    group_filtered_reservation_dates
+  end
+
+  def group_filtered_reservation_dates
+    @grouped_filtered_reservation_dates = []
+    @relevant_runs_and_dates.count.times do
+      if !@relevant_runs_and_dates.empty?
+        @grouped_filtered_reservation_dates << [@relevant_runs_and_dates[0][0], @relevant_runs_and_dates[0][1] ,@relevant_runs_and_dates.count(@relevant_runs_and_dates[0])]
+        @relevant_runs_and_dates.delete(@relevant_runs_and_dates[0])
+      end
+    end
+    res_dates_maxed?
+  end
+
+  def res_dates_maxed?
+    @maxing_runs = []
+    @grouped_filtered_reservation_dates.each do |run_id, date, count|
+      run = Run.find(run_id)
+      @grouped_run_ids.each do |r_id, r_count|
+        if run_id == r_id
+          if (r_count + count) > run[:number_of_rooms]
+            @maxing_runs << [run[:title]]
+          end
+        end
+      end
+    end
+    @maxing_runs = @maxing_runs.uniq
   end
 
   def check_pets_type_for_runs

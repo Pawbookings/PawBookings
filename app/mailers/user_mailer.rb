@@ -28,4 +28,11 @@ class UserMailer < ApplicationMailer
     mail(to: email, subject: 'PawBookings 3 week reminder')
   end
 
+  def send_kennel_rating_email(email, kennel_id, user_id, reservation_id)
+    @kennel_id = kennel_id
+    @user_id = user_id
+    @reservation_id = reservation_id
+    mail(to: email, subject: 'PawBookings Kennel Rating')
+  end
+
 end

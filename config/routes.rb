@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :searches, only: [:show]
   resources :payments, only: [:new, :create]
   resources :reservations, only: [:show]
+  resources :kennel_ratings, only: [:new, :create]
 
   # KennelsController
   resources :kennels, only: [:new, :create]
