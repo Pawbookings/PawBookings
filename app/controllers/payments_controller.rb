@@ -13,7 +13,8 @@ class PaymentsController < ApplicationController
     reservation_maxes_runs?
     if !@maxing_runs.empty?
       redirect_to request.referrer
-      flash[:notice] = "The following rooms cannot be booked during the dates scheduled: #{@maxing_runs.flatten}"
+      # TODO flash verbiage
+      flash[:notice] = "Your run is not available(SHIT FASTER!!): #{@maxing_runs.flatten}"
       return false
     end
     if current_user.nil?

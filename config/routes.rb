@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :payments, only: [:new, :create]
   resources :reservations, only: [:show]
   resources :kennel_ratings, only: [:new, :create]
+  resources :stand_by_reservations, only: [:new, :create]
 
   # KennelsController
   resources :kennels, only: [:new, :create]

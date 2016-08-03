@@ -4,7 +4,6 @@ class KennelRatingsController < ApplicationController
   end
 
   def create
-    params[:kennel_rating][:rating] = params[:kennel_rating][:rating].to_i
     kennel_rating = KennelRating.new(kennel_rating_params)
     if params[:user_id] == current_user.id
       reservation_id = params[:kennel_rating][:reservationID]

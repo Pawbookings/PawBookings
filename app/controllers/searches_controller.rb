@@ -85,8 +85,8 @@ class SearchesController < ApplicationController
     @searched_kennel = Kennel.find(params[:id])
     @kennel_user = User.find(@searched_kennel[:user_id])
     @runs = Run.where(kennel_id: @searched_kennel.id)
-    @customer_drop_off_date = unsanitize_date(params[:search_info][:check_in])
-    @customer_pick_up_date = unsanitize_date(params[:search_info][:check_out])
+    @customer_check_in_date = unsanitize_date(params[:search_info][:check_in])
+    @customer_check_out_date = unsanitize_date(params[:search_info][:check_out])
     maxed_out?
   end
 

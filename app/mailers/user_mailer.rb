@@ -1,7 +1,7 @@
 class UserMailer < ApplicationMailer
   def user_confirm_email(current_user)
     @current_user = current_user
-    mail(to: current_user.email, subject: 'Confirm Email', from:"Email Confirmation <email_confirmation@pawbookings.com>")
+    mail(to: current_user.email, subject: 'Confirm Email', from:"Email Confirmation <no_reply@pawbookings.com>")
   end
 
   def new_kennel_registration(current_user)
@@ -33,6 +33,14 @@ class UserMailer < ApplicationMailer
     @user_id = user_id
     @reservation_id = reservation_id
     mail(to: email, subject: 'PawBookings Kennel Rating')
+  end
+
+  def stand_by_reservation_alert(num_of_runs_available, run_title, original_search_url, customer_email)
+    @num_of_runs_available = num_of_runs_available
+    @run_title = run_title
+    @original_search_url = original_search_url
+    @customer_email = customer_email
+    mail(to: customer_email, subject: 'PawBookings stand-by reservation update')
   end
 
 end
