@@ -18,7 +18,7 @@
 
   <div class="room_details">
     <div class="dates_chosen">
-      <p>Date: <%= "#{@customer_drop_off_date} to #{@customer_pick_up_date}" %></p>
+      <p>Date: <%= "#{@customer_check_in_date} to #{@customer_check_out_date}" %></p>
       <p>Pets: <%= "Dogs #{params[:search_info][:number_of_dogs]}, Cats #{params[:search_info][:number_of_cats]}" %></p>
       <p>Number of rooms: <%= params[:search_info][:number_of_rooms] %></p>
       <p class='testing123' value='3'>Number of nights: <%= params[:search_info][:number_of_nights].to_i - 1 %></p>
@@ -67,6 +67,7 @@
           <% if !@run_ids_maxed.nil? %>
             <% if @run_ids_maxed.include? r.id.to_s %>
               <p style="color:orange;"><strong>This Room is currently unavailable</strong></p>
+              <%= link_to "Notify me when this room becomes available!", new_stand_by_reservation_path(kennel_id: @searched_kennel[:id], run_id: r.id, check_in_date: @customer_check_in_date, check_out_date: @customer_check_out_date ) %>
               <br>
               <br>
             <% else %>

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     return true if current_user.completed_registration == "true"
     false
   end
-
+  
   def sanitize_date(param)
     @new_date = []
     split_params = param.split('/')
