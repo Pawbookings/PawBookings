@@ -1,0 +1,21 @@
+<h1>Create a New Blog!</h1>
+
+<%= form_for @blog do |f| %>
+  <p>Title:</p>
+  <%= f.text_field :title, placeholder: " Title" %>
+  <br>
+  <br>
+  <p>Body:</p>
+  <%= f.text_area :body, placeholder: " Body" %>
+  <br>
+  <br>
+  <p>Keyword:</p>
+  <%= f.text_field :keyword, placeholder: " Keyword" %>
+  <br>
+  <br>
+  <p>Publishing Date:</p>
+  <%= f.text_field :publish_date, class: "blog_publish_date_picker" %>
+  <br>
+  <br>
+  <%= f.submit "Submit" %>
+<% end %>

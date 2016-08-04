@@ -1,0 +1,13 @@
+<h1>Edit Blog</h1>
+
+<%= form_for @blog do |b| %>
+  <%= b.text_field :title %>
+  <br>
+  <%= b.text_area :body %>
+  <br>
+  <%= b.text_field :keyword %>
+  <br>
+  <%= b.text_field :publish_date, class: "blog_publish_date_picker" %>
+  <br>
+  <%= b.submit "Submit" %>
+<% end %>

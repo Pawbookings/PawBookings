@@ -66,3 +66,9 @@ $(function() {
     minDate: 0
   });
 });
+
+$(function() {
+  $('.blog_publish_date_picker').datepicker({
+    minDate: 0
+  });
+});

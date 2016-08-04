@@ -16,13 +16,14 @@ Rails.application.routes.draw do
   resources :runs, only: [:new, :create]
   resources :amenities, only: [:new, :create]
   resources :policies, only: [:new, :create]
-  resources :drop_off_pick_ups, only: [:new, :create]
   resources :photos, only: [:new, :create]
   resources :searches, only: [:show]
   resources :payments, only: [:new, :create]
   resources :reservations, only: [:show]
   resources :kennel_ratings, only: [:new, :create]
   resources :stand_by_reservations, only: [:new, :create]
+  resources :blogs
+  resources :pawbookings_admins, only: [:index]
 
   # KennelsController
   resources :kennels, only: [:new, :create]
@@ -36,5 +37,8 @@ Rails.application.routes.draw do
 
   # SearchesController
     get "/search_results", to: "searches#search_results", as: :search_results
+
+  # BlogsController
+    get '/blog_search', to: "blogs#blog_search", as: :blog_search
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160731141047) do
+ActiveRecord::Schema.define(version: 20160803173438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,16 @@ ActiveRecord::Schema.define(version: 20160731141047) do
   end
 
   add_index "amenities", ["kennel_id"], name: "index_amenities_on_kennel_id", using: :btree
+
+  create_table "blogs", force: :cascade do |t|
+    t.integer  "blogID"
+    t.string   "title"
+    t.string   "body"
+    t.string   "keyword"
+    t.date     "publish_date"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "customer_emergency_contacts", force: :cascade do |t|
     t.integer  "user_id"

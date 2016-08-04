@@ -12,7 +12,7 @@
 <div class="container-fluid">
   <div class="row text-center">
     <div class="col-xs-4 text-left">
-      <% if !current_user.nil? %>
+      <% if !current_user.nil? && current_user.kennel_or_customer != "admin" %>
         <p>Welcome, <%= "#{current_user.first_name.split("").each {|name| name.capitalize}.join}" %>!</p>
         <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
       <% end %>

@@ -10,8 +10,10 @@
 <div class="container">
   <div class="row text-center">
     <div class="col-xs-6">
-      <h3>Most Booked Runs</h3>
-      <%= pie_chart @run_names_and_counts %>
+      <% if !@reservations.nil? %>
+        <h3>Most Booked Runs</h3>
+        <%= pie_chart @run_names_and_counts %>
+      <% end %>
     </div>
   </div>
 </div>
