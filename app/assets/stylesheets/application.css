@@ -23,7 +23,7 @@
 
 
 .home_bg_image {
-  background: image-url("/assets/top_pb_bg_home.jpg") no-repeat center center fixed;
+  background: url("/assets/top_pb_bg_home.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
