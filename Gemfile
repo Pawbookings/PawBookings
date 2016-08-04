@@ -22,7 +22,7 @@ gem "bootstrap-sass"
 gem 'whenever', :require => false
 gem 'activeadmin', github: 'activeadmin'
 gem "chartkick"
-gem "rails_12factor"
+gem "rails_12factor", group: :production
 
 group :development, :test do
   gem "pry"
