@@ -1,0 +1,15 @@
+<h1>Recent Blogs</h1>
+
+<% @latest_blogs.each do |blog| %>
+  <%= blog[:id] %>
+  <br>
+  <%= blog[:title] %>
+  <br>
+  <%= blog[:body][0..120].gsub(/\s\w+$/,'...') %>
+  <br>
+  <%= blog[:keyword] %>
+  <br>
+  <%= unsanitize_date(blog[:publish_date].to_s) %>
+  <br>
+  <br>
+<% end %>

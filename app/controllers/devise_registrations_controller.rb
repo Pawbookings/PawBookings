@@ -1,5 +1,10 @@
 class DeviseRegistrationsController < Devise::RegistrationsController
   def create
+  if !%w(customer kennel).include? params[:user][:kennel_or_customer]
+    flash[:notice] = "You're barking up the wrong tree."
+    redirect_to request.referrer
+    return false
+  end
   build_resource(sign_up_params)
   resource.save
   yield resource if block_given?

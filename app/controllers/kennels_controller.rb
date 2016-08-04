@@ -32,7 +32,7 @@ class KennelsController < ApplicationController
         # @photo = Photo.where(kennel_id: @kennel.id).first
       end
     end
-    get_most_booked_runs
+    get_most_booked_runs if !@reservations.nil?
   end
 
   def get_most_booked_runs

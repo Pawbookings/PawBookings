@@ -1,0 +1,11 @@
+<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+<br>
+<h1>Admin Index</h1>
+
+<h3>Admin Panel</h3>
+<%= link_to "Admin Panel", admin_root_path %>
+
+<h3>Blogs</h3>
+<%= link_to "Search for blogs", blog_search_path %>
+<br>
+<%= link_to "Create a new blog", new_blog_path %>
