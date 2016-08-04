@@ -1,26 +1,29 @@
-<div class="container-fluid" style="background-color:black">
-  <div class="row text-center">
-    <div class="col-xs-4">
-      <image style="height:5em;" src="/assets/pb_dog_logo.png" />
-    </div>
-    <div class="col-xs-4">
-      <a href="/"><h1 style="color:white;">PawBookings.com</h1></a>
+<div class="home_bg_image">
+  <div style="margin-bottom: 10em;" class="container-fluid">
+    <div class="row text-center">
+      <div class="col-xs-4"></div>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-5">
+        <div style="box-shadow: 0px 0px 47px #87ff87;background: linear-gradient(#44d610, #0d520d);margin-top: 2em;border-radius: 6em;margin-left: -6em;">
+          <image style="width:75%;" src="/assets/paw.png">
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container-fluid">
-  <div class="row text-center">
-    <div class="col-xs-4 text-left">
-      <% if !current_user.nil? && current_user.kennel_or_customer != "admin" %>
-        <p>Welcome, <%= "#{current_user.first_name.split("").each {|name| name.capitalize}.join}" %>!</p>
-        <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-      <% end %>
-    </div>
-    <div class="col-xs-4">
-      <% unless flash[:notice].nil? %>
-        <p id="flash" style="padding:0.5em;color:red;"><%= flash[:notice] %></p>
-      <% end %>
+  <div class="container-fluid">
+    <div class="row text-center">
+      <div class="col-xs-4 text-left">
+        <% if !current_user.nil? && current_user.kennel_or_customer != "admin" %>
+          <p>Welcome, <%= "#{current_user.first_name.split("").each {|name| name.capitalize}.join}" %>!</p>
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+        <% end %>
+      </div>
+      <div class="col-xs-4">
+        <% unless flash[:notice].nil? %>
+          <p id="flash" style="padding:0.5em;color:red;"><%= flash[:notice] %></p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
