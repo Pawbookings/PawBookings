@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  root to: "home#index"
 
   ActiveAdmin.routes(self)
 
-  root to: "home#index"
-
+  devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users, :controllers => { registrations: 'devise_registrations', passwords: "devise_passwords" }
   get "/users/sign_in" => redirect("/")
 
@@ -24,13 +23,13 @@ Rails.application.routes.draw do
   resources :stand_by_reservations, only: [:new, :create]
   resources :blogs
   resources :pawbookings_admins, only: [:index]
+  resources :check_in_check_out_reservations, only: [:update]
 
   # KennelsController
   resources :kennels, only: [:new, :create]
     get "/kennel_dashboard",   to: "kennels#kennel_dashboard",   as: :kennel_dashboard
     get "/kennel_reservations", to: "kennels#kennel_reservations", as: :kennel_reservations
-    get "/kennel_reservation_pet_owner_info", to: "kennels#kennel_reservation_pet_owner_info", as: :kennel_reservation_pet_owner_info
-    get "/my_kennel_info", to: "kennels#my_kennel_info", as: :my_kennel_info
+    get "/kennel_searched_reservation", to: "kennels#kennel_searched_reservation", as: :kennel_searched_reservation
 
   # CustomersController
     get "/customer_dashboard", to: "customers#customer_dashboard", as: :customer_dashboard

@@ -51,6 +51,7 @@
     <% if run_going_home %>
       <p style="color:red;">Reservation scheduled for check-out today.</p>
     <% end %>
+    <%= link_to "Select", kennel_searched_reservation_path(id: res[:reservation_id]) %>
     <br>
     <br>
   <% end %>

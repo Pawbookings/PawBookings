@@ -1,0 +1,66 @@
+<h1>Searched Reservation</h1>
+
+<h3>Check-in Check-out Customer</h3>
+<%= link_to "Check In", check_in_check_out_reservation_path(checked_in: "true", id: @reservation[:id]), method: :patch %>
+  <% if @reservation[:checked_in] == "true" %>
+    <p style="color:green">√ This user has been marked as checked-in. <%= link_to "revert", check_in_check_out_reservation_path(checked_in: "false", id: @reservation[:id]), method: :patch %></p>
+  <% end %>
+<br>
+<%= link_to "Check Out", check_in_check_out_reservation_path(checked_out: "true", id: @reservation[:id]), method: :patch %>
+  <% if @reservation[:checked_out] == "true" %>
+    <p style="color:green">√ This user has been marked as checked-out. <%= link_to "revert", check_in_check_out_reservation_path(checked_out: "false", id: @reservation[:id]), method: :patch %></p>
+  <% end %>
+
+
+<h3>Customer Info</h3>
+<%= @reservation[:customer_first_name] %>
+<br>
+<%= @reservation[:customer_last_name] %>
+<br>
+<%= @reservation[:customer_email] %>
+<br>
+<%= @reservation[:customer_phone] %>
+<br>
+
+<h3>Rooms Chosen</h3>
+<% JSON.parse(@reservation[:room_details]).each do |room_name, room_price| %>
+  <%= room_name %>
+  <br>
+  $<%= room_price %>
+  <br>
+  <br>
+<% end %>
+
+<h3>Check-in Check-out Dates</h3>
+<%= unsanitize_date(@reservation[:check_in_date].to_s) %>
+<br>
+<%= unsanitize_date(@reservation[:check_out_date].to_s) %>
+
+<h3>Pets Chosen</h3>
+<% @pets.each do |pet| %>
+  <%= pet[:name] %>
+  <br>
+  <%= pet[:cat_or_dog] %>
+  <br>
+  <%= pet[:breed] %>
+  <br>
+  <%= pet[:weight] %>
+  <br>
+  vaccinatoions: <%= pet[:vaccinations] %>
+  <br>
+  spay or neutered: <%= pet[:spay_or_neutered] %>
+  <br>
+  <br>
+<% end %>
+
+<h3>Amenities Chosen</h3>
+
+<h3>Price Total</h3>
+$<%= @reservation[:total_price] %>
+
+
+<script type="text/javascript">
+  $(".check_in").on("click", function(){
+    console.log("TRUE!!!!!!!!!!")
+  });
+</script>

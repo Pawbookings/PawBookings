@@ -33,6 +33,12 @@ class KennelsController < ApplicationController
       end
     end
     get_most_booked_runs if !@reservations.nil?
+    filter_reservation_search if !params[:search_by].nil?
+  end
+
+  def filter_reservation_search
+    search_by = params[:search_by]
+    @reservation_search_results = Reservation.where(search_by.to_sym => params[:reservation_search].capitalize).order(created_at: :desc).limit(10)
   end
 
   def get_most_booked_runs
@@ -236,6 +242,13 @@ class KennelsController < ApplicationController
     end
   end
 
+  def kennel_searched_reservation
+    @reservation = Reservation.find(params[:id])
+    @pets = []
+    JSON.parse(@reservation[:pet_ids]).each do |p_id|
+      @pets << Pet.find(p_id)
+    end
+  end
 
 
 

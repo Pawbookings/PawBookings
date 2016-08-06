@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row text-center">
     <div class="col-xs-12">
@@ -29,12 +28,41 @@
     <p><strong>State:</strong> <%= @kennel.state %></p>
     <p><strong>Zip:</strong> <%= @kennel.zip %></p>
     <p><strong>Phone:</strong> <%= @kennel.phone %></p>
-    <%= link_to "View info", my_kennel_info_path(kennel_id: @kennel.id) %>
 <% else %>
   <h1>Register a Kennel</h1>
   <%= link_to "Kennel registration", new_kennel_path %>
 <% end %>
-
+<br>
+<br>
+<h3>Search for reservations</h3>
+<%= form_tag({controller: 'kennels', action: 'kennel_dashboard'}, method: 'get') do %>
+  <%= text_field_tag :reservation_search, nil, placeholder: " Search" %>
+  ReservationID<%= radio_button_tag(:search_by, "reservationID", active: true) %>
+  Last Name<%= radio_button_tag(:search_by, "customer_last_name") %>
+  Email<%= radio_button_tag(:search_by, "customer_email") %>
+  Phone<%= radio_button_tag(:search_by, "customer_phone") %>
+  <br>
+  <%= submit_tag "Submit" %>
+<% end %>
+<br>
+<br>
+<% if !@reservation_search_results.blank? %>
+  <h3>Reservation Results</h3>
+  <% @reservation_search_results.each do |res| %>
+    <%= res[:customer_first_name] %>
+    <br>
+    <%= res[:customer_last_name] %>
+    <br>
+    <%= res[:customer_email] %>
+    <br>
+    <%= res[:customer_phone] %>
+    <br>
+    <%= link_to "Select", kennel_searched_reservation_path(id: res[:id]) %>
+    <br>
+  <% end %>
+<% else %>
+  <h3>No results..</h3>
+<% end %>
 <br>
 <br>
 <%= month_calendar(attribute: :check_in_date) do |date| %>
@@ -46,7 +74,7 @@
       <% @pet_stay_date_range = (res[:check_in_date]..res[:check_out_date]).map{|date| date} %>
       <% if @pet_stay_date_range.include? date %>
         <% counter << res %>
-        <%= "•#{res.payment_first_name}" %>
+        <%= "•#{res.customer_first_name}" %>
         <br>
       <% end %>
     <% end %>
@@ -57,3 +85,4 @@
     <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]) %>
   <% end %>
 <% end %>
+<br>
