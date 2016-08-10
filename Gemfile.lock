@@ -88,6 +88,9 @@ GEM
     byebug (9.0.5)
     chartkick (2.0.0)
     chronic (0.10.2)
+    ckeditor (4.2.0)
+      cocaine
+      orm_adapter (~> 0.5.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -277,6 +280,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   chartkick
+  ckeditor
   devise
   figaro
   geocoder
