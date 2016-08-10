@@ -15,20 +15,23 @@ gem 'paperclip', '~> 5.0.0.beta1'
 gem 'ahoy_matey'
 gem 'geocoder'
 gem 'authorizenet'
-gem "simple_calendar", "~> 2.0"
-gem "sass"
-gem "sass-rails"
-gem "bootstrap-sass"
+gem 'simple_calendar', '~> 2.0'
+gem 'sass'
+gem 'sass-rails'
+gem 'bootstrap-sass'
 gem 'whenever', :require => false
 gem 'activeadmin', github: 'activeadmin'
-gem "chartkick"
-gem "rails_12factor", group: :production
+gem 'chartkick'
+gem 'ckeditor'
+
+# For Heroku. Delete when finished using.
+gem 'rails_12factor', group: :production
 
 group :development, :test do
-  gem "pry"
-  gem "pry-rails"
-  gem "pry-stack_explorer"
-  gem "pry-byebug"
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-stack_explorer'
+  gem 'pry-byebug'
   gem 'byebug'
 end
 
