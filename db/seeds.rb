@@ -37,3 +37,7 @@ reservation.userID = 2
 reservation.save!
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
+CheckInContractImportantInformation.create!(title: "Important Information", body: "This is to be edited by Admin.")
+CheckInContractReservationChange.create!(title: "Important Information", body: "This is to be edited by Admin.")
+CheckInContractRefundPolicy.create!(title: "Important Information", body: "This is to be edited by Admin.")

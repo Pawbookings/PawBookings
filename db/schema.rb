@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160810181844) do
+ActiveRecord::Schema.define(version: 20160818182338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,27 @@ ActiveRecord::Schema.define(version: 20160810181844) do
     t.datetime "blog_image_updated_at"
   end
 
+  create_table "check_in_contract_important_informations", force: :cascade do |t|
+    t.string   "title"
+    t.string   "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "check_in_contract_refund_policies", force: :cascade do |t|
+    t.string   "title"
+    t.string   "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "check_in_contract_reservation_changes", force: :cascade do |t|
+    t.string   "title"
+    t.string   "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
     t.string   "data_content_type"
@@ -112,6 +133,19 @@ ActiveRecord::Schema.define(version: 20160810181844) do
   end
 
   add_index "customer_emergency_contacts", ["user_id"], name: "index_customer_emergency_contacts_on_user_id", using: :btree
+
+  create_table "customer_vet_infos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "address"
+    t.integer  "phone"
+    t.integer  "emergency_phone"
+    t.string   "email"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "customer_vet_infos", ["user_id"], name: "index_customer_vet_infos_on_user_id", using: :btree
 
   create_table "holidays", force: :cascade do |t|
     t.integer  "kennel_id"

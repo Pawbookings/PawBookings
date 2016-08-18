@@ -23,6 +23,8 @@ gem 'whenever', :require => false
 gem 'activeadmin', github: 'activeadmin'
 gem 'chartkick'
 gem 'ckeditor'
+gem 'pdfkit'
+gem 'wkhtmltopdf-binary'
 
 # For Heroku. Delete when finished using.
 gem 'rails_12factor', group: :production
@@ -38,4 +40,5 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'unicorn'
 end

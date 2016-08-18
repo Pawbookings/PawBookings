@@ -1,0 +1,9 @@
+<h1>Edit Refund Policy for check in contract</h1>
+
+<%= form_for @refund_policy do |f| %>
+  <%= f.text_field :title %>
+  <br>
+  <%= f.cktext_area :body %>
+  <br>
+  <%= f.submit "Update" %>
+<% end %>

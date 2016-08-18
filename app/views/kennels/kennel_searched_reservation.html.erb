@@ -1,12 +1,14 @@
 <h1>Searched Reservation</h1>
 
 <h3>Check-in Check-out Customer</h3>
-<%= link_to "Check In", check_in_check_out_reservation_path(checked_in: "true", id: @reservation[:id]), method: :patch %>
+<%= link_to "Customer contract for Check In", customer_checkin_contract_path(reservation_id: @reservation[:id], user_id: @reservation[:user_id], customer_first_name: @reservation[:customer_first_name], customer_last_name: @reservation[:customer_last_name], check_in_date: @reservation[:check_in_date], check_out_date: @reservation[:check_out_date], customer_email: @reservation[:customer_email], customer_phone: @reservation[:customer_phone], room_details: @reservation[:room_details], run_ids: @reservation[:run_ids], total_price: @reservation[:total_price], kennel: params[:kennel_info], pets: @pets, format: "pdf"), target: '_blank' %>
+<br>
+<%= link_to "Check In this customer", check_in_check_out_reservation_path(checked_in: "true", id: @reservation[:id]), method: :patch %>
   <% if @reservation[:checked_in] == "true" %>
     <p style="color:green">√ This user has been marked as checked-in. <%= link_to "revert", check_in_check_out_reservation_path(checked_in: "false", id: @reservation[:id]), method: :patch %></p>
   <% end %>
 <br>
-<%= link_to "Check Out", check_in_check_out_reservation_path(checked_out: "true", id: @reservation[:id]), method: :patch %>
+<%= link_to "Check Out this customer", check_in_check_out_reservation_path(checked_out: "true", id: @reservation[:id]), method: :patch %>
   <% if @reservation[:checked_out] == "true" %>
     <p style="color:green">√ This user has been marked as checked-out. <%= link_to "revert", check_in_check_out_reservation_path(checked_out: "false", id: @reservation[:id]), method: :patch %></p>
   <% end %>

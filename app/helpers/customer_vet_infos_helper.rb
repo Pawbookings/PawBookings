@@ -1,0 +1,2 @@
+module CustomerVetInfosHelper
+end

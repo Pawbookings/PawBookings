@@ -1,0 +1,15 @@
+<h1>Customer Veterinarian Information Registration</h1>
+
+<%= form_for @customer_vet_info do |f| %>
+  <%= f.text_field :name, placeholder: " Vet Name" %>
+  <br>
+  <%= f.text_field :email, placeholder: " Vet Email" %>
+  <br>
+  <%= f.text_field :address, placeholder: " Vet Address" %>
+  <br>
+  <%= f.text_field :phone, placeholder: " Vet Phone" %>
+  <br>
+  <%= f.text_field :emergency_phone, placeholder: " Vet Emergency Phone" %>
+  <br>
+  <%= f.submit "Submit" %>
+<% end %>
