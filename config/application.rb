@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module PawBookings
   class Application < Rails::Application
+    config.middleware.use PDFKit::Middleware, print_media_type: true
     Ahoy.track_visits_immediately = true
     config.active_record.raise_in_transactional_callbacks = true
     config.filter_parameters << [:card_number, :card_verification]

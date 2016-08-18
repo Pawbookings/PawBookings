@@ -1,0 +1,2 @@
+module CheckInContractReservationChangesHelper
+end

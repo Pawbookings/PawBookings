@@ -32,8 +32,10 @@
   <h1>Register a Kennel</h1>
   <%= link_to "Kennel registration", new_kennel_path %>
 <% end %>
+
 <br>
 <br>
+
 <h3>Search for reservations</h3>
 <%= form_tag({controller: 'kennels', action: 'kennel_dashboard'}, method: 'get') do %>
   <%= text_field_tag :reservation_search, nil, placeholder: " Search" %>
@@ -44,8 +46,10 @@
   <br>
   <%= submit_tag "Submit" %>
 <% end %>
+
 <br>
 <br>
+
 <% if !@reservation_search_results.blank? %>
   <h3>Reservation Results</h3>
   <% @reservation_search_results.each do |res| %>
@@ -57,14 +61,16 @@
     <br>
     <%= res[:customer_phone] %>
     <br>
-    <%= link_to "Select", kennel_searched_reservation_path(id: res[:id]) %>
+    <%= link_to "Select", kennel_searched_reservation_path(id: res[:id], kennel_info: {name: @kennel[:name], address: @kennel[:address], city: @kennel[:city], state: @kennel[:state], zip: @kennel[:zip], phone: @kennel[:phone], email: @kennel[:email] } ) %>
     <br>
   <% end %>
 <% else %>
   <h3>No results..</h3>
 <% end %>
+
 <br>
 <br>
+
 <%= month_calendar(attribute: :check_in_date) do |date| %>
   <%= unsanitize_date(date.to_s) %>
   <br>

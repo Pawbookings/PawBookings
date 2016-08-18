@@ -1,0 +1,2 @@
+module CheckInContractImportantInformationsHelper
+end

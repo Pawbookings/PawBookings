@@ -8,12 +8,11 @@ class CustomerEmergencyContactsController < ApplicationController
   def create
     @customer_emergency_contact = CustomerEmergencyContact.new(customer_emergency_contact_params)
     @user = User.where(id: current_user.id).first
-    if @user.customer_emergency_contacts.create(user_id: @user.id, name: @customer_emergency_contact.name, email: @customer_emergency_contact.email, phone: @customer_emergency_contact.phone)
-      if params[:create_another_emergency_contact] == "Submit and create another 'Emergency Contact'"
-        redirect_to new_customer_emergency_contact_path
-      else
-        redirect_to kennel_dashboard_path
-      end
+    if @customer_emergency_contact.save! && @user.customer_emergency_contact = @customer_emergency_contact
+      redirect_to kennel_dashboard_path
+    else
+      flash[:notice] = "The record could not be saved. Please try again."
+      redirect_to request.referrer
     end
   end
 

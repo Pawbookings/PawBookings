@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   resources :blogs
   resources :pawbookings_admins, only: [:index]
   resources :check_in_check_out_reservations, only: [:update]
+  resources :check_in_contract_important_informations, only: [:update, :edit]
+  resources :check_in_contract_reservation_changes, only: [:update, :edit]
+  resources :check_in_contract_refund_policies, only: [:update, :edit]
 
   # KennelsController
   resources :kennels, only: [:new, :create]
@@ -39,6 +42,8 @@ Rails.application.routes.draw do
     get "/search_results", to: "searches#search_results", as: :search_results
 
   # BlogsController
-    get '/blog_search', to: "blogs#blog_search", as: :blog_search
+    get "/blog_search", to: "blogs#blog_search", as: :blog_search
 
+  # Contracts
+    get "/customer_checkin_contract", to: "contracts#customer_checkin_contract", as: :customer_checkin_contract
 end
