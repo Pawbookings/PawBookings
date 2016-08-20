@@ -16,6 +16,29 @@ class SearchesController < ApplicationController
     hours_of_operation_filtering
   end
 
+  def show
+    @searched_kennel = Kennel.find(params[:id])
+    @kennel_user = User.find(@searched_kennel[:user_id])
+    @runs = Run.where(kennel_id: @searched_kennel.id)
+    @customer_check_in_date = unsanitize_date(params[:search_info][:check_in])
+    @customer_check_out_date = unsanitize_date(params[:search_info][:check_out])
+    maxed_out?
+    get_amenities_offered
+  end
+
+  def maxed_out?
+    @reservations = Reservation.where(kennel_id: @searched_kennel[:id], completed: nil)
+    get_res_dates
+  end
+
+  def get_amenities_offered
+    @amenity_ids = []
+    @amenities = Amenity.where(kennel_id: params[:id])
+    @amenities.each do |amenity|
+      @amenity_ids << amenity.id
+    end
+  end
+
   def get_pet_stay_dates
     @pet_stay_date_range = (params[:check_in]..params[:check_out]).map{|date| date}
     params[:number_of_nights] = @pet_stay_date_range.count.to_s
@@ -81,19 +104,6 @@ class SearchesController < ApplicationController
     @final_search_results = @holiday_filtered_results
   end
 
-  def show
-    @searched_kennel = Kennel.find(params[:id])
-    @kennel_user = User.find(@searched_kennel[:user_id])
-    @runs = Run.where(kennel_id: @searched_kennel.id)
-    @customer_check_in_date = unsanitize_date(params[:search_info][:check_in])
-    @customer_check_out_date = unsanitize_date(params[:search_info][:check_out])
-    maxed_out?
-  end
-
-  def maxed_out?
-    @reservations = Reservation.where(kennel_id: @searched_kennel[:id], completed: nil)
-    get_res_dates
-  end
 
   def get_res_dates
     @res_ids_and_dates = []

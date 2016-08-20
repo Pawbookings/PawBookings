@@ -1,5 +1,4 @@
 <h1>Payments Page</h1>
-<p>Total-Price <%= @total_price %></p>
 <p>Total Number of Pets <%= @total_pets %></p>
 <p>Total Number of Rooms <%= params[:number_of_rooms] %></p>
 
@@ -7,12 +6,40 @@
 <% params[:number_of_rooms].to_i.times do %>
   <h3>Room <%= counter %></h3>
   <p>Room title: <%= params["room_#{counter}_name"] %></p>
-  <p>Room price: $<%= params["room_#{counter}_price"] %></p>
+  <p>Room price: $<%= params["room_#{counter}_price"].to_f %></p>
   <p>Maximum amount of pets allowed for this room: <%= params["room_#{counter}_pets_per_run"] %></p>
   <% counter -= 1 %>
 <% end %>
 
+<h3>Amenities:</h3>
+<% if !@amenities_list.empty? %>
+  <% @amenities_list.each do |a_id, count, price, description, title| %>
+    <%= "•#{title}" %>
+    <br>
+    <%= "#{description}" %>
+    <br>
+    <%= "$#{price} x #{count}" %>
+    <br>
+    <br>
+  <% end %>
+<% else %>
+  None selected.
+<% end %>
+
+<h3>Tax:</h3>
+
+<h3>Grand Total:</h3>
+<p><%= @total_price %></p>
+
 <%= form_tag payments_path, method: :post %>
+
+  <% if !@amenity_details.empty? %>
+    <%= hidden_field_tag :amenity_details, nil, value: @amenity_details.to_s %>
+  <% end %>
+  <% if !@amenity_ids.empty? %>
+    <%= hidden_field_tag :amenity_ids, nil, value: @amenity_ids %>
+  <% end %>
+  <%= hidden_field_tag :amenities_total, nil, value: @amenities_total %>
   <%= hidden_field_tag :total_price, nil, value: @total_price %>
   <%= hidden_field_tag :payment_card_type, nil, value: "visa" %>
   <%= hidden_field_tag :kennel_info, nil, value: params %>
@@ -74,7 +101,9 @@
 <br>
 <br>
 
+
 <script type='text/javascript'>
+
   function petTypeOptions(counter){
     var pet_type = $("#pet_type_" + counter).val();
     if (pet_type == "dog"){
@@ -84,4 +113,5 @@
       $(".pet_breed_selection_" + counter).hide();
     }
   }
+
 </script>

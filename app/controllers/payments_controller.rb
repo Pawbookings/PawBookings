@@ -2,6 +2,7 @@ class PaymentsController < ApplicationController
   include UsersHelper
 
   def new
+    get_amenity_info
     get_price_total
     get_pets_total
     check_pets_type_for_runs
@@ -73,6 +74,30 @@ class PaymentsController < ApplicationController
         get_run_ids
         process_payment
       end
+    end
+  end
+
+  def get_amenity_info
+    @amenities_total = 0
+    @amenities_list = []
+    params.each do |key, val|
+      if key.include? "amenity_id"
+        if val.to_i > 0
+          amenity_id = key.split("_")[2]
+          @amenities_total += (params["amenity_price_#{amenity_id}"].to_f * val.to_f)
+          @amenities_list << [amenity_id, val.to_i, params["amenity_price_#{amenity_id}"], params["amenity_description_#{amenity_id}"], params["amenity_title_#{amenity_id}"]]
+        end
+      end
+    end
+    group_amenity_ids
+  end
+
+  def group_amenity_ids
+    @amenity_ids = []
+    @amenity_details = []
+    @amenities_list.each do |a_id, count, price, description, title|
+      @amenity_ids << a_id
+      @amenity_details << [title, description, price, count]
     end
   end
 
@@ -272,6 +297,8 @@ class PaymentsController < ApplicationController
                                    customer_phone: params[:customer_phone],
                                    pet_ids: @pet_ids,
                                    run_ids: @run_ids,
+                                   amenity_ids: params[:amenity_ids],
+                                   amenity_details: params[:amenity_details],
                                    transID: params[:transId],
                                    card_number: get_credit_card_num.join(""),
                                    expiration_date: params[:card_expiration_date] )
@@ -318,6 +345,8 @@ class PaymentsController < ApplicationController
     end
     number_of_nights = @kennel_info.nil? ? params["number_of_nights"] : @kennel_info["number_of_nights"]
     @total_price = @total_price * (number_of_nights.to_i - 1)
+    @total_price = @total_price + params[:amenities_total].to_f
+    @total_price = @total_price.round(2)
   end
 
   def get_pets_total
@@ -328,5 +357,7 @@ class PaymentsController < ApplicationController
       @total_pets = @kennel_info["number_of_dogs"].to_i + @kennel_info["number_of_cats"].to_i
     end
   end
+
+
 
 end

@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20160818182338) do
 
   create_table "amenities", force: :cascade do |t|
     t.integer  "kennel_id"
+    t.string   "title"
     t.string   "description"
     t.float    "price"
     t.datetime "created_at",  null: false
@@ -286,8 +287,10 @@ ActiveRecord::Schema.define(version: 20160818182338) do
     t.string   "customer_email"
     t.string   "customer_phone"
     t.string   "room_details"
+    t.string   "amenity_details"
     t.string   "pet_ids"
     t.string   "run_ids"
+    t.string   "amenity_ids"
     t.date     "check_in_date"
     t.date     "check_out_date"
     t.string   "payment_first_name"
