@@ -50,19 +50,23 @@
 <br>
 <br>
 
-<% if !@reservation_search_results.blank? %>
-  <h3>Reservation Results</h3>
-  <% @reservation_search_results.each do |res| %>
-    <%= res[:customer_first_name] %>
-    <br>
-    <%= res[:customer_last_name] %>
-    <br>
-    <%= res[:customer_email] %>
-    <br>
-    <%= res[:customer_phone] %>
-    <br>
-    <%= link_to "Select", kennel_searched_reservation_path(id: res[:id], kennel_info: {name: @kennel[:name], address: @kennel[:address], city: @kennel[:city], state: @kennel[:state], zip: @kennel[:zip], phone: @kennel[:phone], email: @kennel[:email] } ) %>
-    <br>
+<% if !@kennel.nil? %>
+  <% if !@reservation_search_results.blank? %>
+    <h3>Reservation Results</h3>
+    <% @reservation_search_results.each do |res| %>
+      <%= res[:customer_first_name] %>
+      <br>
+      <%= res[:customer_last_name] %>
+      <br>
+      <%= res[:customer_email] %>
+      <br>
+      <%= res[:customer_phone] %>
+      <br>
+      <%= link_to "Select", kennel_searched_reservation_path(id: res[:id], kennel_info: {name: @kennel[:name], address: @kennel[:address], city: @kennel[:city], state: @kennel[:state], zip: @kennel[:zip], phone: @kennel[:phone], email: @kennel[:email] } ) %>
+      <br>
+    <% end %>
+  <% else %>
+    <h3>No results..</h3>
   <% end %>
 <% else %>
   <h3>No results..</h3>
