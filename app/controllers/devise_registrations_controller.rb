@@ -1,4 +1,7 @@
 class DeviseRegistrationsController < Devise::RegistrationsController
+  include Recaptcha::ClientHelper
+  include Recaptcha::Verify
+
   def create
   if !%w(customer kennel).include? params[:user][:kennel_or_customer]
     flash[:notice] = "You're barking up the wrong tree."
@@ -8,21 +11,22 @@ class DeviseRegistrationsController < Devise::RegistrationsController
   build_resource(sign_up_params)
   resource.save
   yield resource if block_given?
-  if resource.persisted?
+  if verify_recaptcha(model: @user) && resource.persisted?
     if resource.active_for_authentication?
       set_flash_message :notice, :signed_up if is_flashing_format?
       sign_up(resource_name, resource)
       respond_with resource, location: params[:user][:kennel_or_customer] == "customer" ? '/customer_dashboard' : '/kennel_dashboard'
       params[:confirm_email] = "true"
     else
-      set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+      set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}"
       expire_data_after_sign_in!
       respond_with resource, location: after_inactive_sign_up_path_for(resource)
     end
   else
     clean_up_passwords resource
     set_minimum_password_length
-    respond_with resource
+    redirect_to request.referrer
+    return false
   end
   if params[:confirm_email] == "true"
     UserMailer.user_confirm_email(current_user).deliver_now
