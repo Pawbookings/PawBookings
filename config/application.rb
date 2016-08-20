@@ -22,5 +22,7 @@ module PawBookings
       authentication:       'plain',
       enable_starttls_auto: true
     }
+    recaptcha_public_key = ENV["recaptcha_public_key"]
+    recaptcha_private_key = ENV["recaptcha_private_key"]
   end
 end

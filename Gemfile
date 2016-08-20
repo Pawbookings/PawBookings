@@ -25,6 +25,7 @@ gem 'chartkick'
 gem 'ckeditor'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
+gem 'recaptcha', require: 'recaptcha/rails'
 
 # For Heroku. Delete when finished using.
 gem 'rails_12factor', group: :production
