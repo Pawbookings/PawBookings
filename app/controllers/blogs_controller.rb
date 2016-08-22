@@ -2,7 +2,7 @@ class BlogsController < ApplicationController
   http_basic_authenticate_with name: "pawbookings", password: "helloworld", except: [:show, :blog_search, :index]
 
   def index
-    @latest_blogs = Blog.limit(5).order('id desc')
+    @latest_blogs = Blog.where("publish_date < ?", Date.tomorrow).limit(10).order('id desc')
   end
 
   def new
