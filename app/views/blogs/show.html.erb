@@ -2,7 +2,7 @@
 
   <h3><%= @blog.title %></h3>
   <br>
-  <%= simple_format(@blog.body) %>
+  <%= raw(@blog.body) %>
   <br>
   Keyword: <%= @blog.keyword %>
   <br>

@@ -26,20 +26,30 @@ class BlogsController < ApplicationController
   end
 
   def edit
-    @blog = Blog.find(params[:id])
+    if session[:blog].nil?
+      @blog = Blog.find(params[:id])
+    else
+      @blog = Blog.find(session[:blog]["id"])
+      @blog.title = session[:blog]["title"]
+      @blog.body = session[:blog]["body"]
+      @blog.keyword = session[:blog]["keyword"]
+      @blog.publish_date = session[:blog]["publish_date"]
+      flash[:notice] = "Blog did not save. Please try again."
+    end
   end
 
   def update
-    @blog = Blog.find(params[:id])
-    if @blog.update(title: params[:blog][:title],
-                 body: params[:blog][:body],
-                 keyword: params[:blog][:keyword],
-                 publish_date: params[:blog][:publish_date])
-
-       redirect_to blog_path(@blog[:id])
-     else
-       flash[:notice] = "Your edit was not updated, please try again."
-       redirect_to request.referrer
+    session[:blog] = nil
+    blog = Blog.find(params[:id])
+    blog.title = params[:blog][:title]
+    blog.body = params[:blog][:body]
+    blog.keyword = params[:blog][:keyword]
+    blog.publish_date = params[:blog][:publish_date]
+    if blog.save
+      redirect_to blog_path(params[:id])
+    else
+      session[:blog] = params[:blog]
+      redirect_to edit_blog_path(params[:id])
     end
   end
 
