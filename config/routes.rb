@@ -17,12 +17,10 @@ Rails.application.routes.draw do
   resources :amenities, only: [:new, :create]
   resources :policies, only: [:new, :create]
   resources :photos, only: [:new, :create]
-  resources :searches, only: [:show]
   resources :payments, only: [:new, :create]
   resources :reservations, only: [:show]
   resources :kennel_ratings, only: [:new, :create]
   resources :stand_by_reservations, only: [:new, :create]
-  resources :blogs
   resources :pawbookings_admins, only: [:index]
   resources :check_in_check_out_reservations, only: [:update]
   resources :check_in_contract_important_informations, only: [:update, :edit]
@@ -39,9 +37,11 @@ Rails.application.routes.draw do
     get "/customer_dashboard", to: "customers#customer_dashboard", as: :customer_dashboard
 
   # SearchesController
+  resources :searches, only: [:show]
     get "/search_results", to: "searches#search_results", as: :search_results
 
   # BlogsController
+  resources :blogs
     get "/blog_search", to: "blogs#blog_search", as: :blog_search
 
   # Contracts
