@@ -3,6 +3,7 @@ class BlogsController < ApplicationController
 
   def index
     @latest_blogs = Blog.where("publish_date < ?", Date.tomorrow).limit(10).order('id desc')
+    @blog_categories = BlogCategory.where("publish_date < ?", Date.tomorrow)
   end
 
   def new
@@ -54,8 +55,8 @@ class BlogsController < ApplicationController
   end
 
   def destroy
-    @blog = Blog.find(params[:id])
-    if @blog.destroy
+    blog = Blog.find(params[:id])
+    if blog.destroy
       redirect_to blog_search_path
     else
       flash[:notice] = "This record did not delete, please try again."
@@ -65,8 +66,12 @@ class BlogsController < ApplicationController
 
   def blog_search
     if !params[:blog_search_text].nil?
-      @blog_search_results = Blog.where(params[:search_by].to_sym => params[:blog_search_text]).to_a
+      @blog_search_results = Blog.where("publish_date < ?", Date.tomorrow).where(params[:search_by].to_sym => params[:blog_search_text]).to_a
     end
+  end
+
+  def all_blogs
+    @all_blogs = Blog.all
   end
 
   private

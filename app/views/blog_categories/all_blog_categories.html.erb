@@ -1,0 +1,11 @@
+<h1>All Blog Categories</h1>
+
+<% @all_blog_categories.each do |bc| %>
+  <%= bc.title %>
+  <br>
+  <%= bc.publish_date %>
+  <br>
+  <%= link_to "Edit Category", edit_blog_category_path(bc.id) %>
+  <br>
+  <%= link_to "Delete Category", blog_category_path(bc.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
+<% end  %>

@@ -1,0 +1,10 @@
+<h1>All Blogs</h1>
+<% @all_blogs.each do |blog| %>
+  <%= link_to raw(blog.title), blog_path(blog.id) %>
+  <br>
+  <%= link_to "Edit", edit_blog_path(blog.id) %>
+  <br>
+  <%= link_to "Delete", blog_path(blog.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
+  <br>
+  <br>
+<% end %>

@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  mount Ckeditor::Engine => '/ckeditor'
+  mount Ckeditor::Engine => "/ckeditor"
   root to: "home#index"
 
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-  devise_for :users, :controllers => { registrations: 'devise_registrations', passwords: "devise_passwords" }
+  devise_for :users, :controllers => { registrations: "devise_registrations", passwords: "devise_passwords" }
   get "/users/sign_in" => redirect("/")
 
   resources :home
@@ -43,6 +43,11 @@ Rails.application.routes.draw do
   # BlogsController
   resources :blogs
     get "/blog_search", to: "blogs#blog_search", as: :blog_search
+    get "/all_blogs", to: "blogs#all_blogs", as: :all_blogs
+
+  # BlogCategoriesController
+  resources :blog_categories
+    get "/all_blog_categories", to: "blog_categories#all_blog_categories", as: :all_blog_categories
 
   # Contracts
     get "/customer_checkin_contract", to: "contracts#customer_checkin_contract", as: :customer_checkin_contract

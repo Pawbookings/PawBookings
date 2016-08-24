@@ -1,0 +1,9 @@
+<h1>New Blog Category</h1>
+
+<%= form_for @blog_category do |f| %>
+  <%= f.text_field :title, placeholder: " Title" %>
+  <br>
+  <%= f.text_field :publish_date, placeholder: " Publish Date" %>
+  <br>
+  <%= f.submit "Submit" %>
+<% end %>
