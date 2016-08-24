@@ -3,7 +3,7 @@
 <% @latest_blogs.each do |blog| %>
   <%= blog[:id] %>
   <br>
-  <%= link_to blog[:title], blog_path(blog[:id]) %>
+  <%= link_to raw(blog[:title]), blog_path(blog[:id]) %>
   <br>
   <%#= raw blog[:body][0..120].gsub(/\s\w+$/,'...') %>
   <%= blog[:keyword] %>
