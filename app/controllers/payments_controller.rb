@@ -341,11 +341,15 @@ class PaymentsController < ApplicationController
   def get_price_total
     @total_price = 0
     params.each_pair do |k, v|
-      @total_price += v.to_f if k.to_s.include? "price"
+      @total_price += v.to_f if (k.to_s.include? "price") && (k.to_s.include? "room")
     end
     number_of_nights = @kennel_info.nil? ? params["number_of_nights"] : @kennel_info["number_of_nights"]
-    @total_price = @total_price * (number_of_nights.to_i - 1)
-    @total_price = @total_price + params[:amenities_total].to_f
+    @total_price = @total_price * number_of_nights.to_i
+    if params[:amenities_total].nil?
+      @total_price = @total_price + @amenities_total
+    else
+      @total_price = @total_price + params[:amenities_total].to_f
+    end
     @total_price = @total_price.round(2)
   end
 
@@ -357,7 +361,5 @@ class PaymentsController < ApplicationController
       @total_pets = @kennel_info["number_of_dogs"].to_i + @kennel_info["number_of_cats"].to_i
     end
   end
-
-
 
 end

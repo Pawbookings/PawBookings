@@ -57,7 +57,7 @@
             <input type="hidden" name="kennel_zip" value="<%= @searched_kennel[:zip] %>">
             <input type="hidden" name="kennel_phone" value="<%= @searched_kennel[:phone] %>">
             <input type="hidden" name="kennel_user_email" value="<%= @kennel_user[:email] %>">
-            <input type="hidden" name="number_of_nights" value="<%= params[:search_info][:number_of_nights] %>">
+            <input type="hidden" name="number_of_nights" value="<%= (params[:search_info][:number_of_nights].to_i - 1) %>">
             <input type="hidden" name="number_of_rooms" value="<%= params[:search_info][:number_of_rooms] %>">
             <input type="hidden" name="number_of_cats" value="<%= params[:search_info][:number_of_cats] %>">
             <input type="hidden" name="number_of_dogs" value="<%= params[:search_info][:number_of_dogs] %>">
