@@ -21,7 +21,7 @@
       <p>Date: <%= "#{@customer_check_in_date} to #{@customer_check_out_date}" %></p>
       <p>Pets: <%= "Dogs #{params[:search_info][:number_of_dogs]}, Cats #{params[:search_info][:number_of_cats]}" %></p>
       <p>Number of rooms: <%= params[:search_info][:number_of_rooms] %></p>
-      <p class='testing123' value='3'>Number of nights: <%= params[:search_info][:number_of_nights].to_i - 1 %></p>
+      <p>Number of nights: <%= params[:search_info][:number_of_nights].to_i %></p>
     </div>
 
     <% counter = params[:search_info][:number_of_rooms].to_i %>
@@ -57,7 +57,7 @@
             <input type="hidden" name="kennel_zip" value="<%= @searched_kennel[:zip] %>">
             <input type="hidden" name="kennel_phone" value="<%= @searched_kennel[:phone] %>">
             <input type="hidden" name="kennel_user_email" value="<%= @kennel_user[:email] %>">
-            <input type="hidden" name="number_of_nights" value="<%= (params[:search_info][:number_of_nights].to_i - 1) %>">
+            <input type="hidden" name="number_of_nights" value="<%= (params[:search_info][:number_of_nights].to_i) %>">
             <input type="hidden" name="number_of_rooms" value="<%= params[:search_info][:number_of_rooms] %>">
             <input type="hidden" name="number_of_cats" value="<%= params[:search_info][:number_of_cats] %>">
             <input type="hidden" name="number_of_dogs" value="<%= params[:search_info][:number_of_dogs] %>">
@@ -68,6 +68,8 @@
             <div style="color:black;" class="amenities_div">
               <h3>Amenities</h3>
               <% @amenities.to_a.each do |amenity| %>
+                <%= amenity.title %>
+                <br>
                 <%= amenity.description %>
                 <br>
                 <%= amenity.price %>
@@ -81,7 +83,7 @@
               <% end %>
             </div>
 
-          <%= submit_tag "Go To Payments" %>
+          <%= submit_tag "Continue" %>
         </div>
       </div>
     </div>
