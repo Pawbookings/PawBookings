@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     get "/customer_dashboard", to: "customers#customer_dashboard", as: :customer_dashboard
 
   # SearchesController
-  resources :searches, only: [:show]
+  resources :searches, only: [:show, :create]
     get "/search_results", to: "searches#search_results", as: :search_results
 
   # BlogsController

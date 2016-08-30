@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824202451) do
+ActiveRecord::Schema.define(version: 20160829040543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -337,6 +337,19 @@ ActiveRecord::Schema.define(version: 20160824202451) do
   end
 
   add_index "runs", ["kennel_id"], name: "index_runs_on_kennel_id", using: :btree
+
+  create_table "searches", force: :cascade do |t|
+    t.integer  "search_zip"
+    t.integer  "radius"
+    t.date     "check_in"
+    t.date     "check_out"
+    t.string   "cats_or_dogs"
+    t.integer  "number_of_dogs"
+    t.integer  "number_of_cats"
+    t.integer  "number_of_rooms"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "stand_by_reservations", force: :cascade do |t|
     t.integer  "kennel_id"

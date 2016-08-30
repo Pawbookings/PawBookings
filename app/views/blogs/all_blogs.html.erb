@@ -1,6 +1,6 @@
 <h1>All Blogs</h1>
 <% @all_blogs.each do |blog| %>
-  <%= link_to raw(blog.title), blog_path(blog.id) %>
+  <%= link_to blog.title, blog_path(blog.id) %>
   <br>
   <%= link_to "Edit", edit_blog_path(blog.id) %>
   <br>

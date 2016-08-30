@@ -1,6 +1,13 @@
 class StandByReservation < ActiveRecord::Base
   belongs_to :kennel
 
+  validates :check_in_date, presence: true
+  validates :check_out_date, presence: true
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+  validates :expired, presence: true
+  validates :email_sent, presence: true
+  validates :original_search_url, presence: true
+
   def check_for_open_reservations
     expire_reservations_no_longer_relevant
   end

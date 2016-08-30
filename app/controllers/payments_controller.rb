@@ -15,7 +15,7 @@ class PaymentsController < ApplicationController
     if !@maxing_runs.empty?
       redirect_to request.referrer
       # TODO flash verbiage
-      flash[:notice] = "Your run is not available(SHIT FASTER!!): #{@maxing_runs.flatten}"
+      flash[:notice] = "Your run is not available: #{@maxing_runs.flatten}"
       return false
     end
     if current_user.nil?
@@ -284,7 +284,8 @@ class PaymentsController < ApplicationController
     get_price_total
     if payment.payment_successful?(params, @total_price)
       get_room_info
-      @kennel.reservations.create( user_id: @user.id,
+      if @kennel.reservations.create(
+                                   user_id: @user.id,
                                    check_in_date: @kennel_info["check_in"],
                                    check_out_date: @kennel_info["check_out"],
                                    room_details: @room_details,
@@ -301,18 +302,25 @@ class PaymentsController < ApplicationController
                                    amenity_details: params[:amenity_details],
                                    transID: params[:transId],
                                    card_number: get_credit_card_num.join(""),
-                                   expiration_date: params[:card_expiration_date] )
+                                   expiration_date: params[:card_expiration_date],
+                                   completed: "false",
+                                   checked_in: "false",
+                                   checked_out: "false",
+                                   three_weeks_before_email_reminder: "false",
+                                   one_week_before_email_reminder: "false",
+                                   day_before_email_reminder: "false").valid?
 
-      reservation = Reservation.where(customer_email: params[:customer_email]).first
-      reservation.kennelID = reservation[:kennel_id]
-      reservation.userID = reservation[:user_id]
-      reservation.reservationID = reservation[:id]
-      reservation.save!
+        reservation = Reservation.where(customer_email: params[:customer_email]).first
+        reservation.kennelID = reservation[:kennel_id]
+        reservation.userID = reservation[:user_id]
+        reservation.reservationID = reservation[:id]
+        reservation.save!
 
-      send_reservation_confirmation_email(reservation)
-      return redirect_to reservation_path(id: @user[:id])
-    else
-      return redirect_to request.referrer
+        send_reservation_confirmation_email(reservation)
+        return redirect_to reservation_path(id: @user[:id])
+      else
+        return redirect_to request.referrer
+      end
     end
   end
 
@@ -341,7 +349,7 @@ class PaymentsController < ApplicationController
   def get_price_total
     @total_price = 0
     params.each_pair do |k, v|
-      @total_price += v.to_f if (k.to_s.include? "price") && (k.to_s.include? "room")
+      @total_price += v.to_f if (k.to_s.include? "total_price") || ((k.to_s.include? "room") && (k.to_s.include? "price"))
     end
     number_of_nights = @kennel_info.nil? ? params["number_of_nights"] : @kennel_info["number_of_nights"]
     @total_price = @total_price * number_of_nights.to_i

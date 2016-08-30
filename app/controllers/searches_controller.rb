@@ -1,15 +1,39 @@
 class SearchesController < ApplicationController
   include SearchesHelper
 
-  def search_results
+  def create
+    if (params[:number_of_dogs].to_i > 0) && (params[:number_of_cats].to_i == 0)
+      params[:cats_or_dogs] = "dogs"
+    elsif (params[:number_of_dogs].to_i == 0) && (params[:number_of_cats].to_i > 0)
+      params[:cats_or_dogs] = "cats"
+    else
+      params[:cats_or_dogs] = "both"
+    end
+    search = Search.new
+
     sanitize_date(params[:check_in])
     params[:check_in] = Date.parse(@new_date)
-
     sanitize_date(params[:check_out])
     params[:check_out] = Date.parse(@new_date)
 
-    get_pet_stay_dates
+    search.search_zip = params[:search_zip].to_i
+    search.radius = params[:radius].to_i
+    search.check_in = params[:check_in]
+    search.check_out = params[:check_out]
+    search.cats_or_dogs = params[:cats_or_dogs]
+    search.number_of_dogs = params[:number_of_dogs].to_i
+    search.number_of_cats = params[:number_of_cats].to_i
+    search.number_of_rooms = params[:number_of_rooms].to_i
+    if search.valid? && search.save!
+      redirect_to search_results_path(params)
+    else
+      flash[:notice] = search.errors.messages.values.flatten[0].to_s
+      redirect_to request.referrer
+    end
+  end
 
+  def search_results
+    get_pet_stay_dates
     location_filtering
     pet_type_filtering
     holiday_filtering

@@ -5,7 +5,7 @@ class StandByReservationsController < ApplicationController
 
   def create
     kennel = Kennel.find(params[:stand_by_reservation][:kennelID])
-    if kennel.stand_by_reservations.create(stand_by_reservation_params)
+    if kennel.stand_by_reservations.create(stand_by_reservation_params).valid?
       redirect_to params[:stand_by_reservation][:original_search_url]
     else
       redirect_to request.referrer

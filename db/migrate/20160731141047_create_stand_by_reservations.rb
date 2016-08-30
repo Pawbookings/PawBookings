@@ -14,6 +14,3 @@ class CreateStandByReservations < ActiveRecord::Migration
     end
   end
 end
-
-# status values "relevant"/"not relevant"
-# email_sent values "true"/"false"

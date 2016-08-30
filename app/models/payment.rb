@@ -4,6 +4,30 @@ include AuthorizeNet::API
   belongs_to :user
   belongs_to :kennel
 
+  validates :customer_first_name, format: { with: /\A[a-z\s-]{3,30}\z/i }
+  validates :customer_last_name, format: { with: /\A[a-z\s-]{3,30}\z/i }
+  validates :customer_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+  validates :customer_phone, format: { with: /\A\+?[0-9]{,2}(-|\s)?\(?[0-9]{3}\)?(-|\s)?[0-9]{3}(-|\s)?[0-9]{4}\z/ }
+  validates :room_details, presence: true
+  validates :amenity_details, presence: true
+  validates :pet_ids, presence: true
+  validates :run_ids, presence: true
+  validates :amenity_ids, presence: true
+  validates :check_in_date, presence: true
+  validates :check_out_date, presence: true
+  validates :payment_first_name, format: { with: /\A[a-z\s-]{3,30}\z/i }
+  validates :payment_last_name, format: { with: /\A[a-z\s-]{3,30}\z/i }
+  validates_numericality_of :total_price
+  validates :transID, presence: true
+  validates :card_number, presence: true
+  validates :expiration_date, presence: true
+  validates :checked_in, presence: true
+  validates :checked_out, presence: true
+  validates :completed, presence: true
+  validates :three_weeks_before_email_reminder, presence: true
+  validates :one_week_before_email_reminder, presence: true
+  validates :day_before_email_reminder, presence: true
+
   def payment_successful?(params, total_price)
     transaction = Transaction.new(ENV["authorize_net_login"], ENV["authorize_net_transactional_id"], :gateway => :sandbox)
 
@@ -24,10 +48,12 @@ include AuthorizeNet::API
       params[:card_expiration_date] = @date
       return true
     else
-      response.messages.messages[0].text
-      response.transactionResponse.errors.errors[0].errorCode
-      response.transactionResponse.errors.errors[0].errorText
-      raise "Failed to charge card."
+      flash[:notice] = "Unable to process information, please try again."
+      redirect_to request.referrer
+      # response.messages.messages[0].text
+      # response.transactionResponse.errors.errors[0].errorCode
+      # response.transactionResponse.errors.errors[0].errorText
+      # raise "Failed to charge card."
       return false
     end
   end

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row text-center">
     <div class="col-xs-12">
-      <%= form_tag({controller: "searches", action: "search_results"}, {method: "get"}) do %>
+      <%= form_tag({controller: "searches", action: "create"}, {method: "post"}) do %>
         <%= text_field_tag(:search_zip, nil, placeholder: " Zip Code") %>
         <br>
 
@@ -9,27 +9,27 @@
         <br>
         <br>
 
-        <p>Drop Off Date</p>
+        <p>Check-In Date</p>
         <%= text_field_tag(:check_in, nil, class: "datepicker_drop_off") %>
         <br>
-        <p>Pick Up Date</p>
+        <p>Check-out Date</p>
         <%= text_field_tag(:check_out, nil, class: "datepicker_pick_up") %>
         <br>
         <br>
 
-        <p>Is this for a Dog or Cat?</p>
+        <!-- <p>Is this for a Dog or Cat?</p>
         <%= select_tag :cats_or_dogs, options_for_select(cat_or_dog_options), onchange: "numberOfPets()" %>
         <br>
-        <br>
+        <br> -->
 
-        <div style="display:none;" class="dogs">
+        <div class="dogs">
           <p>Number of Dogs</p>
           <%= select_tag(:number_of_dogs, options_for_select(0..5)) %>
           <br>
           <br>
         </div>
 
-        <div style="display:none;" class="cats">
+        <div class="cats">
           <p>Number of Cats</p>
           <%= select_tag(:number_of_cats, options_for_select(0..5)) %>
           <br>
@@ -48,7 +48,7 @@
   </div>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   function numberOfPets(){
     console.log($("#cats_or_dogs").val());
     var pet = $("#cats_or_dogs").val();
@@ -69,4 +69,4 @@
       $(".cats").hide();
     }
   }
-</script>
+</script> -->
