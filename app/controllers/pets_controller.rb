@@ -13,7 +13,7 @@ class PetsController < ApplicationController
       @user.completed_registration = true
       @user.save!
     end
-    if @user.pets.create(user_id: @user.id, name: @pet.name, cat_or_dog: @pet.cat_or_dog, breed: @pet.breed, weight: @pet.weight, vaccinations: @pet.vaccinations, spay_or_neutered: @pet.spay_or_neutered)
+    if @pet.valid? && @user.pets.create(user_id: @user.id, name: @pet.name, cat_or_dog: @pet.cat_or_dog, breed: @pet.breed, weight: @pet.weight, vaccinations: @pet.vaccinations, spay_or_neutered: @pet.spay_or_neutered)
       if params[:create_another_pet] == "Submit and create another 'Pet'"
         redirect_to new_pet_path
       else

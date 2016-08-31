@@ -4,8 +4,8 @@ class CreateCustomerVetInfos < ActiveRecord::Migration
       t.belongs_to :user, index: true
       t.string :name
       t.string :address
-      t.integer :phone
-      t.integer :emergency_phone
+      t.string :phone
+      t.string :emergency_phone
       t.string :email
       t.timestamps null: false
     end

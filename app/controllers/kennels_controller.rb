@@ -8,7 +8,7 @@ class KennelsController < ApplicationController
   def create
     @kennel = Kennel.new(kennel_params)
     @user = User.where(id: current_user.id).first
-    if !kennel_completed_registration? && @kennel.save! && @user.kennel = @kennel
+    if @kennel.valid? && !kennel_completed_registration? && @kennel.save! && @user.kennel = @kennel
       kennel = Kennel.where(user_id: @user[:id]).first
       kennel.userID = @user[:id]
       kennel.kennelID = kennel[:id]

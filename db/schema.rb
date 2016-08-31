@@ -146,8 +146,8 @@ ActiveRecord::Schema.define(version: 20160829040543) do
     t.integer  "user_id"
     t.string   "name"
     t.string   "address"
-    t.integer  "phone"
-    t.integer  "emergency_phone"
+    t.string   "phone"
+    t.string   "emergency_phone"
     t.string   "email"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false

@@ -14,7 +14,7 @@ user = User.create!(first_name: "John", last_name: "Smith", email: 'johnsmith@gm
 user.userID = user[:id]
 user.save!
 
-kennel = Kennel.create!(user_id: 1, name: 'Kennel One', zip: '34741', address: '123 Fake St', city: 'Kissimme', state: 'FL', cats_or_dogs: "both")
+kennel = Kennel.create!(user_id: 1, name: 'Kennel One', zip: '34741', address: '123 Fake St', city: 'Kissimme', state: 'FL', cats_or_dogs: "both", mission_statement: "Be all that you can be", email: "kennel_one@gmail.com", phone: "4079331234")
 kennel.kennelID = kennel[:id]
 kennel.userID = kennel[:user_id]
 kennel.save!

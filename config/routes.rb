@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :home
   resources :customer_emergency_contacts, only: [:new, :create]
+  resources :customer_vet_infos, only: [:new, :create]
   resources :pets, only: [:new, :create]
   resources :hours_of_operations, only: [:new, :create]
   resources :holidays, only: [:new, :create]
