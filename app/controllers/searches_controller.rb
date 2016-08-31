@@ -42,6 +42,7 @@ class SearchesController < ApplicationController
 
   def show
     @searched_kennel = Kennel.find(params[:id])
+    @sales_tax = SalesTax.where(kennel_id: @searched_kennel.id).first
     @kennel_user = User.find(@searched_kennel[:user_id])
     @runs = Run.where(kennel_id: @searched_kennel.id)
     @customer_check_in_date = unsanitize_date(params[:search_info][:check_in])
@@ -64,7 +65,7 @@ class SearchesController < ApplicationController
   end
 
   def get_pet_stay_dates
-    @pet_stay_date_range = (params[:check_in]..params[:check_out]).map{|date| date}
+    @pet_stay_date_range = (Date.parse(params[:check_in])..Date.parse(params[:check_out])).map{|date| date}
     params[:number_of_nights] = (@pet_stay_date_range.count.to_i - 1)
   end
 
@@ -141,12 +142,12 @@ class SearchesController < ApplicationController
 
   def filter_res_dates
     @each_date_reservation = []
-    @guest_stay_date_range = (params[:search_info][:check_in]..params[:search_info][:check_out]).map{|date| date}
+    @guest_stay_date_range = (Date.parse(params[:search_info][:check_in])..Date.parse(params[:search_info][:check_out])).map{|date| date}
     @guest_stay_date_range.delete_at(@guest_stay_date_range.length - 1)
     @guest_stay_date_range.each do |gr|
       @res_ids_and_dates.each do |k|
         k[1].each do |i|
-          if i == Date.parse(gr)
+          if i == gr
             @each_date_reservation << [i, k[0]]
           end
         end

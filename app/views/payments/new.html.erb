@@ -27,7 +27,7 @@
   None selected.
 <% end %>
 
-<h3>Tax:</h3>
+<h3>Tax(<%= params[:percentage].to_i %>%):</h3>
 
 <h3>Grand Total:</h3>
 <p><%= @total_price %></p>
@@ -44,6 +44,7 @@
   <%= hidden_field_tag :total_price, nil, value: @total_price %>
   <%= hidden_field_tag :payment_card_type, nil, value: "visa" %>
   <%= hidden_field_tag :kennel_info, nil, value: params %>
+  <%= hidden_field_tag :percentage, nil, value: params[:percentage] %>
 
   <h3 style="color:#b73c3c;">Owner Info</h3>
   <div class="payment_info">
