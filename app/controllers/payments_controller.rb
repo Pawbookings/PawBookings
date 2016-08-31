@@ -358,6 +358,7 @@ class PaymentsController < ApplicationController
     else
       @total_price = @total_price + params[:amenities_total].to_f
     end
+    @total_price += (@total_price * (params[:percentage].to_i * 0.01))
     @total_price = @total_price.round(2)
   end
 

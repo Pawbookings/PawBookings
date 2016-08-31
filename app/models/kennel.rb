@@ -1,6 +1,7 @@
 class Kennel < ActiveRecord::Base
   belongs_to :user
   has_one    :kennel_check_in_check_out
+  has_one    :sales_tax
   has_one    :hours_of_operation
   has_many   :holidays
   has_many   :runs
