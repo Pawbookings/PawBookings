@@ -1,0 +1,24 @@
+.footer_container {
+  background-color: #222222;
+  color: #88969f;
+}
+
+.footer_logo {
+  height: 5em;
+}
+
+.mobile_footer_description {
+  font-size: 0.9em;
+}
+
+.footer_row {
+  margin-top: 2em;
+}
+
+.footer_row_2 {
+  /*margin-bottom: 2em;*/
+}
+
+.footer_description_logo {
+  margin-left: -2em;
+}

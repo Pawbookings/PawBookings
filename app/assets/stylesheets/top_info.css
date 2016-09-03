@@ -1,0 +1,41 @@
+.top_nav_container {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+.top_nav_bar_row {
+  background-color: #51d888;
+}
+
+.top_logo {
+  height: 6em;
+}
+
+.top_mobile_glyphicon {
+  font-size: 2.5em;
+  color: #ffffff;
+  position: absolute;
+  margin-left: -1.4em;
+  margin-top: 0.6em;
+  text-shadow: 0px 0px 5px green;
+}
+
+.mobile_nav_menu {
+  display: none;
+  background-color: #53e68f;
+  position: absolute;
+  z-index: 1;
+  right: 15px;
+}
+
+.mobile_nav_text {
+  color: #ffffff;
+  text-shadow: 0px 0px 7px green;
+  font-family: 'Lato', sans-serif;
+}
+
+.mobile_login_btn, .mobile_signup_btn {
+  height: 2em;
+  box-shadow: 0px 0px 25px green;
+}

@@ -1,72 +1,43 @@
-<div class="container">
-  <div class="row text-center">
-    <div class="col-xs-12">
-      <%= form_tag({controller: "searches", action: "create"}, {method: "post"}) do %>
-        <%= text_field_tag(:search_zip, nil, placeholder: " Zip Code") %>
-        <br>
-
-        <%= text_field_tag(:radius, nil, placeholder: " Radius") %>
-        <br>
-        <br>
-
-        <p>Check-In Date</p>
-        <%= text_field_tag(:check_in, nil, class: "datepicker_drop_off") %>
-        <br>
-        <p>Check-out Date</p>
-        <%= text_field_tag(:check_out, nil, class: "datepicker_pick_up") %>
-        <br>
-        <br>
-
-        <!-- <p>Is this for a Dog or Cat?</p>
-        <%= select_tag :cats_or_dogs, options_for_select(cat_or_dog_options), onchange: "numberOfPets()" %>
-        <br>
-        <br> -->
-
-        <div class="dogs">
-          <p>Number of Dogs</p>
-          <%= select_tag(:number_of_dogs, options_for_select(0..5)) %>
-          <br>
-          <br>
+<%= form_tag({controller: "searches", action: "create"}, {method: "post"}) do %>
+  <div class="mobile_search_div">
+    <div class="row text-center">
+        <div class="col-xs-12">
+          <%= text_field_tag(:search_zip, nil, placeholder: " Zip Code", class: "common_search_field") %>
         </div>
-
-        <div class="cats">
-          <p>Number of Cats</p>
-          <%= select_tag(:number_of_cats, options_for_select(0..5)) %>
-          <br>
-          <br>
+      </div>
+      <div style="margin-top:1em;" class="row text-center">
+        <div class="col-xs-12">
+          <%= text_field_tag(:radius, nil, placeholder: " Radius", class: "common_search_field") %>
         </div>
-
-        <p>Number of Rooms</p>
-        <%= select_tag(:number_of_rooms, options_for_select(1..3)) %>
-        <br>
-        <br>
-        <%= submit_tag("Search") %>
-        <br>
-        <br>
-      <% end %>
+      </div>
+    <div style="margin-top: 1em;" class="row text-center">
+      <div class="col-xs-6">
+        <%= text_field_tag(:check_in, nil, class: "datepicker_drop_off common_search_field", placeholder: "Check In") %>
+      </div>
+      <div class="col-xs-6">
+        <%= text_field_tag(:check_out, nil, class: "datepicker_pick_up common_search_field", placeholder: "Check Out") %>
+      </div>
+    </div>
+    <div style="margin-top: 1em;" class="row text-center">
+      <div class="col-xs-6">
+        <%= label_tag "Number of Dogs", nil, class: "search_label" %>
+        <%= select_tag(:number_of_dogs, options_for_select(0..5), class: "form-control common_search_field") %>
+      </div>
+      <div class="col-xs-6">
+        <%= label_tag "Number of cats", nil, class: "search_label" %>
+        <%= select_tag(:number_of_cats, options_for_select(0..5), class: "form-control common_search_field") %>
+      </div>
+    </div>
+    <div style="margin-top: 1em;" class="row text-center">
+      <div class="col-xs-12">
+        <%= label_tag "Number of rooms", nil, class: "search_label" %>
+        <%= select_tag(:number_of_rooms, options_for_select(1..10), class: "form-control common_search_field") %>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-12">
+        <%= submit_tag("Search", class: "search_submit_btn") %>
+      </div>
     </div>
   </div>
-</div>
-
-<!-- <script type="text/javascript">
-  function numberOfPets(){
-    console.log($("#cats_or_dogs").val());
-    var pet = $("#cats_or_dogs").val();
-    if (pet == "dogs"){
-      $(".cats").hide();
-      $(".dogs").show();
-    }
-    else if (pet == "cats") {
-      $(".dogs").hide();
-      $(".cats").show();
-    }
-    else if (pet == "both") {
-      $(".dogs").show();
-      $(".cats").show();
-    }
-    else {
-      $(".dogs").hide();
-      $(".cats").hide();
-    }
-  }
-</script> -->
+<% end %>
