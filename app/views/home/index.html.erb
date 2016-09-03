@@ -1,42 +1,78 @@
-<div style="border: 2px solid #3abf0f;"></div>
-<div class="container">
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid main_hero_bg">
+  <div class="row text-center main_hero_text">
+    <div class="col-xs-12">
+      <h5 class="top_hero_text">Lorem Ipsum Dolor Amet</h5>
+      <h6 class="bottom_hero_text">Pellentesque venenatis feugiat tortor tincidunt egestas. Vestibulum ornare tortor...</h6>
+    </div>
+  </div>
+    <%= render partial: "shared/search_bar" %>
+</div>
+
+<div class="container-fluid why_pawbookings_container">
   <div class="row text-center">
     <div class="col-xs-12">
-      <% if current_user.nil? %>
-      <h2>Log in</h2>
-        <%= form_for("user", :url => user_session_path, :html => { :class => "form-horizontal well"}) do |f|%>
-          <div class="field">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true %>
-          </div>
-
-          <div class="field">
-            <%= f.label :password %><br />
-            <%= f.password_field :password, autocomplete: "off" %>
-          </div>
-
-          <% if devise_mapping.rememberable? -%>
-            <div class="field">
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember_me %>
-            </div>
-          <% end -%>
-
-          <div class="actions">
-            <%= f.submit "Log in" %>
-          </div>
-        <% end %>
-
-        <%= render "devise/shared/links" %>
-
-        <!-- Customer/Kennel Signup Links -->
-        <%= render partial: "shared/user_signup_links" %>
-        <br>
-        <br>
-        <h1>Search for Kennels near you now!</h1>
-        <%= render partial: "shared/search_bar" %>
-
-      <% end %>
+      <h5 class="why_top_text">Why Pawbookings</h5>
+      <h6 class="why_bottom_text">Mauris consequat libero metus, nec ultricies sem efficitur quis. Integer bibendum eget metus ac accumsan.</h6>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="icon_div">
+      <img src="/assets/eco_icon.png">
+      <p class="why_features_titles">ECO FEATURE</p>
+      <img src="/assets/small_line.png">
+      <p class="why_features_details">Suspendisse pharetra eleifend malesuada. Fusce faucibus pharetra nibh, in egestas dui blandit quis. Pellentesque faucibus dictum magna, quis convallis neque aliquam vel diam.</p>
+    </div>
+    <div class="icon_div">
+      <img src="/assets/pets_feature_icon.png">
+      <p class="why_features_titles">PETS FEATURE</p>
+      <img src="/assets/small_line.png">
+      <p class="why_features_details">Suspendisse pharetra eleifend malesuada. Fusce faucibus pharetra nibh, in egestas dui blandit quis. Pellentesque faucibus dictum magna, quis convallis neque aliquam vel diam.</p>
+    </div>
+    <div class="icon_div">
+      <img src="/assets/save_money_icon.png">
+      <p class="why_features_titles">SAVE MONEY</p>
+      <img src="/assets/small_line.png">
+      <p class="why_features_details">Suspendisse pharetra eleifend malesuada. Fusce faucibus pharetra nibh, in egestas dui blandit quis. Pellentesque faucibus dictum magna, quis convallis neque aliquam vel diam.</p>
+    </div>
+    <div class="icon_div">
+      <img src="/assets/easy_book_icon.png">
+      <p class="why_features_titles">EASY BOOK</p>
+      <img src="/assets/small_line.png">
+      <p class="why_features_details">Suspendisse pharetra eleifend malesuada. Fusce faucibus pharetra nibh, in egestas dui blandit quis. Pellentesque faucibus dictum magna, quis convallis neque aliquam vel diam.</p>
     </div>
   </div>
 </div>
+
+<div class="container-fluid testimonial_container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="testimonials_top_text">Testimonials</h5>
+      <h6 class="testimonials_bottom_text">Mauris consequat libero metus, nec ultricies sem efficitur quis. Integer bibendum eget metus ac accumsan.</h6>
+    </div>
+  </div>
+  <div class="row text-center testimonial_row">
+    <div class="col-xs-12">
+      <img class="testimonial_avatar" src="/assets/testimonial_test_avatar.png">
+      <p class="testimonial_person_name">Jane Watson</p>
+      <p class="testimonial_comment">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"</p>
+    </div>
+  </div>
+  <div class="row text-center testimonial_row">
+    <div class="col-xs-12">
+      <img class="testimonial_avatar" src="/assets/testimonial_test_avatar.png">
+      <p class="testimonial_person_name">Jane Watson</p>
+      <p class="testimonial_comment">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"</p>
+    </div>
+  </div>
+  <div class="row text-center testimonial_row">
+    <div class="col-xs-12">
+      <img class="testimonial_avatar" src="/assets/testimonial_test_avatar.png">
+      <p class="testimonial_person_name">Jane Watson</p>
+      <p class="testimonial_comment">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"</p>
+    </div>
+  </div>
+</div>
+
+<%= render partial: "shared/footer" %>

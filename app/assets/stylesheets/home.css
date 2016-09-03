@@ -1,0 +1,112 @@
+.main_hero_bg {
+  background: url("/assets/pawbookings_hero_bg.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Lato', sans-serif;
+  padding-top: 5em;
+}
+
+.main_hero_text {
+  color: white;
+  margin-top: 2em;
+}
+
+.top_hero_text {
+  font-size: 2em;
+  padding: 0.5em;
+}
+
+.bottom_hero_text {
+  font-size: 0.9em;
+  letter-spacing: 0.04em;
+  line-height: 1.3em;
+}
+
+.why_pawbookings_container {
+  background-color: #f9fafb;
+  padding-bottom: 5em;
+}
+
+.why_top_text {
+  font-size: 2em;
+  margin-top: 2em;
+  color: #48cd7e;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.why_bottom_text {
+  color: #404040;
+  font-size: 0.9em;
+  letter-spacing: 0.01em;
+  line-height: 1.3em;
+  margin-top: 2em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.icon_div {
+  padding: 1em;
+  background-color: #ffffff;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 2em;
+  border-radius: 0.04em;
+}
+
+.why_features_titles {
+  margin-top: 1.5em;
+  font-family: 'Lato', sans-serif;
+}
+
+.why_features_details {
+  font-size: 0.9em;
+  color: #afafaf;
+}
+
+.testimonial_container {
+  padding-bottom: 5em;
+}
+
+.testimonials_top_text {
+  font-size: 2em;
+  margin-top: 2em;
+  color: #48cd7e;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.testimonials_bottom_text {
+  color: #404040;
+  font-size: 0.9em;
+  letter-spacing: 0.01em;
+  line-height: 1.3em;
+  margin-top: 2em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.testimonial_row {
+  border: 1px solid black;
+  border-radius: 0.4em;
+  padding: 1em;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-top: 2em;
+}
+
+.testimonial_avatar {
+  height: 4em;
+}
+
+.testimonial_person_name {
+  font-size: 1em;
+}
+
+.testimonial_comment {
+  font-size: 0.8em;
+  line-height: 1.5em;
+  font-style: italic;
+}
