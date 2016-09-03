@@ -13,6 +13,7 @@ module PawBookings
     config.active_record.raise_in_transactional_callbacks = true
     config.filter_parameters << [:card_number, :card_verification]
     config.action_mailer.delivery_method = :smtp
+    config.serve_static_assets = true
     config.action_mailer.smtp_settings = {
       address:              'smtp.sendgrid.net',
       port:                 587,
