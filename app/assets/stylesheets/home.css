@@ -15,13 +15,18 @@
 
 .top_hero_text {
   font-size: 2em;
-  padding: 0.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-top: 1em;
+  margin-bottom: 0.6em;
 }
 
 .bottom_hero_text {
-  font-size: 0.9em;
+  font-size: 1em;
   letter-spacing: 0.04em;
   line-height: 1.3em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .why_pawbookings_container {
@@ -32,18 +37,18 @@
 .why_top_text {
   font-size: 2em;
   margin-top: 2em;
+  margin-bottom: 1em;
   color: #48cd7e;
   font-family: 'Open Sans', sans-serif;
 }
 
 .why_bottom_text {
   color: #404040;
-  font-size: 0.9em;
+  font-size: 1em;
   letter-spacing: 0.01em;
   line-height: 1.3em;
-  margin-top: 2em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -73,18 +78,18 @@
 .testimonials_top_text {
   font-size: 2em;
   margin-top: 2em;
+  margin-bottom: 1em;
   color: #48cd7e;
   font-family: 'Open Sans', sans-serif;
 }
 
 .testimonials_bottom_text {
   color: #404040;
-  font-size: 0.9em;
+  font-size: 1em;
   letter-spacing: 0.01em;
   line-height: 1.3em;
-  margin-top: 2em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
   font-family: 'Open Sans', sans-serif;
 }
 
