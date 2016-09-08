@@ -8,17 +8,34 @@
 }
 
 .mobile_footer_description {
-  font-size: 0.9em;
+  font-size: 1.2em;
+  line-height: 2em;
 }
 
 .footer_row {
   margin-top: 2em;
 }
 
-.footer_row_2 {
+.footer_social_media_row {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.footer_bottom_row {
   /*margin-bottom: 2em;*/
 }
 
 .footer_description_logo {
+  margin-left: -2em;
+}
+
+.facebook_btn_footer, .twitter_btn_footer, .pinterest_btn_footer, .google_plus_btn_footer {
+  width: 2.5em;
+}
+
+.footer_bottom_text {
+  margin-top: 2.65em;
   margin-left: -2em;
 }
