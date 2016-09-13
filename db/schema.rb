@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831041509) do
+ActiveRecord::Schema.define(version: 20160829040543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(version: 20160831041509) do
     t.integer  "user_id"
     t.integer  "kennelID"
     t.integer  "userID"
+    t.float    "sales_tax"
     t.string   "name"
     t.string   "address"
     t.string   "mission_statement"
@@ -339,13 +340,6 @@ ActiveRecord::Schema.define(version: 20160831041509) do
   end
 
   add_index "runs", ["kennel_id"], name: "index_runs_on_kennel_id", using: :btree
-
-  create_table "sales_taxes", force: :cascade do |t|
-    t.integer  "kennel_id"
-    t.float    "percentage"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "searches", force: :cascade do |t|
     t.integer  "search_zip"

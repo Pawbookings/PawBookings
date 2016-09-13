@@ -4,6 +4,6 @@ class Pet < ActiveRecord::Base
   validates :cat_or_dog, presence: true
   validates_numericality_of :weight, only_integer: true
   validates :vaccinations, presence: true
-  validates :spay_or_neutered, format: { with: /\A[a-z\s-]{4,5}\z/i }
+  validates :vaccinations, presence: true
   validates :special_instructions, presence: true
 end
