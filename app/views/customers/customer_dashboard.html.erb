@@ -1,1 +1,14 @@
+<%= link_to("Log out", destroy_user_session_path, method: "delete") %>
+<br>
+<br>
 <h1>Customer Dashboard</h1>
+
+
+<%= form_tag({controller: "customers", action: "create_user_image"}, multipart: true, method: "post") do |f| %>
+  <%= file_field_tag :user_image %>
+  <%= submit_tag "Submit" %>
+<% end %>
+
+<% if !@customer.user_image_file_size.nil? %>
+  <%= image_tag @customer.user_image.url(:thumb) %>
+<% end  %>

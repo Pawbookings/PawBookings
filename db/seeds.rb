@@ -6,36 +6,81 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# User
+# 1 -Kennel
 user = User.create!(first_name: "Christopher", last_name: "Pelnar", email: 'christopherpelnar@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4074081234', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'kennel')
 user.userID = user[:id]
 user.save!
 
+# 2 -Customer
 user = User.create!(first_name: "John", last_name: "Smith", email: 'johnsmith@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4078464231', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
 user.userID = user[:id]
 user.save!
 
+# 3 -Customer
+user = User.create!(first_name: "Luke", last_name: "Skywalker", email: 'lskywalker@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4071231234', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
+user.userID = user[:id]
+user.save!
+
+# 4 -Customer
+user = User.create!(first_name: "Mary", last_name: "Jane", email: 'mjane@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4073214321', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
+user.userID = user[:id]
+user.save!
+
+
+# Kennel
 kennel = Kennel.create!(user_id: 1, name: 'Kennel One', zip: '34741', address: '123 Fake St', city: 'Kissimme', state: 'FL', cats_or_dogs: "both", mission_statement: "Be all that you can be", email: "kennel_one@gmail.com", phone: "4079331234", sales_tax: 6.9)
 kennel.kennelID = kennel[:id]
 kennel.userID = kennel[:user_id]
 kennel.save!
 
+# Run
+Run.create!(kennel_id: 1, size_width: '12', size_length: '12', title: 'The Large Room', description: 'The largest room we have', indoor_or_outdoor: 'indoor', pets_per_run: 2, price: 90.0, weight_limit: 120, breeds_restricted: 'n/a', number_of_rooms: 2, type_of_pets_allowed: 'dog' )
+
+
+# Admin
 user = User.create!(first_name: "Patrick", last_name: "McDonnel", email: 'pawbookings@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4078464231', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'admin')
 user.userID = user[:id]
 user.save!
 
-Run.create!(kennel_id: 1, size_width: '12', size_length: '12', title: 'The Large Room', description: 'The largest room we have', indoor_or_outdoor: 'indoor', pets_per_run: 2, price: 90.0, weight_limit: 120, breeds_restricted: 'n/a', number_of_rooms: 2, type_of_pets_allowed: 'dog' )
 
+# Pet
+# 1,2
 Pet.create!(user_id: 2, name: "Petey", cat_or_dog: "dog", breed: "Pitbull", weight: "120", vaccinations: "true", spay_or_neutered: "true", special_instructions: "Likes to have belly scratched.")
 Pet.create!(user_id: 2, name: "Jolly", cat_or_dog: "dog", breed: "Cocker-Spaniel", weight: "45", vaccinations: "true", spay_or_neutered: "true", special_instructions: "Likes to eat watermelon.")
 
+# 3
+Pet.create!(user_id: 3, name: "Chewy", cat_or_dog: "dog", breed: "German-Shepherd", weight: "145", vaccinations: "true", spay_or_neutered: "true", special_instructions: "Wets the bed")
+
+# 4
+Pet.create!(user_id: 4, name: "Rocky", cat_or_dog: "dog", breed: "Poodle", weight: "20", vaccinations: "true", spay_or_neutered: "true", special_instructions: "false")
+
+# Amenity
+# 1
 Amenity.create!(kennel_id: 1, title: "Doggy Ice-Cream", description: "A smooth peanut butter taste with large chunks of tuna.", price: 4.99)
+# 2
 Amenity.create!(kennel_id: 1, title: "Doggy Day-SPA", description: "A relaxing time in our spa where your pet can come and be pampered.", price: 30.00)
 
 
-reservation = Reservation.create!(kennel_id: 1, user_id: 2, customer_first_name: 'John', customer_last_name: 'Smith', customer_email: 'johnsmith@gmail.com', customer_phone: '4071231234', pet_ids: '[1,2]', run_ids: '[1]', check_in_date: '2016-12-12', check_out_date: '2016-12-13', total_price: 90.0, room_details: "[[\"The Large Room\", 90]]")
+# 1
+reservation = Reservation.create!(kennel_id: 1, user_id: 2, customer_first_name: 'John', customer_last_name: 'Smith', customer_email: 'johnsmith@gmail.com', customer_phone: '4074081234', pet_ids: '[1,2]', run_ids: '[1]', check_in_date: '2016-12-12', check_out_date: '2016-12-13', total_price: 90.0, room_details: "[[\"The Large Room\", 90]]")
 reservation.reservationID = 1
 reservation.kennelID = 1
 reservation.userID = 2
+reservation.save!
+
+# 2
+reservation = Reservation.create!(kennel_id: 1, user_id: 3, customer_first_name: 'Luke', customer_last_name: 'Skywalker', customer_email: 'lskywalker@gmail.com', customer_phone: '4071231234', pet_ids: '[3]', run_ids: '[1]', check_in_date: '2016-12-01', check_out_date: '2016-12-02', total_price: 90.0, room_details: "[[\"The Large Room\", 90]]")
+reservation.reservationID = 1
+reservation.kennelID = 1
+reservation.userID = 3
+reservation.save!
+
+# 3
+reservation = Reservation.create!(kennel_id: 1, user_id: 4, customer_first_name: 'Mary', customer_last_name: 'Jane', customer_email: 'mjane@gmail.com', customer_phone: '4073214321', pet_ids: '[4]', run_ids: '[1]', check_in_date: '2016-12-10', check_out_date: '2016-12-11', total_price: 90.0, room_details: "[[\"The Large Room\", 90]]")
+reservation.reservationID = 1
+reservation.kennelID = 1
+reservation.userID = 3
 reservation.save!
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
@@ -45,3 +90,5 @@ CheckInContractReservationChange.create!(title: "Important Information", body: "
 CheckInContractRefundPolicy.create!(title: "Important Information", body: "This is to be edited by Admin.")
 
 KennelRating.create!(reservation_id: 1, reservationID: 1, kennelID: 1, userID: 2, rating: 5, comment: "This is the best thing ever!")
+KennelRating.create!(reservation_id: 2, reservationID: 2, kennelID: 1, userID: 3, rating: 5, comment: "I really love this place and couldn't imagine leaving Brüno anywhere else!")
+KennelRating.create!(reservation_id: 3, reservationID: 3, kennelID: 1, userID: 4, rating: 5, comment: "My favorite kennel in the world!")

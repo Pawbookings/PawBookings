@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   # CustomersController
     get "/customer_dashboard", to: "customers#customer_dashboard", as: :customer_dashboard
+    post "/create_user_image", to: "customers#create_user_image", as: :create_user_image
 
   # SearchesController
   resources :searches, only: [:show, :create]

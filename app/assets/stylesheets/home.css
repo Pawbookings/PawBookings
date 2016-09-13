@@ -15,8 +15,8 @@
 
 .top_hero_text {
   font-size: 2em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
   margin-top: 1em;
   margin-bottom: 0.6em;
 }
@@ -25,8 +25,8 @@
   font-size: 1em;
   letter-spacing: 0.04em;
   line-height: 1.3em;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .why_pawbookings_container {
@@ -43,25 +43,26 @@
 }
 
 .why_bottom_text {
-  color: #404040;
+  color: #6c707d;
   font-size: 1em;
   letter-spacing: 0.01em;
   line-height: 1.3em;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
   font-family: 'Open Sans', sans-serif;
 }
 
 .icon_div {
   padding: 1em;
   background-color: #ffffff;
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-left: 20%;
+  margin-right: 20%;
   margin-top: 2em;
   border-radius: 0.04em;
 }
 
 .why_features_titles {
+  color: #2c3e50;
   margin-top: 1.5em;
   font-family: 'Lato', sans-serif;
 }
@@ -84,12 +85,12 @@
 }
 
 .testimonials_bottom_text {
-  color: #404040;
+  color: #6c707d;
   font-size: 1em;
   letter-spacing: 0.01em;
   line-height: 1.3em;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -97,23 +98,32 @@
   border: 1px solid black;
   border-radius: 0.4em;
   padding: 1em;
-  margin-right: 1em;
-  margin-left: 1em;
+  margin-right: 2em;
+  margin-left: 2em;
   margin-top: 2em;
 }
 
 .testimonial_avatar {
   height: 4em;
+  border-radius: 100%;
 }
 
 .testimonial_person_name {
+  color: #51d888;
   font-size: 1em;
 }
 
 .testimonial_comment {
-  font-size: 0.8em;
-  line-height: 1.5em;
+  color: #6c707d;
+  font-size: 1.3em;
+  line-height: 1.4em;
   font-style: italic;
+}
+
+.testimonial_kennel_details {
+  color: #51d888;
+  font-size: 1em;
+  line-height: 0.5em;
 }
 
 .testimonials_pawbookings_word {
