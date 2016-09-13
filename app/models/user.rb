@@ -10,4 +10,7 @@ class User < ActiveRecord::Base
   has_many :kennels, through: :reservations
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  has_attached_file :user_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :user_image, content_type: /\Aimage\/.*\Z/
 end

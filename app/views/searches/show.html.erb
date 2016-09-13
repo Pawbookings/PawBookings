@@ -51,12 +51,12 @@
             <p></p>
             <input type="hidden" name="kennel_id" value="<%= @searched_kennel[:id] %>">
             <input type="hidden" name="name" value="<%= @searched_kennel[:name] %>">
-            <input type="hidden" name="percentage" value="<%= @sales_tax[:percentage] %>">
             <input type="hidden" name="address" value="<%= @searched_kennel[:address] %>">
             <input type="hidden" name="kennel_city" value="<%= @searched_kennel[:city] %>">
             <input type="hidden" name="kennel_state" value="<%= @searched_kennel[:state] %>">
             <input type="hidden" name="kennel_zip" value="<%= @searched_kennel[:zip] %>">
             <input type="hidden" name="kennel_phone" value="<%= @searched_kennel[:phone] %>">
+            <input type="hidden" name="kennel_sales_tax" value="<%= @searched_kennel[:sales_tax] %>">
             <input type="hidden" name="kennel_user_email" value="<%= @kennel_user[:email] %>">
             <input type="hidden" name="number_of_nights" value="<%= (params[:search_info][:number_of_nights].to_i) %>">
             <input type="hidden" name="number_of_rooms" value="<%= params[:search_info][:number_of_rooms] %>">

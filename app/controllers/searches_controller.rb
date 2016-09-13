@@ -42,7 +42,6 @@ class SearchesController < ApplicationController
 
   def show
     @searched_kennel = Kennel.find(params[:id])
-    @sales_tax = SalesTax.where(kennel_id: @searched_kennel.id).first
     @kennel_user = User.find(@searched_kennel[:user_id])
     @runs = Run.where(kennel_id: @searched_kennel.id)
     @customer_check_in_date = unsanitize_date(params[:search_info][:check_in])

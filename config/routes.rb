@@ -27,7 +27,6 @@ Rails.application.routes.draw do
   resources :check_in_contract_important_informations, only: [:update, :edit]
   resources :check_in_contract_reservation_changes, only: [:update, :edit]
   resources :check_in_contract_refund_policies, only: [:update, :edit]
-  resources :sales_taxes, only: [:new, :create]
 
   # KennelsController
   resources :kennels, only: [:new, :create]
@@ -37,6 +36,7 @@ Rails.application.routes.draw do
 
   # CustomersController
     get "/customer_dashboard", to: "customers#customer_dashboard", as: :customer_dashboard
+    post "/create_user_image", to: "customers#create_user_image", as: :create_user_image
 
   # SearchesController
   resources :searches, only: [:show, :create]

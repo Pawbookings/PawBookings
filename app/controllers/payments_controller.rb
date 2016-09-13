@@ -14,7 +14,6 @@ class PaymentsController < ApplicationController
     reservation_maxes_runs?
     if !@maxing_runs.empty?
       redirect_to request.referrer
-      # TODO flash verbiage
       flash[:notice] = "Your run is not available: #{@maxing_runs.flatten}"
       return false
     end
@@ -230,7 +229,7 @@ class PaymentsController < ApplicationController
     total_pets = @kennel_info["number_of_dogs"].to_i + @kennel_info["number_of_cats"].to_i
     counter = total_pets
     total_pets.times do
-      @user.pets.create(user_id: @user[:id], name: params["pet_name_#{counter}"], cat_or_dog: params["pet_type_#{counter}"], breed: params["pet_breed_#{counter}"], weight: params["pet_weight_#{counter}"], special_instructions: params["pet_special_instructions_#{counter}"])
+      @user.pets.create!(user_id: @user[:id], name: params["pet_name_#{counter}"], cat_or_dog: params["pet_type_#{counter}"], breed: params["pet_breed_#{counter}"], weight: params["pet_weight_#{counter}"], special_instructions: params["pet_special_instructions_#{counter}"], vaccinations: params["pet_vaccinations_#{counter}"], spay_or_neutered: params["spay_or_neutered_#{counter}"])
       counter -= 1
     end
   end
@@ -348,18 +347,29 @@ class PaymentsController < ApplicationController
 
   def get_price_total
     @total_price = 0
+    @total_price_without_tax = 0
+    @tax_amount = 0
     params.each_pair do |k, v|
       @total_price += v.to_f if (k.to_s.include? "total_price") || ((k.to_s.include? "room") && (k.to_s.include? "price"))
     end
     number_of_nights = @kennel_info.nil? ? params["number_of_nights"] : @kennel_info["number_of_nights"]
     @total_price = @total_price * number_of_nights.to_i
     if params[:amenities_total].nil?
-      @total_price = @total_price + @amenities_total
-    else
-      @total_price = @total_price + params[:amenities_total].to_f
+      params[:amenities_total] = @amenities_total
     end
-    @total_price += (@total_price * (params[:percentage].to_i * 0.01))
+
+
+    if params[:amenities_total] == 0
+      @total_price_without_tax = @total_price
+    else
+      @total_price_without_tax = @total_price + params[:amenities_total].to_f
+      @total_price += params[:amenities_total].to_f
+    end
+    @tax_amount = (@total_price * (params[:kennel_sales_tax].to_f * 0.01)).round(2)
+    @total_price += @tax_amount
+
     @total_price = @total_price.round(2)
+    @total_price_without_tax = @total_price_without_tax.round(2)
   end
 
   def get_pets_total

@@ -48,8 +48,7 @@ include AuthorizeNet::API
       params[:card_expiration_date] = @date
       return true
     else
-      flash[:notice] = "Unable to process information, please try again."
-      redirect_to request.referrer
+      redirect_to new_payment_path
       # response.messages.messages[0].text
       # response.transactionResponse.errors.errors[0].errorCode
       # response.transactionResponse.errors.errors[0].errorText
