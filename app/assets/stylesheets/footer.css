@@ -8,12 +8,12 @@
 }
 
 .mobile_footer_description {
-  font-size: 1.2em;
+  font-size: 1em;
   line-height: 2em;
 }
 
 .footer_row {
-  margin-top: 2em;
+  margin-top: 3em;
 }
 
 .footer_social_media_row {
@@ -32,7 +32,7 @@
 }
 
 .facebook_btn_footer, .twitter_btn_footer, .pinterest_btn_footer, .google_plus_btn_footer {
-  width: 2.5em;
+  width: 2em;
 }
 
 .footer_bottom_text {
