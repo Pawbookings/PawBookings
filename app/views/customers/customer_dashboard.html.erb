@@ -11,4 +11,6 @@
 
 <% if !@customer.user_image_file_size.nil? %>
   <%= image_tag @customer.user_image.url(:thumb) %>
+  <br>
+  <%= link_to "Delete Image", delete_user_image_path, method: "delete" %>
 <% end  %>
