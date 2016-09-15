@@ -32,4 +32,7 @@ class HomeController < ApplicationController
     @kennel = Kennel.find(@kr.kennelID)
   end
 
+  def kennel_or_customer
+  end
+
 end

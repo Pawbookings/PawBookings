@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resources :check_in_contract_refund_policies, only: [:update, :edit]
 
   # KennelsController
-  resources :kennels, only: [:new, :create]
+    resources :kennels, only: [:new, :create]
     get "/kennel_dashboard",   to: "kennels#kennel_dashboard",   as: :kennel_dashboard
     get "/kennel_reservations", to: "kennels#kennel_reservations", as: :kennel_reservations
     get "/kennel_searched_reservation", to: "kennels#kennel_searched_reservation", as: :kennel_searched_reservation
@@ -40,18 +40,21 @@ Rails.application.routes.draw do
     delete "/delete_user_image", to: "customers#delete_user_image", as: :delete_user_image
 
   # SearchesController
-  resources :searches, only: [:show, :create]
+    resources :searches, only: [:show, :create]
     get "/search_results", to: "searches#search_results", as: :search_results
 
   # BlogsController
-  resources :blogs
+    resources :blogs
     get "/blog_search", to: "blogs#blog_search", as: :blog_search
     get "/all_blogs", to: "blogs#all_blogs", as: :all_blogs
 
   # BlogCategoriesController
-  resources :blog_categories
+    resources :blog_categories
     get "/all_blog_categories", to: "blog_categories#all_blog_categories", as: :all_blog_categories
 
   # Contracts
     get "/customer_checkin_contract", to: "contracts#customer_checkin_contract", as: :customer_checkin_contract
+
+  # Kennel or Customer sign-up selection page
+    get "/kennel_or_customer", to: "home#kennel_or_customer", as: :kennel_or_customer
 end
