@@ -33,6 +33,11 @@ class SearchesController < ApplicationController
   end
 
   def search_results
+    if params[:number_of_dogs] == "0" || params[:number_of_cats] == "0"
+      flash[:notice] = "Must select number of dogs or cats greater than 0."
+      redirect_to request.referrer
+    end
+
     get_pet_stay_dates
     location_filtering
     pet_type_filtering

@@ -2,20 +2,20 @@
   <div class="mobile_search_div">
     <div class="row text-center">
         <div class="col-xs-12">
-          <%= text_field_tag(:search_zip, nil, placeholder: " Zip Code", class: "common_search_field") %>
+          <%= text_field_tag(:search_zip, nil, placeholder: " Zip Code", class: "common_search_field", onkeypress: "return isNumber(event);", maxlength: "5", required: true) %>
         </div>
       </div>
       <div style="margin-top:1em;" class="row text-center">
         <div class="col-xs-12">
-          <%= text_field_tag(:radius, nil, placeholder: " Radius", class: "common_search_field") %>
+          <%= text_field_tag(:radius, nil, placeholder: " Radius", class: "common_search_field", onkeypress: "return isNumber(event);", maxlength: "3", required: true) %>
         </div>
       </div>
     <div style="margin-top: 1em;" class="row text-center">
       <div class="col-xs-6">
-        <%= text_field_tag(:check_in, nil, class: "datepicker_drop_off common_search_field", placeholder: "Check In") %>
+        <%= text_field_tag(:check_in, nil, class: "datepicker_drop_off common_search_field", placeholder: "Check In", required: true) %>
       </div>
       <div class="col-xs-6">
-        <%= text_field_tag(:check_out, nil, class: "datepicker_pick_up common_search_field", placeholder: "Check Out") %>
+        <%= text_field_tag(:check_out, nil, class: "datepicker_pick_up common_search_field", placeholder: "Check Out", required: true) %>
       </div>
     </div>
     <div style="margin-top: 1em;" class="row text-center">
@@ -41,3 +41,15 @@
     </div>
   </div>
 <% end %>
+
+
+<script type="text/javascript">
+  function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+  }
+</script>
