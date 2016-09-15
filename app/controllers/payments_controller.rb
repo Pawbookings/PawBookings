@@ -1,4 +1,5 @@
 class PaymentsController < ApplicationController
+  http_basic_authenticate_with name: "pawbookings", password: "Guinness1", only: [:new, :create]
   include UsersHelper
 
   def new
