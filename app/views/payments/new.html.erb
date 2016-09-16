@@ -58,7 +58,8 @@
     <br>
     <%= text_field_tag :payment_last_name, nil, placeholder: " Last Name" %>
     <br>
-    <%= text_field_tag :payment_card_type, nil, placeholder: " Card Type" %>
+    <%= label_tag "payment_card_type", "Card Type" %>
+    <%= select_tag :payment_card_type, options_for_select(card_type_option) %>
     <br>
     <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number" %>
     <br>
@@ -71,18 +72,18 @@
     <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode" %>
   </div>
 
-<br>
-<div class="pets_contact">
-  <h4 style="color:green;">Primary Contact</h4>
-  <%= text_field_tag :customer_first_name, nil, placeholder: " First Name" %>
   <br>
-  <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name" %>
+  <div class="pets_contact">
+    <h4 style="color:green;">Primary Contact</h4>
+    <%= text_field_tag :customer_first_name, nil, placeholder: " First Name" %>
+    <br>
+    <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name" %>
+    <br>
+    <%= text_field_tag :customer_email, nil, placeholder: " Email" %>
+    <br>
+    <%= text_field_tag :customer_phone, nil, placeholder: " Phone" %>
+  </div>
   <br>
-  <%= text_field_tag :customer_email, nil, placeholder: " Email" %>
-  <br>
-  <%= text_field_tag :customer_phone, nil, placeholder: " Phone" %>
-</div>
-<br>
   <h3 style="color:#b73c3c;">Pets Info</h3>
 
   <div class="pet_details">
@@ -101,9 +102,11 @@
       <br>
       <%= text_field_tag "pet_special_instructions_#{counter}", nil, placeholder: " Pet Special Instructions" %>
       <br>
-      <%= text_field_tag "pet_vaccinations_#{counter}", nil, placeholder: " Vaccinated?" %>
+      <%= label_tag "pet_vaccinations_#{counter}", "Vaccinations?" %>
+      <%= select_tag "pet_vaccinations_#{counter}", options_for_select(false_or_true_option) %>
       <br>
-      <%= text_field_tag "pet_spay_or_neutered_#{counter}", nil, placeholder: " Spay or Neutuered?" %>
+      <%= label_tag "pet_spay_or_neutered_#{counter}", "Spay or Neutered?" %>
+      <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(false_or_true_option) %>
       <br>
       <br>
       <% counter -= 1 %>
@@ -116,7 +119,6 @@
 
 
 <script type='text/javascript'>
-
   function petTypeOptions(counter){
     var pet_type = $("#pet_type_" + counter).val();
     if (pet_type == "dog"){
@@ -126,5 +128,4 @@
       $(".pet_breed_selection_" + counter).hide();
     }
   }
-
 </script>

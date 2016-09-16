@@ -24,7 +24,7 @@ class PaymentsController < ApplicationController
 
       # if user not logged in and doesnt have an account
       if User.where(email: params[:customer_email]).blank?
-        @user = User.create!({email: params[:customer_email], phone: params[:customer_phone], first_name: params[:customer_first_name], last_name: params[:customer_last_name], password: @encrypted_password, password_confirmation: @encrypted_password, kennel_or_customer: "customer" })
+        @user = User.create!(email: params[:customer_email], phone: params[:customer_phone], first_name: params[:customer_first_name], last_name: params[:customer_last_name], password: @encrypted_password, password_confirmation: @encrypted_password, kennel_or_customer: "customer" )
         get_inputed_pet_names
         register_pets
         get_pet_ids
