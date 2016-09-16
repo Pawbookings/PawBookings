@@ -29,7 +29,11 @@ include AuthorizeNet::API
   validates :day_before_email_reminder, presence: true
 
   def payment_successful?(params, total_price)
-    transaction = Transaction.new(ENV["authorize_net_login"], ENV["authorize_net_transactional_id"], :gateway => :production)
+    if Rails.env.production?
+      transaction = Transaction.new(ENV["authorize_net_login"], ENV["authorize_net_transactional_id"], :gateway => :production)
+    elsif Rails.env.development?
+      transaction = Transaction.new(ENV["authorize_net_login_dev"], ENV["authorize_net_transactional_id_dev"], :gateway => :sandbox)
+    end
 
     request = CreateTransactionRequest.new
 
@@ -48,11 +52,9 @@ include AuthorizeNet::API
       params[:card_expiration_date] = @date
       return true
     else
-      redirect_to new_payment_path
-      response.messages.messages[0].text
-      response.transactionResponse.errors.errors[0].errorCode
-      response.transactionResponse.errors.errors[0].errorText
-      raise "Failed to charge card."
+      # response.messages.messages[0].text
+      # response.transactionResponse.errors.errors[0].errorCode
+      # response.transactionResponse.errors.errors[0].errorText
       return false
     end
   end
