@@ -262,7 +262,7 @@ class PaymentsController < ApplicationController
           if pn == v
             pet_number << k.split("_")[2]
             pet_number = pet_number.join("").to_i
-            @user.pets.create(user_id: @user[:id], name: params["pet_name_#{pet_number}"], cat_or_dog: params["pet_type_#{pet_number}"], breed: params["pet_breed_#{pet_number}"], weight: params["pet_weight_#{pet_number}"], special_instructions: params["pet_special_instructions_#{pet_number}"])
+            @user.pets.create!(user_id: @user[:id], name: params["pet_name_#{pet_number}"], cat_or_dog: params["pet_type_#{pet_number}"], breed: params["pet_breed_#{pet_number}"], weight: params["pet_weight_#{pet_number}"], special_instructions: params["pet_special_instructions_#{pet_number}"], vaccinations: params["pet_vaccinations_#{pet_number}"], spay_or_neutered: params["pet_spay_or_neutered_#{pet_number}"])
           end
         end
       end
