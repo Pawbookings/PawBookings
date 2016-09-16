@@ -1,4 +1,5 @@
 class PaymentsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   http_basic_authenticate_with name: "pawbookings", password: "Guinness1", only: [:new, :create]
   include UsersHelper
 
