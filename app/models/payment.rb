@@ -52,9 +52,9 @@ include AuthorizeNet::API
       params[:card_expiration_date] = @date
       return true
     else
-      # response.messages.messages[0].text
-      # response.transactionResponse.errors.errors[0].errorCode
-      # response.transactionResponse.errors.errors[0].errorText
+      puts response.messages.messages[0].text
+      puts response.transactionResponse.errors.errors[0].errorCode
+      puts response.transactionResponse.errors.errors[0].errorText
       return false
     end
   end
