@@ -282,7 +282,7 @@ class PaymentsController < ApplicationController
   def process_payment
     payment = Payment.new
     get_price_total
-    if payment.payment_successful?(params, params[:total_price].to_i)
+    if payment.payment_successful?(params, params[:total_price].to_f)
       get_room_info
       if @kennel.reservations.create(
                                    user_id: @user.id,
