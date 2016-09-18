@@ -23,8 +23,8 @@ class PaymentsController < ApplicationController
       @kennel = Kennel.find(@kennel_info["kennel_id"])
 
       # if user not logged in and doesnt have an account
-      if User.where(email: params[:customer_email]).blank?
-        @user = User.create!(email: params[:customer_email], phone: params[:customer_phone], first_name: params[:customer_first_name], last_name: params[:customer_last_name], password: @encrypted_password, password_confirmation: @encrypted_password, kennel_or_customer: "customer" )
+      if User.where(email: params[:customer_email].downcase).blank?
+        @user = User.create!(email: params[:customer_email].downcase, phone: params[:customer_phone], first_name: params[:customer_first_name].downcase, last_name: params[:customer_last_name].downcase, password: @encrypted_password, password_confirmation: @encrypted_password, kennel_or_customer: "customer" )
         get_inputed_pet_names
         register_pets
         get_pet_ids
@@ -32,7 +32,7 @@ class PaymentsController < ApplicationController
         process_payment
       else
         # if user not logged in but has an account
-        @user = User.where(email: params[:customer_email], kennel_or_customer: "customer").first
+        @user = User.where(email: params[:customer_email].downcase, kennel_or_customer: "customer").first
         if @user.nil?
           flash[:notice] = "This email cannot be used to make reservations. Please choose another email."
           redirect_to request.referrer
@@ -290,11 +290,11 @@ class PaymentsController < ApplicationController
                                    check_out_date: @kennel_info["check_out"],
                                    room_details: @room_details,
                                    total_price: params[:total_price],
-                                   payment_first_name: params[:payment_first_name],
-                                   payment_last_name: params[:payment_last_name],
-                                   customer_first_name: params[:customer_first_name],
-                                   customer_last_name: params[:customer_last_name],
-                                   customer_email: params[:customer_email],
+                                   payment_first_name: params[:payment_first_name].downcase,
+                                   payment_last_name: params[:payment_last_name].downcase,
+                                   customer_first_name: params[:customer_first_name].downcase,
+                                   customer_last_name: params[:customer_last_name].downcase,
+                                   customer_email: params[:customer_email].downcase,
                                    customer_phone: params[:customer_phone],
                                    pet_ids: @pet_ids,
                                    run_ids: @run_ids,
@@ -310,7 +310,7 @@ class PaymentsController < ApplicationController
                                    one_week_before_email_reminder: "false",
                                    day_before_email_reminder: "false").valid?
 
-        reservation = Reservation.where(customer_email: params[:customer_email]).first
+        reservation = Reservation.where(customer_email: params[:customer_email].downcase).first
         reservation.kennelID = reservation[:kennel_id]
         reservation.userID = reservation[:user_id]
         reservation.reservationID = reservation[:id]
