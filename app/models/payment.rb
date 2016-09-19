@@ -45,8 +45,7 @@ include AuthorizeNet::API
 
     response = transaction.create_transaction(request)
 
-
-    if response.messages.resultCode == MessageTypeEnum::Ok
+    if (response.messages.resultCode == MessageTypeEnum::Ok) && (response.transactionResponse.responseCode == "1")
       # puts "Successful charge (auth + capture) (authorization code: #{response.transactionResponse.authCode}) (transaction ID: #{response.transactionResponse.transId})"
       params[:transId] = response.transactionResponse.transId
       params[:card_expiration_date] = @date
