@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   # Contracts
     get "/customer_checkin_contract", to: "contracts#customer_checkin_contract", as: :customer_checkin_contract
 
-  # Kennel or Customer sign-up selection page
+  # HomeController
     get "/kennel_or_customer", to: "home#kennel_or_customer", as: :kennel_or_customer
+    get "/about", to: "home#about", as: :about
 end

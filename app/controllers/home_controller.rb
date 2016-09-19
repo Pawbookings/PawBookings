@@ -35,4 +35,7 @@ class HomeController < ApplicationController
   def kennel_or_customer
   end
 
+  def about
+  end
+
 end
