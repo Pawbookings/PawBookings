@@ -13,13 +13,23 @@
       </h6>
 
       <%= form_for @contact_message do |f| %>
+      <%= f.label :name, "Name", class: "default_white_color" %>
+      <br>
       <%= f.text_field :name, placeholder: " Name", class: "contact_form_field" %>
+      <br>
+      <%= f.label :subject, "Subject", class: "default_white_color" %>
       <br>
       <%= f.text_field :subject, placeholder: " Subject", class: "contact_form_field" %>
       <br>
+      <%= f.label :phone, "Phone", class: "default_white_color" %>
+      <br>
       <%= f.text_field :phone, placeholder: " Phone", class: "contact_form_field" %>
       <br>
+      <%= f.label :email, "Email", class: "default_white_color" %>
+      <br>
       <%= f.text_field :email, placeholder: " Email", class: "contact_form_field" %>
+      <br>
+      <%= f.label :message, "Message", class: "default_white_color" %>
       <br>
       <%= f.text_area :details, placeholder: " Message", class: "contact_form_field" %>
       <br>

@@ -34,8 +34,12 @@ input {
   font-style: italic;
 }
 
-.default_green {
+.default_green_color {
 	color: #48cd7e;
+}
+
+.default_white_color {
+  color: #ffffff;
 }
 
 .leto_font {

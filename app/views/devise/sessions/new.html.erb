@@ -1,18 +1,18 @@
 <%= render partial: "shared/top_info" %>
 
-<div class="container-fluid">
+<div class="container-fluid leto_font">
   <div class="row text-center">
     <div class="login_div">
         <% if current_user.nil? %>
-        <h5 class="login_title">Log In</h5>
+        <h5 class="login_title">Login</h5>
           <%= form_for("user", :url => user_session_path) do |f|%>
             <div class="field">
-              <%= f.label :email, class: "leto_font" %><br />
+              <%= f.label :email, class: "default_white_color" %><br />
               <%= f.email_field :email, class:"login_input", placeholder: " Email", autofocus: true %>
             </div>
 
             <div class="field">
-              <%= f.label :password, class: "leto_font" %><br />
+              <%= f.label :password, class: "default_white_color" %><br />
               <%= f.password_field :password, class: "login_input", placeholder: " Password", autocomplete: "off" %>
             </div>
 
@@ -24,12 +24,12 @@
             <% end -%>
 
             <div class="actions">
-              <%= f.submit "Log in", class: "login_submit_btn" %>
+              <%= f.submit "Login", class: "login_submit_btn" %>
             </div>
           <% end %>
           <%= render "devise/shared/links" %>
           <br>
-          <%= link_to "Sign up", kennel_or_customer_path %>
+          <%= link_to "Sign Up", kennel_or_customer_path %>
         <% end %>
     </div>
   </div>

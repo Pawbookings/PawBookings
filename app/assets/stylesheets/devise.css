@@ -22,4 +22,49 @@
   width: 75%;
   background: linear-gradient(#42b370, #51d888);
   height: 3em;
+  color: #ffffff;
+}
+
+/* new_session */
+
+.devise_password_1, .devise_password_2 {
+  display: none;
+}
+
+.signup_div {
+  background-color: #25b15e;
+  margin-top: 6.7em;
+  padding-bottom: 3em;
+}
+
+.signup_title {
+  font-size: 2.5em;
+  color: #ffffff;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.signup_input {
+  width: 75%;
+  height: 2.5em;
+  border-radius: 0.4em;
+}
+
+.signup_submit_btn {
+  width: 75%;
+  background: linear-gradient(#42b370, #51d888);
+  height: 3em;
+  color: #ffffff;
+}
+
+.signup_timezone_input {
+  background-color: white;
+  height: 2.5em;
+  width: 75%;
+}
+
+.signup_recaptcha {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 3em;
 }

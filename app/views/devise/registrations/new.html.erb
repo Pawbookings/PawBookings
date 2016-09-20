@@ -1,55 +1,60 @@
-<style>
-  .devise_password_1, .devise_password_2 {
-    display: none;
-  }
-</style>
-<h2>Sign up</h2>
+<%= render partial: "shared/top_info" %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<div class="container-fluid leto_font">
+  <div class="row text-center">
+    <div class="signup_div">
+      <h5 class="signup_title">Sign Up</h5>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-    <%= f.hidden_field :kennel_or_customer, value: params[:kennel_or_customer] %>
+        <div class="field">
+          <%= f.label :email, class: "default_white_color" %><br />
+          <%= f.email_field :email, class: "signup_input", placeholder: " Email", autofocus: true %>
+          <%= f.hidden_field :kennel_or_customer, value: params[:kennel_or_customer] %>
+        </div>
+
+        <div class="field">
+          <%= f.label :first_name, class: "default_white_color" %><br />
+          <%= f.text_field :first_name, placeholder: " First Name", class: "signup_input" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :last_name, class: "default_white_color" %><br />
+          <%= f.text_field :last_name, placeholder: " Last Name", class: "signup_input" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :phone, class: "default_white_color" %><br />
+          <%= f.text_field :phone, placeholder: " Phone", class: "signup_input" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :time_zone, class: "default_white_color" %><br />
+          <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {}, {class: "signup_timezone_input"} %>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :password, class: "devise_password_1", autocomplete: "off", value: random_password %>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :password_confirmation, class: "devise_password_2", autocomplete: "off", value: "" %>
+        </div>
+
+        <div class="g-recaptcha signup_recaptcha" data-sitekey="6Lf83QYUAAAAAFGzS6tH-D2Ie-_n7eINV9NrVfyQ"></div>
+
+        <div class="actions">
+          <%= f.submit "Sign up", class: "signup_submit_btn" %>
+          <br>
+          <%= render "devise/shared/links" %>
+          <br>
+          <%= link_to "Login", new_user_session_path %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= f.label :time_zone %><br />
-    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
-  </div>
-
-  <div class="field">
-    <%= f.password_field :password, class: "devise_password_1", autocomplete: "off", value: random_password %>
-  </div>
-
-  <div class="field">
-    <%= f.password_field :password_confirmation, class: "devise_password_2", autocomplete: "off", value: "" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up", class: "user_signup_btn" %>
-  </div>
-  <br>
-  <div class="g-recaptcha" data-sitekey="6Lf83QYUAAAAAFGzS6tH-D2Ie-_n7eINV9NrVfyQ"></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
+<%= render partial: "shared/footer" %>
 
 <script type="text/javascript">
   $(".user_signup_btn").on("click", function(){

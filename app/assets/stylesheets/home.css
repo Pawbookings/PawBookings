@@ -157,7 +157,8 @@
 }
 
 .kennel_or_customer_link {
-  color: #ffffff;
+  color: #3276b0;
+  text-decoration: underline;
 }
 
 .kennel_or_customer_image {
