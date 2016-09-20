@@ -18,6 +18,8 @@
 .contact_form_field {
   margin-bottom: 2em;
   border-radius: 0.4em;
+  height: 2.5em;
+  width: 75%;
 }
 
 .contact_address {
