@@ -1,0 +1,25 @@
+/* new_registration */
+.login_div {
+  background-color: #25b15e;
+  margin-top: 6.7em;
+  padding-bottom: 3em;
+}
+
+.login_title {
+  font-size: 2em;
+  color: #ffffff;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.login_input {
+  width: 75%;
+  height: 2.5em;
+  border-radius: 0.4em;
+}
+
+.login_submit_btn {
+  width: 75%;
+  background: linear-gradient(#42b370, #51d888);
+  height: 3em;
+}

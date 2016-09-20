@@ -1,28 +1,38 @@
-<h1>Recent Blogs</h1>
+<%= render partial: "shared/top_info" %>
 
-<% @latest_blogs.each do |blog| %>
-  <%= link_to raw(blog[:title]), blog_path(blog[:id]) %>
-  <%= blog[:keyword] %>
-  <br>
-  <%= unsanitize_date(blog[:publish_date].to_s) %>
-  <br>
-  <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
-    <%= link_to "Edit", edit_blog_path(blog[:id]) %>
-    <br>
-    <%= link_to "Delete", blog_path(blog.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
-  <% end %>
-  <br>
-  <br>
-<% end %>
+<div class="container-fluid blog_index_container">
+  <div class="blog_index_div">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="recent_blogs_title">Recent Blogs</h5>
+      <% @latest_blogs.each do |blog| %>
+      <%= link_to raw(blog[:title]), blog_path(blog[:id]), class: "blog_title_link" %>
+      <br>
+      <p class="blog_date_index"><%= unsanitize_date(blog[:publish_date].to_s) %></p>
+        <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
+          <%= link_to "Edit", edit_blog_path(blog[:id]) %>
+          <br>
+          <%= link_to "Delete", blog_path(blog.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
+          <br>
+        <% end %>
+      <br>
+      <% end %>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="blog_categories_title">Categories</h5>
+      <% @blog_categories.each do |bc| %>
+        <h6><%= link_to bc.title, blog_category_path(bc.title), class: "blog_category_link" %></h6>
+        <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
+          <%= link_to "Edit", edit_blog_category_path(bc[:id]) %>
+          <br>
+          <%= link_to "Delete", blog_category_path(bc.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  </div>
+</div>
 
-<h1>Categories</h1>
-<% @blog_categories.each do |bc| %>
-  <h3><%= link_to bc.title, blog_category_path(bc.title) %></h3>
-  <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
-  <%= link_to "Edit", edit_blog_category_path(bc[:id]) %>
-  <br>
-  <%= link_to "Delete", blog_category_path(bc.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
-  <% end %>
-  <br>
-
-<% end %>
+<%= render partial: "shared/footer" %>

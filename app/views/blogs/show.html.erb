@@ -1,16 +1,21 @@
-<h1>Blog Show Page</h1>
+<%= render partial: "shared/top_info" %>
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <div class="blog_show_div">
+        <h1 class="blog_show_title default_green"><%= @blog.title %></h1>
+        Published on: <%= unsanitize_date(@blog.publish_date.to_s) %>
+        <br>
+        <br>
+        <%= raw(@blog.body) %>
 
-  <h3><%= raw(@blog.title) %></h3>
-  <br>
-  <%= raw(@blog.body) %>
-  <br>
-  Keyword: <%= @blog.keyword %>
-  <br>
-  <br>
-  Published on: <%= unsanitize_date(@blog.publish_date.to_s) %>
-  <br>
-  <% if !current_user.nil? && current_user.kennel_or_customer == "admin" %>
-    <%= link_to "Edit", edit_blog_path(@blog.id) %>
-    <br>
-    <%= link_to "Delete", blog_path(@blog.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
-  <% end %>
+        <% if !current_user.nil? && current_user.kennel_or_customer == "admin" %>
+          <%= link_to "Edit", edit_blog_path(@blog.id) %>
+          <br>
+          <%= link_to "Delete", blog_path(@blog.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render partial: "shared/footer" %>

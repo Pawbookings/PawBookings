@@ -1,26 +1,39 @@
-<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-<br>
-<h1>Admin Directory</h1>
+<%= render partial: "shared/top_info" %>
 
-<h3>Admin Dashboard</h3>
-<%= link_to "Admin Dash", admin_root_path %>
+<div class="container-fluid admin_directory_container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h1 class="admin_directory_title">Admin Directory</h1>
 
-<h3>Blogs</h3>
-<%= link_to "Blogs Index", blogs_path %>
-<br>
-<%= link_to "Create a new blog", new_blog_path %>
-<br>
-<%= link_to "View all blogs", all_blogs_path %>
-<br>
-<%= link_to "Create a new category", new_blog_category_path %>
-<br>
-<%= link_to "View all categories", all_blog_categories_path %>
-<br>
-<%= link_to "Search for blogs", blog_search_path %>
+      <h3>Admin Dashboard</h3>
+      <%= link_to "Admin Dash", admin_root_path, class: "admin_directory_links" %>
 
-<h3>Check-In contract verbiage</h3>
-<%= link_to "Important Information", edit_check_in_contract_important_information_path(1) %>
-<br>
-<%= link_to "Reservation Changes", edit_check_in_contract_reservation_change_path(1) %>
-<br>
-<%= link_to "Refund Policy", edit_check_in_contract_refund_policy_path(1) %>
+      <h3>Blogs</h3>
+      <%= link_to "Search for blogs", blog_search_path, class: "admin_directory_links" %>
+      <br>
+      <%= link_to "Blogs Index", blogs_path, class: "admin_directory_links" %>
+      <br>
+      <br>
+      <%= link_to "Create a new blog", new_blog_path, class: "admin_directory_links" %>
+      <br>
+      <%= link_to "View all blogs", all_blogs_path, class: "admin_directory_links" %>
+      <br>
+      <br>
+      <%= link_to "Create a new category", new_blog_category_path, class: "admin_directory_links" %>
+      <br>
+      <%= link_to "View all categories", all_blog_categories_path, class: "admin_directory_links" %>
+
+
+      <h3>Check-In contract verbiage</h3>
+      <%= link_to "Important Information", edit_check_in_contract_important_information_path(1), class: "admin_directory_links" %>
+      <br>
+      <%= link_to "Reservation Changes", edit_check_in_contract_reservation_change_path(1), class: "admin_directory_links" %>
+      <br>
+      <%= link_to "Refund Policy", edit_check_in_contract_refund_policy_path(1), class: "admin_directory_links" %>
+    </div>
+  </div>
+</div>
+
+
+
+<%= render partial: "shared/footer" %>

@@ -29,6 +29,8 @@
   padding-right: 2em;
 }
 
+/* _why_pawbookings */
+
 .why_pawbookings_container {
   background-color: #f9fafb;
   padding-bottom: 5em;
@@ -71,6 +73,8 @@
   font-size: 0.9em;
   color: #afafaf;
 }
+
+/* _testimonials */
 
 .testimonial_container {
   padding-bottom: 5em;
@@ -129,4 +133,33 @@
 .testimonials_pawbookings_word {
   font-style: italic;
   color: #48cd7e;
+}
+
+/* kennel_or_customer */
+
+.kennel_or_customer_div {
+  background-color: #25b15e;
+  margin-top: 6.7em;
+}
+
+.kennel_or_customer_bottom_div {
+  background: linear-gradient(#42b370, #51d888);
+  padding-bottom: 3em;
+  padding-top: 3em;
+  font-size: 1.5em;
+}
+
+.kennel_or_customer_title {
+  font-size: 2.5em;
+  color: #ffffff;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.kennel_or_customer_link {
+  color: #ffffff;
+}
+
+.kennel_or_customer_image {
+  width: 100%;
 }

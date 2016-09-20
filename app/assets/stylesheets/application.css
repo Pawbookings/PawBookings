@@ -20,6 +20,9 @@
  *= require footer
  *= require about
  *= require contact_message
+ *= require blog
+ *= require devise
+ *= require pawbookings_admins
  */
 
 /*
@@ -29,4 +32,16 @@
 
 input {
   font-style: italic;
+}
+
+.default_green {
+	color: #48cd7e;
+}
+
+.leto_font {
+  font-family: 'Lato', sans-serif;
+}
+
+.open_sanz_font {
+  font-family: 'Open Sans', sans-serif;
 }
