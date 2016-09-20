@@ -16,14 +16,18 @@
   <div class="row text-center footer_row">
     <div class="col-xs-2"></div>
     <div class="col-xs-4">
-      <p class="mobile_footer_description">About</p>
-      <p class="mobile_footer_description">Blog</p>
-      <p class="mobile_footer_description">Contact</p>
+      <%= link_to "About", about_path, class: "mobile_footer_description" %>
+      <br>
+      <%= link_to "Blog", "#", class: "mobile_footer_description" %>
+      <br>
+      <%= link_to "Contact", new_contact_message_path, class: "mobile_footer_description" %>
     </div>
     <div class="col-xs-4">
-      <p class="mobile_footer_description">Press</p>
-      <p class="mobile_footer_description">Terms</p>
-      <p class="mobile_footer_description">Help/FAQ</p>
+      <%= link_to "Press", "#", class: "mobile_footer_description" %>
+      <br>
+      <%= link_to "Terms", "#", class: "mobile_footer_description" %>
+      <br>
+      <%= link_to "Help/FAQ", "#", class: "mobile_footer_description" %>
     </div>
   </div>
   <div class="row text-center footer_bottom_row">
