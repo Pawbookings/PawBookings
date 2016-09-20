@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "/users/sign_in" => redirect("/")
 
   resources :home
+  resources :contact_messages, only: [:new, :create]
   resources :customer_emergency_contacts, only: [:new, :create]
   resources :customer_vet_infos, only: [:new, :create]
   resources :pets, only: [:new, :create]
@@ -58,4 +59,7 @@ Rails.application.routes.draw do
   # HomeController
     get "/kennel_or_customer", to: "home#kennel_or_customer", as: :kennel_or_customer
     get "/about", to: "home#about", as: :about
+
+  # Contact
+    get "/message_confirmation", to: "contact_messages#message_confirmation", as: :message_confirmation
 end

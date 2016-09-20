@@ -1,0 +1,32 @@
+
+<%= render partial: "shared/top_info" %>
+<div class="container-fluid contact_container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="contact_title">Contact Us</h5>
+
+      <h6 class="contact_address">
+        3050 Dyer Blvd<br>
+        Suite 203<br>
+        Kissimmee, FL 34741<br>
+        844.944.3333
+      </h6>
+
+      <%= form_for @contact_message do |f| %>
+      <%= f.text_field :name, placeholder: " Name", class: "contact_form_field" %>
+      <br>
+      <%= f.text_field :subject, placeholder: " Subject", class: "contact_form_field" %>
+      <br>
+      <%= f.text_field :phone, placeholder: " Phone", class: "contact_form_field" %>
+      <br>
+      <%= f.text_field :email, placeholder: " Email", class: "contact_form_field" %>
+      <br>
+      <%= f.text_area :details, placeholder: " Message", class: "contact_form_field" %>
+      <br>
+      <%= f.submit "Send", class: "contact_submit_btn" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render partial: "shared/footer" %>

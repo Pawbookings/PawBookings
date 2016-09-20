@@ -1,0 +1,33 @@
+.contact_title {
+  font-family: 'Open Sans', sans-serif;
+  color: #48cd7e;
+  font-size: 2.5em;
+  margin-top: 3.7em;
+  margin-bottom: 1em;
+}
+
+.contact_container {
+  background: url("/assets/contact_image.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-bottom: 3em;
+}
+
+.contact_form_field {
+  margin-bottom: 2em;
+  border-radius: 0.4em;
+}
+
+.contact_address {
+  font-family: 'Open Sans', sans-serif;
+  color: #f0fff6;
+  font-size: 1em;
+}
+
+.contact_submit_btn {
+  background: linear-gradient(#42b370, #51d888);
+  width: 40%;
+  height: 3em;
+}
