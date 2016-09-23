@@ -35,6 +35,7 @@ class BlogsController < ApplicationController
       @blog.body = session[:blog]["body"]
       @blog.keyword = session[:blog]["keyword"]
       @blog.publish_date = session[:blog]["publish_date"]
+      @blog.blog_display_image = session[:blog]["blog_display_image"]
       flash[:notice] = "Blog did not save. Please try again."
     end
   end
@@ -46,6 +47,7 @@ class BlogsController < ApplicationController
     blog.body = params[:blog][:body]
     blog.keyword = params[:blog][:keyword]
     blog.publish_date = params[:blog][:publish_date]
+    blog.blog_display_image = params[:blog][:blog_display_image]
     if blog.save
       redirect_to blog_path(params[:id])
     else
@@ -77,6 +79,6 @@ class BlogsController < ApplicationController
   private
 
   def blog_params
-    return params.require(:blog).permit(:blogID, :title, :body, :keyword, :publish_date)
+    return params.require(:blog).permit(:blog_display_image, :blogID, :title, :body, :keyword, :publish_date)
   end
 end

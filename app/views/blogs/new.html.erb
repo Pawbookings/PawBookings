@@ -1,6 +1,10 @@
 <h1>Create a New Blog!</h1>
 
 <%= form_for @blog do |f| %>
+  <p>Display Image:</p>
+  <%= f.file_field :blog_display_image %>
+  <br>
+  <br>
   <p>Title:</p>
   <%= f.text_field :title, placeholder: " Title" %>
   <br>

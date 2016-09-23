@@ -1,6 +1,8 @@
 <h1>Edit Blog</h1>
 
 <%= form_for @blog do |b| %>
+  <%= b.file_field :blog_display_image %>
+  <br>
   <%= b.text_area :title %>
   <br>
   <%= b.cktext_area :body %>

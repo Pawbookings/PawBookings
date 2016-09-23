@@ -6,15 +6,21 @@
     <div class="col-xs-12">
       <h5 class="recent_blogs_title">Recent Blogs</h5>
       <% @latest_blogs.each do |blog| %>
-      <%= link_to raw(blog[:title]), blog_path(blog[:id]), class: "blog_title_link" %>
-      <br>
-      <p class="blog_date_index"><%= unsanitize_date(blog[:publish_date].to_s) %></p>
+      <div class="blog_individual_divs">
+        <%= link_to raw(blog[:title]), blog_path(blog[:id]), class: "blog_title_link" %>
+        <br>
+        <p class="blog_date_index"><%= unsanitize_date(blog[:publish_date].to_s) %></p>
+        <div class="blog_display_image_div">
+          <img class="blog_display_image" src="<%= blog.blog_display_image %>">
+        </div>
         <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
           <%= link_to "Edit", edit_blog_path(blog[:id]) %>
           <br>
           <%= link_to "Delete", blog_path(blog.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
           <br>
         <% end %>
+      </div>
+      <br>
       <br>
       <% end %>
     </div>
