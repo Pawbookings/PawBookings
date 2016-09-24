@@ -21,20 +21,29 @@
 //= require_tree .
 
 ahoy.trackAll();
-//
-// var today = new Date();
-// var dd = today.getDate();
-// var mm = today.getMonth()+1; //January is 0!
-//
-// var yyyy = today.getFullYear();
-// if(dd<10){
-//     dd='0'+dd
-// }
-// if(mm<10){
-//     mm='0'+mm
-// }
-// var today = mm+'/'+dd+'/'+yyyy;
 
+function isNumber(evt) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+  }
+  return true;
+}
+
+function isChar(evt) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if ((charCode < 65 || charCode > 122) ) {
+      return false;
+  }
+  else if (charCode > 90 && charCode < 97) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
 
 $(function() {
   $(".daterange_check_in").daterangepicker({
@@ -53,3 +62,17 @@ $(function() {
     minDate: 0
   });
 });
+
+//
+// var today = new Date();
+// var dd = today.getDate();
+// var mm = today.getMonth()+1; //January is 0!
+//
+// var yyyy = today.getFullYear();
+// if(dd<10){
+//     dd='0'+dd
+// }
+// if(mm<10){
+//     mm='0'+mm
+// }
+// var today = mm+'/'+dd+'/'+yyyy;
