@@ -11,11 +11,9 @@
         </div>
       </div>
     <div style="margin-top: 1em;" class="row text-center">
-      <div class="col-xs-6">
-        <%= text_field_tag(:check_in, nil, class: "datepicker_drop_off common_search_field", placeholder: "Check In", required: true) %>
-      </div>
-      <div class="col-xs-6">
-        <%= text_field_tag(:check_out, nil, class: "datepicker_pick_up common_search_field", placeholder: "Check Out", required: true) %>
+      <div class="col-xs-12">
+        <%= label_tag "Reservation dates", nil, class: "search_label" %>
+        <%= text_field_tag(:reservation_dates, nil, class: "daterange_check_in common_search_field text-center", required: true, name: "reservation_dates", value: "") %>
       </div>
     </div>
     <div style="margin-top: 1em;" class="row text-center">

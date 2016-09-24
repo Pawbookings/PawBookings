@@ -1,25 +1,48 @@
-<h1>Search Results</h1>
-<% if !@final_search_results.blank? %>
-  <% @final_search_results.each do |fr| %>
-    <%= link_to fr.name, search_path(fr.id, search_info: params) %>
-    <br>
-    <% if fr.cats_or_dogs == "both" %>
-      Cats and Dogs
-    <% else %>
-      <%= fr.cats_or_dogs.capitalize %>
-    <% end %>
-    <br>
-    <%= fr.address %>
-    <br>
-    <br>
-  <% end %>
-<% else %>
-  <p>No results found…</p>
-<% end %>
-<br>
-<h1>The Kennels listed below do NOT meet your reservation dates selected.</h1>
-<br>
+<%= render partial: "shared/top_info" %>
+
+<div style="padding-top:7em;text-align:center;background-color:#25b15e;padding-bottom:1em;">
+  <h5 class="search_results_top_title default_white_color open_sanz_font">Search Results:</h5>
+  <div style="color:black;">
+    <%= render partial: "shared/search_bar" %>
+  </div>
+</div>
+
+<div class="container-fluid search_results_container open_sanz_font">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="search_results_title default_white_color">Kennels Found:</h5>
+    </div>
+  </div>
+  <div class="row text-left">
+    <div class="col-xs-12">
+      <div class="search_results_individual_div">
+        <% if !@final_search_results.blank? %>
+          <% @final_search_results.each do |fr| %>
+            <h2 class="searched_kennel_title_link"><%= link_to fr.name, search_path(fr.id, search_info: params) %></h2>
+            <p><strong>Accepts: </strong>
+              <% if fr.cats_or_dogs == "both" %>
+                <img class="pet_icon" src="/assets/dog_icon.png"><img class="pet_icon" src="/assets/cat_icon.png">
+              <% elsif fr.cats_or_dogs = "dogs" %>
+                <img class="pet_icon" src="/assets/dog_icon.png">
+              <% elsif fr.cats_or_dogs = "cats" %>
+                <img class="pet_icon" src="/assets/cat_icon.png">
+              <% end %>
+            </p>
+            <p><strong>Address: </strong><%= simple_format("#{fr.address}
+            #{fr.city}, #{fr.state} #{fr.zip}") %></p>
+            <p><strong>Phone: </strong><%= fr.phone %></p>
+            <p class="view_searched_kennel_btn"><%= link_to "View", search_path(fr.id, search_info: params), class: "default_white_color" %></p>
+          <% end %>
+        <% else %>
+          <p style="padding-top:1em;" class="text-center">No results found…</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <% if !@negative_kennels.blank? %>
+  <h1>The Kennels listed below do NOT meet your reservation dates selected.</h1>
   <% @negative_kennels.each do |fr| %>
     <%= link_to fr.name, search_path(fr.id, search_info: params) %>
     <br>
@@ -34,3 +57,5 @@
     <br>
   <% end %>
 <% end %>
+
+<%= render partial: "shared/footer" %>

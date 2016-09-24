@@ -21,44 +21,24 @@
 //= require_tree .
 
 ahoy.trackAll();
-
-// $("#customer_drop_off_date").datepicker({
-//   showOn: "both",
-//   onSelect: function(dateText, inst){
-//      $("#customer_pick_up_date").datepicker("option","minDate",
-//      $("#customer_drop_off_date").datepicker("getDate"));
-//   }
-// });
-
-// $("#customer_drop_off_date").datepicker({
-//     dateFormat: 'yy-mm-dd',
-//     changeMonth: true,
-//     minDate: new Date(),
-//     maxDate: '+1y',
-//     onSelect: function(date){
-//       var selectedDate = new Date(date);
-//       var msecsInADay = 86400000;
-//       var endDate = new Date(selectedDate.getTime() + msecsInADay);
-//       $("#customer_pick_up_date").datepicker( "option", "minDate", endDate );
-//       $("#customer_pick_up_date").datepicker( "option", "maxDate", '+1y' );
-//     }
-// });
 //
-// $("#customer_pick_up_date").datepicker({
-//     dateFormat: 'yy-mm-dd',
-//     changeMonth: true
-// });
-// minDate: new Date(2016, 12 - 1, 15)
+// var today = new Date();
+// var dd = today.getDate();
+// var mm = today.getMonth()+1; //January is 0!
+//
+// var yyyy = today.getFullYear();
+// if(dd<10){
+//     dd='0'+dd
+// }
+// if(mm<10){
+//     mm='0'+mm
+// }
+// var today = mm+'/'+dd+'/'+yyyy;
+
 
 $(function() {
-  $(".datepicker_drop_off").datepicker({
-    minDate: 0
-  });
-});
-
-$(function() {
-  $('.datepicker_pick_up').datepicker({
-    minDate: 0
+  $(".daterange_check_in").daterangepicker({
+    minDate: moment(),
   });
 });
 

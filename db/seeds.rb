@@ -13,7 +13,7 @@ user.userID = user[:id]
 user.save!
 
 # 2 -Customer
-user = User.create!(first_name: "John", last_name: "Smith", email: 'johnsmith@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4078464231', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
+user = User.create!(first_name: "John", last_name: "Smith", email: 'jsmith@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4078464231', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
 user.userID = user[:id]
 user.save!
 
@@ -23,7 +23,17 @@ user.userID = user[:id]
 user.save!
 
 # 4 -Customer
-user = User.create!(first_name: "Mary", last_name: "Jane", email: 'mjane@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4073214321', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
+user = User.create!(first_name: "Jim", last_name: "Johnson", email: 'jjohnson@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4073214321', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
+user.userID = user[:id]
+user.save!
+
+# 5 -Kennel
+user = User.create!(first_name: "Tony", last_name: "Montana", email: 'tmontana@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '3059569404', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
+user.userID = user[:id]
+user.save!
+
+#6 -Kennel
+user = User.create!(first_name: "Han", last_name: "Solo", email: 'hsolo@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '3212436990', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
 user.userID = user[:id]
 user.save!
 

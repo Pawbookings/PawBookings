@@ -2,6 +2,9 @@ class SearchesController < ApplicationController
   include SearchesHelper
 
   def create
+    dates_split = params[:reservation_dates].split(" ")
+    params[:check_in] = dates_split[0]
+    params[:check_out] = dates_split[2]
     if (params[:number_of_dogs].to_i > 0) && (params[:number_of_cats].to_i == 0)
       params[:cats_or_dogs] = "dogs"
     elsif (params[:number_of_dogs].to_i == 0) && (params[:number_of_cats].to_i > 0)
