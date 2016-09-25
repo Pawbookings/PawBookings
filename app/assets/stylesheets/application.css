@@ -51,6 +51,16 @@ input {
   font-family: 'Open Sans', sans-serif;
 }
 
+.kaushan_font {
+  font-family: 'Kaushan Script', cursive;
+}
+
 .pet_icon {
   width: 11%;
+}
+
+.blog_footer_wrap {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }

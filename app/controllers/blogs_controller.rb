@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  http_basic_authenticate_with name: "pawbookings", password: "helloworld", except: [:show, :blog_search, :index]
+  http_basic_authenticate_with name: "pawbookings", password: "helloworld", except: [:show, :blog_search, :index, :all_blogs]
 
   def index
     @latest_blogs = Blog.where("publish_date < ?", Date.tomorrow).limit(10).order('id desc')
@@ -67,6 +67,7 @@ class BlogsController < ApplicationController
   end
 
   def blog_search
+    params[:search_by] = "title" if params[:search_by] == nil
     if !params[:blog_search_text].nil?
       @blog_search_results = Blog.where("publish_date < ?", Date.tomorrow).where(params[:search_by].to_sym => params[:blog_search_text]).to_a
     end

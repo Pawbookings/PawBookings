@@ -51,7 +51,6 @@
   font-family: 'Open Sans', sans-serif;
   color: #00c14e;
   font-size: 2.5em;
-  margin-bottom: 1em;
   text-decoration: underline;
 }
 
@@ -99,4 +98,85 @@
   width: 100%;
   border-radius: 0.1em;
   box-shadow: 0px 0px 3px black;
+}
+
+/* Blog Category */
+
+.blog_category_container {
+  padding-bottom: 3em;
+}
+
+.blog_category_title {
+  font-size: 2.5em;
+  margin-top: 3.7em;
+  padding-bottom: 0.5em;
+}
+
+.blog_category_title_link {
+  font-size: 2em;
+  margin-bottom: -0.01em;
+}
+
+/* Blog Search */
+
+.search_blog_title {
+  font-size: 2.5em;
+  margin-top: 3.7em;
+  padding-bottom: 0.5em;
+}
+
+.blog_search_form_div {
+  background-color: #eaeaea;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  padding-left: 2em;
+  padding-right: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-bottom: 2em;
+}
+
+.blog_search_input {
+  width: 75%;
+  height: 2.5em;
+  border-radius: 0.4em;
+}
+
+.blog_search_submit_btn {
+  width: 75%;
+  height: 3em;
+  margin-top: 1.5em;
+  background: linear-gradient(#42b370, #51d888);
+  color: #ffffff;
+}
+
+.searched_blog_title {
+  font-size: 2.5em;
+  padding-bottom: 0.5em;
+}
+
+.searched_blog_title_link {
+  font-size: 2em;
+}
+
+/* All Blogs */
+
+.all_blogs_title {
+  font-size: 2.5em;
+  margin-top: 3.7em;
+  padding-bottom: 0.5em;
+  text-decoration: underline;
+}
+
+.all_blogs_title_link {
+  font-family: 'Kaushan Script', cursive;
+  font-size: 2em;
+  color: #0084d2;
+}
+
+.all_blogs_display_images {
+  width: 100%;
+  padding-left: 4em;
+  padding-right: 4em;
+  margin-bottom: 2em;
 }

@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 
   # BlogsController
     resources :blogs
-    get "/blog_search", to: "blogs#blog_search", as: :blog_search
+    match "/blog_search", to: "blogs#blog_search", as: :blog_search, via: [:get, :post]
     get "/all_blogs", to: "blogs#all_blogs", as: :all_blogs
 
   # BlogCategoriesController

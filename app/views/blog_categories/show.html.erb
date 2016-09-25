@@ -1,11 +1,25 @@
-<h1>Blog Category Show Page</h1>
+<%= render partial: "shared/top_info" %>
 
-<% @blogs.each do |blog| %>
-  <%= link_to raw(blog.title), blog_path(blog.id) %>
-  <br>
-  <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
-    <%= link_to "Edit", edit_blog_path(blog[:id]) %>
-    <br>
-    <%= link_to "Delete", blog_path(blog.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
-  <% end %>
-<% end %>
+<div class="container-fluid blog_category_container leto_font">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="blog_category_title default_green_color">
+        <%= params[:id] %>
+      </h5>
+      <% @blogs.each do |blog| %>
+        <h5 class="blog_category_title_link kaushan_font"><%= link_to "#{raw(blog.title)}", blog_path(blog.id) %></h5>
+        <%= unsanitize_date(blog.publish_date.to_s) %>
+        <br>
+        <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
+          <%= link_to "Edit", edit_blog_path(blog[:id]) %>
+          <br>
+          <%= link_to "Delete", blog_path(blog.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="blog_footer_wrap">
+  <%= render partial: "shared/footer" %>
+</div>

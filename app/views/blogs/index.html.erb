@@ -5,6 +5,8 @@
   <div class="row text-center">
     <div class="col-xs-12">
       <h5 class="recent_blogs_title">Recent Blogs</h5>
+      <h6 style="padding-top:0.5em;padding-bottom:0.5em;font-size:1.5em;"><%= link_to "Search blogs", blog_search_path %></h6>
+      <h6 style="padding-bottom:0.5em;font-size:1.5em;"><%= link_to "View all blogs", all_blogs_path %></h6>
       <% @latest_blogs.each do |blog| %>
       <div class="blog_individual_divs">
         <div class="blog_individual_divs_cover">

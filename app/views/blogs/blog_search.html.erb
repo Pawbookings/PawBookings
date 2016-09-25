@@ -1,23 +1,44 @@
-<h1>Blog Search</h1>
+<%= render partial: "shared/top_info" %>
 
-<%= form_tag({controller: "blogs", action: "blog_search"}, method: "get") %>
-  <%= text_field_tag :blog_search_text %>
-  <br>
-  <p>Search by Title: <%= radio_button_tag(:search_by, "title") %></p>
-  <p>or</p>
-  <p>Search by Keyword: <%= radio_button_tag(:search_by, "keyword") %></p>
-  <br>
-<%= submit_tag "Submit" %>
+<div class="container-fluid leto_font">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="search_blog_title default_green_color">
+        Search for a blog...
+      </h5>
+      <div class="blog_search_form_div">
+        <%= form_tag({controller: "blogs", action: "blog_search"}, method: "post") %>
+          <%= label_tag "Enter title or Keyword" %>
+          <br>
+          <%= text_field_tag :blog_search_text, nil, class: "blog_search_input", placeholder: " Enter Title or Keyword", required: true %>
+          <br>
+          <br>
+          <p>Title: <%= radio_button_tag(:search_by, "title") %> Keyword: <%= radio_button_tag(:search_by, "keyword") %></p>
+        <%= submit_tag "Submit", class: "blog_search_submit_btn" %>
+      </div>
+      <div class="blog_search_result_div">
+        <% if !@blog_search_results.nil? %>
+          <% if !@blog_search_results.empty? %>
+            <h5 class="searched_blog_title default_green_color">Blog Search Results</h5>
+            <% @blog_search_results.each do |b| %>
+              <%= link_to b[:title], blog_path(b[:id]), class: "searched_blog_title_link kaushan_font " %>
+              <p><%= unsanitize_date(b[:publish_date].to_s) %></p>
+              <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
+                <%= link_to "Edit", edit_blog_path(b[:id]) %>
+                <br>
+                <%= link_to "Delete", blog_path(b.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
+              <% end %>
+              <br>
+            <% end %>
+          <% else %>
+            <p>No results found...</p>
+          <% end %>
+        <% else %>
+        <p>No results found...</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<% if !@blog_search_results.nil? %>
-  <% @blog_search_results.each do |b| %>
-    <%= link_to b[:title], blog_path(b[:id]) %>
-    <p>Published On: <%= b[:publish_date] %></p>
-    <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
-      <%= link_to "Edit", edit_blog_path(b[:id]) %>
-      <br>
-      <%= link_to "Delete", blog_path(b.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
-    <% end %>
-    <br>
-  <% end %>
-<% end %>
+<%= render partial: "shared/footer" %>
