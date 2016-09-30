@@ -1,18 +1,90 @@
-<h1>Show Kennel Selected</h1>
-<%= image_tag @searched_kennel.avatar.url(:thumb) if !@searched_kennel.nil? %>
-<br>
-<%= @searched_kennel[:name] %>
-<br>
-<%= @searched_kennel[:address] %>
-<br>
-<%= @searched_kennel[:city] %>
-<br>
-<%= @searched_kennel[:state] %>
-<br>
-<%= @searched_kennel[:zip] %>
-<br>
-<%= @searched_kennel[:phone] %>
-<br>
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid leto_font">
+  <div class="row my_booking_info_row">
+    <div class="col-xs-12">
+      <h6 class="my_booking_info_title default_white_color text-center">My Booking Info</h6>
+      <div class="searches_show_res_details_div text-left">
+        <p><strong class="searches_show_strong_res_details_txt">Date:</strong> <%= "#{@customer_check_in_date} to #{@customer_check_out_date}" %></p>
+        <p><strong class="searches_show_strong_res_details_txt">Pets:</strong> <%= "Dogs #{params[:search_info][:number_of_dogs]}, Cats #{params[:search_info][:number_of_cats]}" %></p>
+        <p><strong class="searches_show_strong_res_details_txt">Number of rooms:</strong> <%= params[:search_info][:number_of_rooms] %></p>
+        <p><strong class="searches_show_strong_res_details_txt">Number of nights:</strong> <%= params[:search_info][:number_of_nights].to_i %></p>
+        <% counter = params[:search_info][:number_of_rooms].to_i %>
+        <% params[:search_info][:number_of_rooms].to_i.times do %>
+        <div id="room_<%= counter %>">
+          <p><strong class="searches_show_strong_res_details_txt">Room <%= counter %>:</strong></p>
+          <p style="font-style:italic;">Nothing Selected</p>
+        </div>
+        <% counter -= 1 %>
+        <% end %>
+        <div class="searches_show_my_booking_info_border"></div>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Book Room(s)</button>
+      </div>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <div class="searches_show_top_div">
+        <h5 class="searches_show_title default_green_color"><%= @searched_kennel[:name] %></h5>
+        <div class="searches_show_address_div">
+          <div style="margin-top:1em;">
+            <p class="searches_show_address_text"><%= @searched_kennel[:address] %></p>
+            <p class="searches_show_address_text"><%= "#{@searched_kennel[:city]}, #{@searched_kennel[:state]}" %></p>
+            <p class="searches_show_address_text"><%= @searched_kennel[:zip] %></p>
+            <p class="searches_show_address_text"><%= @searched_kennel[:phone] %></p>
+          </div>
+        </div>
+        <div class="searches_show_image_div">
+          <p><%= image_tag @searched_kennel.avatar.url(:thumb), class: "searches_show_image" if !@searched_kennel.nil? %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row searches_show_runs_available_row">
+    <div class="col-xs-12">
+      <h5 class="searches_show_runs_available_title default_green_color">Runs Available</h5>
+      <% counter = params[:search_info][:number_of_rooms].to_i %>
+      <% params[:search_info][:number_of_rooms].to_i.times do %>
+        <div class="run_container_<%= counter %> searches_show_run_result_div">
+          <% @runs.each do |r| %>
+            <div class="searches_show_run_result_individual_div">
+              <h2 class="searches_show_run_result_title kaushan_font"><%= r.title %></h2>
+              <p class="searches_show_type_of_pets_allowed"><strong>(Only <span style='color:#196b18;'><%= r.type_of_pets_allowed.capitalize %>s</span> allowed)</strong></p>
+              <p><strong>Price:</strong> $<%= r.price %></p>
+              <p><strong>Description:</strong> <%= r.description %></p>
+              <% if !@run_ids_maxed.nil? %>
+                <% if @run_ids_maxed.include? r.id.to_s %>
+                  <p style="color:orange;"><strong>This Room is currently unavailable</strong></p>
+                  <%= link_to "Notify me when this room becomes available!", new_stand_by_reservation_path(kennel_id: @searched_kennel[:id], run_id: r.id, check_in_date: @customer_check_in_date, check_out_date: @customer_check_out_date ) %>
+                <% else %>
+                  <button style="height:2.5em;" type="button" class="btn btn-primary" onclick='addRunToRoom("<%= r.title %>", "room_<%= counter %>", <%= r.id %>, <%= r.price %>, "<%= r.type_of_pets_allowed %>", "<%= r.pets_per_run %>");'>Add Room</p>
+                <% end %>
+              <% else %>
+                <button style="height:2.5em;" type="button" class="btn btn-primary" onclick='addRunToRoom("<%= r.title %>", "room_<%= counter %>", <%= r.id %>, <%= r.price %>, "<%= r.type_of_pets_allowed %>", "<%= r.pets_per_run %>");'>Add Room</p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <% counter -= 1 %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render partial: "shared/footer" %>
+
+
+
+
+
+
+
+
+
+
+<!--
 <div style="background-color:#397575;color:white;" class="my_booking">
   <h4>My Booking Info</h4>
 
@@ -28,12 +100,12 @@
     <% params[:search_info][:number_of_rooms].to_i.times do %>
     <div id="room_<%= counter %>">
       Room <%= counter %>
-      <p>Nothing Selected</p>
+      <p style="font-style:italic;">Nothing Selected</p>
     </div>
     <% counter -= 1 %>
     <% end %>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Select Rooms</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Select Rooms</button> -->
 
     <!-- MODAL -->
 
@@ -90,38 +162,38 @@
     </div>
 
 <!--  -->
-  </div>
-</div>
+  <!-- </div>
+</div> -->
 
-<h1>Runs Available</h1>
-<% counter = params[:search_info][:number_of_rooms].to_i %>
-<% params[:search_info][:number_of_rooms].to_i.times do %>
-  <div style="background-color:black;color:white;" class="container run_container_<%= counter %>">
+<!-- <h1>Runs Available</h1>
+<#% counter = params[:search_info][:number_of_rooms].to_i %>
+<#% params[:search_info][:number_of_rooms].to_i.times do %>
+  <div style="background-color:black;color:white;" class="container run_container_<#%= counter %>">
     <div class="row">
       <div class="col-md-6">
-        <h2>Room <%= counter %> options</h2>
-        <% @runs.each do |r| %>
-          <p>Title: <%= r.title %></p>
-          <p>Price: <%= r.price %></p>
-          <p><strong>Only <span style='color:red;'><%= r.type_of_pets_allowed.capitalize %>s</span> allowed.</strong></p>
-          <p>Description: <%= r.description %></p>
-          <% if !@run_ids_maxed.nil? %>
-            <% if @run_ids_maxed.include? r.id.to_s %>
+        <h2>Room <#%= counter %> options</h2>
+        <#% @runs.each do |r| %>
+          <p>Title: <#%= r.title %></p>
+          <p>Price: <#%= r.price %></p>
+          <p><strong>Only <span style='color:red;'><#%= r.type_of_pets_allowed.capitalize %>s</span> allowed.</strong></p>
+          <p>Description: <#%= r.description %></p>
+          <#% if !@run_ids_maxed.nil? %>
+            <#% if @run_ids_maxed.include? r.id.to_s %>
               <p style="color:orange;"><strong>This Room is currently unavailable</strong></p>
-              <%= link_to "Notify me when this room becomes available!", new_stand_by_reservation_path(kennel_id: @searched_kennel[:id], run_id: r.id, check_in_date: @customer_check_in_date, check_out_date: @customer_check_out_date ) %>
+              <#%= link_to "Notify me when this room becomes available!", new_stand_by_reservation_path(kennel_id: @searched_kennel[:id], run_id: r.id, check_in_date: @customer_check_in_date, check_out_date: @customer_check_out_date ) %>
               <br>
               <br>
-            <% else %>
-              <p style="color:blue;" onclick='addRunToRoom("<%= r.title %>", "room_<%= counter %>", <%= r.id %>, <%= r.price %>, "<%= r.type_of_pets_allowed %>", "<%= r.pets_per_run %>");'>Select Room</p>
+            <#% else %>
+              <p style="color:blue;" onclick='addRunToRoom("<#%= r.title %>", "room_<#%= counter %>", <#%= r.id %>, <#%= r.price %>, "<#%= r.type_of_pets_allowed %>", "<#%= r.pets_per_run %>");'>Select Room</p>
               <br>
               <br>
-            <% end %>
-          <% else %>
-            <p style="color:blue;" onclick='addRunToRoom("<%= r.title %>", "room_<%= counter %>", <%= r.id %>, <%= r.price %>, "<%= r.type_of_pets_allowed %>", "<%= r.pets_per_run %>");'>Select Room</p>
+            <#% end %>
+          <#% else %>
+            <p style="color:blue;" onclick='addRunToRoom("<#%= r.title %>", "room_<#%= counter %>", <#%= r.id %>, <#%= r.price %>, "<#%= r.type_of_pets_allowed %>", "<#%= r.pets_per_run %>");'>Select Room</p>
             <br>
             <br>
-          <% end %>
-        <% end %>
+          <#% end %>
+        <#% end %>
         </div>
       </div>
     </div>
@@ -129,14 +201,14 @@
     <br>
     <br>
     <br>
-    <% counter -= 1 %>
-<% end %>
+    <#% counter -= 1 %>
+<#% end %> -->
 
 
 <script text/javascript>
   function addRunToRoom(title, room_number, id, price, type_of_pets_allowed, pets_per_run){
     $("#"+room_number + " p").first().remove();
-    $("#"+room_number).append("<p class='"+room_number+"'>"+title+"<p>");
+    $("#"+room_number).append("<p style='font-style:italic;' class='"+room_number+"'>"+title+"<p>");
 
     $("#"+room_number+"_input"+ " p").first().remove();
     $("#"+room_number+"_input").append("<input type='hidden' name='"+room_number+"_id' value='runid_"+id+"'><input type='hidden' name='"+room_number+"_price' value='"+price+"'><input type='hidden' name='"+room_number+"_name' value='"+title+"'><input type='hidden' name='"+room_number+"_type_of_pets_allowed' value='"+type_of_pets_allowed+"'><input type='hidden' name='"+room_number+"_pets_per_run' value='"+pets_per_run+"'>");
