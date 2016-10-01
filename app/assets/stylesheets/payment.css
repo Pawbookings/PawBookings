@@ -1,0 +1,116 @@
+.payment_container {
+  background-color: #25b15e;
+}
+
+.payment_title {
+  font-size: 3em;
+  margin-top: 3em;
+  margin-bottom: 0.5em;
+  text-decoration: underline;
+}
+
+.payment_room_details_div, .payment_amenity_details_div {
+  background-color: #2cdb74;
+  border-radius: 0.4em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.payment_room_details_title, .payment_amenity_details_title {
+  font-size: 2em;
+  text-align: center;
+  text-decoration: underline;
+  margin-bottom: 1em;
+}
+
+.payment_room_individual_div, .payment_amenity_individual_div {
+  background-color: #eaeaea;
+  color: black;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  box-shadow: inset 0 0 10px;
+  margin-bottom: 2em;
+  padding-top: 0.1em;
+}
+
+.payment_top_details_ul {
+  font-size: 2em;
+}
+
+.payment_top_details_li {
+  font-size: 0.7em;
+}
+
+.payment_amenity_title {
+  margin-top: 2em;
+}
+
+.payment_total_div, .payment_tax_div {
+  background-color: #2cdb74;
+  border-radius: 0.4em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.payment_total_title, .payment_tax_title {
+  font-size: 2em;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.payment_grand_total_div {
+  background-color: #ffffff;
+  border-radius: 0.4em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.payment_grand_total_title {
+  font-size: 2em;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.payment_owner_info_title {
+  font-size: 2.5em;
+  margin-top: 1em;
+  text-decoration: underline;
+}
+
+.payment_credit_card_info_div, .payment_pets_contact_div {
+  margin-top: 2em;
+}
+
+.payment_owner_info_container {
+  margin-bottom: 3em;
+}
+
+.payment_credit_card_title, .payment_pets_contact_title {
+  text-decoration: underline;
+}
+
+.payment_pets_info_title {
+  font-size: 2.5em;
+  margin-top: 1.5em;
+}
+
+.payment_pet_details_div {
+}
+
+.payment_submt_btn {
+  width: 75%;
+  height: 3em;
+  margin-top: 1.5em;
+  background: linear-gradient(#42b370, #51d888);
+  color: #ffffff;
+}

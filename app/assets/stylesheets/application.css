@@ -24,6 +24,7 @@
  *= require devise
  *= require search
  *= require amenity
+ *= require payment
  *= require pawbookings_admins
  */
 
