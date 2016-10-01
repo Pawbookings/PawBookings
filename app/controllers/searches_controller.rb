@@ -73,7 +73,7 @@ class SearchesController < ApplicationController
 
   def get_pet_stay_dates
     @pet_stay_date_range = (Date.parse(params[:check_in])..Date.parse(params[:check_out])).map{|date| date}
-    params[:number_of_nights] = (@pet_stay_date_range.count.to_i - 1)
+    params[:number_of_nights] = (@pet_stay_date_range.count.to_i - 1) > 0 ? (@pet_stay_date_range.count.to_i - 1) : 1
   end
 
   def location_filtering

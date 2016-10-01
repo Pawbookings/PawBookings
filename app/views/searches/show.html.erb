@@ -12,7 +12,7 @@
         <% counter = params[:search_info][:number_of_rooms].to_i %>
         <% params[:search_info][:number_of_rooms].to_i.times do %>
         <div id="room_<%= counter %>">
-          <p><strong class="searches_show_strong_res_details_txt">Room <%= counter %>:</strong></p>
+          <strong class="searches_show_strong_res_details_txt">Room <%= counter %>:</strong>
           <p style="font-style:italic;">Nothing Selected</p>
         </div>
         <% counter -= 1 %>
@@ -44,9 +44,10 @@
   </div>
   <div class="row searches_show_runs_available_row">
     <div class="col-xs-12">
-      <h5 class="searches_show_runs_available_title default_green_color">Runs Available</h5>
       <% counter = params[:search_info][:number_of_rooms].to_i %>
       <% params[:search_info][:number_of_rooms].to_i.times do %>
+      <!-- TODO: Add div for each Room #. -->
+      <h5 class="searches_show_runs_available_title default_green_color">Room <%= counter %></h5>
         <div class="run_container_<%= counter %> searches_show_run_result_div">
           <% @runs.each do |r| %>
             <div class="searches_show_run_result_individual_div">
