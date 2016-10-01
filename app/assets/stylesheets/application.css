@@ -23,6 +23,7 @@
  *= require blog
  *= require devise
  *= require search
+ *= require amenity
  *= require pawbookings_admins
  */
 
