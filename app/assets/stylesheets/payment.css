@@ -102,6 +102,7 @@
 .payment_pets_info_title {
   font-size: 2.5em;
   margin-top: 1.5em;
+  text-decoration: underline;
 }
 
 .payment_pet_details_div {
@@ -113,4 +114,10 @@
   margin-top: 1.5em;
   background: linear-gradient(#42b370, #51d888);
   color: #ffffff;
+}
+
+.payment_input {
+  width: 75%;
+  height: 2.5em;
+  border-radius: 0.4em;
 }

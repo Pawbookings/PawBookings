@@ -97,64 +97,64 @@
           <h3 class="payment_credit_card_title default_green_color">Credit Card</h3>
           <%= label_tag "First Name" %>
           <br>
-          <%= text_field_tag :payment_first_name, nil, placeholder: " First Name" %>
+          <%= text_field_tag :payment_first_name, nil, placeholder: " First Name", class: "payment_input" %>
           <br>
           <br>
           <%= label_tag "Last Name" %>
           <br>
-          <%= text_field_tag :payment_last_name, nil, placeholder: " Last Name" %>
+          <%= text_field_tag :payment_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
           <br>
           <br>
           <%= label_tag "payment_card_type", "Card Type" %>
           <br>
-          <%= select_tag :payment_card_type, options_for_select(card_type_option) %>
+          <%= select_tag :payment_card_type, options_for_select(card_type_option), class:"payment_input" %>
           <br>
           <br>
           <%= label_tag "Card Number" %>
           <br>
-          <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number" %>
+          <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number", class: "payment_input" %>
           <br>
           <br>
           <%= label_tag "Expiration Month" %>
           <br>
-          <%= text_field_tag :payment_expiration_month, nil, placeholder: " Expiration month" %>
+          <%= text_field_tag :payment_expiration_month, nil, placeholder: " Expiration month", class: "payment_input" %>
           <br>
           <br>
           <%= label_tag "Expiration Year" %>
           <br>
-          <%= text_field_tag :payment_expiration_year, nil, placeholder: " Expiration year" %>
+          <%= text_field_tag :payment_expiration_year, nil, placeholder: " Expiration year", class: "payment_input" %>
           <br>
           <br>
           <%= label_tag "CVV" %>
           <br>
-          <%= text_field_tag :payment_cvv, nil, placeholder: " CVV" %>
+          <%= text_field_tag :payment_cvv, nil, placeholder: " CVV", class: "payment_input" %>
           <br>
           <br>
           <%= label_tag "Zip" %>
           <br>
-          <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode" %>
+          <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode", class: "payment_input" %>
         </div>
 
         <div class="payment_pets_contact_div text-center">
           <h3 class="payment_pets_contact_title default_green_color">Primary Contact</h3>
           <%= label_tag "First Name" %>
           <br>
-          <%= text_field_tag :customer_first_name, nil, placeholder: " First Name" %>
+          <%= text_field_tag :customer_first_name, nil, placeholder: " First Name", class: "payment_input" %>
           <br>
           <br>
           <%= label_tag "Last Name" %>
           <br>
-          <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name" %>
+          <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
           <br>
           <br>
           <%= label_tag "Email" %>
           <br>
-          <%= text_field_tag :customer_email, nil, placeholder: " Email" %>
+          <%= text_field_tag :customer_email, nil, placeholder: " Email", class: "payment_input" %>
           <br>
           <br>
           <%= label_tag "Phone" %>
           <br>
-          <%= text_field_tag :customer_phone, nil, placeholder: " Phone" %>
+          <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "payment_input" %>
         </div>
 
         <h5 class="payment_pets_info_title default_green_color text-center">Pet Info</h5>
@@ -165,39 +165,39 @@
             <h3 style="text-decoration:underline;" class="default_green_color text-center">Pet <%= counter %></h3>
             <%= label_tag "Pet name" %>
             <br>
-            <%= text_field_tag "pet_name_#{counter}", nil, placeholder: " Pet Name" %>
+            <%= text_field_tag "pet_name_#{counter}", nil, placeholder: " Pet Name", class: "payment_input" %>
             <br>
             <br>
             <%= label_tag "Type of pet" %>
             <br>
-            <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), onclick: "petTypeOptions(#{counter});" %>
+            <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), onclick: "petTypeOptions(#{counter});", class:"payment_input" %>
             <br>
             <br>
             <div style="" class="pet_breed_selection_<%= counter %>">
               <%= label_tag "Breed" %>
               <br>
-              <%= select_tag "pet_breed_#{counter}", options_for_select(breed_option) %>
+              <%= select_tag "pet_breed_#{counter}", options_for_select(breed_option), class:"payment_input" %>
             </div>
             <br>
             <br>
             <%= label_tag "Pet Weight" %>
             <br>
-            <%= text_field_tag "pet_weight_#{counter}", nil, placeholder: " Pet Weight" %>
+            <%= text_field_tag "pet_weight_#{counter}", nil, placeholder: " Pet Weight", class: "payment_input" %>
             <br>
             <br>
             <%= label_tag "Special instructions" %>
             <br>
-            <%= text_area_tag "pet_special_instructions_#{counter}", nil, placeholder: " Pet Special Instructions" %>
+            <%= text_area_tag "pet_special_instructions_#{counter}", nil, placeholder: " Pet Special Instructions", class: "payment_input" %>
             <br>
             <br>
             <%= label_tag "pet_vaccinations_#{counter}", "Vaccinations?" %>
             <br>
-            <%= select_tag "pet_vaccinations_#{counter}", options_for_select(false_or_true_option) %>
+            <%= select_tag "pet_vaccinations_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
             <br>
             <br>
             <%= label_tag "pet_spay_or_neutered_#{counter}", "Spay or Neutered?" %>
             <br>
-            <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(false_or_true_option) %>
+            <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
             <br>
             <br>
             <% counter -= 1 %>
