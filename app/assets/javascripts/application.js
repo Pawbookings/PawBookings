@@ -22,6 +22,19 @@
 
 ahoy.trackAll();
 
+$(document).click(function(e){
+  if(e.target.id == "mobile_nav_btn"){
+    showMobileNavMenu();
+  }
+  else{
+    $(".mobile_nav_menu").slideUp("slow");
+  }
+});
+
+function showMobileNavMenu(){
+  $(".mobile_nav_menu").slideToggle("slow");
+}
+
 function isNumber(evt) {
   evt = (evt) ? evt : window.event;
   var charCode = (evt.which) ? evt.which : evt.keyCode;

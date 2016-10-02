@@ -37,18 +37,20 @@
       <div class="payment_amenity_details_div default_white_color">
         <h6 class="payment_amenity_details_title">Amenity Details</h6>
         <% counter = params[:number_of_rooms].to_i %>
-        <% params[:number_of_rooms].to_i.times do %>
-          <div class="payment_amenity_individual_div">
-            <% if !@amenities_list.empty? %>
+
+        <% if !@amenities_list.empty? %>
+          <% params[:number_of_rooms].to_i.times do %>
+            <div class="payment_amenity_individual_div">
               <% @amenities_list.each do |a_id, count, price, description, title| %>
                 <p class="payment_amenity_title"><strong><%= "•#{title}" %></strong></p>
                 <p><%= "#{description}" %></p>
                 <p><%= "$#{price} x #{count}" %></p>
               <% end %>
-            <% else %>
-              <p class="payment_amenity_title"><strong>•No Amenities Chosen</strong></p>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% if @amenities_list.empty? %>
+        <p class="payment_amenity_title"><strong>•No Amenities Chosen</strong></p>
         <% end %>
       </div>
     </div>
