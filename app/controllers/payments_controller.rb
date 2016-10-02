@@ -230,7 +230,7 @@ class PaymentsController < ApplicationController
     total_pets = @kennel_info["number_of_dogs"].to_i + @kennel_info["number_of_cats"].to_i
     counter = total_pets
     total_pets.times do
-      @user.pets.create!(user_id: @user[:id], name: params["pet_name_#{counter}"], cat_or_dog: params["pet_type_#{counter}"], breed: params["pet_breed_#{counter}"], weight: params["pet_weight_#{counter}"], special_instructions: params["pet_special_instructions_#{counter}"], vaccinations: params["pet_vaccinations_#{counter}"], spay_or_neutered: params["spay_or_neutered_#{counter}"])
+      @user.pets.create!(user_id: @user[:id], name: params["pet_name_#{counter}"], cat_or_dog: params["pet_type_#{counter}"], breed: params["pet_breed_#{counter}"], weight: params["pet_weight_#{counter}"], special_instructions: params["pet_special_instructions_#{counter}"], vaccinations: params["pet_vaccinations_#{counter}"], spay_or_neutered: params["pet_spay_or_neutered_#{counter}"])
       counter -= 1
     end
   end
