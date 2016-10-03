@@ -40,15 +40,13 @@
         <% counter = params[:number_of_rooms].to_i %>
 
         <% if !@amenities_list.empty? %>
-          <% params[:number_of_rooms].to_i.times do %>
-            <div class="payment_amenity_individual_div">
-              <% @amenities_list.each do |a_id, count, price, description, title| %>
-                <p class="payment_amenity_title"><strong><%= "•#{title}" %></strong></p>
-                <p><%= "#{description}" %></p>
-                <p><%= "$#{price} x #{count}" %></p>
-              <% end %>
-            </div>
-          <% end %>
+          <div class="payment_amenity_individual_div">
+            <% @amenities_list.each do |a_id, count, price, description, title| %>
+              <p class="payment_amenity_title"><strong><%= "•#{title}" %></strong></p>
+              <p><%= "#{description}" %></p>
+              <p><%= "$#{price} x #{count}" %></p>
+            <% end %>
+          </div>
         <% end %>
         <% if @amenities_list.empty? %>
         <p class="payment_amenity_title"><strong>•No Amenities Chosen</strong></p>
