@@ -39,6 +39,7 @@
 
 .payment_top_details_ul {
   font-size: 2em;
+  margin-bottom: 1em;
 }
 
 .payment_top_details_li {
@@ -120,4 +121,8 @@
   width: 75%;
   height: 2.5em;
   border-radius: 0.4em;
+}
+
+.payment_res_dates {
+  line-height: 1.5em;
 }

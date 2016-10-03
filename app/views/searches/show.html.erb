@@ -15,6 +15,9 @@
           <strong class="searches_show_strong_res_details_txt">Room <%= counter %>:</strong>
           <p style="font-style:italic;">Nothing Selected</p>
         </div>
+        <div class="room_<%= counter %>_input">
+          <p></p>
+        </div>
         <% counter -= 1 %>
         <% end %>
         <div class="searches_show_my_booking_info_border"></div>
@@ -81,7 +84,7 @@
 <script text/javascript>
   function addRunToRoom(title, room_number, id, price, type_of_pets_allowed, pets_per_run){
     $("#"+room_number + " p").first().remove();
-    $("#"+room_number).append("<p style='font-style:italic;' class='"+room_number+"'>"+title+"<p>");
+    $("#"+room_number).append("<p style='font-style:italic;' class='"+room_number+"'>"+title+"</p>");
 
     $("#"+room_number+"_input"+ " p").first().remove();
     $("#"+room_number+"_input").append("<input type='hidden' name='"+room_number+"_id' value='runid_"+id+"'><input type='hidden' name='"+room_number+"_price' value='"+price+"'><input type='hidden' name='"+room_number+"_name' value='"+title+"'><input type='hidden' name='"+room_number+"_type_of_pets_allowed' value='"+type_of_pets_allowed+"'><input type='hidden' name='"+room_number+"_pets_per_run' value='"+pets_per_run+"'>");

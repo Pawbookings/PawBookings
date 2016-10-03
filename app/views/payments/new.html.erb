@@ -12,6 +12,7 @@
         <li><p class="payment_top_details_li"><strong>Rooms:</strong> <%= params[:number_of_rooms] %></p></li>
         <li><p class="payment_top_details_li"><strong>Nights:</strong> <%= params[:number_of_nights] %></p></li>
         <li><p class="payment_top_details_li"><strong>Pets:</strong> <%= @total_pets %></p></li>
+        <li><p class="payment_top_details_li payment_res_dates"><strong>Reservation Dates:</strong> <br><%= "#{unsanitize_date(params[:check_in])} to #{unsanitize_date(params[:check_out])}" %></p></li>
       </ul>
     </div>
   </div>
