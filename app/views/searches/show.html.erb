@@ -34,10 +34,13 @@
         <div class="searches_show_address_div">
           <div style="margin-top:1em;">
             <p class="searches_show_address_text"><%= @searched_kennel[:address] %></p>
-            <p class="searches_show_address_text"><%= "#{@searched_kennel[:city]}, #{@searched_kennel[:state]}" %></p>
-            <p class="searches_show_address_text"><%= @searched_kennel[:zip] %></p>
-            <p class="searches_show_address_text"><%= @searched_kennel[:phone] %></p>
+            <p class="searches_show_address_text"><%= "#{@searched_kennel[:city]}, #{@searched_kennel[:state]} #{@searched_kennel[:zip]}" %></p>
+            <!-- <p class="searches_show_address_text"><%#= @searched_kennel[:zip] %></p> -->
+            <!-- <p class="searches_show_address_text"><%#= @searched_kennel[:phone] %></p> -->
           </div>
+        </div>
+        <div class="searches_show_mission_statement_div">
+          <p class="searches_show_mission_statment_details"><%= @searched_kennel[:mission_statement] %></p>
         </div>
         <div class="searches_show_image_div">
           <p><%= image_tag @searched_kennel.avatar.url(:thumb), class: "searches_show_image" if !@searched_kennel.nil? %></p>

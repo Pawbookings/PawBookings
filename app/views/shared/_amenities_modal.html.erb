@@ -31,7 +31,7 @@
         <div class="amenities_individual_div">
           <h6 class="amenity_title default_green_color"><strong>• <%= amenity.title %></strong></h6>
           <p class="default_amenity_description">"<%= amenity.description %>"</p>
-          <p class="default_amenity_description">$<%= amenity.price %></p>
+          <p class="default_amenity_description amenity_price">$<%= amenity.price %></p>
           <%= select_tag "amenity_id_#{amenity.id}", options_for_select(0..20), class: "amenities_selection_tab" %>
         </div>
 

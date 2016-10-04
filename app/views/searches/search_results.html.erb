@@ -28,9 +28,9 @@
                 <img class="pet_icon" src="/assets/cat_icon.png">
               <% end %>
             </p>
-            <p><strong>Address: </strong><%= simple_format("#{fr.address}
+            <p class="search_results_address_p"><strong>Address: </strong><%= simple_format("#{fr.address}
             #{fr.city}, #{fr.state} #{fr.zip}") %></p>
-            <p><strong>Phone: </strong><%= fr.phone %></p>
+            <!-- <p><strong>Phone: </strong><%#= fr.phone %></p> -->
             <!-- <p class="view_searched_kennel_btn"> -->
               <p style="margin-top:1.5em;" class="text-center"><%= link_to "View Details", search_path(fr.id, search_info: params), class: "default_white_color btn btn-primary" %></p>
             <!-- </p> -->

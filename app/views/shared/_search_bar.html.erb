@@ -2,11 +2,13 @@
   <div class="mobile_search_div">
     <div class="row text-center">
         <div class="col-xs-12">
+          <%= label_tag "Zip code", nil, class: "search_label" %>
           <%= text_field_tag(:search_zip, nil, placeholder: " Zip Code", class: "common_search_field search_zip", onkeypress: "return isNumber(event);", maxlength: "5", required: true, value: params[:search_zip]) %>
         </div>
       </div>
       <div style="margin-top:1em;" class="row text-center">
         <div class="col-xs-12">
+          <%= label_tag "Radius", nil, class: "search_label" %>
           <%= text_field_tag(:radius, nil, placeholder: " Radius", class: "common_search_field", onkeypress: "return isNumber(event);", maxlength: "3", value: params[:radius]) %>
         </div>
       </div>

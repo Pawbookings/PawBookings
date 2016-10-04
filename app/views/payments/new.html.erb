@@ -3,22 +3,24 @@
 <div class="container-fluid payment_container leto_font">
   <div class="row">
     <div class="col-xs-12">
-      <h5 class="payment_title default_white_color text-center">Payment</h5>
+      <h5 class="payment_title default_green_color text-center">Payment</h5>
     </div>
   </div>
   <div class="row text-left">
     <div class="col-xs-12">
-      <ul class="payment_top_details_ul default_white_color">
+      <div class="payment_top_details_border_div"></div>
+      <ul class="payment_top_details_ul default_green_color">
         <li><p class="payment_top_details_li"><strong>Rooms:</strong> <%= params[:number_of_rooms] %></p></li>
         <li><p class="payment_top_details_li"><strong>Nights:</strong> <%= params[:number_of_nights] %></p></li>
         <li><p class="payment_top_details_li"><strong>Pets:</strong> <%= @total_pets %></p></li>
         <li><p class="payment_top_details_li payment_res_dates"><strong>Reservation Dates:</strong> <br><%= "#{unsanitize_date(params[:check_in])} to #{unsanitize_date(params[:check_out])}" %></p></li>
       </ul>
+      <div class="payment_top_details_border_div"></div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <div class="payment_room_details_div default_white_color">
+      <div class="payment_room_details_div">
         <h6 class="payment_room_details_title">Room Details</h6>
         <% counter = params[:number_of_rooms].to_i %>
         <% params[:number_of_rooms].to_i.times do %>
@@ -65,7 +67,7 @@
         <h6 class="payment_tax_title">Tax(<%= params[:kennel_sales_tax].to_f %>%): $<%= @tax_amount %></h6>
       </div>
 
-      <div class="payment_grand_total_div default_green_color">
+      <div class="payment_total_div default_white_color">
         <h6 class="payment_grand_total_title">Grand Total: $<%= @total_price %></h6>
       </div>
 

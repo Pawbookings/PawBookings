@@ -1,3 +1,5 @@
+/* Search Results */
+
 .search_results_container {
   background-color: #25b15e;
   margin-top: -4em;
@@ -36,6 +38,10 @@
   padding-top: 0.5em;
   margin-right: 1em;
   box-shadow: 0px 0px 6px black;
+}
+
+.search_results_address_p {
+  line-height: 0.1em;
 }
 
 /* Searches Show  */
@@ -116,11 +122,11 @@
 
 .searches_show_run_result_div {
   /* padding-left: 1em; */
-  background-color: rgb(81, 216, 136);
+  background-color: rgb(212, 212, 212);
   /* padding-right: 1em; */
   margin-bottom: 3em;
   /* padding-bottom: 0.01em; */
-  padding-top: 0.009em;
+  /*padding-top: 0.009em;*/
 }
 
 .searches_show_run_result_individual_div {
@@ -128,6 +134,6 @@
   padding-left: 1em;
   padding-right: 1em;
   padding-bottom: 1.2em;
-  /* box-shadow: 0 0 20px; */
+  box-shadow: 0 0 20px;
   margin-bottom: 1em;
 }
