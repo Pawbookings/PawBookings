@@ -1,3 +1,8 @@
+.reservation_confirmation_conatiner {
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
 .reservation_confirmation_title {
   font-size: 2.5em;
   margin-top: 3.7em;
@@ -6,11 +11,6 @@
 
 .reservation_confirmation_details {
   font-size: 1em;
-}
-
-.reservation_confirmation_conatiner {
-  padding-left: 2em;
-  padding-right: 2em;
 }
 
 .reservation_confirmation_data {

@@ -58,7 +58,6 @@
   line-height: 0.6em;
   color: #6c707d;
   font-style: italic;
-  text-decoration: underline;
 }
 
 .my_booking_info_title {
@@ -66,11 +65,9 @@
   padding-top: 1em;
   padding-bottom: 0.5em;
   text-decoration: underline;
-  color: #486955;
 }
 
 .searches_show_image_div {
-
 }
 
 .searches_show_image {
