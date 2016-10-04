@@ -1,1 +1,17 @@
-<h1>Reservation Confirmation Page</h1>
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid leto_font reservation_confirmation_conatiner">
+  <div class="row">
+    <div class="col-xs-12">
+      <h5 class="reservation_confirmation_title default_green_color">Booking Confirmed!</h5>
+      <h6 class="reservation_confirmation_details">A confirmation email has been sent to: <strong class="reservation_confirmation_data default_green_color"><%= @customer_email %></strong></h6>
+      <h6 class="reservation_confirmation_details">If you need to make a change to your reservation, please contact <strong class="reservation_confirmation_data default_green_color">844.944.3333</strong> with your "transID" number provided below.</h6>
+      <h6 class="reservation_confirmation_details">TransID: <strong class="reservation_confirmation_data default_green_color"><%= @transID %></strong></h6>
+    </div>
+  </div>
+  <div class="row">
+  </div>
+</div>
+<img class="reservation_confirmation_image" style="width:100%;" src="http://www.hutui6.com/data/out/147/67716846-pets-wallpapers.jpg">
+
+<%= render partial: "shared/footer" %>

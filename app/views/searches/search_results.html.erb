@@ -18,7 +18,7 @@
       <div class="search_results_individual_div">
         <% if !@final_search_results.blank? %>
           <% @final_search_results.each do |fr| %>
-            <h2 class="searched_kennel_title_link"><%= link_to fr.name, search_path(fr.id, search_info: params) %></h2>
+            <h2 style="padding-top: 0.5em;"><%= link_to fr.name, search_path(fr.id, search_info: params), class:"searched_kennel_title_link" %></h2>
             <p><strong>Accepts: </strong>
               <% if fr.cats_or_dogs == "both" %>
                 <img class="pet_icon" src="/assets/dog_icon.png"><img class="pet_icon" src="/assets/cat_icon.png">
