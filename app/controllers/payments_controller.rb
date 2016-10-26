@@ -316,7 +316,7 @@ class PaymentsController < ApplicationController
         reservation.reservationID = reservation[:id]
         reservation.save!
 
-        send_reservation_confirmation_email(reservation)
+        UserMailer.reservation_confirmation(reservation).deliver_now
         return redirect_to reservation_path(id: @user[:id], customer_email: params[:customer_email], transID: params[:transId], res_id: reservation)
       else
         return redirect_to request.referrer
@@ -333,10 +333,6 @@ class PaymentsController < ApplicationController
       @room_details << [@kennel_info["room_#{counter}_name"], @kennel_info["room_#{counter}_price"]]
       counter -= 1
     end
-  end
-
-  def send_reservation_confirmation_email(reservation)
-    UserMailer.reservation_confirmation(reservation).deliver_now
   end
 
   def get_credit_card_num
