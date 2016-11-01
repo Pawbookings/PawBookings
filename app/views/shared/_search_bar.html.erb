@@ -53,8 +53,9 @@
     var number_of_rooms = $("#number_of_rooms").val();
 
     // $.ajax({ url: "/searches?", data: my_key_vals, type: "POST" });
-    console.log("TRUE");
-    $.redirectPost("/searches", {search_zip: search_zip, radius: radius, reservation_dates: reservation_dates, number_of_dogs: number_of_dogs, number_of_cats: number_of_cats, number_of_rooms: number_of_rooms});
+    if(search_zip != ""){
+      $.redirectPost("/searches", {search_zip: search_zip, radius: radius, reservation_dates: reservation_dates, number_of_dogs: number_of_dogs, number_of_cats: number_of_cats, number_of_rooms: number_of_rooms});
+    }
   });
 
   $.extend(

@@ -3,6 +3,7 @@ class DeviseRegistrationsController < Devise::RegistrationsController
   include Recaptcha::Verify
 
   def create
+    params[:user][:password_confirmation] = params[:user][:password]
     params[:user][:first_name] = params[:user][:first_name].downcase
     params[:user][:last_name] = params[:user][:last_name].downcase
     params[:user][:email] = params[:user][:email].downcase

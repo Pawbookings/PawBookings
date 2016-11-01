@@ -43,21 +43,21 @@
   </div>
 </div>
 
-<% if !@negative_kennels.blank? %>
+<!-- <%# if !@negative_kennels.blank? %>
   <h1>The Kennels listed below do NOT meet your reservation dates selected.</h1>
-  <% @negative_kennels.each do |fr| %>
-    <%= link_to fr.name, search_path(fr.id, search_info: params) %>
+  <%# @negative_kennels.each do |fr| %>
+    <%#= link_to fr.name, search_path(fr.id, search_info: params) %>
     <br>
-    <% if fr.cats_or_dogs == "both" %>
+    <%# if fr.cats_or_dogs == "both" %>
       Cats and Dogs
-    <% else %>
-      <%= fr.cats_or_dogs.capitalize %>
-    <% end %>
+    <%# else %>
+      <%#= fr.cats_or_dogs.capitalize %>
+    <%# end %>
     <br>
-    <%= fr.address %>
+    <%#= fr.address %>
     <br>
     <br>
-  <% end %>
-<% end %>
+  <%# end %>
+<%# end %> -->
 
 <%= render partial: "shared/footer" %>

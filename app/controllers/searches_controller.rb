@@ -42,11 +42,13 @@ class SearchesController < ApplicationController
       redirect_to request.referrer
     end
 
+    @final_search_results = []
     get_pet_stay_dates
     location_filtering
     pet_type_filtering
     holiday_filtering
     hours_of_operation_filtering
+    check_if_runs_listed
   end
 
   def show
@@ -118,6 +120,7 @@ class SearchesController < ApplicationController
     @holiday_filtered_results.each do |fr|
       kennel = Kennel.find(fr.id)
       hours_of_operation = HoursOfOperation.where(kennel_id: kennel[:id])
+      @kennels_that_are_closed << kennel if hours_of_operation.empty?
       hours_of_operation.to_a.each do |h|
         counter = 0
         @pet_stay_date_range.each do |ps|
@@ -128,15 +131,21 @@ class SearchesController < ApplicationController
         @kennels_that_are_closed << kennel if counter > 0
       end
     end
-    @kennels_that_are_closed.each {|k| @negative_kennels << k }
     @kennels_that_are_closed.each do |k|
+      @negative_kennels << k
       @holiday_filtered_results.each do |fr|
         @holiday_filtered_results.delete fr if k === fr
       end
     end
-    @final_search_results = @holiday_filtered_results
+    @hours_of_operation_results = @holiday_filtered_results
   end
 
+  def check_if_runs_listed
+    @hours_of_operation_results.each do |hr|
+      run = Run.where(kennel_id: hr.id)
+      @final_search_results << hr if !run.empty?
+    end
+  end
 
   def get_res_dates
     @res_ids_and_dates = []
