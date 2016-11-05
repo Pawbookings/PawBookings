@@ -6,16 +6,16 @@ class KennelsController < ApplicationController
   end
 
   def create
-    @kennel = Kennel.new(kennel_params)
-    @user = User.where(id: current_user.id).first
-    if @kennel.valid? && !kennel_completed_registration? && @kennel.save! && @user.kennel = @kennel
-      kennel = Kennel.where(user_id: @user[:id]).first
-      kennel.userID = @user[:id]
+    kennel = Kennel.new(kennel_params)
+    user = User.where(id: current_user.id).first
+    if kennel.valid? && !kennel_completed_registration? && kennel.save! && user.kennel = kennel
+      kennel.userID = user[:id]
       kennel.kennelID = kennel[:id]
       kennel.save!
+      HoursOfOperationsController.new.create(kennel[:id])
       UserMailer.new_kennel_registration(current_user).deliver_now
-      @user.completed_registration = "true"
-      @user.save!
+      user.completed_registration = "true"
+      user.save!
       redirect_to kennel_dashboard_path
     else
       flash[:notice]
@@ -44,6 +44,7 @@ class KennelsController < ApplicationController
       if !@kennel.nil?
         reservations = Reservation.where(kennel_id: @kennel[:id])
         @reservations = reservations if !reservations.blank?
+        @hours_of_operation = HoursOfOperation.where(kennel_id: @kennel[:id]).first
         # @photo = Photo.where(kennel_id: @kennel.id).first
       end
     end

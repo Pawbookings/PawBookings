@@ -69,108 +69,110 @@
       </div>
       <div class="border"></div>
       <div class="all_runs_div text-center">
-        <h3 style="color:#48cd7e;">Runs Listed:</h3>
-        <% @runs.each do |run| %>
-          <%= form_for(@runs, {action: :update, id: run[:id]}) do |f| %>
-            <%= f.label :title %>
-            <br />
-            <%= f.text_field :title, value: run[:title], class:"kennel_dashboard_input" %>
-            <br />
-            <%= f.label :size_width %>
-            <br />
-            <%= f.text_field :size_width, value: run[:size_width], class:"kennel_dashboard_input" %>
-            <br />
-            <%= f.label :size_length %>
-            <br />
-            <%= f.text_field :size_length, value: run[:size_length], class:"kennel_dashboard_input" %>
-            <br />
-            <%= f.label :description %>
-            <br />
-            <%= f.text_field :description, value: run[:description], class:"kennel_dashboard_input" %>
-            <br />
-            <br />
-            <%= f.label :indoor_or_outdoor %>
-            <br />
-            <%= f.select :indoor_or_outdoor, options_for_select(indoor_outdoor_option, run[:indoor_or_outdoor]) %>
-            <br />
-            <br />
-            <%= f.label :pets_allowed_per_run %>
-            <br />
-            <%= f.text_field :pets_per_run, value: run[:pets_per_run], class:"kennel_dashboard_input" %>
-            <br />
-            <br />
-            <%= f.label :type_of_pets_allowed %>
-            <br />
-            <%= f.select :type_of_pets_allowed, options_for_select(cat_or_dog_only_option, run[:type_of_pets_allowed]) %>
-            <br />
-            <br />
-            <%= f.label :price %>
-            <br />
-            <%= f.text_field :price, value: run[:price], class:"kennel_dashboard_input" %>
-            <br />
-            <%= f.label :weight_limit %>
-            <br />
-            <%= f.text_field :weight_limit, value: run[:weight_limit], class:"kennel_dashboard_input" %>
-            <br />
-            <br />
-            <% if !run[:breeds_restricted].blank? %>
-              <% breeds_restricted = JSON.parse(run[:breeds_restricted]) %>
-              <%= f.label :breeds_restricted %>
-              <div class="input-group-addon">
-                <% if breeds_restricted.include? 'pitbull' %>
-                  <input type="checkbox" name="breed_1" value="pitbull" checked="checked">Pitbull
-                  <br />
-                  <br />
-                <% end %>
-                <% if !breeds_restricted.include? 'pitbull' %>
-                  <input type="checkbox" name="breed_1" value="pitbull">Pitbull
-                  <br />
-                  <br />
-                <% end %>
+        <% if !@runs.empty? %>
+          <h3 style="color:#48cd7e;">Runs Listed:</h3>
+          <% @runs.each do |run| %>
+            <%= form_for(@runs, {action: :update, id: run[:id]}) do |f| %>
+              <%= f.label :title %>
+              <br />
+              <%= f.text_field :title, value: run[:title], class:"kennel_dashboard_input" %>
+              <br />
+              <%= f.label :size_width %>
+              <br />
+              <%= f.text_field :size_width, value: run[:size_width], class:"kennel_dashboard_input" %>
+              <br />
+              <%= f.label :size_length %>
+              <br />
+              <%= f.text_field :size_length, value: run[:size_length], class:"kennel_dashboard_input" %>
+              <br />
+              <%= f.label :description %>
+              <br />
+              <%= f.text_field :description, value: run[:description], class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <%= f.label :indoor_or_outdoor %>
+              <br />
+              <%= f.select :indoor_or_outdoor, options_for_select(indoor_outdoor_option, run[:indoor_or_outdoor]) %>
+              <br />
+              <br />
+              <%= f.label :pets_allowed_per_run %>
+              <br />
+              <%= f.text_field :pets_per_run, value: run[:pets_per_run], class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <%= f.label :type_of_pets_allowed %>
+              <br />
+              <%= f.select :type_of_pets_allowed, options_for_select(cat_or_dog_only_option, run[:type_of_pets_allowed]) %>
+              <br />
+              <br />
+              <%= f.label :price %>
+              <br />
+              <%= f.text_field :price, value: run[:price], class:"kennel_dashboard_input" %>
+              <br />
+              <%= f.label :weight_limit %>
+              <br />
+              <%= f.text_field :weight_limit, value: run[:weight_limit], class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <% if !run[:breeds_restricted].blank? %>
+                <% breeds_restricted = JSON.parse(run[:breeds_restricted]) %>
+                <%= f.label :breeds_restricted %>
+                <div class="input-group-addon">
+                  <% if breeds_restricted.include? 'pitbull' %>
+                    <input type="checkbox" name="breed_1" value="pitbull" checked="checked">Pitbull
+                    <br />
+                    <br />
+                  <% end %>
+                  <% if !breeds_restricted.include? 'pitbull' %>
+                    <input type="checkbox" name="breed_1" value="pitbull">Pitbull
+                    <br />
+                    <br />
+                  <% end %>
 
-                <% if breeds_restricted.include? 'german_shephered' %>
-                  <input type="checkbox" name="breed_2" value="german_shephered" checked="checked">German Shephered
-                  <br />
-                  <br />
-                <% end %>
-                <% if !breeds_restricted.include? 'german_shephered' %>
-                    <input type="checkbox" name="breed_2" value="german_shephered"%>German Shephered
-                  <br />
-                  <br />
-                <% end %>
+                  <% if breeds_restricted.include? 'german_shephered' %>
+                    <input type="checkbox" name="breed_2" value="german_shephered" checked="checked">German Shephered
+                    <br />
+                    <br />
+                  <% end %>
+                  <% if !breeds_restricted.include? 'german_shephered' %>
+                      <input type="checkbox" name="breed_2" value="german_shephered"%>German Shephered
+                    <br />
+                    <br />
+                  <% end %>
 
-                <% if breeds_restricted.include? 'rot_weiler' %>
-                  <input type="checkbox" name="breed_3" value="rot_weiler" checked="checked">Rot-Weiler
-                  <br />
-                  <br />
-                <% end %>
-                <% if !breeds_restricted.include? 'rot_weiler' %>
-                  <input type="checkbox" name="breed_3" value="rot_weiler">Rot-Weiler
-                  <br />
-                  <br />
-                <% end %>
+                  <% if breeds_restricted.include? 'rot_weiler' %>
+                    <input type="checkbox" name="breed_3" value="rot_weiler" checked="checked">Rot-Weiler
+                    <br />
+                    <br />
+                  <% end %>
+                  <% if !breeds_restricted.include? 'rot_weiler' %>
+                    <input type="checkbox" name="breed_3" value="rot_weiler">Rot-Weiler
+                    <br />
+                    <br />
+                  <% end %>
 
-                <% if breeds_restricted.include? 'doberman_pincher' %>
-                  <input type="checkbox" name="breed_3" value="doberman_pincher" checked="checked">Doberman Pincher
-                  <br />
-                  <br />
-                <% end %>
-                <% if !breeds_restricted.include? 'doberman_pincher' %>
-                  <input type="checkbox" name="breed_3" value="doberman_pincher">Doberman Pincher
-                  <br />
-                  <br />
-                <% end %>
-              </div>
+                  <% if breeds_restricted.include? 'doberman_pincher' %>
+                    <input type="checkbox" name="breed_3" value="doberman_pincher" checked="checked">Doberman Pincher
+                    <br />
+                    <br />
+                  <% end %>
+                  <% if !breeds_restricted.include? 'doberman_pincher' %>
+                    <input type="checkbox" name="breed_3" value="doberman_pincher">Doberman Pincher
+                    <br />
+                    <br />
+                  <% end %>
+                </div>
+              <% end %>
+              <br />
+              <%= f.label :how_many_of_these_runs_do_you_have_total %>
+              <br />
+              <%= f.text_field :number_of_rooms, value: run[:number_of_rooms], class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <%= f.submit "Update Run", class:"btn btn-success" %>
+              <br />
+              <br />
             <% end %>
-            <br />
-            <%= f.label :how_many_of_these_runs_do_you_have_total %>
-            <br />
-            <%= f.text_field :number_of_rooms, value: run[:number_of_rooms], class:"kennel_dashboard_input" %>
-            <br />
-            <br />
-            <%= f.submit "Update Run", class:"btn btn-success" %>
-            <br />
-            <br />
           <% end %>
         <% end %>
       </div>

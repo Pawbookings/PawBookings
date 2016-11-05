@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :customer_emergency_contacts, only: [:new, :create]
   resources :customer_vet_infos, only: [:new, :create]
   resources :pets, only: [:new, :create]
-  resources :hours_of_operations, only: [:new, :create]
+  resources :hours_of_operations, only: [:edit, :update, :create]
   resources :holidays, only: [:new, :create]
   resources :runs, only: [:new, :create, :update]
   resources :amenities, only: [:new, :create, :update]

@@ -9,7 +9,7 @@
       <div class="kennel_dashboard_general_info_div text-center">
         <% if !@kennel.nil? %>
             <%= form_for(@kennel, {id: @kennel.id}) do |f| %>
-              <%= f.label :name %>
+              <%= f.label :kennel_name %>
               <br />
               <%= f.text_field :name, class: "kennel_dashboard_input" %>
               <br />
@@ -61,7 +61,7 @@
         <div class="kennel_dashboard_option_btns_div text-center">
           <%= link_to "Runs", new_run_path, class: "btn btn-primary" %>
           <%= link_to "Amenities", new_amenity_path, class: "btn btn-primary" %>
-          <%= link_to "Hours of Operation", new_hours_of_operation_path, class: "btn btn-primary" %>
+          <%= link_to "Hours of Operation", edit_hours_of_operation_path(id: @hours_of_operation[:id]), class: "btn btn-primary" %>
           <%= link_to "Holidays", "#", class: "btn btn-primary" %>
           <%= link_to "Policies", "#", class: "btn btn-primary" %>
         </div>
