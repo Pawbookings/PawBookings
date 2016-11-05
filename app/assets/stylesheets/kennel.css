@@ -87,3 +87,31 @@
   text-align: center;
   text-decoration: underline;
 }
+
+/* Holiday Registration */
+
+.holiday_registration_title {
+  font-family: 'Open Sans', sans-serif;
+  color: #48cd7e;
+  font-size: 2.5em;
+  margin-top: 3.7em;
+  margin-bottom: 1em;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.all_holidays_div {
+  margin-top: 1em;
+}
+
+/* Holiday Edit */
+
+.edit_holiday_title {
+  font-family: 'Open Sans', sans-serif;
+  color: #48cd7e;
+  font-size: 2.5em;
+  margin-top: 3.7em;
+  margin-bottom: 1em;
+  text-align: center;
+  text-decoration: underline;
+}

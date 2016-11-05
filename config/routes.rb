@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :customer_vet_infos, only: [:new, :create]
   resources :pets, only: [:new, :create]
   resources :hours_of_operations, only: [:edit, :update, :create]
-  resources :holidays, only: [:new, :create]
+  resources :holidays
   resources :runs, only: [:new, :create, :update]
   resources :amenities, only: [:new, :create, :update]
   resources :policies, only: [:new, :create]

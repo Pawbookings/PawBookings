@@ -1,10 +1,40 @@
-<h1>Holidays Registrations</h1>
+<%= render partial: "shared/top_info" %>
 
-<%= form_for @holiday do |f| %>
-  <%= f.text_field :holiday_date, class: "holiday_datepicker", placeholder: "mm/dd/yyyy" %>
-  <br>
-  <%= f.text_field :description, placeholder: " Description"%>
-  <br>
-  <%= f.submit "Submit" %>
-  <%= f.submit "Submit and create another 'Holiday'", name: "create_another_holiday" %>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <h5 class="holiday_registration_title">Holiday registration</h5>
+      <div class="holiday_registration_div text-center">
+        <%= form_for @holiday do |f| %>
+          <%= f.label :date %>
+          <br />
+          <%= f.text_field :holiday_date, class: "holiday_datepicker kennel_dashboard_input", placeholder: "mm/dd/yyyy" %>
+          <br>
+          <%= f.label :description %>
+          <br>
+          <%= f.text_field :description, placeholder: " Description", class:"kennel_dashboard_input"%>
+          <br>
+          <br>
+          <%= f.submit "Add New", class:"btn btn-success" %>
+          <br>
+          <br>
+        <% end %>
+      </div>
+      <div class="border"></div>
+      <div class="all_holidays_div text-center">
+        <% if !@holidays.blank? %>
+          <h3>Holidays listed</h3>
+          <% @holidays.each do |holiday| %>
+            <p><strong>Date: </strong><%= unsanitize_date(holiday[:holiday_date].to_s) %></p>
+            <p><strong>Description: </strong><%= holiday[:description] %></p>
+            <%= button_to "Edit Holiday", edit_holiday_path(holiday[:id]), class:"btn btn-primary", method: :get %>
+            <br />
+            <br />
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: "shared/footer" %>

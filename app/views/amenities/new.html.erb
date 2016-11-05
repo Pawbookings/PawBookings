@@ -32,7 +32,7 @@
         <% if !@amenities.blank? %>
         <h3 style="color:#48cd7e;">Amenities listed:</h3>
           <% @amenities.each do |amenity| %>
-            <%= form_for(@amenities, url: {action: :update, id: amenity[:id]}) do |f|%>
+            <%= form_for(amenity, url: {action: :update, id: amenity[:id]}) do |f|%>
               <%= f.label :title %>
               <br />
               <%= f.text_field :title, value: amenity[:title], class:"kennel_dashboard_input" %>
