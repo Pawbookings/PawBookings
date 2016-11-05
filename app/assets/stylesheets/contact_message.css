@@ -30,6 +30,7 @@
 
 .contact_submit_btn {
   background: linear-gradient(#42b370, #51d888);
+  color: #ffffff;
   width: 75%;
   height: 3em;
 }

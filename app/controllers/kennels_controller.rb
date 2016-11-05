@@ -23,8 +23,23 @@ class KennelsController < ApplicationController
     end
   end
 
+  def update
+    kennel = Kennel.find(params[:id])
+    kennel.name = params[:kennel][:name]
+    kennel.address = params[:kennel][:address]
+    kennel.mission_statement = params[:kennel][:mission_statement]
+    kennel.city = params[:kennel][:city]
+    kennel.state = params[:kennel][:state]
+    kennel.zip = params[:kennel][:zip]
+    kennel.email = params[:kennel][:email]
+    kennel.avatar = params[:kennel][:avatar] if !params[:kennel][:avatar].nil?
+    kennel.save!
+    redirect_to kennel_dashboard_path
+  end
+
   def kennel_dashboard
     if !current_user.nil?
+      @user = User.find(current_user.id)
       @kennel = Kennel.where(user_id: current_user.id).first
       if !@kennel.nil?
         reservations = Reservation.where(kennel_id: @kennel[:id])
@@ -33,12 +48,12 @@ class KennelsController < ApplicationController
       end
     end
     get_most_booked_runs if !@reservations.nil?
-    filter_reservation_search if !params[:search_by].nil?
+    filter_reservation_search if !params[:search_by].blank?
   end
 
   def filter_reservation_search
     search_by = params[:search_by]
-    @reservation_search_results = Reservation.where(search_by.to_sym => params[:reservation_search].capitalize).order(created_at: :desc).limit(10)
+    @reservation_search_results = Reservation.where(search_by.to_sym => params[:reservation_search].capitalize, kennel_id: @kennel[:id]).order(created_at: :desc).limit(10)
   end
 
   def get_most_booked_runs

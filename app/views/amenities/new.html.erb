@@ -1,15 +1,61 @@
-<h1>Amenities registration</h1>
+<%= render partial: "shared/top_info" %>
 
-<%= form_for @amenity do |f| %>
-  <%= f.text_field :title, placeholder: " Doggy Ice-Cream" %>
-  <br>
-  <br>
-  <%= f.text_area :description, placeholder: " Sweet delicious home-made peanut butter ice-cream" %>
-  <br>
-  <br>
-  <%= f.text_field :price, placeholder: " 4.00" %>
-  <br>
-  <br>
-  <%= f.submit "Submit" %>
-  <%= f.submit "Submit and create another 'Amenity'", name: "create_another_amenity" %>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <h5 class="amenities_title">Amenities:</h5>
+      <div class="amenity_registration_div text-center">
+        <%= form_for @amenity do |f| %>
+          <%= f.label :title %>
+          <br />
+          <%= f.text_field :title, placeholder: " Doggy Ice-Cream", class:"kennel_dashboard_input" %>
+          <br>
+          <br>
+          <%= f.label :description %>
+          <br />
+          <%= f.text_area :description, placeholder: " Sweet delicious home-made peanut butter ice-cream", class:"kennel_dashboard_input" %>
+          <br>
+          <br>
+          <%= f.label :price %>
+          <br />
+          <%= f.text_field :price, placeholder: " 4.00", class:"kennel_dashboard_input" %>
+          <br>
+          <br>
+          <%= f.submit "Submit", class:"btn btn-success" %>
+          <br>
+          <br>
+          <br>
+        <% end %>
+      </div>
+      <div class="border"></div>
+      <div class="all_amenities text-center">
+        <% if !@amenities.blank? %>
+        <h3 style="color:#48cd7e;">Amenities listed:</h3>
+          <% @amenities.each do |amenity| %>
+            <%= form_for(@amenities, url: {action: :update, id: amenity[:id]}) do |f|%>
+              <%= f.label :title %>
+              <br />
+              <%= f.text_field :title, value: amenity[:title], class:"kennel_dashboard_input" %>
+              <br />
+              <%= f.label :description %>
+              <br />
+              <%= f.text_area :description, value: amenity[:description], class:"kennel_dashboard_input" %>
+              <br />
+              <%= f.label :price %>
+              <br />
+              <%= f.text_field :price, value: amenity[:price], class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <%= f.submit "Submit", class:"btn btn-success" %>
+              <br />
+              <br />
+              <br />
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: "shared/footer" %>

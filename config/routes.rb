@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   resources :pets, only: [:new, :create]
   resources :hours_of_operations, only: [:new, :create]
   resources :holidays, only: [:new, :create]
-  resources :runs, only: [:new, :create]
-  resources :amenities, only: [:new, :create]
+  resources :runs, only: [:new, :create, :update]
+  resources :amenities, only: [:new, :create, :update]
   resources :policies, only: [:new, :create]
   resources :photos, only: [:new, :create]
   resources :payments, only: [:new, :create]
@@ -30,10 +30,10 @@ Rails.application.routes.draw do
   resources :check_in_contract_refund_policies, only: [:update, :edit]
 
   # KennelsController
-    resources :kennels, only: [:new, :create]
+    resources :kennels, only: [:new, :create, :update]
     get "/kennel_dashboard",   to: "kennels#kennel_dashboard",   as: :kennel_dashboard
     get "/kennel_reservations", to: "kennels#kennel_reservations", as: :kennel_reservations
-    get "/kennel_searched_reservation", to: "kennels#kennel_searched_reservation", as: :kennel_searched_reservation
+    post "/kennel_searched_reservation", to: "kennels#kennel_searched_reservation", as: :kennel_searched_reservation
 
   # CustomersController
     get "/customer_dashboard", to: "customers#customer_dashboard", as: :customer_dashboard

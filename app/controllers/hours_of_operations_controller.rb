@@ -2,7 +2,9 @@ class HoursOfOperationsController < ApplicationController
   before_action :authenticate_user!
 
   def new
+    kennel = Kennel.where(user_id: current_user.id).first
     @hours_of_operation = HoursOfOperation.new
+    @my_hours = HoursOfOperation.where(kennel_id: kennel[:id]).first
   end
 
   def create
@@ -11,6 +13,10 @@ class HoursOfOperationsController < ApplicationController
     if @hours_of_operation.valid? && @hours_of_operation.save! && @kennel.hours_of_operation = @hours_of_operation
       redirect_to kennel_dashboard_path
     end
+  end
+
+  def update
+    # TODO: continue
   end
 
   private

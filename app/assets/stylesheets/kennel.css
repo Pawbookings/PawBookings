@@ -1,0 +1,89 @@
+@media (max-width: 1279px) {
+  .kennel_dashboard_calendar {
+    display: none;
+  }
+}
+
+.kennel_dashboard_title {
+  font-family: 'Open Sans', sans-serif;
+  color: #48cd7e;
+  font-size: 2.5em;
+  margin-top: 3.7em;
+  margin-bottom: 1em;
+  text-decoration:underline;
+}
+
+.kennel_dashboard_avatar {
+  margin-bottom: 1em;
+}
+
+.kennel_dashboard_input {
+  width: 75%;
+  height: 2.5em;
+  border-radius: 0.4em;
+}
+
+.most_booked_runs {
+  margin-top: 3em;
+}
+
+.kennel_dashboard_res_search {
+  margin-top: 4em;
+}
+
+.kennel_dashboard_search_results {
+  margin-top: 3em;
+}
+
+.kennel_dashboard_option_btns_div {
+  line-height: 5em;
+}
+
+/* Kennel Registration*/
+
+.kennel_registration_title {
+  font-family: 'Open Sans', sans-serif;
+  color: #48cd7e;
+  font-size: 2.5em;
+  margin-top: 3.7em;
+  margin-bottom: 1em;
+  text-align: center;
+  text-decoration: underline;
+}
+
+/* Run Registration */
+
+.run_registration_title {
+  font-family: 'Open Sans', sans-serif;
+  color: #48cd7e;
+  font-size: 2.5em;
+  margin-top: 3.7em;
+  margin-bottom: 1em;
+  text-align: center;
+  text-decoration: underline;
+}
+
+/* Amenity Registration */
+
+.amenities_title {
+  font-family: 'Open Sans', sans-serif;
+  color: #48cd7e;
+  font-size: 2.5em;
+  margin-top: 3.7em;
+  margin-bottom: 1em;
+  text-align: center;
+  text-decoration: underline;
+
+}
+
+/* Hours or Operation Registration */
+
+.hours_of_operation_title {
+  font-family: 'Open Sans', sans-serif;
+  color: #48cd7e;
+  font-size: 2.5em;
+  margin-top: 3.7em;
+  margin-bottom: 1em;
+  text-align: center;
+  text-decoration: underline;
+}

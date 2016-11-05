@@ -1,7 +1,6 @@
 module SearchesHelper
   def cat_or_dog_options
     [
-      ['Select', 'none_selected'],
       ['Dog', 'dogs'],
       ['Cat', 'cats'],
       ['Cat & Dog', 'both']

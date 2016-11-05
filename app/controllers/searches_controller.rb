@@ -138,6 +138,7 @@ class SearchesController < ApplicationController
       end
     end
     @hours_of_operation_results = @holiday_filtered_results
+    @final_search_results = @holiday_filtered_results
   end
 
   def check_if_runs_listed

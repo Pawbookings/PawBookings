@@ -81,16 +81,16 @@ reservation.save!
 
 # 2
 reservation = Reservation.create!(kennel_id: 1, user_id: 3, customer_first_name: 'Luke', customer_last_name: 'Skywalker', customer_email: 'lskywalker@gmail.com', customer_phone: '4071231234', pet_ids: '[3]', run_ids: '[1]', check_in_date: '2016-12-01', check_out_date: '2016-12-02', total_price: 90.0, room_details: "[[\"The Large Room\", 90]]")
-reservation.reservationID = 1
+reservation.reservationID = 2
 reservation.kennelID = 1
 reservation.userID = 3
 reservation.save!
 
 # 3
 reservation = Reservation.create!(kennel_id: 1, user_id: 4, customer_first_name: 'Mary', customer_last_name: 'Jane', customer_email: 'mjane@gmail.com', customer_phone: '4073214321', pet_ids: '[4]', run_ids: '[1]', check_in_date: '2016-12-10', check_out_date: '2016-12-11', total_price: 90.0, room_details: "[[\"The Large Room\", 90]]")
-reservation.reservationID = 1
+reservation.reservationID = 3
 reservation.kennelID = 1
-reservation.userID = 3
+reservation.userID = 4
 reservation.save!
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')

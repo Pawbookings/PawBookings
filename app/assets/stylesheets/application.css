@@ -26,6 +26,7 @@
  *= require amenity
  *= require reservation
  *= require payment
+ *= require kennel
  *= require pawbookings_admins
  */
 
@@ -66,4 +67,8 @@ input {
   position: absolute;
   width: 100%;
   bottom: 0;
+}
+
+.border {
+  border: 1px solid #9a9a9a;
 }
