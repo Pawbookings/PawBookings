@@ -30,6 +30,13 @@ class HolidaysController < ApplicationController
     redirect_to new_holiday_path
   end
 
+  def destroy
+    kennel = Kennel.where(user_id: current_user.id).first
+    holiday = Holiday.where(id: params[:id], kennel_id: kennel[:id]).first
+    holiday.delete
+    redirect_to new_holiday_path
+  end
+
   private
 
   def holiday_params

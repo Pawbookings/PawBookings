@@ -2,20 +2,37 @@ class PoliciesController < ApplicationController
   before_action :authenticate_user!
 
   def new
+    kennel = Kennel.where(user_id: current_user.id).first
     @policy = Policy.new
+    @policies = Policy.where(kennel_id: kennel[:id])
   end
 
   def create
-    @policy = Policy.new(policy_params)
-    @user = User.where(id: current_user.id).first
-    @kennel = Kennel.where(user_id: current_user.id).last
-    if @policy.valid? && @kennel.policies.create(kennel_id: @kennel.id, description: @policy.description)
-      if params[:create_another_policy] == "Submit and create another 'Policy'"
-        redirect_to new_policy_path
-      else
-        redirect_to kennel_dashboard_path
-      end
+    policy = Policy.new(policy_params)
+    user = User.where(id: current_user.id).first
+    kennel = Kennel.where(user_id: current_user.id).last
+    if policy.valid? && kennel.policies.create(kennel_id: kennel.id, description: policy.description)
+      redirect_to new_policy_path
+    else
+      redirect_to request.referrer
     end
+  end
+
+  def update
+    policy = Policy.find(params[:id])
+    policy.description = params[:policy][:description]
+    if policy.valid? && policy.save!
+      redirect_to new_policy_path
+    else
+      redirect_to request.referrer
+    end
+  end
+
+  def destroy
+    kennel = Kennel.where(user_id: current_user.id).first
+    policy = Policy.where(id: params[:id], kennel_id: kennel[:id]).first
+    policy.delete
+    redirect_to new_policy_path
   end
 
   private

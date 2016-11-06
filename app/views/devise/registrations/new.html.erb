@@ -3,7 +3,11 @@
 <div class="container-fluid leto_font">
   <div class="row text-center">
     <div class="signup_div">
-      <h5 class="signup_title">Sign Up</h5>
+      <% if params[:kennel_or_customer] == "kennel" %>
+        <h5 class="signup_title">Owner's Personal Info</h5>
+      <% else %>
+        <h5 class="signup_title">Sign Up</h5>
+      <% end %>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
 

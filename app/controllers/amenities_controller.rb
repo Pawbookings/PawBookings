@@ -24,6 +24,13 @@ class AmenitiesController < ApplicationController
     redirect_to new_amenity_path
   end
 
+  def destroy
+    kennel = Kennel.where(user_id: current_user.id).first
+    amenity = Amenity.where(id: params[:id], kennel_id: kennel[:id]).first
+    amenity.delete
+    redirect_to new_amenity_path
+  end
+
   private
 
   def amenity_params

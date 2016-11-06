@@ -4,6 +4,7 @@
   <div class="row">
     <div class="col-xs-12">
       <h5 class="amenities_title">Amenities:</h5>
+      <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
       <div class="amenity_registration_div text-center">
         <%= form_for @amenity do |f| %>
           <%= f.label :title %>
@@ -21,13 +22,15 @@
           <%= f.text_field :price, placeholder: " 4.00", class:"kennel_dashboard_input" %>
           <br>
           <br>
-          <%= f.submit "Submit", class:"btn btn-success" %>
+          <%= f.submit "Add New", class:"btn btn-success" %>
           <br>
           <br>
           <br>
         <% end %>
       </div>
       <div class="border"></div>
+      <br />
+      <br />
       <div class="all_amenities text-center">
         <% if !@amenities.blank? %>
         <h3 style="color:#48cd7e;">Amenities listed:</h3>
@@ -46,7 +49,10 @@
               <%= f.text_field :price, value: amenity[:price], class:"kennel_dashboard_input" %>
               <br />
               <br />
-              <%= f.submit "Submit", class:"btn btn-success" %>
+              <%= f.submit "Update", class:"btn btn-primary" %>
+              <br />
+              <br />
+              <%= button_to "Delete", amenity_path(id: amenity[:id]), method: :delete, data: { confirm: 'Are you sure you want to delete this Amenity?' }, :class => 'btn btn-danger' %>
               <br />
               <br />
               <br />

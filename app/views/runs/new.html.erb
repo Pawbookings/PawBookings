@@ -4,7 +4,8 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="run_registration_div text-center">
-        <h5 class="run_registration_title">Register or Edit a Run:</h5>
+        <h5 class="run_registration_title">Runs:</h5>
+        <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
         <%= form_for @run do |f| %>
           <%= f.label :title, class:"kennel_dashboard_input" %>
           <%= f.text_field :title, placeholder: " Title", class:"kennel_dashboard_input" %>
@@ -60,7 +61,7 @@
           <%= f.text_field :number_of_rooms, placeholder: " Number of these runs", class:"kennel_dashboard_input", onkeypress:"return isNumber(event)" %>
           <br>
           <br>
-          <%= f.submit "Submit", class: "btn btn-success" %>
+          <%= f.submit "Add New", class: "btn btn-success" %>
           <br>
           <br>
           <br>
@@ -68,11 +69,13 @@
         <% end %>
       </div>
       <div class="border"></div>
+      <br />
+      <br />
       <div class="all_runs_div text-center">
         <% if !@runs.empty? %>
-          <h3 style="color:#48cd7e;">Runs Listed:</h3>
+          <!-- <h3 style="color:#48cd7e;">Runs Listed:</h3> -->
           <% @runs.each do |run| %>
-            <%= form_for(@runs, {action: :update, id: run[:id]}) do |f| %>
+            <%= form_for(run, {action: :update, id: run[:id]}) do |f| %>
               <%= f.label :title %>
               <br />
               <%= f.text_field :title, value: run[:title], class:"kennel_dashboard_input" %>
@@ -169,7 +172,12 @@
               <%= f.text_field :number_of_rooms, value: run[:number_of_rooms], class:"kennel_dashboard_input" %>
               <br />
               <br />
-              <%= f.submit "Update Run", class:"btn btn-success" %>
+              <%= f.submit "Update", class:"btn btn-primary" %>
+              <br />
+              <br />
+              <%= button_to "Delete", run_path(run[:id]), data: {confirm: "Are you sure you want to delete this run?"}, class:"btn btn-danger", method: :delete %>
+              <br />
+              <div class="border"></div>
               <br />
               <br />
             <% end %>

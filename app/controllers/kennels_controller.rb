@@ -45,6 +45,7 @@ class KennelsController < ApplicationController
         reservations = Reservation.where(kennel_id: @kennel[:id])
         @reservations = reservations if !reservations.blank?
         @hours_of_operation = HoursOfOperation.where(kennel_id: @kennel[:id]).first
+        session[:hours_of_operation_id] = @hours_of_operation[:id]
         # @photo = Photo.where(kennel_id: @kennel.id).first
       end
     end

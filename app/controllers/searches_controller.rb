@@ -37,18 +37,20 @@ class SearchesController < ApplicationController
   end
 
   def search_results
-    if params[:number_of_dogs] == "0" && params[:number_of_cats] == "0"
-      flash[:notice] = "Must select number of dogs or cats greater than 0."
-      redirect_to request.referrer
-    end
+    if params[:no_params].nil?
+      if params[:number_of_dogs] == "0" && params[:number_of_cats] == "0"
+        flash[:notice] = "Must select number of dogs or cats greater than 0."
+        redirect_to request.referrer
+      end
 
-    @final_search_results = []
-    get_pet_stay_dates
-    location_filtering
-    pet_type_filtering
-    holiday_filtering
-    hours_of_operation_filtering
-    check_if_runs_listed
+      @final_search_results = []
+      get_pet_stay_dates
+      location_filtering
+      pet_type_filtering
+      holiday_filtering
+      hours_of_operation_filtering
+      check_if_runs_listed
+    end
   end
 
   def show

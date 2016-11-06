@@ -1,8 +1,46 @@
-<h1>Facility Policies/Requirements Registration</h1>
+<%= render partial: "shared/top_info" %>
 
-<%= form_for @policy do |f| %>
-  <%= f.text_area :description, placeholder: " Description" %>
-  <br>
-  <%= f.submit "Submit" %>
-  <%= f.submit "Submit and create another 'Policy'", name: "create_another_policy" %>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <h5 class="policy_registration_title">Policies:</h5>
+      <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
+      <div class="policy_registration_div">
+        <%= form_for @policy do |f| %>
+        <%= f.label :policy_description %>
+        <br />
+        <%= f.text_area :description, placeholder: " Description", class:"kennel_dashboard_input" %>
+        <br>
+        <br>
+        <%= f.submit "Add New", class:"btn btn-success" %>
+        <br>
+        <br>
+        <% end %>
+      </div>
+      <div class="border"></div>
+      <br />
+      <br />
+      <div class="all_policies_div">
+        <% @policies.each do |policy| %>
+          <%= form_for(policy, url: {action: :update, id: policy[:id]}) do |f| %>
+            <%= f.label :policy_description %>
+            <br />
+            <%= f.text_area :description, class:"kennel_dashboard_input", value: policy[:description] %>
+            <br />
+            <br />
+            <%= f.submit "Update", class:"btn btn-primary" %>
+            <br />
+            <br />
+            <%= button_to "Delete", policy_path(policy[:id]), data: {confirm: "Are you sure you want to delete this policy?"}, class:"btn btn-danger", method: :delete %>
+            <br />
+            <br />
+            <br />
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= render partial: "shared/footer" %>

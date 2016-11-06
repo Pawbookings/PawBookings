@@ -1,0 +1,7 @@
+<div class="kennel_dashboard_option_btns_div text-center">
+  <%= link_to "Runs", new_run_path, class: "btn btn-primary" %>
+  <%= link_to "Amenities", new_amenity_path, class: "btn btn-primary" %>
+  <%= link_to "Hours of Operation", edit_hours_of_operation_path(id: session[:hours_of_operation_id]), class: "btn btn-primary" %>
+  <%= link_to "Holidays", new_holiday_path, class: "btn btn-primary" %>
+  <%= link_to "Policies", new_policy_path, class: "btn btn-primary" %>
+</div>
