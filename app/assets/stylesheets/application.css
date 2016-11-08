@@ -27,6 +27,7 @@
  *= require reservation
  *= require payment
  *= require kennel
+ *= require customer
  *= require pawbookings_admins
  */
 
@@ -71,4 +72,17 @@ input {
 
 .border {
   border: 1px solid #9a9a9a;
+}
+
+.main_title {
+  font-family: 'Open Sans', sans-serif;
+  color: #48cd7e;
+  font-size: 2.5em;
+  margin-top: 3.7em;
+}
+
+.general_input {
+  width: 75%;
+  height: 2.5em;
+  border-radius: 0.4em;
 }

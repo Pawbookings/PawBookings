@@ -1,15 +1,40 @@
-<h1>Customer Veterinarian Information Registration</h1>
+<%= render partial: "shared/top_info" %>
 
-<%= form_for @customer_vet_info do |f| %>
-  <%= f.text_field :name, placeholder: " Vet Name" %>
-  <br>
-  <%= f.text_field :email, placeholder: " Vet Email" %>
-  <br>
-  <%= f.text_field :address, placeholder: " Vet Address" %>
-  <br>
-  <%= f.text_field :phone, placeholder: " Vet Phone" %>
-  <br>
-  <%= f.text_field :emergency_phone, placeholder: " Vet Emergency Phone" %>
-  <br>
-  <%= f.submit "Submit" %>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h5 class="main_title">Veterinarian Contact Information</h5>
+      <div class="vet_contact_info_div">
+        <%= form_for @customer_vet_info do |f| %>
+        <%= f.label :name %>
+        <br />
+        <%= f.text_field :name, placeholder: " Vet Name", class:"general_input" %>
+        <br>
+        <%= f.label :email %>
+        <br />
+        <%= f.text_field :email, placeholder: " Vet Email", class:"general_input" %>
+        <br>
+        <%= f.label :address %>
+        <br />
+        <%= f.text_field :address, placeholder: " Vet Address", class:"general_input" %>
+        <br>
+        <%= f.label :phone %>
+        <br />
+        <%= f.text_field :phone, placeholder: " Vet Phone", class:"general_input" %>
+        <br>
+        <%= f.label :emergency_phone %>
+        <br />
+        <%= f.text_field :emergency_phone, placeholder: " Vet Emergency Phone", class:"general_input" %>
+        <br>
+        <br>
+        <%= f.submit "Submit", class:"btn btn-success" %>
+        <br>
+        <br>
+        <br>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: "shared/footer" %>

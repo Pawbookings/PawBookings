@@ -3,10 +3,22 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="text-center">
-        <h5 class="kennel_dashboard_title">Kennel Dashboard</h5>
+        <h5 class="main_title">My Kennel Dashboard</h5>
+        <br />
         <% if !@kennel.nil? %>
           <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
         <% end %>
+        <div class="kennel_dashboard_user_info_div">
+          <h4 class="default_green_color">Owner Personal Info</h4>
+          <p><strong>Email: </strong><%= current_user.email.capitalize %></p>
+          <p><strong>First Name: </strong><%= current_user.first_name.capitalize %></p>
+          <p><strong>Last Name: </strong><%= current_user.last_name.capitalize %></p>
+          <p><strong>Phone: </strong><%= current_user.phone %></p>
+          <p><strong>Time Zone: </strong><%= current_user.time_zone %></p>
+          <%= button_to "Edit", edit_user_registration_path, class: "btn btn-primary", method: :get %>
+          <br />
+          <br />
+        </div>
         <%= image_tag @kennel.avatar.url(:thumb), class: "kennel_dashboard_avatar" if !@kennel.nil? %>
       </div>
       <div class="kennel_dashboard_general_info_div text-center">
@@ -47,7 +59,7 @@
               <%= f.submit "Update Kennel Info", class: "btn btn-success" %>
             <% end %>
         <% else %>
-          <h4 style="color:#48cd7e;">Register your Kennel</h4>
+          <h4 class="default_green_color">Register your Kennel</h4>
           <%= button_to "Kennel registration", new_kennel_path, class:"btn btn-success", method: :get %>
         <% end %>
       </div>
@@ -55,7 +67,7 @@
       <div class="most_booked_runs text-center">
         <% if !@reservations.nil? %>
           <div class="border"></div>
-          <h3 style="color:#48cd7e;">Most Booked Runs</h3>
+          <h3 class="default_green_color">Most Booked Runs</h3>
           <%= pie_chart @run_names_and_counts %>
         <% end %>
       </div>
@@ -63,9 +75,9 @@
       <div class="border"></div>
 
       <div class="kennel_dashboard_res_search text-center">
-        <h3 style="color:#48cd7e;">Search for reservations:</h3>
+        <h3 class="default_green_color">Search for reservations:</h3>
         <%= form_tag({controller: 'kennels', action: 'kennel_dashboard'}, method: 'get') do %>
-          <p>Search by:</p>
+          <p><strong>Search by:</strong></p>
           <%= radio_button_tag(:search_by, "reservationID", active: true) %>Reservation-ID
           <%= radio_button_tag(:search_by, "customer_last_name") %>Last-Name
           <%= radio_button_tag(:search_by, "customer_email") %>Email

@@ -10,10 +10,10 @@ Rails.application.routes.draw do
 
   resources :home
   resources :contact_messages, only: [:new, :create]
-  resources :customer_emergency_contacts, only: [:new, :create]
-  resources :customer_vet_infos, only: [:new, :create]
+  resources :customer_emergency_contacts, only: [:new, :create, :update, :destroy]
+  resources :customer_vet_infos, only: [:new, :create, :update, :destroy]
   resources :pets, only: [:new, :create]
-  resources :hours_of_operations, only: [:edit, :update, :create, :delete]
+  resources :hours_of_operations, only: [:edit, :update, :create, :destroy]
   resources :holidays
   resources :runs, only: [:new, :create, :update, :destroy]
   resources :amenities, only: [:new, :create, :update, :destroy]

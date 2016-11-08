@@ -247,21 +247,6 @@ ActiveRecord::Schema.define(version: 20160923190815) do
 
   add_index "kennels", ["user_id"], name: "index_kennels_on_user_id", using: :btree
 
-  create_table "payments", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "zip"
-    t.string   "ip_address"
-    t.string   "card_type"
-    t.string   "expiration_month"
-    t.string   "expiration_year"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "payments", ["user_id"], name: "index_payments_on_user_id", using: :btree
-
   create_table "pets", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"

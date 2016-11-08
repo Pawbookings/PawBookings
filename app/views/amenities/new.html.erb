@@ -33,7 +33,7 @@
       <br />
       <div class="all_amenities text-center">
         <% if !@amenities.blank? %>
-        <h3 style="color:#48cd7e;">Amenities listed:</h3>
+        <h3 class="default_green_color">Amenities listed:</h3>
           <% @amenities.each do |amenity| %>
             <%= form_for(amenity, url: {action: :update, id: amenity[:id]}) do |f|%>
               <%= f.label :title %>

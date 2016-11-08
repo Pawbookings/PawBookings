@@ -1,55 +1,71 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<%= render partial: "shared/top_info" %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="main_title">Edit My Info</h5>
+        <%= link_to "Back", :back %>
+        <br />
+        <br />
+      <div class="devise_edit_user_info_div">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, class:"general_input" %>
+          </div>
+          <div class="field">
+            <%= f.label :first_name %><br />
+            <%= f.text_field :first_name, class:"general_input" %>
+          </div>
+          <div class="field">
+            <%= f.label :last_name %><br />
+            <%= f.text_field :last_name, class:"general_input" %>
+          </div>
+          <div class="field">
+            <%= f.label :phone %><br />
+            <%= f.text_field :phone, class:"general_input" %>
+          </div>
+          <div class="field">
+            <%= f.label :time_zone %><br />
+            <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {}, {class: "signup_timezone_input"} %>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+          <div class="field">
+            <%= f.label :password %> <br /><i>(leave blank if you don't want to change it)</i><br />
+            <%= f.password_field :password, autocomplete: "off", class:"general_input" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off", class:"general_input" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :current_password %> <br /><i>(we need your current password to confirm your changes)</i><br />
+            <%= f.password_field :current_password, autocomplete: "off", class:"general_input" %>
+          </div>
+          <br />
+          <div class="actions">
+            <%= f.submit "Update Info", class: "btn btn-success" %>
+          </div>
+        <% end %>
+      </div>
+      <br />
+      <br />
+      <div class="devise_cancel_account_div">
+        <h3 style="color:#cd4848;">Cancel Account</h3>
+        <p><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure you want to delete your entire account?" }, method: :delete, class:"btn btn-danger" %></p>
+      </div>
+      <br />
+      <br />
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :phone1 %><br />
-    <%= f.text_field :phone1 %>
-  </div>
-  <div class="field">
-    <%= f.label :time_zone %><br />
-    <%= f.time_zone_select :time_zone, ActiveSupport::TimeWithZone.us_zones %>
-  </div>
+</div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<%= render partial: "shared/footer" %>

@@ -3,6 +3,8 @@ class CustomersController < ApplicationController
 
   def customer_dashboard
     @customer = User.find(current_user.id)
+    @customer_emergency_contact = CustomerEmergencyContact.where(user_id: current_user.id).first
+    @customer_vet_info = CustomerVetInfo.where(user_id: current_user.id).first
   end
 
   def create_user_image

@@ -73,7 +73,7 @@
       <br />
       <div class="all_runs_div text-center">
         <% if !@runs.empty? %>
-          <!-- <h3 style="color:#48cd7e;">Runs Listed:</h3> -->
+          <!-- <h3 class="default_green_color">Runs Listed:</h3> -->
           <% @runs.each do |run| %>
             <%= form_for(run, {action: :update, id: run[:id]}) do |f| %>
               <%= f.label :title %>
