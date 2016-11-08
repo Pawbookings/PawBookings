@@ -22,7 +22,8 @@
         <h4 class="default_green_color">Select your photo</h4>
         <% if @customer.user_image_file_size.nil? %>
           <%= form_tag({controller: "customers", action: "create_user_image"}, multipart: true, method: "post") do |f| %>
-            <%= file_field_tag :user_image %>
+            <%= file_field_tag :user_image, class:"btn btn-primary" %>
+            <br />
             <%= submit_tag "Submit", class:"btn btn-success" %>
           <% end %>
         <% end %>
