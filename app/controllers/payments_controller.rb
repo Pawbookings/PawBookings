@@ -316,7 +316,7 @@ class PaymentsController < ApplicationController
         reservation.reservationID = reservation[:id]
         reservation.save!
 
-        UserMailer.reservation_confirmation(reservation).deliver_now
+        UserMailer.reservation_confirmation(reservation[:id], @total_price).deliver_now
         return redirect_to reservation_path(id: @user[:id], customer_email: params[:customer_email], transID: params[:transId], res_id: reservation)
       else
         return redirect_to request.referrer

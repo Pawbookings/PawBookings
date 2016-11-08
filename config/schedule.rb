@@ -20,13 +20,8 @@
 # Learn more: http://github.com/javan/whenever
 
 
-every :day, :at => "4:00am" do
+every :day, :at => "3:00am" do
   runner "Reservation.new.mark_completed_reservations"
-end
-
-every :day, :at => "6:00am" do
   runner "Reservation.new.send_reservation_reminder_emails"
-end
-
-every :day :at => "8:00am" do
   runner "StandByReservation.new.check_for_open_reservations"
+end
