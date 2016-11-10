@@ -12,7 +12,7 @@
         <div class="kennel_dashboard_user_info_div">
           <div class="border"></div>
           <br />
-          <h4 class="default_green_color">Owner Personal Info</h4>
+          <h3 class="default_green_color">Owner Personal Info</h3>
           <br />
           <p><strong>Email: </strong><%= current_user.email.capitalize %></p>
           <p><strong>First Name: </strong><%= current_user.first_name.capitalize %></p>
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="kennel_dashboard_general_info_div text-center">
-        <h4 class="default_green_color">My Kennel</h4>
+        <h3 class="default_green_color">My Kennel</h3>
         <br />
         <% if !@kennel.nil? %>
             <%= form_for(@kennel, {id: @kennel.id}) do |f| %>
@@ -78,6 +78,7 @@
           <div class="border"></div>
           <h3 class="default_green_color">Most Booked Runs</h3>
           <%= pie_chart @run_names_and_counts %>
+          <br />
         <% end %>
       </div>
 

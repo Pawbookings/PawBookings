@@ -1,11 +1,17 @@
 <%= render partial: "shared/top_info" %>
 
 <div class="container-fluid">
-  <div class="row">
+  <div class="row text-center">
     <div class="col-xs-12">
-      <h5 class="holiday_registration_title">Holidays</h5>
+      <h5 class="main_title">Holidays</h5>
+      <br />
+      <div class="border"></div>
       <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
-      <div class="holiday_registration_div text-center">
+      <div class="border"></div>
+      <br />
+      <div class="holiday_registration_div">
+        <h3 class="default_green_color">New</h3>
+        <br />
         <%= form_for @holiday do |f| %>
           <%= f.label :date %>
           <br />
@@ -23,10 +29,9 @@
       </div>
       <div class="border"></div>
       <br />
-      <br />
-      <div class="all_holidays_div text-center">
+      <div class="all_holidays_div">
         <% if !@holidays.blank? %>
-          <h3>Holidays listed</h3>
+          <h3 class="default_green_color">Edit</h3>
           <% @holidays.each do |holiday| %>
             <p><strong>Date: </strong><%= unsanitize_date(holiday[:holiday_date].to_s) %></p>
             <p><strong>Description: </strong><%= holiday[:description] %></p>
@@ -34,6 +39,8 @@
             <br />
             <%= button_to "Delete", holiday_path(holiday[:id]), date: {confirm: "Are you sure you want to delete this holiday?"}, class:"btn btn-danger", method: :delete %>
             <br />
+            <br />
+            <div class="border"></div>
             <br />
           <% end %>
         <% end %>

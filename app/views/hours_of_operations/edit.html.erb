@@ -1,11 +1,17 @@
 <%= render partial: "shared/top_info" %>
 
 <div class="container-fluid">
-  <div class="row">
+  <div class="row text-center">
     <div class="col-xs-12">
-      <h5 class="hours_of_operation_title">Hours of Operation:</h5>
+      <h5 class="main_title">Hours of Operation</h5>
+      <br />
+      <div class="border"></div>
       <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
-      <div class="hours_of_operation_div text-center">
+      <div class="border"></div>
+      <br />
+      <div class="hours_of_operation_div">
+        <h3 class="default_green_color">Choose the hours you are open:</h3>
+        <br />
         <%= form_for(@hours_of_operation, {action: :update}) do |f| %>
           <%= f.label :monday %>
           <%= f.select :monday_open, options_for_select(hours_of_day_option, @hours_of_operation[:monday_open]) %>-<%= f.select :monday_close, options_for_select(hours_of_day_option, @hours_of_operation[:monday_close]) %>
@@ -36,6 +42,7 @@
           <br>
           <br>
           <%= f.submit "Update", class:"btn btn-primary" %>
+          <br>
           <br>
           <br>
         <% end %>
