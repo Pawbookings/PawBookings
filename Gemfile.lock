@@ -184,6 +184,8 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     rack (1.6.4)
+    rack-handlers (0.7.3)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.6)
@@ -303,6 +305,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   pry-stack_explorer
+  rack-handlers
   rails (= 4.2.6)
   rails_12factor
   recaptcha

@@ -16,6 +16,10 @@
   margin-bottom: 1em;
 }
 
+.kennel_avatar_btn {
+  margin-left: 10%;
+}
+
 .kennel_dashboard_input {
   width: 75%;
   height: 2.5em;

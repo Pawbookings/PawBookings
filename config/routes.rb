@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     resources :kennels, only: [:new, :create, :update]
     get "/kennel_dashboard",   to: "kennels#kennel_dashboard",   as: :kennel_dashboard
     get "/kennel_reservations", to: "kennels#kennel_reservations", as: :kennel_reservations
-    post "/kennel_searched_reservation", to: "kennels#kennel_searched_reservation", as: :kennel_searched_reservation
+    match "/kennel_searched_reservation", to: "kennels#kennel_searched_reservation", as: :kennel_searched_reservation, via: [:get, :post]
 
   # CustomersController
     get "/customer_dashboard", to: "customers#customer_dashboard", as: :customer_dashboard
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
     get "/all_blog_categories", to: "blog_categories#all_blog_categories", as: :all_blog_categories
 
   # Contracts
-    get "/customer_checkin_contract", to: "contracts#customer_checkin_contract", as: :customer_checkin_contract
+    match "/customer_checkin_contract", to: "contracts#customer_checkin_contract", as: :customer_checkin_contract, via: [:get, :post]
 
   # HomeController
     get "/kennel_or_customer", to: "home#kennel_or_customer", as: :kennel_or_customer

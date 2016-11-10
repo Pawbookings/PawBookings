@@ -4,6 +4,7 @@
   <div class="row">
     <div class="col-xs-12 text-center">
       <h5 class="main_title">My Dashboard</h5>
+      <div class="border"></div>
       <br />
       <div class="customer_dashboard_user_info_div">
         <h4 class="default_green_color">Primary Conact Info</h4>
@@ -39,7 +40,7 @@
       <br />
 
       <div class="customer_emrgency_contact_div">
-        <h4 class="default_green_color">Customer Emergency Contact</h4>
+        <h4 class="default_green_color">Secondary Emergency Contact</h4>
         <% if @customer_emergency_contact.nil? %>
           <%= button_to "Create New", new_customer_emergency_contact_path, class:"btn btn-success", method: :get %>
         <% else %>

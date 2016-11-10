@@ -4,12 +4,16 @@
     <div class="col-xs-12">
       <div class="text-center">
         <h5 class="main_title">My Kennel Dashboard</h5>
-        <br />
         <% if !@kennel.nil? %>
+          <br />
+          <div class="border"></div>
           <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
         <% end %>
         <div class="kennel_dashboard_user_info_div">
+          <div class="border"></div>
+          <br />
           <h4 class="default_green_color">Owner Personal Info</h4>
+          <br />
           <p><strong>Email: </strong><%= current_user.email.capitalize %></p>
           <p><strong>First Name: </strong><%= current_user.first_name.capitalize %></p>
           <p><strong>Last Name: </strong><%= current_user.last_name.capitalize %></p>
@@ -17,13 +21,21 @@
           <p><strong>Time Zone: </strong><%= current_user.time_zone %></p>
           <%= button_to "Edit", edit_user_registration_path, class: "btn btn-primary", method: :get %>
           <br />
+          <div class="border"></div>
           <br />
         </div>
-        <%= image_tag @kennel.avatar.url(:thumb), class: "kennel_dashboard_avatar" if !@kennel.nil? %>
       </div>
       <div class="kennel_dashboard_general_info_div text-center">
+        <h4 class="default_green_color">My Kennel</h4>
+        <br />
         <% if !@kennel.nil? %>
             <%= form_for(@kennel, {id: @kennel.id}) do |f| %>
+              <%= f.label :logo %>
+              <br />
+              <%= image_tag @kennel.avatar.url(:thumb), class: "kennel_dashboard_avatar" if !@kennel.nil? %>
+              <br />
+              <%= f.file_field :avatar, class: "kennel_dashboard_input text-center btn btn-primary kennel_avatar_btn" %>
+              <br />
               <%= f.label :kennel_name %>
               <br />
               <%= f.text_field :name, class: "kennel_dashboard_input" %>
@@ -52,9 +64,6 @@
               <br />
               <%= f.text_field :email, class: "kennel_dashboard_input" %>
               <br />
-              <%= f.label :logo %>
-              <br />
-              <%= f.file_field :avatar, class: "kennel_dashboard_input text-center" %>
               <br />
               <%= f.submit "Update Kennel Info", class: "btn btn-success" %>
             <% end %>

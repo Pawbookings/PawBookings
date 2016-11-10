@@ -117,7 +117,7 @@
               <%= f.text_field :weight_limit, value: run[:weight_limit], class:"kennel_dashboard_input" %>
               <br />
               <br />
-              <% if !run[:breeds_restricted].blank? %>
+              <% if run[:breeds_restricted] != "n/a" %>
                 <% breeds_restricted = JSON.parse(run[:breeds_restricted]) %>
                 <%= f.label :breeds_restricted %>
                 <div class="input-group-addon">

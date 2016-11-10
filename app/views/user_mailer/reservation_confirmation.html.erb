@@ -7,13 +7,13 @@
       <p><strong>Last Name: </strong><%= @reservation[:customer_last_name] %></p>
       <p><strong>Email: </strong><%= @reservation[:customer_email] %></p>
       <p><strong>Phone: </strong><%= @reservation[:customer_phone] %></p>
-      <p><strong>Check-In Date: </strong><%= sanitize_date(@reservation[:check_in_date].to_s) %></p>
-      <p><strong>Check-Out Date: </strong><%= sanitize_date(@reservation[:check_out_date].to_s) %></p>
+      <p><strong>Check-In Date: </strong><%= @reservation[:check_in_date] %></p>
+      <p><strong>Check-Out Date: </strong><%= @reservation[:check_out_date] %></p>
       <p><strong>Confirmation-ID: </strong><%= @reservation[:transID] %></p>
       <p><strong>Total-Price: </strong><%= @total_price %></p>
 
       <h3>Pets:</h3>
-      <% @reservation[:pet_ids].each do |pet_id| %>
+      <% JSON.parse(@reservation[:pet_ids]).each do |pet_id| %>
         <% pet = Pet.find(pet_id) %>
         <p><strong>Name: </strong><%= pet[:name] %></p>
         <p><strong>Cat or Dog: </strong><%= pet[:cat_or_dog] %></p>
@@ -25,7 +25,7 @@
       <% end %>
 
       <h3>Room Details:</h3>
-      <% @reservation[:room_details].each do |room_detail| %>
+      <% JSON.parse(@reservation[:room_details]).each do |room_detail| %>
         <p><%= room_detail %></p>
       <% end %>
     </div>

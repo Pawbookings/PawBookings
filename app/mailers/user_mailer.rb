@@ -22,6 +22,8 @@ class UserMailer < ApplicationMailer
   def reservation_confirmation(res_id, total_price)
     @total_price = total_price
     @reservation = Reservation.find(res_id)
+    @reservation[:check_in_date] = unsanitize_date @reservation[:check_in_date].to_s
+    @reservation[:check_out_date] = unsanitize_date @reservation[:check_out_date].to_s
     mail(to: @reservation[:customer_email], subject: 'PawBookings Reservation Confirmation')
   end
 
@@ -62,6 +64,24 @@ class UserMailer < ApplicationMailer
     @original_search_url = original_search_url
     @customer_email = customer_email
     mail(to: customer_email, subject: 'PawBookings stand-by reservation update')
+  end
+
+  def sanitize_date(param)
+    @new_date = []
+    split_params = param.split('/')
+    @new_date << split_params[1]
+    @new_date << split_params[0]
+    @new_date << split_params[2]
+    @new_date = @new_date.join("-")
+  end
+
+  def unsanitize_date(param)
+    @new_date = []
+    split_params = param.split('-')
+    @new_date << split_params[1]
+    @new_date << split_params[2]
+    @new_date << split_params[0]
+    @new_date = @new_date.join("/")
   end
 
 end
