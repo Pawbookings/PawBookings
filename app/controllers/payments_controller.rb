@@ -57,6 +57,7 @@ class PaymentsController < ApplicationController
       end
     else
     # user is logged in and has an account registered
+      @kennel = Kennel.find(@kennel_info["kennel_id"])
       @user = User.find(current_user.id)
       if Pet.where(user_id: @user[:id]).blank?
         # if user doesnt have pets associated with them

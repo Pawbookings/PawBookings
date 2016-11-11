@@ -5,6 +5,7 @@ class CustomersController < ApplicationController
     @customer = User.find(current_user.id)
     @customer_emergency_contact = CustomerEmergencyContact.where(user_id: current_user.id).first
     @customer_vet_info = CustomerVetInfo.where(user_id: current_user.id).first
+    @upcoming_reservations = Reservation.where(user_id: current_user.id, completed: "false")
   end
 
   def create_user_image

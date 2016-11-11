@@ -4,10 +4,12 @@
   <div class="row">
     <div class="col-xs-12 text-center">
       <h5 class="main_title">My Dashboard</h5>
+      <br />
       <div class="border"></div>
       <br />
       <div class="customer_dashboard_user_info_div">
-        <h4 class="default_green_color">Primary Conact Info</h4>
+        <h3 class="default_green_color">Primary Conact Info</h3>
+        <br />
         <p><strong>Email: </strong><%= current_user.email.capitalize %></p>
         <p><strong>First Name: </strong><%= current_user.first_name.capitalize %></p>
         <p><strong>Last Name: </strong><%= current_user.last_name.capitalize %></p>
@@ -19,8 +21,51 @@
       <div class="border"></div>
       <br />
 
-      <div class="customer_photo_div">
-        <h4 class="default_green_color">Select your photo</h4>
+      <div class="customer_dashboard_upcoming_reservations_div">
+        <h3 class="default_green_color">Upcoming Reservations</h3>
+        <br />
+        <% if @upcoming_reservations.blank? %>
+          <p><strong>•No upcoming reservations.</strong></p>
+        <% else %>
+          <% @upcoming_reservations.each do |res| %>
+            <p><strong>Contact First Name: </strong><%= res[:customer_first_name] %></p>
+            <p><strong>Contact Last Name: </strong><%= res[:customer_last_name] %></p>
+            <p><strong>Contact Email: </strong><%= res[:customer_email] %></p>
+            <p><strong>Contact Phone: </strong><%= res[:customer_phone] %></p>
+
+            <% JSON.parse(res[:room_details]).each do |key, val| %>
+              <p><strong><%= "•#{key}- $#{val}" %></strong></p>
+            <% end %>
+
+            <% if res[:amenity_details].nil? %>
+              <p><strong>•No amenties chosen.</strong></p>
+            <% else %>
+              <% JSON.parse(res[:amenity_details]).each do |title, description, price, quantity| %>
+              <div class="customer_dashboard_amenity_div">
+                <p><strong><%= title %></strong></p>
+                <p><strong><%= description %></strong></p>
+                <p><strong><%= "$#{price} x #{quantity}" %></strong></p>
+              </div>
+              <% end %>
+            <% end %>
+
+            <p><strong>Check-In: </strong><%= unsanitize_date(res[:check_in_date].to_s) %></p>
+            <p><strong>Check-Out: </strong><%= unsanitize_date(res[:check_out_date].to_s) %></p>
+            <p><strong>Total Price: <%= "$#{res[:total_price]}" %></strong></p>
+            <p><strong>ConfirmationID: </strong><%= res[:transID] %></p>
+            <br />
+          <% end %>
+
+
+        <% end %>
+      </div>
+      <br />
+      <div class="border"></div>
+      <br />
+
+      <div class="customer_dashboard_photo_div">
+        <h3 class="default_green_color">Select your photo</h3>
+        <br />
         <% if @customer.user_image_file_size.nil? %>
           <%= form_tag({controller: "customers", action: "create_user_image"}, multipart: true, method: "post") do |f| %>
             <%= file_field_tag :user_image, class:"btn btn-primary" %>
@@ -39,8 +84,9 @@
       <div class="border"></div>
       <br />
 
-      <div class="customer_emrgency_contact_div">
-        <h4 class="default_green_color">Secondary Emergency Contact</h4>
+      <div class="customer_dashboard_emrgency_contact_div">
+        <h3 class="default_green_color">Secondary Emergency Contact</h3>
+        <br />
         <% if @customer_emergency_contact.nil? %>
           <%= button_to "Create New", new_customer_emergency_contact_path, class:"btn btn-success", method: :get %>
         <% else %>
@@ -60,6 +106,7 @@
             <br />
             <%= f.submit "Update", class:"btn btn-primary" %>
           <% end %>
+          <br />
           <%= button_to "Delete", customer_emergency_contact_path(@customer_emergency_contact[:id]), data: {confirm: "Are you sure you want to delete your Secondary Emergency Contact"}, class:"btn btn-danger", method: :delete %>
         <% end %>
       </div>
@@ -67,8 +114,9 @@
       <div class="border"></div>
       <br />
 
-      <div class="customer_vet_info_div">
-        <h4 class="default_green_color">Veterinarian Contact Info</h4>
+      <div class="customer_dashboard_vet_info_div">
+        <h3 class="default_green_color">Veterinarian Contact Info</h3>
+        <br />
         <% if @customer_vet_info.nil? %>
           <%= button_to "Create New", new_customer_vet_info_path, class:"btn btn-success", method: :get %>
         <% else %>
@@ -96,11 +144,22 @@
             <br />
             <%= f.submit "Update", class: "btn btn-primary" %>
           <% end %>
+          <br />
             <%= button_to "Delete", customer_vet_info_path(@customer_vet_info[:id]), class:"btn btn-danger", data: {confirm: "Are you sure you want to delete your Vet Contact Info?"}, method: :delete %>
         <% end %>
         <br />
+        <div class="border"></div>
         <br />
       </div>
+
+      <div class="customer_dashboard_pets_div">
+        <h3 class="default_green_color">My Pets</h3>
+        <br />
+        <%= button_to "View", new_pet_path, class:"btn btn-primary", method: :get %>
+        <br />
+        <br />
+      </div>
+
     </div>
   </div>
 </div>

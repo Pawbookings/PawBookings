@@ -1,1 +1,9 @@
+/* Customer Dashboard */
 
+.customer_dashboard_amenity_div {
+  background-color: #51d888;
+  margin-left: 2em;
+  margin-right: 2em;
+  padding: 0.5em;
+  border-radius: 1em;
+}

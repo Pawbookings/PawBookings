@@ -1,21 +1,105 @@
-<h1>Pet Registration</h1>
+<%= render partial: "shared/top_info" %>
 
-<%= form_for @pet do |f| %>
-  <%= f.text_field :name, placeholder: " Name" %>
-  <br>
-  <%= f.label :cat_or_dog %>
-  <%= f.select :cat_or_dog, options_for_select(cat_or_dog_only_option) %>
-  <br>
-  <%= f.label :breed %>
-  <%= f.select :breed, options_for_select(breed_option) %>
-  <br>
-  <%= f.text_field :weight, placeholder: " Pets weight" %>
-  <br>
-  <%= f.label :spay_or_neutered %>
-  <%= f.select :spay_or_neutered, options_for_select(yes_or_no_option)%>
-  <br>
-  <%= f.text_area :vaccinations, placeholder: " Vaccinations Given in Past 6 Months" %>
-  <br>
-  <%= f.submit "Submit" %>
-  <%= f.submit "Submit and create another 'Pet'", name: "create_another_pet" %>
-<% end %>
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="main_title">Pets</h5>
+      <br />
+      <div class="border"></div>
+      <br />
+      <div class="new_pet_div">
+        <h3 class="default_green_color">New</h3>
+        <br />
+        <%= form_for @pet do |f| %>
+          <%= f.label :pet_name %>
+          <br />
+          <%= f.text_field :name, placeholder: " Pet Name", class:"general_input" %>
+          <br>
+          <br>
+          <%= f.label :cat_or_dog %>
+          <br />
+          <%= f.select :cat_or_dog, options_for_select(cat_or_dog_only_option) %>
+          <br>
+          <br>
+          <%= f.label :breed %>
+          <br />
+          <%= f.select :breed, options_for_select(breed_option) %>
+          <br>
+          <br>
+          <%= f.label :weight %>
+          <br />
+          <%= f.text_field :weight, placeholder: " Pets weight" %>
+          <br>
+          <br>
+          <%= f.label :spay_or_neutered %>
+          <br />
+          <%= f.select :spay_or_neutered, options_for_select(false_or_true_option)%>
+          <br>
+          <br>
+          <%= f.label :vaccinated %>
+          <br />
+          <%= f.select :vaccinations, options_for_select(false_or_true_option) %>
+          <br>
+          <br>
+          <%= f.submit "Add New", class:"btn btn-success" %>
+          <br>
+        <% end %>
+      </div>
+
+      <br />
+      <div class="border"></div>
+      <br />
+
+      <div class="edit_pet_div">
+        <% if !@pets.blank? %>
+        <h3 class="default_green_color">Edit</h3>
+        <br />
+          <% @pets.each do |pet| %>
+            <%= form_for(pet, {action: :update}) do |f| %>
+              <%= f.label :pet_name %>
+              <br />
+              <%= f.text_field :name, placeholder: " Pet Name", class:"general_input" %>
+              <br>
+              <br>
+              <%= f.label :cat_or_dog %>
+              <br />
+              <%= f.select :cat_or_dog, options_for_select(cat_or_dog_only_option, pet[:cat_or_dog]) %>
+              <br>
+              <br>
+              <%= f.label :breed %>
+              <br />
+              <%= f.select :breed, options_for_select(breed_option, pet[:breed]) %>
+              <br>
+              <br>
+              <%= f.label :weight %>
+              <br />
+              <%= f.text_field :weight, placeholder: " Pets weight", class:"general_input" %>
+              <br>
+              <br>
+              <%= f.label :spay_or_neutered %>
+              <br />
+              <%= f.select :spay_or_neutered, options_for_select(false_or_true_option, pet[:spay_or_neutered])%>
+              <br>
+              <br>
+              <%= f.label :vaccinated %>
+              <br />
+              <%= f.select :vaccinations, options_for_select(false_or_true_option, pet[:vaccinations]) %>
+              <br>
+              <br>
+              <%= f.submit "Update", class:"btn btn-primary" %>
+              <br />
+              <br />
+              <%= button_to "Delete", pet_path(pet[:id]), class:"btn btn-danger", method: :delete %>
+              <br />
+              <div class="border"></div>
+              <br />
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%= render partial: "shared/footer" %>

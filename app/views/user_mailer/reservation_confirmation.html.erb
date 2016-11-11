@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row text-center">
     <div clas="col-xs-12">
-      <h1>Reservation Confirmation Email</h1>
+      <h1 class="default_green_color">Reservation Confirmation Email</h1>
       <p><strong>Reservation-ID: </strong><%= @reservation[:id] %></p>
       <p><strong>First Name: </strong><%= @reservation[:customer_first_name] %></p>
       <p><strong>Last Name: </strong><%= @reservation[:customer_last_name] %></p>
@@ -12,7 +12,7 @@
       <p><strong>Confirmation-ID: </strong><%= @reservation[:transID] %></p>
       <p><strong>Total-Price: </strong><%= @total_price %></p>
 
-      <h3>Pets:</h3>
+      <h3 class="default_green_color">Pets:</h3>
       <% JSON.parse(@reservation[:pet_ids]).each do |pet_id| %>
         <% pet = Pet.find(pet_id) %>
         <p><strong>Name: </strong><%= pet[:name] %></p>
@@ -24,9 +24,22 @@
         <p><strong>Special instructions: </strong><%= pet[:special_instructions] %></p>
       <% end %>
 
-      <h3>Room Details:</h3>
-      <% JSON.parse(@reservation[:room_details]).each do |room_detail| %>
-        <p><%= room_detail %></p>
+      <h3 class="default_green_color">Room Details:</h3>
+      <% JSON.parse(@reservation[:room_details]).each do |key, val| %>
+        <p><strong><%= "•#{key}- $#{val}" %></strong></p>
+      <% end %>
+
+      <h3 class="default_green_color">Amenity Details</h3>
+      <% if @reservation[:amenity_details].nil? %>
+        <p><strong>•No Amenities Chosen.</strong></p>
+      <% else %>
+        <% JSON.parse(@reservation[:amenity_details]).each do |title, description, price, quantity| %>
+          <p><strong><%= title %></strong></p>
+          <p><strong><%= description %></strong></p>
+          <p><strong><%= "$#{price} x #{quantity}" %></strong></p>
+          <br />
+          <br />
+        <% end %>
       <% end %>
     </div>
   </div>
