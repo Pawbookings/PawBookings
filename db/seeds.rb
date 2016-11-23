@@ -77,21 +77,21 @@ Amenity.create!(kennel_id: 1, title: "Doggy Day-SPA", description: "A relaxing t
 
 
 # 1
-reservation = Reservation.create!(kennel_id: 1, user_id: 2, customer_first_name: 'John', customer_last_name: 'Smith', customer_email: 'johnsmith@gmail.com', customer_phone: '4074081234', pet_ids: '[1,2]', run_ids: '[1]', check_in_date: '2016-12-12', check_out_date: '2016-12-13', total_price: 96.21, room_details: "[[\"The Large Room\", 90]]")
+reservation = Reservation.create!(kennel_id: 1, user_id: 2, customer_first_name: 'John', customer_last_name: 'Smith', customer_email: 'johnsmith@gmail.com', customer_phone: '4074081234', pet_ids: '[1,2]', run_ids: '[1]', check_in_date: '2016-12-12', check_out_date: '2016-12-13', total_price: 96.21, room_details: "[[\"The Large Room\", 90]]", completed: "false", transID: "87345876987965786")
 reservation.reservationID = 1
 reservation.kennelID = 1
 reservation.userID = 2
 reservation.save!
 
 # 2
-reservation = Reservation.create!(kennel_id: 1, user_id: 3, customer_first_name: 'Luke', customer_last_name: 'Skywalker', customer_email: 'lskywalker@gmail.com', customer_phone: '4071231234', pet_ids: '[3]', run_ids: '[1]', check_in_date: '2016-12-01', check_out_date: '2016-12-02', total_price: 96.21, room_details: "[[\"The Large Room\", 90]]")
+reservation = Reservation.create!(kennel_id: 1, user_id: 3, customer_first_name: 'Luke', customer_last_name: 'Skywalker', customer_email: 'lskywalker@gmail.com', customer_phone: '4071231234', pet_ids: '[3]', run_ids: '[1]', check_in_date: '2016-12-01', check_out_date: '2016-12-02', total_price: 96.21, room_details: "[[\"The Large Room\", 90]]", completed: "false", transID: "87345876987965786")
 reservation.reservationID = 2
 reservation.kennelID = 1
 reservation.userID = 3
 reservation.save!
 
 # 3
-reservation = Reservation.create!(kennel_id: 1, user_id: 4, customer_first_name: 'Mary', customer_last_name: 'Jane', customer_email: 'mjane@gmail.com', customer_phone: '4073214321', pet_ids: '[4]', run_ids: '[1]', check_in_date: '2016-12-10', check_out_date: '2016-12-11', total_price: 96.21, room_details: "[[\"The Large Room\", 90]]")
+reservation = Reservation.create!(kennel_id: 1, user_id: 4, customer_first_name: 'Mary', customer_last_name: 'Jane', customer_email: 'mjane@gmail.com', customer_phone: '4073214321', pet_ids: '[4]', run_ids: '[1]', check_in_date: '2016-12-10', check_out_date: '2016-12-11', total_price: 96.21, room_details: "[[\"The Large Room\", 90]]", completed: "false", transID: "87345876987965786")
 reservation.reservationID = 3
 reservation.kennelID = 1
 reservation.userID = 4

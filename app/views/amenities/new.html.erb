@@ -10,7 +10,7 @@
       <div class="border"></div>
       <br />
       <div class="amenity_registration_div">
-        <h3 class="default_green_color">New</h3>
+        <h3 class="default_green_color">Add New</h3>
         <br />
         <%= form_for @amenity do |f| %>
           <%= f.label :title %>
@@ -38,7 +38,7 @@
       <br />
       <div class="all_amenities">
         <% if !@amenities.blank? %>
-        <h3 class="default_green_color">Edit</h3>
+        <h3 class="default_green_color">Edit Existing</h3>
         <br />
           <% @amenities.each do |amenity| %>
             <%= form_for(amenity, url: {action: :update, id: amenity[:id]}) do |f|%>

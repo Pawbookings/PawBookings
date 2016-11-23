@@ -173,10 +173,10 @@
             <br>
             <%= label_tag "Type of pet" %>
             <br>
-            <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), onclick: "petTypeOptions(#{counter});", class:"payment_input" %>
+            <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), class:"payment_input", onchange:"return paymentChangeBreed();" %>
             <br>
             <br>
-            <div style="" class="pet_breed_selection_<%= counter %>">
+            <div class="pet_breed_selection_<%= counter %>">
               <%= label_tag "Breed" %>
               <br>
               <%= select_tag "pet_breed_#{counter}", options_for_select(breed_option), class:"payment_input" %>
@@ -207,10 +207,24 @@
           <% end %>
           <%= submit_tag "Book Now!", class: "btn btn-success payment_submt_btn" %>
         </div>
-
-
     </div>
   </div>
 </div>
 
 <%= render partial: "shared/footer" %>
+
+<script type="text/javascript">
+function paymentChangeBreed(){
+  var total_pets = parseInt("<%= @total_pets %>");
+  while(total_pets > 0 ){
+    if ($("#pet_type_"+total_pets).val() == "dog"){
+      console.log($("#pet_type_"+total_pets).val());
+      $(".pet_breed_selection_"+total_pets).show();
+    } else {
+      console.log("HITTIN IT!!");
+      $(".pet_breed_selection_"+total_pets).hide();
+    }
+    total_pets -= 1;
+  }
+}
+</script>

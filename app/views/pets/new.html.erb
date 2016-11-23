@@ -8,7 +8,7 @@
       <div class="border"></div>
       <br />
       <div class="new_pet_div">
-        <h3 class="default_green_color">New</h3>
+        <h3 class="default_green_color">Create New</h3>
         <br />
         <%= form_for @pet do |f| %>
           <%= f.label :pet_name %>
@@ -52,7 +52,7 @@
 
       <div class="edit_pet_div">
         <% if !@pets.blank? %>
-        <h3 class="default_green_color">Edit</h3>
+        <h3 class="default_green_color">Edit Existing</h3>
         <br />
           <% @pets.each do |pet| %>
             <%= form_for(pet, {action: :update}) do |f| %>

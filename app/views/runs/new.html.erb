@@ -10,7 +10,7 @@
         <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
         <div class="border"></div>
         <br />
-        <h3 class="default_green_color">New</h3>
+        <h3 class="default_green_color">Add New</h3>
         <br />
         <%= form_for @run do |f| %>
           <%= f.label :title %>
@@ -63,7 +63,7 @@
             <input type="checkbox" name="breed_2" value="german_shephered">German Shephered
             <br />
             <br />
-            <input type="checkbox" name="breed_3" value="rot_weiler">Rot-Weiler
+            <input type="checkbox" name="breed_3" value="rottweiler">RottWeiler
             <br />
             <br />
             <input type="checkbox" name="breed_4" value="doberman_pincher">Doberman Pincher
@@ -83,11 +83,10 @@
       </div>
       <div class="border"></div>
       <br />
-      <h3 class="default_green_color">Edit</h3>
-      <br />
       <div class="all_runs_div text-center">
         <% if !@runs.empty? %>
-          <!-- <h3 class="default_green_color">Runs Listed:</h3> -->
+        <h3 class="default_green_color">Edit Existing</h3>
+        <br />
           <% @runs.each do |run| %>
             <%= form_for(run, {action: :update, id: run[:id]}) do |f| %>
               <%= f.label :title %>
@@ -131,9 +130,10 @@
               <%= f.text_field :weight_limit, value: run[:weight_limit], class:"kennel_dashboard_input" %>
               <br />
               <br />
+
+              <%= f.label :breeds_restricted %>
               <% if run[:breeds_restricted] != "n/a" %>
                 <% breeds_restricted = JSON.parse(run[:breeds_restricted]) %>
-                <%= f.label :breeds_restricted %>
                 <div class="input-group-addon">
                   <% if breeds_restricted.include? 'pitbull' %>
                     <input type="checkbox" name="breed_1" value="pitbull" checked="checked">Pitbull
@@ -157,13 +157,13 @@
                     <br />
                   <% end %>
 
-                  <% if breeds_restricted.include? 'rot_weiler' %>
-                    <input type="checkbox" name="breed_3" value="rot_weiler" checked="checked">Rot-Weiler
+                  <% if breeds_restricted.include? 'rottweiler' %>
+                    <input type="checkbox" name="breed_3" value="rottweiler" checked="checked">RottWeiler
                     <br />
                     <br />
                   <% end %>
-                  <% if !breeds_restricted.include? 'rot_weiler' %>
-                    <input type="checkbox" name="breed_3" value="rot_weiler">Rot-Weiler
+                  <% if !breeds_restricted.include? 'rottweiler' %>
+                    <input type="checkbox" name="breed_3" value="rottweiler">RottWeiler
                     <br />
                     <br />
                   <% end %>
@@ -179,6 +179,20 @@
                     <br />
                   <% end %>
                 </div>
+
+              <% else %>
+                <input type="checkbox" name="breed_1" value="pitbull">Pitbull
+                <br />
+                <br />
+                <input type="checkbox" name="breed_2" value="german_shephered">German Shephered
+                <br />
+                <br />
+                <input type="checkbox" name="breed_3" value="rottweiler">RottWeiler
+                <br />
+                <br />
+                <input type="checkbox" name="breed_4" value="doberman_pincher">Doberman Pincher
+                <br />
+                <br />
               <% end %>
               <br />
               <%= f.label :how_many_of_these_runs_do_you_have_total %>
@@ -189,13 +203,12 @@
               <%= f.submit "Update", class:"btn btn-primary" %>
               <br />
               <br />
-              <%= button_to "Delete", run_path(run[:id]), data: {confirm: "Are you sure you want to delete this run?"}, class:"btn btn-danger", method: :delete %>
-              <br />
-              <div class="border"></div>
-              <br />
-              <br />
             <% end %>
+            <%= button_to "Delete", run_path(run[:id]), data: {confirm: "Are you sure you want to delete this run?"}, class:"btn btn-danger", method: :delete %>
           <% end %>
+          <br />
+          <br />
+          <div class="border"></div>
         <% end %>
       </div>
     </div>

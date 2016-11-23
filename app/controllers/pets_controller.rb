@@ -7,14 +7,16 @@ class PetsController < ApplicationController
   end
 
   def create
+    params[:pet][:breed] = "cat" if params[:pet][:cat_or_dog] == "cat"
     pet = Pet.new(pet_params)
-    user = User.where(id: current_user.id).first
-    if pet.valid? && user.pets.create(user_id: user.id, name: pet.name, cat_or_dog: pet.cat_or_dog, breed: pet.breed, weight: pet.weight, vaccinations: pet.vaccinations, spay_or_neutered: pet.spay_or_neutered)
+    user = User.find(current_user.id)
+    if pet.valid? && user.pets.create!(user_id: user.id, name: pet.name, cat_or_dog: pet.cat_or_dog, breed: pet.breed, weight: pet.weight, vaccinations: pet.vaccinations, spay_or_neutered: pet.spay_or_neutered)
       redirect_to new_pet_path
     end
   end
 
   def update
+    params[:pet][:breed] = "cat" if params[:pet][:cat_or_dog] == "cat"
     pet = Pet.find(params[:id])
     pet.name = params[:pet][:name]
     pet.cat_or_dog = params[:pet][:cat_or_dog]

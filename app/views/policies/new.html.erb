@@ -10,7 +10,7 @@
       <div class="border"></div>
       <br />
       <div class="policy_registration_div">
-        <h3 class="default_green_color">New</h3>
+        <h3 class="default_green_color">Add New</h3>
         <br />
         <%= form_for @policy do |f| %>
           <%= f.label :policy_description %>
@@ -28,7 +28,7 @@
       <br />
       <div class="all_policies_div">
         <% if !@policies.blank? %>
-          <h3 class="default_green_color">Edit</h3>
+          <h3 class="default_green_color">Edit Existing</h3>
           <br />
           <% @policies.each do |policy| %>
             <%= form_for(policy, url: {action: :update, id: policy[:id]}) do |f| %>

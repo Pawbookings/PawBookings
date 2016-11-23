@@ -27,36 +27,79 @@
         <% if @upcoming_reservations.blank? %>
           <p><strong>•No upcoming reservations.</strong></p>
         <% else %>
-          <% @upcoming_reservations.each do |res| %>
-            <p><strong>Contact First Name: </strong><%= res[:customer_first_name] %></p>
-            <p><strong>Contact Last Name: </strong><%= res[:customer_last_name] %></p>
-            <p><strong>Contact Email: </strong><%= res[:customer_email] %></p>
-            <p><strong>Contact Phone: </strong><%= res[:customer_phone] %></p>
-
-            <% JSON.parse(res[:room_details]).each do |key, val| %>
-              <p><strong><%= "•#{key}- $#{val}" %></strong></p>
-            <% end %>
-
-            <% if res[:amenity_details].nil? %>
-              <p><strong>•No amenties chosen.</strong></p>
-            <% else %>
-              <% JSON.parse(res[:amenity_details]).each do |title, description, price, quantity| %>
-              <div class="customer_dashboard_amenity_div">
-                <p><strong><%= title %></strong></p>
-                <p><strong><%= description %></strong></p>
-                <p><strong><%= "$#{price} x #{quantity}" %></strong></p>
-              </div>
+          <div class="customer_dash_individual_reservation_div">
+            <% @upcoming_reservations.each do |res| %>
+              <% kennel = Kennel.find(res[:kennel_id]) %>
+              <strong>ReservationID:</strong>
+              <br />
+              <%= res[:id] %>
+              <br />
+              <br />
+              <strong>Contact First Name: </strong>
+              <br />
+              <%= res[:customer_first_name].capitalize %>
+              <br />
+              <br />
+              <strong>Contact Last Name: </strong>
+              <br />
+              <%= res[:customer_last_name].capitalize %>
+              <br />
+              <br />
+              <strong>Contact Email: </strong>
+              <br />
+              <%= res[:customer_email] %>
+              <br />
+              <br />
+              <strong>Contact Phone: </strong>
+              <br />
+              <%= res[:customer_phone] %>
+              <br />
+              <br />
+              <strong>Kennel Info</strong>
+              <br />
+              <br />
+              <%= label_tag :name %>:
+              <br />
+              <%= kennel[:name] %>
+              <br />
+              <br />
+              <%= label_tag :address %>:
+              <br />
+              <%= kennel[:address] %>
+              <br />
+              <%= kennel[:city] %>, <%= kennel[:state] %> <%= kennel[:zip] %>
+              <br />
+              <br />
+              <%= label_tag :phone %>:
+              <br />
+              <%= kennel[:phone] %>
+              <br />
+              <br />
+              <% JSON.parse(res[:room_details]).each do |key, val| %>
+                <p><strong><%= "•#{key}- $#{val}" %></strong></p>
               <% end %>
+              <br />
+              <strong>Amenities:</strong>
+              <br />
+              <% if res[:amenity_details].nil? %>
+                <p><strong>•No amenties chosen.</strong></p>
+              <% else %>
+                <% JSON.parse(res[:amenity_details]).each do |title, description, price, quantity| %>
+                <div class="customer_dashboard_amenity_div">
+                  <p><strong><%= title %></strong></p>
+                  <p><strong><%= description %></strong></p>
+                  <p><strong><%= "$#{price} x #{quantity}" %></strong></p>
+                </div>
+                <% end %>
+              <% end %>
+              <br />
+              <p><strong>Check-In: </strong><%= unsanitize_date(res[:check_in_date].to_s) %></p>
+              <p><strong>Check-Out: </strong><%= unsanitize_date(res[:check_out_date].to_s) %></p>
+              <p><strong>Total Price w/tax: <%= "$#{res[:total_price]}" %></strong></p>
+              <p><strong>ConfirmationID: </strong><%= res[:transID] %></p>
+              <br />
             <% end %>
-
-            <p><strong>Check-In: </strong><%= unsanitize_date(res[:check_in_date].to_s) %></p>
-            <p><strong>Check-Out: </strong><%= unsanitize_date(res[:check_out_date].to_s) %></p>
-            <p><strong>Total Price: <%= "$#{res[:total_price]}" %></strong></p>
-            <p><strong>ConfirmationID: </strong><%= res[:transID] %></p>
-            <br />
-          <% end %>
-
-
+          </div>
         <% end %>
       </div>
       <br />
@@ -153,9 +196,8 @@
       </div>
 
       <div class="customer_dashboard_pets_div">
-        <h3 class="default_green_color">My Pets</h3>
         <br />
-        <%= button_to "View", new_pet_path, class:"btn btn-primary", method: :get %>
+        <%= button_to "My Pets", new_pet_path, class:"btn btn-primary", method: :get %>
         <br />
         <br />
       </div>

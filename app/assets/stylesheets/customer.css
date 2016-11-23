@@ -1,9 +1,16 @@
 /* Customer Dashboard */
 
 .customer_dashboard_amenity_div {
-  background-color: #51d888;
+  background-color: rgba(152, 152, 152, 0.17);
   margin-left: 2em;
   margin-right: 2em;
   padding: 0.5em;
   border-radius: 1em;
+}
+
+.customer_dash_individual_reservation_div {
+  padding: 2em;
+  background-color: #51d888;
+  border-radius: 2em;
+  color: white;
 }

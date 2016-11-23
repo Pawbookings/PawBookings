@@ -91,8 +91,12 @@
         <% if @reservation[:amenity_details].nil? %>
         <p><strong>•No Amenities Chosen.</strong></p>
         <% else %>
-          <% @reservation[:amenity_details].each do |amenity| %>
-            <%= amenity %>
+          <% JSON.parse(@reservation[:amenity_details]).each do |name, description, price, quanity| %>
+            <strong><%= "•#{name}: #{description}" %></strong>
+            <br />
+            <strong><%= "$#{price} x #{quanity}" %></strong>
+            <br />
+            <br />
           <% end %>
         <% end %>
       </div>
