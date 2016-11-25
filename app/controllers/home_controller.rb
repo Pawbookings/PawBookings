@@ -27,11 +27,11 @@ class HomeController < ApplicationController
   end
 
   def get_user_info(kennel_rating)
-    @user = User.find(kr.userID)
+    @user = User.find(kennel_rating.userID)
   end
 
   def get_kennel_info(kennel_rating)
-    @kennel = Kennel.find(kr.kennelID)
+    @kennel = Kennel.find(kennel_rating.kennelID)
   end
 
   def kennel_or_customer
