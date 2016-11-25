@@ -20,6 +20,7 @@ class DeviseRegistrationsController < Devise::RegistrationsController
     yield resource if block_given?
 
     if verify_recaptcha(model: @user) && resource.persisted?
+      puts "RECAPTCHA VERIFIED!!!!!!!!!!!!!"
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
@@ -31,6 +32,7 @@ class DeviseRegistrationsController < Devise::RegistrationsController
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
     else
+      puts "RECAPTCHA FAILED!!!!!!!!!!!!!!"
       clean_up_passwords resource
       set_minimum_password_length
       redirect_to request.referrer
