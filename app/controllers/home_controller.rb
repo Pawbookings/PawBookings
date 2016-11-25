@@ -10,26 +10,28 @@ class HomeController < ApplicationController
        root_path
     end
 
+
     @kennel_ratings = KennelRating.where(rating: 5).last(3).reverse
     testimonials
   end
 
   def testimonials
     @testimonials = []
-    @kennel_ratings.each do |kr|
-      @kr = kr
-      get_user_info
-      get_kennel_info
-      @testimonials << [@user.first_name, @user.last_name, @user.user_image, @kennel.name, @kennel.city, @kennel.state, kr.comment]
+    if !@kennel_ratings.nil?
+      @kennel_ratings.each do |kr|
+        get_user_info(kr)
+        get_kennel_info(kr)
+        @testimonials << [@user.first_name, @user.last_name, @user.user_image, @kennel.name, @kennel.city, @kennel.state, kr.comment]
+      end
     end
   end
 
-  def get_user_info
-    @user = User.find(@kr.userID)
+  def get_user_info(kennel_rating)
+    @user = User.find(kr.userID)
   end
 
-  def get_kennel_info
-    @kennel = Kennel.find(@kr.kennelID)
+  def get_kennel_info(kennel_rating)
+    @kennel = Kennel.find(kr.kennelID)
   end
 
   def kennel_or_customer
