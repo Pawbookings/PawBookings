@@ -17,7 +17,7 @@ class HomeController < ApplicationController
 
   def testimonials
     @testimonials = []
-    if !@kennel_ratings.nil?
+    if !@kennel_ratings.blank?
       @kennel_ratings.each do |kr|
         get_user_info(kr)
         get_kennel_info(kr)
