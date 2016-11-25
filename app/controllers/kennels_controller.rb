@@ -262,8 +262,11 @@ class KennelsController < ApplicationController
   def kennel_searched_reservation
     @reservation = Reservation.find(params[:id])
     @pets = []
+    @pet_ids = []
     JSON.parse(@reservation[:pet_ids]).each do |p_id|
-      @pets << Pet.find(p_id)
+      pet = Pet.find(p_id)
+      @pets << pet
+      @pet_ids << pet[:id]
     end
   end
 

@@ -11,7 +11,7 @@ class ContractsController < ApplicationController
 
   def contract_pets
     @pets = []
-    params[:pets].each do |pet_id|
+    JSON.parse(params[:pets]).each do |pet_id|
       @pets << Pet.find(pet_id)
     end
   end

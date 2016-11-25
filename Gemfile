@@ -43,5 +43,5 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   # Unicorn is needed to run multiple threads when requesting PDF.
-  gem 'unicorn'
+  gem "unicorn-rails"
 end
