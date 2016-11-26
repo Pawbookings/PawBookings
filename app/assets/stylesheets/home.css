@@ -164,3 +164,52 @@
 .kennel_or_customer_image {
   width: 100%;
 }
+
+
+@media (min-width: 992px) {
+
+  .top_hero_text {
+    padding-left: 10em;
+    padding-right: 10em;
+  }
+
+  .bottom_hero_text {
+    padding-left: 20em;
+    padding-right: 20em;
+  }
+
+  .why_bottom_text {
+    padding-left: 10em;
+    padding-right: 10em;
+  }
+
+  .why_features_details {
+    padding-left: 5em;
+    padding-right: 5em;
+  }
+
+  .testimonials_bottom_text {
+    padding-left: 10em;
+    padding-right: 10em;
+  }
+
+  .testimonial_row {
+    margin-right: 15em;
+    margin-left: 15em;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .testimonial_row {
+    margin-right: 25em;
+    margin-left: 25em;
+  }
+}
+
+@media (min-width: 2000px) {
+  .testimonial_row {
+    margin-right: 50em;
+    margin-left: 50em;
+  }
+}
