@@ -159,6 +159,7 @@
 .kennel_or_customer_link {
   color: #3276b0;
   text-decoration: underline;
+  text-shadow: 0px 0px 1px #ffffff;
 }
 
 .kennel_or_customer_image {
@@ -196,6 +197,10 @@
   .testimonial_row {
     margin-right: 15em;
     margin-left: 15em;
+  }
+
+  .kennel_or_customer_link {
+    font-size: 2em;
   }
 
 }

@@ -1,8 +1,3 @@
-@media (max-width: 992px) {
-  .kennel_dashboard_calendar {
-    display: none;
-  }
-}
 
 .kennel_dashboard_title {
   font-family: 'Open Sans', sans-serif;
@@ -14,6 +9,7 @@
 
 .kennel_dashboard_avatar {
   margin-bottom: 1em;
+  border-radius: 100%;
 }
 
 .kennel_avatar_btn {
@@ -40,6 +36,13 @@
 
 .kennel_dashboard_option_btns_div {
   line-height: 5em;
+}
+
+.kennel_reservations_individual_div {
+  background-color: #ececec;
+  border-radius: 4em;
+  padding: 2em;
+  margin-bottom: 3em;
 }
 
 /* Kennel Registration*/
@@ -122,4 +125,16 @@
   margin-top: 3.7em;
   text-align: center;
   text-decoration: underline;
+}
+
+@media (max-width: 679px) {
+  .kennel_dashboard_calendar {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .kennel_dashboard_input {
+    width: 20%;
+  }
 }

@@ -74,7 +74,13 @@
     width: 20%;
   }
 
-  .login_submit_btn {
+  .signup_timezone_input, .signup_submit_btn, .signup_input, .login_input, .login_submit_btn {
     width: 20%;
+  }
+
+  .kennel_or_customer_div {
+    padding-right: 20em;
+    padding-left: 20em;
+    padding-bottom: 5em;
   }
 }

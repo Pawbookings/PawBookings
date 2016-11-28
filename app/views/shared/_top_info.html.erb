@@ -14,17 +14,25 @@
     <div class="col-md-8">
       <ul class="top_info_desktop_nav_ul">
         <li class="top_info_desktop_nav_li"><%= link_to "Home", '/', class:"default_white_color" %></li>
-        <li class="top_info_desktop_nav_li"><%= link_to "Search", "#", class:"default_white_color" %></li>
-        <li class="top_info_desktop_nav_li"><%= link_to "About", "#", class:"default_white_color" %></li>
-        <li class="top_info_desktop_nav_li"><%= link_to "Contact", "#", class:"default_white_color" %></li>
+        <li class="top_info_desktop_nav_li"><%= link_to "Search", search_results_path(no_params: "true"), class:"default_white_color" %></li>
+        <li class="top_info_desktop_nav_li"><%= link_to "About", about_path, class:"default_white_color" %></li>
+        <li class="top_info_desktop_nav_li"><%= link_to "Contact", new_contact_message_path, class:"default_white_color" %></li>
         <li class="top_info_desktop_nav_li"><%= link_to "Policies/Terms", "#", class:"default_white_color" %></li>
         <li class="top_info_desktop_nav_li"><%= link_to "Support/FAQ", "#", class:"default_white_color" %></li>
-        <li class="top_info_desktop_nav_li"><%= link_to "Blog", "#", class:"default_white_color" %></li>
+        <li class="top_info_desktop_nav_li"><%= link_to "Blog", blogs_path, class:"default_white_color" %></li>
       </ul>
     </div>
     <div class="col-md-2">
-      <h5><a href="<%= new_user_session_path %>"><img class="mobile_login_btn" src="/assets/login_btn.png"></a></h5>
-      <h5><a href="<%= kennel_or_customer_path %>"><img class="mobile_signup_btn" src="/assets/signup_btn.png"></a></h5>
+      <% if current_user.nil? %>
+        <h5><a href="<%= new_user_session_path %>"><img class="mobile_login_btn" src="/assets/login_btn.png"></a></h5>
+        <h5><a href="<%= kennel_or_customer_path %>"><img class="mobile_signup_btn" src="/assets/signup_btn.png"></a></h5>
+      <% else %>
+        <div class="welcome_logout_div">
+          <%= "Welcome, #{current_user.first_name.capitalize}!" %>
+          <br />
+          <%= link_to("Log out", destroy_user_session_path, class: "mobile_nav_text", method: "delete") %>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="row text-center mobile_nav_menu" id="mobile_nav_menu">

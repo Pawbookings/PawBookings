@@ -23,3 +23,13 @@
   width: 100%;
   margin-bottom: 1em;
 }
+
+
+@media (min-width: 992px) {
+  .about_details {
+    padding-right: 10em;
+    padding-left: 10em;
+    word-spacing: 0.09em;
+    line-height: 1.8em;
+  }
+}

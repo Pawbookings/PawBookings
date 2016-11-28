@@ -90,3 +90,19 @@ input {
   height: 2.5em;
   border-radius: 0.4em;
 }
+
+.text_underline {
+  text-decoration: underline;
+}
+
+.footer_bottom_addon {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+@media (min-width: 992px) {
+  .general_input {
+    width: 20%;
+  }
+}

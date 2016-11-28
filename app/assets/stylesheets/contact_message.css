@@ -34,3 +34,9 @@
   width: 75%;
   height: 3em;
 }
+
+@media (min-width: 992px) {
+  .contact_submit_btn, .contact_form_field {
+    width: 20%;
+  }
+}

@@ -180,3 +180,13 @@
   padding-right: 4em;
   margin-bottom: 2em;
 }
+
+@media (min-width: 992px) {
+  .blog_search_input, .blog_search_submit_btn {
+    width: 20%;
+  }
+
+  .blog_index_container {
+    background: none;
+  }
+}

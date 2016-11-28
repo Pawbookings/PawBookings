@@ -48,34 +48,42 @@
     display: none;
   }
 }
-@media (min-width: 992px) {
 
+@media (min-width: 992px) {
   .nav_bar_mobile {
     display: none;
   }
-
   .top_info_desktop_nav_li {
     display: inline;
   }
-
   .top_info_desktop_nav_ul {
     position: absolute;
     margin-top: 3.6em;
     word-spacing: 2em;
   }
-
+  .welcome_logout_div {
+    position: absolute;
+    margin-top: 1em;
+    margin-right: 1em;
+    color: #6d6e71;
+  }
 }
 
 @media (min-width: 1200px) {
   .top_info_desktop_nav_ul {
     word-spacing: 3.5em;
   }
+  .welcome_logout_div {
+    margin-top: 2.2em;
+  }
 }
+
 @media (min-width: 1450px) {
   .top_info_desktop_nav_ul {
     word-spacing: 5.5em;
   }
 }
+
 @media (min-width: 2000px) {
   .top_info_desktop_nav_ul {
     word-spacing: 9.5em;

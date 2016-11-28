@@ -73,188 +73,96 @@ class KennelsController < ApplicationController
   end
 
   def kennel_reservations
+    @kennel = Kennel.find(params[:kennel_id])
     if !params[:reservation_ids].nil?
-      @run_ids_going_home = []
-      @all_runs_purchased = []
       @current_reservations = params[:reservation_ids].map do |i|
         Reservation.find(i)
       end
-      format_reservations
-      get_reservations_going_home
-      grouped_runs_going_home
-      get_kennels_runs
-      get_runs_available
-      group_runs_available
-      sanitize_group_runs_available
-      check_if_no_reservations
+      @date = []
+      split_date = params[:date].split("/")
+      @date << split_date[2]
+      @date << split_date[0]
+      @date << split_date[1]
+      @date = Date.parse(@date.join("-"))
+      get_reservations_checking_in_and_out
+      get_all_runs
     end
   end
 
-  def format_reservations
-    @grouped_formatted_reservations = []
+  def get_reservations_checking_in_and_out
+    @reservations_checking_out_today = []
+    @reservations_checking_in_today = []
     @current_reservations.each do |res|
-      get_pets_staying(res)
-      get_runs_purchased(res)
-      get_pet_owner_info(res)
-      counter = @pets_staying.length
-
-      formatted_reservations = {
-        pet_owner_id: @pet_owner[:id],
-        reservation_id: res[:id],
-        first_name: @pet_owner[:first_name],
-        last_name: @pet_owner[:last_name],
-        phone: @pet_owner[:phone],
-        email: @pet_owner[:email],
-        check_in: unsanitize_date(res[:check_in_date].to_s),
-        check_out: unsanitize_date(res[:check_out_date].to_s)
-      }
-
-      counter = 1
-      @pets_staying.each do |pet|
-        formatted_reservations.merge!("pet_name_#{counter}".to_sym => pet[:name], "pet_weight_#{counter}".to_sym => pet[:weight], "pet_weight_#{counter}".to_sym => pet[:type], "pet_breed_#{counter}".to_sym => pet[:breed], "pet_vaccinations_#{counter}".to_sym => pet[:vaccinations], "pet_spay_or_neutered_#{counter}".to_sym => pet[:spay_or_neutered], "pet_special_instructions_#{counter}".to_sym => pet[:special_instructions] )
-        counter += 1
-      end
-
-      counter = 1
-      @runs_purchased.each do |run|
-        formatted_reservations.merge!("run_id_#{counter}".to_sym => run[:id], "run_name_#{counter}".to_sym => run[:title])
-        counter += 1
-      end
-
-      @grouped_formatted_reservations << formatted_reservations
+      @reservations_checking_out_today << res[:id] if res[:check_out_date] == @date
+      @reservations_checking_in_today << res[:id] if res[:check_in_date] == @date
     end
   end
 
-  def get_pets_staying(res)
-    @pets_staying = []
-    JSON.parse(res[:pet_ids]).each do |pet_id|
-      @pets_staying << Pet.find(pet_id)
+  def get_all_runs
+    all_runs = Run.where(kennel_id: @kennel[:id]).to_a
+    @all_run_ids_and_quantities = []
+    @all_run_ids = []
+    all_runs.each do |run|
+      @all_run_ids_and_quantities << [run[:id], run[:number_of_rooms]]
+      @all_run_ids << run[:id]
     end
+    get_runs_taken
   end
 
-  def get_runs_purchased(res)
-    @runs_purchased = []
-    @customer_number_of_rooms = 0
-    JSON.parse(res[:run_ids]).each do |run_id|
-      run = Run.find(run_id)
-      @runs_purchased << run
-      @all_runs_purchased << run
-    end
-    @customer_number_of_rooms = @runs_purchased.count
-  end
-
-  def get_pet_owner_info(res)
-    @pet_owner = User.find(res[:user_id])
-  end
-
-  def get_reservations_going_home
-    @reservations_going_home = []
-    @grouped_formatted_reservations.each do |res|
-      if res[:check_out] == params[:date]
-        get_dynamic_run_id(res)
-        get_dynamic_run_names(res)
-        @reservations_going_home << [res[:reservation_id], @customer_run_ids, @customer_run_names]
+  def get_runs_taken
+    runs_taken = []
+    @runs_taken_ids_and_quantities = []
+    @current_reservations.each do |res|
+      JSON.parse(res[:run_ids]).each do |run_id|
+        runs_taken << run_id
       end
     end
-  end
 
-  def get_dynamic_run_id(res)
-    @customer_run_ids = []
-    res.each do |key, val|
-      @customer_run_ids << val if key.to_s.include? "run_id"
+    runs_taken.length.times do
+      count = runs_taken.count(runs_taken[0])
+      @runs_taken_ids_and_quantities << [runs_taken[0], count]
+      runs_taken.delete(runs_taken[0])
     end
-  end
 
-  def get_dynamic_run_names(res)
-    @customer_run_names = []
-    res.each do |key, val|
-      @customer_run_names << val if key.to_s.include? "run_name"
-    end
-  end
-
-  def grouped_runs_going_home
-    @grouped_runs_going_home_count = []
-    holder = @reservations_going_home.flatten
-    @reservations_going_home.each do |res|
-      res[2].each do |name|
-        if holder.include? name
-          @grouped_runs_going_home_count << [name, holder.count(name)]
-          holder.delete name
-        end
-      end
-      res[1].each do |id|
-        @run_ids_going_home << id
-      end
-    end
-  end
-
-  def get_kennels_runs
-    @all_kennels_runs = Run.where(kennel_id: params[:kennel_id])
+    get_runs_available
   end
 
   def get_runs_available
-    split_kennels_runs = []
-    subtracted_runs = []
-    added_runs = []
-    @all_kennels_runs.each do |k_run|
-      split_kennels_runs << [k_run[:id].to_s, k_run[:title], k_run[:number_of_rooms].to_i]
-    end
-
-    @all_runs_purchased.each do |rp|
-      split_kennels_runs.each do |r_id, r_title, r_number_of_rooms|
-        if rp[:id] == r_id.to_i
-          subtracted_runs << [r_id, r_title, r_number_of_rooms -= 1]
+    counter = 0
+    @all_run_ids_and_quantities.each do |all_run_id, all_quantity|
+      @runs_taken_ids_and_quantities.each do |taken_run_id, taken_quantity|
+        if all_run_id == taken_run_id
+          @all_run_ids_and_quantities[counter][1] -= taken_quantity
         end
       end
+      counter += 1
     end
-
-    @runs_available = subtracted_runs
+    add_runs_checking_out
   end
 
-  def group_runs_available
-    @grouped_runs_occupied = []
-    holder = @runs_available.flatten
-    @runs_available.each do |r_id, r_title, r_number_of_rooms|
-      if holder.include? r_id
-        @grouped_runs_occupied << [r_id, r_title, holder.count(r_id)]
-        holder.delete(r_id)
-      end
-    end
-  end
-
-  def sanitize_group_runs_available
-    runs = []
-    if !@run_ids_going_home.empty?
-      @grouped_runs_occupied.map! do |r_id, r_title, r_number_of_rooms|
-        if @run_ids_going_home.include? r_id.to_i
-          amount = @run_ids_going_home.count(r_id.to_i)
-          @run_ids_going_home.delete(r_id.to_i)
-          [r_id, r_title, r_number_of_rooms -= amount]
-        else
-          [r_id, r_title, r_number_of_rooms]
+  def add_runs_checking_out
+    if !@reservations_checking_out_today.blank?
+      all_runs_opening_up = []
+      runs_opening_ids_and_quantities = []
+      @reservations_checking_out_today.each do |res_id|
+        res = Reservation.find(res_id)
+        JSON.parse(res[:run_ids]).each do |run_id|
+          all_runs_opening_up << run_id
         end
       end
-    end
-
-    @all_kennels_runs.each do |k_run|
-      @grouped_runs_occupied.each do |r_id, r_title, r_number_of_rooms|
-        if k_run[:number_of_rooms] == r_number_of_rooms
-          runs << [r_id, r_title, r_number_of_rooms, true]
-        else
-          runs << [r_id, r_title, r_number_of_rooms, false]
-        end
+      all_runs_opening_up.length.times do
+        count = all_runs_opening_up.count(all_runs_opening_up[0])
+        runs_opening_ids_and_quantities << [all_runs_opening_up[0], count]
+        all_runs_opening_up.delete(all_runs_opening_up[0])
       end
-    end
-    @grouped_runs_occupied = runs.uniq
-  end
-
-  def check_if_no_reservations
-    @grouped_runs_occupied.each do |r_id, r_title, r_number_of_rooms, maxed|
-      if r_number_of_rooms == 0
-        @no_reservations = true
-      else
-        @no_reservations = false
-        return @no_reservations
+      counter = 0
+      @all_run_ids_and_quantities.each do |all_run_id, all_quantity|
+        runs_opening_ids_and_quantities.each do |open_run_id, open_quantity|
+          if all_run_id == open_run_id
+            @all_run_ids_and_quantities[counter][1] += open_quantity
+          end
+        end
+        counter += 1
       end
     end
   end
@@ -267,24 +175,6 @@ class KennelsController < ApplicationController
       pet = Pet.find(p_id)
       @pets << pet
       @pet_ids << pet[:id]
-    end
-  end
-
-
-
-# TODO get rid of my_kennel_info
-  def my_kennel_info
-    @kennel = Kennel.where(id: params[:kennel_id])
-    if !@kennel.empty?
-      if current_user.id == @kennel.first.user_id
-        @runs = Run.where(kennel_id: params[:kennel_id])
-        @policies = Policy.where(kennel_id: params[:kennel_id])
-        @amenities = Amenity.where(kennel_id: params[:kennel_id])
-      else
-        redirect_to kennel_dashboard_path
-      end
-    else
-      redirect_to kennel_dashboard_path
     end
   end
 

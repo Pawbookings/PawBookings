@@ -24,10 +24,10 @@
           <br>
         <% end %>
       </div>
-      <div class="border"></div>
-      <br />
       <div class="all_policies_div">
         <% if !@policies.blank? %>
+          <div class="border"></div>
+          <br />
           <h3 class="default_green_color">Edit Existing</h3>
           <br />
           <% @policies.each do |policy| %>

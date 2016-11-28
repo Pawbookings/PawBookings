@@ -88,7 +88,7 @@
         <h3 class="default_green_color">Search for reservations:</h3>
         <%= form_tag({controller: 'kennels', action: 'kennel_dashboard'}, method: 'get') do %>
           <p><strong>Search by:</strong></p>
-          <%= radio_button_tag(:search_by, "reservationID", active: true) %>Reservation-ID
+          <%= radio_button_tag(:search_by, "reservationID", active: true) %>ReservationID
           <%= radio_button_tag(:search_by, "customer_last_name") %>Last-Name
           <%= radio_button_tag(:search_by, "customer_email") %>Email
           <%= radio_button_tag(:search_by, "customer_phone") %>Phone
@@ -130,24 +130,24 @@
   </div>
   <div class="row">
     <%= month_calendar(attribute: :check_in_date) do |date| %>
-    <%= unsanitize_date(date.to_s) %>
-    <br>
-    <% counter = [] %>
-    <% if !@reservations.nil? %>
-    <% @reservations.each do |res| %>
-    <% @pet_stay_date_range = (res[:check_in_date]..res[:check_out_date]).map{|date| date} %>
-    <% if @pet_stay_date_range.include? date %>
-    <% counter << res %>
-    <%= "•#{res.customer_first_name}" %>
-    <br>
-    <% end %>
-    <% end %>
-    <% end %>
-    <% if @kennel.nil? %>
-    <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s)) %>
-    <% else %>
-    <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]) %>
-    <% end %>
+      <%= unsanitize_date(date.to_s) %>
+      <br>
+      <% counter = [] %>
+      <% if !@reservations.nil? %>
+        <% @reservations.each do |res| %>
+          <% @pet_stay_date_range = (res[:check_in_date]..res[:check_out_date]).map{|date| date} %>
+          <% if @pet_stay_date_range.include? date %>
+            <% counter << res %>
+            <%= "•#{res.customer_first_name}" %>
+            <br>
+          <% end %>
+        <% end %>
+      <% end %>
+      <% if @kennel.nil? %>
+        <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s)) %>
+      <% else %>
+        <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]) %>
+      <% end %>
     <% end %>
     <br>
   </div>

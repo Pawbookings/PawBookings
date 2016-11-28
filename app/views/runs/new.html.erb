@@ -17,17 +17,17 @@
           <br />
           <%= f.text_field :title, placeholder: " Title", class:"kennel_dashboard_input" %>
           <br>
-          <%= f.label :size_width %>
+          <%= f.label :width_of_room %>
           <br />
           <%= f.text_field :size_width, placeholder: " Width", class:"kennel_dashboard_input" %>
           <br>
-          <%= f.label :size_length %>
+          <%= f.label :length_of_room %>
           <br />
           <%= f.text_field :size_length, placeholder: " Length", class:"kennel_dashboard_input" %>
           <br />
           <%= f.label :description %>
           <br />
-          <%= f.text_field :description, placeholder: " Description", class:"kennel_dashboard_input" %>
+          <%= f.text_area :description, placeholder: " Description", class:"kennel_dashboard_input" %>
           <br>
           <br>
           <%= f.label :indoor_or_outdoor %>
@@ -71,6 +71,7 @@
           <br>
           <br>
           <%= f.label :how_many_of_these_runs_do_you_have_total %>
+          <br />
           <%= f.text_field :number_of_rooms, placeholder: " Number of these runs", class:"kennel_dashboard_input", onkeypress:"return isNumber(event)" %>
           <br>
           <br>
@@ -81,29 +82,29 @@
           <br>
         <% end %>
       </div>
-      <div class="border"></div>
-      <br />
       <div class="all_runs_div text-center">
         <% if !@runs.empty? %>
-        <h3 class="default_green_color">Edit Existing</h3>
-        <br />
+          <div class="border"></div>
+          <br />
+          <h3 class="default_green_color">Edit Existing</h3>
+          <br />
           <% @runs.each do |run| %>
             <%= form_for(run, {action: :update, id: run[:id]}) do |f| %>
               <%= f.label :title %>
               <br />
               <%= f.text_field :title, value: run[:title], class:"kennel_dashboard_input" %>
               <br />
-              <%= f.label :size_width %>
+              <%= f.label :width_of_room %>
               <br />
               <%= f.text_field :size_width, value: run[:size_width], class:"kennel_dashboard_input" %>
               <br />
-              <%= f.label :size_length %>
+              <%= f.label :length_of_room %>
               <br />
               <%= f.text_field :size_length, value: run[:size_length], class:"kennel_dashboard_input" %>
               <br />
               <%= f.label :description %>
               <br />
-              <%= f.text_field :description, value: run[:description], class:"kennel_dashboard_input" %>
+              <%= f.text_area :description, value: run[:description], class:"kennel_dashboard_input" %>
               <br />
               <br />
               <%= f.label :indoor_or_outdoor %>
@@ -181,6 +182,7 @@
                 </div>
 
               <% else %>
+              <div class="input-group-addon"
                 <input type="checkbox" name="breed_1" value="pitbull">Pitbull
                 <br />
                 <br />
@@ -193,6 +195,7 @@
                 <input type="checkbox" name="breed_4" value="doberman_pincher">Doberman Pincher
                 <br />
                 <br />
+              </div>
               <% end %>
               <br />
               <%= f.label :how_many_of_these_runs_do_you_have_total %>
