@@ -8,7 +8,7 @@
       <div class="border"></div>
       <br />
       <div class="new_pet_div">
-        <h3 class="default_green_color">Create New</h3>
+        <h3 class="default_green_color">Add New</h3>
         <br />
         <%= form_for @pet do |f| %>
           <%= f.label :pet_name %>
@@ -18,17 +18,19 @@
           <br>
           <%= f.label :cat_or_dog %>
           <br />
-          <%= f.select :cat_or_dog, options_for_select(cat_or_dog_only_option) %>
+          <%= f.select :cat_or_dog, options_for_select(cat_or_dog_only_option), {}, onchange:"return petsChangeBreed();" %>
           <br>
           <br>
-          <%= f.label :breed %>
-          <br />
-          <%= f.select :breed, options_for_select(breed_option) %>
-          <br>
-          <br>
+          <div class="pets_new_breed_div">
+            <%= f.label :breed %>
+            <br />
+            <%= f.select :breed, options_for_select(breed_option) %>
+            <br>
+            <br>
+          </div>
           <%= f.label :weight %>
           <br />
-          <%= f.text_field :weight, placeholder: " Pets weight" %>
+          <%= f.text_field :weight, placeholder: " Pets weight", class:"general_input" %>
           <br>
           <br>
           <%= f.label :spay_or_neutered %>
@@ -61,16 +63,6 @@
               <%= f.text_field :name, placeholder: " Pet Name", class:"general_input" %>
               <br>
               <br>
-              <%= f.label :cat_or_dog %>
-              <br />
-              <%= f.select :cat_or_dog, options_for_select(cat_or_dog_only_option, pet[:cat_or_dog]) %>
-              <br>
-              <br>
-              <%= f.label :breed %>
-              <br />
-              <%= f.select :breed, options_for_select(breed_option, pet[:breed]) %>
-              <br>
-              <br>
               <%= f.label :weight %>
               <br />
               <%= f.text_field :weight, placeholder: " Pets weight", class:"general_input" %>
@@ -91,11 +83,12 @@
               <br />
               <%= button_to "Delete", pet_path(pet[:id]), class:"btn btn-danger", method: :delete %>
               <br />
-              <div class="border"></div>
+              <br />
               <br />
             <% end %>
           <% end %>
         <% end %>
+        <div class="border"></div>
       </div>
 
     </div>
@@ -103,3 +96,16 @@
 </div>
 
 <%= render partial: "shared/footer" %>
+
+
+<script type="text/javascript">
+  function petsChangeBreed(){
+    console.log("HELLOWORLD!!");
+    var cat_or_dog = $("#pet_cat_or_dog").val();
+    if(cat_or_dog == "dog"){
+      $(".pets_new_breed_div").show();
+    } else {
+      $(".pets_new_breed_div").hide();
+    }
+  }
+</script>

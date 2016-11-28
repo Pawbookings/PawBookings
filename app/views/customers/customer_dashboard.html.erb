@@ -32,8 +32,7 @@
               <% kennel = Kennel.find(res[:kennel_id]) %>
               <strong>ReservationID:</strong>
               <br />
-              <%= res[:id] %>
-              <br />
+              <h2><%= res[:id] %></h2>
               <br />
               <strong>Contact First Name: </strong>
               <br />
@@ -118,7 +117,7 @@
         <% end %>
 
         <% if !@customer.user_image_file_size.nil? %>
-          <%= image_tag @customer.user_image.url(:thumb) %>
+          <%= image_tag @customer.user_image.url(:thumb), class:"customer_profile_pic" %>
           <br>
           <%= link_to "Delete Image", delete_user_image_path, method: "delete" %>
         <% end  %>

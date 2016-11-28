@@ -69,6 +69,12 @@
   margin-left: 3em;
 }
 
+@media (max-width: 991px) {
+  .kennel_or_customer_top_desktop_div {
+    display: none;
+  }
+}
+
 @media (min-width: 992px) {
   .login_input {
     width: 20%;
@@ -79,8 +85,16 @@
   }
 
   .kennel_or_customer_div {
-    padding-right: 20em;
-    padding-left: 20em;
+    padding-right: 15em;
+    padding-left: 15em;
     padding-bottom: 5em;
+  }
+
+  .kennel_or_customer_top_desktop_div {
+    margin-bottom: 2em;
+  }
+
+  .kennel_or_customer_bottom_row {
+    display: none;
   }
 }

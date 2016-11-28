@@ -14,3 +14,14 @@
   border-radius: 2em;
   color: white;
 }
+
+.customer_profile_pic {
+  border-radius: 100%;
+}
+
+@media (min-width: 992px) {
+  .customer_dash_individual_reservation_div {
+    margin-right: 25em;
+    margin-left: 25em;
+  }
+}

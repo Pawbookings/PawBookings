@@ -4,10 +4,18 @@
   <div class="row text-center">
     <div class="kennel_or_customer_div">
       <h5 class="kennel_or_customer_title">Register as a...</h5>
+      <div class="kennel_or_customer_top_desktop_div">
+        <div class="col-xs-6 kennel_or_customer_bottom_div">
+          <%= link_to "Customer", new_user_registration_path(kennel_or_customer: "customer"), class: "kennel_or_customer_link" %>
+        </div>
+        <div class="col-xs-6 kennel_or_customer_bottom_div">
+          <%= link_to "Kennel", new_user_registration_path(kennel_or_customer: "kennel"), class: "kennel_or_customer_link" %>
+        </div>
+      </div>
       <img class="kennel_or_customer_image" src="/assets/kennel_or_customer_image.jpg">
     </div>
   </div>
-  <div class="row text-center">
+  <div class="row text-center kennel_or_customer_bottom_row">
     <div class="col-xs-6 kennel_or_customer_bottom_div">
       <%= link_to "Customer", new_user_registration_path(kennel_or_customer: "customer"), class: "kennel_or_customer_link" %>
     </div>

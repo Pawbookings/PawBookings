@@ -22,7 +22,7 @@
         <li class="top_info_desktop_nav_li"><%= link_to "Blog", blogs_path, class:"default_white_color" %></li>
       </ul>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 text-left">
       <% if current_user.nil? %>
         <h5><a href="<%= new_user_session_path %>"><img class="mobile_login_btn" src="/assets/login_btn.png"></a></h5>
         <h5><a href="<%= kennel_or_customer_path %>"><img class="mobile_signup_btn" src="/assets/signup_btn.png"></a></h5>
