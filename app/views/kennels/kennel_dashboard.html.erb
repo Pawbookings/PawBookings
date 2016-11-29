@@ -71,11 +71,65 @@
                 <br />
                 <%= f.file_field :avatar, class: "kennel_dashboard_input text-center btn btn-primary kennel_avatar_btn" %>
                 <br />
-                <%= f.submit "Update Kennel Info", class: "btn btn-success" %>
+                <div class="text-center">
+                  <%= f.submit "Update Kennel Info", class: "btn btn-success" %>
+                </div>
               <% end %>
           <% else %>
             <h4 class="default_green_color">Register your Kennel</h4>
             <%= button_to "Kennel registration", new_kennel_path, class:"btn btn-success", method: :get %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <br />
+      <br />
+      <div class="border"></div>
+      <div class="col-md-4">
+        <div class="kennel_dashboard_res_search text-center">
+          <h3 class="default_green_color">Search for reservations:</h3>
+          <%= form_tag({controller: 'kennels', action: 'kennel_dashboard'}, method: 'get') do %>
+            <p><strong class="default_white_color">Search by:</strong></p>
+            <span class="default_green_color res_search_radio_btn_text"><%= radio_button_tag(:search_by, "reservationID", active: true) %> ReservationID</span>
+            <span class="default_green_color res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_last_name") %> Last Name</span>
+            <span class="default_green_color res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_email") %> Email</span>
+            <span class="default_green_color res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_phone") %> Phone</span>
+            <br />
+            <br />
+            <%= text_field_tag :reservation_search, nil, placeholder: " Search", class: "kennel_dashboard_input" %>
+            <br>
+            <br>
+            <%= submit_tag "Search Now", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="kennel_dashboard_search_results text-center">
+          <% if !@kennel.nil? %>
+            <% if !@reservation_search_results.blank? %>
+              <br />
+              <br />
+              <br />
+              <% @reservation_search_results.each do |res| %>
+                <p class="default_white_color"><strong class="default_green_color">First Name:</strong><%= " #{res[:customer_first_name]}" %></p>
+                <p class="default_white_color"><strong class="default_green_color">Last Name:</strong><%= " #{res[:customer_last_name]}" %></p>
+                <p class="default_white_color"><strong class="default_green_color">Email:</strong><%= " #{res[:customer_email]}" %></p>
+                <p class="default_white_color"><strong class="default_green_color">Phone:</strong><%= " #{res[:customer_phone]}" %></p>
+                <%= button_to "Select", kennel_searched_reservation_path(id: res[:id], kennel_info: {name: @kennel[:name], address: @kennel[:address], city: @kennel[:city], state: @kennel[:state], zip: @kennel[:zip], phone: @kennel[:phone], email: @kennel[:email] } ), class:"btn btn-primary" %>
+                <br>
+              <% end %>
+            <% else %>
+            <br />
+            <br />
+            <br />
+              <h3 class="default_white_color">No results..</h3>
+            <% end %>
+          <% else %>
+          <br />
+          <br />
+          <br />
+            <h3 class="default_white_color">No results..</h3>
           <% end %>
         </div>
       </div>
@@ -211,6 +265,8 @@
             <h3>No results..</h3>
           <% end %>
         </div>
+        <br />
+        <br />
 
       </div>
     </div>

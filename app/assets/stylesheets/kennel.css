@@ -45,6 +45,13 @@
   margin-bottom: 3em;
 }
 
+.kennel_dashboard_calendar {
+  background-color: #48cd7e;
+}
+
+.res_search_radio_btn_text {
+  margin-left: 1em;
+}
 /* Kennel Registration*/
 
 .kennel_registration_title {
@@ -154,9 +161,6 @@
     display: none;
   }
 
-  .kennel_dashboard_calendar {
-    background-color: #48cd7e;
-  }
 
   .kennel_dashboard_option_btns_div {
     line-height: 1em;
