@@ -1,156 +1,245 @@
 <%= render partial: "shared/top_info" %>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="text-center">
-        <h5 class="main_title">My Kennel Dashboard</h5>
-        <% if !@kennel.nil? %>
-          <br />
-          <div class="border"></div>
-          <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
-        <% end %>
+<div class="container-fluid kennel_dashboard_container">
+  <div class="kennel_dashboard_desktop">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h5 class="main_title kennel_dashboard_main_title text_underline">My Kennel Dashboard</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="most_booked_runs_desktop text-center">
+          <% if !@reservations.nil? %>
+            <!-- <div class="border"></div> -->
+            <h4 class="default_green_color text_underline">Most Booked Runs</h4>
+            <%= pie_chart @run_names_and_counts %>
+          <% end %>
+        </div>
+        <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
+      </div>
+      <div class="col-md-4">
         <div class="kennel_dashboard_user_info_div">
-          <div class="border"></div>
+          <h4 class="default_green_color text_underline">Owner Personal Info</h4>
           <br />
-          <h3 class="default_green_color">Owner Personal Info</h3>
-          <br />
-          <p><strong>Email: </strong><%= current_user.email.capitalize %></p>
-          <p><strong>First Name: </strong><%= current_user.first_name.capitalize %></p>
-          <p><strong>Last Name: </strong><%= current_user.last_name.capitalize %></p>
-          <p><strong>Phone: </strong><%= current_user.phone %></p>
-          <p><strong>Time Zone: </strong><%= current_user.time_zone %></p>
+          <p class="default_white_color"><strong class="default_green_color">Email: </strong><br /><%= current_user.email.capitalize %></p>
+          <p class="default_white_color"><strong class="default_green_color">First Name: </strong><br /><%= current_user.first_name.capitalize %></p>
+          <p class="default_white_color"><strong class="default_green_color">Last Name: </strong><br /><%= current_user.last_name.capitalize %></p>
+          <p class="default_white_color"><strong class="default_green_color">Phone: </strong><br /><%= current_user.phone %></p>
+          <p class="default_white_color"><strong class="default_green_color">Time Zone: </strong><br /><%= current_user.time_zone %></p>
           <%= button_to "Edit", edit_user_registration_path, class: "btn btn-primary", method: :get %>
           <br />
           <div class="border"></div>
           <br />
         </div>
       </div>
-      <div class="kennel_dashboard_general_info_div text-center">
-        <h3 class="default_green_color">My Kennel</h3>
-        <br />
-        <% if !@kennel.nil? %>
-            <%= form_for(@kennel, {id: @kennel.id}) do |f| %>
-              <%= f.label :logo %>
-              <br />
-              <%= image_tag @kennel.avatar.url(:thumb), class: "kennel_dashboard_avatar" if !@kennel.nil? %>
-              <br />
-              <%= f.file_field :avatar, class: "kennel_dashboard_input text-center btn btn-primary kennel_avatar_btn" %>
-              <br />
-              <%= f.label :kennel_name %>
-              <br />
-              <%= f.text_field :name, class: "kennel_dashboard_input" %>
-              <br />
-              <%= f.label :address %>
-              <br />
-              <%= f.text_field :address, class: "kennel_dashboard_input" %>
-              <br />
-              <%= f.label :mission_statement %>
-              <br />
-              <%= f.text_area :mission_statement, class: "kennel_dashboard_input" %>
-              <br />
-              <%= f.label :city %>
-              <br />
-              <%= f.text_field :city, class: "kennel_dashboard_input" %>
-              <br />
-              <%= f.label :state %>
-              <br />
-              <%= f.select :state, options_for_select(states_options, @kennel[:state]) %>
-              <br />
-              <%= f.label :zip %>
-              <br />
-              <%= f.text_field :zip, class: "kennel_dashboard_input" %>
-              <br />
-              <%= f.label :email %>
-              <br />
-              <%= f.text_field :email, class: "kennel_dashboard_input" %>
-              <br />
-              <br />
-              <%= f.submit "Update Kennel Info", class: "btn btn-success" %>
-            <% end %>
-        <% else %>
-          <h4 class="default_green_color">Register your Kennel</h4>
-          <%= button_to "Kennel registration", new_kennel_path, class:"btn btn-success", method: :get %>
-        <% end %>
-      </div>
-
-      <div class="most_booked_runs text-center">
-        <% if !@reservations.nil? %>
-          <div class="border"></div>
-          <h3 class="default_green_color">Most Booked Runs</h3>
-          <%= pie_chart @run_names_and_counts %>
+      <div class="col-xs-4">
+        <div class="kennel_dashboard_general_info_div">
+          <h4 class="default_green_color text_underline">My Kennel</h4>
           <br />
-        <% end %>
+          <% if !@kennel.nil? %>
+              <%= form_for(@kennel, {id: @kennel.id}) do |f| %>
+                <%= f.label :kennel_name, class:"default_green_color" %><span class="default_green_color">:</span>
+                <br />
+                <%= f.text_field :name, class: "kennel_dashboard_input" %>
+                <br />
+                <%= f.label :address, class:"default_green_color" %><span class="default_green_color">:</span>
+                <br />
+                <%= f.text_field :address, class: "kennel_dashboard_input" %>
+                <br />
+                <%= f.label :mission_statement, class:"default_green_color" %><span class="default_green_color">:</span>
+                <br />
+                <%= f.text_area :mission_statement, class: "kennel_dashboard_input" %>
+                <br />
+                <%= f.label :city, class:"default_green_color" %><span class="default_green_color">:</span>
+                <br />
+                <%= f.text_field :city, class: "kennel_dashboard_input" %>
+                <br />
+                <%= f.label :state, class:"default_green_color" %><span class="default_green_color">:</span>
+                <br />
+                <%= f.select :state, options_for_select(states_options, @kennel[:state]) %>
+                <br />
+                <%= f.label :zip, class:"default_green_color" %><span class="default_green_color">:</span>
+                <br />
+                <%= f.text_field :zip, class: "kennel_dashboard_input" %>
+                <br />
+                <%= f.label :email, class:"default_green_color" %><span class="default_green_color">:</span>
+                <br />
+                <%= f.text_field :email, class: "kennel_dashboard_input" %>
+                <br />
+                <br />
+                <%= image_tag @kennel.avatar.url(:thumb), class: "kennel_dashboard_avatar" if !@kennel.nil? %>
+                <br />
+                <%= f.file_field :avatar, class: "kennel_dashboard_input text-center btn btn-primary kennel_avatar_btn" %>
+                <br />
+                <%= f.submit "Update Kennel Info", class: "btn btn-success" %>
+              <% end %>
+          <% else %>
+            <h4 class="default_green_color">Register your Kennel</h4>
+            <%= button_to "Kennel registration", new_kennel_path, class:"btn btn-success", method: :get %>
+          <% end %>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <div class="border"></div>
 
-      <div class="kennel_dashboard_res_search text-center">
-        <h3 class="default_green_color">Search for reservations:</h3>
-        <%= form_tag({controller: 'kennels', action: 'kennel_dashboard'}, method: 'get') do %>
-          <p><strong>Search by:</strong></p>
-          <%= radio_button_tag(:search_by, "reservationID", active: true) %>ReservationID
-          <%= radio_button_tag(:search_by, "customer_last_name") %>Last-Name
-          <%= radio_button_tag(:search_by, "customer_email") %>Email
-          <%= radio_button_tag(:search_by, "customer_phone") %>Phone
+
+
+
+  <div class="kennel_dashboard_mobile">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="text-center">
+          <h5 class="main_title">My Kennel Dashboard</h5>
+          <% if !@kennel.nil? %>
+            <br />
+            <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
+          <% end %>
+          <div class="kennel_dashboard_user_info_div">
+            <div class="border"></div>
+            <br />
+            <h3 class="default_green_color">Owner Personal Info</h3>
+            <br />
+            <p><strong>Email: </strong><%= current_user.email.capitalize %></p>
+            <p><strong>First Name: </strong><%= current_user.first_name.capitalize %></p>
+            <p><strong>Last Name: </strong><%= current_user.last_name.capitalize %></p>
+            <p><strong>Phone: </strong><%= current_user.phone %></p>
+            <p><strong>Time Zone: </strong><%= current_user.time_zone %></p>
+            <%= button_to "Edit", edit_user_registration_path, class: "btn btn-primary", method: :get %>
+            <br />
+            <div class="border"></div>
+            <br />
+          </div>
+        </div>
+        <div class="kennel_dashboard_general_info_div text-center">
+          <h3 class="default_green_color">My Kennel</h3>
           <br />
-          <br />
-          <%= text_field_tag :reservation_search, nil, placeholder: " Search", class: "kennel_dashboard_input" %>
-          <br>
-          <br>
-          <%= submit_tag "Search Now", class: "btn btn-success" %>
-        <% end %>
-      </div>
+          <% if !@kennel.nil? %>
+              <%= form_for(@kennel, {id: @kennel.id}) do |f| %>
+                <%= f.label :logo %>
+                <br />
+                <%= image_tag @kennel.avatar.url(:thumb), class: "kennel_dashboard_avatar" if !@kennel.nil? %>
+                <br />
+                <%= f.file_field :avatar, class: "kennel_dashboard_input text-center btn btn-primary kennel_avatar_btn" %>
+                <br />
+                <%= f.label :kennel_name %>
+                <br />
+                <%= f.text_field :name, class: "kennel_dashboard_input" %>
+                <br />
+                <%= f.label :address %>
+                <br />
+                <%= f.text_field :address, class: "kennel_dashboard_input" %>
+                <br />
+                <%= f.label :mission_statement %>
+                <br />
+                <%= f.text_area :mission_statement, class: "kennel_dashboard_input" %>
+                <br />
+                <%= f.label :city %>
+                <br />
+                <%= f.text_field :city, class: "kennel_dashboard_input" %>
+                <br />
+                <%= f.label :state %>
+                <br />
+                <%= f.select :state, options_for_select(states_options, @kennel[:state]) %>
+                <br />
+                <%= f.label :zip %>
+                <br />
+                <%= f.text_field :zip, class: "kennel_dashboard_input" %>
+                <br />
+                <%= f.label :email %>
+                <br />
+                <%= f.text_field :email, class: "kennel_dashboard_input" %>
+                <br />
+                <br />
+                <%= f.submit "Update Kennel Info", class: "btn btn-success" %>
+              <% end %>
+          <% else %>
+            <h4 class="default_green_color">Register your Kennel</h4>
+            <%= button_to "Kennel registration", new_kennel_path, class:"btn btn-success", method: :get %>
+          <% end %>
+        </div>
 
-      <div class="kennel_dashboard_search_results text-center">
-        <% if !@kennel.nil? %>
-          <% if !@reservation_search_results.blank? %>
-            <h3 style="text-decoration:underline;">Reservation Results</h3>
-            <% @reservation_search_results.each do |res| %>
-              <strong>First Name:</strong><%= " #{res[:customer_first_name]}" %>
-              <br>
-              <strong>Last Name:</strong><%= " #{res[:customer_last_name]}" %>
-              <br>
-              <strong>Email:</strong><%= " #{res[:customer_email]}" %>
-              <br>
-              <strong>Phone:</strong><%= " #{res[:customer_phone]}" %>
-              <br>
-              <br>
-              <%= button_to "Select", kennel_searched_reservation_path(id: res[:id], kennel_info: {name: @kennel[:name], address: @kennel[:address], city: @kennel[:city], state: @kennel[:state], zip: @kennel[:zip], phone: @kennel[:phone], email: @kennel[:email] } ), class:"btn btn-primary" %>
-              <br>
+        <div class="most_booked_runs text-center">
+          <% if !@reservations.nil? %>
+            <div class="border"></div>
+            <h3 class="default_green_color">Most Booked Runs</h3>
+            <%= pie_chart @run_names_and_counts %>
+            <br />
+          <% end %>
+        </div>
+
+        <div class="border"></div>
+
+        <div class="kennel_dashboard_res_search text-center">
+          <h3 class="default_green_color">Search for reservations:</h3>
+          <%= form_tag({controller: 'kennels', action: 'kennel_dashboard'}, method: 'get') do %>
+            <p><strong>Search by:</strong></p>
+            <%= radio_button_tag(:search_by, "reservationID", active: true) %>ReservationID
+            <%= radio_button_tag(:search_by, "customer_last_name") %>Last-Name
+            <%= radio_button_tag(:search_by, "customer_email") %>Email
+            <%= radio_button_tag(:search_by, "customer_phone") %>Phone
+            <br />
+            <br />
+            <%= text_field_tag :reservation_search, nil, placeholder: " Search", class: "kennel_dashboard_input" %>
+            <br>
+            <br>
+            <%= submit_tag "Search Now", class: "btn btn-success" %>
+          <% end %>
+        </div>
+
+        <div class="kennel_dashboard_search_results text-center">
+          <% if !@kennel.nil? %>
+            <% if !@reservation_search_results.blank? %>
+              <h3 style="text-decoration:underline;">Reservation Results</h3>
+              <% @reservation_search_results.each do |res| %>
+                <strong>First Name:</strong><%= " #{res[:customer_first_name]}" %>
+                <br>
+                <strong>Last Name:</strong><%= " #{res[:customer_last_name]}" %>
+                <br>
+                <strong>Email:</strong><%= " #{res[:customer_email]}" %>
+                <br>
+                <strong>Phone:</strong><%= " #{res[:customer_phone]}" %>
+                <br>
+                <br>
+                <%= button_to "Select", kennel_searched_reservation_path(id: res[:id], kennel_info: {name: @kennel[:name], address: @kennel[:address], city: @kennel[:city], state: @kennel[:state], zip: @kennel[:zip], phone: @kennel[:phone], email: @kennel[:email] } ), class:"btn btn-primary" %>
+                <br>
+              <% end %>
+            <% else %>
+              <h3>No results..</h3>
             <% end %>
           <% else %>
             <h3>No results..</h3>
           <% end %>
-        <% else %>
-          <h3>No results..</h3>
-        <% end %>
-      </div>
+        </div>
 
+      </div>
     </div>
+    <!-- End of mobile/tablet row -->
   </div>
-  <div class="row">
-    <%= month_calendar(attribute: :check_in_date) do |date| %>
-      <%= unsanitize_date(date.to_s) %>
-      <br>
-      <% counter = [] %>
-      <% if !@reservations.nil? %>
-        <% @reservations.each do |res| %>
-          <% @pet_stay_date_range = (res[:check_in_date]..res[:check_out_date]).map{|date| date} %>
-          <% if @pet_stay_date_range.include? date %>
-            <% counter << res %>
-            <%= "•#{res.customer_first_name}" %>
-            <br>
-          <% end %>
-        <% end %>
-      <% end %>
-      <% if @kennel.nil? %>
-        <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s)) %>
-      <% else %>
-        <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]) %>
+  <!-- End of main Kennel Dashboard container -->
+</div>
+
+<!-- Start of Kennel Dashboard monthly_calendar container -->
+<%= month_calendar(attribute: :check_in_date) do |date| %>
+  <%= unsanitize_date(date.to_s) %>
+  <br>
+  <% counter = [] %>
+  <% if !@reservations.nil? %>
+    <% @reservations.each do |res| %>
+      <% @pet_stay_date_range = (res[:check_in_date]..res[:check_out_date]).map{|date| date} %>
+      <% if @pet_stay_date_range.include? date %>
+        <% counter << res %>
+        <%= "•#{res.customer_first_name}" %>
+        <br>
       <% end %>
     <% end %>
-    <br>
-  </div>
-</div>
+  <% end %>
+  <% if @kennel.nil? %>
+    <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s)) %>
+  <% else %>
+    <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]) %>
+  <% end %>
+<% end %>
+<!-- End of Kennel Dashboard monthly_calendar container -->
 
 <%= render partial: "shared/footer" %>

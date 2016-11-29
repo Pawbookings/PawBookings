@@ -101,7 +101,22 @@ input {
   bottom: 0;
 }
 
+.simple-calendar .today {
+  background: rgba(255, 183, 183, 0.96);
+}
+
+
+@media (max-width: 991px){
+  .br_if_desktop{
+    display: none;
+  }
+}
+
 @media (min-width: 992px) {
+  .calendar-title {
+    font-size: 1.5em;
+  }
+
   .general_input {
     width: 20%;
   }

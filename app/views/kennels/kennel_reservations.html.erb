@@ -126,10 +126,10 @@
             <% end %>
             <% if @reservations_checking_out_today.include? res[:id] %>
               <br />
-              <strong style="color:red;">**This reservation is scheduled for check-out today**</strong>
+              <strong style="color:#ff7e7e;">**This reservation is scheduled for check-out today**</strong>
             <% elsif @reservations_checking_in_today.include? res[:id] %>
               <br />
-              <strong style="color:green;">**This reservation is scheduled for check-in today**</strong>
+              <strong style="color:#57d54b;">**This reservation is scheduled for check-in today**</strong>
             <% end %>
             <br />
             <br />

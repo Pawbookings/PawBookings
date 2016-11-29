@@ -39,7 +39,7 @@
 }
 
 .kennel_reservations_individual_div {
-  background-color: #ececec;
+  background-color: #6d6e71;
   border-radius: 4em;
   padding: 2em;
   margin-bottom: 3em;
@@ -133,8 +133,35 @@
   }
 }
 
+@media (max-width: 991px){
+  .kennel_dashboard_desktop {
+    display: none;
+  }
+}
+
 @media (min-width: 992px) {
-  .kennel_dashboard_input {
-    width: 20%;
+  .kennel_dashboard_container {
+    background-color: #3c3c3c;
+    padding-bottom: 3em;
+  }
+
+  .kennel_dashboard_main_title {
+    margin-bottom: 1em;
+  }
+
+
+  .kennel_dashboard_mobile {
+    display: none;
+  }
+
+  .kennel_dashboard_calendar {
+    background-color: #48cd7e;
+  }
+
+  .kennel_dashboard_option_btns_div {
+    line-height: 1em;
+    text-align: left;
+    margin-left: 6em;
+    margin-top: 4em;
   }
 }

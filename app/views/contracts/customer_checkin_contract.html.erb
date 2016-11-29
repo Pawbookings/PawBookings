@@ -25,7 +25,7 @@
 <%= params[:customer_phone] %>
 
 <h3>Customer Emergency Contact:</h3>
-<% if !@emergency_contact.empty? %>
+<% if !@emergency_contact.blank? %>
   <p><strong>Emergency Contact Name</strong></p>
   <%= @emergency_contact.name %>
   <p><strong>Emergency Contact Email</strong></p>
@@ -37,7 +37,7 @@
 <% end %>
 
 <h3>Veterinarian Info</h3>
-<% if !@vet_info.empty? %>
+<% if !@vet_info.blank? %>
   <p><strong>Vet Name</strong></p>
   <p><strong>Vet Address</strong></p>
   <p><strong>Vet Email</strong></p>

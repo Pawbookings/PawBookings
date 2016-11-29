@@ -22,11 +22,11 @@ class ContractsController < ApplicationController
   end
 
   def contract_emergency_contact
-    @emergency_contact = CustomerEmergencyContact.where(user_id: params[:user_id])
+    @emergency_contact = CustomerEmergencyContact.where(user_id: params[:user_id]).first
   end
 
   def contract_vet_info
-    @vet_info = CustomerVetInfo.where(user_id: params[:user_id])
+    @vet_info = CustomerVetInfo.where(user_id: params[:user_id]).first
   end
 
   def check_in_important_information
