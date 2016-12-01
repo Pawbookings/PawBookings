@@ -19,9 +19,23 @@
   border-radius: 100%;
 }
 
+@media (max-width: 991px) {
+  .customer_dashboard_desktop {
+    display: none;
+  }
+}
+
 @media (min-width: 992px) {
+  .customer_dashboard_container {
+    background-color: #3c3c3c;
+    padding-bottom: 3em;
+  }
+
+  .customer_dashboard_mobile {
+    display: none;
+  }
+
   .customer_dash_individual_reservation_div {
-    margin-right: 25em;
-    margin-left: 25em;
+
   }
 }

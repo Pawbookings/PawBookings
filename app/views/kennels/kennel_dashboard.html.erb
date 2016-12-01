@@ -4,18 +4,31 @@
     <div class="row text-center">
       <div class="col-md-12">
         <h5 class="main_title kennel_dashboard_main_title text_underline">My Kennel Dashboard</h5>
+        <div class="border"></div>
+        <br />
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
-        <div class="most_booked_runs_desktop text-center">
-          <% if !@reservations.nil? %>
-            <!-- <div class="border"></div> -->
+      <div class="col-md-4 border_right">
+        <% if !@reservations.nil? %>
+          <div class="most_booked_runs_desktop text-center">
             <h4 class="default_green_color text_underline">Most Booked Runs</h4>
             <%= pie_chart @run_names_and_counts %>
+          </div>
+          <% else %>
+            <h3 class="default_green_color">Getting started:</h3>
+            <h4 class="default_white_color">• Register your Kennel</h4>
+            <h4 class="default_white_color">• Modify your Hours of Operation</h4>
+            <h4 class="default_white_color">• Create Runs</h4>
+            <h4 class="default_white_color">• Create Policies</h4>
+            <p class="default_green_color">Once this is complete, you are eligible to be searched by customers.</p>
           <% end %>
-        </div>
-        <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
+        <% if !@kennel.nil? %>
+          <br />
+          <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
+          <br />
+          <br />
+        <% end %>
       </div>
       <div class="col-md-4">
         <div class="kennel_dashboard_user_info_div">
@@ -28,11 +41,9 @@
           <p class="default_white_color"><strong class="default_green_color">Time Zone: </strong><br /><%= current_user.time_zone %></p>
           <%= button_to "Edit", edit_user_registration_path, class: "btn btn-primary", method: :get %>
           <br />
-          <div class="border"></div>
-          <br />
         </div>
       </div>
-      <div class="col-xs-4">
+      <div class="col-xs-4 border_left">
         <div class="kennel_dashboard_general_info_div">
           <h4 class="default_green_color text_underline">My Kennel</h4>
           <br />

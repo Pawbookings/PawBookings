@@ -1,84 +1,206 @@
 <%= render partial: "shared/top_info" %>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-12 text-center">
-      <h5 class="main_title">My Dashboard</h5>
-      <br />
-      <div class="border"></div>
-      <br />
-      <div class="customer_dashboard_user_info_div">
-        <h3 class="default_green_color">Primary Conact Info</h3>
+<div class="container-fluid customer_dashboard_container">
+  <div class="customer_dashboard_desktop">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h5 class="main_title text_underline">My Dashboard</h5>
         <br />
-        <p><strong>Email: </strong><%= current_user.email.capitalize %></p>
-        <p><strong>First Name: </strong><%= current_user.first_name.capitalize %></p>
-        <p><strong>Last Name: </strong><%= current_user.last_name.capitalize %></p>
-        <p><strong>Phone: </strong><%= current_user.phone %></p>
-        <p><strong>Time Zone: </strong><%= current_user.time_zone %></p>
-        <%= button_to "Edit", edit_user_registration_path, class: "btn btn-primary", method: :get %>
+        <div class="border"></div>
+        <br />
       </div>
-      <br />
-      <div class="border"></div>
-      <br />
+    </div>
+    <div class="row text-center">
+      <div class="col-md-4 border_right">
+        <div class="customer_dashboard_photo_div">
+          <h4 class="default_green_color text_underline">Select your photo</h4>
+          <br />
+          <% if @customer.user_image_file_size.nil? %>
+            <%= form_tag({controller: "customers", action: "create_user_image"}, multipart: true, method: "post") do |f| %>
+              <%= file_field_tag :user_image, class:"btn btn-primary width_50_percent" %>
+              <br />
+              <%= submit_tag "Submit", class:"btn btn-success" %>
+            <% end %>
+          <% end %>
 
-      <div class="customer_dashboard_upcoming_reservations_div">
-        <h3 class="default_green_color">Upcoming Reservations</h3>
+          <% if !@customer.user_image_file_size.nil? %>
+            <%= image_tag @customer.user_image.url(:thumb), class:"customer_profile_pic" %>
+            <br>
+            <%= link_to "Delete Image", delete_user_image_path, method: "delete" %>
+          <% end  %>
+        </div>
+      </div>
+      <div class="col-md-4">
         <br />
-        <% if @upcoming_reservations.blank? %>
-          <p><strong>•No upcoming reservations.</strong></p>
-        <% else %>
-          <div class="customer_dash_individual_reservation_div">
-            <% @upcoming_reservations.each do |res| %>
-              <% kennel = Kennel.find(res[:kennel_id]) %>
-              <strong>ReservationID:</strong>
+        <br />
+        <%= button_to "My Pets", new_pet_path, class:"btn btn-primary", method: :get %>
+      </div>
+      <div class="col-md-4 border_left">
+        <div class="text-left customer_primary_info_desktop">
+          <h4 class="default_green_color text_underline">Primary Conact Info</h4>
+          <br />
+          <p class="default_white_color"><strong class="default_green_color">Email: </strong><br /><%= current_user.email.capitalize %></p>
+          <p class="default_white_color"><strong class="default_green_color">First Name: </strong><br /><%= current_user.first_name.capitalize %></p>
+          <p class="default_white_color"><strong class="default_green_color">Last Name: </strong><br /><%= current_user.last_name.capitalize %></p>
+          <p class="default_white_color"><strong class="default_green_color">Phone: </strong><br /><%= current_user.phone %></p>
+          <p class="default_white_color"><strong class="default_green_color">Time Zone: </strong><br /><%= current_user.time_zone %></p>
+          <%= button_to "Edit", edit_user_registration_path, class: "btn btn-primary", method: :get %>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <div class="border"></div>
+    <br />
+    <br />
+    <div class="row text-center">
+      <div class="col-md-6">
+        <div class="customer_dashboard_vet_info_div">
+          <h4 class="default_green_color text_underline">Veterinarian Contact Info</h4>
+          <br />
+          <% if @customer_vet_info.nil? %>
+            <%= button_to "Create New", new_customer_vet_info_path, class:"btn btn-success", method: :get %>
+          <% else %>
+            <%= form_for(@customer_vet_info, {controller: :customer_vet_infos, action: :update}) do |f| %>
+              <%= f.label :name, class:"default_green_color" %>
+              <br />
+              <%= f.text_field :name, class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <%= f.label :email, class:"default_green_color" %>
+              <br />
+              <%= f.text_field :email, class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <%= f.label :phone, class:"default_green_color" %>
+              <br />
+              <%= f.text_field :phone, class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <%= f.label :emergency_phone, class:"default_green_color" %>
+              <br />
+              <%= f.text_field :emergency_phone, class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <%= f.label :address, class:"default_green_color" %>
+              <br />
+              <%= f.text_field :address, class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <%= f.submit "Update", class: "btn btn-primary" %>
+            <% end %>
+            <br />
+              <%= button_to "Delete", customer_vet_info_path(@customer_vet_info[:id]), class:"btn btn-danger", data: {confirm: "Are you sure you want to delete your Vet Contact Info?"}, method: :delete %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-6 border_left">
+        <div class="customer_dashboard_emrgency_contact_div">
+          <h4 class="default_green_color text_underline">Secondary Emergency Contact</h4>
+          <br />
+          <% if @customer_emergency_contact.nil? %>
+            <%= button_to "Create New", new_customer_emergency_contact_path, class:"btn btn-success", method: :get %>
+          <% else %>
+            <%= form_for(@customer_emergency_contact, {controller: :customer_emergency_contact, action: :update}) do |f| %>
+              <%= f.label :name, class:"default_green_color" %>
+              <br />
+              <%= f.text_field :name, class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <%= f.label :email, class:"default_green_color" %>
+              <br />
+              <%= f.text_field :email, class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <%= f.label :phone, class:"default_green_color" %>
+              <br />
+              <%= f.text_field :phone, class:"kennel_dashboard_input" %>
+              <br />
+              <br />
+              <%= f.submit "Update", class:"btn btn-primary" %>
+            <% end %>
+            <br />
+            <%= button_to "Delete", customer_emergency_contact_path(@customer_emergency_contact[:id]), data: {confirm: "Are you sure you want to delete your Secondary Emergency Contact"}, class:"btn btn-danger", method: :delete %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <div class="border"></div>
+    <br />
+    <br />
+      <% if @upcoming_reservations.blank? %>
+        <h4 class="default_green_color text-center"><strong>•No upcoming reservations.</strong></h4>
+      <% else %>
+      <h4 class="default_green_color text_underline text-center">Upcoming reservation(s):</h4>
+      <br />
+      <br />
+        <% @upcoming_reservations.each do |res| %>
+        <div class="customer_dash_individual_reservation_div">
+          <div class="row text-center">
+            <% kennel = Kennel.find(res[:kennel_id]) %>
+            <div class="col-md-1">
+              <strong class="text_underline">ID:</strong>
               <br />
               <h2><%= res[:id] %></h2>
+            </div>
+            <div class="col-md-2">
+              <strong class="text_underline">Contact Info</strong>
               <br />
-              <strong>Contact First Name: </strong>
+              <br />
+              <strong>First Name: </strong>
               <br />
               <%= res[:customer_first_name].capitalize %>
               <br />
               <br />
-              <strong>Contact Last Name: </strong>
+              <strong>Last Name: </strong>
               <br />
               <%= res[:customer_last_name].capitalize %>
               <br />
               <br />
-              <strong>Contact Email: </strong>
+              <strong>Email: </strong>
               <br />
-              <%= res[:customer_email] %>
+              <%= res[:customer_email].capitalize %>
               <br />
               <br />
-              <strong>Contact Phone: </strong>
+              <strong>Phone: </strong>
               <br />
               <%= res[:customer_phone] %>
+            </div>
+            <div class="col-md-2">
+              <strong class="text_underline">Kennel Info</strong>
               <br />
               <br />
-              <strong>Kennel Info</strong>
-              <br />
-              <br />
-              <%= label_tag :name %>:
+              <strong>Name:</strong>
               <br />
               <%= kennel[:name] %>
               <br />
               <br />
-              <%= label_tag :address %>:
+              <strong>Address:</strong>
               <br />
               <%= kennel[:address] %>
               <br />
               <%= kennel[:city] %>, <%= kennel[:state] %> <%= kennel[:zip] %>
               <br />
               <br />
-              <%= label_tag :phone %>:
+              <strong>Phone:</strong>
               <br />
               <%= kennel[:phone] %>
+              <br />
+              <br />
+            </div>
+            <div class="col-md-2">
+              <strong class="text_underline">Room Details</strong>
               <br />
               <br />
               <% JSON.parse(res[:room_details]).each do |key, val| %>
                 <p><strong><%= "•#{key}- $#{val}" %></strong></p>
               <% end %>
+            </div>
+            <div class="col-md-3">
+              <strong class="text_underline">Amenities:</strong>
               <br />
-              <strong>Amenities:</strong>
               <br />
               <% if res[:amenity_details].nil? %>
                 <p><strong>•No amenties chosen.</strong></p>
@@ -91,116 +213,235 @@
                 </div>
                 <% end %>
               <% end %>
+            </div>
+            <div class="col-md-2">
+              <strong class="text_underline">Other Info</strong>
+              <br />
               <br />
               <p><strong>Check-In: </strong><%= unsanitize_date(res[:check_in_date].to_s) %></p>
               <p><strong>Check-Out: </strong><%= unsanitize_date(res[:check_out_date].to_s) %></p>
               <p><strong>Total Price w/tax: <%= "$#{res[:total_price]}" %></strong></p>
               <p><strong>ConfirmationID: </strong><%= res[:transID] %></p>
-              <br />
-            <% end %>
+            </div>
           </div>
         <% end %>
-      </div>
-      <br />
-      <div class="border"></div>
-      <br />
+    <% end %>
+  </div>
+</div>
 
-      <div class="customer_dashboard_photo_div">
-        <h3 class="default_green_color">Select your photo</h3>
-        <br />
-        <% if @customer.user_image_file_size.nil? %>
-          <%= form_tag({controller: "customers", action: "create_user_image"}, multipart: true, method: "post") do |f| %>
-            <%= file_field_tag :user_image, class:"btn btn-primary" %>
-            <br />
-            <%= submit_tag "Submit", class:"btn btn-success" %>
-          <% end %>
-        <% end %>
 
-        <% if !@customer.user_image_file_size.nil? %>
-          <%= image_tag @customer.user_image.url(:thumb), class:"customer_profile_pic" %>
-          <br>
-          <%= link_to "Delete Image", delete_user_image_path, method: "delete" %>
-        <% end  %>
-      </div>
-      <br />
-      <div class="border"></div>
-      <br />
 
-      <div class="customer_dashboard_emrgency_contact_div">
-        <h3 class="default_green_color">Secondary Emergency Contact</h3>
-        <br />
-        <% if @customer_emergency_contact.nil? %>
-          <%= button_to "Create New", new_customer_emergency_contact_path, class:"btn btn-success", method: :get %>
-        <% else %>
-          <%= form_for(@customer_emergency_contact, {controller: :customer_emergency_contact, action: :update}) do |f| %>
-            <%= f.label :name %>
-            <br />
-            <%= f.text_field :name, class:"general_input" %>
-            <br />
-            <%= f.label :email %>
-            <br />
-            <%= f.text_field :email, class:"general_input" %>
-            <br />
-            <%= f.label :phone %>
-            <br />
-            <%= f.text_field :phone, class:"general_input" %>
-            <br />
-            <br />
-            <%= f.submit "Update", class:"btn btn-primary" %>
-          <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="customer_dashboard_mobile">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <h5 class="main_title">My Dashboard</h5>
+        <div class="customer_dashboard_pets_div">
           <br />
-          <%= button_to "Delete", customer_emergency_contact_path(@customer_emergency_contact[:id]), data: {confirm: "Are you sure you want to delete your Secondary Emergency Contact"}, class:"btn btn-danger", method: :delete %>
-        <% end %>
-      </div>
-      <br />
-      <div class="border"></div>
-      <br />
-
-      <div class="customer_dashboard_vet_info_div">
-        <h3 class="default_green_color">Veterinarian Contact Info</h3>
-        <br />
-        <% if @customer_vet_info.nil? %>
-          <%= button_to "Create New", new_customer_vet_info_path, class:"btn btn-success", method: :get %>
-        <% else %>
-          <%= form_for(@customer_vet_info, {controller: :customer_vet_infos, action: :update}) do |f| %>
-            <%= f.label :name %>
-            <br />
-            <%= f.text_field :name, class:"general_input" %>
-            <br />
-            <%= f.label :email %>
-            <br />
-            <%= f.text_field :email, class:"general_input" %>
-            <br />
-            <%= f.label :phone %>
-            <br />
-            <%= f.text_field :phone, class:"general_input" %>
-            <br />
-            <%= f.label :emergency_phone %>
-            <br />
-            <%= f.text_field :emergency_phone, class:"general_input" %>
-            <br />
-            <%= f.label :address %>
-            <br />
-            <%= f.text_field :address, class:"general_input" %>
-            <br />
-            <br />
-            <%= f.submit "Update", class: "btn btn-primary" %>
-          <% end %>
           <br />
-            <%= button_to "Delete", customer_vet_info_path(@customer_vet_info[:id]), class:"btn btn-danger", data: {confirm: "Are you sure you want to delete your Vet Contact Info?"}, method: :delete %>
-        <% end %>
+          <%= button_to "My Pets", new_pet_path, class:"btn btn-primary", method: :get %>
+          <br />
+          <br />
+        </div>
+        <div class="customer_dashboard_user_info_div">
+          <h3 class="default_green_color">Primary Conact Info</h3>
+          <br />
+          <p><strong>Email: </strong><%= current_user.email.capitalize %></p>
+          <p><strong>First Name: </strong><%= current_user.first_name.capitalize %></p>
+          <p><strong>Last Name: </strong><%= current_user.last_name.capitalize %></p>
+          <p><strong>Phone: </strong><%= current_user.phone %></p>
+          <p><strong>Time Zone: </strong><%= current_user.time_zone %></p>
+          <%= button_to "Edit", edit_user_registration_path, class: "btn btn-primary", method: :get %>
+        </div>
         <br />
         <div class="border"></div>
         <br />
-      </div>
 
-      <div class="customer_dashboard_pets_div">
+        <div class="customer_dashboard_upcoming_reservations_div">
+          <h3 class="default_green_color">Upcoming Reservations</h3>
+          <br />
+          <% if @upcoming_reservations.blank? %>
+            <p><strong>•No upcoming reservations.</strong></p>
+          <% else %>
+            <div class="customer_dash_individual_reservation_div">
+              <% @upcoming_reservations.each do |res| %>
+                <% kennel = Kennel.find(res[:kennel_id]) %>
+                <strong>ReservationID:</strong>
+                <br />
+                <h2><%= res[:id] %></h2>
+                <br />
+                <strong>Contact First Name: </strong>
+                <br />
+                <%= res[:customer_first_name].capitalize %>
+                <br />
+                <br />
+                <strong>Contact Last Name: </strong>
+                <br />
+                <%= res[:customer_last_name].capitalize %>
+                <br />
+                <br />
+                <strong>Contact Email: </strong>
+                <br />
+                <%= res[:customer_email] %>
+                <br />
+                <br />
+                <strong>Contact Phone: </strong>
+                <br />
+                <%= res[:customer_phone] %>
+                <br />
+                <br />
+                <strong>Kennel Info</strong>
+                <br />
+                <br />
+                <%= label_tag :name %>:
+                <br />
+                <%= kennel[:name] %>
+                <br />
+                <br />
+                <%= label_tag :address %>:
+                <br />
+                <%= kennel[:address] %>
+                <br />
+                <%= kennel[:city] %>, <%= kennel[:state] %> <%= kennel[:zip] %>
+                <br />
+                <br />
+                <%= label_tag :phone %>:
+                <br />
+                <%= kennel[:phone] %>
+                <br />
+                <br />
+                <% JSON.parse(res[:room_details]).each do |key, val| %>
+                  <p><strong><%= "•#{key}- $#{val}" %></strong></p>
+                <% end %>
+                <br />
+                <strong>Amenities:</strong>
+                <br />
+                <% if res[:amenity_details].nil? %>
+                  <p><strong>•No amenties chosen.</strong></p>
+                <% else %>
+                  <% JSON.parse(res[:amenity_details]).each do |title, description, price, quantity| %>
+                  <div class="customer_dashboard_amenity_div">
+                    <p><strong><%= title %></strong></p>
+                    <p><strong><%= description %></strong></p>
+                    <p><strong><%= "$#{price} x #{quantity}" %></strong></p>
+                  </div>
+                  <% end %>
+                <% end %>
+                <br />
+                <p><strong>Check-In: </strong><%= unsanitize_date(res[:check_in_date].to_s) %></p>
+                <p><strong>Check-Out: </strong><%= unsanitize_date(res[:check_out_date].to_s) %></p>
+                <p><strong>Total Price w/tax: <%= "$#{res[:total_price]}" %></strong></p>
+                <p><strong>ConfirmationID: </strong><%= res[:transID] %></p>
+                <br />
+              <% end %>
+            </div>
+          <% end %>
+        </div>
         <br />
-        <%= button_to "My Pets", new_pet_path, class:"btn btn-primary", method: :get %>
+        <div class="border"></div>
         <br />
-        <br />
-      </div>
 
+        <div class="customer_dashboard_photo_div">
+          <h3 class="default_green_color">Select your photo</h3>
+          <br />
+          <% if @customer.user_image_file_size.nil? %>
+            <%= form_tag({controller: "customers", action: "create_user_image"}, multipart: true, method: "post") do |f| %>
+              <%= file_field_tag :user_image, class:"btn btn-primary" %>
+              <br />
+              <%= submit_tag "Submit", class:"btn btn-success" %>
+            <% end %>
+          <% end %>
+
+          <% if !@customer.user_image_file_size.nil? %>
+            <%= image_tag @customer.user_image.url(:thumb), class:"customer_profile_pic" %>
+            <br>
+            <%= link_to "Delete Image", delete_user_image_path, method: "delete" %>
+          <% end  %>
+        </div>
+        <br />
+        <div class="border"></div>
+        <br />
+
+        <div class="customer_dashboard_emrgency_contact_div">
+          <h3 class="default_green_color">Secondary Emergency Contact</h3>
+          <br />
+          <% if @customer_emergency_contact.nil? %>
+            <%= button_to "Create New", new_customer_emergency_contact_path, class:"btn btn-success", method: :get %>
+          <% else %>
+            <%= form_for(@customer_emergency_contact, {controller: :customer_emergency_contact, action: :update}) do |f| %>
+              <%= f.label :name %>
+              <br />
+              <%= f.text_field :name, class:"general_input" %>
+              <br />
+              <%= f.label :email %>
+              <br />
+              <%= f.text_field :email, class:"general_input" %>
+              <br />
+              <%= f.label :phone %>
+              <br />
+              <%= f.text_field :phone, class:"general_input" %>
+              <br />
+              <br />
+              <%= f.submit "Update", class:"btn btn-primary" %>
+            <% end %>
+            <br />
+            <%= button_to "Delete", customer_emergency_contact_path(@customer_emergency_contact[:id]), data: {confirm: "Are you sure you want to delete your Secondary Emergency Contact"}, class:"btn btn-danger", method: :delete %>
+          <% end %>
+        </div>
+        <br />
+        <div class="border"></div>
+        <br />
+
+        <div class="customer_dashboard_vet_info_div">
+          <h3 class="default_green_color">Veterinarian Contact Info</h3>
+          <br />
+          <% if @customer_vet_info.nil? %>
+            <%= button_to "Create New", new_customer_vet_info_path, class:"btn btn-success", method: :get %>
+          <% else %>
+            <%= form_for(@customer_vet_info, {controller: :customer_vet_infos, action: :update}) do |f| %>
+              <%= f.label :name %>
+              <br />
+              <%= f.text_field :name, class:"general_input" %>
+              <br />
+              <%= f.label :email %>
+              <br />
+              <%= f.text_field :email, class:"general_input" %>
+              <br />
+              <%= f.label :phone %>
+              <br />
+              <%= f.text_field :phone, class:"general_input" %>
+              <br />
+              <%= f.label :emergency_phone %>
+              <br />
+              <%= f.text_field :emergency_phone, class:"general_input" %>
+              <br />
+              <%= f.label :address %>
+              <br />
+              <%= f.text_field :address, class:"general_input" %>
+              <br />
+              <br />
+              <%= f.submit "Update", class: "btn btn-primary" %>
+            <% end %>
+            <br />
+              <%= button_to "Delete", customer_vet_info_path(@customer_vet_info[:id]), class:"btn btn-danger", data: {confirm: "Are you sure you want to delete your Vet Contact Info?"}, method: :delete %>
+          <% end %>
+          <br />
+          <div class="border"></div>
+          <br />
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
