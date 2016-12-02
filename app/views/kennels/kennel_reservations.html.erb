@@ -1,6 +1,9 @@
 <%= render partial: "shared/top_info" %>
-
-<div class="container-fluid">
+<% if @current_reservations.blank? %>
+  <div class="container-fluid">
+<% else %>
+  <div class="container-fluid kennel_reservation_container">
+<% end %>
   <div class="row text-center">
     <div class="col-xs-12">
       <h5 class="main_title text_underline"><%= params[:date] %></h5>
@@ -24,98 +27,25 @@
       <% end %>
     </div>
   </div>
-  <div class="row text-center">
-    <div class="col-md-3"></div>
-    <div class="col-xs-12 col-md-6">
-      <br />
-      <% if @current_reservations.blank? %>
+  <br />
+    <% if @current_reservations.blank? %>
+      <div class="row text-center">
         <strong>•No reservations</strong>
-      <% else %>
-        <h4 class="default_green_color text_underline">Reservations:</h4>
-        <br />
-        <% @current_reservations.each do |res| %>
-          <div class="kennel_reservations_individual_div">
-            <strong>ReservationID: </strong>
+      </div>
+    <% else %>
+      <h3 class="default_green_color text_underline text-center">Reservations:</h3>
+      <br />
+      <div class="border"></div>
+      <br />
+      <% @current_reservations.each do |res| %>
+        <div class="row text-center">
+          <div class="col-md-3">
+            <%= link_to "Contract for Check-In", customer_checkin_contract_path(reservation_id: res[:id], user_id: res[:user_id], customer_first_name: res[:customer_first_name], customer_last_name: res[:customer_last_name], check_in_date: res[:check_in_date], check_out_date: res[:check_out_date], customer_email: res[:customer_email], customer_phone: res[:customer_phone], room_details: res[:room_details], run_ids: res[:run_ids], total_price: res[:total_price], kennel_address: @kennel[:address], kennel_city: @kennel[:city], kennel_state: @kennel[:state], kennel_zip: @kennel[:zip], kennel_email: @kennel[:email], kennel_phone: @kennel[:phone], kennel_name: @kennel[:name], pets: res[:pet_ids], format: :pdf), target: '_blank', class:"btn btn-primary" %>
             <br />
-            <h2 class="default_green_color"><%= res[:id] %></h2>
-            <br />
-            <strong>First Name: </strong>
-            <br />
-            <span class="default_green_color"><%= res[:customer_first_name].capitalize %></span>
-            <br />
-            <br />
-            <strong>Last Name: </strong>
-            <br />
-            <span class="default_green_color"><%= res[:customer_last_name].capitalize %></span>
-            <br />
-            <br />
-            <strong>Email: </strong>
-            <br />
-            <span class="default_green_color"><%= res[:customer_email] %></span>
-            <br />
-            <br />
-            <strong>Phone: </strong>
-            <br />
-            <span class="default_green_color"><%= res[:customer_phone] %></span>
-            <br />
-            <br />
-            <strong>Rooms Taken:</strong>
-            <br />
-            <% JSON.parse(res[:room_details]).each do |title, price| %>
-              <span class="default_green_color"><%= "#{title} - #{price}" %></span>
-              <br />
-            <% end %>
-
-            <br />
-
-            <% if res[:amenity_details].nil? %>
-              <strong>•No Amenities Chosen.</strong>
-            <% else %>
-              <strong>Amenities:</strong>
-              <br />
-              <% JSON.parse(res[:amenity_details]).each do |title, description, price, quantity| %>
-                <span class="default_green_color"><%= "•#{title} '#{description}' - #{price} x #{quantity}" %></span>
-              <% end %>
-            <% end %>
-
-            <br />
-            <br />
-
-            <strong>Pets:</strong>
-            <br />
-            <% JSON.parse(res[:pet_ids]).each do |pet_id| %>
-              <% pet = Pet.find(pet_id) %>
-              <strong>Name: </strong><span class="default_green_color"><%= pet[:name] %></span>
-              <br />
-              <strong>Cat or Dog: </strong><span class="default_green_color"><%= pet[:cat_or_dog] %></span>
-              <br />
-              <strong>Breed: </strong><span class="default_green_color"><%= pet[:breed] %></span>
-              <br />
-              <strong>Weight: </strong><span class="default_green_color"><%= pet[:weight] %></span>
-              <br />
-              <strong>Vaccinations: </strong><span class="default_green_color"><%= pet[:vaccinations] %></span>
-              <br />
-              <strong>Spay or Neutered: </strong><span class="default_green_color"><%= pet[:spay_or_neutered] %></span>
-              <br />
-              <strong>Special Instructions: </strong><span class="default_green_color"><%= pet[:special_instructions] %></span>
-              <br />
-              <br />
-            <% end %>
-
-            <strong>Check-In Date: </strong><span class="default_green_color"><%= unsanitize_date(res[:check_in_date].to_s) %></span>
-            <br />
-            <strong>Check-Out Date: </strong><span class="default_green_color"><%= unsanitize_date(res[:check_out_date].to_s) %></span>
-            <br />
-            <strong>Total Price: </strong><span class="default_green_color"><%= res[:total_price] %></span>
-            <br />
-            <br />
-            <%= link_to "Customer contract for Check-In", customer_checkin_contract_path(reservation_id: res[:id], user_id: res[:user_id], customer_first_name: res[:customer_first_name], customer_last_name: res[:customer_last_name], check_in_date: res[:check_in_date], check_out_date: res[:check_out_date], customer_email: res[:customer_email], customer_phone: res[:customer_phone], room_details: res[:room_details], run_ids: res[:run_ids], total_price: res[:total_price], kennel_address: @kennel[:address], kennel_city: @kennel[:city], kennel_state: @kennel[:state], kennel_zip: @kennel[:zip], kennel_email: @kennel[:email], kennel_phone: @kennel[:phone], kennel_name: @kennel[:name], pets: res[:pet_ids], format: :pdf), target: '_blank', class:"btn btn-primary" %>
             <br />
             <% if res[:checked_in] == "true" %>
-            <br />
               <p style="color:green">√ This user has been marked as checked-in. <%= link_to "revert?", check_in_check_out_reservation_path(checked_in: "false", id: res[:id]), method: :put %></p>
             <% else %>
-            <br />
               <%= button_to "Check-In this customer", check_in_check_out_reservation_path(checked_in: "true", id: res[:id]), method: :put, class:"btn btn-primary" %>
             <% end %>
             <br>
@@ -124,19 +54,218 @@
             <% else %>
               <%= button_to "Check-Out this customer", check_in_check_out_reservation_path(checked_out: "true", id: res[:id]), method: :put, class:"btn btn-primary" %>
             <% end %>
+            <br />
             <% if @reservations_checking_out_today.include? res[:id] %>
-              <br />
               <strong style="color:#ff7e7e;">**This reservation is scheduled for check-out today**</strong>
             <% elsif @reservations_checking_in_today.include? res[:id] %>
-              <br />
               <strong style="color:#57d54b;">**This reservation is scheduled for check-in today**</strong>
             <% end %>
-            <br />
-            <br />
           </div>
-        <% end %>
+          <div class="col-md-2">
+            <h4 class="default_green_color text_underline">Customer Info</h4>
+            <br />
+            <strong class="default_green_color">ReservationID: </strong>
+            <br />
+            <h2 class="default_white_color"><%= res[:id] %></h2>
+            <br />
+            <strong class="default_green_color">First Name: </strong>
+            <br />
+            <span class="default_white_color"><%= res[:customer_first_name].capitalize %></span>
+            <br />
+            <br />
+            <strong class="default_green_color">Last Name: </strong>
+            <br />
+            <span class="default_white_color"><%= res[:customer_last_name].capitalize %></span>
+            <br />
+            <br />
+            <strong class="default_green_color">Email: </strong>
+            <br />
+            <span class="default_white_color"><%= res[:customer_email] %></span>
+            <br />
+            <br />
+            <strong class="default_green_color">Phone: </strong>
+            <br />
+            <span class="default_white_color"><%= res[:customer_phone] %></span>
+          </div>
+          <div class="col-md-2">
+            <h4 class="default_green_color text_underline">Room Details</h4>
+            <br />
+            <% JSON.parse(res[:room_details]).each do |title, price| %>
+              <span class="default_white_color"><%= "•#{title} - $#{price}" %></span>
+              <br />
+              <br />
+            <% end %>
+            <strong class="default_green_color">Check-In Date: </strong><span class="default_white_color"><%= unsanitize_date(res[:check_in_date].to_s) %></span>
+            <br />
+            <br />
+            <strong class="default_green_color">Check-Out Date: </strong><span class="default_white_color"><%= unsanitize_date(res[:check_out_date].to_s) %></span>
+            <br />
+            <br />
+            <strong class="default_green_color">Total Price: </strong><span class="default_white_color">$<%= res[:total_price] %></span>
+          </div>
+          <div class="col-md-3">
+            <h4 class="default_green_color text_underline">Amenities</h4>
+            <br />
+            <% if res[:amenity_details].nil? %>
+              <strong class="default_white_color">•No Amenities Chosen.</strong>
+            <% else %>
+              <% JSON.parse(res[:amenity_details]).each do |title, description, price, quantity| %>
+                <span class="default_white_color"><%= "•#{title}"%></span>
+                <br />
+                <span class="default_white_color" style="font-style:italic;"><%= "#{description}"%></span>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="col-md-2">
+            <h4 class="default_green_color text_underline">Pets</h4>
+            <% JSON.parse(res[:pet_ids]).each do |pet_id| %>
+              <% pet = Pet.find(pet_id) %>
+              <strong class="default_green_color">Name: </strong><span class="default_white_color"><br /><%= pet[:name] %></span>
+              <br />
+              <br />
+              <strong class="default_green_color">Cat or Dog: </strong><span class="default_white_color"><br /><%= pet[:cat_or_dog] %></span>
+              <br />
+              <br />
+              <strong class="default_green_color">Breed: </strong><span class="default_white_color"><br /><%= pet[:breed] %></span>
+              <br />
+              <br />
+              <strong class="default_green_color">Weight: </strong><span class="default_white_color"><br /><%= pet[:weight] %></span>
+              <br />
+              <br />
+              <strong class="default_green_color">Vaccinations: </strong><span class="default_white_color"><br /><%= pet[:vaccinations] %></span>
+              <br />
+              <br />
+              <strong class="default_green_color">Spay or Neutered: </strong><span class="default_white_color"><br /><%= pet[:spay_or_neutered] %></span>
+              <br />
+              <br />
+              <strong class="default_green_color">Special Instructions: </strong><span class="default_white_color"><br /><%= pet[:special_instructions] %></span>
+              <br />
+              <br />
+            <% end %>
+          </div>
+        </div>
+        <div class="border"></div>
+        <br />
       <% end %>
+    <% end %>
 
+
+
+
+  <div class="kennel_reservation_mobile">
+    <div class="row text-center">
+      <div class="col-md-3"></div>
+      <div class="col-xs-12 col-md-6">
+        <br />
+        <% if @current_reservations.blank? %>
+          <strong>•No reservations</strong>
+        <% else %>
+          <h4 class="default_green_color text_underline">Reservations:</h4>
+          <br />
+          <% @current_reservations.each do |res| %>
+            <div class="kennel_reservations_individual_div">
+              <strong class="default_green_color">ReservationID: </strong>
+              <br />
+              <h2 class="default_white_color"><%= res[:id] %></h2>
+              <br />
+              <strong class="default_green_color">First Name: </strong>
+              <br />
+              <span class="default_white_color"><%= res[:customer_first_name].capitalize %></span>
+              <br />
+              <br />
+              <strong class="default_green_color">Last Name: </strong>
+              <br />
+              <span class="default_white_color"><%= res[:customer_last_name].capitalize %></span>
+              <br />
+              <br />
+              <strong class="default_green_color">Email: </strong>
+              <br />
+              <span class="default_white_color"><%= res[:customer_email] %></span>
+              <br />
+              <br />
+              <strong class="default_green_color">Phone: </strong>
+              <br />
+              <span class="default_white_color"><%= res[:customer_phone] %></span>
+              <br />
+              <br />
+              <strong class="default_green_color">Room Details:</strong>
+              <br />
+              <% JSON.parse(res[:room_details]).each do |title, price| %>
+                <span class="default_white_color"><%= "•#{title} - $#{price}" %></span>
+                <br />
+              <% end %>
+
+              <br />
+
+              <% if res[:amenity_details].nil? %>
+                <strong class="default_white_color">•No Amenities Chosen.</strong>
+              <% else %>
+                <strong class="default_green_color">Amenities:</strong>
+                <br />
+                <% JSON.parse(res[:amenity_details]).each do |title, description, price, quantity| %>
+                  <span class="default_white_color"><%= "•#{title} '#{description}' - #{price} x #{quantity}" %></span>
+                <% end %>
+              <% end %>
+
+              <br />
+              <br />
+
+              <strong class="default_green_color">Pets:</strong>
+              <br />
+              <% JSON.parse(res[:pet_ids]).each do |pet_id| %>
+                <% pet = Pet.find(pet_id) %>
+                <strong class="default_green_color">Name: </strong><span class="default_white_color"><%= pet[:name] %></span>
+                <br />
+                <strong class="default_green_color">Cat or Dog: </strong><span class="default_white_color"><%= pet[:cat_or_dog] %></span>
+                <br />
+                <strong class="default_green_color">Breed: </strong><span class="default_white_color"><%= pet[:breed] %></span>
+                <br />
+                <strong class="default_green_color">Weight: </strong><span class="default_white_color"><%= pet[:weight] %></span>
+                <br />
+                <strong class="default_green_color">Vaccinations: </strong><span class="default_white_color"><%= pet[:vaccinations] %></span>
+                <br />
+                <strong class="default_green_color">Spay or Neutered: </strong><span class="default_white_color"><%= pet[:spay_or_neutered] %></span>
+                <br />
+                <strong class="default_green_color">Special Instructions: </strong><span class="default_white_color"><%= pet[:special_instructions] %></span>
+                <br />
+                <br />
+              <% end %>
+
+              <strong class="default_green_color">Check-In Date: </strong><span class="default_white_color"><%= unsanitize_date(res[:check_in_date].to_s) %></span>
+              <br />
+              <strong class="default_green_color">Check-Out Date: </strong><span class="default_white_color"><%= unsanitize_date(res[:check_out_date].to_s) %></span>
+              <br />
+              <strong class="default_green_color">Total Price: </strong><span class="default_white_color">$<%= res[:total_price] %></span>
+              <br />
+              <br />
+              <%= link_to "Customer contract for Check-In", customer_checkin_contract_path(reservation_id: res[:id], user_id: res[:user_id], customer_first_name: res[:customer_first_name], customer_last_name: res[:customer_last_name], check_in_date: res[:check_in_date], check_out_date: res[:check_out_date], customer_email: res[:customer_email], customer_phone: res[:customer_phone], room_details: res[:room_details], run_ids: res[:run_ids], total_price: res[:total_price], kennel_address: @kennel[:address], kennel_city: @kennel[:city], kennel_state: @kennel[:state], kennel_zip: @kennel[:zip], kennel_email: @kennel[:email], kennel_phone: @kennel[:phone], kennel_name: @kennel[:name], pets: res[:pet_ids], format: :pdf), target: '_blank', class:"btn btn-primary" %>
+              <br />
+              <% if res[:checked_in] == "true" %>
+              <br />
+                <p style="color:green">√ This user has been marked as checked-in. <%= link_to "revert?", check_in_check_out_reservation_path(checked_in: "false", id: res[:id]), method: :put %></p>
+              <% else %>
+              <br />
+                <%= button_to "Check-In this customer", check_in_check_out_reservation_path(checked_in: "true", id: res[:id]), method: :put, class:"btn btn-primary" %>
+              <% end %>
+              <br>
+              <% if res[:checked_out] == "true" %>
+                <p style="color:green">√ This user has been marked as checked-out. <%= link_to "revert?", check_in_check_out_reservation_path(checked_out: "false", id: res[:id]), method: :put %></p>
+              <% else %>
+                <%= button_to "Check-Out this customer", check_in_check_out_reservation_path(checked_out: "true", id: res[:id]), method: :put, class:"btn btn-primary" %>
+              <% end %>
+              <% if @reservations_checking_out_today.include? res[:id] %>
+                <br />
+                <strong style="color:#ff7e7e;">**This reservation is scheduled for check-out today**</strong>
+              <% elsif @reservations_checking_in_today.include? res[:id] %>
+                <br />
+                <strong style="color:#57d54b;">**This reservation is scheduled for check-in today**</strong>
+              <% end %>
+              <br />
+              <br />
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
