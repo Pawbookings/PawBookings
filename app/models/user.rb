@@ -10,6 +10,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_attached_file :user_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/default_testimonial_image.jpg"
+  has_attached_file :user_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/default_photo_image.png"
   validates_attachment_content_type :user_image, content_type: /\Aimage\/.*\Z/
 end

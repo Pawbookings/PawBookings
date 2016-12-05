@@ -7,7 +7,8 @@
     </div>
   </div>
   <div class="row text-left">
-    <div class="col-xs-12">
+    <div class="col-md-2"></div>
+    <div class="col-xs-12 col-md-8">
       <div class="payment_top_details_border_div"></div>
       <ul class="payment_top_details_ul default_green_color">
         <li><p class="payment_top_details_li"><strong>Rooms:</strong> <%= params[:number_of_rooms] %></p></li>
@@ -19,7 +20,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-md-2"></div>
+    <div class="col-xs-12 col-md-8">
       <div class="payment_room_details_div">
         <h6 class="payment_room_details_title">Room Details</h6>
         <% counter = params[:number_of_rooms].to_i %>
@@ -36,7 +38,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-md-2"></div>
+    <div class="col-xs-12 col-md-8">
       <div class="payment_amenity_details_div default_white_color">
         <h6 class="payment_amenity_details_title">Amenity Details</h6>
         <% counter = params[:number_of_rooms].to_i %>
@@ -57,7 +60,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-md-2"></div>
+    <div class="col-xs-12 col-md-8">
 
       <div class="payment_total_div default_white_color">
         <h6 class="payment_total_title">Total: $<%= @total_price_without_tax %></h6>
@@ -92,7 +96,8 @@
 
         <%= hidden_field_tag :amenities_total, nil, value: @amenities_total %>
         <%= hidden_field_tag :total_price, nil, value: @total_price %>
-        <%= hidden_field_tag :payment_card_type, nil, value: "visa" %>
+        <%= hidden_field_tag :total_pets, nil, value: @total_pets %>
+        <%#= hidden_field_tag :payment_card_type, nil, value: "visa" %>
         <%= hidden_field_tag :kennel_info, nil, value: params %>
         <%= hidden_field_tag :kennel_sales_tax, nil, value: params[:kennel_sales_tax] %>
 
@@ -206,6 +211,8 @@
             <% counter -= 1 %>
           <% end %>
           <%= submit_tag "Book Now!", class: "btn btn-success payment_submt_btn" %>
+          <br />
+          <br />
         </div>
     </div>
   </div>

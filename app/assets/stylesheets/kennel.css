@@ -156,6 +156,11 @@
     margin-bottom: 1em;
   }
 
+  .kennel_dashboard_input_desktop {
+    width: 75%;
+    height: 2.5em;
+    border-radius: 0.4em;
+  }
 
   .kennel_reservation_mobile, .searched_res_mobile, .kennel_dashboard_mobile {
     display: none;
@@ -166,5 +171,9 @@
     text-align: left;
     margin-left: 6em;
     margin-top: 4em;
+  }
+
+  .kennel_dashboard_input {
+    width: 20%;
   }
 }

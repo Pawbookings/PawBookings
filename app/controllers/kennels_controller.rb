@@ -73,7 +73,7 @@ class KennelsController < ApplicationController
   end
 
   def kennel_reservations
-    @kennel = Kennel.find(params[:kennel_id])
+    @kennel = Kennel.find(params[:kennel_id]) if !params[:kennel_id].nil?
     if !params[:reservation_ids].nil?
       @current_reservations = params[:reservation_ids].map do |i|
         Reservation.find(i)

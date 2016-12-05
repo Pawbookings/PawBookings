@@ -2,15 +2,18 @@
 
 <div class="container-fluid leto_font">
   <div class="row text-center">
-    <div class="col-xs-12">
-        <h5 class="all_blogs_title default_green_color">All Blogs</h5>
-        <div class="all_blogs_div">
-          <% @all_blogs.each do |blog| %>
-            <%= link_to blog.title, blog_path(blog.id), class: "all_blogs_title_link" %>
+    <div class="col-md-2"></div>
+    <div class="col-xs-12 col-md-8">
+      <h5 class="all_blogs_title default_green_color">All Blogs</h5>
+      <br />
+      <div class="all_blogs_div">
+        <% @all_blogs.each do |blog| %>
+          <div class="all_blogs_individual_div">
+            <%= link_to blog.title, blog_path(blog.id), class: "all_blogs_title_link default_white_color text_underline patrick_hand_font" %>
             <br>
-            <%= unsanitize_date(blog.publish_date.to_s) %>
             <br>
-            <img class="all_blogs_display_images" src="<%= blog.blog_display_image %>">
+            <p class="default_white_color"><%= unsanitize_date(blog.publish_date.to_s) %></p>
+            <a href="<%= blog_path(blog.id) %>"><img class="all_blogs_display_images" src="<%= blog.blog_display_image %>"></a>
             <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
               <%= link_to "Edit", edit_blog_path(blog.id) %>
               <br>
@@ -18,6 +21,7 @@
             <% end %>
             <br>
             <br>
+          </div>
         <% end %>
       </div>
     </div>
@@ -26,6 +30,4 @@
 
 
 
-<div class="footer_bottom_addon">
-  <%= render partial: "shared/footer" %>
-</div>
+<%= render partial: "shared/footer" %>

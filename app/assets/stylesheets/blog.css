@@ -68,15 +68,11 @@
 }
 
 .blog_title_link {
-  font-family: 'Kaushan Script', cursive;
   font-size: 2em;
-  color: #0084d2;
-  text-shadow: 0px 0px 15px white;
 }
 
 .blog_date_index {
   font-family: 'Lato', sans-serif;
-  color: #029a3f;
 }
 
 .blog_show_div {
@@ -84,11 +80,6 @@
   padding-right: 2em;
   padding-left: 2em;
   font-family: 'Open Sans', sans-serif;
-}
-
-.blog_show_title {
-  color: #48cd7e;
-  margin-top: 3.5em;
 }
 
 .blog_display_image_div {
@@ -169,9 +160,7 @@
 }
 
 .all_blogs_title_link {
-  font-family: 'Kaushan Script', cursive;
   font-size: 2em;
-  color: #0084d2;
 }
 
 .all_blogs_display_images {
@@ -181,12 +170,20 @@
   margin-bottom: 2em;
 }
 
+.all_blogs_individual_div {
+  border: 1px solid black;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #51d888;
+  border-radius: 1em;
+}
+
+.edit_blog_image {
+  border-radius: 1em;
+}
+
 @media (min-width: 992px) {
   .blog_search_input, .blog_search_submit_btn {
     width: 20%;
-  }
-
-  .blog_index_container {
-    background: none;
   }
 }

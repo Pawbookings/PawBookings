@@ -1,16 +1,27 @@
-<h1>Stand-By Reservations</h1>
+<%= render partial: "shared/top_info" %>
 
-<%= form_for @stand_by_reservation do |f| %>
-  <p>Please enter the email you would like to be notified at: </p>
-  <%= f.text_field :customer_email, placeholder: " Email" %>
-  <%= f.hidden_field :kennel_id, value: params[:kennel_id] %>
-  <%= f.hidden_field :check_in_date, value: sanitize_date(params[:check_in_date]) %>
-  <%= f.hidden_field :check_out_date, value: sanitize_date(params[:check_out_date]) %>
-  <%= f.hidden_field :kennelID, value: params[:kennel_id] %>
-  <%= f.hidden_field :runID, value: params[:run_id] %>
-  <%= f.hidden_field :expired, value: "false" %>
-  <%= f.hidden_field :email_sent, value: "false" %>
-  <%= f.hidden_field :original_search_url, value: request.referrer %>
-  <br>
-  <%= f.submit "Submit" %>
-<% end %>
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="main_title text_underline">Stand-By Reservation</h5>
+      <br />
+      <br />
+      <%= form_for @stand_by_reservation do |f| %>
+      <p>Please enter the email you would like to be notified at: </p>
+      <%= f.text_field :customer_email, placeholder: " example@gmail.com", class:"general_input" %>
+      <%= f.hidden_field :kennel_id, value: params[:kennel_id] %>
+      <%= f.hidden_field :check_in_date, value: sanitize_date(params[:check_in_date]) %>
+      <%= f.hidden_field :check_out_date, value: sanitize_date(params[:check_out_date]) %>
+      <%= f.hidden_field :kennelID, value: params[:kennel_id] %>
+      <%= f.hidden_field :runID, value: params[:run_id] %>
+      <%= f.hidden_field :expired, value: "false" %>
+      <%= f.hidden_field :email_sent, value: "false" %>
+      <%= f.hidden_field :original_search_url, value: request.referrer %>
+      <br>
+      <br>
+      <%= f.submit "Submit", class:"btn btn-success" %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

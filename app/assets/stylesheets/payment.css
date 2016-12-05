@@ -133,3 +133,9 @@
 .payment_res_dates {
   line-height: 1.5em;
 }
+
+@media (min-width: 992px) {
+  .payment_submt_btn, .payment_input {
+    width: 20%;
+  }
+}

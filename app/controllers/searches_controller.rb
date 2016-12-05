@@ -59,12 +59,13 @@ class SearchesController < ApplicationController
     @runs = Run.where(kennel_id: @searched_kennel.id)
     @customer_check_in_date = unsanitize_date(params[:search_info][:check_in])
     @customer_check_out_date = unsanitize_date(params[:search_info][:check_out])
+    @policies = Policy.where(kennel_id: @searched_kennel[:id])
     maxed_out?
     get_amenities_offered
   end
 
   def maxed_out?
-    @reservations = Reservation.where(kennel_id: @searched_kennel[:id], completed: nil)
+    @reservations = Reservation.where(kennel_id: @searched_kennel[:id], completed: "false")
     get_res_dates
   end
 
@@ -144,9 +145,10 @@ class SearchesController < ApplicationController
 
   def check_if_runs_listed
     @hours_of_operation_results.each do |hr|
-      run = Run.where(kennel_id: hr.id)
-      @final_search_results << hr if !run.empty?
+      runs = Run.where(kennel_id: hr.id)
+      @final_search_results << hr if !runs.empty?
     end
+
   end
 
   def get_res_dates
@@ -180,7 +182,7 @@ class SearchesController < ApplicationController
     @group_res_dates = []
     @guest_stay_date_range.each do |gr|
       @each_date_reservation.each do |k, v|
-        if Date.parse(gr) == k
+        if gr == k
           if @group_res_dates.empty?
             @group_res_dates << [id_holder << v, k]
           else

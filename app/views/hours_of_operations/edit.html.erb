@@ -6,7 +6,9 @@
       <h5 class="main_title">Hours of Operation</h5>
       <br />
       <div class="border"></div>
+      <div class="br_if_desktop"><br /></div>
       <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
+      <div class="br_if_desktop"><br /></div>
       <div class="border"></div>
       <br />
       <div class="hours_of_operation_div">
@@ -39,7 +41,6 @@
           <br>
           <%= f.label :sunday %>
           <%= f.select :sunday_open, options_for_select(hours_of_day_option, @hours_of_operation[:sunday_open]) %>-<%= f.select :sunday_close, options_for_select(hours_of_day_option, @hours_of_operation[:sunday_close]) %>
-          <br>
           <br>
           <%= f.submit "Update", class:"btn btn-primary" %>
           <br>

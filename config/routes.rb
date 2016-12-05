@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => "/ckeditor"
   root to: "home#index"
-
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -12,14 +11,12 @@ Rails.application.routes.draw do
   resources :contact_messages, only: [:new, :create]
   resources :customer_emergency_contacts, only: [:new, :create, :update, :destroy]
   resources :customer_vet_infos, only: [:new, :create, :update, :destroy]
-  resources :pets, only: [:new, :create, :update, :destroy]
   resources :hours_of_operations, only: [:edit, :update, :create, :destroy]
   resources :holidays
   resources :runs, only: [:new, :create, :update, :destroy]
   resources :amenities, only: [:new, :create, :update, :destroy]
   resources :policies, only: [:new, :create, :update, :destroy]
   resources :photos, only: [:new, :create]
-  resources :payments, only: [:new, :create]
   resources :reservations, only: [:show]
   resources :kennel_ratings, only: [:new, :create]
   resources :stand_by_reservations, only: [:new, :create]
@@ -28,6 +25,10 @@ Rails.application.routes.draw do
   resources :check_in_contract_important_informations, only: [:update, :edit]
   resources :check_in_contract_reservation_changes, only: [:update, :edit]
   resources :check_in_contract_refund_policies, only: [:update, :edit]
+
+  # PaymentsController
+    resources :payments, only: [:new, :create]
+    get "/vaccination_upload_after_payment", to: "payments#vaccination_upload_after_payment", as: :vaccination_upload_after_payment
 
   # KennelsController
     resources :kennels, only: [:new, :create, :update]
@@ -39,6 +40,10 @@ Rails.application.routes.draw do
     get "/customer_dashboard", to: "customers#customer_dashboard", as: :customer_dashboard
     post "/create_user_image", to: "customers#create_user_image", as: :create_user_image
     delete "/delete_user_image", to: "customers#delete_user_image", as: :delete_user_image
+
+  # PetsController
+    resources :pets, only: [:new, :create, :update, :destroy]
+    get "/update_vaccination_records", to: "pets#update_vaccination_records", as: :update_vaccination_records_path
 
   # SearchesController
     resources :searches, only: [:show, :create]

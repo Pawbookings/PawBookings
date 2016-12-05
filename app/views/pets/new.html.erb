@@ -43,6 +43,13 @@
           <%= f.select :vaccinations, options_for_select(false_or_true_option) %>
           <br>
           <br>
+          <div class="vaccination_record_div">
+            <%= f.label :vaccination_record %>
+            <br />
+            <%= f.file_field :vaccination_record %>
+          </div>
+          <br>
+          <br>
           <%= f.submit "Add New", class:"btn btn-success" %>
           <br>
         <% end %>
@@ -78,14 +85,25 @@
               <%= f.select :vaccinations, options_for_select(false_or_true_option, pet[:vaccinations]) %>
               <br>
               <br>
+              <%= f.label :vaccination_record %>
+              <br />
+              <% if pet[:vaccination_record_file_name].nil? %>
+                <strong>•No vaccination record found.</strong>
+              <% else %>
+                <%= link_to "#{pet[:vaccination_record_file_name]}", pet.vaccination_record.url %>
+              <% end %>
+              <br />
+              <%= f.file_field :vaccination_record %>
+              <br>
+              <br>
               <%= f.submit "Update", class:"btn btn-primary" %>
               <br />
               <br />
-              <%= button_to "Delete", pet_path(pet[:id]), class:"btn btn-danger", method: :delete %>
-              <br />
-              <br />
-              <br />
             <% end %>
+            <%= link_to "Delete", pet_path(pet[:id]), class:"btn btn-danger", method: :delete %>
+            <br />
+            <br />
+            <br />
           <% end %>
         <% end %>
         <div class="border"></div>

@@ -81,4 +81,13 @@ module KennelsHelper
     @new_date = @new_date.join("/")
   end
 
+  def get_kennel_price_range(kennel_id)
+    price_range = []
+    runs = Run.where(kennel_id: kennel_id).to_a
+    runs.each do |run|
+      price_range << run[:price]
+    end
+    @price_range = price_range.sort!
+  end
+
 end

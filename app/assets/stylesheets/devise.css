@@ -69,11 +69,6 @@
   margin-left: 3em;
 }
 
-@media (max-width: 991px) {
-  .kennel_or_customer_top_desktop_div {
-    display: none;
-  }
-}
 
 @media (min-width: 992px) {
   .login_input {
@@ -83,18 +78,8 @@
   .signup_timezone_input, .signup_submit_btn, .signup_input, .login_input, .login_submit_btn {
     width: 20%;
   }
+}
 
-  .kennel_or_customer_div {
-    padding-right: 15em;
-    padding-left: 15em;
-    padding-bottom: 5em;
-  }
+@media (min-width: 1200px){
 
-  .kennel_or_customer_top_desktop_div {
-    margin-bottom: 2em;
-  }
-
-  .kennel_or_customer_bottom_row {
-    display: none;
-  }
 }

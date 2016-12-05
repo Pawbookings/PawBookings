@@ -1,16 +1,22 @@
 /* Search Results */
 
+.searches_show_policies_list_div, .searches_show_amenities_list_div {
+  display: none;
+}
+
 .search_results_container {
   background-color: #25b15e;
   margin-top: -4em;
 }
 
 .search_results_individual_div {
-  background-color: #eaeaea;
+  background-color: #ffffff;
+  padding-top: 0.5em;
   padding-left: 1em;
   padding-bottom: 1em;
   box-shadow: inset 0 0 3px;
   margin-bottom: 3em;
+  border-radius: 1em;
 }
 
 .search_results_top_title {
@@ -22,12 +28,10 @@
 }
 
 .searched_kennel_title_link {
-  font-family: 'Dancing Script', cursive;
-  /*font-family: 'Tangerine', cursive;*/
+  font-family: 'Patrick Hand', cursive;
   font-size: 1.7em;
   letter-spacing: -.02em;
   text-decoration: underline;
-  color: #35915b;
 }
 
 .view_searched_kennel_btn {
@@ -40,8 +44,14 @@
   box-shadow: 0px 0px 6px black;
 }
 
-.search_results_address_p {
-  line-height: 0.1em;
+.search_results_address {
+  margin-top: -0.5em;
+  color: rgba(145, 145, 145, 0.97);
+}
+
+.search_results_mission_statement {
+  font-style: italic;
+  font-size: 1.1em;
 }
 
 /* Searches Show  */
@@ -84,7 +94,7 @@
 }
 
 .my_booking_info_row {
-  background-color: #acacac;
+  background-color: #3c3c3c;
   padding-bottom: 2em;
   padding-top: 5em;
   /*text-shadow: 0px 0px 15px black;*/
@@ -94,11 +104,11 @@
 .searches_show_res_details_div {
   color: white;
   padding-bottom: 1em;
+  text-align: left;
 }
 
 .searches_show_strong_res_details_txt {
   font-size: 1.2em;
-  color: #565656;
 }
 
 .searches_show_my_booking_info_border {
@@ -109,10 +119,15 @@
 }
 
 .searches_show_runs_available_title {
-  font-size: 2.5em;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  text-align: center;
+  background-color: #51d888;
+  display: inline;
+  padding-bottom: 5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.5em;
+  z-index: -1;
+  position: relative;
+  border-radius: 1em;
 }
 
 .searches_show_run_result_title {
@@ -121,19 +136,67 @@
 }
 
 .searches_show_run_result_div {
-  /* padding-left: 1em; */
-  background-color: rgb(212, 212, 212);
-  /* padding-right: 1em; */
+  background-color: rgb(81, 216, 136);
   margin-bottom: 3em;
-  /* padding-bottom: 0.01em; */
-  /*padding-top: 0.009em;*/
+  border-radius: 1em;
 }
 
 .searches_show_run_result_individual_div {
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(76, 203, 127);
   padding-left: 1em;
   padding-right: 1em;
   padding-bottom: 1.2em;
-  box-shadow: 0 0 20px;
   margin-bottom: 1em;
+  border-radius: 1em;
+}
+
+.no_results_found {
+  margin-bottom: 3em;
+  font-size: 1.5em;
+  margin-top: 2em;
+}
+
+
+@media (max-width: 991px){
+  .searches_show_runs_available_row_desktop, .search_results_desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+ .searches_show_runs_available_row_mobile, .search_results_mobile {
+    display: none;
+  }
+
+  .searches_show_policies_list_div, .searches_show_amenities_list_div, .searches_show_mission_statement_div {
+    padding: 2em;
+    border: 1px solid #dadada;
+    border-radius: 1em;
+  }
+
+  .searches_show_res_details_div {
+    text-align: center
+  }
+
+  .my_booking_info_row {
+    margin-left: 15em;
+    margin-right: 15em;
+  }
+
+  .search_results_individual_div {
+    padding-right: 2em;
+    margin-right: 5em;
+    margin-left: 5em;
+  }
+
+  .searched_kennel_price_range {
+    margin-top: 4em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .search_results_individual_div {
+    margin-right: 10em;
+    margin-left: 10em;
+  }
 }

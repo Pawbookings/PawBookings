@@ -134,7 +134,7 @@ class PaymentsController < ApplicationController
   end
 
   def get_relevant_reservations
-    @reservations = Reservation.where(kennel_id: @kennel_info["kennel_id"], completed: nil)
+    @reservations = Reservation.where(kennel_id: @kennel_info["kennel_id"], completed: "false")
     filter_reservation_dates
   end
 
@@ -256,6 +256,7 @@ class PaymentsController < ApplicationController
   end
 
   def register_pets_not_registered
+
     pet_number = []
     @pet_names.each do |pn|
       if Pet.where(user_id: @user[:id], name: pn).blank?
@@ -318,12 +319,38 @@ class PaymentsController < ApplicationController
         reservation.save!
 
         UserMailer.reservation_confirmation(reservation[:id], @total_price).deliver_now
-        return redirect_to reservation_path(id: @user[:id], customer_email: params[:customer_email], transID: params[:transId], res_id: reservation[:id])
+        if upload_vaccination_records?
+          return redirect_to vaccination_upload_after_payment_path(id: @user[:id], customer_email: params[:customer_email], transID: params[:transId], res_id: reservation[:id], pet_ids: @pet_ids, total_pets: params[:total_pets])
+        else
+          return redirect_to reservation_path(id: @user[:id], customer_email: params[:customer_email], transID: params[:transId], res_id: reservation[:id])
+        end
       else
         return redirect_to request.referrer
       end
     else
       redirect_to request.referrer
+    end
+  end
+
+  def upload_vaccination_records?
+    num_of_rooms = params[:total_pets].to_i
+    counter = num_of_rooms
+
+    num_of_rooms.times do
+      if params["pet_vaccinations_#{counter}"] == "true"
+        return true
+      end
+      counter -= 1
+    end
+  end
+
+  def vaccination_upload_after_payment
+    total_pets = params[:total_pets].to_i
+    @counter = total_pets
+    @pets = []
+    params[:pet_ids].each do |pet_id|
+      pet = Pet.find(pet_id)
+      @pets << pet if pet[:vaccinations] == "true"
     end
   end
 

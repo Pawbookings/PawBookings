@@ -1,26 +1,51 @@
 <%= render partial: "shared/top_info" %>
 
-<div class="container-fluid leto_font">
-  <div class="row text-center">
-    <div class="kennel_or_customer_div">
-      <h5 class="kennel_or_customer_title">Register as a...</h5>
-      <div class="kennel_or_customer_top_desktop_div">
-        <div class="col-xs-6 kennel_or_customer_bottom_div">
+<div class="container-fluid leto_font kennel_or_customer_container">
+  <div class="kennel_or_customer_desktop">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h5 class="kennel_or_customer_title">Register as a...</h5>
+        <div class="br_if_desktop"><br /></div>
+        <div class="br_if_desktop"><br /></div>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="kennel_or_customer_styled_containers">
           <%= link_to "Customer", new_user_registration_path(kennel_or_customer: "customer"), class: "kennel_or_customer_link" %>
-        </div>
-        <div class="col-xs-6 kennel_or_customer_bottom_div">
+          <br />
+          <br />
+          <br />
+          <br />
           <%= link_to "Kennel", new_user_registration_path(kennel_or_customer: "kennel"), class: "kennel_or_customer_link" %>
         </div>
       </div>
-      <img class="kennel_or_customer_image" src="/assets/kennel_or_customer_image.jpg">
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
-  <div class="row text-center kennel_or_customer_bottom_row">
-    <div class="col-xs-6 kennel_or_customer_bottom_div">
-      <%= link_to "Customer", new_user_registration_path(kennel_or_customer: "customer"), class: "kennel_or_customer_link" %>
+
+
+  <div class="kennel_or_customer_mobile">
+    <div class="row text-center">
+      <div class="kennel_or_customer_div">
+        <h5 class="kennel_or_customer_title">Register as a...</h5>
+        <img class="kennel_or_customer_image" src="/assets/kennel_or_customer_image.jpg">
+      </div>
     </div>
-    <div class="col-xs-6 kennel_or_customer_bottom_div">
-      <%= link_to "Kennel", new_user_registration_path(kennel_or_customer: "kennel"), class: "kennel_or_customer_link" %>
+    <div class="row text-center kennel_or_customer_bottom_row">
+      <div class="col-xs-6 kennel_or_customer_bottom_div">
+        <%= link_to "Customer", new_user_registration_path(kennel_or_customer: "customer"), class: "kennel_or_customer_link" %>
+      </div>
+      <div class="col-xs-6 kennel_or_customer_bottom_div">
+        <%= link_to "Kennel", new_user_registration_path(kennel_or_customer: "kennel"), class: "kennel_or_customer_link" %>
+      </div>
     </div>
   </div>
 </div>

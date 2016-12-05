@@ -51,36 +51,42 @@
               <%= form_for(@kennel, {id: @kennel.id}) do |f| %>
                 <%= f.label :kennel_name, class:"default_green_color" %><span class="default_green_color">:</span>
                 <br />
-                <%= f.text_field :name, class: "kennel_dashboard_input" %>
+                <%= f.text_field :name, class: "kennel_dashboard_input_desktop" %>
+                <br />
                 <br />
                 <%= f.label :address, class:"default_green_color" %><span class="default_green_color">:</span>
                 <br />
-                <%= f.text_field :address, class: "kennel_dashboard_input" %>
+                <%= f.text_field :address, class: "kennel_dashboard_input_desktop" %>
+                <br />
                 <br />
                 <%= f.label :mission_statement, class:"default_green_color" %><span class="default_green_color">:</span>
                 <br />
-                <%= f.text_area :mission_statement, class: "kennel_dashboard_input" %>
+                <%= f.text_area :mission_statement, class: "kennel_dashboard_input_desktop" %>
+                <br />
                 <br />
                 <%= f.label :city, class:"default_green_color" %><span class="default_green_color">:</span>
                 <br />
-                <%= f.text_field :city, class: "kennel_dashboard_input" %>
+                <%= f.text_field :city, class: "kennel_dashboard_input_desktop" %>
+                <br />
                 <br />
                 <%= f.label :state, class:"default_green_color" %><span class="default_green_color">:</span>
                 <br />
                 <%= f.select :state, options_for_select(states_options, @kennel[:state]) %>
                 <br />
+                <br />
                 <%= f.label :zip, class:"default_green_color" %><span class="default_green_color">:</span>
                 <br />
-                <%= f.text_field :zip, class: "kennel_dashboard_input" %>
+                <%= f.text_field :zip, class: "kennel_dashboard_input_desktop" %>
+                <br />
                 <br />
                 <%= f.label :email, class:"default_green_color" %><span class="default_green_color">:</span>
                 <br />
-                <%= f.text_field :email, class: "kennel_dashboard_input" %>
+                <%= f.text_field :email, class: "kennel_dashboard_input_desktop" %>
                 <br />
                 <br />
                 <%= image_tag @kennel.avatar.url(:thumb), class: "kennel_dashboard_avatar" if !@kennel.nil? %>
                 <br />
-                <%= f.file_field :avatar, class: "kennel_dashboard_input text-center btn btn-primary kennel_avatar_btn" %>
+                <%= f.file_field :avatar, class: "kennel_dashboard_input_desktop text-center btn btn-primary kennel_avatar_btn" %>
                 <br />
                 <div class="text-center">
                   <%= f.submit "Update Kennel Info", class: "btn btn-success" %>
@@ -108,7 +114,7 @@
             <span class="default_green_color res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_phone") %> Phone</span>
             <br />
             <br />
-            <%= text_field_tag :reservation_search, nil, placeholder: " Search", class: "kennel_dashboard_input" %>
+            <%= text_field_tag :reservation_search, nil, placeholder: " Search", class: "kennel_dashboard_input_desktop" %>
             <br>
             <br>
             <%= submit_tag "Search Now", class: "btn btn-success" %>

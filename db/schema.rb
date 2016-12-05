@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161110001359) do
+ActiveRecord::Schema.define(version: 20161203011755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -262,8 +262,12 @@ ActiveRecord::Schema.define(version: 20161110001359) do
     t.string   "vaccinations"
     t.string   "spay_or_neutered"
     t.string   "special_instructions"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "vaccination_record_file_name"
+    t.string   "vaccination_record_content_type"
+    t.integer  "vaccination_record_file_size"
+    t.datetime "vaccination_record_updated_at"
   end
 
   add_index "pets", ["user_id"], name: "index_pets_on_user_id", using: :btree

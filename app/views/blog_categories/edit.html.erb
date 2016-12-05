@@ -1,9 +1,26 @@
-<h1>Edit Blog Category Page</h1>
+<%= render partial: "shared/top_info" %>
 
-<%= form_for @blog_category do |f| %>
-  <%= f.text_field :title, placeholder: " Title" %>
-  <br>
-  <%= f.text_field :publish_date, placeholder: " Publish Date" %>
-  <br>
-  <%= f.submit "Submit" %>
-<% end %>
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="main_title">Edit Blog Category</h5>
+      <br />
+      <%= form_for @blog_category do |f| %>
+      <strong>Title:</strong>
+      <br />
+      <%= f.text_field :title, placeholder: " Title" %>
+      <br>
+      <br>
+      <strong>Publish Date:</strong>
+      <br />
+      <%= f.text_field :publish_date, placeholder: " Publish Date" %>
+      <br>
+      <br>
+      <%= f.submit "Submit", class:"btn btn-success blog_publish_date_picker" %>
+      <br />
+      <br />
+      <br />
+      <% end %>
+    </div>
+  </div>
+</div>

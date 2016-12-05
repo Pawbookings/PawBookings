@@ -44,6 +44,10 @@ input {
   font-style: italic;
 }
 
+.font_italic {
+  font-style: italic;
+}
+
 .default_green_color {
 	color: #48cd7e;
 }
@@ -64,6 +68,10 @@ input {
   font-family: 'Kaushan Script', cursive;
 }
 
+.patrick_hand_font {
+  font-family: 'Patrick Hand', cursive;
+}
+
 .pet_icon {
   width: 11%;
 }
@@ -76,21 +84,33 @@ input {
 
 .border {
   /*border: 1px solid #9a9a9a;*/
-  border: 1px solid #5f5f5f;
+  /*border: 1px solid #5f5f5f;*/
+  border: 1px solid #51d888;
 }
+
 .border_right {
-  border-right: 1px solid #828282;
+  /*border-right: 1px solid #828282;*/
+  border-right: 1px solid #51d888;
 }
 
 .border_left {
-  border-left: 1px solid #828282;
+  /*border-left: 1px solid #828282;*/
+  border-left: 1px solid #51d888;
+}
+
+.border_radius_100 {
+  border-radius: 100%;
 }
 
 .main_title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Patrick Hand', cursive;
   color: #48cd7e;
   font-size: 2.5em;
   margin-top: 3.7em;
+}
+
+.margin_top_5em {
+  margin-top: 5em;
 }
 
 .general_input {
@@ -117,14 +137,27 @@ input {
   width: 50%;
 }
 
+.width_100_percent {
+  width: 100%;
+}
+
 
 @media (max-width: 991px){
   .br_if_desktop{
     display: none;
   }
+
+  .hidden_if_mobile {
+    display: none;
+  }
 }
 
 @media (min-width: 992px) {
+
+  .hidden_if_desktop {
+    display: none;
+  }
+
   .calendar-title {
     font-size: 1.5em;
   }
@@ -135,5 +168,9 @@ input {
 
   .simple-calendar {
     box-shadow: 0px 0px 15px black;
+  }
+
+  .pet_icon {
+    width: 9%;
   }
 }

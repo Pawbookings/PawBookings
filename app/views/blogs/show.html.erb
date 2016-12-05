@@ -1,10 +1,11 @@
 <%= render partial: "shared/top_info" %>
 <div class="container-fluid">
   <div class="row text-center">
-    <div class="col-xs-12">
+    <div class="col-md-1"></div>
+    <div class="col-xs-12 col-md-10">
       <div class="blog_show_div">
-        <h1 class="blog_show_title default_green_color"><%= @blog.title %></h1>
-        Published on: <%= unsanitize_date(@blog.publish_date.to_s) %>
+        <h5 class="main_title default_green_color text_underline patrick_hand_font"><%= @blog.title %></h5>
+        Published on: <br /><%= unsanitize_date(@blog.publish_date.to_s) %>
         <br>
         <br>
         <%= raw(@blog.body) %>

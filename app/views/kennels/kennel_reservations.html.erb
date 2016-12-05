@@ -8,20 +8,24 @@
     <div class="col-xs-12">
       <h5 class="main_title text_underline"><%= params[:date] %></h5>
       <br />
-      <% if @all_run_ids_and_quantities.nil? %>
+      <% if @all_run_ids_and_quantities.nil? && !@kennel.nil? %>
         <% runs = Run.where(kennel_id: @kennel[:id]).to_a %>
         <% runs.each do |run| %>
-      <strong class="default_green_color"><%= "#{run[:title]} - #{run[:number_of_rooms]} room(s) available for booking." %></strong>
+          <strong class="default_green_color"><%= "#{run[:title]} - #{run[:number_of_rooms]} room(s) available for booking." %></strong>
+          <br />
         <% end %>
-      <% else %>
+      <% elsif !@all_run_ids_and_quantities.nil? %>
         <% @all_run_ids_and_quantities.each do |run_id, quantity| %>
           <% run = Run.find(run_id) %>
           <% if quantity > 0 %>
             <strong class="default_green_color"><%= "#{run[:title]} - #{quantity} room(s) available for booking." %></strong>
+            <br />
           <% elsif quantity == 0 %>
             <strong style="color:red;"><%= "#{run[:title]} is maxed out." %></strong>
+            <br />
           <% else %>
             <strong style="color:red;"><%= "#{run[:title]} is overbooked, please contact Pawbookings to resolve." %></strong>
+            <br />
           <% end %>
         <% end %>
       <% end %>
@@ -101,7 +105,8 @@
             <strong class="default_green_color">Check-Out Date: </strong><span class="default_white_color"><%= unsanitize_date(res[:check_out_date].to_s) %></span>
             <br />
             <br />
-            <strong class="default_green_color">Total Price: </strong><span class="default_white_color">$<%= res[:total_price] %></span>
+            <strong class="default_green_color">Total Price: </strong>
+            <h2 class="default_white_color">$<%= res[:total_price] %></h2>
           </div>
           <div class="col-md-3">
             <h4 class="default_green_color text_underline">Amenities</h4>
@@ -118,8 +123,11 @@
           </div>
           <div class="col-md-2">
             <h4 class="default_green_color text_underline">Pets</h4>
+            <br />
+            <% counter = JSON.parse(res[:pet_ids]).length %>
             <% JSON.parse(res[:pet_ids]).each do |pet_id| %>
               <% pet = Pet.find(pet_id) %>
+              <p class="default_green_color text_underline">Pet#<%= counter %></p>
               <strong class="default_green_color">Name: </strong><span class="default_white_color"><br /><%= pet[:name] %></span>
               <br />
               <br />
@@ -135,12 +143,21 @@
               <strong class="default_green_color">Vaccinations: </strong><span class="default_white_color"><br /><%= pet[:vaccinations] %></span>
               <br />
               <br />
+              <% if pet[:vaccination_record_file_name].nil? %>
+                <strong class="default_white_color">•No vaccination record found.</strong>
+              <% else %>
+                <%= link_to "#{pet[:vaccination_record_file_name]}", pet.vaccination_record.url %>
+              <% end %>
+              <br />
+              <br />
               <strong class="default_green_color">Spay or Neutered: </strong><span class="default_white_color"><br /><%= pet[:spay_or_neutered] %></span>
               <br />
               <br />
               <strong class="default_green_color">Special Instructions: </strong><span class="default_white_color"><br /><%= pet[:special_instructions] %></span>
               <br />
               <br />
+              <br />
+              <% counter -= 1 %>
             <% end %>
           </div>
         </div>

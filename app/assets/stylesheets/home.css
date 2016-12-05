@@ -166,8 +166,33 @@
   width: 100%;
 }
 
+.kennel_or_customer_styled_containers {
+  background-color: rgba(255, 255, 255, 0.79);
+  border-radius: 1em;
+  padding: 2em;
+}
+
+@media (max-width: 991px){
+  .kennel_or_customer_desktop {
+    display: none;
+  }
+}
+
 
 @media (min-width: 992px) {
+
+  .kennel_or_customer_container {
+    background: url("/assets//kennel_or_customer_image.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-bottom: 3em;
+  }
+
+  .kennel_or_customer_mobile {
+    display: none;
+  }
 
   .top_hero_text {
     padding-left: 10em;
@@ -180,8 +205,8 @@
   }
 
   .why_bottom_text {
-    padding-left: 10em;
-    padding-right: 10em;
+    padding-left: 15em;
+    padding-right: 15em;
   }
 
   .why_features_details {
@@ -203,12 +228,21 @@
     font-size: 2em;
   }
 
+  .kennel_or_customer_title {
+    margin-top: 3.7em;
+  }
+
 }
 
 @media (min-width: 1200px) {
   .testimonial_row {
     margin-right: 25em;
     margin-left: 25em;
+  }
+
+  .why_bottom_text {
+    margin-right: 15em;
+    margin-left: 15em;
   }
 }
 

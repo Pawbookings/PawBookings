@@ -1,25 +1,37 @@
-<h1>Create a New Blog!</h1>
+<%= render partial: "shared/top_info" %>
 
-<%= form_for @blog do |f| %>
-  <p>Display Image:</p>
-  <%= f.file_field :blog_display_image %>
-  <br>
-  <br>
-  <p>Title:</p>
-  <%= f.text_field :title, placeholder: " Title" %>
-  <br>
-  <br>
-  <p>Body:</p>
-  <%= f.cktext_area :body, placeholder: " Body" %>
-  <br>
-  <br>
-  <p>Keyword:</p>
-  <%= f.text_field :keyword, placeholder: " Keyword" %>
-  <br>
-  <br>
-  <p>Publishing Date:</p>
-  <%= f.text_field :publish_date, class: "blog_publish_date_picker" %>
-  <br>
-  <br>
-  <%= f.submit "Submit" %>
-<% end %>
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="main_title">Create a blog</h5>
+        <br />
+      <%= form_for @blog do |f| %>
+        <strong>Display Image:</strong>
+        <%= f.file_field :blog_display_image, class:"btn btn-primary general_input" %>
+        <br>
+        <br>
+        <strong>Title:</strong>
+        <br />
+        <%= f.text_field :title, placeholder: " Title", class:"general_input" %>
+        <br>
+        <br>
+        <strong>Body:</strong>
+        <%= f.cktext_area :body, placeholder: " Body", class:"general_input" %>
+        <br>
+        <br>
+        <strong>Keyword:</strong>
+        <%= f.text_field :keyword, placeholder: " Keyword", class:"general_input" %>
+        <br>
+        <br>
+        <strong>Publishing Date:</strong>
+        <%= f.text_field :publish_date, class: "blog_publish_date_picker general_input" %>
+        <br>
+        <br>
+        <%= f.submit "Submit", class:"btn btn-success" %>
+        <br />
+        <br />
+      <% end %>
+
+    </div>
+  </div>
+</div>

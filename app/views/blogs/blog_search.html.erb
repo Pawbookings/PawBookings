@@ -2,7 +2,8 @@
 
 <div class="container-fluid leto_font">
   <div class="row text-center">
-    <div class="col-xs-12">
+    <div class="col-md-2"></div>
+    <div class="col-xs-12 col-md-8">
       <h5 class="search_blog_title default_green_color">
         Search for a blog...
       </h5>
@@ -21,14 +22,21 @@
           <% if !@blog_search_results.empty? %>
             <h5 class="searched_blog_title default_green_color">Blog Search Results</h5>
             <% @blog_search_results.each do |b| %>
-              <%= link_to b[:title], blog_path(b[:id]), class: "searched_blog_title_link kaushan_font " %>
-              <p><%= unsanitize_date(b[:publish_date].to_s) %></p>
-              <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
-                <%= link_to "Edit", edit_blog_path(b[:id]) %>
+              <div class="all_blogs_individual_div">
+                <%= link_to b[:title], blog_path(b[:id]), class: "searched_blog_title_link patrick_hand_font default_white_color " %>
+                <br />
+                <br />
+                <a href="<%= blog_path(b[:id]) %>"><img class="width_100_percent" src="<%= b.blog_display_image %>" /></a>
+                <br />
+                <br />
+                <p class="default_white_color"><%= unsanitize_date(b[:publish_date].to_s) %></p>
+                <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
+                  <%= link_to "Edit", edit_blog_path(b[:id]) %>
+                  <br>
+                  <%= link_to "Delete", blog_path(b.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
+                <% end %>
                 <br>
-                <%= link_to "Delete", blog_path(b.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
-              <% end %>
-              <br>
+              </div>
             <% end %>
           <% else %>
             <p>No results found...</p>
