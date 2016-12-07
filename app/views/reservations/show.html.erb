@@ -2,17 +2,25 @@
 
 <div class="container-fluid leto_font reservation_confirmation_conatiner">
   <div class="row">
-    <div class="col-xs-12">
-      <h5 class="reservation_confirmation_title default_green_color">Booking Confirmed!</h5>
+    <div class="col-md-3"></div>
+    <div class="col-xs-12 col-md-6 booking_confirmed_verbiage">
+      <h5 class="reservation_confirmation_title default_green_color text_underline">Booking Confirmed!</h5>
       <h6 class="reservation_confirmation_details">A confirmation email has been sent to: <strong class="reservation_confirmation_data default_green_color"><%= @customer_email %></strong></h6>
-      <h6 class="reservation_confirmation_details">If you need to make a change to your reservation, please contact <strong class="reservation_confirmation_data default_green_color">844.944.3333</strong> with your "ConfirmationID" number provided below.</h6>
+      <h6 class="reservation_confirmation_details">If you need to make a change to your reservation, please contact <strong class="reservation_confirmation_data default_green_color">844.944.3333</strong> with your "ReservationID" &amp; "ConfirmationID" numbers provided below.</h6>
       <h6 class="reservation_confirmation_details">Payment ConfirmationID: <strong class="reservation_confirmation_data default_green_color"><%= @transID %></strong></h6>
       <h6 class="reservation_confirmation_details">ReservationID: <strong class="reservation_confirmation_data default_green_color"><%= params[:res_id] %></strong></h6>
     </div>
   </div>
   <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <img class="reservation_confirmation_image hidden_if_mobile" style="width:100%;" src="/assets/reservation_confirmation_image.jpg">
+      <br />
+      <br />
+      <br />
+    </div>
   </div>
 </div>
-<img class="reservation_confirmation_image" style="width:100%;" src="/assets/reservation_confirmation_image.jpg">
+<img class="reservation_confirmation_image hidden_if_desktop" style="width:100%;" src="/assets/reservation_confirmation_image.jpg">
 
 <%= render partial: "shared/footer" %>

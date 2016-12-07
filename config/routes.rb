@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :hours_of_operations, only: [:edit, :update, :create, :destroy]
   resources :holidays
   resources :runs, only: [:new, :create, :update, :destroy]
+  resources :pets, only: [:new, :create, :update, :destroy]
   resources :amenities, only: [:new, :create, :update, :destroy]
   resources :policies, only: [:new, :create, :update, :destroy]
   resources :photos, only: [:new, :create]
@@ -34,16 +35,13 @@ Rails.application.routes.draw do
     resources :kennels, only: [:new, :create, :update]
     get "/kennel_dashboard",   to: "kennels#kennel_dashboard",   as: :kennel_dashboard
     get "/kennel_reservations", to: "kennels#kennel_reservations", as: :kennel_reservations
+    get "/kennel_view_pets", to: "kennels#kennel_view_pets", as: :kennel_view_pets
     match "/kennel_searched_reservation", to: "kennels#kennel_searched_reservation", as: :kennel_searched_reservation, via: [:get, :post]
 
   # CustomersController
     get "/customer_dashboard", to: "customers#customer_dashboard", as: :customer_dashboard
     post "/create_user_image", to: "customers#create_user_image", as: :create_user_image
     delete "/delete_user_image", to: "customers#delete_user_image", as: :delete_user_image
-
-  # PetsController
-    resources :pets, only: [:new, :create, :update, :destroy]
-    get "/update_vaccination_records", to: "pets#update_vaccination_records", as: :update_vaccination_records_path
 
   # SearchesController
     resources :searches, only: [:show, :create]

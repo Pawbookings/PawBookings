@@ -13,19 +13,22 @@
   <div class="row text-center">
     <div class="col-xs-12">
       <% @pets.each do |pet| %>
-        <%= form_for(pet, html: {id: @counter, action: "update_vaccination_records", controller: :pets}) do |f| %>
-          <br />
-          <strong>Pet Name:</strong><p class="default_green_color"><%= pet[:name] %></p>
-          <strong>Weight:</strong><p class="default_green_color"><%= pet[:weight] %></p>
-          <strong>Vaccination record:</strong>
-          <%= f.file_field :vaccination_record, class:"btn btn-primary" %>
-          <br />
-          <br />
+        <% if pet[:vaccination_record_file_name].nil? %>
+          <%= form_for(pet, html: {id: @counter, action: "update_vaccination_records", controller: :pets}) do |f| %>
+            <br />
+            <strong>Pet Name:</strong><p class="default_green_color"><%= pet[:name] %></p>
+            <strong>Weight:</strong><p class="default_green_color"><%= pet[:weight] %></p>
+            <strong>Vaccination record:</strong>
+            <%= f.file_field :vaccination_record, class:"btn btn-primary" %>
+            <br />
+            <br />
+            <%= f.submit "Submit", class:"btn btn-success" %>
+            <br />
+            <br />
+          <% end %>
         <% end %>
         <div class="border"></div>
       <% end %>
-      <br />
-      <%= link_to "Submit", "#", class:"btn btn-success vaccination_record_submit_btn", onclick:"return submitForms();" %>
       <br />
       <%= link_to "Skip", reservation_path(id: params[:id], params: params) %>
     </div>
@@ -36,17 +39,3 @@
 <br />
 
 <%= render partial: "shared/footer" %>
-
-
-<script type="text/javascript">
-  function submitForms(){
-    var counter = "<%= params[:total_pets] %>";
-    var numCounter = parseInt("<%= params[:total_pets] %>");
-    console.log(numCounter);
-    while(numCounter > 0) {
-      $("#"+counter).submit();
-      counter -= 1;
-    }
-
-  }
-</script>

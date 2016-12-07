@@ -1,5 +1,5 @@
 class PetsController < ApplicationController
-  before_action :authenticate_user!, except: [:update_vaccination_records]
+  before_action :authenticate_user!, except: [:update]
 
   def new
     @pet = Pet.new
@@ -18,7 +18,6 @@ class PetsController < ApplicationController
   end
 
   def update
-    params[:pet][:breed] = "cat" if params[:pet][:cat_or_dog] == "cat"
     pet = Pet.find(params[:id])
     pet.name = params[:pet][:name] if !params[:pet][:name].nil?
     pet.weight = params[:pet][:weight] if !params[:pet][:weight].nil?
@@ -27,13 +26,7 @@ class PetsController < ApplicationController
     pet.special_instructions = params[:pet][:special_instructions] if !params[:pet][:special_instructions].nil?
     pet.vaccination_record = params[:pet][:vaccination_record] if !params[:pet][:vaccination_record].nil?
     pet.save!
-    redirect_to new_pet_path
-  end
-
-  def update_vaccination_records
-    pet = Pet.find(params[:id])
-    pet.vaccination_record = params[:pet][:vaccination_record]
-    pet.save!
+    redirect_to request.referrer
   end
 
   def destroy

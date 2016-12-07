@@ -22,3 +22,9 @@
   width: 100%;
   margin-top: 2em;
 }
+
+@media (min-width: 992px) {
+  .booking_confirmed_verbiage {
+    text-align: center
+  }
+}

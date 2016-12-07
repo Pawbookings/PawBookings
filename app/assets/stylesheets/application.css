@@ -44,6 +44,15 @@ input {
   font-style: italic;
 }
 
+table, th, td {
+  border: 1px solid #48cd7e;
+  padding: 1em;
+}
+
+.margin_left_1em {
+  margin-left: 1em;
+}
+
 .font_italic {
   font-style: italic;
 }

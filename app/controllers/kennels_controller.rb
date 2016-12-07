@@ -53,6 +53,14 @@ class KennelsController < ApplicationController
     filter_reservation_search if !params[:search_by].blank?
   end
 
+  def kennel_view_pets
+    @pets = []
+    JSON.parse(params[:pet_ids]).each do |pet_id|
+      @pets << Pet.find(pet_id)
+    end
+    @counter = @pets.length
+  end
+
   def filter_reservation_search
     search_by = params[:search_by]
     @reservation_search_results = Reservation.where(search_by.to_sym => params[:reservation_search].capitalize, kennel_id: @kennel[:id]).order(created_at: :desc).limit(10)
@@ -176,6 +184,7 @@ class KennelsController < ApplicationController
       @pets << pet
       @pet_ids << pet[:id]
     end
+    @counter = @pets.length
   end
 
   private

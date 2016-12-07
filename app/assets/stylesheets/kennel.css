@@ -1,4 +1,3 @@
-
 .kennel_dashboard_title {
   font-family: 'Open Sans', sans-serif;
   color: #48cd7e;
@@ -141,12 +140,16 @@
 }
 
 @media (max-width: 991px){
-  .searched_res_desktop, .kennel_dashboard_desktop {
+  .kennel_reservation_desktop, .searched_res_desktop, .kennel_dashboard_desktop {
     display: none;
   }
 }
 
 @media (min-width: 992px) {
+  .kennel_reservation_mobile, .searched_res_mobile, .kennel_dashboard_mobile {
+    display: none;
+  }
+
   .kennel_reservation_container, .searched_res_container_desktop, .kennel_dashboard_container {
     background-color: #3c3c3c;
     padding-bottom: 3em;
@@ -162,10 +165,6 @@
     border-radius: 0.4em;
   }
 
-  .kennel_reservation_mobile, .searched_res_mobile, .kennel_dashboard_mobile {
-    display: none;
-  }
-
   .kennel_dashboard_option_btns_div {
     line-height: 1em;
     text-align: left;
@@ -176,4 +175,17 @@
   .kennel_dashboard_input {
     width: 20%;
   }
+
+  .kennel_reservations_body {
+    background-color: #3c3c3c;
+  }
+
+  .kennel_reservation_th {
+    background-color: #5e5e5e;
+  }
+
+  .kennel_reservation_td {
+    color: #ffffff;
+  }
+
 }
