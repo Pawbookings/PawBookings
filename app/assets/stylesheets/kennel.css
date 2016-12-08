@@ -15,7 +15,7 @@
   margin-left: 10%;
 }
 
-.kennel_dashboard_input {
+.kennel_dashboard_input_edit, .kennel_dashboard_input {
   width: 75%;
   height: 2.5em;
   border-radius: 0.4em;

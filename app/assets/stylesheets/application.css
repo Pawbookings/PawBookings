@@ -122,7 +122,7 @@ table, th, td {
   margin-top: 5em;
 }
 
-.general_input {
+.general_input_edit, .general_input {
   width: 75%;
   height: 2.5em;
   border-radius: 0.4em;

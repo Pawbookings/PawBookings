@@ -54,25 +54,30 @@
           <br>
         <% end %>
       </div>
+    </div>
+  </div>
 
-      <br />
-      <div class="border"></div>
-      <br />
-
-      <div class="edit_pet_div">
-        <% if !@pets.blank? %>
+  <br />
+  <div class="border"></div>
+  <br />
+  <div class="row text-center">
+    <div class="edit_pet_div">
+      <% if @pets.blank? %>
+        <h2><strong class="default_white_color">•No pets listed.</strong></h2>
+      <% else %>
         <h3 class="default_green_color">Edit Existing</h3>
         <br />
-          <% @pets.each do |pet| %>
+        <% @pets.each do |pet| %>
+          <div class="col-xs-6 col-sm-4 col-md-3">
             <%= form_for(pet, {action: :update}) do |f| %>
               <%= f.label :pet_name %>
               <br />
-              <%= f.text_field :name, placeholder: " Pet Name", class:"general_input" %>
+              <%= f.text_field :name, placeholder: " Pet Name", class:"general_input_edit" %>
               <br>
               <br>
               <%= f.label :weight %>
               <br />
-              <%= f.text_field :weight, placeholder: " Pets weight", class:"general_input" %>
+              <%= f.text_field :weight, placeholder: " Pets weight", class:"general_input_edit" %>
               <br>
               <br>
               <%= f.label :spay_or_neutered %>
@@ -103,12 +108,9 @@
             <%= link_to "Delete", pet_path(pet[:id]), class:"btn btn-danger", method: :delete %>
             <br />
             <br />
-            <br />
-          <% end %>
+          </div>
         <% end %>
-        <div class="border"></div>
-      </div>
-
+      <% end %>
     </div>
   </div>
 </div>

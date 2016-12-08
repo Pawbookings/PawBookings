@@ -29,24 +29,31 @@
           <br>
         <% end %>
       </div>
-      <div class="all_holidays_div">
-        <% if !@holidays.blank? %>
-        <div class="border"></div>
+    </div>
+  </div>
+  <br />
+  <div class="border"></div>
+  <br />
+  <div class="row text-center">
+    <div class="all_holidays_div">
+      <% if @holidays.blank? %>
+        <h2><strong class="default_green_color">•No holidays listed.</strong></h2>
+      <% else %>
+        <h3 class="default_green_color">Edit</h3>
         <br />
-          <h3 class="default_green_color">Edit</h3>
-          <% @holidays.each do |holiday| %>
-            <p><strong>Date: </strong><%= unsanitize_date(holiday[:holiday_date].to_s) %></p>
-            <p><strong>Description: </strong><%= holiday[:description] %></p>
+        <% @holidays.each do |holiday| %>
+          <div class="col-xs-6 col-sm-4 col-md-3">
+            <p><strong>Date: </strong><br /><%= unsanitize_date(holiday[:holiday_date].to_s) %></p>
+            <p><strong>Description: </strong><br /><%= holiday[:description] %></p>
             <%= button_to "Edit", edit_holiday_path(holiday[:id]), class:"btn btn-primary", method: :get %>
             <br />
             <%= button_to "Delete", holiday_path(holiday[:id]), data: {confirm: "Are you sure you want to delete this holiday?"}, class:"btn btn-danger", method: :delete %>
             <br />
             <br />
             <br />
-          <% end %>
-          <div class="border"></div>
+          </div>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
