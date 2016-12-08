@@ -173,14 +173,12 @@
 }
 
 @media (max-width: 991px){
-  .kennel_or_customer_desktop {
+  .testimonial_desktop, .kennel_or_customer_desktop {
     display: none;
   }
 }
 
-
 @media (min-width: 992px) {
-
   .kennel_or_customer_container {
     background: url("/assets//kennel_or_customer_image.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -190,7 +188,7 @@
     padding-bottom: 3em;
   }
 
-  .kennel_or_customer_mobile {
+  .testimonial_mobile, .kennel_or_customer_mobile {
     display: none;
   }
 
