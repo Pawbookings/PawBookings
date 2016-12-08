@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203011755) do
+ActiveRecord::Schema.define(version: 20161208193612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,7 +95,10 @@ ActiveRecord::Schema.define(version: 20161203011755) do
     t.string   "blog_display_image_content_type"
     t.integer  "blog_display_image_file_size"
     t.datetime "blog_display_image_updated_at"
+    t.string   "slug"
   end
+
+  add_index "blogs", ["slug"], name: "index_blogs_on_slug", using: :btree
 
   create_table "check_in_contract_important_informations", force: :cascade do |t|
     t.string   "title"
@@ -168,6 +171,19 @@ ActiveRecord::Schema.define(version: 20161203011755) do
   end
 
   add_index "customer_vet_infos", ["user_id"], name: "index_customer_vet_infos_on_user_id", using: :btree
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "holidays", force: :cascade do |t|
     t.integer  "kennel_id"
@@ -243,8 +259,10 @@ ActiveRecord::Schema.define(version: 20161203011755) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "slug"
   end
 
+  add_index "kennels", ["slug"], name: "index_kennels_on_slug", using: :btree
   add_index "kennels", ["user_id"], name: "index_kennels_on_user_id", using: :btree
 
   create_table "payments", force: :cascade do |t|

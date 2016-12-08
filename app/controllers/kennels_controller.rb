@@ -1,5 +1,5 @@
 class KennelsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
 
   def new
     @kennel = Kennel.new
@@ -35,6 +35,114 @@ class KennelsController < ApplicationController
     kennel.avatar = params[:kennel][:avatar] if !params[:kennel][:avatar].nil?
     kennel.save!
     redirect_to kennel_dashboard_path
+  end
+
+  def show
+    @searched_kennel = Kennel.friendly.find(params[:id])
+    @kennel_user = User.find(@searched_kennel[:user_id])
+    @runs = Run.where(kennel_id: @searched_kennel.id)
+    @customer_check_in_date = unsanitize_date(params[:search_info][:check_in])
+    @customer_check_out_date = unsanitize_date(params[:search_info][:check_out])
+    @policies = Policy.where(kennel_id: @searched_kennel[:id])
+    maxed_out?
+    get_amenities_offered
+  end
+
+  def maxed_out?
+    @reservations = Reservation.where(kennel_id: @searched_kennel[:id], completed: "false")
+    get_res_dates
+  end
+
+  def get_amenities_offered
+    @amenity_ids = []
+    @amenities = Amenity.where(kennel_id: params[:id])
+    @amenities.each do |amenity|
+      @amenity_ids << amenity.id
+    end
+  end
+
+  def get_res_dates
+    @res_ids_and_dates = []
+    @reservations.each do |res|
+      reservation_date_range = (res[:check_in_date]..res[:check_out_date]).map{|date| date}
+      reservation_date_range.delete_at(reservation_date_range.length - 1)
+      @res_ids_and_dates << [res[:id], reservation_date_range]
+    end
+    filter_res_dates
+  end
+
+  def filter_res_dates
+    @each_date_reservation = []
+    @guest_stay_date_range = (Date.parse(params[:search_info][:check_in])..Date.parse(params[:search_info][:check_out])).map{|date| date}
+    @guest_stay_date_range.delete_at(@guest_stay_date_range.length - 1)
+    @guest_stay_date_range.each do |gr|
+      @res_ids_and_dates.each do |k|
+        k[1].each do |i|
+          if i == gr
+            @each_date_reservation << [i, k[0]]
+          end
+        end
+      end
+    end
+    group_res_dates
+  end
+
+  def group_res_dates
+    id_holder = []
+    @group_res_dates = []
+    @guest_stay_date_range.each do |gr|
+      @each_date_reservation.each do |k, v|
+        if gr == k
+          if @group_res_dates.empty?
+            @group_res_dates << [id_holder << v, k]
+          else
+            @group_res_dates.each do |ke, va|
+              if va == k
+                ke << v
+              elsif !@group_res_dates.flatten.include? k
+                @group_res_dates << [id_holder << v, k]
+              end
+            end
+          end
+        end
+      end
+    end
+    @grouped_res_dates = @group_res_dates.map {|k, v| [k.uniq, v]}
+    get_number_of_runs_occupied
+  end
+
+  def get_number_of_runs_occupied
+    @grouped_res_dates.each do |reservation_ids, date1|
+      @runs_for_today = []
+      reservation_ids.each do |res_id|
+        res = Reservation.find(res_id)
+        (JSON.parse res[:run_ids]).each {|i| @runs_for_today << i}
+      end
+      group_runs
+    end
+  end
+
+  def group_runs
+    @group_runs_by_count = []
+    counter = @runs_for_today.length - 1
+    @runs_for_today.length.times do
+      if @runs_for_today.count(@runs_for_today[0]) > 1
+        @group_runs_by_count << [@runs_for_today[0].to_s, @runs_for_today.count(@runs_for_today[0])]
+        @runs_for_today.delete(@runs_for_today[0])
+      elsif !@runs_for_today.empty?
+        @group_runs_by_count << [@runs_for_today[0].to_s, 1]
+        @runs_for_today.delete(@runs_for_today[0])
+      end
+    end
+    check_if_runs_maxed_today
+  end
+
+  def check_if_runs_maxed_today
+    @run_ids_maxed = []
+    @group_runs_by_count.each do |run_id, count|
+      run = Run.find(run_id)
+      @run_ids_maxed << run_id if count == run[:number_of_rooms]
+    end
   end
 
   def kennel_dashboard

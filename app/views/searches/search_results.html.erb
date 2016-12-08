@@ -28,7 +28,7 @@
               <%= image_tag fr.avatar.url(:thumb), class:"border_radius_100" %>
             </div>
             <div class="col-md-7">
-              <h4><%= link_to fr.name, search_path(fr.id, search_info: params), class:"searched_kennel_title_link default_green_color" %></h4>
+              <h4><%= link_to fr.name, kennel_path(fr.id, search_info: params), class:"searched_kennel_title_link default_green_color" %></h4>
               <p class="search_results_mission_statement"><%= fr.mission_statement %></p>
               <% if fr.cats_or_dogs == "both" %>
                 <img class="pet_icon" src="/assets/dog_icon.png"><img class="pet_icon" src="/assets/cat_icon.png">
@@ -48,7 +48,7 @@
                   <h2 class="default_green_color"><%= "$#{@price_range[0]}" %></h2>
                 <% end %>
               </div>
-              <p class="text-center"><%= link_to "View Details", search_path(fr.id, search_info: params), class: "default_white_color btn btn-primary" %></p>
+              <p class="text-center"><%= link_to "View Details", kennel_path(fr.id, search_info: params), class: "default_white_color btn btn-primary" %></p>
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@
         <div class="search_results_individual_div">
           <% if !@final_search_results.blank? %>
             <% @final_search_results.each do |fr| %>
-              <h4><%= link_to fr.name, search_path(fr.id, search_info: params), class:"searched_kennel_title_link default_green_color" %></h4>
+              <h4><%= link_to fr.name, kennel_path(fr.id, search_info: params), class:"searched_kennel_title_link default_green_color" %></h4>
               <div class="search_results_address"><%= simple_format("#{fr.address} #{fr.city}, #{fr.state} #{fr.zip}") %></div>
               <p class="search_results_mission_statement"><%= fr.mission_statement %></p>
                 <% if fr.cats_or_dogs == "both" %>
@@ -78,7 +78,7 @@
                 <% elsif fr.cats_or_dogs = "cats" %>
                   <img class="pet_icon" src="/assets/cat_icon.png">
                 <% end %>
-                <p style="margin-top:1.5em;" class="text-center"><%= link_to "View Details", search_path(fr.id, search_info: params), class: "default_white_color btn btn-primary" %></p>
+                <p style="margin-top:1.5em;" class="text-center"><%= link_to "View Details", kennel_path(fr.id, search_info: params), class: "default_white_color btn btn-primary" %></p>
             <% end %>
           <% else %>
             <p class="text-center no_results_found default_white_color">No results found…</p>

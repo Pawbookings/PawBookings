@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get "/vaccination_upload_after_payment", to: "payments#vaccination_upload_after_payment", as: :vaccination_upload_after_payment
 
   # KennelsController
-    resources :kennels, only: [:new, :create, :update]
+    resources :kennels, only: [:new, :create, :update, :show]
     get "/kennel_dashboard",   to: "kennels#kennel_dashboard",   as: :kennel_dashboard
     get "/kennel_reservations", to: "kennels#kennel_reservations", as: :kennel_reservations
     get "/kennel_view_pets", to: "kennels#kennel_view_pets", as: :kennel_view_pets
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     delete "/delete_user_image", to: "customers#delete_user_image", as: :delete_user_image
 
   # SearchesController
-    resources :searches, only: [:show, :create]
+    resources :searches, only: [:create]
     get "/search_results", to: "searches#search_results", as: :search_results
 
   # BlogsController

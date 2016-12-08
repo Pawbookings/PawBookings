@@ -1,4 +1,11 @@
 class Kennel < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :finders]
+
+  def should_generate_new_friendly_id?
+    name_changed?
+  end
+
   belongs_to :user
   has_one    :kennel_check_in_check_out
   has_one    :hours_of_operation
@@ -26,4 +33,5 @@ class Kennel < ActiveRecord::Base
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/default_photo_image.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
 end
