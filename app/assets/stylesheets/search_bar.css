@@ -33,6 +33,13 @@
   }
 }
 
+@media (min-width: 1200px) {
+  .mobile_search_div {
+    margin-left: 35em;
+    margin-right: 35em;
+  }
+}
+
 @media (min-width: 2000px) {
   .mobile_search_div {
     margin-left: 50em;

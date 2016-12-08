@@ -45,7 +45,7 @@
 }
 
 .why_bottom_text {
-  color: #6c707d;
+  color: #999;
   font-size: 1em;
   letter-spacing: 0.01em;
   line-height: 1.3em;
@@ -89,7 +89,7 @@
 }
 
 .testimonials_bottom_text {
-  color: #6c707d;
+  color: #999;
   font-size: 1em;
   letter-spacing: 0.01em;
   line-height: 1.3em;
@@ -194,29 +194,27 @@
     display: none;
   }
 
-  .top_hero_text {
-    padding-left: 10em;
-    padding-right: 10em;
+  .testimonials_top_text, .why_top_text, .top_hero_text {
+    font-size: 2.5em;
   }
 
   .bottom_hero_text {
-    padding-left: 20em;
-    padding-right: 20em;
-  }
-
-  .why_bottom_text {
     padding-left: 15em;
     padding-right: 15em;
+    font-size: 1.2em;
+  }
+
+  .testimonials_bottom_text, .why_bottom_text {
+    padding-left: 10em;
+    padding-right: 10em;
+    font-size: 1.2em;
   }
 
   .why_features_details {
-    padding-left: 5em;
-    padding-right: 5em;
-  }
-
-  .testimonials_bottom_text {
-    padding-left: 10em;
-    padding-right: 10em;
+    padding-left: 3em;
+    padding-right: 3em;
+    font-size: 1em;
+    line-height: 2.5em;
   }
 
   .testimonial_row {
@@ -240,15 +238,8 @@
     margin-left: 25em;
   }
 
-  .why_bottom_text {
-    margin-right: 15em;
-    margin-left: 15em;
-  }
-}
-
-@media (min-width: 2000px) {
-  .testimonial_row {
-    margin-right: 50em;
-    margin-left: 50em;
+  .bottom_hero_text {
+    padding-left: 20em;
+    padding-right: 20em;
   }
 }
