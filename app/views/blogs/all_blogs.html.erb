@@ -1,19 +1,18 @@
 <%= render partial: "shared/top_info" %>
 
 <div class="container-fluid leto_font">
-  <div class="row text-center">
-    <div class="col-md-2"></div>
-    <div class="col-xs-12 col-md-8">
-      <h5 class="all_blogs_title default_green_color">All Blogs</h5>
+  <div class="blog_all_desktop">
+    <div class="row text-center">
+      <h5 class="main_title text_underline">All Blogs</h5>
       <br />
-      <div class="all_blogs_div">
-        <% @all_blogs.each do |blog| %>
+      <% @all_blogs.each do |blog| %>
+        <div class="col-md-3">
           <div class="all_blogs_individual_div">
-            <%= link_to blog.title, blog_path(blog.id), class: "all_blogs_title_link default_white_color text_underline patrick_hand_font" %>
+            <%= link_to blog.title, blog_path(blog.slug), class: "all_blogs_title_link default_white_color text_underline patrick_hand_font" %>
             <br>
             <br>
             <p class="default_white_color"><%= unsanitize_date(blog.publish_date.to_s) %></p>
-            <a href="<%= blog_path(blog.id) %>"><img class="all_blogs_display_images" src="<%= blog.blog_display_image %>"></a>
+            <a href="<%= blog_path(blog.slug) %>"><img class="all_blogs_display_images" src="<%= blog.blog_display_image %>"></a>
             <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
               <%= link_to "Edit", edit_blog_path(blog.id) %>
               <br>
@@ -22,12 +21,42 @@
             <br>
             <br>
           </div>
-        <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+
+  <div class="blog_all_mobile">
+    <div class="row text-center">
+      <div class="col-md-2"></div>
+      <div class="col-xs-12 col-md-8">
+        <h5 class="main_title text_underline">All Blogs</h5>
+        <br />
+        <div class="all_blogs_div">
+          <% @all_blogs.each do |blog| %>
+            <div class="all_blogs_individual_div">
+              <%= link_to blog.title, blog_path(blog.slug), class: "all_blogs_title_link default_white_color text_underline patrick_hand_font" %>
+              <br>
+              <br>
+              <p class="default_white_color"><%= unsanitize_date(blog.publish_date.to_s) %></p>
+              <a href="<%= blog_path(blog.slug) %>"><img class="all_blogs_display_images" src="<%= blog.blog_display_image %>"></a>
+              <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
+                <%= link_to "Edit", edit_blog_path(blog.id) %>
+                <br>
+                <%= link_to "Delete", blog_path(blog.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
+              <% end %>
+              <br>
+              <br>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
+
 </div>
 
 
-
+<br />
 <%= render partial: "shared/footer" %>

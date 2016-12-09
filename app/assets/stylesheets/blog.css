@@ -76,7 +76,6 @@
 }
 
 .blog_show_div {
-  margin-bottom: 2em;
   padding-right: 2em;
   padding-left: 2em;
   font-family: 'Open Sans', sans-serif;
@@ -182,8 +181,22 @@
   border-radius: 1em;
 }
 
+@media (max-width: 991px) {
+  .blog_all_desktop, .blog_index_desktop {
+    display: none;
+  }
+}
+
 @media (min-width: 992px) {
+  .blog_all_mobile, .blog_index_mobile {
+    display: none;
+  }
+
   .blog_search_input, .blog_search_submit_btn {
     width: 20%;
+  }
+  .blog_show_div {
+    margin-left: 5em;
+    margin-right: 5em;
   }
 }
