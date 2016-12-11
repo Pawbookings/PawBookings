@@ -28,6 +28,7 @@ gem 'wkhtmltopdf-binary'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'rack-handlers'
 gem 'friendly_id', '~> 5.1.0'
+gem 'meta-tags'
 
 # For Heroku. Delete when finished using.
 gem 'rails_12factor', group: :production

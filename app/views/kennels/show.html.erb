@@ -1,3 +1,7 @@
+<% set_meta_tags title: @searched_kennel[:name].capitalize %>
+<% set_meta_tags description: "Booking search results for kennels available to make a reservation. Kennel searched results." %>
+<% set_meta_tags keywords: [@searched_kennel[:name], @searched_kennel[:address], @searched_kennel[:city], @searched_kennel[:state], @searched_kennel[:zip], @searched_kennel[:email], @searched_kennel[:phone], "pet booking", "kennel", "pet hotel", "pet reservation", "local pet kennels", "pawbookings"] %>
+
 <%= render partial: "shared/top_info" %>
 
 <div class="container-fluid leto_font">

@@ -1,6 +1,7 @@
 <%= render partial: "shared/top_info" %>
 
-<div style="padding-top:7em;text-align:center;background-color:#25b15e;padding-bottom:1em;">
+<div style="padding-top:7em;text-align:center;background-color:#43ac6a;padding-bottom:1em;">
+  <h1 class="default_white_color patrick_hand_font text_underline">Search for Kennels:</h1>
   <div style="color:black;">
     <%= render partial: "shared/search_bar" %>
   </div>
@@ -81,7 +82,7 @@
                 <p style="margin-top:1.5em;" class="text-center"><%= link_to "View Details", kennel_path(fr.slug, search_info: params), class: "default_white_color btn btn-primary" %></p>
             <% end %>
           <% else %>
-            <p class="text-center no_results_found default_white_color">No results found…</p>
+            <p class="text-center no_results_found default_green_color">No results found…</p>
           <% end %>
         </div>
       </div>

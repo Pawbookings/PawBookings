@@ -6,7 +6,8 @@
 
 .top_nav_bar_row {
   /*background-color: #51d888;*/
-  background-color: #49e583;
+  /*background-color: #49e583;*/
+  background: linear-gradient(#c1ffd9, #2a9c54);
 }
 
 .top_logo {
@@ -27,11 +28,12 @@
 
 .mobile_nav_menu {
   display: none;
-  background-color: #53e68f;
+  background-color: #242c24;
   position: absolute;
   z-index: 1;
   right: 15px;
   line-height: .8em;
+  border-radius: 0.1em;
 }
 
 .mobile_nav_text {

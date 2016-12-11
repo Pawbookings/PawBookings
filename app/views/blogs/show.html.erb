@@ -1,3 +1,7 @@
+<% set_meta_tags title: @blog[:title] %>
+<% set_meta_tags description: raw(@blog[:body]) %>
+<% set_meta_tags keywords: [@blog[:title], "pet blog", "all about pets", "pet article", "pet blog", "pets", "pawbookings blog", "articles about pets", "pet reading", "pet information", "kennel information", "kennel blogs", "pet room blogs", "pet reservation expectations"] %>
+
 <%= render partial: "shared/top_info" %>
 <div class="container-fluid">
   <div class="row text-center">

@@ -1848,7 +1848,7 @@ div.field, div.actions {
 /* kennel_or_customer */
 
 .kennel_or_customer_div {
-  background-color: #25b15e;
+  background-color: #43ac6a;
   margin-top: 6.7em;
 }
 
@@ -2231,7 +2231,7 @@ div.field, div.actions {
 /* new_registration */
 
 .login_div {
-  background-color: #25b15e;
+  background-color: #43ac6a;
   margin-top: 6.7em;
   padding-bottom: 3em;
 }
@@ -2263,7 +2263,7 @@ div.field, div.actions {
 }
 
 .signup_div {
-  background-color: #25b15e;
+  background-color: #43ac6a;
   margin-top: 6.7em;
   padding-bottom: 3em;
 }
@@ -2300,7 +2300,7 @@ div.field, div.actions {
   margin-left: 3em;
 }
 .search_results_container {
-  background-color: #25b15e;
+  background-color: #43ac6a;
   margin-top: -4em;
 }
 
@@ -2378,7 +2378,7 @@ div.field, div.actions {
 }
 
 .my_booking_info_row {
-  background-color: #25b15e;
+  background-color: #43ac6a;
   padding-bottom: 2em;
   padding-top: 5em;
   /*text-shadow: 0px 0px 15px black;*/
@@ -2432,7 +2432,7 @@ div.field, div.actions {
   margin-bottom: 3em;
 }
 .amenities_container {
-  /*background-color: #25b15e;*/
+  /*background-color: #43ac6a;*/
 }
 
 .amenities_offered_title {
@@ -2440,7 +2440,7 @@ div.field, div.actions {
 }
 
 .amenities_div {
-  background-color: #25b15e;
+  background-color: #43ac6a;
   padding-left: 1em;
   padding-right: 1em;
   padding-bottom: 2em;
@@ -2478,7 +2478,7 @@ div.field, div.actions {
   height: 2.5em;
 }
 .payment_container {
-  background-color: #25b15e;
+  background-color: #43ac6a;
 }
 
 .payment_title {
