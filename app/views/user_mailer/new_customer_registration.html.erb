@@ -1,8 +1,15 @@
 <div class="container">
   <div class="row text-center">
-    <div class="col-xs-12 text-center">
-      <h1>Congratulations, <%= "#{@current_user.first_name} #{@current_user.last_name}!" %></h1>
-      <p>You are now registered with PawBookings.com and are eligible for future rewards.</p>
+    <div class="col-xs-12 text-left">
+      <p>Dear <%= @current_user.first_name %>,</p>
+      <p>Thank you for registering with PawBookings.com</p>
+      <p>Once your email account has been verified, you will be able to log in and benefit from the full features of the PawBookings.com website. Remember to login as soon as you know your travel plans to make a boarding reservation for your pet. The earlier you search for availability for your pet’s stay, the better chance you can confirm the reservation immediately.</p>
+      <p>At your Customer Dashboard, you can:<br /><br /> Manage your account details.<br /> Search, browse and save your favorite kennel.<br /> Book and confirm a vacation for your pet.<br /> Enter and update your pet information.<br /> Upload your pet’s vaccination records.<br /> View your upcoming and past reservations.<br /> Share our website to your friends and family.Review your pet’s stay.</p>
+      <p>To keep up to date with all our latest news, offers and promotions! Sign up for our monthly newsletter: https://www.pawbookings.com/newsletter</p>
+      <p>Yours truly, <br />The PawBookings.com Team.</p>
+      <p>https://www.pawbookings.com</p>
+      <p>Follow us on Facebook: http://www.facebook.com/pawbookings</p>
+      <p>Follow us on Twitter: http://www.twitter.com/pawbookings</p>
     </div>
   </div>
 </div>
