@@ -172,6 +172,15 @@
   padding: 2em;
 }
 
+/* Policies and Terms */
+
+.disclaimer_box {
+  border: 1px solid black;
+  padding: 1em;
+  margin-bottom: 3em;
+}
+
+
 @media (max-width: 991px){
   .testimonial_desktop, .kennel_or_customer_desktop {
     display: none;

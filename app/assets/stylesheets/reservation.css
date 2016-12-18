@@ -27,4 +27,9 @@
   .booking_confirmed_verbiage {
     text-align: center
   }
+
+  .reservation_confirmation_details {
+    font-size: 1.4em;
+    color: #6d6e71;
+  }
 }

@@ -27,8 +27,8 @@
 .payment_room_details_title, .payment_amenity_details_title {
   font-size: 2em;
   text-align: center;
-  text-decoration: underline;
   margin-bottom: 1em;
+  color: white;
 }
 
 .payment_room_individual_div, .payment_amenity_individual_div {
@@ -108,10 +108,6 @@
   margin-bottom: 3em;
 }
 
-.payment_credit_card_title, .payment_pets_contact_title {
-  text-decoration: underline;
-}
-
 .payment_pets_info_title {
   font-size: 2.5em;
   margin-top: 1.5em;
@@ -139,12 +135,30 @@
   line-height: 1.5em;
 }
 
-@media (min-width: 992px) {
-  .payments_top_details_mobile {
+@media (max-width: 991px) {
+  .payment_top_details_desktop {
     display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .payment_top_details_mobile, .payment_room_details_mobile {
+    display: none;
+  }
+
+  .payment_res_dates_desktop {
+    font-size: 0.8em;
   }
 
   .payment_submt_btn, .payment_input {
     width: 20%;
+  }
+
+  .payment_room_details_div, .payment_amenity_details_div {
+    text-align: center;
+  }
+
+  .payment_room_individual_div, .payment_amenity_individual_div {
+    font-size: 2em;
   }
 }

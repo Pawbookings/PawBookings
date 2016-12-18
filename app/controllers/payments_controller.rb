@@ -256,7 +256,6 @@ class PaymentsController < ApplicationController
   end
 
   def register_pets_not_registered
-
     pet_number = []
     @pet_names.each do |pn|
       if Pet.where(user_id: @user[:id], name: pn).blank?

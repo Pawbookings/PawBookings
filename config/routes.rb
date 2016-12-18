@@ -65,4 +65,10 @@ Rails.application.routes.draw do
 
   # Contact
     get "/message_confirmation", to: "contact_messages#message_confirmation", as: :message_confirmation
+
+  # FAQ
+    get "/faq", to: "home#faq", as: :faq
+
+  # Policies/Terms
+    get "/policies_and_terms", to: "home#policies_and_terms", as: :policies_and_terms
 end

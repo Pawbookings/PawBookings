@@ -11,7 +11,8 @@
   </div>
   <div class="pet_total" value="<%= @counter %>"></div>
   <div class="row text-center">
-    <div class="col-xs-12">
+    <div class="col-md-4"></div>
+    <div class="col-xs-12 col-md-4">
       <% @pets.each do |pet| %>
         <% if pet[:vaccination_record_file_name].nil? %>
           <%= form_for(pet, html: {id: @counter, action: "update_vaccination_records", controller: :pets}) do |f| %>
