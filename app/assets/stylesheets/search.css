@@ -57,7 +57,7 @@
 /* Searches Show  */
 
 .searches_show_top_div {
-  padding-bottom: 2em;
+  padding-bottom: 1em;
 }
 
 .searches_show_title {
@@ -88,7 +88,7 @@
 
 .searches_show_image {
   width: 75%;
-  border-radius: 0.4em;
+  border-radius: 100%;
   box-shadow: 0px 0px 3px black;
   margin-top: 1em;
 }
@@ -166,6 +166,16 @@
 @media (min-width: 992px) {
  .searches_show_runs_available_row_mobile, .search_results_mobile {
     display: none;
+  }
+
+  .searches_show_runs_available_title {
+    margin-left: 6em;
+    display: initial;
+  }
+
+  .searches_show_run_result_div {
+    margin-left: 8em;
+    margin-right: 8em;
   }
 
   .searches_show_policies_list_div, .searches_show_amenities_list_div, .searches_show_mission_statement_div {

@@ -27,19 +27,23 @@
         <input type="hidden" name="check_out" value="<%= params[:search_info][:check_out] %>">
 
         <h3 class="text-center amenities_offered_title">Amenities Offered:</h3>
-        <% @amenities.to_a.each do |amenity| %>
-        <div class="amenities_individual_div">
-          <h6 class="amenity_title default_green_color"><strong>• <%= amenity.title %></strong></h6>
-          <p class="default_amenity_description">"<%= amenity.description %>"</p>
-          <p class="default_amenity_description amenity_price">$<%= amenity.price %></p>
-          <%= select_tag "amenity_id_#{amenity.id}", options_for_select(0..20), class: "amenities_selection_tab" %>
-        </div>
+        <% if @amenities.blank? %>
+          <strong class="default_white_color">•No Amenities Offered</strong>
+        <% else %>
+          <% @amenities.to_a.each do |amenity| %>
+            <div class="amenities_individual_div">
+              <h6 class="amenity_title default_green_color"><strong>• <%= amenity.title %></strong></h6>
+              <p class="default_amenity_description">"<%= amenity.description %>"</p>
+              <p class="default_amenity_description amenity_price">$<%= amenity.price %></p>
+              <%= select_tag "amenity_id_#{amenity.id}", options_for_select(0..20), class: "amenities_selection_tab" %>
+            </div>
 
-          <input type="hidden" name="amenity_title_<%= amenity.id %>" value="<%= amenity.title %>">
-          <input type="hidden" name="amenity_description_<%= amenity.id %>" value="<%= amenity.description %>">
-          <input type="hidden" name="amenity_price_<%= amenity.id %>" value="<%= amenity.price %>">
+            <input type="hidden" name="amenity_title_<%= amenity.id %>" value="<%= amenity.title %>">
+            <input type="hidden" name="amenity_description_<%= amenity.id %>" value="<%= amenity.description %>">
+            <input type="hidden" name="amenity_price_<%= amenity.id %>" value="<%= amenity.price %>">
+          <% end %>
         <% end %>
-      <div class="text-center"><%= submit_tag "Continue", class: "btn btn-primary" %></div>
+        <div class="text-center"><%= submit_tag "Continue", class: "btn btn-primary" %></div>
+      </div>
     </div>
   </div>
-</div>

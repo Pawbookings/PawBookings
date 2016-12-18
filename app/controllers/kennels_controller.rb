@@ -55,7 +55,7 @@ class KennelsController < ApplicationController
 
   def get_amenities_offered
     @amenity_ids = []
-    @amenities = Amenity.where(kennel_id: params[:id])
+    @amenities = Amenity.where(kennel_id: @searched_kennel[:id])
     @amenities.each do |amenity|
       @amenity_ids << amenity.id
     end

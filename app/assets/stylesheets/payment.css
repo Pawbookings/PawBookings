@@ -1,3 +1,8 @@
+.payment_div {
+  background-color: #3c3c3c;
+  padding-bottom: 2em;
+}
+
 .payment_container {
   /*background-color: #43ac6a;*/
 }
@@ -9,7 +14,7 @@
 }
 
 .payment_room_details_div, .payment_amenity_details_div {
-  background-color: #b1b1b1;
+  background-color: #48cd7e;
   border-radius: 0.4em;
   padding-left: 1em;
   padding-right: 1em;
@@ -27,8 +32,8 @@
 }
 
 .payment_room_individual_div, .payment_amenity_individual_div {
-  background-color: #eaeaea;
-  color: black;
+  background-color: #3c3c3c;
+  color: #48cd7e;
   padding-left: 1em;
   padding-right: 1em;
   padding-bottom: 1em;
@@ -58,7 +63,7 @@
 }
 
 .payment_total_div, .payment_tax_div {
-  background-color: #2cdb74;
+  background-color: #48cd7e;
   border-radius: 0.4em;
   padding-left: 1em;
   padding-right: 1em;
@@ -135,6 +140,10 @@
 }
 
 @media (min-width: 992px) {
+  .payments_top_details_mobile {
+    display: none;
+  }
+
   .payment_submt_btn, .payment_input {
     width: 20%;
   }

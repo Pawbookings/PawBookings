@@ -7,7 +7,7 @@
 <div class="container-fluid leto_font">
 
   <div class="searches_show_mobile">
-    <div class="row my_booking_info_row">
+    <div class="row my_booking_info_row my_booking_info_mobile">
       <div class="col-xs-12">
         <br />
         <h6 class="my_booking_info_title default_green_color text-center">My Booking Info</h6>
@@ -35,8 +35,8 @@
       </div>
     </div>
     <div class="row text-center">
-      <div class="col-xs-1 col-md-2"></div>
-      <div class="col-xs-10 col-md-8">
+      <div class="col-xs-1 col-sm-3 col-md-2"></div>
+      <div class="col-xs-10 col-sm-6 col-md-8">
         <div class="searches_show_top_div">
           <h5 class="searches_show_title default_green_color patrick_hand_font"><%= @searched_kennel[:name] %></h5>
           <div class="searches_show_address_div">
@@ -79,14 +79,13 @@
               <% end %>
             <% end %>
           </div>
-          <p class="hidden_if_desktop"><%= image_tag @searched_kennel.avatar.url(:thumb), class: "searches_show_image" if !@searched_kennel.nil? %></p>
         </div>
       </div>
     </div>
     <div class="row text-center">
-      <div class="col-md-5"></div>
-      <div class="col-md-2">
-        <div class="searches_show_image_div hidden_if_mobile">
+      <div class="col-xs-2 col-sm-5 col-md-5"></div>
+      <div class="col-xs-8 col-sm-2 col-md-2">
+        <div class="searches_show_image_div">
           <p><%= image_tag @searched_kennel.avatar.url(:thumb), class: "searches_show_image" if !@searched_kennel.nil? %></p>
         </div>
       </div>
@@ -103,7 +102,7 @@
     <div class="searches_show_runs_available_row_desktop">
       <% counter = params[:search_info][:number_of_rooms].to_i %>
       <% params[:search_info][:number_of_rooms].to_i.times do %>
-        <h4 class="searches_show_runs_available_title default_white_color text_underline">Room <%= counter %> selection</h4>
+        <h4 class="searches_show_runs_available_title default_white_color text_underline">Room <%= counter %> selection:</h4>
         <div class="run_container_<%= counter %> searches_show_run_result_div">
           <% @runs.each do |r| %>
             <div class="searches_show_run_result_individual_div text-center">
@@ -159,6 +158,7 @@
             </div>
           <% end %>
         </div>
+        <% counter -= 1 %>
       <% end %>
     </div>
 

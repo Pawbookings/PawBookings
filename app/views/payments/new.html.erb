@@ -28,9 +28,9 @@
         <% params[:number_of_rooms].to_i.times do %>
           <div class="payment_room_individual_div">
             <h3 class="text-center">Room <%= counter %></h3>
-            <p><strong>Name:</strong> <%= params["room_#{counter}_name"] %></p>
-            <p><strong>Price:</strong> $<%= params["room_#{counter}_price"].to_f %></p>
-            <p><strong>Maximum # of pets allowed:</strong> <%= params["room_#{counter}_pets_per_run"] %></p>
+            <p><strong>Name:</strong> <span class="default_white_color"><%= params["room_#{counter}_name"] %></span></p>
+            <p><strong>Price:</strong> <span class="default_white_color">$<%= params["room_#{counter}_price"].to_f %></span></p>
+            <p><strong>Maximum # of pets allowed:</strong> <span class="default_white_color"><%= params["room_#{counter}_pets_per_run"] %></span></p>
             <% counter -= 1 %>
           </div>
         <% end %>
@@ -48,8 +48,8 @@
           <div class="payment_amenity_individual_div">
             <% @amenities_list.each do |a_id, count, price, description, title| %>
               <p class="payment_amenity_title"><strong><%= "•#{title}" %></strong></p>
-              <p><%= "#{description}" %></p>
-              <p><%= "$#{price} x #{count}" %></p>
+              <p class="default_white_color font_italic"><%= "- #{description}" %></p>
+              <p class="default_white_color"><%= "$#{price} x #{count}" %></p>
             <% end %>
           </div>
         <% end %>
