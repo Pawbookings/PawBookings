@@ -46,6 +46,20 @@ class KennelsController < ApplicationController
     @policies = Policy.where(kennel_id: @searched_kennel[:id])
     maxed_out?
     get_amenities_offered
+    get_run_price_range
+    get_pickup_and_dropoff_times
+  end
+
+  def get_pickup_and_dropoff_times
+    @hours_of_operation = HoursOfOperation.where(kennel_id: @searched_kennel).first
+  end
+
+  def get_run_price_range
+    run_price_range = []
+    @runs.each do |run|
+      run_price_range << run[:price]
+    end
+    @run_price_range = run_price_range.sort
   end
 
   def maxed_out?

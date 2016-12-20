@@ -20,7 +20,6 @@ class DeviseRegistrationsController < Devise::RegistrationsController
     yield resource if block_given?
 
     if verify_recaptcha(model: @user) && resource.persisted?
-      puts "RECAPTCHA VERIFIED!!!!!!!!!!!!!"
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)

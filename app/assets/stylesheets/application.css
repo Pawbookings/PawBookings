@@ -49,8 +49,20 @@ table, th, td {
   padding: 1em;
 }
 
+.font_1_1_em {
+  font-size: 1.1em;
+}
+
 .margin_left_1em {
   margin-left: 1em;
+}
+
+.margin_top_1em {
+  margin-top: 1em;
+}
+
+.margin_top_n1em {
+  margin-top: -1em;
 }
 
 .font_italic {
@@ -73,12 +85,20 @@ table, th, td {
   font-family: 'Open Sans', sans-serif;
 }
 
+.arvo_font {
+  font-family: 'Arvo', serif;
+}
+
 .kaushan_font {
   font-family: 'Kaushan Script', cursive;
 }
 
 .patrick_hand_font {
   font-family: 'Patrick Hand', cursive;
+}
+
+.poppins_font {
+  font-family: 'Poppins', sans-serif;
 }
 
 .pet_icon {
@@ -132,6 +152,11 @@ table, th, td {
   text-decoration: underline;
 }
 
+.text_underline_green {
+  text-decoration: underline;
+  color: #48cd7e;
+}
+
 .footer_bottom_addon {
   position: absolute;
   width: 100%;
@@ -148,6 +173,29 @@ table, th, td {
 
 .width_100_percent {
   width: 100%;
+}
+
+.back_button_p {
+  font-size: 1.1em;
+  margin-top: 7.5em;
+}
+
+.back_button_a {
+  color: #35a55e;
+}
+
+.div_border {
+  border: 2px solid #6d6e71;
+  padding: 1em;
+  border-radius: 1em;
+  background-color: #ffffff;
+}
+
+.div_border_green_background {
+  border: 2px solid #6d6e71;
+  padding: 1em;
+  border-radius: 1em;
+  background-color: #48cd7e;
 }
 
 

@@ -51,6 +51,63 @@
 .res_search_radio_btn_text {
   margin-left: 1em;
 }
+
+/* Kennel Show */
+
+.back_to_results_row {
+  background-color: rgba(66, 176, 107, 0.17);
+}
+
+.kennel_show_title {
+  font-size: 2.3em;
+  color: black;
+}
+
+.kennel_show_address {
+  color: #6d6e71;
+}
+
+.kennel_show_logo_div {
+  border: 40px solid #e1e1e1;
+  border-radius: 1em;
+}
+
+.kennel_show_logo {
+  width: 100%;
+}
+
+.kennel_show_options_btn_row {
+  margin-top: 2em;
+}
+
+.kennel_show_options_btns {
+  font-size: 1.2em;
+}
+
+.kennel_show_amenities_div, .kennel_show_policies_div {
+  display: none;
+}
+
+.per_night_p {
+  margin-top: -1em;
+  color: #6d6e71;
+}
+
+.pickup_dropoff_time_div {
+  background-color: #e1e1e1;
+  border-radius: 1em;
+  padding: 1em;
+  display: inline-grid;
+}
+
+.add_room_btn {
+  width: 75%;
+  height: 3em;
+  margin-top: 1.5em;
+  background: linear-gradient(#42b370, #51d888);
+  color: #ffffff;
+}
+
 /* Kennel Registration*/
 
 .kennel_registration_title {
@@ -140,14 +197,28 @@
 }
 
 @media (max-width: 991px){
-  .kennel_reservation_desktop, .searched_res_desktop, .kennel_dashboard_desktop {
+ .kennel_reservation_desktop, .searched_res_desktop, .kennel_dashboard_desktop {
     display: none;
   }
 }
 
 @media (min-width: 992px) {
-  .kennel_reservation_mobile, .searched_res_mobile, .kennel_dashboard_mobile {
+ .kennel_reservation_mobile, .searched_res_mobile, .kennel_dashboard_mobile {
     display: none;
+  }
+
+  .add_room_btn {
+    width: 50%;
+  }
+
+  .kennel_show_options_btns_row_desktop {
+    position: absolute;
+    top: 15em;
+    left: 40em;
+  }
+
+  .kennel_show_btn_option_div {
+    margin-top: 10em;
   }
 
   .kennel_reservation_container, .searched_res_container_desktop, .kennel_dashboard_container {
