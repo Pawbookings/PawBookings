@@ -178,14 +178,14 @@
             <% counter -= 1 %>
           <% end %>
 
-          <h5 style="margin-bottom:1em;" class="arvo_font">Amenity Selection(s):</h5>
+          <h5 style="margin-bottom:1em;" class="arvo_font">Amenities Selection(s):</h5>
           <% counter = params[:number_of_rooms].to_i %>
           <% if !@amenities_list.empty? %>
             <div>
               <% @amenities_list.each do |a_id, count, price, description, title| %>
                 <p class="margin_top_n1em margin_bottom_1em poppins_font"><strong><%= "#{title}" %></strong></p>
                 <p class="margin_top_n1em poppins_font font_italic line_height_1em"><%= "- #{description}" %></p>
-                <p class="margin_top_n1em poppins_font"><%= "$#{price} x #{count}" %></p>
+                <p class="margin_top_n1em margin_bottom_1em poppins_font"><%= "$#{price} x #{count}" %></p>
               <% end %>
             </div>
           <% end %>
@@ -369,7 +369,7 @@
             <% counter -= 1 %>
           <% end %>
 
-          <h5 style="margin-bottom:1em;" class="arvo_font">Room Selection(s):</h5>
+          <h5 style="margin-bottom:1em;" class="arvo_font">Amenities Selection(s):</h5>
           <% counter = params[:number_of_rooms].to_i %>
           <% if !@amenities_list.empty? %>
             <div>

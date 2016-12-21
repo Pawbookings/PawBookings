@@ -2,38 +2,47 @@
   <div class="mobile_search_div">
     <div class="row text-center">
         <div class="col-xs-12">
-          <%= label_tag "Zip code", nil, class: "search_label" %>
-          <%= text_field_tag(:search_zip, nil, placeholder: " Zip Code", class: "common_search_field search_zip", onkeypress: "return isNumber(event);", maxlength: "5", required: true, value: params[:search_zip]) %>
+          <div class="row">
+            <div class="col-xs-6">
+              <%= label_tag "Zip code", nil, class: "search_label" %>
+              <br />
+              <%= text_field_tag(:search_zip, nil, placeholder: " Zip Code", class: "common_search_field search_zip", onkeypress: "return isNumber(event);", maxlength: "5", required: true, value: params[:search_zip]) %>
+            </div>
+            <div class="col-xs-6">
+              <%= label_tag "Distance", nil, class: "search_label" %>
+              <br />
+              <%= text_field_tag(:radius, nil, placeholder: " Distance", class: "common_search_field", onkeypress: "return isNumber(event);", maxlength: "3", value: params[:radius]) %>
+            </div>
+          </div>
         </div>
       </div>
-      <div style="margin-top:1em;" class="row text-center">
-        <div class="col-xs-12">
-          <%= label_tag "Radius", nil, class: "search_label" %>
-          <%= text_field_tag(:radius, nil, placeholder: " Radius", class: "common_search_field", onkeypress: "return isNumber(event);", maxlength: "3", value: params[:radius]) %>
-        </div>
-      </div>
+
     <div style="margin-top: 1em;" class="row text-center">
       <div class="col-xs-12">
         <%= label_tag "Reservation dates", nil, class: "search_label" %>
         <%= text_field_tag(:reservation_dates, nil, class: "daterange_check_in common_search_field text-center", required: true, name: "reservation_dates", value: params[:reservation_dates]) %>
       </div>
     </div>
+
     <div style="margin-top: 1em;" class="row text-center">
       <div class="col-xs-6">
         <%= label_tag "Number of Dogs", nil, class: "search_label" %>
         <%= select_tag(:number_of_dogs, options_for_select(0..5), class: "form-control common_search_field", value: params[:number_of_dogs]) %>
       </div>
+
       <div class="col-xs-6">
         <%= label_tag "Number of cats", nil, class: "search_label" %>
         <%= select_tag(:number_of_cats, options_for_select(0..5), class: "form-control common_search_field", value: params[:number_of_cats]) %>
       </div>
     </div>
+
     <div style="margin-top: 1em;" class="row text-center">
       <div class="col-xs-12">
         <%= label_tag "Number of rooms", nil, class: "search_label" %>
         <%= select_tag(:number_of_rooms, options_for_select(1..10), class: "form-control common_search_field", value: params[:number_of_rooms]) %>
       </div>
     </div>
+
     <div class="row text-center">
       <div class="col-xs-12">
         <%= button_to "Search", "#", class: "search_submit_btn" %>

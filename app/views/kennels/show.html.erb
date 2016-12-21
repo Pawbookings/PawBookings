@@ -271,10 +271,10 @@
                   <p style="color:#ff5151;"><strong>**This Room is currently unavailable**</strong></p>
                   <%= link_to "Notify me when this room becomes available!", new_stand_by_reservation_path(kennel_id: @searched_kennel[:id], run_id: run.id, check_in_date: @customer_check_in_date, check_out_date: @customer_check_out_date ) %>
                 <% else %>
-                  <button style="height:2.5em;" type="button" class="btn add_room_btn" onclick='addRunToRoom("<%= run.title %>", "room_<%= counter %>", <%= run.id %>, <%= run.price %>, "<%= run.type_of_pets_allowed %>", "<%= run.pets_per_run %>");'>Add Room</p>
+                  <button style="height:2.5em;" type="button" class="btn add_room_btn" onclick='addRunToRoom("<%= run.title %>", "room_<%= counter %>", <%= run.id %>, <%= run.price %>, "<%= run.type_of_pets_allowed %>", "<%= run.pets_per_run %>");'>Select Room</p>
                 <% end %>
               <% else %>
-                <button style="height:2.5em;" type="button" class="btn add_room_btn" onclick='addRunToRoom("<%= run.title %>", "room_<%= counter %>", <%= run.id %>, <%= run.price %>, "<%= run.type_of_pets_allowed %>", "<%= run.pets_per_run %>");'>Add Room</p>
+                <button style="height:2.5em;" type="button" class="btn add_room_btn" onclick='addRunToRoom("<%= run.title %>", "room_<%= counter %>", <%= run.id %>, <%= run.price %>, "<%= run.type_of_pets_allowed %>", "<%= run.pets_per_run %>");'>Select Room</p>
               <% end %>
             </div>
           <% end %>
