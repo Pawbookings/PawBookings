@@ -178,7 +178,7 @@
             <% counter -= 1 %>
           <% end %>
 
-          <h5 style="margin-bottom:1em;" class="arvo_font">Room Selection(s):</h5>
+          <h5 style="margin-bottom:1em;" class="arvo_font">Amenity Selection(s):</h5>
           <% counter = params[:number_of_rooms].to_i %>
           <% if !@amenities_list.empty? %>
             <div>
@@ -190,7 +190,7 @@
             </div>
           <% end %>
           <% if @amenities_list.empty? %>
-          <p class="payment_amenity_title"><strong>•No Amenities Chosen</strong></p>
+          <p class="margin_top_n1em poppins_font"><strong>•No Amenities Chosen</strong></p>
           <% end %>
 
           <h5 style="margin-bottom:1em;" class="arvo_font">Total:</h5>
