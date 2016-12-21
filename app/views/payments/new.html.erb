@@ -1,238 +1,416 @@
 <%= render partial: "shared/top_info" %>
-<div class="payment_div">
-  <div class="container-fluid payment_container leto_font">
+
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h1 class="arvo_font payment_main_title">Complete Booking!</h1>
+      <br />
+      <div class="border"></div>
+      <br />
+    </div>
+  </div>
+
+  <div class="hidden_if_mobile">
     <div class="row">
-      <div class="col-xs-12">
-        <h5 class="payment_title default_green_color text-center">Payment</h5>
-      </div>
-    </div>
-
-    <div class="border"></div>
-    <br />
-
-    <div class="row text-left payment_top_details_mobile">
-      <div class="col-md-2"></div>
-      <div class="col-xs-12 col-md-8">
-        <ul class="payment_top_details_ul default_green_color">
-          <li><p class="payment_top_details_li"><strong>Rooms:</strong> <span class="default_white_color"><%= params[:number_of_rooms] %></span></p></li>
-          <li><p class="payment_top_details_li"><strong>Nights:</strong> <span class="default_white_color"><%= params[:number_of_nights] %></span></p></li>
-          <li><p class="payment_top_details_li"><strong>Pets:</strong> <span class="default_white_color"><%= @total_pets %></span></p></li>
-          <li><p class="payment_top_details_li payment_res_dates"><strong>Reservation Dates:</strong> <br><span class="default_white_color"><%= "#{unsanitize_date(params[:check_in])} to #{unsanitize_date(params[:check_out])}" %></span></p></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="row payment_top_details_desktop default_green_color text-center">
-      <div class="col-md-2"></div>
-      <div class="col-md-2"><h3><strong>Rooms:</strong> <span class="default_white_color"><br /><%= params[:number_of_rooms] %></span></h3></div>
-      <div class="col-md-2"><h3><strong>Nights:</strong> <span class="default_white_color"><br /><%= params[:number_of_nights] %></span></h3></div>
-      <div class="col-md-2"><h3><strong>Pets:</strong> <span class="default_white_color"><br /><%= @total_pets %></span></h3></div>
-      <div class="col-md-3"><h3><strong>Reservation Dates:</strong> <br><span class="default_white_color payment_res_dates_desktop"><%= "#{unsanitize_date(params[:check_in])} to #{unsanitize_date(params[:check_out])}" %></span></h3></div>
-    </div>
-
-    <div class="border"></div>
-    <br />
-
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-xs-12 col-md-8">
-        <div class="payment_room_details_div">
-          <h6 class="payment_room_details_title">Room Details</h6>
-          <% counter = params[:number_of_rooms].to_i %>
-          <% params[:number_of_rooms].to_i.times do %>
-            <div class="payment_room_individual_div">
-              <h3 class="text-center text_underline">Room <%= counter %></h3>
-              <br />
-              <p><strong>Name:</strong> <span class="default_white_color"><br />•<%= params["room_#{counter}_name"] %></span></p>
-              <p><strong>Price:</strong> <span class="default_white_color"><br />$<%= params["room_#{counter}_price"].to_f %></span></p>
-              <% counter -= 1 %>
-            </div>
-          <% end %>
+      <%= form_tag payments_path, method: :post do %>
+      <div class="col-md-8">
+        <h3 class="arvo_font defaul">1. Billing Info</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <%= label_tag "First Name" %>
+            <br>
+            <%= text_field_tag :payment_first_name, nil, placeholder: " First Name", class: "payment_input" %>
+          </div>
+          <div class="col-md-6">
+            <%= label_tag "Last Name" %>
+            <br>
+            <%= text_field_tag :payment_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
+          </div>
         </div>
+        <br />
+        <div class="row">
+          <div class="col-md-6">
+            <%= label_tag "payment_card_type", "Card Type" %>
+            <br>
+            <%= select_tag :payment_card_type, options_for_select(card_type_option), class:"payment_input" %>
+          </div>
+          <div class="col-md-6">
+            <%= label_tag "Card Number" %>
+            <br>
+            <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number", class: "payment_input" %>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-6">
+            <%= label_tag "Expiration Month" %>
+            <br>
+            <%= text_field_tag :payment_expiration_month, nil, placeholder: " MM", class: "payment_input" %>
+          </div>
+          <div class="col-md-6">
+            <%= label_tag "Expiration Year" %>
+            <br>
+            <%= text_field_tag :payment_expiration_year, nil, placeholder: " YYYY", class: "payment_input" %>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-6">
+            <%= label_tag "CVV" %>
+            <br>
+            <%= text_field_tag :payment_cvv, nil, placeholder: " CVV", class: "payment_input" %>
+          </div>
+          <div class="col-md-6">
+            <%= label_tag "Zip" %>
+            <br>
+            <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode", class: "payment_input" %>
+          </div>
+        </div>
+        <br />
+        <h3 class="arvo_font">2. Pet-Owner Info</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <%= label_tag "First Name" %>
+            <br>
+            <%= text_field_tag :customer_first_name, nil, placeholder: " First Name", class: "payment_input" %>
+          </div>
+          <div class="col-md-6">
+            <%= label_tag "Last Name" %>
+            <br>
+            <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-6">
+            <%= label_tag "Email" %>
+            <br>
+            <%= text_field_tag :customer_email, nil, placeholder: " Email", class: "payment_input" %>
+          </div>
+          <div class="col-md-6">
+            <%= label_tag "Phone" %>
+            <br>
+            <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "payment_input" %>
+          </div>
+        </div>
+        <br />
+        <% counter = @total_pets.to_i %>
+        <h3 class="arvo_font">3. Pet Info</h3>
+        <% (@total_pets.to_i).times do %>
+          <h5 class="arvo_font">Pet# <%= counter %></h5>
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag "Pet name" %>
+              <br>
+              <%= text_field_tag "pet_name_#{counter}", nil, placeholder: " Pet Name", class: "payment_input" %>
+            </div>
+            <div class="col-md-6">
+              <%= label_tag "Pet Weight" %>
+              <br>
+              <%= text_field_tag "pet_weight_#{counter}", nil, placeholder: " Pet Weight", class: "payment_input" %>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag "pet_spay_or_neutered_#{counter}", "Spay or Neutered?" %>
+              <br>
+              <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
+            </div>
+            <div class="col-md-6">
+              <%= label_tag "Special instructions" %>
+              <br>
+              <%= text_area_tag "pet_special_instructions_#{counter}", nil, placeholder: " Pet Special Instructions", class: "payment_input" %>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag "Type of pet" %>
+              <br>
+              <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), class:"payment_input", onchange:"return paymentChangeBreed();" %>
+            </div>
+            <div class="col-md-6">
+              <%= label_tag "pet_vaccinations_#{counter}", "Vaccinations?" %>
+              <br>
+              <%= select_tag "pet_vaccinations_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-6">
+              <div class="pet_breed_selection_<%= counter %>">
+                <%= label_tag "Breed" %>
+                <br>
+                <%= select_tag "pet_breed_#{counter}", options_for_select(breed_option), class:"payment_input" %>
+              </div>
+            </div>
+            <div class="col-md-6">
+            </div>
+          </div>
+          <br />
+          <br />
+          <% counter -= 1 %>
+        <% end %>
       </div>
-    </div>
+      <div class="col-md-4">
+        <div class="payment_confirm_booking_div">
+          <h3 class="arvo_font">Confirm Booking</h3>
+          <div class="border"></div>
+          <br />
+          <h5 style="margin-bottom:1em;" class="arvo_font"><%= params[:name] %></h5>
+          <p class="margin_top_n1em poppins_font font_1_1_em"><%= "#{params[:address]}" %></p>
+          <p class="margin_top_n1em poppins_font font_1_1_em"><%= "#{params[:kennel_city]}, #{params[:kennel_state]} #{params[:kennel_zip]}" %></p>
 
+          <h5 style="margin-bottom:1em;" class="arvo_font">Dates:</h5>
+          <p class="margin_top_n1em poppins_font"><%= "#{unsanitize_date(params[:check_in])} to #{unsanitize_date(params[:check_out])}" %></p>
 
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-xs-12 col-md-8">
-        <div class="payment_amenity_details_div default_white_color">
-          <h6 class="payment_amenity_details_title">Amenity Details</h6>
+          <h5 style="margin-bottom:1em;" class="arvo_font">Nights:</h5>
+          <p class="margin_top_n1em poppins_font"><%= params[:number_of_nights] %></p>
+
+          <h5 style="margin-bottom:1em;" class="arvo_font">Room Selection(s):</h5>
+          <% params[:number_of_rooms].to_i.times do %>
           <% counter = params[:number_of_rooms].to_i %>
+            <div>
+              <p class="margin_top_n1em poppins_font"><%= params["room_#{counter}_name"] %></p>
+              <p class="margin_top_n1em poppins_font">$<%= params["room_#{counter}_price"].to_f %></p>
+            </div>
+            <% counter -= 1 %>
+          <% end %>
 
+          <h5 style="margin-bottom:1em;" class="arvo_font">Room Selection(s):</h5>
+          <% counter = params[:number_of_rooms].to_i %>
           <% if !@amenities_list.empty? %>
-            <div class="payment_amenity_individual_div">
+            <div>
               <% @amenities_list.each do |a_id, count, price, description, title| %>
-                <p class="payment_amenity_title"><strong><%= "•#{title}" %></strong></p>
-                <p class="default_white_color font_italic"><%= "- #{description}" %></p>
-                <p class="default_white_color"><%= "$#{price} x #{count}" %></p>
+                <p class="margin_top_n1em margin_bottom_1em poppins_font"><strong><%= "#{title}" %></strong></p>
+                <p class="margin_top_n1em poppins_font font_italic line_height_1em"><%= "- #{description}" %></p>
+                <p class="margin_top_n1em poppins_font"><%= "$#{price} x #{count}" %></p>
               <% end %>
             </div>
           <% end %>
           <% if @amenities_list.empty? %>
           <p class="payment_amenity_title"><strong>•No Amenities Chosen</strong></p>
           <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-xs-12 col-md-8">
 
-        <div class="payment_total_div default_white_color">
-          <h6 class="payment_total_title">Total: $<%= @total_price_without_tax %></h6>
-        </div>
+          <h5 style="margin-bottom:1em;" class="arvo_font">Total:</h5>
+          <p class="margin_top_n1em poppins_font">$<%= @total_price_without_tax %></p>
 
-        <div class="payment_tax_div default_white_color">
-          <h6 class="payment_tax_title">Tax(<%= params[:kennel_sales_tax].to_f %>%): $<%= @tax_amount %></h6>
-        </div>
+          <h5 style="margin-bottom:1em;" class="arvo_font">Tax(<%= params[:kennel_sales_tax].to_f %>%):</h5>
+          <p class="margin_top_n1em poppins_font">$<%= @tax_amount %></p>
 
-        <div class="payment_total_div default_white_color">
-          <h6 class="payment_grand_total_title">Grand Total: $<%= @total_price %></h6>
-        </div>
+          <h5 style="margin-bottom:1em;" class="arvo_font">Grand Total:</h5>
+          <p class="margin_top_n1em poppins_font">$<%= @total_price %></p>
 
-      </div>
-    </div>
-  </div>
-
-  <div class="container-fluid payment_owner_info_container leto_font">
-    <div class="row">
-      <div class="col-xs-12">
-        <h5 class="payment_owner_info_title default_green_color text-center">Owner Info</h5>
-
-        <%= form_tag payments_path, method: :post %>
-
-          <% if !@amenity_details.empty? %>
-            <%= hidden_field_tag :amenity_details, nil, value: @amenity_details.to_s %>
-          <% end %>
-
-          <% if !@amenity_ids.empty? %>
-            <%= hidden_field_tag :amenity_ids, nil, value: @amenity_ids %>
-          <% end %>
-
-          <%= hidden_field_tag :amenities_total, nil, value: @amenities_total %>
-          <%= hidden_field_tag :total_price, nil, value: @total_price %>
-          <%= hidden_field_tag :total_pets, nil, value: @total_pets %>
-          <%#= hidden_field_tag :payment_card_type, nil, value: "visa" %>
-          <%= hidden_field_tag :kennel_info, nil, value: params %>
-          <%= hidden_field_tag :kennel_sales_tax, nil, value: params[:kennel_sales_tax] %>
-
-          <div class="payment_credit_card_info_div text-center">
-            <h3 class="default_green_color">*Credit Card*</h3>
-            <%= label_tag "First Name", nil, class:"default_green_color" %>
-            <br>
-            <%= text_field_tag :payment_first_name, nil, placeholder: " First Name", class: "payment_input" %>
-            <br>
-            <br>
-            <%= label_tag "Last Name", nil, class:"default_green_color" %>
-            <br>
-            <%= text_field_tag :payment_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
-            <br>
-            <br>
-            <%= label_tag "payment_card_type", "Card Type", class:"default_green_color" %>
-            <br>
-            <%= select_tag :payment_card_type, options_for_select(card_type_option), class:"payment_input" %>
-            <br>
-            <br>
-            <%= label_tag "Card Number", nil, class:"default_green_color" %>
-            <br>
-            <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number", class: "payment_input" %>
-            <br>
-            <br>
-            <%= label_tag "Expiration Month", nil, class:"default_green_color" %>
-            <br>
-            <%= text_field_tag :payment_expiration_month, nil, placeholder: " 10", class: "payment_input" %>
-            <br>
-            <br>
-            <%= label_tag "Expiration Year", nil, class:"default_green_color" %>
-            <br>
-            <%= text_field_tag :payment_expiration_year, nil, placeholder: " 2020", class: "payment_input" %>
-            <br>
-            <br>
-            <%= label_tag "CVV", nil, class:"default_green_color" %>
-            <br>
-            <%= text_field_tag :payment_cvv, nil, placeholder: " CVV", class: "payment_input" %>
-            <br>
-            <br>
-            <%= label_tag "Zip", nil, class:"default_green_color" %>
-            <br>
-            <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode", class: "payment_input" %>
-          </div>
-
-          <div class="payment_pets_contact_div text-center">
-            <h3 class="payment_pets_contact_title default_green_color">*Primary Contact*</h3>
-            <%= label_tag "First Name", nil, class:"default_green_color" %>
-            <br>
-            <%= text_field_tag :customer_first_name, nil, placeholder: " First Name", class: "payment_input" %>
-            <br>
-            <br>
-            <%= label_tag "Last Name", nil, class:"default_green_color" %>
-            <br>
-            <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
-            <br>
-            <br>
-            <%= label_tag "Email", nil, class:"default_green_color" %>
-            <br>
-            <%= text_field_tag :customer_email, nil, placeholder: " Email", class: "payment_input" %>
-            <br>
-            <br>
-            <%= label_tag "Phone", nil, class:"default_green_color" %>
-            <br>
-            <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "payment_input" %>
-          </div>
-
-          <h5 class="payment_pets_info_title default_green_color text-center">Pet Info</h5>
-
-          <div class="payment_pet_details_div text-center">
-            <% counter = @total_pets.to_i %>
-            <% (@total_pets.to_i).times do %>
-              <h3 class="default_green_color text-center">*Pet <%= counter %>*</h3>
-              <%= label_tag "Pet name", nil, class:"default_green_color" %>
-              <br>
-              <%= text_field_tag "pet_name_#{counter}", nil, placeholder: " Pet Name", class: "payment_input" %>
-              <br>
-              <br>
-              <%= label_tag "Type of pet", nil, class:"default_green_color" %>
-              <br>
-              <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), class:"payment_input", onchange:"return paymentChangeBreed();" %>
-              <br>
-              <br>
-              <div class="pet_breed_selection_<%= counter %>">
-                <%= label_tag "Breed", nil, class:"default_green_color" %>
-                <br>
-                <%= select_tag "pet_breed_#{counter}", options_for_select(breed_option), class:"payment_input" %>
-              </div>
-              <br>
-              <%= label_tag "Pet Weight", nil, class:"default_green_color" %>
-              <br>
-              <%= text_field_tag "pet_weight_#{counter}", nil, placeholder: " Pet Weight", class: "payment_input" %>
-              <br>
-              <br>
-              <%= label_tag "Special instructions", nil, class:"default_green_color" %>
-              <br>
-              <%= text_area_tag "pet_special_instructions_#{counter}", nil, placeholder: " Pet Special Instructions", class: "payment_input" %>
-              <br>
-              <br>
-              <%= label_tag "pet_vaccinations_#{counter}", "Vaccinations?", class:"default_green_color" %>
-              <br>
-              <%= select_tag "pet_vaccinations_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
-              <br>
-              <br>
-              <%= label_tag "pet_spay_or_neutered_#{counter}", "Spay or Neutered?", class:"default_green_color" %>
-              <br>
-              <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
-              <br>
-              <br>
-              <% counter -= 1 %>
-            <% end %>
+          <div class="text-center">
             <%= submit_tag "Book Now!", class: "btn btn-success payment_submt_btn" %>
             <br />
             <br />
+            <p class="poppins_font font_italic">By clicking "Book Now!" you are agreeing to the PawBookings <a href="<%= policies_and_terms_path %>">Terms of Use and Privacy Policy</a></p>
           </div>
+        </div>
       </div>
+      <% end %>
     </div>
   </div>
+
+  <div class="row hidden_if_desktop">
+    <div class="col-xs-12">
+      <%= form_tag payments_path, method: :post do %>
+        <% if !@amenity_details.empty? %>
+          <%= hidden_field_tag :amenity_details, nil, value: @amenity_details.to_s %>
+        <% end %>
+
+        <% if !@amenity_ids.empty? %>
+          <%= hidden_field_tag :amenity_ids, nil, value: @amenity_ids %>
+        <% end %>
+
+        <%= hidden_field_tag :amenities_total, nil, value: @amenities_total %>
+        <%= hidden_field_tag :total_price, nil, value: @total_price %>
+        <%= hidden_field_tag :total_pets, nil, value: @total_pets %>
+        <%#= hidden_field_tag :payment_card_type, nil, value: "visa" %>
+        <%= hidden_field_tag :kennel_info, nil, value: params %>
+        <%= hidden_field_tag :kennel_sales_tax, nil, value: params[:kennel_sales_tax] %>
+        <div class="payment_credit_card_info_div text-center">
+          <h3 class="arvo_font defaul">1. Billing Info</h3>
+          <br />
+          <%= label_tag "First Name" %>
+          <br>
+          <%= text_field_tag :payment_first_name, nil, placeholder: " First Name", class: "payment_input" %>
+          <br>
+          <br>
+          <%= label_tag "Last Name" %>
+          <br>
+          <%= text_field_tag :payment_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
+          <br>
+          <br>
+          <%= label_tag "payment_card_type", "Card Type" %>
+          <br>
+          <%= select_tag :payment_card_type, options_for_select(card_type_option), class:"payment_input" %>
+          <br>
+          <br>
+          <%= label_tag "Card Number" %>
+          <br>
+          <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number", class: "payment_input" %>
+          <br>
+          <br>
+          <%= label_tag "Expiration Month" %>
+          <br>
+          <%= text_field_tag :payment_expiration_month, nil, placeholder: " MM", class: "payment_input" %>
+          <br>
+          <br>
+          <%= label_tag "Expiration Year" %>
+          <br>
+          <%= text_field_tag :payment_expiration_year, nil, placeholder: " YYYY", class: "payment_input" %>
+          <br>
+          <br>
+          <%= label_tag "CVV" %>
+          <br>
+          <%= text_field_tag :payment_cvv, nil, placeholder: " CVV", class: "payment_input" %>
+          <br>
+          <br>
+          <%= label_tag "Zip" %>
+          <br>
+          <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode", class: "payment_input" %>
+        </div>
+
+        <div class="payment_pets_contact_div text-center">
+          <br />
+          <h3 class="arvo_font">2. Pet-Owner Info</h3>
+          <br />
+          <%= label_tag "First Name" %>
+          <br>
+          <%= text_field_tag :customer_first_name, nil, placeholder: " First Name", class: "payment_input" %>
+          <br>
+          <br>
+          <%= label_tag "Last Name" %>
+          <br>
+          <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
+          <br>
+          <br>
+          <%= label_tag "Email" %>
+          <br>
+          <%= text_field_tag :customer_email, nil, placeholder: " Email", class: "payment_input" %>
+          <br>
+          <br>
+          <%= label_tag "Phone" %>
+          <br>
+          <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "payment_input" %>
+        </div>
+
+        <div class="payment_pet_details_div">
+          <br />
+          <h3 class="arvo_font">3. Pet Info</h3>
+          <% counter = @total_pets.to_i %>
+          <% (@total_pets.to_i).times do %>
+            <h4 class="arvo_font">Pet# <%= counter %></h4>
+            <%= label_tag "Pet name" %>
+            <br>
+            <%= text_field_tag "pet_name_#{counter}", nil, placeholder: " Pet Name", class: "payment_input" %>
+            <br>
+            <br>
+            <%= label_tag "Type of pet" %>
+            <br>
+            <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), class:"payment_input", onchange:"return paymentChangeBreed();" %>
+            <br>
+            <br>
+            <div class="pet_breed_selection_<%= counter %>">
+              <%= label_tag "Breed" %>
+              <br>
+              <%= select_tag "pet_breed_#{counter}", options_for_select(breed_option), class:"payment_input" %>
+            </div>
+            <br>
+            <%= label_tag "Pet Weight" %>
+            <br>
+            <%= text_field_tag "pet_weight_#{counter}", nil, placeholder: " Pet Weight", class: "payment_input" %>
+            <br>
+            <br>
+            <%= label_tag "Special instructions" %>
+            <br>
+            <%= text_area_tag "pet_special_instructions_#{counter}", nil, placeholder: " Pet Special Instructions", class: "payment_input" %>
+            <br>
+            <br>
+            <%= label_tag "pet_vaccinations_#{counter}", "Vaccinations?" %>
+            <br>
+            <%= select_tag "pet_vaccinations_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
+            <br>
+            <br>
+            <%= label_tag "pet_spay_or_neutered_#{counter}", "Spay or Neutered?" %>
+            <br>
+            <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
+            <br>
+            <br>
+            <% counter -= 1 %>
+          <% end %>
+          <br />
+        </div>
+
+        <div class="payment_confirm_booking_div">
+          <h3 class="arvo_font">Confirm Booking</h3>
+          <div class="border"></div>
+          <br />
+          <h5 style="margin-bottom:1em;" class="arvo_font"><%= params[:name] %></h5>
+          <p class="margin_top_n1em poppins_font font_1_1_em"><%= "#{params[:address]}" %></p>
+          <p class="margin_top_n1em poppins_font font_1_1_em"><%= "#{params[:kennel_city]}, #{params[:kennel_state]} #{params[:kennel_zip]}" %></p>
+
+          <h5 style="margin-bottom:1em;" class="arvo_font">Dates:</h5>
+          <p class="margin_top_n1em poppins_font"><%= "#{unsanitize_date(params[:check_in])} to #{unsanitize_date(params[:check_out])}" %></p>
+
+          <h5 style="margin-bottom:1em;" class="arvo_font">Nights:</h5>
+          <p class="margin_top_n1em poppins_font"><%= params[:number_of_nights] %></p>
+
+          <h5 style="margin-bottom:1em;" class="arvo_font">Room Selection(s):</h5>
+          <% params[:number_of_rooms].to_i.times do %>
+          <% counter = params[:number_of_rooms].to_i %>
+            <div>
+              <p class="margin_top_n1em poppins_font"><%= params["room_#{counter}_name"] %></p>
+              <p class="margin_top_n1em poppins_font">$<%= params["room_#{counter}_price"].to_f %></p>
+            </div>
+            <% counter -= 1 %>
+          <% end %>
+
+          <h5 style="margin-bottom:1em;" class="arvo_font">Room Selection(s):</h5>
+          <% counter = params[:number_of_rooms].to_i %>
+          <% if !@amenities_list.empty? %>
+            <div>
+              <% @amenities_list.each do |a_id, count, price, description, title| %>
+                <p class="margin_top_n1em margin_bottom_1em poppins_font"><strong><%= "#{title}" %></strong></p>
+                <p class="margin_top_n1em poppins_font font_italic line_height_1em"><%= "- #{description}" %></p>
+                <p class="margin_top_n1em poppins_font"><%= "$#{price} x #{count}" %></p>
+              <% end %>
+            </div>
+          <% end %>
+          <% if @amenities_list.empty? %>
+          <p class="payment_amenity_title"><strong>•No Amenities Chosen</strong></p>
+          <% end %>
+
+          <h5 style="margin-bottom:1em;" class="arvo_font">Total:</h5>
+          <p class="margin_top_n1em poppins_font">$<%= @total_price_without_tax %></p>
+
+          <h5 style="margin-bottom:1em;" class="arvo_font">Tax(<%= params[:kennel_sales_tax].to_f %>%):</h5>
+          <p class="margin_top_n1em poppins_font">$<%= @tax_amount %></p>
+
+          <h5 style="margin-bottom:1em;" class="arvo_font">Grand Total:</h5>
+          <p class="margin_top_n1em poppins_font">$<%= @total_price %></p>
+
+          <div class="text-center">
+            <%= submit_tag "Book Now!", class: "btn btn-success payment_submt_btn" %>
+            <br />
+            <br />
+            <p class="poppins_font font_italic">By clicking "Book Now!" you are agreeing to the PawBookings <a href="<%= policies_and_terms_path %>">Terms of Use and Privacy Policy</a></p>
+          </div>
+        </div>
+        <br />
+        <% counter -= 1 %>
+      <% end %>
+    </div>
+  </div>
+
 </div>
+
+
+
+
 <%= render partial: "shared/footer" %>
 
 <script type="text/javascript">

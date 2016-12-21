@@ -53,12 +53,20 @@ table, th, td {
   font-size: 1.1em;
 }
 
+.margin_bottom_p5em {
+  margin: 0.5em;
+}
+
 .margin_left_1em {
   margin-left: 1em;
 }
 
 .margin_top_1em {
   margin-top: 1em;
+}
+
+.margin_bottom_1em {
+  margin-bottom: 1em;
 }
 
 .margin_top_n1em {
@@ -75,6 +83,10 @@ table, th, td {
 
 .default_white_color {
   color: #ffffff;
+}
+
+.line_height_1em {
+  line-height: 1em;
 }
 
 .leto_font {

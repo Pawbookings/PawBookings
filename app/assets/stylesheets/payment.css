@@ -7,10 +7,8 @@
   /*background-color: #43ac6a;*/
 }
 
-.payment_title {
-  font-size: 2.5em;
-  margin-top: 3.7em;
-  margin-bottom: 0.5em;
+.payment_main_title {
+  margin-top: 3em;
 }
 
 .payment_room_details_div, .payment_amenity_details_div {
@@ -101,7 +99,7 @@
 }
 
 .payment_credit_card_info_div, .payment_pets_contact_div {
-  margin-top: 2em;
+  text-align: left;
 }
 
 .payment_owner_info_container {
@@ -126,13 +124,19 @@
 }
 
 .payment_input {
-  width: 75%;
+  width: 100%;
   height: 2.5em;
   border-radius: 0.4em;
 }
 
 .payment_res_dates {
   line-height: 1.5em;
+}
+
+.payment_confirm_booking_div {
+  background-color: #f1f1f1;
+  padding: 1em;
+  border-radius: 1em;
 }
 
 @media (max-width: 991px) {
@@ -148,10 +152,6 @@
 
   .payment_res_dates_desktop {
     font-size: 0.8em;
-  }
-
-  .payment_submt_btn, .payment_input {
-    width: 20%;
   }
 
   .payment_room_details_div, .payment_amenity_details_div {
