@@ -84,6 +84,11 @@
                 <%= f.text_field :email, class: "kennel_dashboard_input_desktop" %>
                 <br />
                 <br />
+                <%= f.label :sales_tax, class:"default_green_color" %><span class="default_green_color">:</span>
+                <br />
+                <%= f.text_field :sales_tax, class: "kennel_dashboard_input_desktop" %>
+                <br />
+                <br />
                 <%= image_tag @kennel.avatar.url(:thumb), class: "kennel_dashboard_avatar" if !@kennel.nil? %>
                 <br />
                 <%= f.file_field :avatar, class: "kennel_dashboard_input_desktop text-center btn btn-primary kennel_avatar_btn" %>
@@ -220,6 +225,10 @@
                 <%= f.label :email %>
                 <br />
                 <%= f.text_field :email, class: "kennel_dashboard_input" %>
+                <br />
+                <%= f.label :sales_tax %>
+                <br />
+                <%= f.text_field :sales_tax, class: "kennel_dashboard_input" %>
                 <br />
                 <br />
                 <%= f.submit "Update Kennel Info", class: "btn btn-success" %>

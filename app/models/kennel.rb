@@ -25,7 +25,7 @@ class Kennel < ActiveRecord::Base
   validates :state, presence: true
   validates :zip, format: { with: /\A[0-9]{5}\z/i }
   validates :phone, format: { with: /\A\+?[0-9]{,2}(-|\s)?\(?[0-9]{3}\)?(-|\s)?[0-9]{3}(-|\s)?[0-9]{4}\z/ }
-  validates :email, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+  validates :email, uniqueness: true
   validates :cats_or_dogs, presence: true
 
   geocoded_by :zip

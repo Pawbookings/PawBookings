@@ -32,6 +32,7 @@ class KennelsController < ApplicationController
     kennel.state = params[:kennel][:state]
     kennel.zip = params[:kennel][:zip]
     kennel.email = params[:kennel][:email]
+    kennel.sales_tax = params[:kennel][:sales_tax]
     kennel.avatar = params[:kennel][:avatar] if !params[:kennel][:avatar].nil?
     kennel.save!
     redirect_to kennel_dashboard_path
