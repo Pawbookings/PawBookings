@@ -191,6 +191,10 @@
     display: none;
   }
 
+  .blog_index_container {
+    min-height: 650px;
+  }
+
   .blog_search_input, .blog_search_submit_btn {
     width: 20%;
   }
