@@ -2,7 +2,7 @@
 server '45.55.59.10', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:ctpelnar1988/PawBookings.git'
-set :application,     'pawbookings'
+set :application,     'PawBookings'
 set :user,            'ctpelnar1988'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
