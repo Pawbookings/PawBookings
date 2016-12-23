@@ -1,6 +1,6 @@
 # Load DSL and Setup Up Stages
-install_plugin Capistrano::SCM::Git
 require 'capistrano/scm/git'
+install_plugin Capistrano::SCM::Git
 require 'capistrano/setup'
 require 'capistrano/deploy'
 
