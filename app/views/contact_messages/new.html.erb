@@ -1,41 +1,64 @@
 
 <%= render partial: "shared/top_info" %>
 <div class="container-fluid contact_container">
-  <div class="row text-center">
-    <div class="col-xs-12">
-      <h5 class="main_title">Contact Us</h5>
+  <div class="contact_div">
+    <div class="row text-center">
+      <div class="col-xs-12">
+        <h5 class="main_title">Contact PawBookings.com</h5>
 
-      <h6 class="contact_address">
-        3050 Dyer Blvd<br>
-        Suite 203<br>
-        Kissimmee, FL 34741<br>
-        844.944.3333
-      </h6>
 
-      <%= form_for @contact_message do |f| %>
-      <%= f.label :name, "Name", class: "default_white_color" %>
-      <br>
-      <%= f.text_field :name, placeholder: " Name", class: "contact_form_field" %>
-      <br>
-      <%= f.label :subject, "Subject", class: "default_white_color" %>
-      <br>
-      <%= f.text_field :subject, placeholder: " Subject", class: "contact_form_field" %>
-      <br>
-      <%= f.label :phone, "Phone", class: "default_white_color" %>
-      <br>
-      <%= f.text_field :phone, placeholder: " Phone", class: "contact_form_field" %>
-      <br>
-      <%= f.label :email, "Email", class: "default_white_color" %>
-      <br>
-      <%= f.text_field :email, placeholder: " Email", class: "contact_form_field" %>
-      <br>
-      <%= f.label :message, "Message", class: "default_white_color" %>
-      <br>
-      <%= f.text_area :details, placeholder: " Message", class: "contact_form_field" %>
-      <br>
-      <%= f.submit "Send", class: "contact_submit_btn" %>
-      <% end %>
+
+        <h6 class="contact_info">
+          Our agents are available 24 hours a day, every day, by email when you fill out the form below or by
+
+          calling us at <strong>844-944- 3333</strong>. If you do call, having your Reservation Confirmation Number (RCN) on hand
+
+          allows us to help you faster.
+        </h6>
+
+        <h6 class="contact_info text-center">
+          3050 Dyer Blvd<br>
+          Suite 203<br>
+          Kissimmee, FL 34741<br>
+          844.944.3333
+        </h6>
+
+        <div class="useful_links">
+          <%= link_to "Frequently Asked Questions", faq_path, class:"link_color" %>
+          <br />
+          <%= link_to "Change/Cancellation/Refund Policy", policies_and_terms_path, class:"link_color" %>
+          <br />
+          <%= link_to "Manage your account", new_user_session_path, class:"link_color" %>
+        </div>
+        <br />
+        <br />
+
+        <%= form_for @contact_message do |f| %>
+        <%= f.label :name, "Name", class: "default_white_color" %>
+        <br>
+        <%= f.text_field :name, placeholder: " Name", class: "contact_form_field" %>
+        <br>
+        <%= f.label :subject, "Subject", class: "default_white_color" %>
+        <br>
+        <%= f.text_field :subject, placeholder: " Subject", class: "contact_form_field" %>
+        <br>
+        <%= f.label :phone, "Phone", class: "default_white_color" %>
+        <br>
+        <%= f.text_field :phone, placeholder: " Phone", class: "contact_form_field" %>
+        <br>
+        <%= f.label :email, "Email", class: "default_white_color" %>
+        <br>
+        <%= f.text_field :email, placeholder: " Email", class: "contact_form_field" %>
+        <br>
+        <%= f.label :message, "Message", class: "default_white_color" %>
+        <br>
+        <%= f.text_area :details, placeholder: " Message", class: "contact_form_field" %>
+        <br>
+        <%= f.submit "Send", class: "contact_submit_btn" %>
+        <% end %>
+      </div>
     </div>
+    <br />
   </div>
 </div>
 

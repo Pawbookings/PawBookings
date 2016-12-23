@@ -256,16 +256,6 @@
                 <p><strong>Weight-Limit:</strong> <%= run.weight_limit %>lbs</p>
               <% end %>
               <p><strong>Size:</strong> <%= run.size_length %>ft x <%= run.size_length %>ft</p>
-              <% if JSON.parse(run.breeds_restricted).blank? %>
-                <p><strong>Breeds Restricted:</strong> n/a</p>
-              <% else %>
-                <p><strong>Breeds Restricted:</strong>
-                  <br />
-                  <% JSON.parse(run.breeds_restricted).each do |br| %>
-                     •<%= br.capitalize %>
-                  <% end %>
-                </p>
-              <% end %>
               <% if !@run_ids_maxed.nil? %>
                 <% if @run_ids_maxed.include? run.id.to_s %>
                   <p style="color:#ff5151;"><strong>**This Room is currently unavailable**</strong></p>

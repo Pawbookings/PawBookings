@@ -94,6 +94,10 @@ table, th, td {
   color: #ffffff;
 }
 
+.link_color {
+  color: #1dcfe7;
+}
+
 .line_height_1em {
   line-height: 1em;
 }
