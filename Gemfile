@@ -29,6 +29,7 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem 'rack-handlers'
 gem 'friendly_id', '~> 5.1.0'
 gem 'meta-tags'
+gem 'puma'
 
 # For Heroku. Delete when finished using.
 gem 'rails_12factor', group: :production
@@ -46,4 +47,10 @@ group :development do
   gem 'spring'
   # Unicorn is needed to run multiple threads when requesting PDF.
   gem "unicorn-rails"
+
+  gem 'capistrano',         require: false
+  gem 'capistrano-rvm',     require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma',   require: false
 end
