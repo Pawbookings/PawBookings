@@ -15,11 +15,10 @@ class DeviseRegistrationsController < Devise::RegistrationsController
     end
 
     build_resource(sign_up_params)
-    resource.save
+    resource.save if verify_recaptcha(model: @user)
 
     yield resource if block_given?
-
-    if verify_recaptcha(model: @user) && resource.persisted?
+    if resource.persisted?
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)

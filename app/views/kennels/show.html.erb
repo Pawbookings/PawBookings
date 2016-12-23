@@ -93,7 +93,7 @@
           <br />
         <% else %>
           <% @policies.each do |policy| %>
-            <strong>•<%= policy %></strong>
+            <strong>•<%= policy[:description] %></strong>
             <br />
             <br />
           <% end %>
@@ -256,7 +256,7 @@
                 <p><strong>Weight-Limit:</strong> <%= run.weight_limit %>lbs</p>
               <% end %>
               <p><strong>Size:</strong> <%= run.size_length %>ft x <%= run.size_length %>ft</p>
-              <% if run.breeds_restricted == "n/a" %>
+              <% if JSON.parse(run.breeds_restricted).blank? %>
                 <p><strong>Breeds Restricted:</strong> n/a</p>
               <% else %>
                 <p><strong>Breeds Restricted:</strong>
@@ -353,6 +353,8 @@
           </div>
           <br />
         </div>
+        <br />
+        <br />
     </div>
   </div>
 

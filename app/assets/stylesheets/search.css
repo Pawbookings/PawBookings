@@ -6,6 +6,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  width: 100%;
 }
 
 .searches_show_policies_list_div, .searches_show_amenities_list_div {
@@ -21,6 +22,7 @@
   background-color: #ffffff;
   padding-top: 0.5em;
   padding-left: 1em;
+  padding-right: 1em;
   padding-bottom: 1em;
   box-shadow: inset 0 0 3px;
   margin-bottom: 3em;
@@ -51,6 +53,10 @@
   padding-top: 0.5em;
   margin-right: 1em;
   box-shadow: 0px 0px 6px black;
+}
+
+.view_details_btn {
+  margin-top: 2em;
 }
 
 .search_results_address {
@@ -169,11 +175,28 @@
   .searches_show_runs_available_row_desktop, .search_results_desktop {
     display: none;
   }
+
+  .search_parent_div {
+    margin-left: 3em;
+    margin-right: 3em;
+  }
 }
 
 @media (min-width: 992px) {
  .searches_show_runs_available_row_mobile, .search_results_mobile {
     display: none;
+  }
+
+  .search_container {
+    min-height: 650px;
+  }
+
+  .mobile_search_div {
+    position: fixed;
+    top: 12em;
+    left: 10em;
+    width: 25%;
+    z-index: 0;
   }
 
   .searches_show_runs_available_title {
@@ -201,12 +224,6 @@
     margin-right: 15em;
   }
 
-  .search_results_individual_div {
-    padding-right: 2em;
-    margin-right: 5em;
-    margin-left: 5em;
-  }
-
   .searched_kennel_price_range {
     margin-top: 4em;
   }
@@ -216,5 +233,10 @@
   .search_results_individual_div {
     margin-right: 10em;
     margin-left: 10em;
+  }
+
+  .mobile_search_div {
+    width: 20%;
+    left: 18em;
   }
 }

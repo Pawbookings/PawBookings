@@ -49,8 +49,17 @@ table, th, td {
   padding: 1em;
 }
 
+.relative_position {
+  position: relative;
+}
+
 .font_1_1_em {
   font-size: 1.1em;
+}
+
+.no_left_right_margin {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .margin_bottom_p5em {
@@ -114,7 +123,8 @@ table, th, td {
 }
 
 .pet_icon {
-  width: 11%;
+  width: 35%;
+  margin-top: 2em;
 }
 
 .blog_footer_wrap {
@@ -211,6 +221,12 @@ table, th, td {
 }
 
 
+@media (min-width: 740px){
+  .pet_icon {
+    width: 25%;
+  }
+}
+
 @media (max-width: 991px){
   .br_if_desktop{
     display: none;
@@ -240,6 +256,12 @@ table, th, td {
   }
 
   .pet_icon {
-    width: 9%;
+    width: 20%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .pet_icon {
+    width: 30%;
   }
 }

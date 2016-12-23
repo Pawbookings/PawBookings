@@ -27,21 +27,21 @@
 }
 
 @media (min-width: 992px) {
-  .mobile_search_div {
+  .mobile_search_div_home {
     margin-left: 28em;
     margin-right: 28em;
   }
 }
 
 @media (min-width: 1200px) {
-  .mobile_search_div {
+  .mobile_search_div_home {
     margin-left: 38em;
     margin-right: 38em;
   }
 }
 
 @media (min-width: 2000px) {
-  .mobile_search_div {
+  .mobile_search_div_home {
     margin-left: 50em;
     margin-right: 50em;
   }
