@@ -180,6 +180,13 @@
   margin-bottom: 3em;
 }
 
+@media (min-width: 768px) {
+  .testimonials_bottom_text, .why_bottom_text {
+    margin-left: 10em;
+    margin-right: 10em;
+  }
+}
+
 
 @media (max-width: 991px){
   .testimonial_desktop, .kennel_or_customer_desktop {
@@ -212,8 +219,8 @@
   }
 
   .testimonials_bottom_text, .why_bottom_text {
-    padding-left: 10em;
-    padding-right: 10em;
+    margin-left: 10em;
+    margin-right: 10em;
     font-size: 1.2em;
   }
 
@@ -251,7 +258,7 @@
   }
 
   .testimonials_bottom_text, .why_bottom_text {
-    margin-left: 5em;
-    margin-right: 5em;
+    margin-left: 18em;
+    margin-right: 18em;
   }
 }
