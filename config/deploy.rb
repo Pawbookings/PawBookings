@@ -1,5 +1,5 @@
 # Change these
-server '45.55.59.10', port: 80, roles: [:web, :app, :db], primary: true
+server '45.55.59.10', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:ctpelnar1988/PawBookings.git'
 set :application,     'pawbookings'
