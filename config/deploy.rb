@@ -1,5 +1,5 @@
 # Change these
-server '45.55.59.10', port: 22, roles: [:web, :app, :db], primary: true
+server '45.55.59.10', port: 80, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:ctpelnar1988/PawBookings.git'
 set :application,     'pawbookings'
@@ -8,7 +8,7 @@ set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
 # Don't change these unless you know what you're doing
-set :pty,             false
+set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
