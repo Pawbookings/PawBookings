@@ -2,8 +2,8 @@
 server ENV["server_ip"], port: 80, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        ENV["github_ssh_url"]
-set :application,     'Pawbookings'
-set :user,            'root_user'
+set :application,     'pawbookings'
+set :user,            ENV["root_user"]
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
