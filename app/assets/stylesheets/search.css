@@ -191,7 +191,7 @@
     min-height: 650px;
   }
 
-  .mobile_search_div {
+  .fixed_search_bar {
     position: fixed;
     top: 12em;
     left: 10em;
@@ -235,7 +235,7 @@
     margin-left: 10em;
   }
 
-  .mobile_search_div {
+  .fixed_search_bar {
     width: 20%;
     left: 18em;
   }
