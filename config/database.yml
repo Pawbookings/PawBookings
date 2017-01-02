@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: PawBookings_production
-  username: PawBookings
+  username: pawbookings
   password: <%= ENV['PAWBOOKINGS_DATABASE_PASSWORD'] %>
