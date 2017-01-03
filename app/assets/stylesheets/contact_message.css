@@ -7,17 +7,6 @@
   padding-bottom: 3em;
 }
 
-.contact_div {
-  background-color: rgba(5, 5, 5, 0.54);
-  padding-left: 2em;
-  padding-right: 2em;
-  border-radius: 1em;
-  margin-right: -1em;
-  margin-left: -1em;
-  padding-bottom: 9em;
-  margin-bottom: -8em;
-}
-
 .contact_title {
   font-family: 'Open Sans', sans-serif;
   color: #48cd7e;
