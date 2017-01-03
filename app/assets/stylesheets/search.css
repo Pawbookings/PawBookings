@@ -170,8 +170,14 @@
   margin-top: 2em;
 }
 
+@media (min-width: 768px) {
+  .search_container {
+    min-height: 1024px;
+  }
+}
 
-@media (max-width: 991px){
+
+@media (max-width: 991px) {
   .searches_show_runs_available_row_desktop, .search_results_desktop {
     display: none;
   }
