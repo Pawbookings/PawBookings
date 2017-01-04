@@ -64,15 +64,18 @@
   <!--  -->
 </head>
 <body>
-  <!-- <%# if flash[:notice] %>
-    <div style="background-color:#ff8080; color:white;" class="row text-center">
-      <div>
-        <div class="col-xs-12">
-          <%=flash[:notice]%>
+  <div class="flash_notice_div">
+    <% if flash[:notice] %>
+      <div style="background-color:rgba(120, 219, 157, 0); color:white;" class="row text-center">
+        <div>
+          <div class="col-xs-12">
+            <%=flash[:notice]%>
+          </div>
         </div>
       </div>
-    </div>
-  <%# end %> -->
+    <% end %>
+  </div>
+
 <%= yield %>
 
 </body>

@@ -12,7 +12,7 @@
       <div class="border"></div>
       <br />
       <div class="amenity_registration_div">
-        <h3 class="default_green_color">Add New</h3>
+        <h3 class="default_green_color patrick_hand_font text_underline">Add New</h3>
         <br />
         <%= form_for @amenity do |f| %>
           <%= f.label :title %>
@@ -42,10 +42,8 @@
   <br />
   <div class="row text-center">
     <div class="all_amenities">
-      <% if @amenities.blank? %>
-        <h2><strong class="default_white_color">•No amenities listed.</strong></h2>
-      <% else %>
-        <h3 class="default_green_color">Edit Existing</h3>
+      <% if !@amenities.blank? %>
+        <h3 class="default_green_color patrick_hand_font text_underline">Edit Existing</h3>
         <br />
         <% @amenities.each do |amenity| %>
           <div class="col-xs-6 col-sm-4 col-md-3">

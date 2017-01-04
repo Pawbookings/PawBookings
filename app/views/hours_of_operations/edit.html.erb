@@ -12,7 +12,7 @@
       <div class="border"></div>
       <br />
       <div class="hours_of_operation_div">
-        <h3 class="default_green_color">Choose the hours you are open:</h3>
+        <h3 class="default_green_color patrick_hand_font text_underline">Choose the hours you are open:</h3>
         <br />
         <%= form_for(@hours_of_operation, {action: :update}) do |f| %>
           <%= f.label :monday %>
@@ -41,6 +41,7 @@
           <br>
           <%= f.label :sunday %>
           <%= f.select :sunday_open, options_for_select(hours_of_day_option, @hours_of_operation[:sunday_open]) %>-<%= f.select :sunday_close, options_for_select(hours_of_day_option, @hours_of_operation[:sunday_close]) %>
+          <br>
           <br>
           <%= f.submit "Update", class:"btn btn-primary" %>
           <br>

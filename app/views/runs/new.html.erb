@@ -12,92 +12,95 @@
         <div class="br_if_desktop"><br /></div>
         <div class="border"></div>
         <br />
-        <h3 class="default_green_color">Add New</h3>
+        <h3 class="default_green_color patrick_hand_font text_underline">Add New</h3>
         <br />
         <%= form_for @run do |f| %>
-          <%= f.label :title %>
-          <br />
-          <%= f.text_field :title, placeholder: " Title", class:"kennel_dashboard_input" %>
-          <br>
-          <%= f.label :width_of_room %>
-          <br />
-          <%= f.text_field :size_width, placeholder: " Width", class:"kennel_dashboard_input" %>
-          <br>
-          <%= f.label :length_of_room %>
-          <br />
-          <%= f.text_field :size_length, placeholder: " Length", class:"kennel_dashboard_input" %>
-          <br />
-          <%= f.label :description %>
-          <br />
-          <%= f.text_area :description, placeholder: " Description", class:"kennel_dashboard_input" %>
-          <br>
-          <br>
-          <%= f.label :indoor_or_outdoor %>
-          <br />
-          <%= f.select :indoor_or_outdoor, options_for_select(indoor_outdoor_option), class:"kennel_dashboard_input" %>
-          <br>
-          <br>
-          <%= f.label :pets_allowed_per_run %>
-          <br />
-          <%= f.text_field :pets_per_run, placeholder: " Pets allowed per run", class:"kennel_dashboard_input", onkeypress:"return isNumber(event)" %>
-          <br>
-          <br>
-          <%= f.label :type_of_pets_allowed %>
-          <br />
-          <%= f.select :type_of_pets_allowed, options_for_select(cat_or_dog_only_option), class:"kennel_dashboard_input" %>
-          <br>
-          <br>
-          <%= f.label :price %>
-          <br />
-          <%= f.text_field :price, placeholder: " Price per night", class:"kennel_dashboard_input" %>
-          <br>
-          <%= f.label :weight_limit %>
-          <br />
-          <%= f.text_field :weight_limit, placeholder: " Weight Limit", class:"kennel_dashboard_input" %>
-          <br>
-          <br>
-          <%= f.label :breeds_restricted %>
-          <br />
-          <div class="input-group-addon">
-            <input type="checkbox" name="breed_1" value="pitbull">Pitbull
-            <br />
-            <br />
-            <input type="checkbox" name="breed_2" value="german_shephered">German Shephered
-            <br />
-            <br />
-            <input type="checkbox" name="breed_3" value="rottweiler">RottWeiler
-            <br />
-            <br />
-            <input type="checkbox" name="breed_4" value="doberman_pincher">Doberman Pincher
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+              <%= f.label :title %>
+              <br />
+              <%= f.text_field :title, placeholder: " Title", class:"kennel_dashboard_input_desktop" %>
+              <br>
+              <%= f.label :width_of_room %>
+              <br />
+              <%= f.text_field :size_width, placeholder: " Width", class:"kennel_dashboard_input_desktop" %>
+              <br>
+              <%= f.label :length_of_room %>
+              <br />
+              <%= f.text_field :size_length, placeholder: " Length", class:"kennel_dashboard_input_desktop" %>
+              <br />
+              <%= f.label :description %>
+              <br />
+              <%= f.text_area :description, placeholder: " Description", class:"kennel_dashboard_input_desktop" %>
+              <br>
+              <br>
+              <%= f.label :indoor_or_outdoor %>
+              <br />
+              <%= f.select :indoor_or_outdoor, options_for_select(indoor_outdoor_option), class:"kennel_dashboard_input_desktop" %>
+              <br>
+              <br>
+              <%= f.label :pets_allowed_per_run %>
+              <br />
+              <%= f.text_field :pets_per_run, placeholder: " Pets allowed per run", class:"kennel_dashboard_input_desktop", onkeypress:"return isNumber(event)" %>
+            </div>
+            <div class="col-md-3">
+              <%= f.label :type_of_pets_allowed %>
+              <br />
+              <%= f.select :type_of_pets_allowed, options_for_select(cat_or_dog_only_option), class:"kennel_dashboard_input_desktop" %>
+              <br>
+              <br>
+              <%= f.label :price %>
+              <br />
+              <%= f.text_field :price, placeholder: " Price per night", class:"kennel_dashboard_input_desktop" %>
+              <br>
+              <%= f.label :weight_limit %>
+              <br />
+              <%= f.text_field :weight_limit, placeholder: " Weight Limit", class:"kennel_dashboard_input_desktop" %>
+              <br>
+              <br>
+              <%= f.label :breeds_restricted %>
+              <br />
+              <div class="input-group-addon">
+                <input type="checkbox" name="breed_1" value="pitbull">Pitbull
+                <br />
+                <br />
+                <input type="checkbox" name="breed_2" value="german_shephered">German Shephered
+                <br />
+                <br />
+                <input type="checkbox" name="breed_3" value="rottweiler">RottWeiler
+                <br />
+                <br />
+                <input type="checkbox" name="breed_4" value="doberman_pincher">Doberman Pincher
+              </div>
+              <br>
+              <br>
+              <%= f.label :how_many_of_these_runs_do_you_have_total %>
+              <br />
+              <%= f.text_field :number_of_rooms, placeholder: " Number of these runs", class:"kennel_dashboard_input_desktop", onkeypress:"return isNumber(event)" %>
+              <br>
+              <br>
+            </div>
           </div>
-          <br>
-          <br>
-          <%= f.label :how_many_of_these_runs_do_you_have_total %>
-          <br />
-          <%= f.text_field :number_of_rooms, placeholder: " Number of these runs", class:"kennel_dashboard_input", onkeypress:"return isNumber(event)" %>
-          <br>
-          <br>
-          <%= f.submit "Add New", class: "btn btn-success" %>
-          <br>
-          <br>
-          <br>
-          <br>
-        <% end %>
+          <div class="row text-center">
+            <br />
+            <%= f.submit "Add New", class: "btn btn-success" %>
+          </div>
+          <% end %>
       </div>
     </div>
   </div>
+
   <div class="row text-center">
+    <br />
+    <br />
     <div class="border"></div>
     <br />
-    <h3 class="default_green_color">Edit Existing</h3>
+    <h3 class="default_green_color patrick_hand_font text_underline">Edit Existing</h3>
     <br />
-    <% if @runs.blank? %>
-      <div class="col-xs-12">
-        <h2><strong class="default_white_color">•No runs listed yet.</strong></h2>
-      </div>
-    <% else %>
+    <% if !@runs.blank? %>
       <% @runs.each do |run| %>
-        <div class="col-xs-6 col-sm-4 col-md-3">
+        <div class="col-xs-12 col-sm-4 col-md-3">
           <%= form_for(run, {action: :update, id: run[:id]}) do |f| %>
             <%= f.label :title %>
             <br />

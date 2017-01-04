@@ -199,8 +199,8 @@
 
   .fixed_search_bar {
     position: fixed;
-    top: 12em;
-    left: 10em;
+    top: 14em;
+    left: 8em;
     width: 25%;
     z-index: 0;
   }

@@ -49,6 +49,12 @@ table, th, td {
   padding: 1em;
 }
 
+.flash_notice_div {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+}
+
 .relative_position {
   position: relative;
 }
@@ -190,7 +196,7 @@ table, th, td {
 }
 
 .simple-calendar .today {
-  background: rgba(255, 183, 183, 0.96);
+  background-color: rgba(115, 255, 115, 0.42);
 }
 
 .width_50_percent {
@@ -256,7 +262,7 @@ table, th, td {
   }
 
   .simple-calendar {
-    box-shadow: 0px 0px 15px black;
+    box-shadow: 0px 0px 18px #6d6e71;
   }
 
   .pet_icon {

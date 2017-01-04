@@ -12,7 +12,7 @@
       <div class="border"></div>
       <br />
       <div class="policy_registration_div">
-        <h3 class="default_green_color">Add New</h3>
+        <h3 class="default_green_color patrick_hand_font text_underline">Add New</h3>
         <br />
         <%= form_for @policy do |f| %>
           <%= f.label :policy_description %>
@@ -32,10 +32,8 @@
   <br />
   <div class="row text-center">
     <div class="all_policies_div">
-      <% if @policies.blank? %>
-        <h2><strong class="default_green_color">•No policies listed.</strong></h2>
-      <% else %>
-        <h3 class="default_green_color">Edit Existing</h3>
+      <% if !@policies.blank? %>
+        <h3 class="default_green_color patrick_hand_font text_underline">Edit Existing</h3>
         <br />
         <% @policies.each do |policy| %>
           <div class="col-sm-6 col-xs-4 col-md-3">

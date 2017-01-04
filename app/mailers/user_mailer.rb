@@ -34,7 +34,7 @@ class UserMailer < ApplicationMailer
     mail(to: email, subject: 'PawBookings 3 week reminder')
   end
 
-  # Cron job checks for reservations that are exactly 1 weeks before a check-in date,
+  # Cron job checks for reservations that are exactly 1 week before a check-in date,
   # and sends a reminder email if true.
   def send_one_week_reservation_reminder(email)
     @email = email
@@ -64,6 +64,11 @@ class UserMailer < ApplicationMailer
     @original_search_url = original_search_url
     @customer_email = customer_email
     mail(to: customer_email, subject: 'PawBookings stand-by reservation update')
+  end
+
+  def pawbookings_support_email(message)
+    @message = message
+    mail(to: "mcdonnellenterprisesllc@gmail.com", subject: 'PawBookings Support Contact')
   end
 
   def sanitize_date(param)

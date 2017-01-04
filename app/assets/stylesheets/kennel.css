@@ -21,6 +21,12 @@
   border-radius: 0.4em;
 }
 
+.kennel_dashboard_input_desktop {
+  width: 75%;
+  height: 2.5em;
+  border-radius: 0.4em;
+}
+
 .most_booked_runs {
   margin-top: 3em;
 }
@@ -228,12 +234,6 @@
 
   .kennel_dashboard_main_title {
     margin-bottom: 1em;
-  }
-
-  .kennel_dashboard_input_desktop {
-    width: 75%;
-    height: 2.5em;
-    border-radius: 0.4em;
   }
 
   .kennel_dashboard_option_btns_div {

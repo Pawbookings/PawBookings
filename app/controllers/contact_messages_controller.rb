@@ -6,6 +6,7 @@ class ContactMessagesController < ApplicationController
   def create
     contact_message = ContactMessage.new(contact_message_params)
     if contact_message.save!
+      UserMailer.pawbookings_support_email(contact_message).deliver_now
       redirect_to message_confirmation_path
     else
       redirect_to request.referrer

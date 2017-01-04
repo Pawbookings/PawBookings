@@ -18,7 +18,7 @@ class KennelsController < ApplicationController
       user.save!
       redirect_to kennel_dashboard_path
     else
-      flash[:notice]
+      flash[:notice] = "Unable to register your Kennel, validation falied."
       redirect_to kennel_dashboard_path
     end
   end
@@ -173,7 +173,6 @@ class KennelsController < ApplicationController
       end
     end
     get_most_booked_runs if !@reservations.nil?
-    binding.pry
     filter_reservation_search if !params[:search_by].blank?
   end
 
@@ -186,7 +185,6 @@ class KennelsController < ApplicationController
   end
 
   def filter_reservation_search
-    binding.pry
     search_by = params[:search_by]
     @reservation_search_results = Reservation.where(search_by.to_sym => params[:reservation_search].downcase, kennel_id: @kennel[:id]).order(created_at: :desc).limit(10)
   end
