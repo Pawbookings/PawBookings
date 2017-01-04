@@ -9,7 +9,7 @@
 
 .blog_index_div {
   background-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0px 0px 25px black;
+  box-shadow: 0px 0px 18px #6d6e71;
   border-radius: 0.4em;
   margin-bottom: -1em;
   margin-right: 1em;
@@ -43,7 +43,7 @@
   margin-left: 2em;
   margin-right: 2em;
   border-radius: 0.4em;
-  box-shadow: inset 0px 0px 3px #000000;
+  box-shadow: 0px 0px 18px #6d6e71;
 }
 
 .recent_blogs_title {
@@ -84,7 +84,7 @@
 .blog_display_image {
   width: 100%;
   border-radius: 0.1em;
-  box-shadow: 0px 0px 3px black;
+  box-shadow: 0px 0px 18px #6d6e71;
 }
 
 /* Blog Category */
