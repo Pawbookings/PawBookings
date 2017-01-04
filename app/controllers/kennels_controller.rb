@@ -173,6 +173,7 @@ class KennelsController < ApplicationController
       end
     end
     get_most_booked_runs if !@reservations.nil?
+    binding.pry
     filter_reservation_search if !params[:search_by].blank?
   end
 
@@ -185,8 +186,9 @@ class KennelsController < ApplicationController
   end
 
   def filter_reservation_search
+    binding.pry
     search_by = params[:search_by]
-    @reservation_search_results = Reservation.where(search_by.to_sym => params[:reservation_search].capitalize, kennel_id: @kennel[:id]).order(created_at: :desc).limit(10)
+    @reservation_search_results = Reservation.where(search_by.to_sym => params[:reservation_search].downcase, kennel_id: @kennel[:id]).order(created_at: :desc).limit(10)
   end
 
   def get_most_booked_runs

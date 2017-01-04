@@ -8,33 +8,37 @@
 
 # User
 # 1 -Kennel
-user = User.create!(first_name: "Christopher", last_name: "Pelnar", email: 'christopherpelnar@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4074081234', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'kennel')
+user = User.create!(first_name: "christopher", last_name: "pelnar", email: 'christopherpelnar@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4074081234', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'kennel')
 user.userID = user[:id]
 user.save!
 
-
 # 2 -Customer
-user = User.create!(first_name: "John", last_name: "Smith", email: 'jsmith@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4078464231', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
+user = User.create!(first_name: "john", last_name: "smith", email: 'jsmith@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4078464231', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
 user.userID = user[:id]
 user.save!
 
 # 3 -Customer
-user = User.create!(first_name: "Luke", last_name: "Skywalker", email: 'lskywalker@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4071231234', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
+user = User.create!(first_name: "luke", last_name: "skywalker", email: 'lskywalker@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4071231234', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
 user.userID = user[:id]
 user.save!
 
 # 4 -Customer
-user = User.create!(first_name: "Jim", last_name: "Johnson", email: 'jjohnson@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4073214321', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
+user = User.create!(first_name: "jim", last_name: "johnson", email: 'jjohnson@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4073214321', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
 user.userID = user[:id]
 user.save!
 
 # 5 -Kennel
-user = User.create!(first_name: "Tony", last_name: "Montana", email: 'tmontana@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '3059569404', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
+user = User.create!(first_name: "tony", last_name: "montana", email: 'tmontana@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '3059569404', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'kennel')
 user.userID = user[:id]
 user.save!
 
 #6 -Kennel
-user = User.create!(first_name: "Han", last_name: "Solo", email: 'hsolo@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '3212436990', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
+user = User.create!(first_name: "han", last_name: "solo", email: 'hsolo@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '3212436990', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'kennel')
+user.userID = user[:id]
+user.save!
+
+#7 -Customer
+user = User.create!(first_name: "mary", last_name: "blossom", email: 'mblossom@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '3218889978', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'customer')
 user.userID = user[:id]
 user.save!
 
@@ -53,7 +57,7 @@ Run.create!(kennel_id: 1, size_width: '12', size_length: '12', title: 'The Large
 
 
 # Admin
-user = User.create!(first_name: "Patrick", last_name: "McDonnel", email: 'pawbookings@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4078464231', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'admin')
+user = User.create!(first_name: "patrick", last_name: "mcdonnel", email: 'pawbookings@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4078464231', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'admin')
 user.userID = user[:id]
 user.save!
 
@@ -77,21 +81,21 @@ Amenity.create!(kennel_id: 1, title: "Doggy Day-SPA", description: "A relaxing t
 
 
 # 1
-reservation = Reservation.create!(kennel_id: 1, user_id: 2, customer_first_name: 'John', customer_last_name: 'Smith', customer_email: 'johnsmith@gmail.com', customer_phone: '4074081234', pet_ids: '[1,2]', run_ids: '[1]', check_in_date: '2016-12-12', check_out_date: '2016-12-13', total_price: 96.21, room_details: "[[\"The Large Room\", 90]]", completed: "false", transID: "87345876987965786")
+reservation = Reservation.create!(kennel_id: 1, user_id: 2, customer_first_name: 'john', customer_last_name: 'smith', customer_email: 'jsmith@gmail.com', customer_phone: '4074081234', pet_ids: '[1,2]', run_ids: '[1]', check_in_date: '2016-12-12', check_out_date: '2016-12-13', total_price: 96.21, room_details: "[[\"The Large Room\", 90]]", completed: "false", transID: "87345876987965786")
 reservation.reservationID = 1
 reservation.kennelID = 1
 reservation.userID = 2
 reservation.save!
 
 # 2
-reservation = Reservation.create!(kennel_id: 1, user_id: 3, customer_first_name: 'Luke', customer_last_name: 'Skywalker', customer_email: 'lskywalker@gmail.com', customer_phone: '4071231234', pet_ids: '[3]', run_ids: '[1]', check_in_date: '2016-12-01', check_out_date: '2016-12-02', total_price: 96.21, room_details: "[[\"The Large Room\", 90]]", completed: "false", transID: "87345876987965786")
+reservation = Reservation.create!(kennel_id: 1, user_id: 3, customer_first_name: 'luke', customer_last_name: 'skywalker', customer_email: 'lskywalker@gmail.com', customer_phone: '4071231234', pet_ids: '[3]', run_ids: '[1]', check_in_date: '2016-12-01', check_out_date: '2016-12-02', total_price: 96.21, room_details: "[[\"The Large Room\", 90]]", completed: "false", transID: "7709703987176987")
 reservation.reservationID = 2
 reservation.kennelID = 1
 reservation.userID = 3
 reservation.save!
 
 # 3
-reservation = Reservation.create!(kennel_id: 1, user_id: 4, customer_first_name: 'Mary', customer_last_name: 'Jane', customer_email: 'mjane@gmail.com', customer_phone: '4073214321', pet_ids: '[4]', run_ids: '[1]', check_in_date: '2016-12-10', check_out_date: '2016-12-11', total_price: 96.21, room_details: "[[\"The Large Room\", 90]]", completed: "false", transID: "87345876987965786")
+reservation = Reservation.create!(kennel_id: 1, user_id: 4, customer_first_name: 'mary', customer_last_name: 'blossom', customer_email: 'mblossom@gmail.com', customer_phone: '4073214321', pet_ids: '[4]', run_ids: '[1]', check_in_date: '2016-12-10', check_out_date: '2016-12-11', total_price: 96.21, room_details: "[[\"The Large Room\", 90]]", completed: "false", transID: "09809796784876834")
 reservation.reservationID = 3
 reservation.kennelID = 1
 reservation.userID = 4
