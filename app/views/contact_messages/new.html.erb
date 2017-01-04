@@ -4,28 +4,53 @@
     <div class="row text-center">
       <div class="col-xs-12">
         <h5 class="main_title">Contact PawBookings.com</h5>
-        <h6 class="contact_info">
+        <h6 class="contact_info default_white_color">
           Our agents are available 24 hours a day, every day, by email when you fill out the form below or by
 
           calling us at <strong>844-944-3333</strong>. If you do call, having your Reservation Confirmation Number (RCN) on hand
 
           allows us to help you faster.
         </h6>
+        <div class="hidden_if_mobile">
+          <div class="useful_links">
+            <div class="row text-center">
+              <div class="col-md-4">
+                <h2 class="patrick_hand_font default_green_color text_underline">Other Helpful Links</h2>
+                <%= link_to "Frequently Asked Questions", faq_path, class:"link_color" %>
+                <br />
+                <%= link_to "Change/Cancellation/Refund Policy", policies_and_terms_path, class:"link_color" %>
+                <br />
+                <%= link_to "Manage your account", new_user_session_path, class:"link_color" %>
+              </div>
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <h6 class="contact_info text-center">
-          3050 Dyer Blvd<br>
-          Suite 203<br>
-          Kissimmee, FL 34741<br>
-          844.944.3333
+        <h6 class="contact_info text-center text_underline default_white_color">
+          <strong>
+            3050 Dyer Blvd<br>
+            Suite 203<br>
+            Kissimmee, FL 34741<br>
+            844.944.3333
+          </strong>
         </h6>
 
-        <div class="useful_links">
-          <%= link_to "Frequently Asked Questions", faq_path, class:"link_color" %>
-          <br />
-          <%= link_to "Change/Cancellation/Refund Policy", policies_and_terms_path, class:"link_color" %>
-          <br />
-          <%= link_to "Manage your account", new_user_session_path, class:"link_color" %>
+        <div class="hidden_if_desktop">
+          <h2 class="patrick_hand_font default_green_color text_underline">Other Helpful Links</h2>
+          <div class="useful_links">
+            <%= link_to "Frequently Asked Questions", faq_path, class:"link_color" %>
+            <br />
+            <%= link_to "Change/Cancellation/Refund Policy", policies_and_terms_path, class:"link_color" %>
+            <br />
+            <%= link_to "Manage your account", new_user_session_path, class:"link_color" %>
+          </div>
         </div>
+
+
         <br />
         <br />
 
