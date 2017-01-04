@@ -4,7 +4,7 @@
       <p>Dear <%= "#{@current_user.first_name}" %>,</p>
       <p>Thank you for registering with PawBookings.com.</p>
       <p>IMPORTANT: To complete your registration please click on the link below to verify your email address. (You may need to copy and paste the full link into your browser&#39;s address bar):</p>
-      <%= link_to "Confirm Email", "http://pawbookings.com/users/password/new"(email: @current_user.email, reset_password: "true") %>
+      <%= link_to "Confirm Email", "http://pawbookings.com/users/password/new?email=#{@current_user.email}&reset_password=true" %>
       <p>Your password can also be set by following the 'forgot your password?' instructions here: http://pawbookings.com/users/password/new</p>
       <p>https://www.pawbookings.com</p>
       <p>Follow us on Facebook: http://www.facebook.com/pawbookings</p>

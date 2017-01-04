@@ -16,7 +16,7 @@
         <br />
 
         <div class="actions">
-          <%= f.submit "Send me reset password instructions", class: "btn btn-success" %>
+          <%= f.submit "Send me reset password instructions", class: "btn btn-success reset_email_submit_btn" %>
         </div>
       <% end %>
       <br />
@@ -28,9 +28,9 @@
 </div>
 
 <script type="text/javascript">
-var email = "<%= params['email'] %>";
-if (email){
-  $(".reset_email").val(email);
-  $(".reset_email_submit_btn").click();
-}
+  var email = "<%= params['email'] %>";
+  if (email){
+    $(".reset_email").val(email);
+    $(".reset_email_submit_btn").click();
+  }
 </script>
