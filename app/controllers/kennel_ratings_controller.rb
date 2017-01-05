@@ -1,4 +1,6 @@
 class KennelRatingsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @kennel_rating = KennelRating.new
   end

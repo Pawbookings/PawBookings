@@ -1,4 +1,5 @@
 class CheckInCheckOutReservationsController < ApplicationController
+
   def update
     reservation = Reservation.find(params[:id])
     if params[:checked_out].nil? && !params[:checked_in].nil?

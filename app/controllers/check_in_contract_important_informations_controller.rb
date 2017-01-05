@@ -4,8 +4,11 @@ class CheckInContractImportantInformationsController < ApplicationController
     important_information = CheckInContractImportantInformation.first
     important_information.title = params[:check_in_contract_important_information][:title]
     important_information.body = params[:check_in_contract_important_information][:body]
-    important_information.save!
-    redirect_to pawbookings_admins_path
+    if important_information.save!
+      redirect_to pawbookings_admins_path
+    else
+      redirect_to request.referrer
+    end
   end
 
   def edit
