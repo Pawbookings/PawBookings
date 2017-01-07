@@ -42,7 +42,7 @@
           <%= f.select :spay_or_neutered, options_for_select(spay_or_neutered_option)%>
           <br>
           <br>
-          <%= f.label :vaccinated %>
+          <%= f.label :vaccinated, "Vaccinations current?" %>
           <br />
           <%= f.select :vaccinations, options_for_select(false_or_true_option), {},onchange:"return petsChangeVaccinations();" %>
           <br>
@@ -95,7 +95,7 @@
               <%= f.select :spay_or_neutered, options_for_select(spay_or_neutered_option, pet[:spay_or_neutered])%>
               <br>
               <br>
-              <%= f.label :vaccinated %>
+              <%= f.label :vaccinated, "Vaccinations current?" %>
               <br />
               <%= f.select :vaccinations, options_for_select(false_or_true_option, pet[:vaccinations]) %>
               <br>

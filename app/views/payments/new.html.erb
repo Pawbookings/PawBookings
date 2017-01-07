@@ -131,7 +131,7 @@
               <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), class:"payment_input", onchange:"return paymentChangeBreed();" %>
             </div>
             <div class="col-md-6">
-              <%= label_tag "pet_vaccinations_#{counter}", "Vaccinations?" %>
+              <%= label_tag "pet_vaccinations_#{counter}", "Vaccinations current?" %>
               <br>
               <%= select_tag "pet_vaccinations_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
             </div>
