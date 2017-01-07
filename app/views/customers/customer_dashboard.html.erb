@@ -35,7 +35,13 @@
       <div class="col-md-4">
         <br />
         <br />
-        <%= button_to "My Pets", new_pet_path, class:"btn btn-success", method: :get %>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+            <img src="/assets/pets_cartoon.jpg", class="pets_cartoon_image" />
+          </div>
+        </div>
+        <%= button_to "My Pets", new_pet_path, class:"btn btn-success my_pets_btn", method: :get %>
       </div>
       <div class="col-md-4 border_left">
         <div class="text-left customer_primary_info_desktop">

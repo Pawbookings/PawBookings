@@ -21,4 +21,12 @@ module PaymentsHelper
       ["True", "true"]
     ]
   end
+
+  def spay_or_neutered_option
+    [
+      ["False", "false"],
+      ["Spay", "spay"],
+      ["Neutered", "neutered"]
+    ]
+  end
 end

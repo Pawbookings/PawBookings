@@ -322,7 +322,7 @@
             <br>
             <%= label_tag "Pet Weight" %>
             <br>
-            <%= text_field_tag "pet_weight_#{counter}", nil, placeholder: " Pet Weight", class: "payment_input" %>
+            <%= text_field_tag "pet_weight_#{counter}", nil, placeholder: " Weight in lbs", class: "payment_input" %>
             <br>
             <br>
             <%= label_tag "Special instructions" %>
@@ -337,7 +337,7 @@
             <br>
             <%= label_tag "pet_spay_or_neutered_#{counter}", "Spay or Neutered?" %>
             <br>
-            <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
+            <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(spay_or_neutered_option), class:"payment_input" %>
             <br>
             <br>
             <% counter -= 1 %>

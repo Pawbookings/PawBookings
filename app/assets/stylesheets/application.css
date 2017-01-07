@@ -147,6 +147,7 @@ table, th, td {
   /*border: 1px solid #9a9a9a;*/
   /*border: 1px solid #5f5f5f;*/
   border: 1px solid #51d888;
+  width: 100%;
 }
 
 .border_right {
@@ -228,6 +229,14 @@ table, th, td {
   padding: 1em;
   border-radius: 1em;
   background-color: #48cd7e;
+}
+
+.display_none {
+  display: none;
+}
+
+.dashboard_default_background_color {
+  background-color: #3c3c3c;
 }
 
 

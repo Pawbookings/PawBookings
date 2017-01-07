@@ -1,14 +1,18 @@
 <%= render partial: "shared/top_info" %>
 
 <div class="container-fluid">
-  <div class="row text-center">
+  <div class="row text-center dashboard_default_background_color">
     <div class="col-xs-12">
       <h5 class="main_title">Pets</h5>
       <br />
-      <div class="border"></div>
+    </div>
+  </div>
+  <div class="border"></div>
+  <div class="row text-center">
+    <div class="col-xs-12">
       <br />
       <div class="new_pet_div">
-        <h3 class="default_green_color">Add New</h3>
+        <h3 class="default_green_color patrick_hand_font">Enter Your Pet Details</h3>
         <br />
         <%= form_for @pet do |f| %>
           <%= f.label :pet_name %>
@@ -30,27 +34,33 @@
           </div>
           <%= f.label :weight %>
           <br />
-          <%= f.text_field :weight, placeholder: " Pets weight", class:"general_input" %>
+          <%= f.text_field :weight, placeholder: " Weight in lbs", class:"general_input", onkeypress: "return isNumber(event);" %> lbs
           <br>
           <br>
           <%= f.label :spay_or_neutered %>
           <br />
-          <%= f.select :spay_or_neutered, options_for_select(false_or_true_option)%>
+          <%= f.select :spay_or_neutered, options_for_select(spay_or_neutered_option)%>
           <br>
           <br>
           <%= f.label :vaccinated %>
           <br />
-          <%= f.select :vaccinations, options_for_select(false_or_true_option) %>
+          <%= f.select :vaccinations, options_for_select(false_or_true_option), {},onchange:"return petsChangeVaccinations();" %>
           <br>
           <br>
-          <div class="vaccination_record_div">
-            <%= f.label :vaccination_record %>
-            <br />
-            <%= f.file_field :vaccination_record %>
+          <div class="vaccination_record_div display_none">
+            <div class="row text-center">
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                <%= f.label :vaccination_record %>
+                <br />
+                <%= f.file_field :vaccination_record, class:"btn btn-primary" %>
+                <br>
+                <br>
+              </div>
+            </div>
           </div>
-          <br>
-          <br>
-          <%= f.submit "Add New", class:"btn btn-success" %>
+          <%= f.submit "Save and Close", class:"btn btn-success" %> or
+          <%= f.submit "Save and Add Another Pet", class:"btn btn-success", name: "create_another_pet" %>
           <br>
         <% end %>
       </div>
@@ -77,12 +87,12 @@
               <br>
               <%= f.label :weight %>
               <br />
-              <%= f.text_field :weight, placeholder: " Pets weight", class:"general_input_edit" %>
+              <%= f.text_field :weight, placeholder: " Weight in lbs", class:"general_input_edit", onkeypress: "return isNumber(event);" %>
               <br>
               <br>
               <%= f.label :spay_or_neutered %>
               <br />
-              <%= f.select :spay_or_neutered, options_for_select(false_or_true_option, pet[:spay_or_neutered])%>
+              <%= f.select :spay_or_neutered, options_for_select(spay_or_neutered_option, pet[:spay_or_neutered])%>
               <br>
               <br>
               <%= f.label :vaccinated %>
@@ -120,12 +130,20 @@
 
 <script type="text/javascript">
   function petsChangeBreed(){
-    console.log("HELLOWORLD!!");
     var cat_or_dog = $("#pet_cat_or_dog").val();
     if(cat_or_dog == "dog"){
       $(".pets_new_breed_div").show();
     } else {
       $(".pets_new_breed_div").hide();
+    }
+  }
+
+  function petsChangeVaccinations(){
+    var vaccinations = $("#pet_vaccinations").val();
+    if(vaccinations == "true"){
+      $(".vaccination_record_div").show();
+    } else {
+      $(".vaccination_record_div").hide();
     }
   }
 </script>

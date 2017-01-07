@@ -1,9 +1,17 @@
 <%= render partial: "shared/top_info" %>
 
 <div class="container-fluid">
+  <div class="row text-center dashboard_default_background_color">
+    <div class="col-xs-12">
+      <h5 class="main_title">Veterinarian Contact Information</h5>
+      <br />
+    </div>
+  </div>
+  <div class="border"></div>
+  <div class="border"></div>
+  <br />
   <div class="row">
     <div class="col-xs-12 text-center">
-      <h5 class="main_title">Veterinarian Contact Information</h5>
       <div class="vet_contact_info_div">
         <%= form_for @customer_vet_info do |f| %>
         <%= f.label :name %>

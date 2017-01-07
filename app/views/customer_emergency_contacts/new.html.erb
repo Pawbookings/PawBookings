@@ -1,10 +1,15 @@
 <%= render partial: "shared/top_info" %>
 
 <div class="container-fluid">
+  <div class="row text-center dashboard_default_background_color">
+    <h5 class="main_title">Secondary Emergency Contact</h5>
+    <br />
+  </div>
+  <div class="border"></div>
+  <div class="border"></div>
+  <br />
   <div class="row">
     <div class="col-xs-12">
-      <h5 class="main_title text-center">Secondary Emergency Contact</h5>
-      <br />
       <div class="emergency_contact_div text-center">
         <%= form_for @customer_emergency_contact do |f| %>
           <%= f.label :name %>
