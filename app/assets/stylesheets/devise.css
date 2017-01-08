@@ -31,14 +31,17 @@
   display: none;
 }
 
-.signup_div {
+.signup_div_container {
   background-color: #43ac6a;
-  margin-top: 6.7em;
+}
+
+.signup_div {
   padding-bottom: 3em;
 }
 
 .signup_title {
-  font-size: 2.5em;
+  margin-top: 3.7em;
+  font-size: 2em;
   color: #ffffff;
   padding-top: 1em;
   padding-bottom: 1em;
