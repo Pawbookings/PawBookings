@@ -73,6 +73,14 @@
           </div>
         </div>
       </div>
+    <% elsif flash[:alert] %>
+    <div style="background-color:rgba(120, 219, 157, 0); color:#6d6e71;" class="row text-center">
+      <div>
+        <div class="col-xs-12">
+          <%=flash[:alert]%>
+        </div>
+      </div>
+    </div>
     <% end %>
   </div>
 
