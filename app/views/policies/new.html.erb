@@ -1,15 +1,20 @@
 <%= render partial: "shared/top_info" %>
 
 <div class="container-fluid">
+  <div class="row text-center dashboard_default_background_color">
+    <h5 class="main_title">Policies</h5>
+    <br />
+  </div>
+</div>
+<div class="border"></div>
+<div class="border"></div>
+<br />
+<div class="container">
   <div class="row text-center">
     <div class="col-xs-12">
-      <h5 class="main_title">Policies</h5>
-      <br />
-      <div class="border"></div>
       <div class="br_if_desktop"><br /></div>
       <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
       <div class="br_if_desktop"><br /></div>
-      <div class="border"></div>
       <br />
       <div class="policy_registration_div">
         <h3 class="default_green_color patrick_hand_font text_underline">Add New</h3>
@@ -17,10 +22,11 @@
         <%= form_for @policy do |f| %>
           <%= f.label :policy_description %>
           <br />
-          <%= f.text_area :description, placeholder: " Description", class:"kennel_dashboard_input" %>
+          <%= f.text_area :description, placeholder: " All Pets must show vaccination records before arrival.", class:"kennel_dashboard_input" %>
           <br>
           <br>
-          <%= f.submit "Add New", class:"btn btn-success" %>
+          <%= f.submit "Add Policy", class:"btn btn-success" %>
+          <%= f.submit "Save and Add Another Policy", class:"btn btn-success", name: "create_another_policy" %>
           <br>
           <br>
           <br>

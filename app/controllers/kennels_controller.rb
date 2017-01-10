@@ -18,7 +18,7 @@ class KennelsController < ApplicationController
       user.save!
       redirect_to kennel_dashboard_path
     else
-      flash[:notice] = "Unable to register your Kennel, validation falied."
+      flash[:notice] = "Unable to register your Kennel, validation falied. #{kennel.errors.full_messages.first}"
       redirect_to kennel_dashboard_path
     end
   end
@@ -34,8 +34,13 @@ class KennelsController < ApplicationController
     kennel.email = params[:kennel][:email]
     kennel.sales_tax = params[:kennel][:sales_tax]
     kennel.avatar = params[:kennel][:avatar] if !params[:kennel][:avatar].nil?
-    kennel.save!
-    redirect_to kennel_dashboard_path
+    if kennel.valid? && kennel.save!
+      flash[:notice] = "Your Kennel updated successfully!"
+      redirect_to kennel_dashboard_path
+    else
+      flash[:notice] = "Unable to update your Kennel, validation failed. #{kennel.errors.full_messages.first}"
+      redirect_to request.referrer
+    end
   end
 
   def show

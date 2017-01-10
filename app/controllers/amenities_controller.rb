@@ -8,10 +8,19 @@ class AmenitiesController < ApplicationController
   end
 
   def create
-    @amenity = Amenity.new(amenity_params)
-    @kennel = Kennel.where(user_id: current_user.id).first
-    if @amenity.valid? && @kennel.amenities.create(kennel_id: @kennel.id, title: @amenity.title, description: @amenity.description, price: @amenity.price)
-      redirect_to new_amenity_path
+    amenity = Amenity.new(amenity_params)
+    kennel = Kennel.where(user_id: current_user.id).first
+    if amenity.valid? && kennel.amenities.create(kennel_id: kennel.id, title: amenity.title, description: amenity.description, price: amenity.price)
+      if params[:create_another_amenity] == "Save and Add Another Amenity"
+        flash[:notice] = "Your Amenity was created successfully!"
+        redirect_to new_amenity_path
+      else
+        flash[:notice] = "Your Amenity was created successfully!"
+        redirect_to kennel_dashboard_path
+      end
+    else
+      flash[:notice] = "Your Amenity failed to be saved. #{amenity.errors.full_messages.first}"
+      redirect_to request.referrer
     end
   end
 

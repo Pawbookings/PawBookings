@@ -13,8 +13,18 @@ class RunsController < ApplicationController
     user = User.where(id: current_user.id).first
     kennel = Kennel.where(user_id: user.id).last
     params["run"]["breeds_restricted"][0] = "No Breed Restrictions"  if params["run"]["breeds_restricted"][0].blank?
+
     if kennel.runs.create(kennel_id: kennel.id, size_width: run.size_width, size_length: run.size_length, title: run.title, description: run.description, indoor_or_outdoor: run.indoor_or_outdoor, pets_per_run: run.pets_per_run, price: run.price.to_f, weight_limit: run.weight_limit, breeds_restricted: params[:run][:breeds_restricted], number_of_rooms: run.number_of_rooms, type_of_pets_allowed: run.type_of_pets_allowed ).valid?
-      redirect_to new_run_path
+      if params[:create_another_run] == "Save and Add Another Run"
+        flash[:notice] = "Your Run was created successfully!"
+        redirect_to new_run_path
+      else
+        flash[:notice] = "Your Run was created successfully!"
+        redirect_to kennel_dashboard_path
+      end
+    else
+      flash[:notice] = "Unable to create your Run, validation failed. #{run.errors.full_messages.first}"
+      redirect_to request.referrer
     end
   end
 
@@ -32,8 +42,14 @@ class RunsController < ApplicationController
     run.weight_limit = params[:run][:weight_limit]
     run.breeds_restricted = params[:run][:breeds_restricted]
     run.number_of_rooms = params[:run][:number_of_rooms]
-    run.save!
-    redirect_to new_run_path
+
+    if run.valid? && run.save!
+      flash[:notice] = "Your Run was updated successfully!"
+      redirect_to new_run_path
+    else
+      flash[:notice] = "Unable to update your Run, validation failed. #{run.errors.full_messages.first}"
+      redirect_to request.referrer
+    end
   end
 
   def destroy

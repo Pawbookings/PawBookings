@@ -34,11 +34,11 @@
         <div class="kennel_dashboard_user_info_div">
           <h4 class="default_green_color text_underline">Owner Personal Info</h4>
           <br />
-          <p class="default_white_color"><strong class="default_green_color">Email: </strong><br /><%= current_user.email.capitalize %></p>
-          <p class="default_white_color"><strong class="default_green_color">First Name: </strong><br /><%= current_user.first_name.capitalize %></p>
-          <p class="default_white_color"><strong class="default_green_color">Last Name: </strong><br /><%= current_user.last_name.capitalize %></p>
-          <p class="default_white_color"><strong class="default_green_color">Phone: </strong><br /><%= current_user.phone %></p>
-          <p class="default_white_color"><strong class="default_green_color">Time Zone: </strong><br /><%= current_user.time_zone %></p>
+          <p class="default_white_color"><strong class="default_green_color">Personal contact email: </strong><br /><%= current_user.email.capitalize %></p>
+          <p class="default_white_color"><strong class="default_green_color">First name: </strong><br /><%= current_user.first_name.capitalize %></p>
+          <p class="default_white_color"><strong class="default_green_color">Last name: </strong><br /><%= current_user.last_name.capitalize %></p>
+          <p class="default_white_color"><strong class="default_green_color">Personal contact phone: </strong><br /><%= current_user.phone %></p>
+          <p class="default_white_color"><strong class="default_green_color">Time zone: </strong><br /><%= current_user.time_zone %></p>
           <%= button_to "Edit", edit_user_registration_path, class: "btn btn-primary", method: :get %>
           <br />
         </div>
@@ -79,14 +79,19 @@
                 <%= f.text_field :zip, class: "kennel_dashboard_input_desktop" %>
                 <br />
                 <br />
-                <%= f.label :email, class:"default_green_color" %><span class="default_green_color">:</span>
+                <%= f.label :email, "Email Pet Owners can contact", class:"default_green_color" %><span class="default_green_color">:</span>
                 <br />
                 <%= f.text_field :email, class: "kennel_dashboard_input_desktop" %>
                 <br />
                 <br />
+                <%= f.label :phone, "Phone Pet Owners can call", class:"default_green_color" %><span class="default_green_color">:</span>
+                <br />
+                <%= f.text_field :phone, class: "kennel_dashboard_input_desktop", onkeypress: "return isNumber(event);" %>
+                <br />
+                <br />
                 <%= f.label :sales_tax, class:"default_green_color" %><span class="default_green_color">:</span>
                 <br />
-                <%= f.text_field :sales_tax, class: "kennel_dashboard_input_desktop" %>
+                <%= f.text_field :sales_tax, class: "kennel_dashboard_input_desktop" %> <span class="default_white_color">%</span>
                 <br />
                 <br />
                 <%= image_tag @kennel.avatar.url(:thumb), class: "kennel_dashboard_avatar" if !@kennel.nil? %>

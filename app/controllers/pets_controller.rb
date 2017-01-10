@@ -19,7 +19,7 @@ class PetsController < ApplicationController
         redirect_to customer_dashboard_path
       end
     else
-      flash[:notice] = "There was an error saving your Pet. Please try again."
+      flash[:notice] = "There was an error saving your Pet. #{pet.errors.full_messages.first}"
       redirect_to request.referrer
     end
   end
@@ -40,7 +40,7 @@ class PetsController < ApplicationController
       flash[:notice] = "Your Pet was successfully updated!"
       redirect_to request.referrer
     else
-      flash[:notice] = "There was an error updating your Pet. Please try again."
+      flash[:notice] = "There was an error updating your Pet. #{pet.errors.full_messages.first}"
       redirect_to request.referrer
     end
   end

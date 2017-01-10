@@ -1,16 +1,21 @@
 <%= render partial: "shared/top_info" %>
 
 <div class="container-fluid">
+  <div class="row text-center dashboard_default_background_color">
+    <h5 class="main_title">Runs</h5>
+    <br />
+  </div>
+</div>
+<div class="border"></div>
+<div class="border"></div>
+<br />
+<div class="container">
   <div class="row text-center">
     <div class="col-xs-12">
       <div class="run_registration_div">
-        <h5 class="main_title">Runs</h5>
-        <br />
-        <div class="border"></div>
         <div class="br_if_desktop"><br /></div>
         <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
-        <div class="br_if_desktop"><br /></div>
-        <div class="border"></div>
+        <br />
         <br />
         <h3 class="default_green_color patrick_hand_font text_underline">Add New</h3>
         <br />
@@ -22,13 +27,16 @@
               <br />
               <%= f.text_field :title, placeholder: " Title", class:"kennel_dashboard_input_desktop" %>
               <br>
+              <br>
               <%= f.label :width_of_room %>
               <br />
-              <%= f.text_field :size_width, placeholder: " Width", class:"kennel_dashboard_input_desktop" %>
+              <%= f.text_field :size_width, placeholder: " Width", class:"kennel_dashboard_input_desktop", onkeypress: "return isNumber(event);" %> ft
+              <br>
               <br>
               <%= f.label :length_of_room %>
               <br />
-              <%= f.text_field :size_length, placeholder: " Length", class:"kennel_dashboard_input_desktop" %>
+              <%= f.text_field :size_length, placeholder: " Length", class:"kennel_dashboard_input_desktop", onkeypress: "return isNumber(event);" %> ft
+              <br />
               <br />
               <%= f.label :description %>
               <br />
@@ -52,16 +60,17 @@
               <br>
               <%= f.label :price %>
               <br />
-              <%= f.text_field :price, placeholder: " Price per night", class:"kennel_dashboard_input_desktop" %>
+              <%= f.text_field :price, placeholder: " Price per night", class:"kennel_dashboard_input_desktop", onkeypress: "return isNumber(event);" %> .00
+              <br>
               <br>
               <%= f.label :weight_limit %>
               <br />
-              <%= f.text_field :weight_limit, placeholder: " Weight Limit", class:"kennel_dashboard_input_desktop" %>
+              <%= f.text_field :weight_limit, placeholder: " Weight in lbs", class:"kennel_dashboard_input_desktop", onkeypress: "return isNumber(event);" %> lbs
               <br>
               <br>
               <%= f.label :breeds_restricted %>
               <br />
-              <div class="input-group-addon">
+              <div class="input-group-addon" style="text-align:left;">
                 <input type="checkbox" name="breed_1" value="pitbull">Pitbull
                 <br />
                 <br />
@@ -75,7 +84,7 @@
               </div>
               <br>
               <br>
-              <%= f.label :how_many_of_these_runs_do_you_have_total %>
+              <%= f.label :how_many_of_these_runs_do_you_have_total, "How many of these Runs do you have total?" %>
               <br />
               <%= f.text_field :number_of_rooms, placeholder: " Number of these runs", class:"kennel_dashboard_input_desktop", onkeypress:"return isNumber(event)" %>
               <br>
@@ -84,7 +93,8 @@
           </div>
           <div class="row text-center">
             <br />
-            <%= f.submit "Add New", class: "btn btn-success" %>
+            <%= f.submit "Save Run", class: "btn btn-success" %> or
+            <%= f.submit "Save and Add Another Run", class:"btn btn-success", name: "create_another_run" %>
           </div>
           <% end %>
       </div>
@@ -96,9 +106,9 @@
     <br />
     <div class="border"></div>
     <br />
-    <h3 class="default_green_color patrick_hand_font text_underline">Edit Existing</h3>
-    <br />
     <% if !@runs.blank? %>
+      <h3 class="default_green_color patrick_hand_font text_underline">Edit Existing</h3>
+      <br />
       <% @runs.each do |run| %>
         <div class="col-xs-12 col-sm-4 col-md-3">
           <%= form_for(run, {action: :update, id: run[:id]}) do |f| %>
@@ -108,11 +118,11 @@
             <br />
             <%= f.label :width_of_room %>
             <br />
-            <%= f.text_field :size_width, value: run[:size_width], class:"kennel_dashboard_input_edit" %>
+            <%= f.text_field :size_width, value: run[:size_width], class:"kennel_dashboard_input_edit", onkeypress: "return isNumber(event);" %>
             <br />
             <%= f.label :length_of_room %>
             <br />
-            <%= f.text_field :size_length, value: run[:size_length], class:"kennel_dashboard_input_edit" %>
+            <%= f.text_field :size_length, value: run[:size_length], class:"kennel_dashboard_input_edit", onkeypress: "return isNumber(event);" %>
             <br />
             <%= f.label :description %>
             <br />
@@ -126,7 +136,7 @@
             <br />
             <%= f.label :pets_allowed_per_run %>
             <br />
-            <%= f.text_field :pets_per_run, value: run[:pets_per_run], class:"kennel_dashboard_input_edit" %>
+            <%= f.text_field :pets_per_run, value: run[:pets_per_run], class:"kennel_dashboard_input_edit", onkeypress: "return isNumber(event);" %>
             <br />
             <br />
             <%= f.label :type_of_pets_allowed %>
@@ -136,11 +146,11 @@
             <br />
             <%= f.label :price %>
             <br />
-            <%= f.text_field :price, value: run[:price], class:"kennel_dashboard_input_edit" %>
+            <%= f.text_field :price, value: run[:price], class:"kennel_dashboard_input_edit", onkeypress: "return isNumber(event);" %> .00
             <br />
-            <%= f.label :weight_limit %>
+            <%= f.label :weight_limit, "Weight in lbs" %>
             <br />
-            <%= f.text_field :weight_limit, value: run[:weight_limit], class:"kennel_dashboard_input_edit" %>
+            <%= f.text_field :weight_limit, value: run[:weight_limit], class:"kennel_dashboard_input_edit" %> lbs
             <br />
             <br />
 

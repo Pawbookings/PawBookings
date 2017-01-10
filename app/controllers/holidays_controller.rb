@@ -12,8 +12,18 @@ class HolidaysController < ApplicationController
     params[:holiday][:holiday_date] = Date.parse(@new_date)
     holiday = Holiday.new(holiday_params)
     kennel = Kennel.where(user_id: current_user.id).first
-    kennel.holidays.create(kennel_id: kennel.id, holiday_date: holiday.holiday_date, description: holiday.description)
-    redirect_to new_holiday_path
+    if kennel.holidays.create!(kennel_id: kennel.id, holiday_date: holiday.holiday_date, description: holiday.description)
+      if params[:create_another_holiday] == "Save and Add Another Holiday"
+        flash[:notice] = "Your Holiday was created successfully!"
+        redirect_to new_holiday_path
+      else
+        flash[:notice] = "Your Holiday was created successfully!"
+        redirect_to kennel_dashboard_path
+      end
+    else
+      flash[:notice] = "There was an error saving your Holiday. Please try again."
+      redirect_to request.referrer
+    end
   end
 
   def edit
@@ -26,8 +36,13 @@ class HolidaysController < ApplicationController
     holiday = Holiday.find(params[:id])
     holiday.holiday_date = params[:holiday][:holiday_date]
     holiday.description = params[:holiday][:description]
-    holiday.save!
-    redirect_to new_holiday_path
+    if holiday.save!
+      flash[:notice] = "Your Holiday was updated successfully!"
+      redirect_to new_holiday_path
+    else
+      flash[:notice] = "There was an error updating your Holiday. Please try again."
+      redirect_to new_holiday_path
+    end
   end
 
   def destroy

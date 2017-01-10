@@ -1,9 +1,19 @@
 <%= render partial: "shared/top_info" %>
 
 <div class="container-fluid">
+  <div class="row dashboard_default_background_color text-center">
+    <div class="col-xs-12">
+      <h5 class="main_title">Register My Kennel:</h5>
+      <br />
+    </div>
+  </div>
+  <div class="border"></div>
+  <div class="border"></div>
+  <br />
+  <br />
+
   <div class="row">
     <div class="col-xs-12">
-      <h5 class="kennel_registration_title">Register My Kennel:</h5>
       <div class="kennel_registration_form_div text-center">
         <%= form_for @kennel do |f| %>
         <%= f.label :name %>
@@ -11,7 +21,7 @@
         <%= f.text_field :name, placeholder: " Kennel-Name", class: "kennel_dashboard_input" %>
         <br />
         <br />
-        <%= f.label :cats_or_dogs %>
+        <%= f.label :pets_allowed %>
         <br />
         <%= f.select :cats_or_dogs, options_for_select(cat_or_dog_options), class: "kennel_dashboard_input" %>
         <br />
@@ -19,6 +29,7 @@
         <%= f.label :address %>
         <br />
         <%= f.text_field :address, placeholder: " Address", class: "kennel_dashboard_input" %>
+        <br />
         <br />
         <%= f.label :city %>
         <br />
@@ -34,26 +45,36 @@
         <br />
         <%= f.text_field :zip, placeholder: " Zip", class: "kennel_dashboard_input", onkeypress: "return isNumber(event);" %>
         <br />
-        <%= f.label :phone %>
+        <br />
+        <%= f.label :phone, "Phone Pet-Owners can reach you at" %>
         <br />
         <%= f.text_field :phone, placeholder: " Kennel-Phone", class: "kennel_dashboard_input", onkeypress: "return isNumber(event);" %>
         <br />
-        <%= f.label :email %>
+        <br />
+        <%= f.label :email, "Email Pet-Owners can reach you at" %>
         <br />
         <%= f.text_field :email, placeholder: " Kennel-Email", class: "kennel_dashboard_input" %>
+        <br />
         <br />
         <%= f.label :sales_tax %>
         <br />
         <%= f.text_field :sales_tax, placeholder: " 6.5", class: "kennel_dashboard_input" %>
         <br />
+        <br />
         <%= f.label :mission_statement %>
         <br />
         <%= f.text_area :mission_statement, placeholder: " Mission Statement", class: "kennel_dashboard_input" %>
         <br />
-        <%= f.label :logo %>
         <br />
-        <%= f.file_field :avatar, class: "kennel_dashboard_input text-center btn btn-primary" %>
-        <br />
+          <div class="row text-center">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+            <%= f.label :kennel_logo %>
+            <br />
+            <%= f.file_field :avatar, class: "kennel_dashboard_file_input text-center btn btn-primary" %>
+            <br />
+          </div>
+        </div>
         <%= f.submit "Sumbit", class: "btn btn-success" %>
         <br />
         <br />

@@ -1,15 +1,20 @@
 <%= render partial: "shared/top_info" %>
 
 <div class="container-fluid">
+  <div class="row text-center dashboard_default_background_color">
+    <h5 class="main_title">Holidays</h5>
+    <br />
+  </div>
+</div>
+<div class="border"></div>
+<div class="border"></div>
+<br />
+<div class="container">
   <div class="row text-center">
     <div class="col-xs-12">
-      <h5 class="main_title">Holidays</h5>
-      <br />
-      <div class="border"></div>
       <div class="br_if_desktop"><br /></div>
       <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
       <div class="br_if_desktop"><br /></div>
-      <div class="border"></div>
       <br />
       <div class="holiday_registration_div">
         <h3 class="default_green_color patrick_hand_font text_underline">Add New</h3>
@@ -24,7 +29,8 @@
           <%= f.text_field :description, placeholder: " Description", class:"kennel_dashboard_input"%>
           <br>
           <br>
-          <%= f.submit "Add New", class:"btn btn-success" %>
+          <%= f.submit "Save Holiday", class:"btn btn-success" %>
+          <%= f.submit "Save and Add Another Holiday", class:"btn btn-success", name: "create_another_holiday" %>
           <br>
           <br>
         <% end %>
