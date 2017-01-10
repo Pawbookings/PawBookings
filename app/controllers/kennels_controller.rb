@@ -9,6 +9,7 @@ class KennelsController < ApplicationController
     kennel = Kennel.new(kennel_params)
     user = User.where(id: current_user.id).first
     if kennel.valid? && !kennel_completed_registration? && kennel.save! && user.kennel = kennel
+      flash[:notice] = "Your Kennel was created successfully!"
       kennel.userID = user[:id]
       kennel.kennelID = kennel[:id]
       kennel.save!
@@ -19,7 +20,7 @@ class KennelsController < ApplicationController
       redirect_to kennel_dashboard_path
     else
       flash[:notice] = "Unable to register your Kennel, validation falied. #{kennel.errors.full_messages.first}"
-      redirect_to kennel_dashboard_path
+      redirect_to request.referrer
     end
   end
 
