@@ -255,6 +255,10 @@ table, th, td {
   background-color: #3c3c3c;
 }
 
+.z_index_2 {
+  z-index: 2;
+}
+
 
 @media (min-width: 740px){
   .pet_icon {

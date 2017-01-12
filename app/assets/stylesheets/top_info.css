@@ -1,7 +1,7 @@
 .top_nav_container {
   position: fixed;
   width: 100%;
-  z-index: 1;
+  z-index: 3;
 }
 
 .top_nav_bar_row {

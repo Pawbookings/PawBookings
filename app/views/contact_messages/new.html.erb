@@ -22,10 +22,6 @@
                 <br />
                 <%= link_to "Manage your account", new_user_session_path, class:"link_color" %>
               </div>
-              <div class="col-md-4">
-              </div>
-              <div class="col-md-4">
-              </div>
             </div>
           </div>
         </div>
@@ -53,29 +49,31 @@
         <br />
         <br />
 
-        <%= form_for @contact_message do |f| %>
-          <%= f.label :name, "Name", class: "default_white_color" %>
-          <br>
-          <%= f.text_field :name, placeholder: " Name", class: "contact_form_field" %>
-          <br>
-          <%= f.label :subject, "Subject", class: "default_white_color" %>
-          <br>
-          <%= f.text_field :subject, placeholder: " Subject", class: "contact_form_field" %>
-          <br>
-          <%= f.label :phone, "Phone", class: "default_white_color" %>
-          <br>
-          <%= f.text_field :phone, placeholder: " Phone", class: "contact_form_field" %>
-          <br>
-          <%= f.label :email, "Email", class: "default_white_color" %>
-          <br>
-          <%= f.text_field :email, placeholder: " Email", class: "contact_form_field" %>
-          <br>
-          <%= f.label :message, "Message", class: "default_white_color" %>
-          <br>
-          <%= f.text_area :details, placeholder: " Message", class: "contact_form_field" %>
-          <br>
-          <%= f.submit "Send", class: "contact_submit_btn" %>
-        <% end %>
+        <div class="z_index_2 relative_position">
+          <%= form_for @contact_message do |f| %>
+            <%= f.label :name, "Name", class: "default_white_color" %>
+            <br>
+            <%= f.text_field :name, placeholder: " Name", class: "contact_form_field", autofocus: true %>
+            <br>
+            <%= f.label :subject, "Subject", class: "default_white_color" %>
+            <br>
+            <%= f.text_field :subject, placeholder: " Subject", class: "contact_form_field" %>
+            <br>
+            <%= f.label :phone, "Phone", class: "default_white_color" %>
+            <br>
+            <%= f.text_field :phone, placeholder: " Phone", class: "contact_form_field" %>
+            <br>
+            <%= f.label :email, "Email", class: "default_white_color" %>
+            <br>
+            <%= f.text_field :email, placeholder: " Email", class: "contact_form_field" %>
+            <br>
+            <%= f.label :message, "Message", class: "default_white_color" %>
+            <br>
+            <%= f.text_area :details, placeholder: " Message", class: "contact_form_field" %>
+            <br>
+            <%= f.submit "Send", class: "contact_submit_btn" %>
+          <% end %>
+        </div>
       </div>
     </div>
     <br />
