@@ -7,11 +7,12 @@
       <br />
     </div>
   </div>
+</div>
   <div class="border"></div>
   <div class="border"></div>
   <br />
   <br />
-
+<div class="container-fluid">
   <div class="row">
     <div class="col-xs-12">
       <div class="kennel_registration_form_div text-center">
@@ -46,19 +47,19 @@
         <%= f.text_field :zip, placeholder: " Zip", class: "kennel_dashboard_input", onkeypress: "return isNumber(event);" %>
         <br />
         <br />
-        <%= f.label :phone, "Phone Pet-Owners can reach you at" %>
+        <%= f.label :phone, "Phone where Pet-Owners can reach you at" %>
         <br />
         <%= f.text_field :phone, placeholder: " Kennel-Phone", class: "kennel_dashboard_input", onkeypress: "return isNumber(event);" %>
         <br />
         <br />
-        <%= f.label :email, "Email Pet-Owners can reach you at" %>
+        <%= f.label :email, "Email where Pet-Owners can reach you at" %>
         <br />
         <%= f.text_field :email, placeholder: " Kennel-Email", class: "kennel_dashboard_input" %>
         <br />
         <br />
         <%= f.label :sales_tax %>
         <br />
-        <%= f.text_field :sales_tax, placeholder: " 6.5", class: "kennel_dashboard_input" %>
+        <%= f.text_field :sales_tax, placeholder: " 6.5", class: "kennel_dashboard_input" %> %
         <br />
         <br />
         <%= f.label :mission_statement %>
@@ -75,7 +76,7 @@
             <br />
           </div>
         </div>
-        <%= f.submit "Sumbit", class: "btn btn-success" %>
+        <%= f.submit "Save Kennel", class: "btn btn-success" %>
         <br />
         <br />
         <br />

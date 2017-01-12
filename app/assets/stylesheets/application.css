@@ -52,7 +52,11 @@ table, th, td {
 .flash_notice_div {
   position: fixed;
   z-index: 2;
-  width: 100%;
+  width:100%;
+}
+
+.flash_notice_background_color {
+  background-color: #a0fbc4;
 }
 
 .relative_position {
@@ -84,8 +88,20 @@ table, th, td {
   margin-bottom: 1em;
 }
 
+.margin_bottom_2em {
+  margin-bottom: 2em;
+}
+
 .margin_top_n1em {
   margin-top: -1em;
+}
+
+.padding_bottom_1em {
+  padding-bottom: 1em;
+}
+
+.padding_bottom_2em {
+  padding-bottom: 2em;
 }
 
 .font_italic {

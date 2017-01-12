@@ -1,5 +1,5 @@
 class CheckInCheckOutReservationsController < ApplicationController
-
+  before_action :authenticate_user!
   def update
     reservation = Reservation.find(params[:id])
     if params[:checked_out].nil? && !params[:checked_in].nil?

@@ -200,9 +200,11 @@
   .fixed_search_bar {
     position: fixed;
     top: 14em;
-    left: 8em;
-    width: 25%;
+    left: 7em;
+    width: 24%;
     z-index: 0;
+    background-color: rgba(62, 172, 103, 0.84);
+    border-radius: 0.4em;
   }
 
   .searches_show_runs_available_title {
@@ -243,6 +245,6 @@
 
   .fixed_search_bar {
     width: 20%;
-    left: 18em;
+    left: 13em;
   }
 }

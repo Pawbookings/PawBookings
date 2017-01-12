@@ -64,25 +64,54 @@
   <!--  -->
 </head>
 <body>
-  <div class="flash_notice_div">
-    <% if flash[:notice] %>
-      <div style="background-color:rgba(120, 219, 157, 0); color:#6d6e71;" class="row text-center">
-        <div>
-          <div class="col-xs-12">
-            <%=flash[:notice]%>
+  <% if flash[:notice] %>
+    <% if flash[:notice].length > 148 %>
+      <div class="container width_100_percent flash_notice_background_color padding_bottom_2em">
+    <% else %>
+      <div class="container width_100_percent flash_notice_background_color padding_bottom_1em">
+    <% end %>
+      <div class="row text-left">
+        <div class="col-xs-12">
+          <div class="flash_notice_div">
+            <% if flash[:notice] %>
+              <div style="background-color:rgb(160, 251, 196); color:#ff3939;" class="row text-center">
+                <div>
+                  <div class="col-xs-12">
+                    <%=flash[:notice]%>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
-    <% elsif flash[:alert] %>
-    <div style="background-color:rgba(120, 219, 157, 0); color:#6d6e71;" class="row text-center">
-      <div>
+    </div>
+  <% end %>
+
+  <% if flash[:alert] %>
+    <% if flash[:alert].length > 148 %>
+      <div class="container width_100_percent flash_notice_background_color padding_bottom_2em">
+    <% else %>
+      <div class="container width_100_percent flash_notice_background_color padding_bottom_1em">
+    <% end %>
+      <div class="row text-left">
         <div class="col-xs-12">
-          <%=flash[:alert]%>
+          <div class="flash_notice_div">
+            <% if flash[:alert] %>
+              <div style="background-color:rgb(160, 251, 196); color:#ff3939;" class="row text-center">
+                <div>
+                  <div class="col-xs-12">
+                    <%=flash[:alert]%>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-    <% end %>
-  </div>
+  <% end %>
+
 
 <%= yield %>
 

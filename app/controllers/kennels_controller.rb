@@ -19,7 +19,11 @@ class KennelsController < ApplicationController
       user.save!
       redirect_to kennel_dashboard_path
     else
-      flash[:notice] = "Unable to register your Kennel, validation falied. #{kennel.errors.full_messages.first}"
+      error_message = "Unable to register your Kennel, validation falied."
+      kennel.errors.full_messages.each do |err|
+        error_message << " #{err}."
+      end
+      flash[:notice] = error_message
       redirect_to request.referrer
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208193612) do
+ActiveRecord::Schema.define(version: 20170111222241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,15 @@ ActiveRecord::Schema.define(version: 20161208193612) do
   end
 
   add_index "blogs", ["slug"], name: "index_blogs_on_slug", using: :btree
+
+  create_table "breed_restrictions", force: :cascade do |t|
+    t.integer  "kennel_id"
+    t.string   "breed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "breed_restrictions", ["kennel_id"], name: "index_breed_restrictions_on_kennel_id", using: :btree
 
   create_table "check_in_contract_important_informations", force: :cascade do |t|
     t.string   "title"
@@ -348,7 +357,6 @@ ActiveRecord::Schema.define(version: 20161208193612) do
     t.string   "title"
     t.string   "description"
     t.string   "indoor_or_outdoor"
-    t.string   "breeds_restricted"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end

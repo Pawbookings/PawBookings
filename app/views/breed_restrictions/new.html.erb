@@ -1,0 +1,63 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid">
+  <div class="row text-center dashboard_default_background_color">
+    <div class="col-xs-12">
+      <h5 class="main_title">Breed Restriction</h5>
+      <br />
+    </div>
+  </div>
+</div>
+<div class="border"></div>
+<div class="border"></div>
+<br />
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <div class="br_if_desktop"><br /></div>
+      <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
+      <div class="br_if_desktop"><br /></div>
+      <br />
+      <%= form_for @breed_restriction do |f| %>
+        <%= f.label :breed, placeholder: " Chihuahua" %>
+        <br />
+        <%= f.text_field :breed, placeholder: " German Shephered", class: "general_input" %>
+        <br />
+        <br />
+        <%= f.submit "Restrict Breed", class: "btn btn-success" %>
+        <br />
+        <br />
+      <% end %>
+    </div>
+  </div>
+<br />
+<br />
+<div class="border"></div>
+<br />
+  <div class="row text-center">
+      <% if !@breed_restrictions.blank? %>
+        <h3 class="default_green_color patrick_hand_font text_underline">Edit Existing</h3>
+        <br />
+        <% @breed_restrictions.each do |br| %>
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <%= form_for(br, url: {action: :update, id: br[:id]}) do |f|%>
+          <%= f.label :breed_restricted %>
+          <br />
+          <%= f.text_field :breed, value: br[:breed], class:"kennel_dashboard_input_edit" %>
+          <br />
+          <br />
+          <%= f.submit "Update", class:"btn btn-primary" %>
+          <br />
+          <br />
+        <% end %>
+        <%= button_to "Delete", breed_restriction_path(id: br[:id]), method: :delete, data: { confirm: 'Are you sure you want to delete this Breed Restriction?' }, :class => 'btn btn-danger' %>
+        <br />
+        <br />
+        <br />
+      </div>
+        <% end %>
+      <% end %>
+      <br />
+  </div>
+</div>
+<%= render partial: "shared/footer" %>

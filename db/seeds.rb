@@ -53,7 +53,7 @@ kennel.save!
 HoursOfOperation.create!(kennel_id: 1, monday_open: "closed", monday_close: "closed", tuesday_open: "closed", tuesday_close: "closed", wednesday_open: "closed", wednesday_close: "closed", thursday_open: "closed", thursday_close: "closed", friday_open: "closed", friday_close: "closed", saturday_open: "closed", saturday_close: "closed", sunday_open: "closed", sunday_close: "closed")
 
 # Run
-Run.create!(kennel_id: 1, size_width: '12', size_length: '12', title: 'The Large Room', description: 'The largest room we have', indoor_or_outdoor: 'indoor', pets_per_run: 2, price: 90.0, weight_limit: 120, breeds_restricted: 'n/a', number_of_rooms: 2, type_of_pets_allowed: 'dog' )
+Run.create!(kennel_id: 1, size_width: '12', size_length: '12', title: 'The Large Room', description: 'The largest room we have', indoor_or_outdoor: 'indoor', pets_per_run: 2, price: 90.0, weight_limit: 120, number_of_rooms: 2, type_of_pets_allowed: 'dog' )
 
 
 # Admin

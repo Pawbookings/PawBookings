@@ -9,9 +9,14 @@ class CustomerEmergencyContactsController < ApplicationController
     customer_emergency_contact = CustomerEmergencyContact.new(customer_emergency_contact_params)
     user = User.where(id: current_user.id).first
     if customer_emergency_contact.valid? && customer_emergency_contact.save! && user.customer_emergency_contact = customer_emergency_contact
+      flash[:notice] = "Your Emergency Contact was saved successfully!"
       redirect_to customer_dashboard_path
     else
-      flash[:notice] = "The record could not be saved. Please try again."
+      error_message = "The record could not be saved."
+      customer_emergency_contact.errors.full_messages.each do |err|
+        error_message << " #{err}."
+      end
+      flash[:notice] = error_message
       redirect_to request.referrer
     end
   end

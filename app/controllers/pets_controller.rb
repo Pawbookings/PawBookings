@@ -19,7 +19,11 @@ class PetsController < ApplicationController
         redirect_to customer_dashboard_path
       end
     else
-      flash[:notice] = "There was an error saving your Pet. #{pet.errors.full_messages.first}"
+      error_message = "There was an error saving your Pet."
+      pet.errors.full_messages.each do |err|
+        error_message << " #{err}."
+      end
+      flash[:notice] = error_message
       redirect_to request.referrer
     end
   end

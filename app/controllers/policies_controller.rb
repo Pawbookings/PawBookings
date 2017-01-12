@@ -20,7 +20,11 @@ class PoliciesController < ApplicationController
         redirect_to kennel_dashboard_path
       end
     else
-      flash[:notice] = "Your Policy failed to save. #{policy.errors.full_messages.first}"
+      error_message = "Your Policy failed to save."
+      policy.errors.full_messages.each do |err|
+        error_message << " #{err}."
+      end
+      flash[:notice] = error_message
       redirect_to request.referrer
     end
   end

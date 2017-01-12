@@ -9,6 +9,7 @@ class Kennel < ActiveRecord::Base
   belongs_to :user
   has_one    :kennel_check_in_check_out
   has_one    :hours_of_operation
+  has_many   :breed_restrictions
   has_many   :holidays
   has_many   :runs
   has_many   :amenities

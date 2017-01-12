@@ -9,9 +9,14 @@ class CustomerVetInfosController < ApplicationController
     customer_vet_info = CustomerVetInfo.new(customer_vet_info_params)
     user = User.where(id: current_user.id).first
     if customer_vet_info.valid? && customer_vet_info.save! && user.customer_vet_info = customer_vet_info
+      flash[:notice] = "Veterinarian information created successfully!"
       redirect_to customer_dashboard_path
     else
-      flash[:notice] = "The record could not be saved. Please try again."
+      error_message = "The record could not be saved. Validation failed."
+      customer_vet_info.errors.full_messages.each do |err|
+        error_message << " #{err}."
+      end
+      flash[:notice] = error_message
       redirect_to request.referrer
     end
   end
@@ -23,8 +28,17 @@ class CustomerVetInfosController < ApplicationController
     customer_vet_info.name = params[:customer_vet_info][:address]
     customer_vet_info.name = params[:customer_vet_info][:phone]
     customer_vet_info.name = params[:customer_vet_info][:emergency_phone]
-    customer_vet_info.save!
-    redirect_to customer_dashboard_path
+    if customer_vet_info.valid? && customer_vet_info.save!
+      flash[:notice] = "Veterinarian information updated successfully!"
+      redirect_to request.referrer
+    else
+      error_message = "Veterinarian information failed to update."
+      customer_vet_info.errors.full_messages.each do |err|
+        error_message << " #{err}."
+      end
+      flash[:notice] = error_message
+      redirect_to request.referrer
+    end
   end
 
   def destroy

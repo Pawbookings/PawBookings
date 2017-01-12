@@ -29,6 +29,7 @@
           <%= f.text_field :description, placeholder: " Description", class:"kennel_dashboard_input"%>
           <br>
           <br>
+          <br>
           <%= f.submit "Save Holiday", class:"btn btn-success" %>
           <%= f.submit "Save and Add Another Holiday", class:"btn btn-success", name: "create_another_holiday" %>
           <br>
@@ -45,18 +46,19 @@
       <% if !@holidays.blank? %>
         <h3 class="default_green_color patrick_hand_font text_underline">Edit</h3>
         <br />
+        <div class="col-xs-6 col-sm-4 col-md-3">
         <% @holidays.each do |holiday| %>
-          <div class="col-xs-6 col-sm-4 col-md-3">
             <p><strong>Date: </strong><br /><%= unsanitize_date(holiday[:holiday_date].to_s) %></p>
             <p><strong>Description: </strong><br /><%= holiday[:description] %></p>
             <%= button_to "Edit", edit_holiday_path(holiday[:id]), class:"btn btn-primary", method: :get %>
-            <br />
-            <%= button_to "Delete", holiday_path(holiday[:id]), data: {confirm: "Are you sure you want to delete this holiday?"}, class:"btn btn-danger", method: :delete %>
-            <br />
-            <br />
-            <br />
-          </div>
+          <br />
+        <%= button_to "Delete", holiday_path(holiday[:id]), data: {confirm: "Are you sure you want to delete this holiday?"}, class:"btn btn-danger", method: :delete %>
+        <br />
         <% end %>
+      </div>
+        <br />
+        <br />
+        <br />
       <% end %>
     </div>
   </div>

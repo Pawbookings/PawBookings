@@ -8,11 +8,16 @@ class HolidaysController < ApplicationController
   end
 
   def create
-    sanitize_date(params[:holiday][:holiday_date])
-    params[:holiday][:holiday_date] = Date.parse(@new_date)
-    holiday = Holiday.new(holiday_params)
-    kennel = Kennel.where(user_id: current_user.id).first
-    if kennel.holidays.create!(kennel_id: kennel.id, holiday_date: holiday.holiday_date, description: holiday.description)
+    if params[:holiday][:holiday_date].blank? || params[:holiday][:description].blank?
+      flash[:notice] = "Date and/or description invalid. Cannot be blank."
+      return redirect_to new_holiday_path
+    else
+      sanitize_date(params[:holiday][:holiday_date])
+      params[:holiday][:holiday_date] = Date.parse(@new_date)
+      holiday = Holiday.new(holiday_params)
+      kennel = Kennel.where(user_id: current_user.id).first
+    end
+    if holiday.valid? && kennel.holidays.create!(kennel_id: kennel.id, holiday_date: holiday.holiday_date, description: holiday.description)
       if params[:create_another_holiday] == "Save and Add Another Holiday"
         flash[:notice] = "Your Holiday was created successfully!"
         redirect_to new_holiday_path
@@ -21,7 +26,11 @@ class HolidaysController < ApplicationController
         redirect_to kennel_dashboard_path
       end
     else
-      flash[:notice] = "There was an error saving your Holiday. Please try again."
+      error_message = "There was an error saving your Holiday."
+      holiday.errors.full_messages.each do |err|
+        error_message << " #{err}."
+      end
+      flash[:notice] = error_message
       redirect_to request.referrer
     end
   end

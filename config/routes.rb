@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :customer_vet_infos, only: [:new, :create, :update, :destroy]
   resources :hours_of_operations, only: [:edit, :update, :create, :destroy]
   resources :holidays
+  resources :breed_restrictions
   resources :runs, only: [:new, :create, :update, :destroy]
   resources :pets, only: [:new, :create, :update, :destroy]
   resources :amenities, only: [:new, :create, :update, :destroy]
