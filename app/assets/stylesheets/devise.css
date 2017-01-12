@@ -34,6 +34,9 @@
 
 .login_message_div {
   margin-top: 10em;
+  background-color: rgba(255, 255, 255, 0.88);
+  padding: 2em;
+  border-radius: 0.4em;
 }
 
 /* new_session */
