@@ -72,7 +72,4 @@ Rails.application.routes.draw do
 
   # Policies/Terms
     get "/policies_and_terms", to: "home#policies_and_terms", as: :policies_and_terms
-
-  # SSL verification
-    get "/$MISCKEY", to: "home#MISCKEY"
 end
