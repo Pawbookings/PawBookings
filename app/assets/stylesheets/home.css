@@ -187,7 +187,6 @@
   }
 }
 
-
 @media (max-width: 991px){
   .testimonial_desktop, .kennel_or_customer_desktop {
     display: none;
@@ -241,7 +240,7 @@
   }
 
   .kennel_or_customer_link {
-    font-size: 2em;
+    font-size: 3em;
   }
 
   .kennel_or_customer_title {
