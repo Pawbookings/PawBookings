@@ -67,10 +67,6 @@ table, th, td {
   font-size: 1.1em;
 }
 
-.line_height_1_5_em {
-  line-height: 1.5em;
-}
-
 .no_left_right_margin {
   margin-left: 0;
   margin-right: 0;
@@ -126,6 +122,10 @@ table, th, td {
 
 .line_height_1em {
   line-height: 1em;
+}
+
+.line_height_1_5_em {
+  line-height: 1.5em;
 }
 
 .leto_font {

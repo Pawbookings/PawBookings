@@ -1,14 +1,21 @@
 /* new_registration */
-.login_div {
-  background-color: #43ac6a;
-  margin-top: 6.7em;
+.login_div_container {
+  background: url("/assets/pb_login_image.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   padding-bottom: 4em;
+}
+
+.login_div {
+  background-color: rgba(255, 255, 255, 0.88);
+  padding: 1em;
 }
 
 .login_title {
   font-size: 2em;
-  color: #ffffff;
-  padding-top: 3em;
+  padding-top: 5em;
   padding-bottom: 1em;
 }
 
@@ -23,6 +30,10 @@
   background: linear-gradient(#42b370, #51d888);
   height: 3em;
   color: #ffffff;
+}
+
+.login_message_div {
+  margin-top: 10em;
 }
 
 /* new_session */
@@ -74,15 +85,15 @@
 
 
 @media (min-width: 992px) {
-  .login_input {
-    width: 20%;
-  }
 
-  .signup_timezone_input, .signup_submit_btn, .signup_input, .login_input, .login_submit_btn {
+  .signup_timezone_input, .signup_submit_btn, .signup_input {
     width: 20%;
   }
 }
 
 @media (min-width: 1200px){
-
+  .login_div {
+    margin-left: 5em;
+    margin-right: 5em;
+  }
 }

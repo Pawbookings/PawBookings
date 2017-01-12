@@ -24,7 +24,6 @@ class BreedRestrictionsController < ApplicationController
   end
 
   def update
-    binding.pry
     breed_restriction = BreedRestriction.find(params[:id])
     breed_restriction.breed = params[:breed_restriction][:breed]
     if breed_restriction.valid? && breed_restriction.save!
@@ -41,7 +40,6 @@ class BreedRestrictionsController < ApplicationController
   end
 
   def destroy
-    binding.pry
     kennel = Kennel.where(user_id: current_user.id).first
     breed_restriction = BreedRestriction.where(id: params[:id], kennel_id: kennel[:id]).first
     if breed_restriction.delete
