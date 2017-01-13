@@ -50,16 +50,30 @@
           <%= f.select :vaccinations, options_for_select(false_or_true_option), {},onchange:"return petsChangeVaccinations();" %>
           <br>
           <br>
+          <%= f.label :special_instructions %>
+          <br />
+          <%= f.text_area :special_instructions, placeholder: " Special Instructions", class:"general_input"%>
+          <br>
           <div class="vaccination_record_div display_none">
             <div class="row text-center">
               <div class="col-md-4"></div>
               <div class="col-md-4">
-                <%= f.label :vaccination_record %>
+                <%= f.label :vaccination_record, "Vaccination record (optional)" %>
                 <br />
                 <%= f.file_field :vaccination_record, class:"btn btn-primary" %>
                 <br>
                 <br>
               </div>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <%= f.label :picture, "Picture (optional)" %>
+              <br />
+              <%= f.file_field :avatar, class: "btn btn-primary"%>
+              <br />
+              <br />
             </div>
           </div>
           <%= f.submit "Save and Close", class:"btn btn-success" %> or
@@ -112,6 +126,17 @@
               <% end %>
               <br />
               <%= f.file_field :vaccination_record %>
+              <br>
+              <br>
+              <div class="row">
+                <div class="col-xs-12">
+                  <%= image_tag pet.avatar.url, class: "kennel_dashboard_avatar" if !pet.avatar.url.nil? %>
+                  <br>
+                  <%= f.label :picture %>
+                  <br />
+                  <%= f.file_field :avatar %>
+                </div>
+              </div>
               <br>
               <br>
               <%= f.submit "Update", class:"btn btn-primary" %>

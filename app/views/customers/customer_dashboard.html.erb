@@ -15,12 +15,12 @@
         <div class="customer_dashboard_photo_div">
           <h4 class="default_green_color text_underline">Select your photo</h4>
           <br />
-          <%= image_tag @customer.user_image.url(:thumb), class:"customer_profile_pic" %>
+          <%= image_tag @customer.user_image.url(:thumb), class:"kennel_dashboard_avatar" %>
           <br />
           <br />
           <% if @customer.user_image_file_size.nil? %>
             <%= form_tag({controller: "customers", action: "create_user_image"}, multipart: true, method: "post") do |f| %>
-              <%= file_field_tag :user_image, class:"btn btn-primary width_50_percent" %>
+              <%= file_field_tag :user_image, class:"btn btn-primary width_75_percent" %>
               <br />
               <%= submit_tag "Submit", class:"btn btn-success" %>
             <% end %>

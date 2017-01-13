@@ -6,6 +6,9 @@ class PaymentsController < ApplicationController
     get_price_total
     get_pets_total
     check_pets_type_for_runs
+    if !current_user.nil?
+      @pets = Pet.where(user_id: current_user)
+    end
   end
 
   def create

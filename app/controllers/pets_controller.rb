@@ -10,7 +10,7 @@ class PetsController < ApplicationController
     params[:pet][:breed] = "cat" if params[:pet][:cat_or_dog] == "cat"
     pet = Pet.new(pet_params)
     user = User.find(current_user.id)
-    if pet.valid? && user.pets.create!(user_id: user.id, name: pet.name, cat_or_dog: pet.cat_or_dog, breed: pet.breed, weight: pet.weight, vaccinations: pet.vaccinations, spay_or_neutered: pet.spay_or_neutered, vaccination_record: pet.vaccination_record)
+    if pet.valid? && user.pets.create!(user_id: user.id, name: pet.name, cat_or_dog: pet.cat_or_dog, breed: pet.breed, weight: pet.weight, vaccinations: pet.vaccinations, spay_or_neutered: pet.spay_or_neutered, vaccination_record: pet.vaccination_record, avatar: pet.avatar, special_instructions: pet.special_instructions)
       if params[:create_another_pet] == "Save and Add Another Pet"
         flash[:notice] = "Your Pet was successfully saved!"
         redirect_to request.referrer
@@ -58,6 +58,6 @@ class PetsController < ApplicationController
   private
 
   def pet_params
-    return params.require(:pet).permit(:name, :cat_or_dog, :special_instructions, :breed, :weight, :vaccinations, :spay_or_neutered, :vaccination_record)
+    return params.require(:pet).permit(:name, :cat_or_dog, :special_instructions, :breed, :weight, :vaccinations, :spay_or_neutered, :vaccination_record, :avatar)
   end
 end

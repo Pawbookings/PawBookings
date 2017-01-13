@@ -224,6 +224,10 @@ table, th, td {
   width: 50%;
 }
 
+.width_75_percent {
+  width: 75%;
+}
+
 .width_100_percent {
   width: 100%;
 }

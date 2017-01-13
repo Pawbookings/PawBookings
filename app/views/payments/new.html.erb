@@ -67,17 +67,46 @@
           </div>
         </div>
         <br />
+
+        <% if current_user.nil? %>
+          <h3 class="arvo_font">2. Pet-Owner Info</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag "First Name" %>
+              <br>
+              <%= text_field_tag :customer_first_name, nil, placeholder: " First Name", class: "payment_input" %>
+            </div>
+            <div class="col-md-6">
+              <%= label_tag "Last Name" %>
+              <br>
+              <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag "Email" %>
+              <br>
+              <%= text_field_tag :customer_email, nil, placeholder: " Email", class: "payment_input" %>
+            </div>
+            <div class="col-md-6">
+              <%= label_tag "Phone" %>
+              <br>
+              <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "payment_input" %>
+            </div>
+          </div>
+        <% else %>
         <h3 class="arvo_font">2. Pet-Owner Info</h3>
         <div class="row">
           <div class="col-md-6">
             <%= label_tag "First Name" %>
             <br>
-            <%= text_field_tag :customer_first_name, nil, placeholder: " First Name", class: "payment_input" %>
+            <%= text_field_tag :customer_first_name, current_user.first_name.capitalize, placeholder: " First Name", class: "payment_input" %>
           </div>
           <div class="col-md-6">
             <%= label_tag "Last Name" %>
             <br>
-            <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
+            <%= text_field_tag :customer_last_name, current_user.last_name.capitalize, placeholder: " Last Name", class: "payment_input" %>
           </div>
         </div>
         <br />
@@ -85,14 +114,16 @@
           <div class="col-md-6">
             <%= label_tag "Email" %>
             <br>
-            <%= text_field_tag :customer_email, nil, placeholder: " Email", class: "payment_input" %>
+            <%= text_field_tag :customer_email, current_user.email.capitalize, placeholder: " Email", class: "payment_input" %>
           </div>
           <div class="col-md-6">
             <%= label_tag "Phone" %>
             <br>
-            <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "payment_input" %>
+            <%= text_field_tag :customer_phone, current_user.phone.capitalize, placeholder: " Phone", class: "payment_input" %>
           </div>
         </div>
+        <% end %>
+
         <br />
         <% counter = @total_pets.to_i %>
         <h3 class="arvo_font">3. Pet Info</h3>
@@ -102,12 +133,12 @@
             <div class="col-md-6">
               <%= label_tag "Pet name" %>
               <br>
-              <%= text_field_tag "pet_name_#{counter}", nil, placeholder: " Pet Name", class: "payment_input" %>
+              <%= text_field_tag "pet_name_#{counter}", nil, placeholder: " Pet Name", class: "payment_input pet_name_#{counter}" %>
             </div>
             <div class="col-md-6">
               <%= label_tag "Pet Weight" %>
               <br>
-              <%= text_field_tag "pet_weight_#{counter}", nil, placeholder: " Pet Weight", class: "payment_input" %>
+              <%= text_field_tag "pet_weight_#{counter}", nil, placeholder: " Pet Weight", class: "payment_input pet_weight_#{counter}" %>
             </div>
           </div>
           <br />
@@ -115,12 +146,12 @@
             <div class="col-md-6">
               <%= label_tag "pet_spay_or_neutered_#{counter}", "Spay or Neutered?" %>
               <br>
-              <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
+              <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(spay_or_neutered_option), class:"payment_input pet_spay_or_neutered_#{counter}" %>
             </div>
             <div class="col-md-6">
               <%= label_tag "Special instructions" %>
               <br>
-              <%= text_area_tag "pet_special_instructions_#{counter}", nil, placeholder: " Pet Special Instructions", class: "payment_input" %>
+              <%= text_area_tag "pet_special_instructions_#{counter}", nil, placeholder: " Pet Special Instructions", class: "payment_input pet_special_instructions_#{counter}" %>
             </div>
           </div>
           <br />
@@ -128,12 +159,12 @@
             <div class="col-md-6">
               <%= label_tag "Type of pet" %>
               <br>
-              <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), class:"payment_input", onchange:"return paymentChangeBreed();" %>
+              <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), class:"payment_input pet_type_#{counter}", onchange:"return paymentChangeBreed();" %>
             </div>
             <div class="col-md-6">
               <%= label_tag "pet_vaccinations_#{counter}", "Vaccinations current?" %>
               <br>
-              <%= select_tag "pet_vaccinations_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
+              <%= select_tag "pet_vaccinations_#{counter}", options_for_select(false_or_true_option), class:"payment_input pet_vaccinations_#{counter}" %>
             </div>
           </div>
           <br />
@@ -142,17 +173,24 @@
               <div class="pet_breed_selection_<%= counter %>">
                 <%= label_tag "Breed" %>
                 <br>
-                <%= select_tag "pet_breed_#{counter}", options_for_select(breed_option), class:"payment_input" %>
+                <%= select_tag "pet_breed_#{counter}", options_for_select(breed_option), class:"payment_input pet_breed_#{counter}" %>
               </div>
             </div>
             <div class="col-md-6">
             </div>
           </div>
           <br />
+          <% if !@pets.empty? %>
+            <% @pets.each do |pet| %>
+              <p onclick='addSelectedPetToForm("<%= counter %>", "<%= pet[:name] %>", "<%= pet[:cat_or_dog] %>", "<%= pet[:breed] %>", "<%= pet[:weight] %>", "<%= pet[:vaccinations] %>", "<%= pet[:spay_or_neutered] %>", "<%= pet[:special_instructions] %>")' class="btn btn-primary">Add <%= pet[:name] %></p>
+            <% end %>
+          <% end %>
+          <br />
           <br />
           <% counter -= 1 %>
         <% end %>
       </div>
+
       <div class="col-md-4">
         <div class="payment_confirm_booking_div">
           <h3 class="arvo_font">Confirm Booking</h3>
@@ -274,29 +312,55 @@
           <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode", class: "payment_input" %>
         </div>
 
-        <div class="payment_pets_contact_div text-center">
-          <br />
-          <h3 class="arvo_font">2. Pet-Owner Info</h3>
-          <br />
-          <%= label_tag "First Name" %>
-          <br>
-          <%= text_field_tag :customer_first_name, nil, placeholder: " First Name", class: "payment_input" %>
-          <br>
-          <br>
-          <%= label_tag "Last Name" %>
-          <br>
-          <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
-          <br>
-          <br>
-          <%= label_tag "Email" %>
-          <br>
-          <%= text_field_tag :customer_email, nil, placeholder: " Email", class: "payment_input" %>
-          <br>
-          <br>
-          <%= label_tag "Phone" %>
-          <br>
-          <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "payment_input" %>
-        </div>
+        <% if current_user.nil? %>
+          <div class="payment_pets_contact_div text-center">
+            <br />
+            <h3 class="arvo_font">2. Pet-Owner Info</h3>
+            <br />
+            <%= label_tag "First Name" %>
+            <br>
+            <%= text_field_tag :customer_first_name, nil, placeholder: " First Name", class: "payment_input" %>
+            <br>
+            <br>
+            <%= label_tag "Last Name" %>
+            <br>
+            <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
+            <br>
+            <br>
+            <%= label_tag "Email" %>
+            <br>
+            <%= text_field_tag :customer_email, nil, placeholder: " Email", class: "payment_input" %>
+            <br>
+            <br>
+            <%= label_tag "Phone" %>
+            <br>
+            <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "payment_input" %>
+          </div>
+        <% else %>
+          <div class="payment_pets_contact_div text-center">
+            <br />
+            <h3 class="arvo_font">2. Pet-Owner Info</h3>
+            <br />
+            <%= label_tag "First Name" %>
+            <br>
+            <%= text_field_tag :customer_first_name, current_user.first_name.capitalize, placeholder: " First Name", class: "payment_input" %>
+            <br>
+            <br>
+            <%= label_tag "Last Name" %>
+            <br>
+            <%= text_field_tag :customer_last_name, current_user.last_name.capitalize, placeholder: " Last Name", class: "payment_input" %>
+            <br>
+            <br>
+            <%= label_tag "Email" %>
+            <br>
+            <%= text_field_tag :customer_email, current_user.email.capitalize, placeholder: " Email", class: "payment_input" %>
+            <br>
+            <br>
+            <%= label_tag "Phone" %>
+            <br>
+            <%= text_field_tag :customer_phone, current_user.phone, placeholder: " Phone", class: "payment_input" %>
+          </div>
+        <% end %>
 
         <div class="payment_pet_details_div">
           <br />
@@ -306,43 +370,50 @@
             <h4 class="arvo_font">Pet# <%= counter %></h4>
             <%= label_tag "Pet name" %>
             <br>
-            <%= text_field_tag "pet_name_#{counter}", nil, placeholder: " Pet Name", class: "payment_input" %>
+            <%= text_field_tag "pet_name_#{counter}", nil, placeholder: " Pet Name", class: "payment_input pet_name_#{counter}" %>
             <br>
             <br>
             <%= label_tag "Type of pet" %>
             <br>
-            <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), class:"payment_input", onchange:"return paymentChangeBreed();" %>
+            <%= select_tag "pet_type_#{counter}", options_for_select(cat_or_dog_only_option), class:"payment_input pet_type_#{counter}", onchange:"return paymentChangeBreed();" %>
             <br>
             <br>
             <div class="pet_breed_selection_<%= counter %>">
               <%= label_tag "Breed" %>
               <br>
-              <%= select_tag "pet_breed_#{counter}", options_for_select(breed_option), class:"payment_input" %>
+              <%= select_tag "pet_breed_#{counter}", options_for_select(breed_option), class:"payment_input pet_breed_#{counter}" %>
             </div>
             <br>
             <%= label_tag "Pet Weight" %>
             <br>
-            <%= text_field_tag "pet_weight_#{counter}", nil, placeholder: " Weight in lbs", class: "payment_input" %>
+            <%= text_field_tag "pet_weight_#{counter}", nil, placeholder: " Weight in lbs", class: "payment_input pet_weight_#{counter}" %>
             <br>
             <br>
             <%= label_tag "Special instructions" %>
             <br>
-            <%= text_area_tag "pet_special_instructions_#{counter}", nil, placeholder: " Pet Special Instructions", class: "payment_input" %>
+            <%= text_area_tag "pet_special_instructions_#{counter}", nil, placeholder: " Pet Special Instructions", class: "payment_input pet_special_instructions_#{counter}" %>
             <br>
             <br>
             <%= label_tag "pet_vaccinations_#{counter}", "Vaccinations?" %>
             <br>
-            <%= select_tag "pet_vaccinations_#{counter}", options_for_select(false_or_true_option), class:"payment_input" %>
+            <%= select_tag "pet_vaccinations_#{counter}", options_for_select(false_or_true_option), class:"payment_input pet_vaccinations_#{counter}" %>
             <br>
             <br>
             <%= label_tag "pet_spay_or_neutered_#{counter}", "Spay or Neutered?" %>
             <br>
-            <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(spay_or_neutered_option), class:"payment_input" %>
+            <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(spay_or_neutered_option), class:"payment_input pet_spay_or_neutered_#{counter}" %>
             <br>
             <br>
+            <% if !@pets.empty? %>
+              <% @pets.each do |pet| %>
+                <p onclick='addSelectedPetToForm("<%= counter %>", "<%= pet[:name] %>", "<%= pet[:cat_or_dog] %>", "<%= pet[:breed] %>", "<%= pet[:weight] %>", "<%= pet[:vaccinations] %>", "<%= pet[:spay_or_neutered] %>", "<%= pet[:special_instructions] %>")' class="btn btn-primary">Add <%= pet[:name] %></p>
+              <% end %>
+            <% end %>
+            <br />
+            <br />
+            <br />
             <% counter -= 1 %>
           <% end %>
-          <br />
         </div>
 
         <div class="payment_confirm_booking_div">
@@ -369,7 +440,7 @@
             <% counter -= 1 %>
           <% end %>
 
-          <h5 style="margin-bottom:1em;" class="arvo_font">Amenities Selection(s):</h5>
+          <h5 class="arvo_font">Amenities Selection(s):</h5>
           <% counter = params[:number_of_rooms].to_i %>
           <% if !@amenities_list.empty? %>
             <div>
@@ -379,11 +450,12 @@
                 <p class="margin_top_n1em poppins_font"><%= "$#{price} x #{count}" %></p>
               <% end %>
             </div>
+          <% else %>
+            <p>•No Amenities Chosen</p>
           <% end %>
-          <% if @amenities_list.empty? %>
-          <p class="payment_amenity_title"><strong>•No Amenities Chosen</strong></p>
-          <% end %>
-
+          <br />
+          <div class="border"></div>
+          <br />
           <h5 style="margin-bottom:1em;" class="arvo_font">Total:</h5>
           <p class="margin_top_n1em poppins_font">$<%= @total_price_without_tax %></p>
 
@@ -392,7 +464,9 @@
 
           <h5 style="margin-bottom:1em;" class="arvo_font">Grand Total:</h5>
           <p class="margin_top_n1em poppins_font">$<%= @total_price %></p>
-
+          <br />
+          <div class="border"></div>
+          <br />
           <div class="text-center">
             <%= submit_tag "Book Now!", class: "btn btn-success payment_submt_btn" %>
             <br />
@@ -421,10 +495,27 @@ function paymentChangeBreed(){
       console.log($("#pet_type_"+total_pets).val());
       $(".pet_breed_selection_"+total_pets).show();
     } else {
-      console.log("HITTIN IT!!");
       $(".pet_breed_selection_"+total_pets).hide();
     }
     total_pets -= 1;
+  }
+}
+
+function addSelectedPetToForm(pet_number, name, cat_or_dog, breed, weight, vaccinations, spay_or_neutered, special_instructions){
+
+  // NEEDS TO BE SWITCHED TO TARGET CLASS SO BOTH MOBILE AND DESKTOP CHANGE
+  $(".pet_name_" + pet_number).val(name);
+  $(".pet_type_" + pet_number).val(cat_or_dog);
+  $(".pet_breed_" + pet_number).val(breed);
+  $(".pet_weight_" + pet_number).val(weight);
+  $(".pet_vaccinations_" + pet_number).val(vaccinations);
+  $(".pet_spay_or_neutered_" + pet_number).val(spay_or_neutered);
+  $(".pet_special_instructions_" + pet_number).val(special_instructions);
+
+  if(cat_or_dog == "cat"){
+    $(".pet_breed_selection_" + pet_number).hide();
+  } else {
+    $(".pet_breed_selection_" + pet_number).show();
   }
 }
 </script>
