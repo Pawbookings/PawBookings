@@ -21,7 +21,7 @@
                 <p class="search_results_mission_statement"><%= truncate(fr.mission_statement, length: 150, omission: "... ") %><%= link_to "read more", kennel_path(fr, search_info: params) %></p>
                 <div class="row margin_top_n1em text-center">
                   <div class="col-xs-4">
-                    <%= image_tag fr.avatar.url(:thumb), class:"border_radius_100" %>
+                    <%= image_tag fr.avatar.url(:thumb), class:"border_radius_100 kennel_dashboard_avatar" %>
                   </div>
                   <div class="col-xs-4">
                     <p class="text-center view_details_btn"><%= link_to "View Details", kennel_path(fr, search_info: params), class: "default_white_color btn btn-success" %></p>
@@ -56,7 +56,7 @@
               <p class="search_results_mission_statement"><%= truncate(fr.mission_statement, length: 150, omission: "... ") %><%= link_to "read more", kennel_path(fr, search_info: params) %></p>
               <div class="row margin_top_n1em text-center">
                 <div class="col-xs-4">
-                  <%= image_tag fr.avatar.url(:thumb), class:"border_radius_100" %>
+                  <%= image_tag fr.avatar.url(:thumb), class:"border_radius_100 kennel_dashboard_avatar" %>
                 </div>
                 <div class="col-xs-4">
                   <p class="text-center view_details_btn"><%= link_to "View Details", kennel_path(fr, search_info: params), class: "default_white_color btn btn-success" %></p>

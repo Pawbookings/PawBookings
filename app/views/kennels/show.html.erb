@@ -270,13 +270,14 @@
           <h5 class="arvo_font">Room <%= counter %> selection:</h5>
           <% @runs.each do |run| %>
             <div class="div_border">
-              <h3 class="arvo_font"><%= run[:title] %></h3>
+              <h3 class="arvo_font text_underline"><%= run[:title] %></h3>
+              <%= image_tag run.image.url %>
               <% if run.type_of_pets_allowed == "dog" || run.type_of_pets_allowed == "cat" %>
                 <p>•Only <%= run.type_of_pets_allowed.capitalize %>s allowed</span></strong></p>
               <% else %>
                 <p>•Both Cats and Dogs allowed</span></strong></p>
               <% end %>
-              <p class="poppins_font"><%= run.description %></p>
+              <p class="poppins_font margin_l_r_5em"><%= run.description %></p>
               <h1 class="default_green_color arvo_font"><%= "$#{run[:price]}" %></h1>
               <p><strong>Max Occupancy:</strong> <%= run.pets_per_run %></p>
               <% if run.weight_limit.nil? %>

@@ -123,6 +123,11 @@
   color: #ffffff;
 }
 
+.description_btn:hover, .amenities_btn, .policies_btn {
+  cursor: pointer;
+  cursor: hand;
+}
+
 /* Kennel Registration*/
 
 .kennel_registration_title {

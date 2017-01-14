@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112212412) do
+ActiveRecord::Schema.define(version: 20170114224133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -363,6 +363,10 @@ ActiveRecord::Schema.define(version: 20170112212412) do
     t.string   "indoor_or_outdoor"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "runs", ["kennel_id"], name: "index_runs_on_kennel_id", using: :btree

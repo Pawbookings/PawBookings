@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   resources :hours_of_operations, only: [:edit, :update, :create, :destroy]
   resources :holidays
   resources :breed_restrictions
-  resources :runs, only: [:new, :create, :update, :destroy]
   resources :pets, only: [:new, :create, :update, :destroy]
   resources :amenities, only: [:new, :create, :update, :destroy]
   resources :policies, only: [:new, :create, :update, :destroy]
@@ -27,6 +26,10 @@ Rails.application.routes.draw do
   resources :check_in_contract_important_informations, only: [:update, :edit]
   resources :check_in_contract_reservation_changes, only: [:update, :edit]
   resources :check_in_contract_refund_policies, only: [:update, :edit]
+
+  # RunsController
+    resources :runs, only: [:new, :create, :update, :destroy]
+    delete "/delete_run_image", to: "runs#delete_run_image", as: :delete_run_image
 
   # PaymentsController
     resources :payments, only: [:new, :create]

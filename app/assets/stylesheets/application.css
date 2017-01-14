@@ -98,6 +98,11 @@ table, th, td {
   margin-top: -1em;
 }
 
+.margin_l_r_5em {
+  margin-left: 5em;
+  margin-right: 5em;
+}
+
 .padding_bottom_1em {
   padding-bottom: 1em;
 }
