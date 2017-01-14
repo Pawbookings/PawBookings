@@ -55,6 +55,7 @@
           <table class="kennel_reservation_customer_table">
             <tr>
               <th class="kennel_reservation_th default_green_color">Res-ID</th>
+              <th class="kennel_reservation_th default_green_color">Picture</th>
               <th class="kennel_reservation_th default_green_color">First Name</th>
               <th class="kennel_reservation_th default_green_color">Last Name</th>
               <th class="kennel_reservation_th default_green_color">Email</th>
@@ -67,6 +68,8 @@
             </tr>
             <tr>
               <td class="kennel_reservation_td"><%= res[:id] %></td>
+              <% user = User.find(res[:user_id]) %>
+              <td class="kennel_reservation_td"><%= image_tag user.user_image.url(:thumb), class: "kennel_dashboard_avatar" if !user.user_image.url.nil? %></td>
               <td class="kennel_reservation_td"><%= res[:customer_first_name].capitalize %></td>
               <td class="kennel_reservation_td"><%= res[:customer_last_name].capitalize %></td>
               <td class="kennel_reservation_td"><%= res[:customer_email].capitalize %></td>

@@ -15,6 +15,7 @@
             <strong class="text_underline">Pet#<%= @counter %>:</strong>
           </caption>
           <tr>
+            <th class="kennel_reservation_th default_green_color">Picture</th>
             <th class="kennel_reservation_th default_green_color">Name</th>
             <th class="kennel_reservation_th default_green_color">Type</th>
             <th class="kennel_reservation_th default_green_color">Breed</th>
@@ -24,6 +25,7 @@
             <th class="kennel_reservation_th default_green_color">Special Instructions</th>
           </tr>
           <tr>
+            <td class="kennel_reservation_td"><%= image_tag pet.avatar.url(:thumb), class: "kennel_dashboard_avatar" if !pet.avatar.url.nil? %></td>
             <td class="kennel_reservation_td"><%= pet[:name].capitalize %></td>
             <td class="kennel_reservation_td"><%= pet[:cat_or_dog].capitalize %></td>
             <td class="kennel_reservation_td"><%= pet[:breed] %></td>

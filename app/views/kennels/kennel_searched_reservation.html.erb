@@ -13,6 +13,7 @@
             </caption>
             <tr>
               <th class="kennel_reservation_th default_green_color">Res-ID</th>
+              <th class="kennel_reservation_th default_green_color">Picture</th>
               <th class="kennel_reservation_th default_green_color">First Name</th>
               <th class="kennel_reservation_th default_green_color">Last Name</th>
               <th class="kennel_reservation_th default_green_color">Email</th>
@@ -24,7 +25,10 @@
               <th class="kennel_reservation_th default_green_color">Total</th>
             </tr>
             <tr>
+
               <td class="kennel_reservation_td"><%= @reservation[:id] %></td>
+              <% user = User.find(@reservation[:user_id]) %>
+              <td class="kennel_reservation_td"><%= image_tag user.user_image.url(:thumb), class: "kennel_dashboard_avatar" if !user.user_image.url.nil? %></td>
               <td class="kennel_reservation_td"><%= @reservation[:customer_first_name].capitalize %></td>
               <td class="kennel_reservation_td"><%= @reservation[:customer_last_name].capitalize %></td>
               <td class="kennel_reservation_td"><%= @reservation[:customer_email].capitalize %></td>
@@ -60,6 +64,7 @@
                 <strong class="text_underline">Pet#<%= @counter %>:</strong>
               </caption>
               <tr>
+                <th class="kennel_reservation_th default_green_color">Picture</th>
                 <th class="kennel_reservation_th default_green_color">Name</th>
                 <th class="kennel_reservation_th default_green_color">Type</th>
                 <th class="kennel_reservation_th default_green_color">Breed</th>
@@ -69,6 +74,7 @@
                 <th class="kennel_reservation_th default_green_color">Special Instructions</th>
               </tr>
               <tr>
+                <td class="kennel_reservation_td"><%= image_tag pet.avatar.url(:thumb), class: "kennel_dashboard_avatar" if !pet.avatar.url.nil? %></td>
                 <td class="kennel_reservation_td"><%= pet[:name].capitalize %></td>
                 <td class="kennel_reservation_td"><%= pet[:cat_or_dog].capitalize %></td>
                 <td class="kennel_reservation_td"><%= pet[:breed] %></td>
