@@ -10,7 +10,6 @@ class HomeController < ApplicationController
        root_path
     end
 
-
     @kennel_ratings = KennelRating.where(rating: 5).last(3).reverse
     testimonials
   end

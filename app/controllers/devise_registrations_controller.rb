@@ -16,13 +16,12 @@ class DeviseRegistrationsController < Devise::RegistrationsController
 
     build_resource(sign_up_params)
     resource.save if verify_recaptcha(model: @user)
-
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
-        sign_up(resource_name, resource)
-        respond_with resource, location: params[:user][:kennel_or_customer] == "customer" ? '/customer_dashboard' : '/kennel_dashboard'
+        # sign_up(resource_name, resource)
+        respond_with resource, location: "/users/password/new?email=#{params[:user][:email]}&auto_fill=true"
         params[:confirm_email] = "true"
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}"
@@ -37,10 +36,10 @@ class DeviseRegistrationsController < Devise::RegistrationsController
       return false
     end
 
-    UserMailer.user_confirm_email(current_user).deliver_now if params[:confirm_email] == "true"
+    # UserMailer.user_confirm_email(current_user).deliver_now if params[:confirm_email] == "true"
     UserMailer.new_customer_registration(current_user).deliver_now if params[:user][:kennel_or_customer] == "customer"
 
-    user = User.find(current_user[:id])
+    user = User.find(resource[:id])
     user.userID = user[:id]
     user.save!
   end

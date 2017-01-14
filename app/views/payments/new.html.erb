@@ -13,6 +13,20 @@
   <div class="hidden_if_mobile">
     <div class="row">
       <%= form_tag payments_path, method: :post do %>
+        <% if !@amenity_details.empty? %>
+          <%= hidden_field_tag :amenity_details, nil, value: @amenity_details.to_s %>
+        <% end %>
+
+        <% if !@amenity_ids.empty? %>
+          <%= hidden_field_tag :amenity_ids, nil, value: @amenity_ids %>
+        <% end %>
+
+        <%= hidden_field_tag :amenities_total, nil, value: @amenities_total %>
+        <%= hidden_field_tag :total_price, nil, value: @total_price %>
+        <%= hidden_field_tag :total_pets, nil, value: @total_pets %>
+        <%#= hidden_field_tag :payment_card_type, nil, value: "visa" %>
+        <%= hidden_field_tag :kennel_info, nil, value: params %>
+        <%= hidden_field_tag :kennel_sales_tax, nil, value: params[:kennel_sales_tax] %>
       <div class="col-md-8">
         <h3 class="arvo_font defaul">1. Billing Info</h3>
         <div class="row">
@@ -37,7 +51,7 @@
           <div class="col-md-6">
             <%= label_tag "Card Number" %>
             <br>
-            <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number", class: "payment_input" %>
+            <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number", class: "payment_input", onkeypress: "return isNumber(event);" %>
           </div>
         </div>
         <br />
@@ -45,12 +59,12 @@
           <div class="col-md-6">
             <%= label_tag "Expiration Month" %>
             <br>
-            <%= text_field_tag :payment_expiration_month, nil, placeholder: " MM", class: "payment_input" %>
+            <%= text_field_tag :payment_expiration_month, nil, placeholder: " MM", class: "payment_input", onkeypress: "return isNumber(event);" %>
           </div>
           <div class="col-md-6">
             <%= label_tag "Expiration Year" %>
             <br>
-            <%= text_field_tag :payment_expiration_year, nil, placeholder: " YYYY", class: "payment_input" %>
+            <%= text_field_tag :payment_expiration_year, nil, placeholder: " YYYY", class: "payment_input", onkeypress: "return isNumber(event);" %>
           </div>
         </div>
         <br />
@@ -58,12 +72,12 @@
           <div class="col-md-6">
             <%= label_tag "CVV" %>
             <br>
-            <%= text_field_tag :payment_cvv, nil, placeholder: " CVV", class: "payment_input" %>
+            <%= text_field_tag :payment_cvv, nil, placeholder: " CVV", class: "payment_input", onkeypress: "return isNumber(event);" %>
           </div>
           <div class="col-md-6">
             <%= label_tag "Zip" %>
             <br>
-            <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode", class: "payment_input" %>
+            <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode", class: "payment_input", onkeypress: "return isNumber(event);" %>
           </div>
         </div>
         <br />
@@ -92,7 +106,7 @@
             <div class="col-md-6">
               <%= label_tag "Phone" %>
               <br>
-              <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "payment_input" %>
+              <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "payment_input", onkeypress: "return isNumber(event);" %>
             </div>
           </div>
         <% else %>
@@ -119,7 +133,7 @@
           <div class="col-md-6">
             <%= label_tag "Phone" %>
             <br>
-            <%= text_field_tag :customer_phone, current_user.phone.capitalize, placeholder: " Phone", class: "payment_input" %>
+            <%= text_field_tag :customer_phone, current_user.phone.capitalize, placeholder: " Phone", class: "payment_input", onkeypress: "return isNumber(event);" %>
           </div>
         </div>
         <% end %>
@@ -289,27 +303,27 @@
           <br>
           <%= label_tag "Card Number" %>
           <br>
-          <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number", class: "payment_input" %>
+          <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number", class: "payment_input", onkeypress: "return isNumber(event);" %>
           <br>
           <br>
           <%= label_tag "Expiration Month" %>
           <br>
-          <%= text_field_tag :payment_expiration_month, nil, placeholder: " MM", class: "payment_input" %>
+          <%= text_field_tag :payment_expiration_month, nil, placeholder: " MM", class: "payment_input", onkeypress: "return isNumber(event);" %>
           <br>
           <br>
           <%= label_tag "Expiration Year" %>
           <br>
-          <%= text_field_tag :payment_expiration_year, nil, placeholder: " YYYY", class: "payment_input" %>
+          <%= text_field_tag :payment_expiration_year, nil, placeholder: " YYYY", class: "payment_input", onkeypress: "return isNumber(event);" %>
           <br>
           <br>
           <%= label_tag "CVV" %>
           <br>
-          <%= text_field_tag :payment_cvv, nil, placeholder: " CVV", class: "payment_input" %>
+          <%= text_field_tag :payment_cvv, nil, placeholder: " CVV", class: "payment_input", onkeypress: "return isNumber(event);" %>
           <br>
           <br>
           <%= label_tag "Zip" %>
           <br>
-          <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode", class: "payment_input" %>
+          <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode", class: "payment_input", onkeypress: "return isNumber(event);" %>
         </div>
 
         <% if current_user.nil? %>
@@ -334,7 +348,7 @@
             <br>
             <%= label_tag "Phone" %>
             <br>
-            <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "payment_input" %>
+            <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "payment_input", onkeypress: "return isNumber(event);" %>
           </div>
         <% else %>
           <div class="payment_pets_contact_div text-center">

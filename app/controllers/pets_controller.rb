@@ -38,6 +38,7 @@ class PetsController < ApplicationController
     else
       pet.vaccination_record = params[:pet][:vaccination_record] if !params[:pet][:vaccination_record].nil?
     end
+    pet.avatar = params[:pet][:avatar] if !params[:pet][:avatar].nil?
     pet.spay_or_neutered = params[:pet][:spay_or_neutered] if !params[:pet][:spay_or_neutered].nil?
     pet.special_instructions = params[:pet][:special_instructions] if !params[:pet][:special_instructions].nil?
     if pet.save!

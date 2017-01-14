@@ -125,7 +125,7 @@
                 <%= link_to "#{pet[:vaccination_record_file_name]}", pet.vaccination_record.url %>
               <% end %>
               <br />
-              <%= f.file_field :vaccination_record %>
+              <%= f.file_field :vaccination_record, class:"btn btn-primary general_input_edit" %>
               <br>
               <br>
               <div class="row">
