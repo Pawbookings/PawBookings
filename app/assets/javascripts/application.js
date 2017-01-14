@@ -18,6 +18,7 @@
 //= require ckeditor/init
 //= require Chart.bundle
 //= require chartkick
+//= require owl.carousel
 //= require_tree .
 
 ahoy.trackAll();

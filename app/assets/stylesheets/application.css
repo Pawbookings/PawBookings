@@ -29,6 +29,8 @@
  *= require kennel
  *= require customer
  *= require pawbookings_admins
+ *= require owl.carousel
+ *= require owl.theme
  */
 
 /*

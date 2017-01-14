@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :pets, only: [:new, :create, :update, :destroy]
   resources :amenities, only: [:new, :create, :update, :destroy]
   resources :policies, only: [:new, :create, :update, :destroy]
-  resources :photos, only: [:new, :create]
+  resources :photos
   resources :reservations, only: [:show]
   resources :kennel_ratings, only: [:new, :create]
   resources :stand_by_reservations, only: [:new, :create]

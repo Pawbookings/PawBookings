@@ -24,12 +24,15 @@
     <div class="col-md-6 hidden_if_mobile">
       <div class="kennel_show_btn_option_div">
         <div class="kennel_show_option_display_div kennel_show_description_div">
+          <h3 class="arvo_font default_green_color">Description</h3>
           <p><%= @searched_kennel[:mission_statement] %></p>
         </div>
         <div class="kennel_show_option_display_div kennel_show_amenities_div">
           <% if @amenities.blank? %>
+            <h3 class="arvo_font default_green_color">Amenities</h3>
             <strong>•No Amenities Listed.</strong>
           <% else %>
+            <h3 class="arvo_font default_green_color">Amenities</h3>
             <% @amenities.each do |amenity| %>
               <strong><%= "•#{amenity[:title]} - #{amenity[:description]} - $#{amenity[:price]}" %></strong>
               <br />
@@ -39,10 +42,12 @@
         </div>
         <div class="kennel_show_option_display_div kennel_show_policies_div">
           <% if @policies.blank? %>
+            <h3 class="arvo_font default_green_color">Policies</h3>
             <strong>•No Policies Listed.</strong>
             <br />
             <br />
           <% else %>
+            <h3 class="arvo_font default_green_color">Policies</h3>
             <% @policies.each do |policy| %>
               <strong>•<%= policy[:description] %></strong>
               <br />
@@ -73,12 +78,15 @@
   <div class="row kennel_show_option_display_row hidden_if_desktop">
     <div class="col-xs-12">
       <div class="kennel_show_option_display_div kennel_show_description_div">
+        <h3 class="arvo_font default_green_color">Description</h3>
         <p><%= @searched_kennel[:mission_statement] %></p>
       </div>
       <div class="kennel_show_option_display_div kennel_show_amenities_div">
         <% if @amenities.blank? %>
+          <h3 class="arvo_font default_green_color">Amenities</h3>
           <strong>•No Amenities Listed.</strong>
         <% else %>
+          <h3 class="arvo_font default_green_color">Amenities</h3>
           <% @amenities.each do |amenity| %>
             <strong><%= "•#{amenity[:title]} - #{amenity[:description]} - $#{amenity[:price]}" %></strong>
             <br />
@@ -88,10 +96,12 @@
       </div>
       <div class="kennel_show_option_display_div kennel_show_policies_div">
         <% if @policies.blank? %>
+          <h3 class="arvo_font default_green_color">Policies</h3>
           <strong>•No Policies Listed.</strong>
           <br />
           <br />
         <% else %>
+          <h3 class="arvo_font default_green_color">Policies</h3>
           <% @policies.each do |policy| %>
             <strong>•<%= policy[:description] %></strong>
             <br />
@@ -104,7 +114,16 @@
 
   <div class="hidden_if_desktop">
     <br />
-
+    <% if !@photos.blank? %>
+      <div class="text-center">
+        <div class="owl-carousel-kennel-show">
+          <% @photos.each do |photo| %>
+            <div><%= image_tag photo.image.url %></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <br />
     <div class="row text-center">
       <div class="col-xs-12">
         <div class="div_border">
@@ -234,6 +253,16 @@
 
   <div class="row text-center">
     <div class="col-xs-12 col-md-8">
+      <% if !@photos.blank? %>
+        <div class="hidden_if_mobile">
+          <div class="owl-carousel-kennel-show">
+            <% @photos.each do |photo| %>
+              <div><%= image_tag photo.image.url %></div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <br />
       <h4 class="arvo_font kennel_show_select_rooms_title">Select Room(s)</h4>
       <% counter = params[:search_info][:number_of_rooms].to_i %>
       <% params[:search_info][:number_of_rooms].to_i.times do %>
@@ -413,4 +442,11 @@
     $("#"+room_number+"_input"+ " p").first().remove();
     $("#"+room_number+"_input").append("<input type='hidden' name='"+room_number+"_id' value='runid_"+id+"'><input type='hidden' name='"+room_number+"_price' value='"+price+"'><input type='hidden' name='"+room_number+"_name' value='"+title+"'><input type='hidden' name='"+room_number+"_type_of_pets_allowed' value='"+type_of_pets_allowed+"'><input type='hidden' name='"+room_number+"_pets_per_run' value='"+pets_per_run+"'>");
   }
+
+  $(document).ready(function(){
+    $(".owl-carousel-kennel-show").owlCarousel({
+      autoPlay: 3000,
+      singleItem: true
+    });
+  });
 </script>
