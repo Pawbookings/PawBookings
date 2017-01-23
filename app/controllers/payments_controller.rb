@@ -2,10 +2,22 @@ class PaymentsController < ApplicationController
   include UsersHelper
 
   def new
+    check_pets_type_for_runs
+    @kennel_info = params
+    check_max_pets_allowed
+    get_pet_stay_dates
+    reservation_maxes_runs?
+    if !@maxing_runs.empty?
+      error_message = "Your reservation is unavailable:"
+      @maxing_runs.each do |run, diff|
+        error_message << " #{run[:title]} only has #{diff} room(s) left."
+      end
+      flash[:notice] = error_message
+      return redirect_to request.referrer
+    end
     get_amenity_info
     get_price_total
     get_pets_total
-    check_pets_type_for_runs
     if !current_user.nil?
       @pets = Pet.where(user_id: current_user)
     end
@@ -13,17 +25,19 @@ class PaymentsController < ApplicationController
 
   def create
     @kennel_info = JSON.parse params[:kennel_info].gsub('=>', ':')
+    @kennel = Kennel.find(@kennel_info["kennel_id"])
     get_pet_stay_dates
     reservation_maxes_runs?
     if !@maxing_runs.empty?
-      redirect_to request.referrer
-      flash[:notice] = "Your run is not available: #{@maxing_runs.flatten}"
-      return false
+      error_message = "Your reservation is unavailable:"
+      @maxing_runs.each do |run, diff|
+        error_message << " #{run[:title]} only has #{diff} room(s) left."
+      end
+      flash[:notice] = error_message
+      return redirect_to request.referrer
     end
     if current_user.nil?
       random_password
-      @kennel = Kennel.find(@kennel_info["kennel_id"])
-
       # if user not logged in and doesnt have an account
       if User.where(email: params[:customer_email].downcase).blank?
         @user = User.create!(email: params[:customer_email].downcase, phone: params[:customer_phone], first_name: params[:customer_first_name].downcase, last_name: params[:customer_last_name].downcase, password: @encrypted_password, password_confirmation: @encrypted_password, kennel_or_customer: "customer" )
@@ -59,7 +73,6 @@ class PaymentsController < ApplicationController
       end
     else
     # user is logged in and has an account registered
-      @kennel = Kennel.find(@kennel_info["kennel_id"])
       @user = User.find(current_user.id)
       if Pet.where(user_id: @user[:id]).blank?
         # if user doesnt have pets associated with them
@@ -109,76 +122,96 @@ class PaymentsController < ApplicationController
   end
 
   def reservation_maxes_runs?
-    @run_ids = []
-    counter = @kennel_info["number_of_rooms"].to_i
-    counter.times do
-      @run_ids << @kennel_info["room_#{counter}_id"].split("_")[1]
-    end
-    group_run_ids
+    get_staying_pets_run_ids
   end
 
-  def group_run_ids
-    @grouped_run_ids = []
-    @run_ids.each do |r_id|
-      if @grouped_run_ids.empty?
-        @grouped_run_ids << [r_id, 1]
-      else
-        @grouped_run_ids.map! do |key, val|
-          if key == r_id
-            [key, val += 1]
-          else
-            @grouped_run_ids << [r_id.to_s, 1]
-          end
-        end
-      end
+  def get_staying_pets_run_ids
+    @pet_run_ids = []
+    counter = @kennel_info["number_of_rooms"].to_i
+    counter.times do
+      @pet_run_ids << @kennel_info["room_#{counter}_id"].split("_")[1]
+    end
+    group_pet_run_ids
+  end
+
+  def group_pet_run_ids
+    @grouped_pet_run_ids = []
+    @pet_run_ids.length.times do
+      break if @pet_run_ids[0].nil?
+      @grouped_pet_run_ids << [@pet_run_ids[0].to_i, @pet_run_ids.count(@pet_run_ids[0])]
+      @pet_run_ids.delete(@pet_run_ids[0])
     end
     get_relevant_reservations
   end
 
   def get_relevant_reservations
     @reservations = Reservation.where(kennel_id: @kennel_info["kennel_id"], completed: "false")
-    filter_reservation_dates
+    if @reservations.blank?
+      return @maxing_runs = []
+    end
+    filter_relevant_reservations
   end
 
-  def filter_reservation_dates
-    @relevant_runs_and_dates = []
+  def filter_relevant_reservations
+    @filtered_reservations = []
     @reservations.each do |res|
-      reservation_date_range = (res[:check_in_date]..res[:check_out_date]).map {|date| date}
-      reservation_date_range.each do |res_date|
-        if @pet_stay_date_range.include? res_date
-          JSON.parse(res[:run_ids]).each do |run_id|
-            @relevant_runs_and_dates << [run_id.to_s, res_date]
-          end
+      start_date = res[:check_in_date]
+      end_date = res[:check_out_date]
+      start_date.upto(end_date) do |res_date|
+        @pet_stay_date_range.each do |pet_date|
+          @filtered_reservations << res if res_date == pet_date && res_date != res[:check_out_date]
         end
       end
     end
-    group_filtered_reservation_dates
+    group_reservation_runs_taken
   end
 
-  def group_filtered_reservation_dates
-    @grouped_filtered_reservation_dates = []
-    @relevant_runs_and_dates.count.times do
-      if !@relevant_runs_and_dates.empty?
-        @grouped_filtered_reservation_dates << [@relevant_runs_and_dates[0][0], @relevant_runs_and_dates[0][1] ,@relevant_runs_and_dates.count(@relevant_runs_and_dates[0])]
-        @relevant_runs_and_dates.delete(@relevant_runs_and_dates[0])
+  def group_reservation_runs_taken
+    @res_runs = []
+    @grouped_res_run_ids = []
+    @filtered_reservations.each do |res|
+      JSON.parse(res[:run_ids]).each do |run_id|
+        @res_runs << run_id
       end
     end
-    res_dates_maxed?
+    @res_runs.length.times do
+      break if @res_runs[0].nil?
+      @grouped_res_run_ids << [@res_runs[0], @res_runs.count(@res_runs[0])]
+      @res_runs.delete(@res_runs[0])
+    end
+    get_kennel_run_counts
   end
 
-  def res_dates_maxed?
+  def get_kennel_run_counts
+    @all_run_counts = []
+    @all_runs = Run.where(kennel_id: @kennel_info["kennel_id"])
+    @all_runs.each do |run|
+      @all_run_counts << [run[:id], run[:number_of_rooms]]
+    end
+    add_pet_and_res_runs_together
+  end
+
+  def add_pet_and_res_runs_together
+    @new_res_run_counts = []
+    @grouped_res_run_ids.each do |res_run_id, res_run_count|
+      @grouped_pet_run_ids.each do |pet_run_id, pet_run_count|
+        if res_run_id == pet_run_id
+          @new_res_run_counts << [res_run_id, (res_run_count + pet_run_count)]
+        end
+      end
+    end
+    check_if_new_runs_max_capacity
+  end
+
+  def check_if_new_runs_max_capacity
     @maxing_runs = []
-    @grouped_filtered_reservation_dates.each do |run_id, date, count|
-      run = Run.find(run_id)
-      @grouped_run_ids.each do |r_id, r_count|
-        if run_id == r_id
-          if (r_count + count) > run[:number_of_rooms]
-            @maxing_runs << [run[:title]]
-          end
+    @new_res_run_counts.each do |res_run_id, res_run_count|
+      @all_run_counts.each do |run_id, run_count|
+        if res_run_id == run_id && res_run_count > run_count
+          @maxing_runs << [Run.find(res_run_id), (res_run_count - run_count)]
         end
       end
     end
-    @maxing_runs = @maxing_runs.uniq
   end
 
   def check_pets_type_for_runs
@@ -186,42 +219,41 @@ class PaymentsController < ApplicationController
     params.each_pair do |k, v|
       type_of_pets_allowed << v if k.include? "type_of_pets_allowed"
     end
-
-    if (type_of_pets_allowed.include? "dog") && (type_of_pets_allowed.include? "cat")
-      if !(params[:number_of_dogs].to_i > 0) && !(params[:number_of_cats].to_i > 0)
-        redirect_to request.referrer
-        return false
+    if (params[:number_of_dogs].to_i > 0) && (params[:number_of_cats].to_i > 0)
+      if !((type_of_pets_allowed.include? "dog") && (type_of_pets_allowed.include? "cat"))
+        flash[:notice] = "You have not selected a room that will accommodate a Cat and/or Dog."
+        return redirect_to request.referrer
       end
-    elsif type_of_pets_allowed.include? "dog"
+    end
+    if type_of_pets_allowed.include? "dog"
       if !(params[:number_of_dogs].to_i > 0)
-        redirect_to request.referrer
-        return false
+        flash[:notice] = "You have not selected a room that will accommodate a Cat."
+        return redirect_to request.referrer
       end
     else
       if !(params[:number_of_cats].to_i > 0)
-        redirect_to request.referrer
-        return false
+        flash[:notice] = "You have not selected a room that will accommodate a Dog."
+        return redirect_to request.referrer
       end
     end
-    check_max_pets_allowed
   end
 
   def check_max_pets_allowed
     dog_room_max_num = 0
     cat_room_max_num = 0
-    counter = params[:number_of_rooms].to_i
-    params[:number_of_rooms].to_i.times do
-      if params["room_#{counter}_type_of_pets_allowed"] == "dog"
-        dog_room_max_num += params["room_#{counter}_pets_per_run"].to_i
+    counter = @kennel_info["number_of_rooms"].to_i
+    @kennel_info["number_of_rooms"].to_i.times do
+      if @kennel_info["room_#{counter}_type_of_pets_allowed"] == "dog"
+        dog_room_max_num += @kennel_info["room_#{counter}_pets_per_run"].to_i
       else
-        cat_room_max_num += params["room_#{counter}_pets_per_run"].to_i
+        cat_room_max_num += @kennel_info["room_#{counter}_pets_per_run"].to_i
       end
     end
-    if dog_room_max_num < params[:number_of_dogs].to_i
+    if dog_room_max_num < @kennel_info["number_of_dogs"].to_i
       flash[:notice] = "Number of dogs exceeds the number of dogs allowed total."
       redirect_to request.referrer
       return false
-    elsif cat_room_max_num < params[:number_of_cats].to_i
+    elsif cat_room_max_num < @kennel_info["number_of_cats"].to_i
       flash[:notice] = "Number of cats exceeds the number of cats allowed total."
       redirect_to request.referrer
       return false

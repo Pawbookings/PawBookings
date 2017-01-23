@@ -66,6 +66,12 @@ $(function() {
 });
 
 $(function() {
+  $(".admin_daterange_check_in").daterangepicker({
+    minDate: moment(),
+  });
+});
+
+$(function() {
   $('.holiday_datepicker').datepicker({
     minDate: 0
   });

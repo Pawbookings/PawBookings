@@ -19,6 +19,11 @@ class CreateReservations < ActiveRecord::Migration
       t.date   :check_out_date
       t.string :payment_first_name
       t.string :payment_last_name
+      t.float  :rooms_total_price
+      t.float  :amenities_total_price
+      t.float  :total_price_without_tax
+      t.float  :tax_percentage
+      t.float  :tax_total_price
       t.float  :total_price
       t.string :transID
       t.string :card_number

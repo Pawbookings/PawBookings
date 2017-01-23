@@ -279,7 +279,7 @@
               <% end %>
               <p class="poppins_font margin_l_r_5em"><%= run.description %></p>
               <h1 class="default_green_color arvo_font"><%= "$#{run[:price]}" %></h1>
-              <p><strong>Max Occupancy:</strong> <%= run.pets_per_run %></p>
+              <p><strong>Max Occupancy:</strong> <%= run.pets_per_run %> pets</p>
               <% if run.weight_limit.nil? %>
                 <p><strong>Weight-Limit:</strong> n/a</p>
               <% else %>

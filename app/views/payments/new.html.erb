@@ -20,11 +20,11 @@
         <% if !@amenity_ids.empty? %>
           <%= hidden_field_tag :amenity_ids, nil, value: @amenity_ids %>
         <% end %>
-
+        <%= hidden_field_tag :tax_total_price, nil, value: @tax_amount %>
+        <%= hidden_field_tag :total_price_without_tax, nil, value: @total_price_without_tax %>
         <%= hidden_field_tag :amenities_total, nil, value: @amenities_total %>
         <%= hidden_field_tag :total_price, nil, value: @total_price %>
         <%= hidden_field_tag :total_pets, nil, value: @total_pets %>
-        <%#= hidden_field_tag :payment_card_type, nil, value: "visa" %>
         <%= hidden_field_tag :kennel_info, nil, value: params %>
         <%= hidden_field_tag :kennel_sales_tax, nil, value: params[:kennel_sales_tax] %>
       <div class="col-md-8">
@@ -194,7 +194,7 @@
             </div>
           </div>
           <br />
-          <% if !@pets.empty? %>
+          <% if !@pets.blank? %>
             <% @pets.each do |pet| %>
               <p onclick='addSelectedPetToForm("<%= counter %>", "<%= pet[:name] %>", "<%= pet[:cat_or_dog] %>", "<%= pet[:breed] %>", "<%= pet[:weight] %>", "<%= pet[:vaccinations] %>", "<%= pet[:spay_or_neutered] %>", "<%= pet[:special_instructions] %>")' class="btn btn-primary">Add <%= pet[:name] %></p>
             <% end %>
@@ -277,6 +277,8 @@
           <%= hidden_field_tag :amenity_ids, nil, value: @amenity_ids %>
         <% end %>
 
+        <%= hidden_field_tag :tax_total_price, nil, value: @tax_amount %>
+        <%= hidden_field_tag :total_price_without_tax, nil, value: @total_price_without_tax %>
         <%= hidden_field_tag :amenities_total, nil, value: @amenities_total %>
         <%= hidden_field_tag :total_price, nil, value: @total_price %>
         <%= hidden_field_tag :total_pets, nil, value: @total_pets %>
@@ -418,7 +420,7 @@
             <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(spay_or_neutered_option), class:"payment_input pet_spay_or_neutered_#{counter}" %>
             <br>
             <br>
-            <% if !@pets.empty? %>
+            <% if !@pets.blank? %>
               <% @pets.each do |pet| %>
                 <p onclick='addSelectedPetToForm("<%= counter %>", "<%= pet[:name] %>", "<%= pet[:cat_or_dog] %>", "<%= pet[:breed] %>", "<%= pet[:weight] %>", "<%= pet[:vaccinations] %>", "<%= pet[:spay_or_neutered] %>", "<%= pet[:special_instructions] %>")' class="btn btn-primary">Add <%= pet[:name] %></p>
               <% end %>

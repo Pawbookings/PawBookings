@@ -21,11 +21,19 @@ Rails.application.routes.draw do
   resources :reservations, only: [:show]
   resources :kennel_ratings, only: [:new, :create]
   resources :stand_by_reservations, only: [:new, :create]
-  resources :pawbookings_admins, only: [:index]
   resources :check_in_check_out_reservations, only: [:update]
   resources :check_in_contract_important_informations, only: [:update, :edit]
   resources :check_in_contract_reservation_changes, only: [:update, :edit]
   resources :check_in_contract_refund_policies, only: [:update, :edit]
+
+  # PawbookingsAdminsController
+   resources :pawbookings_admins, only: [:index]
+   get '/admin_reservation_search', to: "pawbookings_admins#admin_reservation_search", as: :admin_reservation_search
+
+   get '/refund_reservation_select', to: "pawbookings_admins#refund_reservation_select", as: :refund_reservation_select
+   get '/refund_reservation_confirm', to: "pawbookings_admins#refund_reservation_confirm", as: :refund_reservation_confirm
+
+   get '/update_reservation', to: "pawbookings_admins#update_reservation", as: :update_reservation
 
   # RunsController
     resources :runs, only: [:new, :create, :update, :destroy]
