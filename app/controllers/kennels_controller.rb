@@ -179,6 +179,16 @@ class KennelsController < ApplicationController
         reservations = Reservation.where(kennel_id: @kennel[:id])
         @reservations = reservations if !reservations.blank?
         @hours_of_operation = HoursOfOperation.where(kennel_id: @kennel[:id]).first
+        week_check_array = %w(monday_open tuesday_open wednesday_open thursday_open friday_open saturday_open sunday_open)
+        week_check_array.each do |weekday|
+          if @hours_of_operation[weekday] != "closed"
+            @changed_time = true
+            break
+          else
+            @changed_time = false
+          end
+        end
+        @run = Run.where(kennel_id: @kennel[:id]).first
         session[:hours_of_operation_id] = @hours_of_operation[:id]
         # @photo = Photo.where(kennel_id: @kennel.id).first
       end

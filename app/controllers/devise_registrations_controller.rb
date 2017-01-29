@@ -36,12 +36,13 @@ class DeviseRegistrationsController < Devise::RegistrationsController
       return false
     end
 
-    # UserMailer.user_confirm_email(current_user).deliver_now if params[:confirm_email] == "true"
-    UserMailer.new_customer_registration(current_user).deliver_now if params[:user][:kennel_or_customer] == "customer"
 
     user = User.find(resource[:id])
     user.userID = user[:id]
     user.save!
+
+    # UserMailer.user_confirm_email(current_user).deliver_now if params[:confirm_email] == "true"
+    UserMailer.new_customer_registration(user).deliver_now if params[:user][:kennel_or_customer] == "customer"
   end
 
   private

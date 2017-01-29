@@ -15,12 +15,13 @@
     <%= link_to "Kennel Pictures", new_photo_path, class: "btn btn-success" %>
   </div>
 <% else %>
-<div class="text-center kennel_dashboard_option_btns_div_mobile">
-  <%= link_to "Accommodations", new_run_path, class: "btn btn-success" %>
-  <%= link_to "Amenities", new_amenity_path, class: "btn btn-success" %>
-  <%= link_to "Hours of Operation", edit_hours_of_operation_path(session[:hours_of_operation_id]), class: "btn btn-success" %>
-  <%= link_to "Holidays", new_holiday_path, class: "btn btn-success" %>
-  <%= link_to "Policies", new_policy_path, class: "btn btn-success" %>
-  <%= link_to "Breed Restrictions", new_breed_restriction_path, class: "btn btn-success" %>
-</div>
+  <div class="text-center kennel_dashboard_option_btns_div_mobile">
+    <%= link_to "Accommodations", new_run_path, class: "btn btn-success" %>
+    <%= link_to "Amenities", new_amenity_path, class: "btn btn-success" %>
+    <%= link_to "Hours of Operation", edit_hours_of_operation_path(session[:hours_of_operation_id]), class: "btn btn-success" %>
+    <%= link_to "Holidays", new_holiday_path, class: "btn btn-success" %>
+    <%= link_to "Policies", new_policy_path, class: "btn btn-success" %>
+    <%= link_to "Breed Restrictions", new_breed_restriction_path, class: "btn btn-success" %>
+    <%= link_to "Kennel Pictures", new_photo_path, class: "btn btn-success" %>
+  </div>
 <% end %>

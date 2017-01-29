@@ -45,14 +45,15 @@
           <%= f.select :spay_or_neutered, options_for_select(spay_or_neutered_option)%>
           <br>
           <br>
+          <%= f.label :special_instructions %>
+          <br />
+          <%= f.text_area :special_instructions, placeholder: " Special Instructions", class:"general_input"%>
+          <br>
+          <br>
           <%= f.label :vaccinated, "Vaccinations current?" %>
           <br />
           <%= f.select :vaccinations, options_for_select(false_or_true_option), {},onchange:"return petsChangeVaccinations();" %>
           <br>
-          <br>
-          <%= f.label :special_instructions %>
-          <br />
-          <%= f.text_area :special_instructions, placeholder: " Special Instructions", class:"general_input"%>
           <br>
           <div class="vaccination_record_div display_none">
             <div class="row text-center">
@@ -102,6 +103,9 @@
               <%= f.text_field :name, placeholder: " Pet Name", class:"general_input_edit" %>
               <br>
               <br>
+              <%= f.label :type_of_pet %>
+              <p>• <%= pet[:cat_or_dog].capitalize %></p>
+              <br />
               <%= f.label :weight %>
               <br />
               <%= f.text_field :weight, placeholder: " Weight in lbs", class:"general_input_edit", onkeypress: "return isNumber(event);" %>
@@ -126,6 +130,11 @@
               <% end %>
               <br />
               <%= f.file_field :vaccination_record, class:"btn btn-primary general_input_edit" %>
+              <br />
+              <br />
+              <%= f.label :special_instructions %>
+              <br />
+              <%= f.text_area :special_instructions, placeholder: " Special Instructions", class:"general_input_edit"%>
               <br>
               <br>
               <div class="row">

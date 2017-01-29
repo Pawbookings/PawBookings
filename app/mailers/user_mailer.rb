@@ -3,19 +3,19 @@ class UserMailer < ApplicationMailer
   # Confirms email and redirects user to reset their password.
   def user_confirm_email(current_user)
     @current_user = current_user
-    mail(to: current_user.email, subject: 'Confirm Email', from:"Email Confirmation <no_reply@pawbookings.com>")
+    mail(to: current_user.email, subject: 'Confirm Email', from:"PawBookings <no_reply@pawbookings.com>")
   end
 
   # Confirmation email for new Kennel registrations.
   def new_kennel_registration(current_user)
     @current_user = current_user
-    mail(to: current_user.email, subject: 'Kennel Registration Confirmation')
+    mail(to: current_user.email, subject: 'Kennel Registration Successful – Please Verify Your Email Address')
   end
 
   # Confirmation email for new Customer registrations.
-  def new_customer_registration(current_user)
-    @current_user = current_user
-    mail(to: current_user.email, subject: 'PawBookings Registration Confirmation')
+  def new_customer_registration(user)
+    @current_user = user
+    mail(to: user[:email], subject: 'PawBookings Registration Confirmation')
   end
 
   # Reservation confirmation email being sent to both Customer and Kennel.
@@ -31,21 +31,21 @@ class UserMailer < ApplicationMailer
   # and sends a reminder email if true.
   def send_three_week_reservation_reminder(email)
     @email = email
-    mail(to: email, subject: 'PawBookings 3 week reminder')
+    mail(to: email, subject: 'Your Pet Boarding Reservation Reminder [RCN]')
   end
 
   # Cron job checks for reservations that are exactly 1 week before a check-in date,
   # and sends a reminder email if true.
   def send_one_week_reservation_reminder(email)
     @email = email
-    mail(to: email, subject: 'PawBookings 1 week reminder')
+    mail(to: email, subject: 'Your Pet Boarding Reservation Reminder [RCN]')
   end
 
   # Cron job checks for reservations that the day before a check-in date,
   # and sends a reminder email if true.
   def send_day_before_reservation_reminder(email)
     @email = email
-    mail(to: email, subject: 'PawBookings day before check-in reminder')
+    mail(to: email, subject: 'Your Pet Boarding Reservation Reminder [RCN]')
   end
 
   # Sends an email allowing the Customer to rate the Kennel when the check-out date arrives.

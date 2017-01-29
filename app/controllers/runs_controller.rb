@@ -65,7 +65,7 @@ class RunsController < ApplicationController
   end
 
   def delete_run_image
-    run = Run.find(params[:format])
+    run = Run.find(params[:id])
     run.image = nil
     if run.save!
       flash[:notice] = "Your Accommodation image was deleted successfully!"

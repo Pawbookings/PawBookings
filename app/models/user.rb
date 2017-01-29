@@ -10,6 +10,19 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_attached_file :user_image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/default_photo_image.png"
+  has_attached_file :user_image,
+               :storage => :s3,
+               styles: { small: "350x333#" }, default_url: "/assets/default_photo_image.png",
+               :s3_permissions => { :original => :private, :export => {:quality => 100} },
+               :convert_options => { :all => "-quality 100" },
+               url: ":s3_domain_url",
+               path: "/image/:id/:filename",
+               s3_region: ENV["aws_region"],
+               default_url: "/images/:style/missing.png",
+               :s3_credentials => Proc.new{|a| a.instance.s3_credentials }
+
+  def s3_credentials
+   {:bucket => ENV["aws_bucket"], :access_key_id => ENV["aws_access_key_id"], :secret_access_key => ENV["aws_secret_access_key"]}
+  end
   validates_attachment_content_type :user_image, content_type: /\Aimage\/.*\Z/
 end

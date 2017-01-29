@@ -2,9 +2,13 @@ class PaymentsController < ApplicationController
   include UsersHelper
 
   def new
-    check_pets_type_for_runs
+    if !(check_pets_type_for_runs)
+      return redirect_to request.referrer
+    end
     @kennel_info = params
-    check_max_pets_allowed
+    if !(check_max_pets_allowed)
+      return redirect_to request.referrer
+    end
     get_pet_stay_dates
     reservation_maxes_runs?
     if !@maxing_runs.empty?
@@ -222,42 +226,45 @@ class PaymentsController < ApplicationController
     if (params[:number_of_dogs].to_i > 0) && (params[:number_of_cats].to_i > 0)
       if !((type_of_pets_allowed.include? "dog") && (type_of_pets_allowed.include? "cat"))
         flash[:notice] = "You have not selected a room that will accommodate a Cat and/or Dog."
-        return redirect_to request.referrer
+        return false
       end
     end
     if type_of_pets_allowed.include? "dog"
       if !(params[:number_of_dogs].to_i > 0)
         flash[:notice] = "You have not selected a room that will accommodate a Cat."
-        return redirect_to request.referrer
+        return false
       end
     else
       if !(params[:number_of_cats].to_i > 0)
         flash[:notice] = "You have not selected a room that will accommodate a Dog."
-        return redirect_to request.referrer
+        return false
       end
     end
+    return true
   end
 
   def check_max_pets_allowed
-    dog_room_max_num = 0
-    cat_room_max_num = 0
-    counter = @kennel_info["number_of_rooms"].to_i
-    @kennel_info["number_of_rooms"].to_i.times do
+    max_dog_occupancy = 0
+    max_cat_occupancy = 0
+    number_of_rooms = @kennel_info["number_of_rooms"].to_i
+    counter = number_of_rooms
+    number_of_rooms.times do
       if @kennel_info["room_#{counter}_type_of_pets_allowed"] == "dog"
-        dog_room_max_num += @kennel_info["room_#{counter}_pets_per_run"].to_i
-      else
-        cat_room_max_num += @kennel_info["room_#{counter}_pets_per_run"].to_i
+        max_dog_occupancy += @kennel_info["room_#{counter}_pets_per_run"].to_i
+      elsif @kennel_info["room_#{counter}_type_of_pets_allowed"] == "cat"
+        max_cat_occupancy += @kennel_info["room_#{counter}_pets_per_run"].to_i
       end
+      counter -= 1
     end
-    if dog_room_max_num < @kennel_info["number_of_dogs"].to_i
-      flash[:notice] = "Number of dogs exceeds the number of dogs allowed total."
-      redirect_to request.referrer
+
+    if @kennel_info["number_of_dogs"].to_i > max_dog_occupancy
+      flash[:notice] = "The number of dogs you chose exceeds the number of dogs allowed total."
       return false
-    elsif cat_room_max_num < @kennel_info["number_of_cats"].to_i
-      flash[:notice] = "Number of cats exceeds the number of cats allowed total."
-      redirect_to request.referrer
+    elsif @kennel_info["number_of_cats"].to_i > max_cat_occupancy
+      flash[:notice] = "The number of cats you chose exceeds the number of cats allowed total."
       return false
     end
+
     return true
   end
 

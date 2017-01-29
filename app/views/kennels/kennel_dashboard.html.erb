@@ -15,11 +15,13 @@
             <h4 class="default_green_color text_underline">Most Booked Runs</h4>
             <%= pie_chart @run_names_and_counts %>
           </div>
+          <% elsif !@kennel.nil? && !@run.nil? && @changed_time %>
+            <h3 class="arvo_font default_white_color text-center">• You are now eligible to be searched by Pet Owners.</h3>
           <% else %>
             <h3 class="default_green_color">Getting started:</h3>
             <h4 class="default_white_color">• Register your Kennel</h4>
             <h4 class="default_white_color">• Modify your Hours of Operation</h4>
-            <h4 class="default_white_color">• Create Accommodations</h4>
+            <h4 class="default_white_color">• Create Accommodation Type</h4>
             <p class="default_green_color">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
           <% end %>
         <% if !@kennel.nil? %>

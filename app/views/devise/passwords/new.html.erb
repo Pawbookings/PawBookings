@@ -3,8 +3,6 @@
 <div class="container-fluid">
   <div class="row text-center">
     <div class="col-xs-12">
-      <h5 class="main_title arvo_font">Forgot your password?</h5>
-      <br />
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
         <%= devise_error_messages! %>
         <% if params[:auto_fill] == "true" %>
@@ -20,6 +18,8 @@
             <%= f.submit "Send me reset password instructions", class: "btn btn-success reset_email_submit_btn" %>
           </div>
         <% else %>
+        <h5 class="main_title arvo_font">Forgot your password?</h5>
+        <br />
           <div class="field">
             <%= f.label :email %><br />
             <%= f.email_field :email, autofocus: true, name: "user[email]", class: "reset_email" %>

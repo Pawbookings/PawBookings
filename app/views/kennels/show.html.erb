@@ -118,7 +118,7 @@
       <div class="text-center">
         <div class="owl-carousel-kennel-show">
           <% @photos.each do |photo| %>
-            <div><%= image_tag photo.image.url %></div>
+            <div><%= image_tag photo.image.url, class:"width_100_percent" %></div>
           <% end %>
         </div>
       </div>
@@ -299,6 +299,8 @@
             </div>
           <% end %>
         </div>
+        <br />
+        <br />
         <br />
         <% counter -= 1 %>
       <% end %>

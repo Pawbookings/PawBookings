@@ -15,18 +15,12 @@
 
 .top_hero_text {
   font-size: 2.3em;
-  padding-left: 1em;
-  padding-right: 1em;
-  margin-top: 1em;
-  margin-bottom: 0.6em;
 }
 
 .bottom_hero_text {
   font-size: 1.1em;
   letter-spacing: 0.04em;
   line-height: 1.3em;
-  padding-left: 2em;
-  padding-right: 2em;
 }
 
 /* _why_pawbookings */
@@ -213,12 +207,6 @@
     font-size: 3em;
   }
 
-  .bottom_hero_text {
-    padding-left: 15em;
-    padding-right: 15em;
-    font-size: 1.5em;
-  }
-
   .testimonials_bottom_text, .why_bottom_text {
     margin-left: 10em;
     margin-right: 10em;
@@ -252,8 +240,7 @@
   }
 
   .bottom_hero_text {
-    padding-left: 20em;
-    padding-right: 20em;
+    font-size: 1.5em;
   }
 
   .testimonials_bottom_text, .why_bottom_text {
