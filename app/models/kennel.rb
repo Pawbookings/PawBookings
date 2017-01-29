@@ -40,7 +40,6 @@ class Kennel < ActiveRecord::Base
                 url: ":s3_domain_url",
                 path: "/image/:id/:filename",
                 s3_region: ENV["aws_region"],
-                default_url: "/images/:style/missing.png",
                 :s3_credentials => Proc.new{|a| a.instance.s3_credentials }
 
   def s3_credentials
