@@ -42,7 +42,8 @@ class DeviseRegistrationsController < Devise::RegistrationsController
     user.save!
 
     # UserMailer.user_confirm_email(current_user).deliver_now if params[:confirm_email] == "true"
-    UserMailer.new_customer_registration(user).deliver_now
+    UserMailer.new_customer_registration(user).deliver_now if user[:kennel_or_customer] == "customer"
+    UserMailer.new_kennel_registration(user).deliver_now if user[:kennel_or_customer] == "kennel"
   end
 
   private

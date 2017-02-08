@@ -18,6 +18,8 @@
       <br />
       <div class="amenity_registration_div">
         <h3 class="default_green_color patrick_hand_font text_underline">Add New</h3>
+        <%= link_to "View Existing", "#edit_existing" if !@amenities.blank? %>
+        <br />
         <br />
         <%= form_for @amenity do |f| %>
           <%= f.label :title %>
@@ -47,7 +49,7 @@
   </div>
   <div class="border"></div>
   <br />
-  <div class="row text-center">
+  <div id="edit_existing" class="row text-center">
     <div class="all_amenities">
       <% if !@amenities.blank? %>
         <h3 class="default_green_color patrick_hand_font text_underline">Edit Existing</h3>

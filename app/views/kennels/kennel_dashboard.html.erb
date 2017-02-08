@@ -33,8 +33,7 @@
       </div>
       <div class="col-md-4">
         <div class="kennel_dashboard_user_info_div">
-          <h4 class="default_green_color text_underline">Owner Personal Info</h4>
-          <br />
+          <h3 class="default_green_color text_underline">Owner Personal Info</h3>
           <p class="default_white_color"><strong class="default_green_color">Personal contact email: </strong><br /><%= current_user.email.capitalize %></p>
           <p class="default_white_color"><strong class="default_green_color">First name: </strong><br /><%= current_user.first_name.capitalize %></p>
           <p class="default_white_color"><strong class="default_green_color">Last name: </strong><br /><%= current_user.last_name.capitalize %></p>
@@ -46,8 +45,7 @@
       </div>
       <div class="col-xs-4 border_left">
         <div class="kennel_dashboard_general_info_div">
-          <h4 class="default_green_color text_underline">My Kennel</h4>
-          <br />
+          <h3 class="default_green_color text_underline">My Kennel</h3>
           <% if !@kennel.nil? %>
               <%= form_for(@kennel, {id: @kennel.id}) do |f| %>
                 <%= f.label :kennel_name, class:"default_green_color" %><span class="default_green_color">:</span>
@@ -104,7 +102,6 @@
                 </div>
               <% end %>
           <% else %>
-            <h4 class="default_green_color">Register your Kennel</h4>
             <%= button_to "Kennel registration", new_kennel_path, class:"btn btn-success", method: :get %>
           <% end %>
         </div>
@@ -318,6 +315,7 @@
       <% if @pet_stay_date_range.include? date %>
         <% counter << res %>
         <%= "•#{res.customer_first_name}" %>
+        <!-- Get the fucking count instead! -->
         <br>
       <% end %>
     <% end %>

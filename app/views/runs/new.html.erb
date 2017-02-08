@@ -18,6 +18,8 @@
         <br />
         <br />
         <h3 class="default_green_color patrick_hand_font text_underline">Add New</h3>
+        <%= link_to "View Existing", "#edit_existing" if !@runs.blank? %>
+        <br />
         <br />
         <%= form_for @run, html: {multipart: true} do |f| %>
           <div class="row">
@@ -48,9 +50,9 @@
               <%= f.select :indoor_or_outdoor, options_for_select(indoor_outdoor_option), class:"kennel_dashboard_input_desktop" %>
               <br>
               <br>
-              <%= f.label :pets_allowed_per_accommodation %>
+              <%= f.label :pets_allowed_per_accommodation, "How many pets allowed per accommodation?" %>
               <br />
-              <%= f.text_field :pets_per_run, placeholder: " Pets allowed per accommodation", class:"kennel_dashboard_input_desktop", onkeypress:"return isNumber(event)" %>
+              <%= f.text_field :pets_per_run, placeholder: " 4", class:"kennel_dashboard_input_desktop", onkeypress:"return isNumber(event)" %>
             </div>
             <div class="col-md-3">
               <%= f.label :type_of_pets_allowed %>
@@ -60,12 +62,13 @@
               <br>
               <%= f.label :price %>
               <br />
-              $<%= f.text_field :price, placeholder: " Price per night", class:"kennel_dashboard_input_desktop"%>
+              $<%= f.text_field :price, placeholder: " 19.99", class:"kennel_dashboard_input_desktop"%>
               <br>
               <br>
               <%= f.label :weight_limit %>
               <br />
               <%= f.text_field :weight_limit, placeholder: " Weight in lbs", class:"kennel_dashboard_input_desktop", onkeypress: "return isNumber(event);" %> lbs
+              <p>Leave blank if none</p>
               <br>
               <br>
               <%= f.label :how_many_of_these_runs_do_you_have_total, "How many of these accommodations do you have total?" %>
@@ -91,7 +94,7 @@
     </div>
   </div>
 
-  <div class="row text-center">
+  <div id="edit_existing" class="row text-center">
     <br />
     <br />
     <div class="border"></div>

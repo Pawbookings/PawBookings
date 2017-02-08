@@ -14,7 +14,6 @@ class KennelsController < ApplicationController
       kennel.kennelID = kennel[:id]
       kennel.save!
       HoursOfOperationsController.new.create(kennel[:id])
-      UserMailer.new_kennel_registration(current_user).deliver_now
       user.completed_registration = "true"
       user.save!
       redirect_to kennel_dashboard_path
@@ -56,6 +55,7 @@ class KennelsController < ApplicationController
     @customer_check_in_date = unsanitize_date(params[:search_info][:check_in])
     @customer_check_out_date = unsanitize_date(params[:search_info][:check_out])
     @policies = Policy.where(kennel_id: @searched_kennel[:id])
+    @breeds_restricted = BreedRestriction.where(kennel_id: @searched_kennel[:id])
     maxed_out?
     get_amenities_offered
     get_run_price_range
@@ -176,6 +176,7 @@ class KennelsController < ApplicationController
       @user = User.find(current_user.id)
       @kennel = Kennel.where(user_id: current_user.id).first
       if !@kennel.nil?
+        filter_reservation_search if !params[:search_by].blank?
         reservations = Reservation.where(kennel_id: @kennel[:id])
         @reservations = reservations if !reservations.blank?
         @hours_of_operation = HoursOfOperation.where(kennel_id: @kennel[:id]).first
@@ -194,7 +195,6 @@ class KennelsController < ApplicationController
       end
     end
     get_most_booked_runs if !@reservations.nil?
-    filter_reservation_search if !params[:search_by].blank?
   end
 
   def kennel_view_pets

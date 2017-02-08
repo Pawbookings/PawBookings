@@ -1,5 +1,4 @@
 class UserMailer < ApplicationMailer
-
   # Confirms email and redirects user to reset their password.
   def user_confirm_email(current_user)
     @current_user = current_user
@@ -24,6 +23,7 @@ class UserMailer < ApplicationMailer
     @reservation = Reservation.find(res_id)
     @reservation[:check_in_date] = unsanitize_date @reservation[:check_in_date].to_s
     @reservation[:check_out_date] = unsanitize_date @reservation[:check_out_date].to_s
+    @kennel = Kennel.find(@reservation[:kennel_id])
     mail(to: @reservation[:customer_email], subject: 'PawBookings Reservation Confirmation')
   end
 

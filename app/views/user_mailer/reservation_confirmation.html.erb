@@ -1,9 +1,13 @@
 <div class="container">
   <div class="row text-center">
     <div clas="col-xs-12">
-      <p>Dear <%= @reservation[:customer_first_name] %></p>
-      <p>Thank you for your recent PawBookings.com reservation.</p>
-      <p>Below is your Kennel Reservation details. Please review the following information for accuracy, and note the details contained in the IMPORTANT INFORMATION section below. If you have any questions, please email reservations@pawbookings.com immediately. Please put your Reservation Confirmation Number is the subject line of the email.</p>
+      <p>Dear <%= @reservation[:customer_first_name].capitalize %>,</p>
+      <br />
+      <p> Thank you for your recent PawBookings.com reservation.</p>
+      <br />
+      <p> Below is your Kennel Reservation details. Please review the following information for accuracy, and note the details contained in the IMPORTANT INFORMATION section below. If you have any questions, please email reservations@pawbookings.com immediately. Please put your Reservation Confirmation Number is the subject line of the email.</p>
+      <br />
+      <h3 class="default_green_color">Pet Owner Info</h3>
       <p><strong>Reservation-ID: </strong><%= @reservation[:id] %></p>
       <p><strong>First Name: </strong><%= @reservation[:customer_first_name] %></p>
       <p><strong>Last Name: </strong><%= @reservation[:customer_last_name] %></p>
@@ -12,6 +16,20 @@
       <p><strong>Check-In Date: </strong><%= @reservation[:check_in_date] %></p>
       <p><strong>Check-Out Date: </strong><%= @reservation[:check_out_date] %></p>
       <p><strong>Confirmation-ID: </strong><%= @reservation[:transID] %></p>
+      <% if @reservation[:amenity_details].nil? %>
+        <p><strong>•No Amenities Chosen.</strong></p>
+      <% else %>
+        <% JSON.parse(@reservation[:amenity_details]).each do |title, description, price, quantity| %>
+          <p><strong><%= title %></strong></p>
+          <p><strong><%= description %></strong></p>
+          <p><strong><%= "$#{price} x #{quantity}" %></strong></p>
+          <br />
+          <br />
+        <% end %>
+      <% end %>
+      <p><strong>Total Price without Tax: </strong><%= @reservation[:total_price_without_tax] %></p>
+      <p><strong>Tax Percentage: </strong><%= @reservation[:tax_percentage] %></p>
+      <p><strong>Total Tax Price: </strong><%= @reservation[:tax_total_price] %></p>
       <p><strong>Total-Price: </strong><%= @total_price %></p>
 
       <h3 class="default_green_color">Pets:</h3>
@@ -31,18 +49,18 @@
         <p><strong><%= "•#{key}- $#{val}" %></strong></p>
       <% end %>
 
-      <h3 class="default_green_color">Amenity Details</h3>
-      <% if @reservation[:amenity_details].nil? %>
-        <p><strong>•No Amenities Chosen.</strong></p>
-      <% else %>
-        <% JSON.parse(@reservation[:amenity_details]).each do |title, description, price, quantity| %>
-          <p><strong><%= title %></strong></p>
-          <p><strong><%= description %></strong></p>
-          <p><strong><%= "$#{price} x #{quantity}" %></strong></p>
-          <br />
-          <br />
-        <% end %>
-      <% end %>
+      <h3 class="default_green_color">Kennel Info:</h3>
+      <p><strong>Name: </strong><%= @kennel[:name] %></p>
+      <p><strong>Address: </strong><%= @kennel[:address] %></p>
+      <p><strong>City: </strong><%= @kennel[:city] %></p>
+      <p><strong>State: </strong><%= @kennel[:state] %></p>
+      <p><strong>Zip: </strong><%= @kennel[:zip] %></p>
+      <p><strong>Phone: </strong><%= @kennel[:phone] %></p>
+      <p><strong>Email: </strong><%= @kennel[:email] %></p>
+
+      <br />
+      <br />
+
       <div class="res_email_special_information">
         <p>You will be receiving a reminder email to upload the vaccination documents for your pet(s). Remember! It is extremely important that proof of vaccinations are uploaded to your account. Failure to provide proof of vaccinations may void your reservation.</p>
         <p>Please review the Change/Cancellation/Refund Policy included below. If you need to make changes to your reservation, please email reservations@pawbookings.com or call us at 1-844- 944-3333.</p>

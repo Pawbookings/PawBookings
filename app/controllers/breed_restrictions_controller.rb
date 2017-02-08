@@ -12,7 +12,11 @@ class BreedRestrictionsController < ApplicationController
     kennel = Kennel.where(user_id: current_user).first
     if breed_restriction.valid? && kennel.breed_restrictions.create!(kennel_id: kennel[:id], breed: breed_restriction[:breed])
       flash[:notice] = "A Breed Restriction was created successfully!"
-      redirect_to kennel_dashboard_path
+      if params[:create_another_breed_restriction] == "Save and Restrict Another Breed"
+        redirect_to request.referrer
+      else
+        redirect_to kennel_dashboard_path
+      end
     else
       error_message = "Unable to create Breed Restriction."
       breed_restriction.errors.full_messages.each do |err|

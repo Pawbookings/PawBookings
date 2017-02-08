@@ -41,11 +41,29 @@
           <% end %>
         </div>
         <div class="kennel_show_option_display_div kennel_show_policies_div">
-          <% if @policies.blank? %>
+          <% if @policies.blank? && @breeds_restricted.blank? %>
             <h3 class="arvo_font default_green_color">Policies</h3>
-            <strong>•No Policies Listed.</strong>
+            <strong>•No Policies or Breed Restrictions Listed.</strong>
             <br />
             <br />
+          <% elsif !@policies.blank? && !@breeds_restricted.blank? %>
+            <h4 class="arvo_font default_green_color">Breeds Restricted:</h4>
+            <% @breeds_restricted.each do |breed| %>
+              <strong>•<%= breed[:breed] %></strong>
+              <br />
+            <% end %>
+            <h4 class="arvo_font default_green_color">Policies:</h4>
+            <% @policies.each do |policy| %>
+            <strong>•<%= policy[:description] %></strong>
+            <br />
+            <br />
+            <% end %>
+          <% elsif @policies.blank? && !@breeds_restricted.blank? %>
+            <h4 class="arvo_font default_green_color">Breeds Restricted:</h4>
+            <% @breeds_restricted.each do |breed| %>
+              <strong>•<%= breed[:breed] %></strong>
+              <br />
+            <% end %>
           <% else %>
             <h3 class="arvo_font default_green_color">Policies</h3>
             <% @policies.each do |policy| %>
@@ -95,11 +113,16 @@
         <% end %>
       </div>
       <div class="kennel_show_option_display_div kennel_show_policies_div">
-        <% if @policies.blank? %>
+        <% if @policies.blank? && @breeds_restricted.blank? %>
           <h3 class="arvo_font default_green_color">Policies</h3>
-          <strong>•No Policies Listed.</strong>
+          <strong>•No Policies or Breed Restrictions Listed.</strong>
           <br />
           <br />
+        <% elsif @policies.blank? && !@breeds_restricted.blank? %>
+          <h4 class="arvo_font default_green_color">Breeds Restricted:</h4>
+          <% @breeds_restricted.each do |breed| %>
+            <strong>•<%= breed[:breed] %></strong>
+          <% end %>
         <% else %>
           <h3 class="arvo_font default_green_color">Policies</h3>
           <% @policies.each do |policy| %>

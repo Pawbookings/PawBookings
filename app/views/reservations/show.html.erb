@@ -4,11 +4,12 @@
   <div class="row">
     <div class="col-md-3"></div>
     <div class="col-xs-12 col-md-6 booking_confirmed_verbiage">
-      <h5 class="reservation_confirmation_title default_green_color text_underline">Booking Confirmed!</h5>
-      <h6 class="reservation_confirmation_details">A confirmation email has been sent to: <strong class="reservation_confirmation_data default_green_color"><%= @customer_email %></strong></h6>
-      <h6 class="reservation_confirmation_details">If you need to make a change to your reservation, please contact <strong class="reservation_confirmation_data default_green_color">844.944.3333</strong> with your "ReservationID" &amp; "ConfirmationID" numbers provided below.</h6>
-      <h6 class="reservation_confirmation_details">Payment ConfirmationID: <strong class="reservation_confirmation_data default_green_color"><%= @transID %></strong></h6>
-      <h6 class="reservation_confirmation_details">ReservationID: <strong class="reservation_confirmation_data default_green_color"><%= params[:res_id] %></strong></h6>
+      <h5 class="reservation_confirmation_title default_green_color text_underline arvo_font">Booking Confirmed!</h5>
+      <h6 class="reservation_confirmation_details poppins_font">A confirmation email has been sent to: <strong class="reservation_confirmation_data default_green_color"><%= @customer_email %></strong></h6>
+      <h6 class="reservation_confirmation_details poppins_font">If you need to make a change to your reservation, please contact <strong class="reservation_confirmation_data default_green_color">844.944.3333</strong> with your "ReservationID" &amp; "ConfirmationID" numbers provided below.</h6>
+      <br />
+      <h6 class="reservation_confirmation_details poppins_font">ConfirmationID: <strong class="reservation_confirmation_data default_green_color"><%= @transID %></strong></h6>
+      <h6 class="reservation_confirmation_details poppins_font">ReservationID: <strong class="reservation_confirmation_data default_green_color"><%= params[:res_id] %></strong></h6>
     </div>
   </div>
   <div class="row">

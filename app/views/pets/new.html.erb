@@ -16,6 +16,8 @@
       <br />
       <div class="new_pet_div">
         <h3 class="default_green_color patrick_hand_font">Enter Your Pet Details</h3>
+        <%= link_to "Edit Existing", "#edit_existing" if !@pets.blank? %>
+        <br />
         <br />
         <%= form_for @pet do |f| %>
           <%= f.label :pet_name %>
@@ -88,7 +90,7 @@
   <br />
   <div class="border"></div>
   <br />
-  <div class="row text-center">
+  <div id="edit_existing" class="row text-center">
     <div class="edit_pet_div">
       <% if @pets.blank? %>
         <h2><strong class="default_white_color">•No pets listed.</strong></h2>
