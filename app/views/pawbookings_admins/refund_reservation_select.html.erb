@@ -8,7 +8,7 @@
       <p>(Make button to check all boxes and refund entire reservation)</p>
       <%= form_tag({controller: "pawbookings_admins", action: "refund_reservation_confirm"}, method: "get") do %>
         <%= hidden_field_tag :reservation_id, @reservation[:id] %>
-        <h3 class="patrick_hand_font default_green_color">Pricing:</h3>
+        <h3 class="poppins_font default_green_color">Pricing:</h3>
         <%= label_tag :total_price_without_tax %>:
         <br />
         $<%= text_field_tag :total_price_without_tax_show, @reservation[:total_price_without_tax], readonly: true, class:"general_input" %>
@@ -25,12 +25,12 @@
         <br />
         <strong>(Total price with tax cannot exceed $<%= @reservation[:total_price] %>)</strong>
 
-        <h3 class="patrick_hand_font default_green_color">Check-In/Check-Out Dates</h3>
+        <h3 class="poppins_font default_green_color">Check-In/Check-Out Dates</h3>
         <%= text_field_tag(:reservation_dates, ("#{unsanitize_date(@reservation[:check_in_date].to_s)} - #{unsanitize_date(@reservation[:check_out_date].to_s)}"), class: "admin_daterange_check_in general_input", name: "reservation_dates") %>
         <br />
         <p class="btn btn-primary" onclick='checkBoxTogglePrice("<%= @number_of_rooms %>", "<%= @number_of_amenities %>");'>Refresh Price After Date Change</p>
 
-        <h3 class="patrick_hand_font default_green_color">Rooms/Accommodations</h3>
+        <h3 class="poppins_font default_green_color">Rooms/Accommodations</h3>
         <% counter = @runs.count %>
         <% @runs.each do |run| %>
           <p><input id="run_<%= counter %>" name="run_<%= counter %>_id_<%= run[:id] %>" type="checkbox" value="<%= run[:price] %>" onchange='checkBoxTogglePrice("<%= @number_of_rooms %>", "<%= @number_of_amenities %>");'/>
@@ -38,7 +38,7 @@
           <% counter -= 1 %>
         <% end %>
 
-        <h3 class="patrick_hand_font default_green_color">Amenities</h3>
+        <h3 class="poppins_font default_green_color">Amenities</h3>
         <% counter = @amenities.count %>
         <% @amenities.each do |amenity| %>
           <p><input id="amenity_<%= counter %>" name="amenity_<%= counter %>_id_<%= amenity[:id] %>" type="checkbox" value="<%= amenity[:price] %>" onchange='checkBoxTogglePrice("<%= @number_of_rooms %>", "<%= @number_of_amenities %>");'/>
@@ -46,7 +46,7 @@
           <% counter -= 1 %>
         <% end %>
 
-        <h3 class="patrick_hand_font default_green_color">Pets</h3>
+        <h3 class="poppins_font default_green_color">Pets</h3>
         <% counter = @pets.count %>
         <% @pets.each do |pet| %>
           <p><%= check_box_tag "pet_#{counter}", pet[:id] %> <%= "#{pet[:name]} - #{pet[:breed]} - #{pet[:weight]}lbs" %></p>

@@ -9,7 +9,7 @@
       </h5>
       <% @blogs.each do |blog| %>
       <div class="all_blogs_individual_div">
-          <h3><%= link_to "#{raw(blog.title)}", blog_path(blog.id), class:"default_white_color patrick_hand_font" %></h3>
+          <h3><%= link_to "#{raw(blog.title)}", blog_path(blog.id), class:"default_white_color poppins_font" %></h3>
           <p class="default_white_color"><%= unsanitize_date(blog.publish_date.to_s) %></p>
           <a href="<%= blog_path(blog.id) %>"><img class="width_100_percent" src="<%= blog.blog_display_image %>" /></a>
           <br>

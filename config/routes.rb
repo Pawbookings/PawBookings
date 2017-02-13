@@ -74,13 +74,14 @@ Rails.application.routes.draw do
   # HomeController
     get "/kennel_or_customer", to: "home#kennel_or_customer", as: :kennel_or_customer
     get "/about", to: "home#about", as: :about
+    get "/faq", to: "home#faq", as: :faq
+    get "/policies_and_terms", to: "home#policies_and_terms", as: :policies_and_terms
+    get "/changes_cancellations_refunds", to: "home#changes_cancellations_refunds", as: :changes_cancellations_refunds
+    get "/terms_of_service", to: "home#terms_of_service", as: :terms_of_service
+    get "/privacy_policy", to: "home#privacy_policy", as: :privacy_policy
 
   # Contact
     get "/message_confirmation", to: "contact_messages#message_confirmation", as: :message_confirmation
 
-  # FAQ
-    get "/faq", to: "home#faq", as: :faq
 
-  # Policies/Terms
-    get "/policies_and_terms", to: "home#policies_and_terms", as: :policies_and_terms
 end

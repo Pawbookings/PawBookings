@@ -27,7 +27,7 @@
             <h5 class="searched_blog_title default_green_color">Blog Search Results</h5>
             <% @blog_search_results.each do |b| %>
               <div class="all_blogs_individual_div">
-                <%= link_to b[:title], blog_path(b.slug), class: "searched_blog_title_link patrick_hand_font default_white_color " %>
+                <%= link_to b[:title], blog_path(b.slug), class: "searched_blog_title_link poppins_font default_white_color " %>
                 <br />
                 <br />
                 <a href="<%= blog_path(b[:id]) %>"><img class="width_100_percent" src="<%= b.blog_display_image %>" /></a>

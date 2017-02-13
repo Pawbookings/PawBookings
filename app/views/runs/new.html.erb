@@ -1,6 +1,6 @@
 <%= render partial: "shared/top_info" %>
 
-<div class="container-fluid">
+<div class="container-fluid poppins_font">
   <div class="row text-center dashboard_default_background_color">
     <h5 class="main_title arvo_font">Accommodations</h5>
     <br />
@@ -17,7 +17,7 @@
         <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
         <br />
         <br />
-        <h3 class="default_green_color patrick_hand_font text_underline">Add New</h3>
+        <h3 class="default_green_color poppins_font text_underline">Add New</h3>
         <%= link_to "View Existing", "#edit_existing" if !@runs.blank? %>
         <br />
         <br />
@@ -100,7 +100,7 @@
     <div class="border"></div>
     <br />
     <% if !@runs.blank? %>
-      <h3 class="default_green_color patrick_hand_font text_underline">Edit Existing</h3>
+      <h3 class="default_green_color poppins_font text_underline">Edit Existing</h3>
       <br />
       <% @runs.each do |run| %>
         <div class="col-xs-12 col-sm-4 col-md-3">

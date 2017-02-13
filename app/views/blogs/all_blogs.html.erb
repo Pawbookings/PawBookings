@@ -13,7 +13,7 @@
       <% @all_blogs.each do |blog| %>
         <div class="col-md-3">
           <div class="all_blogs_individual_div">
-            <%= link_to blog.title, blog_path(blog.slug), class: "all_blogs_title_link default_white_color text_underline patrick_hand_font" %>
+            <%= link_to blog.title, blog_path(blog.slug), class: "all_blogs_title_link default_white_color text_underline poppins_font" %>
             <br>
             <br>
             <p class="default_white_color"><%= unsanitize_date(blog.publish_date.to_s) %></p>
@@ -41,7 +41,7 @@
         <div class="all_blogs_div">
           <% @all_blogs.each do |blog| %>
             <div class="all_blogs_individual_div">
-              <%= link_to blog.title, blog_path(blog.slug), class: "all_blogs_title_link default_white_color text_underline patrick_hand_font" %>
+              <%= link_to blog.title, blog_path(blog.slug), class: "all_blogs_title_link default_white_color text_underline poppins_font" %>
               <br>
               <br>
               <p class="default_white_color"><%= unsanitize_date(blog.publish_date.to_s) %></p>

@@ -39,7 +39,7 @@
 }*/
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 input {
@@ -98,6 +98,10 @@ table, th, td {
   margin-top: -1em;
 }
 
+.margin_top_np5em {
+  margin-top: -0.5em;
+}
+
 .margin_l_r_5em {
   margin-left: 5em;
   margin-right: 5em;
@@ -109,6 +113,10 @@ table, th, td {
 
 .padding_bottom_2em {
   padding-bottom: 2em;
+}
+
+.line_height_1p5{
+  line-height: 1.5em;
 }
 
 .font_italic {

@@ -191,7 +191,6 @@ class KennelsController < ApplicationController
         end
         @run = Run.where(kennel_id: @kennel[:id]).first
         session[:hours_of_operation_id] = @hours_of_operation[:id]
-        # @photo = Photo.where(kennel_id: @kennel.id).first
       end
     end
     get_most_booked_runs if !@reservations.nil?

@@ -78,6 +78,10 @@ class PaymentsController < ApplicationController
     else
     # user is logged in and has an account registered
       @user = User.find(current_user.id)
+      if @user[:kennel_or_customer] == "kennel"
+        flash[:notice] = "You cannot book a reservation using a Kennel Operator account."
+        return redirect_to request.referrer
+      end
       if Pet.where(user_id: @user[:id]).blank?
         # if user doesnt have pets associated with them
         get_inputed_pet_names
@@ -323,7 +327,6 @@ class PaymentsController < ApplicationController
 
   def process_payment
     payment = Payment.new
-    get_price_total
     if payment.payment_successful?(params, params[:total_price].to_f)
       get_room_info
       if @kennel.reservations.create!(
@@ -331,6 +334,9 @@ class PaymentsController < ApplicationController
                                    check_in_date: @kennel_info["check_in"],
                                    check_out_date: @kennel_info["check_out"],
                                    room_details: @room_details,
+                                   total_price_without_tax: params[:total_price_without_tax],
+                                   tax_percentage: params[:kennel_sales_tax],
+                                   tax_total_price: params[:tax_total_price],
                                    total_price: params[:total_price],
                                    payment_first_name: params[:payment_first_name].downcase,
                                    payment_last_name: params[:payment_last_name].downcase,
@@ -357,7 +363,7 @@ class PaymentsController < ApplicationController
         reservation.userID = reservation[:user_id]
         reservation.reservationID = reservation[:id]
         reservation.save!
-        UserMailer.reservation_confirmation(reservation[:id], @total_price).deliver_now
+        UserMailer.reservation_confirmation(reservation[:id], params[:total_price]).deliver_now
         flash[:notice] = "Your payment was processed!"
         return redirect_to reservation_path(id: @user[:id], customer_email: params[:customer_email], transID: params[:transId], res_id: reservation[:id])
       else

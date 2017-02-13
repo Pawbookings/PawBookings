@@ -1,5 +1,5 @@
 <%= render partial: "shared/top_info" %>
-<div class="container-fluid kennel_dashboard_container">
+<div class="container-fluid kennel_dashboard_container poppins_font">
   <div class="kennel_dashboard_desktop">
     <div class="row text-center">
       <div class="col-md-12">
@@ -12,8 +12,8 @@
       <div class="col-md-4 border_right">
         <% if !@reservations.nil? %>
           <div class="most_booked_runs_desktop text-center">
-            <h4 class="default_green_color text_underline">Most Booked Runs</h4>
-            <%= pie_chart @run_names_and_counts %>
+            <h3 class="default_green_color text_underline">Most Booked Runs</h3>
+            <%= pie_chart @run_names_and_counts, colors: ["green", "grey", "orange", "blue"] %>
           </div>
           <% elsif !@kennel.nil? && !@run.nil? && @changed_time %>
             <h3 class="arvo_font default_white_color text-center">• You are now eligible to be searched by Pet Owners.</h3>
@@ -34,11 +34,11 @@
       <div class="col-md-4">
         <div class="kennel_dashboard_user_info_div">
           <h3 class="default_green_color text_underline">Owner Personal Info</h3>
-          <p class="default_white_color"><strong class="default_green_color">Personal contact email: </strong><br /><%= current_user.email.capitalize %></p>
-          <p class="default_white_color"><strong class="default_green_color">First name: </strong><br /><%= current_user.first_name.capitalize %></p>
-          <p class="default_white_color"><strong class="default_green_color">Last name: </strong><br /><%= current_user.last_name.capitalize %></p>
-          <p class="default_white_color"><strong class="default_green_color">Personal contact phone: </strong><br /><%= current_user.phone %></p>
-          <p class="default_white_color"><strong class="default_green_color">Time zone: </strong><br /><%= current_user.time_zone %></p>
+          <p class="default_white_color poppins_font"><strong class="default_green_color">Personal contact email: </strong><br /><%= current_user.email.capitalize %></p>
+          <p class="default_white_color poppins_font"><strong class="default_green_color">First name: </strong><br /><%= current_user.first_name.capitalize %></p>
+          <p class="default_white_color poppins_font"><strong class="default_green_color">Last name: </strong><br /><%= current_user.last_name.capitalize %></p>
+          <p class="default_white_color poppins_font"><strong class="default_green_color">Personal contact phone: </strong><br /><%= current_user.phone %></p>
+          <p class="default_white_color poppins_font"><strong class="default_green_color">Time zone: </strong><br /><%= current_user.time_zone %></p>
           <%= button_to "Edit", edit_user_registration_path, class: "btn btn-primary", method: :get %>
           <br />
         </div>
@@ -246,7 +246,7 @@
           <% if !@reservations.nil? %>
             <div class="border"></div>
             <h3 class="default_green_color">Most Booked Runs</h3>
-            <%= pie_chart @run_names_and_counts %>
+            <%= pie_chart @run_names_and_counts, colors: ["green", "grey", "orange", "blue"] %>
             <br />
           <% end %>
         </div>
@@ -305,25 +305,35 @@
 </div>
 
 <!-- Start of Kennel Dashboard monthly_calendar container -->
+<% res_check = false %>
 <%= month_calendar(attribute: :check_in_date) do |date| %>
-  <%= unsanitize_date(date.to_s) %>
-  <br>
-  <% counter = [] %>
+  <span class="poppins_font"><%= unsanitize_date(date.to_s) %></span>
+  <% res_counter = [] %>
   <% if !@reservations.nil? %>
     <% @reservations.each do |res| %>
       <% @pet_stay_date_range = (res[:check_in_date]..res[:check_out_date]).map{|date| date} %>
-      <% if @pet_stay_date_range.include? date %>
-        <% counter << res %>
-        <%= "•#{res.customer_first_name}" %>
+
+      <% if @pet_stay_date_range.include?(date) %>
+
+        <% res_counter << res %>
+        <% res_check = true %>
+        <%#= "•#{res.customer_first_name}" %>
         <!-- Get the fucking count instead! -->
-        <br>
       <% end %>
+    <% end %>
+    <% if res_check == true %>
+      <br>
+      <span class="glyphicon glyphicon-ok"></span>
+      <br />
+      <% res_check = false %>
+    <% else %>
+      <br />
     <% end %>
   <% end %>
   <% if @kennel.nil? %>
-    <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s)) %>
+    <%= link_to "View", kennel_reservations_path(reservation_ids: res_counter, date: unsanitize_date(date.to_s)) %>
   <% else %>
-    <%= link_to "View details", kennel_reservations_path(reservation_ids: counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]) %>
+    <%= link_to "View", kennel_reservations_path(reservation_ids: res_counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]) %>
   <% end %>
 <% end %>
 <!-- End of Kennel Dashboard monthly_calendar container -->

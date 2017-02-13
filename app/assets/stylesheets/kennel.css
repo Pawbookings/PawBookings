@@ -223,6 +223,12 @@
 }
 
 @media (min-width: 992px) {
+  #kennel_mission_statement {
+    margin: 0px;
+    height: 181px;
+    width: 301px;
+  }
+
  .kennel_reservation_mobile, .searched_res_mobile, .kennel_dashboard_mobile {
     display: none;
   }

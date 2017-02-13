@@ -53,6 +53,12 @@
 }
 
 @media (min-width: 992px) {
+  #contact_message_details {
+    margin: 0px 0px 26px;
+    width: 524px;
+    height: 142px;
+  }
+
   .contact_submit_btn, .contact_form_field {
     width: 20%;
   }

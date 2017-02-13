@@ -17,7 +17,7 @@
       <div class="br_if_desktop"><br /></div>
       <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
       <div class="br_if_desktop"><br /></div>
-      <h3 class="default_green_color patrick_hand_font text_underline">Add New</h3>
+      <h3 class="default_green_color poppins_font text_underline">Add New</h3>
       <%= link_to "View Existing", "#edit_existing" if !@breed_restrictions.blank? %>
       <br />
       <br />
@@ -40,7 +40,7 @@
 <br />
   <div id="edit_existing" class="row text-center">
       <% if !@breed_restrictions.blank? %>
-        <h3 class="default_green_color patrick_hand_font text_underline">Edit Existing</h3>
+        <h3 class="default_green_color poppins_font text_underline">Edit Existing</h3>
         <br />
         <% @breed_restrictions.each do |br| %>
         <div class="col-xs-6 col-sm-4 col-md-3">

@@ -14,7 +14,7 @@ class UserMailer < ApplicationMailer
   # Confirmation email for new Customer registrations.
   def new_customer_registration(user)
     @current_user = user
-    mail(to: user[:email], subject: 'PawBookings Registration Confirmation')
+    mail(to: user[:email], subject: 'Kennel Booking Successful – Please Review Your Pet’s Upcoming Reservation')
   end
 
   # Reservation confirmation email being sent to both Customer and Kennel.
@@ -24,6 +24,7 @@ class UserMailer < ApplicationMailer
     @reservation[:check_in_date] = unsanitize_date @reservation[:check_in_date].to_s
     @reservation[:check_out_date] = unsanitize_date @reservation[:check_out_date].to_s
     @kennel = Kennel.find(@reservation[:kennel_id])
+    @hours_of_operation = HoursOfOperation.where(kennel_id: @kennel[:id]).first
     mail(to: @reservation[:customer_email], subject: 'PawBookings Reservation Confirmation')
   end
 

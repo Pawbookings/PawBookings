@@ -1,5 +1,5 @@
 <% if controller_name == "kennels" && action_name == "kennel_dashboard" %>
-  <div class="kennel_dashboard_option_btns_div text-center">
+  <div class="kennel_dashboard_option_btns_div text-center poppins_font">
     <%= link_to "Accommodations", new_run_path, class: "btn btn-success" %>
     <div class="br_if_desktop"><br /></div>
     <%= link_to "Amenities", new_amenity_path, class: "btn btn-success" %>
@@ -15,7 +15,7 @@
     <%= link_to "Kennel Pictures", new_photo_path, class: "btn btn-success" %>
   </div>
 <% else %>
-  <div class="text-center kennel_dashboard_option_btns_div_mobile">
+  <div class="text-center kennel_dashboard_option_btns_div_mobile poppins_font">
     <%= link_to "Accommodations", new_run_path, class: "btn btn-success" %>
     <%= link_to "Amenities", new_amenity_path, class: "btn btn-success" %>
     <%= link_to "Hours of Operation", edit_hours_of_operation_path(session[:hours_of_operation_id]), class: "btn btn-success" %>
