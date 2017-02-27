@@ -3,7 +3,8 @@
     <div class="col-xs-12">
       <p>Dear <%= @current_user.first_name %>,</p>
       <p>Thank you for registering with Pawbookings.com</p>
-      <p>Once your email account has been verified, you will be able to log in and benefit from the full features of the PawBookings.com website.</p>
+      <p>Click <%= link_to "here", edit_password_url(@current_user, reset_password_token: @token) %> to set your new password and verify your email for this account.</p>
+      <p>Once your account has been verified, you will be able to log in and benefit from the full features of the PawBookings.com website.</p>
       <p>As a Kennel Operator User, you are now able to login and manage your account. Do it NOW! You can provide a short description of your kennel, edit requirements for your furry guests, add pictures, and so much more.</p>
       <p>Once your basic details are added, you can then add the details that will help us to grow your business! Rooms or run types, prices, amenities offered, vaccination requirements, change/cancellation/refund policies, hours of operation, etc. can all be added via your Kennel Dashboard. Of course, we are here every step of the way and are excited to offer your services online and at the click of a mouse. And of course, our ‘Always-Available’ U.S.-based customer service center is a resource for you. WELCOME ABOARD!</p>
       <p>At your Kennel Dashboard, you can:</p>
