@@ -19,10 +19,10 @@ class Kennel < ActiveRecord::Base
   has_many   :stand_by_reservations
   has_many   :users, through: :reservations
 
-  validates :name, format: { with: /\A[a-z\s-]{3,30}\z/i }
+  validates :name, presence: true
   validates :address, length: { minimum: 3 }
   validates :mission_statement, presence: true
-  validates :city, format: { with: /\A[a-z\s-]{3,30}\z/i }
+  validates :city, presence: true
   validates :state, presence: true
   validates :zip, format: { with: /\A[0-9]{5}\z/i }
   validates :phone, format: { with: /\A\+?[0-9]{,2}(-|\s)?\(?[0-9]{3}\)?(-|\s)?[0-9]{3}(-|\s)?[0-9]{4}\z/ }
