@@ -221,8 +221,8 @@
           <p class="margin_top_n1em poppins_font"><%= params[:number_of_nights] %></p>
 
           <h5 style="margin-bottom:1em;" class="arvo_font">Room Selection(s):</h5>
-          <% params[:number_of_rooms].to_i.times do %>
           <% counter = params[:number_of_rooms].to_i %>
+          <% params[:number_of_rooms].to_i.times do %>
             <div>
               <p class="margin_top_n1em poppins_font"><%= params["room_#{counter}_name"] %></p>
               <p class="margin_top_n1em poppins_font">$<%= params["room_#{counter}_price"].to_f %></p>
