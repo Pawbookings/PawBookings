@@ -2,6 +2,10 @@ class PaymentsController < ApplicationController
   include UsersHelper
 
   def new
+    if current_user[:kennel_or_customer] == "kennel"
+      flash[:notice] = "A Kennel account cannot book a reservation."
+      return redirect_to request.referrer
+    end
     if !(check_pets_type_for_runs)
       return redirect_to request.referrer
     end
