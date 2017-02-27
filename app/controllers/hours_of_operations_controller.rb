@@ -43,7 +43,7 @@ class HoursOfOperationsController < ApplicationController
     hours_of_operation.sunday_close = params[:hours_of_operation][:sunday_close]
     if hours_of_operation.save!
       flash[:notice] = "Your Hours of Operation time-frame has been updated!"
-      redirect_to edit_hours_of_operation_path(id: params[:id])
+      redirect_to kennel_dashboard_path
     else
       flash[:notice] = "Your Hours of Operation time-frame failed to update, please try again."
       redirect_to request.referrer
