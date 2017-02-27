@@ -65,51 +65,37 @@
 </head>
 <body>
   <% if flash[:notice] %>
-    <% if flash[:notice].length > 148 %>
-      <div class="container width_100_percent flash_notice_background_color padding_bottom_2em">
-    <% else %>
-      <div class="container width_100_percent flash_notice_background_color padding_bottom_1em">
-    <% end %>
-      <div class="row text-left">
-        <div class="col-xs-12">
-          <div class="flash_notice_div">
-            <% if flash[:notice] %>
-              <div style="background-color:rgb(160, 251, 196); color:#35a55e;" class="row text-center">
-                <div>
-                  <div class="col-xs-12">
-                    <%=flash[:notice]%>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
+    <button class="absolute_position flash_notice_modal_btn" data-toggle="modal" data-target=".flash_notice_modal"></button>
+
+    <div class="modal fade flash_notice_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content padding_1em text-center">
+          <%= flash[:notice] %>
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".flash_notice_modal_btn").click();
+      });
+    </script>
   <% end %>
 
   <% if flash[:alert] %>
-    <% if flash[:alert].length > 148 %>
-      <div class="container width_100_percent flash_notice_background_color padding_bottom_2em">
-    <% else %>
-      <div class="container width_100_percent flash_notice_background_color padding_bottom_1em">
-    <% end %>
-      <div class="row text-left">
-        <div class="col-xs-12">
-          <div class="flash_notice_div">
-            <% if flash[:alert] %>
-              <div style="background-color:rgb(160, 251, 196); color:#35a55e;" class="row text-center">
-                <div>
-                  <div class="col-xs-12">
-                    <%=flash[:alert]%>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
+    <button class="absolute_position flash_alert_modal_btn" data-toggle="modal" data-target=".flash_alert_modal"></button>
+
+    <div class="modal fade flash_alert_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content padding_1em text-center">
+          <%= flash[:alert] %>
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".flash_alert_modal_btn").click();
+      });
+    </script>
   <% end %>
 
 
