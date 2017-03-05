@@ -288,45 +288,63 @@
       <br />
       <h4 class="arvo_font kennel_show_select_rooms_title">Select Room(s)</h4>
       <% counter = params[:search_info][:number_of_rooms].to_i %>
-      <% params[:search_info][:number_of_rooms].to_i.times do %>
-        <div class="run_container_<%= counter %> div_border_green_background">
-          <h5 class="arvo_font">Room <%= counter %> selection:</h5>
-          <% @runs.each do |run| %>
-            <div class="div_border">
-              <h3 class="arvo_font text_underline"><%= run[:title] %></h3>
-              <%= image_tag run.image.url %>
-              <% if run.type_of_pets_allowed == "dog" || run.type_of_pets_allowed == "cat" %>
-                <p>•Only <%= run.type_of_pets_allowed.capitalize %>s allowed</span></strong></p>
-              <% else %>
-                <p>•Both Cats and Dogs allowed</span></strong></p>
-              <% end %>
-              <p class="poppins_font margin_l_r_5em"><%= run.description %></p>
-              <h1 class="default_green_color arvo_font"><%= "$#{run[:price]}" %></h1>
-              <p><strong>Max Occupancy:</strong> <%= run.pets_per_run %> pets</p>
-              <% if run.weight_limit.nil? %>
-                <p><strong>Weight-Limit:</strong> n/a</p>
-              <% else %>
-                <p><strong>Weight-Limit:</strong> <%= run.weight_limit %>lbs</p>
-              <% end %>
-              <p><strong>Size:</strong> <%= run.size_length %>ft x <%= run.size_length %>ft</p>
-              <% if !@run_ids_maxed.nil? %>
-                <% if @run_ids_maxed.include? run.id.to_s %>
-                  <p style="color:#ff5151;"><strong>**This Room is currently unavailable**</strong></p>
-                  <%= link_to "Notify me when this room becomes available!", new_stand_by_reservation_path(kennel_id: @searched_kennel[:id], run_id: run.id, check_in_date: @customer_check_in_date, check_out_date: @customer_check_out_date ) %>
-                <% else %>
-                  <button style="height:2.5em;" type="button" class="btn add_room_btn" onclick='addRunToRoom("<%= run.title %>", "room_<%= counter %>", <%= run.id %>, <%= run.price %>, "<%= run.type_of_pets_allowed %>", "<%= run.pets_per_run %>");'>Select Room</p>
-                <% end %>
-              <% else %>
-                <button style="height:2.5em;" type="button" class="btn add_room_btn" onclick='addRunToRoom("<%= run.title %>", "room_<%= counter %>", <%= run.id %>, <%= run.price %>, "<%= run.type_of_pets_allowed %>", "<%= run.pets_per_run %>");'>Select Room</p>
+      <ul class="nav nav-tabs" role="tablist">
+        <% counter.times do %>
+          <% if counter == 1 %>
+          <li role="presentation" class="active"><a href="#room_<%= counter %>_selection" aria-controls="room_<%= counter %>_selection" role="tab" data-toggle="tab"><%= "Room #{counter}" %></a></li>
+          <% else %>
+          <li role="presentation"><a href="#room_<%= counter %>_selection" aria-controls="room_<%= counter %>_selection" role="tab" data-toggle="tab"><%= "Room #{counter}" %></a></li>
+          <% end %>
+          <% counter -= 1 %>
+        <% end %>
+      </ul>
+      <% counter = params[:search_info][:number_of_rooms].to_i %>
+      <div class="tab-content">
+        <% params[:search_info][:number_of_rooms].to_i.times do %>
+          <% if counter == 1 %>
+            <br />
+            <div role="tabpanel" class="tab-pane active" id="room_<%= counter %>_selection">
+          <% else %>
+            <br />
+            <div role="tabpanel" class="tab-pane" id="room_<%= counter %>_selection">
+          <% end %>
+            <div class="run_container_<%= counter %> div_border_green_background">
+              <h5 class="arvo_font">Room <%= counter %> selection:</h5>
+              <% @runs.each do |run| %>
+                <div class="div_border">
+                  <h3 class="arvo_font text_underline"><%= run[:title] %></h3>
+                  <%= image_tag run.image.url %>
+                  <% if run.type_of_pets_allowed == "dog" || run.type_of_pets_allowed == "cat" %>
+                    <p>•Only <%= run.type_of_pets_allowed.capitalize %>s allowed</span></strong></p>
+                  <% else %>
+                    <p>•Both Cats and Dogs allowed</span></strong></p>
+                  <% end %>
+                  <p class="poppins_font margin_l_r_5em"><%= run.description %></p>
+                  <h1 class="default_green_color arvo_font"><%= "$#{run[:price]}" %></h1>
+                  <p><strong>Max Occupancy:</strong> <%= run.pets_per_run %> pets</p>
+                  <% if run.weight_limit.nil? %>
+                    <p><strong>Weight-Limit:</strong> n/a</p>
+                  <% else %>
+                    <p><strong>Weight-Limit:</strong> <%= run.weight_limit %>lbs</p>
+                  <% end %>
+                  <p><strong>Size:</strong> <%= run.size_length %>ft x <%= run.size_length %>ft</p>
+                  <% if !@run_ids_maxed.nil? %>
+                    <% if @run_ids_maxed.include? run.id.to_s %>
+                      <p style="color:#ff5151;"><strong>**This Room is currently unavailable**</strong></p>
+                      <%= link_to "Notify me when this room becomes available!", new_stand_by_reservation_path(kennel_id: @searched_kennel[:id], run_id: run.id, check_in_date: @customer_check_in_date, check_out_date: @customer_check_out_date ) %>
+                    <% else %>
+                      <button style="height:2.5em;" type="button" class="btn add_room_btn" onclick='addRunToRoom("<%= run.title %>", "room_<%= counter %>", <%= run.id %>, <%= run.price %>, "<%= run.type_of_pets_allowed %>", "<%= run.pets_per_run %>");'>Select Room</p>
+                    <% end %>
+                  <% else %>
+                    <button style="height:2.5em;" type="button" class="btn add_room_btn" onclick='addRunToRoom("<%= run.title %>", "room_<%= counter %>", <%= run.id %>, <%= run.price %>, "<%= run.type_of_pets_allowed %>", "<%= run.pets_per_run %>");'>Select Room</p>
+                  <% end %>
+                </div>
               <% end %>
             </div>
-          <% end %>
-        </div>
-        <br />
-        <br />
-        <br />
-        <% counter -= 1 %>
-      <% end %>
+          </div>
+          <% counter -= 1 %>
+        <% end %>
+      </div>
     </div>
 
     <div class="col-md-4 hidden_if_mobile">

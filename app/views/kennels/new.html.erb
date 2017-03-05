@@ -7,17 +7,13 @@
       <br />
     </div>
   </div>
-</div>
   <div class="border"></div>
   <div class="border"></div>
   <br />
   <br />
-<div class="container-fluid">
   <div class="row">
     <div class="col-xs-12">
       <div class="kennel_registration_form_div text-center">
-
-
         <%= form_for @kennel do |f| %>
         <div class="row text-center">
           <div class="col-md-2"></div>
@@ -47,6 +43,17 @@
             <%= f.select :state, options_for_select(states_options), class: "kennel_dashboard_input_edit" %>
             <br />
             <br />
+            <div class="row text-center">
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                <%= f.label :kennel_logo %>
+              </div>
+            </div>
+            <div class="row text-center">
+              <div class="col-md-4">
+                <%= f.file_field :avatar, class: "text-center btn btn-primary" %>
+              </div>
+            </div>
           </div>
           <div class="col-md-4">
             <%= f.label :zip %>
@@ -76,15 +83,11 @@
             <br />
           </div>
         </div>
-        <div class="row text-center">
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
-            <%= f.label :kennel_logo %>
-            <%= f.file_field :avatar, class: "text-center btn btn-primary" %>
-          </div>
-        </div>
         <br />
-        <%= f.submit "Save Kennel", class: "btn btn-success" %>
+        <div class="border"></div>
+        <br />
+        <br />
+        <%= f.submit "Save Kennel", class: "btn-lg btn-success" %>
         <br />
         <br />
         <br />

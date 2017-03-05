@@ -27,6 +27,10 @@ class KennelsController < ApplicationController
     end
   end
 
+  def edit
+    @kennel = Kennel.find(params[:id])
+  end
+
   def update
     kennel = Kennel.find(params[:id])
     kennel.name = params[:kennel][:name]

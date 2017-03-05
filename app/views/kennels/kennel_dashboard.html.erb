@@ -47,60 +47,17 @@
         <div class="kennel_dashboard_general_info_div">
           <h3 class="default_green_color text_underline">My Kennel</h3>
           <% if !@kennel.nil? %>
-              <%= form_for(@kennel, {id: @kennel.id}) do |f| %>
-                <%= f.label :kennel_name, class:"default_green_color" %><span class="default_green_color">:</span>
-                <br />
-                <%= f.text_field :name, class: "kennel_dashboard_input_desktop" %>
-                <br />
-                <br />
-                <%= f.label :address, class:"default_green_color" %><span class="default_green_color">:</span>
-                <br />
-                <%= f.text_field :address, class: "kennel_dashboard_input_desktop" %>
-                <br />
-                <br />
-                <%= f.label :mission_statement, class:"default_green_color" %><span class="default_green_color">:</span>
-                <br />
-                <%= f.text_area :mission_statement, class: "kennel_dashboard_input_desktop" %>
-                <br />
-                <br />
-                <%= f.label :city, class:"default_green_color" %><span class="default_green_color">:</span>
-                <br />
-                <%= f.text_field :city, class: "kennel_dashboard_input_desktop" %>
-                <br />
-                <br />
-                <%= f.label :state, class:"default_green_color" %><span class="default_green_color">:</span>
-                <br />
-                <%= f.select :state, options_for_select(states_options, @kennel[:state]), class: "kennel_dashboard_input_desktop" %>
-                <br />
-                <br />
-                <%= f.label :zip, class:"default_green_color" %><span class="default_green_color">:</span>
-                <br />
-                <%= f.text_field :zip, class: "kennel_dashboard_input_desktop" %>
-                <br />
-                <br />
-                <%= f.label :email, "Email Pet Owners can contact", class:"default_green_color" %><span class="default_green_color">:</span>
-                <br />
-                <%= f.text_field :email, class: "kennel_dashboard_input_desktop" %>
-                <br />
-                <br />
-                <%= f.label :phone, "Phone Pet Owners can call", class:"default_green_color" %><span class="default_green_color">:</span>
-                <br />
-                <%= f.text_field :phone, class: "kennel_dashboard_input_desktop", onkeypress: "return isNumber(event);" %>
-                <br />
-                <br />
-                <%= f.label :sales_tax, class:"default_green_color" %><span class="default_green_color">:</span>
-                <br />
-                <%= f.text_field :sales_tax, class: "kennel_dashboard_input_desktop" %> <span class="default_white_color">%</span>
-                <br />
-                <br />
-                <%= image_tag @kennel.avatar.url(:thumb), class: "kennel_dashboard_avatar" if !@kennel.nil? %>
-                <br />
-                <%= f.file_field :avatar, class: "kennel_dashboard_input_desktop text-center btn btn-primary kennel_avatar_btn" %>
-                <br />
-                <div class="text-center">
-                  <%= f.submit "Update Kennel Info", class: "btn btn-success" %>
-                </div>
-              <% end %>
+            <p class="default_white_color poppins_font"><strong class="default_green_color">Name: </strong><br /><%= @kennel[:name] %></p>
+            <p class="default_white_color poppins_font"><strong class="default_green_color">Email: </strong><br /><%= @kennel[:email] %></p>
+            <p class="default_white_color poppins_font"><strong class="default_green_color">Phone: </strong><br /><%= @kennel[:phone] %></p>
+            <p class="default_white_color poppins_font"><strong class="default_green_color">Address: </strong><br /><%= @kennel[:address] %></p>
+            <p class="default_white_color poppins_font"><strong class="default_green_color">City: </strong><br /><%= @kennel[:city] %></p>
+            <p class="default_white_color poppins_font"><strong class="default_green_color">State: </strong><br /><%= @kennel[:state] %></p>
+            <p class="default_white_color poppins_font"><strong class="default_green_color">Zip: </strong><br /><%= @kennel[:zip] %></p>
+            <p class="default_white_color poppins_font"><strong class="default_green_color">Cats or Dogs: </strong><br /><%= @kennel[:cats_or_dogs] %></p>
+            <p class="default_white_color poppins_font"><strong class="default_green_color">Mission Statement: </strong><br /><%= @kennel[:mission_statement] %></p>
+            <p class="default_white_color poppins_font"><strong class="default_green_color">Logo: </strong><br /><%= image_tag @kennel.avatar.url, class:"kennel_dashboard_avatar" %></p>
+            <%= link_to "Edit", edit_kennel_path(id: @kennel), class:"btn btn-primary" %>
           <% else %>
             <%= button_to "Kennel registration", new_kennel_path, class:"btn btn-success", method: :get %>
           <% end %>
