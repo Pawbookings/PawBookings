@@ -59,7 +59,7 @@ class SearchesController < ApplicationController
   end
 
   def location_filtering
-    params[:radius] = 5 if params[:radius].blank?
+    params[:radius] = "5" if params[:radius].blank?
     @relevant_locations = Kennel.near(params[:search_zip], params[:radius]).to_a
   end
 
@@ -124,7 +124,6 @@ class SearchesController < ApplicationController
       runs = Run.where(kennel_id: hr.id)
       @final_search_results << hr if !runs.empty?
     end
-
   end
 
 end
