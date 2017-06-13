@@ -91,6 +91,10 @@
   width: 100%;
 }
 
+.run_image {
+  height: 16em;
+}
+
 .kennel_show_options_btn_row {
   margin-top: 2em;
 }

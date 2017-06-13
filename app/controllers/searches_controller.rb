@@ -124,6 +124,7 @@ class SearchesController < ApplicationController
       runs = Run.where(kennel_id: hr.id)
       @final_search_results << hr if !runs.empty?
     end
+    # sort final_results by :taken_ownership. :taken_ownership Kennels first in results.
   end
 
 end

@@ -313,7 +313,7 @@
               <% @runs.each do |run| %>
                 <div class="div_border">
                   <h3 class="arvo_font text_underline"><%= run[:title] %></h3>
-                  <%= image_tag run.image.url %>
+                  <%= image_tag run.image.url, class:"run_image" %>
                   <% if run.type_of_pets_allowed == "dog" || run.type_of_pets_allowed == "cat" %>
                     <p>•Only <%= run.type_of_pets_allowed.capitalize %>s allowed</span></strong></p>
                   <% else %>
