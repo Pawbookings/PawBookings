@@ -15,6 +15,7 @@ class UserMailer < ApplicationMailer
   # Confirmation email for new Customer registrations.
   def new_customer_registration(user, token)
     @current_user = user
+    @token = token
     mail(to: user[:email], subject: 'Registration Successful – Please Verify Your Email Address')
   end
 
