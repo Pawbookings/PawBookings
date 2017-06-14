@@ -337,7 +337,7 @@ class KennelsController < ApplicationController
   private
 
   def kennel_params
-    return params.require(:kennel).permit(:avatar, :name, :cats_or_dogs, :address, :city, :state, :zip, :phone, :email, :mission_statement, :sales_tax )
+    return params.require(:kennel).permit(:avatar, :name, :cats_or_dogs, :address, :city, :state, :zip, :phone, :email, :mission_statement, :sales_tax, :taken_ownership )
   end
 
 end

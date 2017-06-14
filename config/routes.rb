@@ -26,6 +26,13 @@ Rails.application.routes.draw do
   resources :check_in_contract_reservation_changes, only: [:update, :edit]
   resources :check_in_contract_refund_policies, only: [:update, :edit]
 
+  # CsvKennelsController
+    resources :csv_kennels
+    post '/notify_kennel', to: 'csv_kennels#notify_kennel', as: :notify_kennel
+    get '/claim_business', to: 'csv_kennels#claim_business', as: :claim_business
+    post '/send_business_claim', to: 'csv_kennels#send_business_claim', as: :send_business_claim
+
+
   # PawbookingsAdminsController
    resources :pawbookings_admins, only: [:index]
    get '/admin_reservation_search', to: "pawbookings_admins#admin_reservation_search", as: :admin_reservation_search

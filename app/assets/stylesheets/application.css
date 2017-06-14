@@ -151,6 +151,10 @@ table, th, td {
   line-height: 1.5em;
 }
 
+.letter_spacing_0_p_08_em {
+  letter-spacing: 0.08em;
+}
+
 .leto_font {
   font-family: 'Lato', sans-serif;
 }

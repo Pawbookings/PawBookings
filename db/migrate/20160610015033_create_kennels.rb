@@ -14,6 +14,7 @@ class CreateKennels < ActiveRecord::Migration
       t.string :phone
       t.string :email
       t.string :cats_or_dogs
+      t.boolean :taken_ownership
       t.timestamps null: false
     end
   end

@@ -1,0 +1,27 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h4 class="main_title arvo_font">Claim Business for: <%= @kennel[:name].capitalize %></h4>
+      <br />
+      <%= form_tag({controller:"csv_kennels", action:"send_business_claim"}) do %>
+        <%= hidden_field_tag :id, nil, value: @kennel[:id] %>
+        <%= label_tag :name %>
+        <%= text_field_tag :name, nil, placeholder: " Name" %>
+        <br />
+        <br />
+        <%= label_tag :email %>
+        <%= text_field_tag :email, nil, placeholder: " Email" %>
+        <br />
+        <br />
+        <%= label_tag :phone %>
+        <%= text_field_tag :phone, nil, placeholder: " Phone" %>
+        <br />
+        <br />
+        <br />
+        <%= submit_tag "Submit Claim!", class:"btn-lg btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

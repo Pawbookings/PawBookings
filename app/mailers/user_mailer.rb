@@ -1,4 +1,21 @@
 class UserMailer < ApplicationMailer
+
+  # Sends CSV-Kennel notification email to Admin.
+  def notify_kennel_email(kennel_id, user_id)
+    @kennel = Kennel.find(kennel_id)
+    @user = User.find(user_id)
+    mail(to: "mcdonnellenterprisesllc@gmail.com", subject: 'Notify Kennel', from:"PawBookings <no_reply@pawbookings.com>")
+  end
+
+  # Sends business-claim notification email to Admin.
+  def send_business_claim_email(kennel_id, name, email, phone)
+    @name = name
+    @email = email
+    @phone = phone
+    @kennel = Kennel.find(kennel_id)
+    mail(to: "mcdonnellenterprisesllc@gmail.com", subject: 'Kennel Business Claim', from:"PawBookings <no_reply@pawbookings.com>")
+  end
+
   # Confirms email and redirects user to reset their password.
   def user_confirm_email(current_user)
     @current_user = current_user

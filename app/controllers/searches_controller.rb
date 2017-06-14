@@ -60,7 +60,7 @@ class SearchesController < ApplicationController
 
   def location_filtering
     params[:radius] = "5" if params[:radius].blank?
-    @relevant_locations = Kennel.near(params[:search_zip], params[:radius]).to_a
+    @relevant_locations = Kennel.where(taken_ownership: true).near(params[:search_zip], params[:radius]).to_a
   end
 
   def pet_type_filtering
@@ -124,7 +124,14 @@ class SearchesController < ApplicationController
       runs = Run.where(kennel_id: hr.id)
       @final_search_results << hr if !runs.empty?
     end
-    # sort final_results by :taken_ownership. :taken_ownership Kennels first in results.
+    get_csv_kennels
+  end
+
+  def get_csv_kennels
+    relevant_locations = Kennel.where(taken_ownership: false).near(params[:search_zip], params[:radius]).to_a
+    relevant_locations.each do |rl|
+      @final_search_results << rl
+    end
   end
 
 end

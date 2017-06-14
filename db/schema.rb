@@ -247,6 +247,7 @@ ActiveRecord::Schema.define(version: 20170114224133) do
     t.string   "phone"
     t.string   "email"
     t.string   "cats_or_dogs"
+    t.boolean  "taken_ownership"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.float    "latitude"
