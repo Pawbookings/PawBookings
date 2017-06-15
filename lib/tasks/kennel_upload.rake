@@ -35,7 +35,8 @@ task :upload_kennel_csv => :environment do
       k.email = "customer_contact_#{counter}@yourbusiness.com"
       k.cats_or_dogs = "both"
       k.save!
-      counter += 1
     end
+    counter += 1
+    sleep(1)
   end
 end
