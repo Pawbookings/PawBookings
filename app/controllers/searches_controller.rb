@@ -40,7 +40,7 @@ class SearchesController < ApplicationController
     if params[:no_params].nil?
       if params[:number_of_dogs] == "0" && params[:number_of_cats] == "0"
         flash[:notice] = "Must select number of dogs or cats greater than 0."
-        return redirect_to root
+        return redirect_to request.referrer
       end
 
       @final_search_results = []
