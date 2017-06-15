@@ -40,7 +40,7 @@ class SearchesController < ApplicationController
     if params[:no_params].nil?
       if params[:number_of_dogs] == "0" && params[:number_of_cats] == "0"
         flash[:notice] = "Must select number of dogs or cats greater than 0."
-        redirect_to request.referrer
+        return redirect_to root
       end
 
       @final_search_results = []
@@ -128,7 +128,7 @@ class SearchesController < ApplicationController
   end
 
   def get_csv_kennels
-    relevant_locations = Kennel.where(taken_ownership: false).near(params[:search_zip], params[:radius]).to_a
+    relevant_locations = Kennel.near(params[:search_zip], params[:radius]).where(taken_ownership: false).to_a
     relevant_locations.each do |rl|
       @final_search_results << rl
     end

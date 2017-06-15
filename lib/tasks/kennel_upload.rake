@@ -4,7 +4,7 @@ require 'devise'
 task :upload_kennel_csv => :environment do
   csv_text = File.read(Rails.root.join('lib', 'seeds', 'kennel.csv'))
   csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-  counter = 0
+  counter = 1
   csv.each do |row|
     if !row['zip'].blank?
       # Create User
@@ -12,11 +12,7 @@ task :upload_kennel_csv => :environment do
       if row['website_email'].blank?
         u.email = "business_#{counter}@tempmail.com"
       else
-        if row['website_email'].include? "@"
-          u.email = row['website_email']
-        else
-          u.email = "business_#{counter}@tempmail.com"
-        end
+        u.email = row['website_email'].include?("@") ? row['website_email'] : "business_#{counter}@tempmail.com"
       end
       u.password = SecureRandom.hex(12)
       u.password_confirmation = u.password
@@ -34,13 +30,10 @@ task :upload_kennel_csv => :environment do
       k.state = row['state']
       k.zip = row['zip'].include?('-') ? row['zip'].split('-').first : row['zip']
       k.sales_tax = 0.0
-      k.mission_statement = "Fill in with mission statement"
+      k.mission_statement = "We Love Pets!"
       k.phone = "0000000000"
-      k.email = "customer_contact@yourbusiness.com"
+      k.email = "customer_contact_#{counter}@yourbusiness.com"
       k.cats_or_dogs = "both"
-      k.save!
-      k.kennelID = k.id
-      k.userID = u.id
       k.save!
       counter += 1
     end
