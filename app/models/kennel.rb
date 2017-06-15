@@ -30,7 +30,7 @@ class Kennel < ActiveRecord::Base
   # validates :cats_or_dogs, presence: true
 
   geocoded_by :zip
-  after_validation :geocode
+  after_validation :geocode, if: ->(obj){ obj.zip.present? and obj.zip_changed? }
 
   has_attached_file :avatar,
                 :storage => :s3,
