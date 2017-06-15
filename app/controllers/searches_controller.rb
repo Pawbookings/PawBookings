@@ -61,7 +61,6 @@ class SearchesController < ApplicationController
   def location_filtering
     params[:radius] = "5" if params[:radius].blank?
     @relevant_locations = Kennel.where(taken_ownership: true).near(params[:search_zip], params[:radius]).to_a
-    sleep(1)
   end
 
   def pet_type_filtering
