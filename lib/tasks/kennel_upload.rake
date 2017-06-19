@@ -7,12 +7,13 @@ task :upload_kennel_csv => :environment do
   counter = 1
   csv.each do |row|
     if !row['zip'].blank?
+      sleep(1)
       # Create User
       u = User.new
-      if row['website_email'].blank?
+      if row['email'].blank?
         u.email = "business_#{counter}@tempmail.com"
       else
-        u.email = row['website_email'].include?("@") ? row['website_email'] : "business_#{counter}@tempmail.com"
+        u.email = row['email']
       end
       u.password = SecureRandom.hex(12)
       u.password_confirmation = u.password
@@ -35,8 +36,7 @@ task :upload_kennel_csv => :environment do
       k.email = "customer_contact_#{counter}@yourbusiness.com"
       k.cats_or_dogs = "both"
       k.save!
+      counter += 1
     end
-    counter += 1
-    sleep(1)
   end
 end
