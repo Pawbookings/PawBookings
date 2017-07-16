@@ -7,7 +7,7 @@ task :upload_kennel_csv => :environment do
   counter = 1
   limit_reached = false
   csv.each do |row|
-    if User.last.id < counter
+    if User.last.id > counter
       counter += 1
       next
     end
