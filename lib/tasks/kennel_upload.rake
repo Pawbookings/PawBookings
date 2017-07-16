@@ -7,13 +7,13 @@ task :upload_kennel_csv => :environment do
   counter = 1
   limit_reached = false
   csv.each do |row|
+    sleep(1)
     if !User.where(id: counter).last.nil?
       counter += 1
       next
     end
     break if limit_reached
     if !row['zip'].blank?
-      sleep(1)
       # Create User
       u = User.new
       if row['email'].blank?
