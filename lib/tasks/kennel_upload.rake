@@ -7,13 +7,13 @@ task :upload_kennel_csv => :environment do
   counter = 1
   limit_reached = false
   csv.each do |row|
-    if User.last.id >= counter
+    if User.last.id >= counter || row['zip'] == '00000'
       counter += 1
       next
     end
     sleep(1)
     break if limit_reached
-    if !row['zip'].blank? || row['zip'] != '00000'
+    if !row['zip'].blank?
       # Create User
       u = User.new
       if row['email'].blank?
@@ -43,12 +43,12 @@ task :upload_kennel_csv => :environment do
       k.email = "customer_contact_#{counter}@yourbusiness.com"
       k.cats_or_dogs = "both"
       k.save!
+      counter += 1
       if k.latitude.nil?
         limit_reached = true
         k.delete
         u.delete
       end
     end # if !row['zip'].blank? || row['zip'] != '00000'
-    counter += 1
   end # csv.each do |row|
 end # task :upload_kennel_csv => :environment do
