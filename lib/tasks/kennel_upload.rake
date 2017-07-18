@@ -13,7 +13,7 @@ task :upload_kennel_csv => :environment do
     end
     sleep(1)
     break if limit_reached
-    if !row['zip'].blank?
+    if !row['zip'].blank? || !row['zip'] == '00000'
       # Create User
       u = User.new
       if row['email'].blank?
