@@ -1,5 +1,5 @@
 class BlogCategoriesController < ApplicationController
-  http_basic_authenticate_with name: "pawbookings", password: ENV["pawbookings_password"]
+  http_basic_authenticate_with name: ENV["pawbookings_email"], password: ENV["pawbookings_password"]
   def new
     @blog_category = BlogCategory.new
   end
