@@ -124,11 +124,12 @@ class SearchesController < ApplicationController
       runs = Run.where(kennel_id: hr.id)
       @final_search_results << hr if !runs.empty?
     end
+    @final_search_results.reverse!
     get_csv_kennels
   end
 
   def get_csv_kennels
-    relevant_locations = Kennel.near(params[:search_zip], params[:radius]).where(taken_ownership: false).to_a
+    relevant_locations = Kennel.near(params[:search_zip], params[:radius]).where(taken_ownership: false).reverse.to_a
     relevant_locations.each do |rl|
       @final_search_results << rl
     end

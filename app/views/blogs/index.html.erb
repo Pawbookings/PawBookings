@@ -24,7 +24,7 @@
                 <div class="blog_display_image_div">
                   <a href="<%= blog_path(blog.slug) %>"><img class="blog_display_image" src="<%= blog.blog_display_image %>"></a>
                 </div>
-                <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
+                <% if !current_user.nil? && current_user.email == ENV["pawbookings_email"] && current_user.kennel_or_customer == "admin" %>
                   <%= link_to "Edit", edit_blog_path(blog[:id]) %>
                   <br>
                   <%= link_to "Delete", blog_path(blog.slug), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
@@ -55,7 +55,7 @@
           <div class="blog_display_image_div">
             <a href="<%= blog_path(blog[:id]) %>"><img class="blog_display_image" src="<%= blog.blog_display_image %>"></a>
           </div>
-          <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
+          <% if !current_user.nil? && current_user.email == ENV["pawbookings_email"] && current_user.kennel_or_customer == "admin" %>
             <%= link_to "Edit", edit_blog_path(blog[:id]) %>
             <br>
             <%= link_to "Delete", blog_path(blog.slug), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
@@ -75,7 +75,7 @@
         <h5 class="blog_categories_title poppins_font default_green_color">Categories</h5>
         <% @blog_categories.each do |bc| %>
           <h6><%= link_to bc.title, blog_category_path(bc.title), class: "blog_category_link" %></h6>
-          <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
+          <% if !current_user.nil? && current_user.email == ENV["pawbookings_email"] && current_user.kennel_or_customer == "admin" %>
             <%= link_to "Edit", edit_blog_category_path(bc[:id]) %>
             <br>
             <%= link_to "Delete", blog_category_path(bc.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>

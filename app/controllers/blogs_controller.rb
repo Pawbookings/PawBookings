@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  http_basic_authenticate_with name: "pawbookings", password: ENV["pawbookings_password"], except: [:show, :blog_search, :index, :all_blogs]
+  http_basic_authenticate_with name: ENV["pawbookings_email"], password: ENV["pawbookings_password"], except: [:show, :blog_search, :index, :all_blogs]
 
   def index
     @latest_blogs = Blog.where("publish_date < ?", Date.tomorrow).limit(10).order('id desc')

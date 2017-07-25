@@ -13,7 +13,7 @@
           <p class="default_white_color"><%= unsanitize_date(blog.publish_date.to_s) %></p>
           <a href="<%= blog_path(blog.id) %>"><img class="width_100_percent" src="<%= blog.blog_display_image %>" /></a>
           <br>
-          <% if !current_user.nil? && current_user.email == "pawbookings@gmail.com" && current_user.kennel_or_customer == "admin" %>
+          <% if !current_user.nil? && current_user.email == ENV["pawbookings_email"] && current_user.kennel_or_customer == "admin" %>
             <%= link_to "Edit", edit_blog_path(blog[:id]) %>
             <br>
             <%= link_to "Delete", blog_path(blog.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
