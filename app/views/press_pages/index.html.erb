@@ -8,22 +8,28 @@
       <br />
       <br />
       <div class="row">
-      <% @press_pages.each do |pp| %>
-          <div class="col-xs-12 col-md-3">
-            <div class="press_page_div">
-              <h5><%= pp[:title] %></h5>
-              <h6><%= pp[:body] %></h6>
-              <a target="_blank" href="<%= pp[:link_to_press] %>">Read More...</a>
-              <br />
-              <% if !current_user.nil? && current_user.email == ENV["pawbookings_email"] && current_user.kennel_or_customer == "admin" %>
+        <% if @press_pages.blank? %>
+          <div class="col-xs-12 text-center">
+            <h5>No press added yet...</h5>
+          </div>
+        <% else %>
+          <% @press_pages.each do |pp| %>
+            <div class="col-xs-12 col-md-3">
+              <div class="press_page_div">
+                <h5><%= pp[:title] %></h5>
+                <h6><%= pp[:body] %></h6>
+                <a target="_blank" href="<%= pp[:link_to_press] %>">Read More...</a>
+                <br />
+                <% if !current_user.nil? && current_user.email == ENV["pawbookings_email"] && current_user.kennel_or_customer == "admin" %>
                 <%= link_to "Edit", edit_press_page_path(pp.id) %>
                 <br>
                 <%= link_to "Delete", press_page_path(pp.id), data: {confirm: "Are you sure you want to delete?"}, method: "delete" %>
-              <% end %>
+                <% end %>
+              </div>
             </div>
-          </div>
-      <% end %>
-    </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
