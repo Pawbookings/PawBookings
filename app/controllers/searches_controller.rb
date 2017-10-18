@@ -124,7 +124,6 @@ class SearchesController < ApplicationController
       runs = Run.where(kennel_id: hr.id)
       @final_search_results << hr if !runs.empty?
     end
-    @final_search_results.reverse!
     get_csv_kennels
   end
 
@@ -133,6 +132,7 @@ class SearchesController < ApplicationController
     relevant_locations.each do |rl|
       @final_search_results << rl
     end
+    @final_search_results
   end
 
 end
