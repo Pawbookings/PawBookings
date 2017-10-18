@@ -132,7 +132,7 @@ class SearchesController < ApplicationController
     relevant_locations.each do |rl|
       @final_search_results << rl
     end
-    @final_search_results
+    @final_search_results.reverse!
   end
 
 end
