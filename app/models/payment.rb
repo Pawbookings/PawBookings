@@ -4,8 +4,8 @@ include AuthorizeNet::API
   belongs_to :user
   belongs_to :kennel
 
-  validates :customer_first_name, format: { with: /\A[a-z\s-]{3,30}\z/i }
-  validates :customer_last_name, format: { with: /\A[a-z\s-]{3,30}\z/i }
+  validates :customer_first_name, presence: true
+  validates :customer_last_name, presence: true
   validates :customer_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
   validates :customer_phone, format: { with: /\A\+?[0-9]{,2}(-|\s)?\(?[0-9]{3}\)?(-|\s)?[0-9]{3}(-|\s)?[0-9]{4}\z/ }
   validates :room_details, presence: true
@@ -15,8 +15,8 @@ include AuthorizeNet::API
   validates :amenity_ids, presence: true
   validates :check_in_date, presence: true
   validates :check_out_date, presence: true
-  validates :payment_first_name, format: { with: /\A[a-z\s-]{3,30}\z/i }
-  validates :payment_last_name, format: { with: /\A[a-z\s-]{3,30}\z/i }
+  validates :payment_first_name, presence: true
+  validates :payment_last_name, presence: true
   validates_numericality_of :total_price
   validates :transID, presence: true
   validates :card_number, presence: true

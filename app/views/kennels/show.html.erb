@@ -54,7 +54,8 @@
             <% end %>
             <h4 class="arvo_font default_green_color">Policies:</h4>
             <% @policies.each do |policy| %>
-            <strong>•<%= policy[:description] %></strong>
+            <strong>•<%= policy[:title] %></strong>
+            <strong>- <%= policy[:description] %></strong>
             <br />
             <br />
             <% end %>
@@ -67,7 +68,8 @@
           <% else %>
             <h3 class="arvo_font default_green_color">Policies</h3>
             <% @policies.each do |policy| %>
-              <strong>•<%= policy[:description] %></strong>
+              <strong>•<%= policy[:title] %></strong>
+              <strong>- <%= policy[:description] %></strong>
               <br />
               <br />
             <% end %>

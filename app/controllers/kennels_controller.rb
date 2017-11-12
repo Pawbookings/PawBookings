@@ -7,6 +7,15 @@ class KennelsController < ApplicationController
 
   def create
     kennel = Kennel.new(kennel_params)
+    if sales_tax_invalid?(params[:kennel][:sales_tax])
+      error_message = "Sales Tax invalid."
+      kennel.errors.full_messages.each do |msg|
+        error_message << " #{msg}."
+      end
+      @kennel = kennel
+      flash[:notice] = error_message
+      return render 'new'
+    end
     user = User.where(id: current_user.id).first
     if kennel.valid? && !kennel_completed_registration? && kennel.save! && user.kennel = kennel
       flash[:notice] = "Your Kennel was created successfully!"
@@ -16,14 +25,16 @@ class KennelsController < ApplicationController
       HoursOfOperationsController.new.create(kennel[:id])
       user.completed_registration = "true"
       user.save!
-      redirect_to kennel_dashboard_path
+      return redirect_to kennel_dashboard_path
     else
-      error_message = "Unable to register your Kennel, validation falied."
+      binding.pry
+      error_message = "Unable to register your Kennel, validation failed."
       kennel.errors.full_messages.each do |err|
         error_message << " #{err}."
       end
       flash[:notice] = error_message
-      redirect_to request.referrer
+      @kennel = kennel
+      return render 'new'
     end
   end
 
@@ -33,21 +44,36 @@ class KennelsController < ApplicationController
 
   def update
     kennel = Kennel.find(params[:id])
+    if sales_tax_invalid?(params[:kennel][:sales_tax])
+      error_message = "Sales Tax invalid."
+      kennel.errors.full_messages.each do |msg|
+        error_message << " #{msg}."
+      end
+      @kennel = kennel
+      flash[:notice] = error_message
+      return render 'edit'
+    end
     kennel.name = params[:kennel][:name]
     kennel.address = params[:kennel][:address]
     kennel.mission_statement = params[:kennel][:mission_statement]
     kennel.city = params[:kennel][:city]
     kennel.state = params[:kennel][:state]
     kennel.zip = params[:kennel][:zip]
+    kennel.phone = params[:kennel][:phone]
     kennel.email = params[:kennel][:email]
     kennel.sales_tax = params[:kennel][:sales_tax]
-    kennel.avatar = params[:kennel][:avatar] if !params[:kennel][:avatar].nil?
+    kennel.avatar = params[:kennel][:logo] if !params[:kennel][:logo].nil?
     if kennel.valid? && kennel.save!
       flash[:notice] = "Your Kennel updated successfully!"
       redirect_to kennel_dashboard_path
     else
-      flash[:notice] = "Unable to update your Kennel, validation failed. #{kennel.errors.full_messages.first}"
-      redirect_to request.referrer
+      error_message = "Unable to update your Kennel:"
+      kennel.errors.full_messages.each do |msg|
+        error_message << " #{msg}"
+      end
+      flash[:notice] = error_message
+      @kennel = kennel
+      render 'edit'
     end
   end
 
@@ -335,6 +361,11 @@ class KennelsController < ApplicationController
   end
 
   private
+
+  def sales_tax_invalid?(sales_tax)
+    sales_tax = sales_tax.to_f
+    sales_tax < 1 ? true : false
+  end
 
   def kennel_params
     return params.require(:kennel).permit(:avatar, :name, :cats_or_dogs, :address, :city, :state, :zip, :phone, :email, :mission_statement, :sales_tax, :taken_ownership )

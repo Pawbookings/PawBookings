@@ -21,7 +21,7 @@
             <%= f.hidden_field :taken_ownership, value: true %>
             <%= f.label :name %>
             <br />
-            <%= f.text_field :name, placeholder: " Kennel-Name", class: "kennel_dashboard_input_edit" %>
+            <%= f.text_field :name, placeholder: " Kennel-Name", class: "kennel_dashboard_input_edit", maxlength: 50 %>
             <br />
             <br />
             <%= f.label :pets_allowed %>
@@ -31,12 +31,12 @@
             <br />
             <%= f.label :address %>
             <br />
-            <%= f.text_field :address, placeholder: " Address", class: "kennel_dashboard_input_edit" %>
+            <%= f.text_field :address, placeholder: " Address", class: "kennel_dashboard_input_edit", maxlength: 100 %>
             <br />
             <br />
             <%= f.label :city %>
             <br />
-            <%= f.text_field :city, placeholder: " City", class: "kennel_dashboard_input_edit" %>
+            <%= f.text_field :city, placeholder: " City", class: "kennel_dashboard_input_edit", maxlength: 100 %>
             <br />
             <br />
             <%= f.label :state %>
@@ -59,27 +59,27 @@
           <div class="col-md-4">
             <%= f.label :zip %>
             <br />
-            <%= f.text_field :zip, placeholder: " Zip", class: "kennel_dashboard_input_edit", onkeypress: "return isNumber(event);" %>
+            <%= f.text_field :zip, placeholder: " Zip", class: "kennel_dashboard_input_edit", onkeypress: "return isNumber(event);", maxlength: 5 %>
             <br />
             <br />
             <%= f.label :phone, "Phone where Pet-Owners can reach you at" %>
             <br />
-            <%= f.text_field :phone, placeholder: " Kennel-Phone", class: "kennel_dashboard_input_edit", onkeypress: "return isNumber(event);" %>
+            <%= f.text_field :phone, placeholder: " Kennel-Phone", class: "kennel_dashboard_input_edit", onkeypress: "return isNumber(event);", maxlength: 11 %>
             <br />
             <br />
             <%= f.label :email, "Email where Pet-Owners can reach you at" %>
             <br />
-            <%= f.text_field :email, placeholder: " Kennel-Email", class: "kennel_dashboard_input_edit" %>
+            <%= f.text_field :email, placeholder: " Kennel-Email", class: "kennel_dashboard_input_edit", maxlength: 100 %>
             <br />
             <br />
             <%= f.label :sales_tax %>
             <br />
-            <%= f.text_field :sales_tax, placeholder: " 6.5", class: "kennel_dashboard_input_edit" %> %
+            <%= f.text_field :sales_tax, placeholder: " 6.5", class: "kennel_dashboard_input_edit", maxlength: 5 %> %
             <br />
             <br />
             <%= f.label :mission_statement %>
             <br />
-            <%= f.text_area :mission_statement, placeholder: " Mission Statement", class: "kennel_dashboard_input_edit" %>
+            <%= f.text_area :mission_statement, placeholder: " Mission Statement", class: "kennel_dashboard_input_edit", maxlength: 600 %>
             <br />
             <br />
           </div>

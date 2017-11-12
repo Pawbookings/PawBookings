@@ -27,19 +27,19 @@
     <div style="margin-top: 1em;" class="row text-center">
       <div class="col-xs-6">
         <%= label_tag "Number of Dogs", nil, class: "search_label" %>
-        <%= select_tag(:number_of_dogs, options_for_select(0..5), class: "form-control common_search_field", value: params[:number_of_dogs]) %>
+        <%= select_tag(:number_of_dogs, options_for_select(number_of_pets_option, params[:number_of_dogs]), class: "form-control common_search_field") %>
       </div>
 
       <div class="col-xs-6">
         <%= label_tag "Number of cats", nil, class: "search_label" %>
-        <%= select_tag(:number_of_cats, options_for_select(0..5), class: "form-control common_search_field", value: params[:number_of_cats]) %>
+        <%= select_tag(:number_of_cats, options_for_select(number_of_pets_option, params[:number_of_cats]), class: "form-control common_search_field") %>
       </div>
     </div>
 
     <div style="margin-top: 1em;" class="row text-center">
       <div class="col-xs-12">
         <%= label_tag "Number of rooms", nil, class: "search_label" %>
-        <%= select_tag(:number_of_rooms, options_for_select(1..10), class: "form-control common_search_field", value: params[:number_of_rooms]) %>
+        <%= select_tag(:number_of_rooms, options_for_select(number_of_rooms_option, params[:number_of_rooms]), class: "form-control common_search_field") %>
       </div>
     </div>
 

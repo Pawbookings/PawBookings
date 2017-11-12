@@ -19,15 +19,17 @@ class Kennel < ActiveRecord::Base
   has_many   :stand_by_reservations
   has_many   :users, through: :reservations
 
-  # validates :name, presence: true
-  # validates :address, length: { minimum: 3 }
-  # validates :mission_statement, presence: true
-  # validates :city, presence: true
-  # validates :state, presence: true
-  # validates :zip, format: { with: /\A[0-9]{5}\z/i }
-  # validates :phone, format: { with: /\A\+?[0-9]{,2}(-|\s)?\(?[0-9]{3}\)?(-|\s)?[0-9]{3}(-|\s)?[0-9]{4}\z/ }
-  # validates :email, uniqueness: true
-  # validates :cats_or_dogs, presence: true
+  validates :name, presence: true
+  validates :address, length: { minimum: 3 }
+  validates :mission_statement, presence: true
+  validates :city, presence: true
+  validates :state, presence: true
+  validates :zip, format: { with: /\A[0-9]{5}\z/i }
+  validates :phone, format: { with: /\A\+?[0-9]{,2}(-|\s)?\(?[0-9]{3}\)?(-|\s)?[0-9]{3}(-|\s)?[0-9]{4}\z/ }
+  validates :email, uniqueness: true
+  validates :cats_or_dogs, presence: true
+  validates :avatar, presence: true
+  validates :sales_tax, presence: {message: "Must be an integer or decimal value."}
 
   geocoded_by :zip
   after_validation :geocode, if: ->(obj){ obj.zip.present? and obj.zip_changed? }

@@ -25,8 +25,9 @@ class RunsController < ApplicationController
       run.errors.full_messages.each do |err|
         error_message << " #{err}."
       end
+      @run = run
       flash[:notice] = error_message
-      redirect_to request.referrer
+      return render 'new'
     end
   end
 
@@ -52,8 +53,9 @@ class RunsController < ApplicationController
       run.errors.full_messages.each do |err|
         error_message << " #{err}."
       end
+      @run = run
       flash[:notice] = error_message
-      redirect_to request.referrer
+      return render 'new'
     end
   end
 

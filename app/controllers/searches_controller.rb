@@ -47,7 +47,7 @@ class SearchesController < ApplicationController
       get_pet_stay_dates
       location_filtering
       pet_type_filtering
-      holiday_filtering
+      # holiday_filtering
       hours_of_operation_filtering
       check_if_runs_listed
     end
@@ -76,27 +76,27 @@ class SearchesController < ApplicationController
     end
   end
 
-  def holiday_filtering
-    @kennels_with_holidays = []
-    @pet_type_filtered_results.each do |fr|
-      kennel = Kennel.find(fr.id)
-      holidays = Holiday.where(kennel_id: kennel[:id])
-      holidays.each do |h|
-        @pet_stay_date_range.each { |ps| @kennels_with_holidays << kennel if ps === h.holiday_date }
-      end
-    end
-    @negative_kennels = @kennels_with_holidays
-    @kennels_with_holidays.each do |k|
-      @pet_type_filtered_results.each do |pt|
-        @pet_type_filtered_results.delete pt if pt === k
-      end
-    end
-    @holiday_filtered_results = @pet_type_filtered_results
-  end
+  # def holiday_filtering
+  #   @kennels_with_holidays = []
+  #   @pet_type_filtered_results.each do |fr|
+  #     kennel = Kennel.find(fr.id)
+  #     holidays = Holiday.where(kennel_id: kennel[:id])
+  #     holidays.each do |h|
+  #       @pet_stay_date_range.each { |ps| @kennels_with_holidays << kennel if ps === h.holiday_date }
+  #     end
+  #   end
+  #   @negative_kennels = @kennels_with_holidays
+  #   @kennels_with_holidays.each do |k|
+  #     @pet_type_filtered_results.each do |pt|
+  #       @pet_type_filtered_results.delete pt if pt === k
+  #     end
+  #   end
+  #   @holiday_filtered_results = @pet_type_filtered_results
+  # end
 
   def hours_of_operation_filtering
     @kennels_that_are_closed = []
-    @holiday_filtered_results.each do |fr|
+    @pet_type_filtered_results.each do |fr|
       kennel = Kennel.find(fr.id)
       hours_of_operation = HoursOfOperation.where(kennel_id: kennel[:id])
       @kennels_that_are_closed << kennel if hours_of_operation.empty?
@@ -112,11 +112,11 @@ class SearchesController < ApplicationController
     end
     @kennels_that_are_closed.each do |k|
       @negative_kennels << k
-      @holiday_filtered_results.each do |fr|
-        @holiday_filtered_results.delete fr if k === fr
+      @pet_type_filtered_results.each do |fr|
+        @pet_type_filtered_results.delete fr if k === fr
       end
     end
-    @hours_of_operation_results = @holiday_filtered_results
+    @hours_of_operation_results = @pet_type_filtered_results
   end
 
   def check_if_runs_listed

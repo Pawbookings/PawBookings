@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module PawBookings
   class Application < Rails::Application
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+      html_tag
+    }
     config.middleware.use PDFKit::Middleware, print_media_type: true
     Ahoy.track_visits_immediately = true
     config.active_record.raise_in_transactional_callbacks = true

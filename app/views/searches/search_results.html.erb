@@ -27,6 +27,7 @@
                 <% else %>
                   <p class="search_results_mission_statement"><%= truncate(fr.mission_statement, length: 150, omission: "... ") %><%= link_to "read more", csv_kennel_path(id: fr) %></p>
                 <% end %>
+                <br />
                 <div class="row margin_top_n1em text-center">
                   <div class="col-xs-4">
                     <%= image_tag fr.avatar.url(:thumb), class:"border_radius_100 kennel_dashboard_avatar" %>

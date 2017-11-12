@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
   def notify_kennel_email(kennel_id, user_id)
     @kennel = Kennel.find(kennel_id)
     @user = User.find(user_id)
-    mail(to: "mcdonnellenterprisesllc@gmail.com", subject: 'Notify Kennel', from:"PawBookings <no_reply@pawbookings.com>")
+    mail(to: "pawbookings@gmail.com", subject: 'Notify Kennel', from:"PawBookings <no_reply@pawbookings.com>")
   end
 
   # Sends business-claim notification email to Admin.
@@ -13,7 +13,7 @@ class UserMailer < ApplicationMailer
     @email = email
     @phone = phone
     @kennel = Kennel.find(kennel_id)
-    mail(to: "mcdonnellenterprisesllc@gmail.com", subject: 'Kennel Business Claim', from:"PawBookings <no_reply@pawbookings.com>")
+    mail(to: "pawbookings@gmail.com", subject: 'Kennel Business Claim', from:"PawBookings <no_reply@pawbookings.com>")
   end
 
   # Confirms email and redirects user to reset their password.
@@ -88,7 +88,7 @@ class UserMailer < ApplicationMailer
 
   def pawbookings_support_email(message)
     @message = message
-    mail(to: "mcdonnellenterprisesllc@gmail.com", subject: 'PawBookings Support Contact')
+    mail(to: "pawbookings@gmail.com", subject: 'PawBookings Support Contact')
   end
 
   def sanitize_date(param)

@@ -28,60 +28,7 @@
         <%= hidden_field_tag :kennel_info, nil, value: params %>
         <%= hidden_field_tag :kennel_sales_tax, nil, value: params[:kennel_sales_tax] %>
       <div class="col-md-8">
-        <h3 class="arvo_font defaul">1. Billing Info</h3>
-        <div class="row">
-          <div class="col-md-6">
-            <%= label_tag "First Name" %>
-            <br>
-            <%= text_field_tag :payment_first_name, nil, placeholder: " First Name", class: "payment_input" %>
-          </div>
-          <div class="col-md-6">
-            <%= label_tag "Last Name" %>
-            <br>
-            <%= text_field_tag :payment_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
-          </div>
-        </div>
-        <br />
-        <div class="row">
-          <div class="col-md-6">
-            <%= label_tag "payment_card_type", "Card Type" %>
-            <br>
-            <%= select_tag :payment_card_type, options_for_select(card_type_option), class:"payment_input" %>
-          </div>
-          <div class="col-md-6">
-            <%= label_tag "Card Number" %>
-            <br>
-            <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number", class: "payment_input", onkeypress: "return isNumber(event);" %>
-          </div>
-        </div>
-        <br />
-        <div class="row">
-          <div class="col-md-6">
-            <%= label_tag "Expiration Month" %>
-            <br>
-            <%= text_field_tag :payment_expiration_month, nil, placeholder: " MM", class: "payment_input", onkeypress: "return isNumber(event);" %>
-          </div>
-          <div class="col-md-6">
-            <%= label_tag "Expiration Year" %>
-            <br>
-            <%= text_field_tag :payment_expiration_year, nil, placeholder: " YYYY", class: "payment_input", onkeypress: "return isNumber(event);" %>
-          </div>
-        </div>
-        <br />
-        <div class="row">
-          <div class="col-md-6">
-            <%= label_tag "CVV" %>
-            <br>
-            <%= text_field_tag :payment_cvv, nil, placeholder: " CVV", class: "payment_input", onkeypress: "return isNumber(event);" %>
-          </div>
-          <div class="col-md-6">
-            <%= label_tag "Zip" %>
-            <br>
-            <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode", class: "payment_input", onkeypress: "return isNumber(event);" %>
-          </div>
-        </div>
-        <br />
-
+        <!-- pet owner info -->
         <% if current_user.nil? %>
           <h3 class="arvo_font">2. Pet-Owner Info</h3>
           <div class="row">
@@ -137,7 +84,59 @@
           </div>
         </div>
         <% end %>
-
+        <br />
+        <h3 class="arvo_font defaul">1. Billing Info</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <%= label_tag "First Name" %>
+            <br>
+            <%= text_field_tag :payment_first_name, nil, placeholder: " First Name", class: "payment_input" %>
+          </div>
+          <div class="col-md-6">
+            <%= label_tag "Last Name" %>
+            <br>
+            <%= text_field_tag :payment_last_name, nil, placeholder: " Last Name", class: "payment_input" %>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-6">
+            <%= label_tag "payment_card_type", "Card Type" %>
+            <br>
+            <%= select_tag :payment_card_type, options_for_select(card_type_option), class:"payment_input" %>
+          </div>
+          <div class="col-md-6">
+            <%= label_tag "Card Number" %>
+            <br>
+            <%= text_field_tag :payment_card_number, nil, placeholder: " Card Number", class: "payment_input", onkeypress: "return isNumber(event);" %>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-6">
+            <%= label_tag "Expiration Month" %>
+            <br>
+            <%= text_field_tag :payment_expiration_month, nil, placeholder: " MM", class: "payment_input", onkeypress: "return isNumber(event);" %>
+          </div>
+          <div class="col-md-6">
+            <%= label_tag "Expiration Year" %>
+            <br>
+            <%= text_field_tag :payment_expiration_year, nil, placeholder: " YYYY", class: "payment_input", onkeypress: "return isNumber(event);" %>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-6">
+            <%= label_tag "CVV" %>
+            <br>
+            <%= text_field_tag :payment_cvv, nil, placeholder: " CVV", class: "payment_input", onkeypress: "return isNumber(event);" %>
+          </div>
+          <div class="col-md-6">
+            <%= label_tag "Zip" %>
+            <br>
+            <%= text_field_tag :payment_zipcode, nil, placeholder: " Zipcode", class: "payment_input", onkeypress: "return isNumber(event);" %>
+          </div>
+        </div>
         <br />
         <% counter = @total_pets.to_i %>
         <h3 class="arvo_font">3. Pet Info</h3>
