@@ -1,0 +1,25 @@
+LOG:  database system was shut down at 2017-11-12 17:12:19 EST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  duplicate key value violates unique constraint "ahoy_events_pkey"
+DETAIL:  Key (id)=(434712f8-2b30-465c-bbae-9abe52ed65e1) already exists.
+STATEMENT:  INSERT INTO "ahoy_events" ("id", "visit_id", "user_id", "name", "properties", "time") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"
+ERROR:  duplicate key value violates unique constraint "ahoy_events_pkey"
+DETAIL:  Key (id)=(7d8eefb3-0a55-4006-b429-23919f158e5d) already exists.
+STATEMENT:  INSERT INTO "ahoy_events" ("id", "visit_id", "user_id", "name", "properties", "time") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"
+ERROR:  duplicate key value violates unique constraint "ahoy_events_pkey"
+DETAIL:  Key (id)=(c404ea8d-301d-4476-8075-1396f842fae3) already exists.
+STATEMENT:  INSERT INTO "ahoy_events" ("id", "visit_id", "user_id", "name", "properties", "time") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"
+ERROR:  duplicate key value violates unique constraint "ahoy_events_pkey"
+DETAIL:  Key (id)=(0f5eb40c-3ff5-46c9-8456-3a70ba107419) already exists.
+STATEMENT:  INSERT INTO "ahoy_events" ("id", "visit_id", "user_id", "name", "properties", "time") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"
+ERROR:  duplicate key value violates unique constraint "ahoy_events_pkey"
+DETAIL:  Key (id)=(f17c178c-85e1-4573-a1d0-138bdfb33f65) already exists.
+STATEMENT:  INSERT INTO "ahoy_events" ("id", "visit_id", "user_id", "name", "properties", "time") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"
+ERROR:  duplicate key value violates unique constraint "ahoy_events_pkey"
+DETAIL:  Key (id)=(853c6578-c73c-4f1e-82eb-efa9dd90aefe) already exists.
+STATEMENT:  INSERT INTO "ahoy_events" ("id", "visit_id", "user_id", "name", "properties", "time") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"
+ERROR:  duplicate key value violates unique constraint "ahoy_events_pkey"
+DETAIL:  Key (id)=(135815c9-edd2-4713-9157-b74ff3b693ec) already exists.
+STATEMENT:  INSERT INTO "ahoy_events" ("id", "visit_id", "user_id", "name", "properties", "time") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"
