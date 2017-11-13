@@ -96,6 +96,7 @@ class SearchesController < ApplicationController
 
   def hours_of_operation_filtering
     @kennels_that_are_closed = []
+    @negative_kennels = []
     @pet_type_filtered_results.each do |fr|
       kennel = Kennel.find(fr.id)
       hours_of_operation = HoursOfOperation.where(kennel_id: kennel[:id])
