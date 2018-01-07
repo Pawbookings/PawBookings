@@ -402,16 +402,20 @@ class PaymentsController < ApplicationController
     @total_price = 0
     @total_price_without_tax = 0
     @tax_amount = 0
+    counter = 1
     params.each_pair do |k, v|
-      @total_price += v.to_f if (k.to_s.include? "total_price") || ((k.to_s.include? "room") && (k.to_s.include? "price"))
+      if (k.to_s.include? "total_price") || ((k.to_s.include? "room") && (k.to_s.include? "price"))
+        @total_price += v.to_f
+        if params["room_#{counter}_price"].to_f.to_s.length < 5 && params["room_1_price"].to_f.to_s.last == "0"
+          params["room_#{counter}_price"] = params["room_#{counter}_price"].to_f.to_s.split("").append("0").join("")
+        end
+      end
     end
     number_of_nights = @kennel_info.nil? ? params["number_of_nights"] : @kennel_info["number_of_nights"]
     @total_price = @total_price * number_of_nights.to_i
     if params[:amenities_total].nil?
       params[:amenities_total] = @amenities_total
     end
-
-
     if params[:amenities_total] == 0
       @total_price_without_tax = @total_price
     else
@@ -420,9 +424,14 @@ class PaymentsController < ApplicationController
     end
     @tax_amount = (@total_price * (params[:kennel_sales_tax].to_f * 0.01)).round(2)
     @total_price += @tax_amount
-
     @total_price = @total_price.round(2)
+    if @total_price.to_s.length < 5
+      @total_price = @total_price.to_s.split("").append("0").join("")
+    end
     @total_price_without_tax = @total_price_without_tax.round(2)
+    if @total_price_without_tax.to_s.length < 5
+      @total_price_without_tax = @total_price_without_tax.to_s.split("").append("0").join("")
+    end
   end
 
   def get_pets_total

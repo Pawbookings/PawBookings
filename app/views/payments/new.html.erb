@@ -116,12 +116,12 @@
           <div class="col-md-6">
             <%= label_tag "Expiration Month" %>
             <br>
-            <%= text_field_tag :payment_expiration_month, nil, placeholder: " MM", class: "payment_input", onkeypress: "return isNumber(event);" %>
+            <%= text_field_tag :payment_expiration_month, nil, placeholder: " MM", type: "text", class: "payment_input", onkeypress: "return isNumber(event);", maxlength: 2 %>
           </div>
           <div class="col-md-6">
             <%= label_tag "Expiration Year" %>
             <br>
-            <%= text_field_tag :payment_expiration_year, nil, placeholder: " YYYY", class: "payment_input", onkeypress: "return isNumber(event);" %>
+            <%= text_field_tag :payment_expiration_year, nil, placeholder: " YY", type: "text", class: "payment_input", onkeypress: "return isNumber(event);", maxlength: 2 %>
           </div>
         </div>
         <br />
@@ -142,6 +142,11 @@
         <h3 class="arvo_font">3. Pet Info</h3>
         <% (@total_pets.to_i).times do %>
           <h5 class="arvo_font">Pet# <%= counter %></h5>
+          <% if !@pets.blank? %>
+            <% @pets.each do |pet| %>
+              <p onclick='addSelectedPetToForm("<%= counter %>", "<%= pet[:name] %>", "<%= pet[:cat_or_dog] %>", "<%= pet[:breed] %>", "<%= pet[:weight] %>", "<%= pet[:vaccinations] %>", "<%= pet[:spay_or_neutered] %>", "<%= pet[:special_instructions] %>")' class="btn btn-primary">Add <%= pet[:name] %></p>
+            <% end %>
+          <% end %>
           <div class="row">
             <div class="col-md-6">
               <%= label_tag "Pet name" %>
@@ -193,13 +198,6 @@
             </div>
           </div>
           <br />
-          <% if !@pets.blank? %>
-            <% @pets.each do |pet| %>
-              <p onclick='addSelectedPetToForm("<%= counter %>", "<%= pet[:name] %>", "<%= pet[:cat_or_dog] %>", "<%= pet[:breed] %>", "<%= pet[:weight] %>", "<%= pet[:vaccinations] %>", "<%= pet[:spay_or_neutered] %>", "<%= pet[:special_instructions] %>")' class="btn btn-primary">Add <%= pet[:name] %></p>
-            <% end %>
-          <% end %>
-          <br />
-          <br />
           <% counter -= 1 %>
         <% end %>
       </div>
@@ -224,7 +222,7 @@
           <% params[:number_of_rooms].to_i.times do %>
             <div>
               <p class="margin_top_n1em poppins_font"><%= params["room_#{counter}_name"] %></p>
-              <p class="margin_top_n1em poppins_font">$<%= params["room_#{counter}_price"].to_f %></p>
+              <p class="margin_top_n1em poppins_font">$<%= params["room_#{counter}_price"] %></p>
             </div>
             <% counter -= 1 %>
           <% end %>
@@ -309,12 +307,12 @@
           <br>
           <%= label_tag "Expiration Month" %>
           <br>
-          <%= text_field_tag :payment_expiration_month, nil, placeholder: " MM", class: "payment_input", onkeypress: "return isNumber(event);" %>
+          <%= text_field_tag :payment_expiration_month, nil, placeholder: " MM", class: "payment_input", onkeypress: "return isNumber(event);", maxlength: 2 %>
           <br>
           <br>
           <%= label_tag "Expiration Year" %>
           <br>
-          <%= text_field_tag :payment_expiration_year, nil, placeholder: " YYYY", class: "payment_input", onkeypress: "return isNumber(event);" %>
+          <%= text_field_tag :payment_expiration_year, nil, placeholder: " YY", class: "payment_input", onkeypress: "return isNumber(event);", maxlength: 2 %>
           <br>
           <br>
           <%= label_tag "CVV" %>
@@ -383,6 +381,12 @@
           <% counter = @total_pets.to_i %>
           <% (@total_pets.to_i).times do %>
             <h4 class="arvo_font">Pet# <%= counter %></h4>
+            <% if !@pets.blank? %>
+              <% @pets.each do |pet| %>
+                <p onclick='addSelectedPetToForm("<%= counter %>", "<%= pet[:name] %>", "<%= pet[:cat_or_dog] %>", "<%= pet[:breed] %>", "<%= pet[:weight] %>", "<%= pet[:vaccinations] %>", "<%= pet[:spay_or_neutered] %>", "<%= pet[:special_instructions] %>")' class="btn btn-primary">Add <%= pet[:name] %></p>
+              <% end %>
+            <% end %>
+            <br
             <%= label_tag "Pet name" %>
             <br>
             <%= text_field_tag "pet_name_#{counter}", nil, placeholder: " Pet Name", class: "payment_input pet_name_#{counter}" %>
@@ -419,13 +423,6 @@
             <%= select_tag "pet_spay_or_neutered_#{counter}", options_for_select(spay_or_neutered_option), class:"payment_input pet_spay_or_neutered_#{counter}" %>
             <br>
             <br>
-            <% if !@pets.blank? %>
-              <% @pets.each do |pet| %>
-                <p onclick='addSelectedPetToForm("<%= counter %>", "<%= pet[:name] %>", "<%= pet[:cat_or_dog] %>", "<%= pet[:breed] %>", "<%= pet[:weight] %>", "<%= pet[:vaccinations] %>", "<%= pet[:spay_or_neutered] %>", "<%= pet[:special_instructions] %>")' class="btn btn-primary">Add <%= pet[:name] %></p>
-              <% end %>
-            <% end %>
-            <br />
-            <br />
             <br />
             <% counter -= 1 %>
           <% end %>
@@ -450,7 +447,7 @@
           <% counter = params[:number_of_rooms].to_i %>
             <div>
               <p class="margin_top_n1em poppins_font"><%= params["room_#{counter}_name"] %></p>
-              <p class="margin_top_n1em poppins_font">$<%= params["room_#{counter}_price"].to_f %></p>
+              <p class="margin_top_n1em poppins_font">$<%= params["room_#{counter}_price"] %></p>
             </div>
             <% counter -= 1 %>
           <% end %>
@@ -503,34 +500,34 @@
 <%= render partial: "shared/footer" %>
 
 <script type="text/javascript">
-function paymentChangeBreed(){
-  var total_pets = parseInt("<%= @total_pets %>");
-  while(total_pets > 0 ){
-    if ($("#pet_type_"+total_pets).val() == "dog"){
-      console.log($("#pet_type_"+total_pets).val());
-      $(".pet_breed_selection_"+total_pets).show();
-    } else {
-      $(".pet_breed_selection_"+total_pets).hide();
+  function paymentChangeBreed(){
+    var total_pets = parseInt("<%= @total_pets %>");
+    while(total_pets > 0 ){
+      if ($("#pet_type_"+total_pets).val() == "dog"){
+        console.log($("#pet_type_"+total_pets).val());
+        $(".pet_breed_selection_"+total_pets).show();
+      } else {
+        $(".pet_breed_selection_"+total_pets).hide();
+      }
+      total_pets -= 1;
     }
-    total_pets -= 1;
   }
-}
 
-function addSelectedPetToForm(pet_number, name, cat_or_dog, breed, weight, vaccinations, spay_or_neutered, special_instructions){
+  function addSelectedPetToForm(pet_number, name, cat_or_dog, breed, weight, vaccinations, spay_or_neutered, special_instructions){
 
-  // NEEDS TO BE SWITCHED TO TARGET CLASS SO BOTH MOBILE AND DESKTOP CHANGE
-  $(".pet_name_" + pet_number).val(name);
-  $(".pet_type_" + pet_number).val(cat_or_dog);
-  $(".pet_breed_" + pet_number).val(breed);
-  $(".pet_weight_" + pet_number).val(weight);
-  $(".pet_vaccinations_" + pet_number).val(vaccinations);
-  $(".pet_spay_or_neutered_" + pet_number).val(spay_or_neutered);
-  $(".pet_special_instructions_" + pet_number).val(special_instructions);
+    // NEEDS TO BE SWITCHED TO TARGET CLASS SO BOTH MOBILE AND DESKTOP CHANGE
+    $(".pet_name_" + pet_number).val(name);
+    $(".pet_type_" + pet_number).val(cat_or_dog);
+    $(".pet_breed_" + pet_number).val(breed);
+    $(".pet_weight_" + pet_number).val(weight);
+    $(".pet_vaccinations_" + pet_number).val(vaccinations);
+    $(".pet_spay_or_neutered_" + pet_number).val(spay_or_neutered);
+    $(".pet_special_instructions_" + pet_number).val(special_instructions);
 
-  if(cat_or_dog == "cat"){
-    $(".pet_breed_selection_" + pet_number).hide();
-  } else {
-    $(".pet_breed_selection_" + pet_number).show();
+    if(cat_or_dog == "cat"){
+      $(".pet_breed_selection_" + pet_number).hide();
+    } else {
+      $(".pet_breed_selection_" + pet_number).show();
+    }
   }
-}
 </script>

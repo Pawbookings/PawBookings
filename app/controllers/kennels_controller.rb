@@ -27,7 +27,6 @@ class KennelsController < ApplicationController
       user.save!
       return redirect_to kennel_dashboard_path
     else
-      binding.pry
       error_message = "Unable to register your Kennel, validation failed."
       kennel.errors.full_messages.each do |err|
         error_message << " #{err}."

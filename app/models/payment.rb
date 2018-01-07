@@ -52,8 +52,6 @@ include AuthorizeNet::API
       return true
     else
       puts response.messages.messages[0].text
-      puts response.transactionResponse.errors.errors[0].errorCode
-      puts response.transactionResponse.errors.errors[0].errorText
       return false
     end
   end
@@ -65,11 +63,7 @@ private
   end
 
   def card_expiration_date(params)
-    year = []
-    year << params["payment_expiration_year"].split("")[2]
-    year << params["payment_expiration_year"].split("")[3]
-    year = year.join("")
-    @date = "#{params[:payment_expiration_month]}#{year}"
+    @date = "#{params[:payment_expiration_month]}#{params[:payment_expiration_year]}"
     return @date
   end
 
