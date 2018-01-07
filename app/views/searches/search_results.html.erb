@@ -25,7 +25,7 @@
                 <% if fr[:taken_ownership] %>
                   <p class="search_results_mission_statement"><%= truncate(fr.mission_statement, length: 150, omission: "... ") %><%= link_to "read more", kennel_path(fr, search_info: params) %></p>
                 <% else %>
-                  <p class="search_results_mission_statement"><%= truncate(fr.mission_statement, length: 150, omission: "... ") %><%= link_to "read more", csv_kennel_path(id: fr) %></p>
+                  <p class="search_results_mission_statement"><%= link_to "read more", csv_kennel_path(id: fr) %></p>
                 <% end %>
                 <br />
                 <div class="row margin_top_n1em text-center">
