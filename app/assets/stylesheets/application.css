@@ -82,6 +82,10 @@ table, th, td {
   margin: 0.5em;
 }
 
+.margin_right_1em {
+  margin-right: 1em;
+}
+
 .margin_left_1em {
   margin-left: 1em;
 }
@@ -141,6 +145,10 @@ table, th, td {
 
 .link_color {
   color: #1dcfe7;
+}
+
+.color_black {
+  color: black;
 }
 
 .line_height_1em {

@@ -252,7 +252,8 @@
           <p class="margin_top_n1em poppins_font">$<%= @total_price %></p>
 
           <div class="text-center">
-            <%= submit_tag "Book Now!", class: "btn btn-success payment_submt_btn" %>
+            <button type="button" class="btn btn-success payment_submt_btn" data-toggle="modal" data-target=".before_payment_notification">Book Room(s)</button>
+            <%= render partial: "shared/before_payment_notification" %>
             <br />
             <br />
             <p class="poppins_font font_italic">By clicking "Book Now!" you are agreeing to the PawBookings <a href="<%= policies_and_terms_path %>">Terms of Use and Privacy Policy</a></p>
@@ -480,7 +481,8 @@
           <div class="border"></div>
           <br />
           <div class="text-center">
-            <%= submit_tag "Book Now!", class: "btn btn-success payment_submt_btn" %>
+            <button type="button" class="btn btn-success payment_submt_btn" data-toggle="modal" data-target=".before_payment_notification">Book Room(s)</button>
+            <%= render partial: "shared/before_payment_notification" %>
             <br />
             <br />
             <p class="poppins_font font_italic">By clicking "Book Now!" you are agreeing to the PawBookings <a href="<%= policies_and_terms_path %>">Terms of Use and Privacy Policy</a></p>

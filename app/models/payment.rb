@@ -59,6 +59,7 @@ include AuthorizeNet::API
 private
 
   def card_number(params)
+    params[:payment_card_number] = params[:payment_card_number].split(" ").join("")
     return params[:payment_card_number]
   end
 
