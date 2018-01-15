@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :phone, presence: true
+
   has_attached_file :user_image,
                :storage => :s3,
                styles: { small: "350x333#" }, default_url: "/assets/default_photo_image.png",

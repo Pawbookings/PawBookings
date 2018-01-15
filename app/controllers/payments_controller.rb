@@ -48,9 +48,20 @@ class PaymentsController < ApplicationController
       random_password
       # if user not logged in and doesnt have an account
       if User.where(email: params[:customer_email].downcase).blank?
-        @user = User.create!(email: params[:customer_email].downcase, phone: params[:customer_phone], first_name: params[:customer_first_name].downcase, last_name: params[:customer_last_name].downcase, password: @encrypted_password, password_confirmation: @encrypted_password, kennel_or_customer: "customer" )
+        @user = User.new(email: params[:customer_email].downcase, phone: params[:customer_phone], first_name: params[:customer_first_name].downcase, last_name: params[:customer_last_name].downcase, password: @encrypted_password, password_confirmation: @encrypted_password, kennel_or_customer: "customer")
+        @user.valid?
+        begin
+          @user.save
+        rescue
+          error_message = "Error: "
+          @user.errors.full_messages.each do |err|
+            error_message << "#{err}. "
+          end
+          flash[:notice] = error_message
+          return redirect_to request.referrer
+        end
         get_inputed_pet_names
-        register_pets
+        return redirect_to request.referrer if !register_pets
         get_pet_ids
         get_run_ids
         process_payment
@@ -65,7 +76,7 @@ class PaymentsController < ApplicationController
         if Pet.where(user_id: @user[:id]).blank?
           # if user doesnt have pets associated with them
           get_inputed_pet_names
-          register_pets
+          return redirect_to request.referrer if !register_pets
           get_pet_ids
           get_run_ids
           process_payment
@@ -73,7 +84,7 @@ class PaymentsController < ApplicationController
           # if user has pets associated with them and/or handles new pets
           pets = Pet.where(user_id: @user[:id])
           get_inputed_pet_names
-          register_pets_not_registered
+          return redirect_to request.referrer if !register_pets_not_registered
           get_pet_ids
           get_run_ids
           process_payment
@@ -89,7 +100,7 @@ class PaymentsController < ApplicationController
       if Pet.where(user_id: @user[:id]).blank?
         # if user doesnt have pets associated with them
         get_inputed_pet_names
-        register_pets
+        return redirect_to request.referrer if !register_pets
         get_pet_ids
         get_run_ids
         process_payment
@@ -97,7 +108,7 @@ class PaymentsController < ApplicationController
         # if user has pets associated with them and/or has new pets
         pets = Pet.where(user_id: @user[:id])
         get_inputed_pet_names
-        register_pets_not_registered
+        return redirect_to request.referrer if !register_pets_not_registered
         get_pet_ids
         get_run_ids
         process_payment
@@ -280,9 +291,23 @@ class PaymentsController < ApplicationController
     total_pets = @kennel_info["number_of_dogs"].to_i + @kennel_info["number_of_cats"].to_i
     counter = total_pets
     total_pets.times do
+      pet = Pet.new(user_id: @user[:id], name: params["pet_name_#{counter}"], cat_or_dog: params["pet_type_#{counter}"], breed: params["pet_breed_#{counter}"], weight: params["pet_weight_#{counter}"], special_instructions: params["pet_special_instructions_#{counter}"], vaccinations: params["pet_vaccinations_#{counter}"], spay_or_neutered: params["pet_spay_or_neutered_#{counter}"])
+      counter -= 1
+      if !pet.valid?
+        error_message = "Pet Info Error: "
+        pet.errors.full_messages.each do |err|
+          error_message << "#{err}. "
+        end
+        flash[:notice] = error_message
+        return false
+      end
+    end
+    counter = total_pets
+    total_pets.times do
       @user.pets.create!(user_id: @user[:id], name: params["pet_name_#{counter}"], cat_or_dog: params["pet_type_#{counter}"], breed: params["pet_breed_#{counter}"], weight: params["pet_weight_#{counter}"], special_instructions: params["pet_special_instructions_#{counter}"], vaccinations: params["pet_vaccinations_#{counter}"], spay_or_neutered: params["pet_spay_or_neutered_#{counter}"])
       counter -= 1
     end
+    return true
   end
 
   def get_pet_ids
@@ -312,11 +337,27 @@ class PaymentsController < ApplicationController
           if pn == v
             pet_number << k.split("_")[2]
             pet_number = pet_number.join("").to_i
+            pet = Pet.new(name: params["pet_name_#{pet_number}"], cat_or_dog: params["pet_type_#{pet_number}"], breed: params["pet_breed_#{pet_number}"], weight: params["pet_weight_#{pet_number}"], special_instructions: params["pet_special_instructions_#{pet_number}"], vaccinations: params["pet_vaccinations_#{pet_number}"], spay_or_neutered: params["pet_spay_or_neutered_#{pet_number}"])
+            if !pet.valid?
+              error_message = "Pet Info Error: "
+              pet.errors.full_messages.each do |err|
+                error_message << "#{err}. "
+              end
+              flash[:notice] = error_message
+              return false
+            end
+          end
+        end
+        params.each_pair do |k, v|
+          if pn == v
+            pet_number << k.split("_")[2]
+            pet_number = pet_number.join("").to_i
             @user.pets.create!(user_id: @user[:id], name: params["pet_name_#{pet_number}"], cat_or_dog: params["pet_type_#{pet_number}"], breed: params["pet_breed_#{pet_number}"], weight: params["pet_weight_#{pet_number}"], special_instructions: params["pet_special_instructions_#{pet_number}"], vaccinations: params["pet_vaccinations_#{pet_number}"], spay_or_neutered: params["pet_spay_or_neutered_#{pet_number}"])
           end
         end
       end
     end
+    return true
   end
 
   def get_run_ids
