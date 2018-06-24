@@ -6,13 +6,13 @@
       <p> Thank you for your recent PawBookings.com reservation.</p>
       <br />
       <p> Below is your Kennel Reservation details. Please review the following information for accuracy, and note the details contained in the IMPORTANT INFORMATION section below. If you have any questions, please email reservations@pawbookings.com immediately. Please put your Reservation Confirmation Number in the subject line of the email.</p>
-      <p>Reservation Insurance (**** I’m not sure if I’ll do this. Just toying with the idea. ****) If you haven't purchased reservation insurance, contact a PawBookings.com reservation specialist at the email above for a quote.</p>
+      
       <br />
-      <h3 class="default_green_color">Pet Owner Info</h3>
+      <h3 class="default_green_color">Reservation Summary</h3>
       <p><strong>Reservation-ID: </strong><%= @reservation[:id] %></p>
       <p><strong>Check-In Date: </strong><%= @reservation[:check_in_date] %></p>
       <p><strong>Check-Out Date: </strong><%= @reservation[:check_out_date] %></p>
-      <p><strong>Reservation-Confirmation-Number: </strong><%= @reservation[:transID] %></p>
+      
       <!-- <%# if @reservation[:amenity_details].nil? %>
         <p><strong>•No Amenities Chosen.</strong></p>
       <%# else %>
@@ -25,17 +25,6 @@
         <%# end %>
       <%# end %> -->
 
-      <h3 class="default_green_color">Pets:</h3>
-      <% JSON.parse(@reservation[:pet_ids]).each do |pet_id| %>
-        <% pet = Pet.find(pet_id) %>
-        <p><strong>Name: </strong><%= pet[:name] %></p>
-        <p><strong>Cat or Dog: </strong><%= pet[:cat_or_dog] %></p>
-        <p><strong>Breed: </strong><%= pet[:breed] %></p>
-        <p><strong>Weight: </strong><%= pet[:weight] %></p>
-        <p><strong>Vaccinations: </strong><%= pet[:vaccinations] %></p>
-        <p><strong>Spay or Neutered: </strong><%= pet[:spay_or_neutered] %></p>
-        <p><strong>Special instructions: </strong><%= pet[:special_instructions] %></p>
-      <% end %>
 <!--
       <h3 class="default_green_color">Room Details:</h3>
       <%# JSON.parse(@reservation[:room_details]).each do |key, val| %>
@@ -51,7 +40,7 @@
       <p><strong>Phone: </strong><%= @kennel[:phone] %></p>
       <p><strong>Email: </strong><%= @kennel[:email] %></p>
 
-      <h3>Hours of Operation</h3>
+      <h3>Payment Summary</h3>
       <% "#{@hours_of_operation[:monday_open]} - #{@hours_of_operation[:monday_close]}" %>
       <% "#{@hours_of_operation[:tuesday_open]} - #{@hours_of_operation[:tuesday_close]}" %>
       <% "#{@hours_of_operation[:wednesday_open]} - #{@hours_of_operation[:wednesday_close]}" %>
@@ -61,17 +50,16 @@
       <% "#{@hours_of_operation[:sunday_open]} - #{@hours_of_operation[:sunday_close]}" %>
       <br />
       <br />
-      <p><strong>Total Price without Tax: </strong><%= @reservation[:total_price_without_tax] %></p>
-      <p><strong>Tax Percentage: </strong><%= @reservation[:tax_percentage] %></p>
-      <p><strong>Total Tax Price: </strong><%= @reservation[:tax_total_price] %></p>
-      <p><strong>Total-Price: </strong><%= @total_price %></p>
-      <p>A separate receipt will be emailed to you.</p>
+      <p><strong>Total Price without Tax: </strong><%= "$ %.2f" % reservation[:total_price_without_tax] %></p>
+      <p><strong>Tax Percentage: </strong><%= "%.2f%" % @reservation[:tax_percentage] %></p>
+      <p><strong>Total Tax Price: </strong><%= "$ %.2f" % @reservation[:tax_total_price] %></p>
+      <p><strong>Total Price: </strong><%= "$ %.2f" % @total_price %></p>
+      <p>A SEPARATE RESERVATION CONFIRMATION EMAIL WILL BE EMAILED TO YOU SOON WITH IMPORTANT INFORMATION REGARDING YOUR RESERVATION</p>
 
       <div class="res_email_special_information">
-        <p>You will be receiving a reminder email to upload the vaccination documents for your pet(s). Remember! It is extremely important that proof of vaccinations are uploaded to your account. Failure to provide proof of vaccinations may void your reservation.</p>
-        <p>Please review the Change/Cancellation/Refund Policy included below. If you need to make changes to your reservation, please email reservations@pawbookings.com or call us at 1-844- 944-3333.</p>
+        
         <p>Thank you again for choosing PawBookings.com to reserve your pet’s holiday!</p>
-        <p>This email was sent to you by PawBookings.com. Please do not respond to this email. Please see this email and the other terms and conditions for this reservation for more details. © 2016. PawBookings.com, Inc. All Rights Reserved</p>
+        <p>This email was sent to you by PawBookings.com. Please do not respond to this email.© 2016. PawBookings.com, Inc. All Rights Reserved</p>
       </div>
     </div>
   </div>
