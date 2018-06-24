@@ -33,8 +33,8 @@
       <% "#{@hours_of_operation[:sunday_open]} - #{@hours_of_operation[:sunday_close]}" %>
       <br />
       <br />
-      <p><strong>Total Price without Tax: </strong><%= "$ %.2f" % @reservation[:total_price_without_tax] %></p>
-      <p><strong>Tax Percentage: </strong><%= "%.2f%" % @reservation[:tax_percentage] %></p>
+      <p><strong>Total Price without Tax: </strong><%= "$ %.2f" % @reservation.try(:total_price_without_tax) %></p>
+      <p><strong>Tax Percentage: </strong><%= "%.2f %" % @reservation.try(:tax_percentage) %></p>
       <p><strong>Total Tax Price: </strong><%= "$ %.2f" % @reservation.try(:tax_total_price) %></p>
       <p><strong>Total Price: </strong><%= "$ %.2f" % @total_price %></p>
       <p>A SEPARATE RESERVATION CONFIRMATION EMAIL WILL BE EMAILED TO YOU SOON WITH IMPORTANT INFORMATION REGARDING YOUR RESERVATION</p>

@@ -378,7 +378,7 @@ class PaymentsController < ApplicationController
     payment = Payment.new
     if payment.payment_successful?(params, params[:total_price].to_f)
       get_room_info
-      if @kennel.reservations.create!(
+      reservation = @kennel.reservations.build(
                                    user_id: @user.id,
                                    check_in_date: @kennel_info["check_in"],
                                    check_out_date: @kennel_info["check_out"],
@@ -405,9 +405,10 @@ class PaymentsController < ApplicationController
                                    checked_out: "false",
                                    three_weeks_before_email_reminder: "false",
                                    one_week_before_email_reminder: "false",
-                                   day_before_email_reminder: "false").valid?
+                                   day_before_email_reminder: "false")
+      if reservation.valid?
 
-        reservation = Reservation.where(customer_email: params[:customer_email].downcase).first
+        # reservation = Reservation.where(customer_email: params[:customer_email].downcase).first
         reservation.kennelID = reservation[:kennel_id]
         reservation.userID = reservation[:user_id]
         reservation.reservationID = reservation[:id]
