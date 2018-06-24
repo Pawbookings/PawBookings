@@ -314,8 +314,9 @@ class PaymentsController < ApplicationController
     @pet_ids = []
     @pet_names.each do |pn|
       pet = Pet.where(user_id: @user[:id], name: pn).first
-      @pet_ids << pet[:id]
+      @pet_ids << pet[:id] if pet.present?
     end
+    @pet_ids
   end
 
   def get_inputed_pet_names
