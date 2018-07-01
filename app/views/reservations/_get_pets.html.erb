@@ -1,0 +1,3 @@
+<% @pets.each do |pet| %>
+	<option value="<%= pet.id %>"><%= "#{pet.name} (#{pet.cat_or_dog})"%></option>
+<% end %>

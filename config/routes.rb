@@ -18,6 +18,11 @@ Rails.application.routes.draw do
   resources :amenities, only: [:new, :create, :update, :destroy]
   resources :policies, only: [:new, :create, :update, :destroy]
   resources :photos
+  get '/reservations/old', to: "reservations#old_reservations", as: :old_reservation
+  get '/get_pets', to: "reservations#get_pets", as: :get_pets
+
+
+  post '/save_old_reservation', to: "reservations#save_old_reservations", as: :save_old_reservation
   resources :reservations, only: [:show]
   resources :kennel_ratings, only: [:new, :create]
   resources :stand_by_reservations, only: [:new, :create]

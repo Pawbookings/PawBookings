@@ -1,0 +1,179 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h1 class="arvo_font payment_main_title">Old Reservation</h1>
+      <br />
+      <div class="border"></div>
+      <br />
+    </div>
+  </div>
+
+  <div class="">
+    <div class="row">
+      <%= form_tag save_old_reservation_path, method: :post do %>
+        <%# if !@amenity_details.empty? %>
+          <%#= hidden_field_tag :amenity_details, nil, value: @amenity_details.to_s %>
+        <%# end %>
+
+        <%# if !@amenity_ids.empty? %>
+          <%#= hidden_field_tag :amenity_ids, nil, value: @amenity_ids %>
+        <%# end %>
+        <%#= hidden_field_tag :tax_total_price, nil, value: @tax_amount %>
+        <%#= hidden_field_tag :total_price_without_tax, nil, value: @total_price_without_tax %>
+        <%#= hidden_field_tag :amenities_total, nil, value: @amenities_total %>
+        <%#= hidden_field_tag :total_price, nil, value: @total_price %>
+        <%#= hidden_field_tag :total_pets, nil, value: @total_pets %>
+        <%#= hidden_field_tag :kennel_info, nil, value: params %>
+        <%#= hidden_field_tag :kennel_sales_tax, nil, value: params[:kennel_sales_tax] %>
+        <div class="col-md-8">
+
+          <h3 class="arvo_font">Pet-Owner Info</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag "First Name" %>
+              <br>
+              <%= text_field_tag :customer_first_name, nil, placeholder: " First Name", class: "form-control payment_input" %>
+            </div>
+            <div class="col-md-6">
+              <%= label_tag "Last Name" %>
+              <br>
+              <%= text_field_tag :customer_last_name, nil, placeholder: " Last Name", class: "form-control payment_input" %>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag "Email" %>
+              <br>
+              <%= text_field_tag :customer_email, nil, placeholder: " Email", class: "form-control payment_input" %>
+            </div>
+            <div class="col-md-6">
+              <%= label_tag "Phone" %>
+              <br>
+              <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "form-control payment_input", onkeypress: "return isNumber(event);" %>
+            </div>
+          </div>
+          <br />
+
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag "Selected Customer's Pets" %>
+              <br>
+              <select id="pets" multiple="multiple" name="pets[]" class="selectpicker form-control">
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <%= label_tag "Select Room Units" %>
+              <br>
+              <select id="room-units" multiple="multiple" name="room-units[]">
+                <% @runs.each do |run| %>
+                  <option value="<%= run.id %>"><%= "#{run.title} ($#{run.price})"%></option>
+                <% end %>
+              </select>
+            </div>
+          </div>
+
+          <br />
+          <div class="row">
+            <div class="col-md-6">
+              <%= label_tag "Check In - Check Out" %>
+              <br>
+              <%= text_field_tag(:reservation_dates, nil, class: "form-control daterange_check_in common_search_field text-center", required: true, name: "reservation_dates", value: '') %>
+            </div>
+
+            <div class="col-md-6">
+              <%= label_tag "Select Amenities" %>
+              <br>
+              <select id="amenities" multiple="multiple" name="amenities[]">
+                <% @amenities.each do |amenity| %>
+                  <option value="<%= amenity.id %>"><%= "#{amenity.title} ($#{amenity.price})"%></option>
+                <% end %>
+              </select>
+            </div>
+          </div>
+           
+      
+          <br>
+          <br>
+          <%= submit_tag 'Save', class: 'form-control search_submit_btn' %>
+          <br>
+          <br>
+          
+          
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<%= render partial: "shared/footer" %>
+
+<script type="text/javascript">
+  function paymentChangeBreed(){
+    var total_pets = parseInt("<%= @total_pets %>");
+    while(total_pets > 0 ){
+      if ($("#pet_type_"+total_pets).val() == "dog"){
+        console.log($("#pet_type_"+total_pets).val());
+        $(".pet_breed_selection_"+total_pets).show();
+      } else {
+        $(".pet_breed_selection_"+total_pets).hide();
+      }
+      total_pets -= 1;
+    }
+  }
+
+  function addSelectedPetToForm(pet_number, name, cat_or_dog, breed, weight, vaccinations, spay_or_neutered, special_instructions){
+
+    // NEEDS TO BE SWITCHED TO TARGET CLASS SO BOTH MOBILE AND DESKTOP CHANGE
+    $(".pet_name_" + pet_number).val(name);
+    $(".pet_type_" + pet_number).val(cat_or_dog);
+    $(".pet_breed_" + pet_number).val(breed);
+    $(".pet_weight_" + pet_number).val(weight);
+    $(".pet_vaccinations_" + pet_number).val(vaccinations);
+    $(".pet_spay_or_neutered_" + pet_number).val(spay_or_neutered);
+    $(".pet_special_instructions_" + pet_number).val(special_instructions);
+
+    if(cat_or_dog == "cat"){
+      $(".pet_breed_selection_" + pet_number).hide();
+    } else {
+      $(".pet_breed_selection_" + pet_number).show();
+    }
+  }
+
+  $(document).ready(function() {
+    $('#pets').multiselect();
+    $('#room-units').multiselect();
+    $('#amenities').multiselect();
+
+
+
+    $("#customer_email").blur(function(){
+      // alert("This input field has lost its focus.");
+
+      $.ajax({
+          url: '/get_pets',
+          type: 'GET',
+          dataType: 'HTML',
+          data: {email: $('#customer_email').val()},
+          success: function(result) {
+            // console.log(result);
+            $('#pets').html(result);
+            $('#pets').multiselect('rebuild');
+
+          }
+        });
+    });
+  });
+
+
+
+</script>

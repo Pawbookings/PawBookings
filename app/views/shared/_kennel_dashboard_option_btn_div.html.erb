@@ -12,6 +12,9 @@
     <div class="br_if_desktop"><br /></div>
     <%= link_to "Breed Restrictions", new_breed_restriction_path, class: "btn btn-success" %>
     <div class="br_if_desktop"><br /></div>
+    
+    <%= link_to "Old Reservations", old_reservation_path, class: "btn btn-success"%>
+    <div class="br_if_desktop"><br /></div>
     <%= link_to "Kennel Pictures", new_photo_path, class: "btn btn-success" %>
   </div>
 <% else %>
@@ -22,6 +25,8 @@
     <%= link_to "Holidays", new_holiday_path, class: "btn btn-success" %>
     <%= link_to "Policies", new_policy_path, class: "btn btn-success" %>
     <%= link_to "Breed Restrictions", new_breed_restriction_path, class: "btn btn-success" %>
+    <%= link_to "Old Reservations", old_reservation_path, class: "btn btn-success"%>
+
     <%= link_to "Kennel Pictures", new_photo_path, class: "btn btn-success" %>
   </div>
 <% end %>

@@ -20,6 +20,7 @@ gem 'simple_calendar', '~> 2.0'
 gem 'sass'
 gem 'sass-rails'
 gem 'bootstrap-sass'
+gem 'bootstrap-multiselect-rails'
 gem 'whenever', :require => false
 gem 'activeadmin', github: 'activeadmin'
 gem 'chartkick'

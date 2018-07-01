@@ -19,6 +19,7 @@
 //= require Chart.bundle
 //= require chartkick
 //= require owl.carousel
+//= require bootstrap-multiselect
 //= require_tree .
 
 ahoy.trackAll();
