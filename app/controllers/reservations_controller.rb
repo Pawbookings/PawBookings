@@ -142,7 +142,8 @@ class ReservationsController < ApplicationController
         reservation.userID = reservation[:user_id]
         reservation.reservationID = reservation[:id]
         reservation.save!
-        flash[:notice] = "Old Reservation Saved in the System!"
+        UserMailer.reservation_confirmation(reservation[:id], total_price.to_s).deliver_now
+        flash[:notice] = "Reservation Saved in the System!"
       end
       redirect_to :back
   end
