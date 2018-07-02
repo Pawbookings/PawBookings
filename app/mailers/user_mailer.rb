@@ -44,7 +44,7 @@ class UserMailer < ApplicationMailer
     # @reservation[:check_out_date] = unsanitize_date @reservation[:check_out_date].to_s
     @kennel = Kennel.find(@reservation[:kennel_id])
     @hours_of_operation = HoursOfOperation.where(kennel_id: @kennel[:id]).first
-    mail(to: @reservation[:customer_email], subject: 'PawBookings Reservation Receipt', bcc: ["pawbookings@gmail.com"])
+    mail(to: @reservation[:customer_email], subject: 'PawBookings Reservation Receipt', bcc: ["reservations@pawbookings.com"])
   end
 
   # Cron job checks for reservations that are exactly 3 weeks before a check-in date,
