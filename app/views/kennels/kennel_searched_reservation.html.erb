@@ -112,29 +112,29 @@
       <div class="row text-center">
         <div class="col-xs-12">
           <h5 class="main_title arvo_font text_underline text-center">ReservationID: <%= @reservation[:id] %></h5>
-          <div class="searched_res_check_in_and_out_div">
-            <div class="border"></div>
-            <br>
-            <h4 class="default_green_color">Customer Check-In/Check-Out</h4>
-            <br />
-            <%= link_to "Customer contract for Check-In", customer_checkin_contract_path(reservation_id: @reservation[:id], user_id: @reservation[:user_id], customer_first_name: @reservation[:customer_first_name], customer_last_name: @reservation[:customer_last_name], check_in_date: @reservation[:check_in_date], check_out_date: @reservation[:check_out_date], customer_email: @reservation[:customer_email], customer_phone: @reservation[:customer_phone], room_details: @reservation[:room_details], run_ids: @reservation[:run_ids], total_price: @reservation[:total_price], kennel_address: params[:kennel_info][:address], kennel_city: params[:kennel_info][:city], kennel_state: params[:kennel_info][:state], kennel_zip: params[:kennel_info][:zip], kennel_email: params[:kennel_info][:email], kennel_phone: params[:kennel_info][:phone], kennel_name: params[:kennel_info][:name], pets: @pet_ids.to_s, format: :pdf), target: '_blank', class:"btn btn-primary" %>
-            <br>
-            <br>
-            <% if @reservation[:checked_in] == "true" %>
-              <p style="color:green">√ This user has been marked as checked-in. <%= link_to "revert?", check_in_check_out_reservation_path(checked_in: "false", id: @reservation[:id]), method: :put %></p>
-            <% else %>
-              <%= button_to "Check-In this customer", check_in_check_out_reservation_path(checked_in: "true", id: @reservation[:id]), method: :put, class:"btn btn-primary" %>
-            <% end %>
-            <br>
-            <% if @reservation[:checked_out] == "true" %>
-              <p style="color:green">√ This user has been marked as checked-out. <%= link_to "revert?", check_in_check_out_reservation_path(checked_out: "false", id: @reservation[:id]), method: :put %></p>
-            <% else %>
-              <%= button_to "Check-Out this customer", check_in_check_out_reservation_path(checked_out: "true", id: @reservation[:id]), method: :put, class:"btn btn-primary" %>
-            <% end %>
-            <br />
-            <br />
-            <div class="border"></div>
-          </div>
+          <!-- <div class="searched_res_check_in_and_out_div"> -->
+            <!-- <div class="border"></div> -->
+            <!-- <br> -->
+            <!-- <h4 class="default_green_color">Customer Check-In/Check-Out</h4> -->
+            <!-- <br /> -->
+            <%#= link_to "Customer contract for Check-In", customer_checkin_contract_path(reservation_id: @reservation[:id], user_id: @reservation[:user_id], customer_first_name: @reservation[:customer_first_name], customer_last_name: @reservation[:customer_last_name], check_in_date: @reservation[:check_in_date], check_out_date: @reservation[:check_out_date], customer_email: @reservation[:customer_email], customer_phone: @reservation[:customer_phone], room_details: @reservation[:room_details], run_ids: @reservation[:run_ids], total_price: @reservation[:total_price], kennel_address: params[:kennel_info][:address], kennel_city: params[:kennel_info][:city], kennel_state: params[:kennel_info][:state], kennel_zip: params[:kennel_info][:zip], kennel_email: params[:kennel_info][:email], kennel_phone: params[:kennel_info][:phone], kennel_name: params[:kennel_info][:name], pets: @pet_ids.to_s, format: :pdf), target: '_blank', class:"btn btn-primary" %>
+            <!-- <br> -->
+            <!-- <br> -->
+            <%# if @reservation[:checked_in] == "true" %>
+              <!-- <p style="color:green">√ This user has been marked as checked-in. <%#= link_to "revert?", check_in_check_out_reservation_path(checked_in: "false", id: @reservation[:id]), method: :put %></p> -->
+            <%# else %>
+              <%#= button_to "Check-In this customer", check_in_check_out_reservation_path(checked_in: "true", id: @reservation[:id]), method: :put, class:"btn btn-primary" %>
+            <%# end %>
+            <!-- <br> -->
+            <%# if @reservation[:checked_out] == "true" %>
+             <!--  <p style="color:green">√ This user has been marked as checked-out. <%#= link_to "revert?", check_in_check_out_reservation_path(checked_out: "false", id: @reservation[:id]), method: :put %></p> -->
+            <%# else %>
+              <%#= button_to "Check-Out this customer", check_in_check_out_reservation_path(checked_out: "true", id: @reservation[:id]), method: :put, class:"btn btn-primary" %>
+            <%# end %>
+            <!-- <br /> -->
+            <!-- <br /> -->
+            <!-- <div class="border"></div> -->
+          <!-- </div> -->
 
           <div class="searched_res_customer_info_div">
             <h4 class="default_green_color">Customer Info</h4>
