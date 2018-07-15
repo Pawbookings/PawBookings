@@ -99,15 +99,15 @@
           </table>
           <div class="kennel_reservations_btn_div">
             <%= link_to "View Pets", kennel_view_pets_path(pet_ids: res[:pet_ids], res_id: res[:id]), class:"btn btn-success" %>
-            <span class="margin_left_1em"></span><%= link_to "Contract for Check-In", customer_checkin_contract_path(reservation_id: res[:id], user_id: res[:user_id], customer_first_name: res[:customer_first_name], customer_last_name: res[:customer_last_name], check_in_date: res[:check_in_date], check_out_date: res[:check_out_date], customer_email: res[:customer_email], customer_phone: res[:customer_phone], room_details: res[:room_details], run_ids: res[:run_ids], total_price: res[:total_price], kennel_address: @kennel[:address], kennel_city: @kennel[:city], kennel_state: @kennel[:state], kennel_zip: @kennel[:zip], kennel_email: @kennel[:email], kennel_phone: @kennel[:phone], kennel_name: @kennel[:name], pets: res[:pet_ids], format: :pdf), target: '_blank', class:"btn btn-primary" %>
-            <% if res[:checked_in] == "true" %>
+            <!-- <span class="margin_left_1em"></span><%#= link_to "Contract for Check-In", customer_checkin_contract_path(reservation_id: res[:id], user_id: res[:user_id], customer_first_name: res[:customer_first_name], customer_last_name: res[:customer_last_name], check_in_date: res[:check_in_date], check_out_date: res[:check_out_date], customer_email: res[:customer_email], customer_phone: res[:customer_phone], room_details: res[:room_details], run_ids: res[:run_ids], total_price: res[:total_price], kennel_address: @kennel[:address], kennel_city: @kennel[:city], kennel_state: @kennel[:state], kennel_zip: @kennel[:zip], kennel_email: @kennel[:email], kennel_phone: @kennel[:phone], kennel_name: @kennel[:name], pets: res[:pet_ids], format: :pdf), target: '_blank', class:"btn btn-primary" %> -->
+            <% if res[:checked_in] == "true" && false %>
               <span class="margin_left_1em" style="color:green">√ This user has been marked as checked-in. <%= link_to "revert?", check_in_check_out_reservation_path(checked_in: "false", id: res[:id]), method: :put %></span>
-            <% else %>
+            <%# else %>
               <span class="margin_left_1em"></span><%= link_to "Check-In this customer", check_in_check_out_reservation_path(checked_in: "true", id: res[:id]), method: :put, class:"btn btn-primary" %>
             <% end %>
-            <% if res[:checked_out] == "true" %>
+            <% if res[:checked_out] == "true" && false %>
               <span class="margin_left_1em" style="color:green">√ This user has been marked as checked-out. <%= link_to "revert?", check_in_check_out_reservation_path(checked_out: "false", id: res[:id]), method: :put %></span>
-            <% else %>
+            <%# else %>
               <span class="margin_left_1em"></span><%= link_to "Check-Out this customer", check_in_check_out_reservation_path(checked_out: "true", id: res[:id]), method: :put, class:"btn btn-primary" %>
             <% end %>
           </div>
