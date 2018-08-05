@@ -81,14 +81,21 @@ class KennelsController < ApplicationController
     @photos = Photo.where(kennel_id: @searched_kennel[:id])
     @kennel_user = User.find(@searched_kennel[:user_id])
     @runs = Run.where(kennel_id: @searched_kennel.id)
-    @customer_check_in_date = unsanitize_date(params[:search_info][:check_in])
-    @customer_check_out_date = unsanitize_date(params[:search_info][:check_out])
     @policies = Policy.where(kennel_id: @searched_kennel[:id])
     @breeds_restricted = BreedRestriction.where(kennel_id: @searched_kennel[:id])
     maxed_out?
     get_amenities_offered
     get_run_price_range
     get_pickup_and_dropoff_times
+
+    if !(params[:search_info].present? && params[:search_info][:check_in].present? &&
+      params[:search_info][:check_out])
+      params[:search_info] = {number_of_rooms: "1", number_of_dogs: "1", check_in: Date.today.to_s, 
+                            check_out: Date.tomorrow.to_s, number_of_nights: 1}
+      params[:inbound] = true
+    end
+    @customer_check_in_date = unsanitize_date(params[:search_info][:check_in])
+    @customer_check_out_date = unsanitize_date(params[:search_info][:check_out])
   end
 
   def get_pickup_and_dropoff_times
@@ -123,7 +130,10 @@ class KennelsController < ApplicationController
       reservation_date_range.delete_at(reservation_date_range.length - 1)
       @res_ids_and_dates << [res[:id], reservation_date_range]
     end
-    filter_res_dates
+    if params[:search_info].present? && params[:search_info][:check_in].present? &&
+      params[:search_info][:check_out]
+      filter_res_dates
+    end
   end
 
   def filter_res_dates

@@ -8,7 +8,13 @@
 <div class="container">
   <div class="row back_to_results_row">
     <div class="col-xs-12">
-      <p class="back_button_p"><span class="glyphicon glyphicon-arrow-left default_green_color"></span> <%= link_to "Back to results", :back, class:"back_button_a" %></p>
+      <p class="back_button_p"><span class="glyphicon glyphicon-arrow-left default_green_color"></span> 
+        <% if params[:inbound] %>
+          <%= link_to "Search", root_path , class:"back_button_a" %>
+        <% else %>
+          <%= link_to "Back to results", :back, class:"back_button_a" %>
+        <% end %>
+      </p>
     </div>
   </div>
 
