@@ -30,8 +30,10 @@
     <%= link_to "Policies", new_policy_path, class: "btn btn-success" %>
     <%= link_to "Breed Restrictions", new_breed_restriction_path, class: "btn btn-success" %>
     <%= link_to "Enter Reservation", old_reservation_path, class: "btn btn-success"%>
-    <p class="default_white_color poppins_font">Link for external pages:</p>
-    <textarea rows="5" cols="20"><%= "<a href='#{kennel_url(id: @kennel.friendly_id)}' target='_blank'>Book Now</a>".html_safe %></textarea>
+    <% if @kennel.present? %>
+        <p class="default_white_color poppins_font">Link for external pages:</p>
+        <textarea rows="5" cols="20"><%= "<a href='#{kennel_url(id: @kennel.friendly_id)}' target='_blank'>Book Now</a>".html_safe %></textarea>
+    <% end %>
     <%= link_to "Kennel Pictures", new_photo_path, class: "btn btn-success" %>
   </div>
 <% end %>
