@@ -34,6 +34,7 @@ gem 'meta-tags'
 gem 'therubyracer'
 gem 'owlcarousel-rails'
 gem 'aws-sdk'
+gem 'intercom-rails'
 
 # For Heroku. Delete when finished using.
 gem 'rails_12factor', group: :production
