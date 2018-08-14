@@ -50,6 +50,7 @@ class SearchesController < ApplicationController
       # holiday_filtering
       hours_of_operation_filtering
       check_if_runs_listed
+      # @final_search_results = Kennel.last(20)
     end
   end
 

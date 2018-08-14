@@ -2,6 +2,7 @@ class PaymentsController < ApplicationController
   include UsersHelper
 
   def new
+    # return render json: params.inspect
     if !current_user.nil? && current_user[:kennel_or_customer] == "kennel"
       flash[:notice] = "A Kennel account cannot book a reservation."
       return redirect_to request.referrer
@@ -119,15 +120,22 @@ class PaymentsController < ApplicationController
   def get_amenity_info
     @amenities_total = 0
     @amenities_list = []
-    params.each do |key, val|
-      if key.include? "amenity_id"
-        if val.to_i > 0
-          amenity_id = key.split("_")[2]
-          @amenities_total += (params["amenity_price_#{amenity_id}"].to_f * val.to_f)
-          @amenities_list << [amenity_id, val.to_i, params["amenity_price_#{amenity_id}"], params["amenity_description_#{amenity_id}"], params["amenity_title_#{amenity_id}"]]
-        end
+
+    if params["amenities"].present?
+      params["amenities"].each do |amenity_id|
+        @amenities_total += (params["amenity_price_#{amenity_id}"].to_f * params["number_of_nights"].to_f)
+        @amenities_list << [amenity_id, params["number_of_nights"], params["amenity_price_#{amenity_id}"], params["amenity_description_#{amenity_id}"], params["amenity_title_#{amenity_id}"]]
       end
     end
+    # params.each do |key, val|
+    #   if key.include? "amenity_id"
+    #     if val.to_i > 0
+    #       amenity_id = key.split("_")[2]
+    #       @amenities_total += (params["amenity_price_#{amenity_id}"].to_f * val.to_f)
+    #       @amenities_list << [amenity_id, val.to_i, params["amenity_price_#{amenity_id}"], params["amenity_description_#{amenity_id}"], params["amenity_title_#{amenity_id}"]]
+    #     end
+    #   end
+    # end
     group_amenity_ids
   end
 
