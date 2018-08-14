@@ -249,7 +249,7 @@
           <p class="margin_top_n1em poppins_font">$<%= @tax_amount %></p>
 
           <h5 style="margin-bottom:1em;" class="arvo_font">Grand Total:</h5>
-          <p class="margin_top_n1em poppins_font">$<%= @total_price %></p>
+          <p class="margin_top_n1em poppins_font">$<%= @total_price.to_f.round(2) %></p>
 
           <div class="text-center">
             <button type="button" class="btn btn-success payment_submt_btn" data-toggle="modal" data-target=".before_payment_notification">Book Room(s)</button>
@@ -476,7 +476,7 @@
           <p class="margin_top_n1em poppins_font">$<%= @tax_amount %></p>
 
           <h5 style="margin-bottom:1em;" class="arvo_font">Grand Total:</h5>
-          <p class="margin_top_n1em poppins_font">$<%= @total_price %></p>
+          <p class="margin_top_n1em poppins_font">$<%= @total_price.to_f.round(2) %></p>
           <br />
           <div class="border"></div>
           <br />
