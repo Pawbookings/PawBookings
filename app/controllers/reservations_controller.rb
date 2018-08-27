@@ -15,7 +15,7 @@ class ReservationsController < ApplicationController
   end
 
   def save_old_reservations
-
+    # return render json: params.inspect
   	# debugger
 
 
@@ -63,49 +63,57 @@ class ReservationsController < ApplicationController
   	# params["room-units"].map(&:to_i)
 
   	@kennel = current_user.kennel
+    user = User.find_by_email(params[:customer_email])
     run_ids = []
-  	pet_ids = []
+    pet_ids = []
     amenity_ids = []
-  	dates = params[:reservation_dates].split(" - ").map{|b| b.to_date.strftime('%Y-%d-%m')}
+    #.strftime('%Y-%d-%m')
+    dates = params[:reservation_dates].split(" - ").map{|b| Date.strptime(b,"%m/%d/%Y")}
 
     run_ids = params["room-units"] if params["room-units"].present?
-    pet_ids = params["pets"] if params["pets"].present?
+    
+    if params["pet_name"].present? && params["pet_type"]
+      npet = user.pets.create!(name: params["pet_name"], cat_or_dog: params["pet_type"], weight: "1", vaccinations: "false", spay_or_neutered: "neutered")
+      pet_ids = [npet.id.to_s] 
+    elsif params["pets"].present?
+      pet_ids = params["pets"] 
+    end
+
     amenity_ids = params["amenities"] if params["amenities"].present?
     days = 0
-    days = (dates.last.to_date - dates.first.to_date).to_i
+    days = (dates.last - dates.first).to_i
     days = 1 if days == 0
     total_price_without_tax = 0
     if run_ids.present?
-    	run_prices = @kennel.runs.where(id: run_ids.map(&:to_i)).pluck(:price)
-    	run_prices.each do |pr|
-    		total_price_without_tax = total_price_without_tax + (pr*days)
-    	end
-    	room_details = []
-    	run_objs = @kennel.runs.where(id: run_ids.map(&:to_i))
-    	run_objs.each do |ro|
-    		room_details << [ro.title, ro.price]
-    	end
+      run_prices = @kennel.runs.where(id: run_ids.map(&:to_i)).pluck(:price)
+      run_prices.each do |pr|
+        total_price_without_tax = total_price_without_tax + (pr*days)
+      end
+      room_details = []
+      run_objs = @kennel.runs.where(id: run_ids.map(&:to_i))
+      run_objs.each do |ro|
+        room_details << [ro.title, ro.price]
+      end
 
     end
 
     if amenity_ids.present?
-    	amenity_prices = @kennel.amenities.where(id: amenity_ids.map(&:to_i)).pluck(:price)
-    	amenity_prices.each do |pr|
-    		total_price_without_tax = total_price_without_tax + (pr*days)
-    	end
+      amenity_prices = @kennel.amenities.where(id: amenity_ids.map(&:to_i)).pluck(:price)
+      amenity_prices.each do |pr|
+        total_price_without_tax = total_price_without_tax + (pr*days)
+      end
 
-    	amenity_details = []
-    	ads = @kennel.amenities.where(id: amenity_ids.map(&:to_i))
-    	ads.each do |ad|
-    		amenity_details << [ad.title, ad.price]
-    	end
+      amenity_details = []
+      ads = @kennel.amenities.where(id: amenity_ids.map(&:to_i))
+      ads.each do |ad|
+        amenity_details << [ad.title, ad.price]
+      end
     end
 
     tax_percentage = @kennel.sales_tax
     tax_total_price = (total_price_without_tax*tax_percentage/100).round(2)
     total_price = (tax_total_price+total_price_without_tax).round(2)
 
-    user = User.find_by_email(params[:customer_email])
 
     reservation = @kennel.reservations.build(
                                  user_id: user.id,
@@ -151,8 +159,24 @@ class ReservationsController < ApplicationController
   def get_pets
   	# puts params.inspect
   	@pets = []
-  	u = User.find_by_email(params[:email])
-  	@pets = u.pets if u.present?
+  	@u = User.find_by_email(params[:email])
+    if @u.present?
+  	  @pets = @u.pets
+    else
+      if params[:email].present? && params[:customer_first_name].present? && 
+          params[:customer_last_name].present? && params[:customer_phone].present?
+
+          User.create!(email: params[:email], 
+                   first_name: params[:customer_first_name], 
+                   last_name: params[:customer_last_name], 
+                   phone: params[:customer_phone], 
+                   password: "12345678Paw!", 
+                   password_confirmation: "12345678Paw!", 
+                   kennel_or_customer: "customer")
+      else
+        @error_msg = "Enter pet owner's all details"
+      end
+    end 
 
   	return render partial: "reservations/get_pets"
   end

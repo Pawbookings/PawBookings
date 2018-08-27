@@ -45,14 +45,14 @@
           <br />
           <div class="row">
             <div class="col-md-6">
-              <%= label_tag "Email" %>
-              <br>
-              <%= text_field_tag :customer_email, nil, placeholder: " Email", class: "form-control payment_input" %>
-            </div>
-            <div class="col-md-6">
               <%= label_tag "Phone" %>
               <br>
               <%= text_field_tag :customer_phone, nil, placeholder: " Phone", class: "form-control payment_input", onkeypress: "return isNumber(event);" %>
+            </div>
+            <div class="col-md-6">
+              <%= label_tag "Email" %>
+              <br>
+              <%= text_field_tag :customer_email, nil, placeholder: " Email", class: "form-control payment_input" %>
             </div>
           </div>
           <br />
@@ -61,10 +61,8 @@
 
           <div class="row">
             <div class="col-md-6">
-              <%= label_tag "Selected Customer's Pets" %>
-              <br>
-              <select id="pets" multiple="multiple" name="pets[]" class="selectpicker form-control">
-              </select>
+              <section id="pets-section">
+              </section>
             </div>
 
             <div class="col-md-6">
@@ -159,14 +157,21 @@
     $("#customer_email").blur(function(){
       // alert("This input field has lost its focus.");
 
+
       $.ajax({
           url: '/get_pets',
           type: 'GET',
           dataType: 'HTML',
-          data: {email: $('#customer_email').val()},
+          data: {
+                  email: $('#customer_email').val(),
+                  customer_first_name: $('#customer_first_name').val(),
+                  customer_last_name: $('#customer_last_name').val(),
+                  customer_phone: $('#customer_phone').val()
+                 },
           success: function(result) {
             // console.log(result);
-            $('#pets').html(result);
+            $('#pets-section').html(result);
+            $('#pets').multiselect();
             $('#pets').multiselect('rebuild');
 
           }
