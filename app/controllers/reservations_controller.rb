@@ -62,13 +62,18 @@ class ReservationsController < ApplicationController
   	# params["room-units"].map(&:to_i)
   	# params["room-units"].map(&:to_i)
 
-  	@kennel = current_user.kennel
+
+
+
+
     user = User.find_by_email(params[:customer_email])
     run_ids = []
     pet_ids = []
     amenity_ids = []
     #.strftime('%Y-%d-%m')
     dates = params[:reservation_dates].split(" - ").map{|b| Date.strptime(b,"%m/%d/%Y")}
+
+    @kennel = current_user.kennel
 
     run_ids = params["room-units"] if params["room-units"].present?
     
@@ -78,6 +83,26 @@ class ReservationsController < ApplicationController
     elsif params["pets"].present?
       pet_ids = params["pets"] 
     end
+
+    reserved_dates = @kennel.reservations.where(completed: "false").pluck(:check_in_date, :check_out_date, :run_ids)
+
+    reserved_dates.each do |rdate|
+      # if ( dates.first <= rdate[0] && rdate[0] >= dates.last ) ||
+      rids = rdate[2].tr('[]', '').split(',').map(&:to_i)
+      ru = params["room-units"].map(&:to_i).flatten.try(:first)
+      # puts "============================================="
+      # puts rdate.inspect
+      # puts rids.inspect
+      # puts ru.inspect
+      # puts (rdate[0] <= dates.last) && (rdate[0] >= dates.first) && (rids.include?(ru))
+      # puts "----------------------------------------------"
+      if (rdate[0] <= dates.last) && (rdate[0] >= dates.first) && (rids.include?(ru))
+        flash[:notice] = "There is already a reservation for this date! Kindly check your reservations."
+        redirect_to :back and return false
+      end
+    end
+
+   
 
     amenity_ids = params["amenities"] if params["amenities"].present?
     days = 0
