@@ -84,9 +84,10 @@
                   <strong class="default_white_color">•No Amenities Chosen.</strong>
                 </td>
               <% else %>
-                <% JSON.parse(res[:amenity_details] || '{}').each do |title, description, price, quantity| %>
+                <%# JSON.parse(res[:amenity_details] || '{}').each do |title, description, price, quantity| %>
                   <td class="kennel_reservation_td">
-                    <%= "#{title} - #{description} - $#{price} x #{quantity}" %>
+                    <%#= "#{title} - #{description} - $#{price} x #{quantity}" %>
+                    <%= res[:amenity_details] %>
                     <br />
                     <br />
                   </td>
