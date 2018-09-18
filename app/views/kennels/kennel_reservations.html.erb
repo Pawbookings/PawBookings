@@ -172,9 +172,13 @@
               <% else %>
                 <strong class="default_green_color">Amenities:</strong>
                 <br />
-                <% JSON.parse(res[:amenity_details]).each do |title, description, price, quantity| %>
-                  <span class="default_white_color"><%= "•#{title} '#{description}' - #{price} x #{quantity}" %></span>
-                <% end %>
+                <%# JSON.parse(res[:amenity_details]).each do |title, description, price, quantity| %>
+                  <span class="default_white_color">
+                    <%#= "•#{title} '#{description}' - #{price} x #{quantity}" %>
+                    <%= res[:amenity_details] %>
+                      
+                    </span>
+                <%# end %>
               <% end %>
 
               <br />
