@@ -85,18 +85,32 @@ class ReservationsController < ApplicationController
     end
 
     reserved_dates = @kennel.reservations.where(completed: "false").pluck(:check_in_date, :check_out_date, :run_ids)
-
+    reservations_same_date_for_run = 0
     reserved_dates.each do |rdate|
       # if ( dates.first <= rdate[0] && rdate[0] >= dates.last ) ||
       rids = rdate[2].tr('[]', '').split(',').map(&:to_i)
       ru = params["room-units"].map(&:to_i).flatten.try(:first)
+
+      actual_run = Run.find_by_id(ru)
+      available_runs_for_the_date = 0
+      if actual_run.present?
+        available_runs_for_the_date = actual_run.number_of_rooms
+      end
       # puts "============================================="
       # puts rdate.inspect
       # puts rids.inspect
       # puts ru.inspect
       # puts (rdate[0] <= dates.last) && (rdate[0] >= dates.first) && (rids.include?(ru))
       # puts "----------------------------------------------"
+
+      # debugger
+      trythis = false
       if (rdate[0] <= dates.last) && (rdate[0] >= dates.first) && (rids.include?(ru))
+        trythis = true
+        reservations_same_date_for_run = reservations_same_date_for_run + 1
+      end
+
+      if reservations_same_date_for_run >= available_runs_for_the_date && trythis
         flash[:notice] = "There is already a reservation for this date! Kindly check your reservations."
         redirect_to :back and return false
       end
