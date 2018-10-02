@@ -26,14 +26,14 @@ class UserMailer < ApplicationMailer
   def new_kennel_registration(current_user, token)
     @current_user = current_user
     @token = token
-    mail(to: current_user.email, subject: 'Kennel Registration Successful – Please Verify Your Email Address')
+    mail(to: current_user.email, subject: 'Kennel Registration Successful – Please Verify Your Email Address', bcc: ["pawbookings@gmail.com"])
   end
 
   # Confirmation email for new Customer registrations.
   def new_customer_registration(user, token)
     @current_user = user
     @token = token
-    mail(to: user[:email], subject: 'Registration Successful – Please Verify Your Email Address')
+    mail(to: user[:email], subject: 'Registration Successful – Please Verify Your Email Address', bcc: ["pawbookings@gmail.com"])
   end
 
   # Reservation confirmation email being sent to both Customer and Kennel.
