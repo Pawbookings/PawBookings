@@ -47,8 +47,9 @@ class Payment < ActiveRecord::Base
         },
       )
       token = resp[:id]
+      # total_price.to_s.gsub(".","").to_i
       charge = Stripe::Charge.create({
-          amount: total_price.to_s.gsub(".","").to_i,
+          amount: ((total_price.to_s.to_f.round(2))*100).to_i,
           currency: 'usd',
           description: 'Pawbooking',
           source: token,
