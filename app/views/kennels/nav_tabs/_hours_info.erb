@@ -1,0 +1,105 @@
+<div class="pet_container" style="width: 1225px;height: 530px; margin: 0 auto; float: none !important;">
+	<br>
+	<% if !@kennel.nil? %>
+	<%= form_for(@hours_of_operation, {action: :update}) do |f| %>
+		<div class="row">
+			<div class="col-md-8">
+			<%= f.hidden_field :id, value: @hours_of_operation.id%>
+				<%= f.label :monday %>
+		<%= f.select :monday_open, options_for_select(hours_of_day_option, @hours_of_operation[:monday_open]) %>-<%= f.select :monday_close, options_for_select(hours_of_day_option, @hours_of_operation[:monday_close]) %>
+		<script>
+			console.log('<%= @hours_of_operation[:monday_open] %>')
+		</script>
+		<br>
+		<br>
+		<%= f.label :tuesday %>
+		<%= f.select :tuesday_open, options_for_select(hours_of_day_option, @hours_of_operation[:tuesday_open]) %>-<%= f.select :tuesday_close, options_for_select(hours_of_day_option, @hours_of_operation[:tuesday_close]) %>
+		<br>
+		<br>
+		<%= f.label :wednesday %>
+		<%= f.select :wednesday_open, options_for_select(hours_of_day_option, @hours_of_operation[:wednesday_open]) %>-<%= f.select :wednesday_close, options_for_select(hours_of_day_option, @hours_of_operation[:wednesday_close]) %>
+		<br>
+		<br>
+		<%= f.label :thursday %>
+		<%= f.select :thursday_open, options_for_select(hours_of_day_option, @hours_of_operation[:thursday_open]) %>-<%= f.select :thursday_close, options_for_select(hours_of_day_option, @hours_of_operation[:thursday_close]) %>
+		<br>
+		<br>
+		<%= f.label :friday %>
+		<%= f.select :friday_open, options_for_select(hours_of_day_option, @hours_of_operation[:friday_open]) %>-<%= f.select :friday_close, options_for_select(hours_of_day_option, @hours_of_operation[:friday_close]) %>
+		<br>
+		<br>
+		<%= f.label :saturday %>
+		<%= f.select :saturday_open, options_for_select(hours_of_day_option, @hours_of_operation[:saturday_open]) %>-<%= f.select :saturday_close, options_for_select(hours_of_day_option, @hours_of_operation[:saturday_close]) %>
+		<br>
+		<br>
+		<%= f.label :sunday %>
+		<%= f.select :sunday_open, options_for_select(hours_of_day_option, @hours_of_operation[:sunday_open]) %>-<%= f.select :sunday_close, options_for_select(hours_of_day_option, @hours_of_operation[:sunday_close]) %>
+		<br>
+			</div>
+			<%= fields_for :hours_of_operation_1, @hours_of_operation_1 do |f1| %>
+			<div class="col-md-4">
+				<%= f1.hidden_field :id, value: @hours_of_operation_1.id%>
+				<% if @hours_of_operation_1.monday_open!= 'closed' || @hours_of_operation_1.monday_close!= 'closed' %>
+					<div id="monday_1_select"><%= f1.select :monday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:monday_open]) %>-<%= f1.select :monday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:monday_close])%><br><br></div>
+				<% else %>
+					<p class="like_a" style="padding-top: 15px; padding-bottom: 15px;" id="monday_1">Add another range you are open</p>
+					<div style="display: none;" id="monday_1_select"><%= f1.select :monday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:monday_open]) %>-<%= f1.select :monday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:monday_close])%><br><br></div>
+				<% end %>
+				<% if @hours_of_operation_1.tuesday_open!= 'closed' || @hours_of_operation_1.tuesday_close!= 'closed' %>
+					<div id="tuesday_1_select"><%= f1.select :tuesday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:tuesday_open]) %>-<%= f1.select :tuesday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:tuesday_close]) %><br><br></div>
+				<% else %>
+					<p class="like_a" style="padding-top: 15px; padding-bottom: 15px;" id="tuesday_1">Add another range you are open</p>
+					<div style="display: none;" id="tuesday_1_select"><%= f1.select :tuesday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:tuesday_open]) %>-<%= f1.select :tuesday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:tuesday_close]) %><br><br></div>
+				<% end %>
+				<% if @hours_of_operation_1.wednesday_open!= 'closed' || @hours_of_operation_1.wednesday_close!= 'closed' %>
+					<div id="wednesday_1_select"><%= f1.select :wednesday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:wednesday_open]) %>-<%= f1.select :wednesday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:wednesday_close]) %><br><br></div>
+				<% else %>
+					<p class="like_a" style="padding-top: 15px; padding-bottom: 15px;" id="wednesday_1">Add another range you are open</p>
+					<div style="display: none;" id="wednesday_1_select"><%= f1.select :wednesday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:wednesday_open]) %>-<%= f1.select :wednesday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:wednesday_close]) %><br><br></div>
+				<% end %>
+				<% if @hours_of_operation_1.thursday_open!= 'closed' || @hours_of_operation_1.thursday_close!= 'closed' %>
+					<div id="thursday_1_select"><%= f1.select :thursday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:thursday_open]) %>-<%= f1.select :thursday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:thursday_close]) %><br><br></div>
+				<% else %>
+					<p class="like_a" style="padding-top: 15px; padding-bottom: 15px;" id="thursday_1">Add another range you are open</p>
+					<div style="display: none;" id="thursday_1_select"><%= f1.select :thursday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:thursday_open]) %>-<%= f1.select :thursday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:thursday_close]) %><br><br></div>
+				<% end %>
+				<% if @hours_of_operation_1.friday_open!= 'closed' || @hours_of_operation_1.friday_close!= 'closed' %>
+					<div id="friday_1_select"><%= f1.select :friday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:friday_open]) %>-<%= f1.select :friday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:friday_close]) %><br><br></div>
+				<% else %>
+					<p class="like_a" style="padding-top: 15px; padding-bottom: 15px;" id="friday_1">Add another range you are open</p>
+					<div style="display: none;" id="friday_1_select"><%= f1.select :friday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:friday_open]) %>-<%= f1.select :friday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:friday_close]) %><br><br></div>
+				<% end %>
+				<% if @hours_of_operation_1.saturday_open!= 'closed' || @hours_of_operation_1.saturday_close!= 'closed' %>
+					<div id="saturday_1_select"><%= f1.select :saturday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:saturday_open]) %>-<%= f1.select :saturday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:saturday_close]) %><br><br></div>
+				<% else %>
+					<p class="like_a" style="padding-top: 15px; padding-bottom: 15px;" id="saturday_1">Add another range you are open</p>
+					<div style="display: none;" id="saturday_1_select"><%= f1.select :saturday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:saturday_open]) %>-<%= f1.select :saturday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:saturday_close]) %><br><br></div>
+				<% end %>
+				<% if @hours_of_operation_1.sunday_open!= 'closed' || @hours_of_operation_1.sunday_close!= 'closed' %>
+					<div id="sunday_1_select"><%= f1.select :sunday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:sunday_open]) %>-<%= f1.select :sunday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:sunday_close]) %><br><br></div>`
+				<% else %>
+					<p class="like_a" style="padding-top: 15px; padding-bottom: 15px;" id="sunday_1">Add another range you are open</p>
+					<div style="display: none;" id="sunday_1_select"><%= f1.select :sunday_open, options_for_select(hours_of_day_option, @hours_of_operation_1[:sunday_open]) %>-<%= f1.select :sunday_close, options_for_select(hours_of_day_option, @hours_of_operation_1[:sunday_close]) %><br><br></div>
+				<% end %>
+			</div>
+			<% end %>
+		</div>
+          <br>
+          <%= f.submit "Update", class:'text_info bold-text link_edit vet_link submit_link font-20', style:"border: none;text-align:center; float: none; margin:0; padding:0; background-color: transparent" %>
+			<% end %>
+		<% end %>
+	<br>
+	<br>
+</div>
+
+<script>
+	$(document).click(function(e) {
+		var p_array = ['monday_1', 'tuesday_1', 'wednesday_1', 'thursday_1', 'friday_1', 'saturday_1', 'sunday_1'];
+
+		var clicked = e.target;
+		if(p_array.indexOf(clicked.id) >= 0) {
+			clicked.style.display = 'none';
+			$(`#${clicked.id}_select`).css('display', 'unset');
+		}
+	})
+</script>

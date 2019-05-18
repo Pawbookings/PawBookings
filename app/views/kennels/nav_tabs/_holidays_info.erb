@@ -1,0 +1,33 @@
+<div style="height: auto; position: relative; overflow: hidden;">
+	<% if !@kennel.nil? %>
+	<% @holidays.each_with_index do |holiday, i| %>
+		<div class="pet_container" style="margin-top: 50px;width: 600px;height: 300px;padding-top: 50px;padding-right: 50px;  <%= (@holidays.length == 1) ? 'float: none; margin: 0 auto !important;' : 'margin-right: 50px !important;float: left !important;margin-left: 125px; margin-bottom: 100px;' %>" >
+			<br>
+      <p class="font-18 vet_h pet_text no-float"><strong>Title:</strong><%= " #{holiday.description}" %></p>
+      <p class="font-18 vet_h pet_text no-float"><strong>Holiday date:</strong><%= " #{holiday.holiday_date}" %></p>
+        
+			<%= link_to 'Edit', edit_holiday_path(holiday), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window7', class: 'text_info bold-text link_edit vet_link', style:"margin-left: 270px; margin-right: unset; margin-top: 30px; padding: 0;" } %>
+			<br>
+			<br>
+		</div>
+		<% if i == @holidays.length - 1%>
+			<br>
+			<br>
+            <br>
+			<br>
+            <br>
+			<div class="kennel_button booking_button" style="padding-top:10px; margin-right: auto;margin-left: auto; text-align: center;width: 150px !important; position: absolute; bottom: 0; right: 0; left: 0;">                 
+				<%= link_to 'Add New', new_holiday_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window8', style:"color: white;", class: 'a_as_button' } %>
+			</div>
+		<% end %>
+	<% end %>
+</div>
+<br>
+<% if @holidays.length == 0 %>
+		<div class="kennel_button booking_button" style="padding-top:10px; margin-right: auto;margin-left: auto; text-align: center;width: 150px !important; position: absolute; bottom: 0; right: 0; left: 0;">                 
+				<%= link_to 'Add New', new_holiday_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window8', style:"color: white;", class: 'a_as_button' } %>
+			</div>
+	<% end %>
+<br>
+<br>
+	<% end %>

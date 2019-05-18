@@ -1,0 +1,20 @@
+<% if @error_msg.present? %>
+  <%= @error_msg %>
+<% else %>
+	<% if @u.present? %>
+	  <label for="Selected_Customer_s_Pets">Selected customer's pet</label>
+	  <br>
+	  <select id="pets" multiple="multiple" name="pets[]" class="selectpicker form-control">
+			<% @pets.each do |pet| %>
+				<option value="<%= pet.id %>"><%= "#{pet.name} (#{pet.cat_or_dog})"%></option>
+			<% end %>
+		</select>
+	<% else %>
+	  <label for="Selected_Customer_s_Pets">Create New Pet</label>
+	  <input type="text" name="pet_name" id="pet-name" placeholder="Pet Name" class="form-control payment_input">
+	  <select id="pet_type" name="pet_type" class="selectpicker form-control">
+				<option value="dog">Dog</option>
+				<option value="cat">Cat</option>
+		</select>
+	<% end %>
+<% end %>

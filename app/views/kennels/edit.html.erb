@@ -1,0 +1,108 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid">
+  <div class="row text-center dashboard_default_background_color">
+    <h5 class="main_title arvo_font">Edit My Kennel</h5>
+    <br />
+    <br />
+  </div>
+</div>
+<div class="border"></div>
+<div class="border"></div>
+
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <br />
+      <%= form_for(@kennel) do |f| %>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-xs-12 col-md-4">
+            <br />
+            <%= f.label :name %>
+            <br />
+            <%= f.text_field :name, placeholder: " Kennel-Name", class: "kennel_dashboard_input_edit", maxlength: 50 %>
+          </div>
+          <div class="col-xs-12 col-md-4">
+            <br />
+            <%= f.label :email %>
+            <br />
+            <%= f.text_field :email, placeholder: " Kennel-Email", class: "kennel_dashboard_input_edit", maxlength: 100 %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-xs-12 col-md-4">
+            <br />
+            <%= f.label :cats_or_dogs %>
+            <br />
+            <%= f.select :cats_or_dogs, options_for_select(cat_or_dog_options, @kennel[:cats_or_dogs]), class:"kennel_dashboard_input_edit"  %>
+          </div>
+          <div class="col-xs-12 col-md-4">
+            <br />
+            <%= f.label :phone %>
+            <br />
+            <%= f.text_field :phone, placeholder: " Kennel-Phone", class: "kennel_dashboard_input_edit", maxlength: 11 %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-xs-12 col-md-4">
+            <br />
+            <%= f.label :address %>
+            <br />
+            <%= f.text_field :address, placeholder: " Address", class:"kennel_dashboard_input_edit", maxlength: 100  %>
+          </div>
+          <div class="col-xs-12 col-md-4">
+            <br />
+            <%= f.label :city %>
+            <br />
+            <%= f.text_field :city, placeholder: " City", class: "kennel_dashboard_input_edit", maxlength: 100 %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-xs-12 col-md-4">
+            <br />
+            <%= f.label :state %>
+            <br />
+            <%= f.select :state, options_for_select(states_options, @kennel[:state]), class: "kennel_dashboard_input_edit"%>
+          </div>
+          <div class="col-xs-12 col-md-4">
+            <br />
+            <%= f.label :zip %>
+            <br />
+            <%= f.text_field :zip, placeholder: " Zip", class:"kennel_dashboard_input_edit", maxlength: 5  %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-xs-12 col-md-4">
+            <br />
+            <%= f.label :kennel_logo %>
+            <br />
+            <%= f.file_field :logo, class: "btn btn-primary"%>
+            <br />
+            <%= image_tag @kennel.avatar.url, class:"kennel_dashboard_avatar" %>
+          </div>
+          <div class="col-xs-12 col-md-4">
+            <br />
+            <%= f.label :mission_statement %>
+            <br />
+            <%= f.text_area :mission_statement, placeholder: " Mission Statement", class:"kennel_dashboard_input_edit", maxlength: 600  %>
+            <br />
+            <%= f.label :sales_tax %>
+            <br />
+            <%= f.text_field :sales_tax, placeholder: " 6.5", class:"kennel_dashboard_input_edit", maxlength: 5  %>
+          </div>
+        </div>
+        <br />
+        <br />
+        <%= f.submit "Submit", class:"btn-lg btn-success" %>
+        <br />
+        <br />
+        <br />
+      <% end %>
+    </div>
+  </div>
+</div>

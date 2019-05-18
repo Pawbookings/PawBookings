@@ -1,0 +1,39 @@
+<% if controller_name == "kennels" && action_name == "kennel_dashboard" %>
+  <div class="kennel_dashboard_option_btns_div text-center poppins_font">
+    <%= link_to "Accommodations", new_run_path, class: "btn btn-success" %>
+    <div class="br_if_desktop"><br /></div>
+    <%= link_to "Amenities", new_amenity_path, class: "btn btn-success" %>
+    <div class="br_if_desktop"><br /></div>
+    <%= link_to "Hours of Operation", edit_hours_of_operation_path(session[:hours_of_operation_id]), class: "btn btn-success" %>
+    <div class="br_if_desktop"><br /></div>
+    <%= link_to "Holidays", new_holiday_path, class: "btn btn-success" %>
+    <div class="br_if_desktop"><br /></div>
+    <%= link_to "Policies", new_policy_path, class: "btn btn-success" %>
+    <div class="br_if_desktop"><br /></div>
+    <%= link_to "Breed Restrictions", new_breed_restriction_path, class: "btn btn-success" %>
+    <div class="br_if_desktop"><br /></div>
+    
+    <%= link_to "Enter Reservation", old_reservation_path, class: "btn btn-success"%>
+    <div class="br_if_desktop"><br /></div>
+    <%= link_to "Kennel Pictures", new_photo_path, class: "btn btn-success" %>
+    <% if @kennel.present? %>
+        <p class="default_white_color poppins_font">Link for external pages:</p>
+        <textarea rows="5" cols="20"><%= "<a href='#{kennel_url(id: @kennel.friendly_id)}' target='_blank'>Book Now</a>".html_safe %></textarea>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center kennel_dashboard_option_btns_div_mobile poppins_font">
+    <%= link_to "Accommodations", new_run_path, class: "btn btn-success" %>
+    <%= link_to "Amenities", new_amenity_path, class: "btn btn-success" %>
+    <%= link_to "Hours of Operation", edit_hours_of_operation_path(session[:hours_of_operation_id]), class: "btn btn-success" %>
+    <%= link_to "Holidays", new_holiday_path, class: "btn btn-success" %>
+    <%= link_to "Policies", new_policy_path, class: "btn btn-success" %>
+    <%= link_to "Breed Restrictions", new_breed_restriction_path, class: "btn btn-success" %>
+    <%= link_to "Enter Reservation", old_reservation_path, class: "btn btn-success"%>
+    <% if @kennel.present? %>
+        <p class="default_white_color poppins_font">Link for external pages:</p>
+        <textarea rows="5" cols="20"><%= "<a href='#{kennel_url(id: @kennel.friendly_id)}' target='_blank'>Book Now</a>".html_safe %></textarea>
+    <% end %>
+    <%= link_to "Kennel Pictures", new_photo_path, class: "btn btn-success" %>
+  </div>
+<% end %>

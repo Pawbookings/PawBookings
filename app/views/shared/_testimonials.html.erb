@@ -1,0 +1,41 @@
+<div class="container-fluid testimonial_container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="testimonials_top_text arvo_font">Testimonials</h5>
+      <h6 class="testimonials_bottom_text poppins_font">We think we’re the best thing for pet owners and boarding kennels since…. well…. boarding kennels!
+      </h6>
+      <h6 class="testimonials_bottom_text poppins_font">But don’t just take our word for it. Check out what others have to say about <span style="font-size:1.2em;" class="default_green_color poppins_font">PawBookings.com</span> and some of our Client Kennels.</h6>
+    </div>
+  </div>
+
+<% if !@testimonials.blank? %>
+  <% @testimonials.each do |t| %>
+    <div class="testimonial_desktop">
+      <div class="row text-center testimonial_row">
+        <div class="col-md-3">
+          <%= image_tag t[2], class: "testimonial_avatar" %>
+          <p class="testimonial_person_name"><%= "#{t[0].capitalize} #{t[1].capitalize}" %></p>
+        </div>
+        <div class="col-md-9">
+          <p class="testimonial_comment">"<%= "#{t[6]}" %>"</p>
+          <p class="testimonial_kennel_details"><%= t[3] %></p>
+          <p class="testimonial_kennel_details"><%= "#{t[4]}, #{t[5]}" %></p>
+        </div>
+      </div>
+    </div>
+  <!--  -->
+    <div class="testimonial_mobile">
+      <div class="row text-center testimonial_row">
+        <div class="col-xs-12">
+          <%= image_tag t[2], class: "testimonial_avatar" %>
+          <p class="testimonial_person_name"><%= "#{t[0].capitalize} #{t[1].capitalize}" %></p>
+          <p class="testimonial_comment">"<%= "#{t[6]}" %>"</p>
+          <p class="testimonial_kennel_details"><%= t[3] %></p>
+          <p class="testimonial_kennel_details"><%= "#{t[4]}, #{t[5]}" %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+</div>

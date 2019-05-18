@@ -1,0 +1,51 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="main_title arvo_font default_green_color text_underline poppins_font">Edit Blog</h5>
+      <br />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-8">
+      <%= image_tag @blog.blog_display_image.url, class:"width_100_percent edit_blog_image" %>
+      <br />
+      <br />
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <%= form_for @blog do |b| %>
+        <%= b.file_field :blog_display_image, class:"btn btn-primary width_50_percent" %>
+        <br>
+        <strong>Title:</strong>
+        <br />
+        <%= b.text_field :title, class:"general_input" %>
+        <br>
+        <br>
+        <strong>Body:</strong>
+        <br />
+        <%= b.cktext_area :body, class:"general_input" %>
+        <br>
+        <strong>Keyword:</strong>
+        <br />
+        <%= b.text_field :keyword, class:"general_input" %>
+        <br>
+        <br>
+        <strong>Publish Date:</strong>
+        <br />
+        <%= b.text_field :publish_date, class: "blog_publish_date_picker general_input" %>
+        <br>
+        <br>
+        <%= b.submit "Submit", class:"btn btn-success" %>
+        <br />
+        <br />
+        <br />
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render partial:"shared/footer" %>

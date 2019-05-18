@@ -1,0 +1,35 @@
+.reservation_confirmation_conatiner {
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+.reservation_confirmation_title {
+  font-size: 2.5em;
+  margin-top: 3.7em;
+  margin-bottom: 1em;
+}
+
+.reservation_confirmation_details {
+  font-size: 1em;
+}
+
+.reservation_confirmation_data {
+  font-size: 1.2em;
+  line-height: 1.5em;
+}
+
+.reservation_confirmation_image {
+  width: 100%;
+  margin-top: 2em;
+}
+
+@media (min-width: 992px) {
+  .booking_confirmed_verbiage {
+    text-align: center
+  }
+
+  .reservation_confirmation_details {
+    font-size: 1.2em;
+    color: #6d6e71;
+  }
+}

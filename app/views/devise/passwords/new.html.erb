@@ -1,0 +1,46 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= devise_error_messages! %>
+        <% if params[:auto_fill] == "true" %>
+          <h1 class="arvo_font">Sending Password Confirmation Email...</h1>
+
+          <div class="field display_none">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, name: "user[email]", class: "reset_email" %>
+          </div>
+          <br />
+          <br />
+          <div class="actions display_none">
+            <%= f.submit "Send me reset password instructions", class: "btn btn-success reset_email_submit_btn" %>
+          </div>
+        <% else %>
+        <h5 class="main_title arvo_font">Forgot your password?</h5>
+        <br />
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, name: "user[email]", class: "reset_email" %>
+          </div>
+          <div class="actions">
+            <%= f.submit "Send me reset password instructions", class: "btn btn-success reset_email_submit_btn" %>
+          </div>
+        <% end %>
+      <% end %>
+      <br />
+      <br />
+      <br />
+      <br />
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var email = "<%= params['email'] %>";
+  if (email){
+    $(".reset_email").val(email);
+    $(".reset_email_submit_btn").click();
+  }
+</script>

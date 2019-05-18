@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row text-center">
+    <div clas="col-xs-12">
+      <p>Dear <%= @reservation[:customer_first_name].capitalize %>,</p>
+      <br />
+      <p> Thank you for your recent PawBookings.com reservation.</p>
+      <br />
+      <p> Below is your Kennel Reservation details. Please review the following information for accuracy, and note the details contained in the IMPORTANT INFORMATION section below. If you have any questions, please email reservations@pawbookings.com immediately. Please put your Reservation Confirmation Number in the subject line of the email.</p>
+      
+      <br />
+      <h3 class="default_green_color">Reservation Summary</h3>
+      <p><strong>Reservation-ID: </strong><%= @reservation[:id] %></p>
+      <p><strong>Check-In Date: </strong><%= @reservation[:check_in_date] %></p>
+      <p><strong>Check-Out Date: </strong><%= @reservation[:check_out_date] %></p>
+  
+
+      <h3 class="default_green_color">Kennel Info:</h3>
+      <p><strong>Name: </strong><%= @kennel[:name] %></p>
+      <p><strong>Address: </strong><%= @kennel[:address] %></p>
+      <p><strong>City: </strong><%= @kennel[:city] %></p>
+      <p><strong>State: </strong><%= @kennel[:state] %></p>
+      <p><strong>Zip: </strong><%= @kennel[:zip] %></p>
+      <p><strong>Phone: </strong><%= @kennel[:phone] %></p>
+      <p><strong>Email: </strong><%= @kennel[:email] %></p>
+
+      <h3>Payment Summary</h3>
+      <% "#{@hours_of_operation[:monday_open]} - #{@hours_of_operation[:monday_close]}" %>
+      <% "#{@hours_of_operation[:tuesday_open]} - #{@hours_of_operation[:tuesday_close]}" %>
+      <% "#{@hours_of_operation[:wednesday_open]} - #{@hours_of_operation[:wednesday_close]}" %>
+      <% "#{@hours_of_operation[:thursday_open]} - #{@hours_of_operation[:thursday_close]}" %>
+      <% "#{@hours_of_operation[:friday_open]} - #{@hours_of_operation[:friday_close]}" %>
+      <% "#{@hours_of_operation[:saturday_open]} - #{@hours_of_operation[:saturday_close]}" %>
+      <% "#{@hours_of_operation[:sunday_open]} - #{@hours_of_operation[:sunday_close]}" %>
+      <br />
+      <br />
+      <p><strong>Total Price without Tax: </strong><%= "$ %.2f" + @reservation.try(:total_price_without_tax).to_s %></p>
+      <p><strong>Tax Percentage: </strong><%= "%.2f %" + @reservation.try(:tax_percentage).to_s %></p>
+      <p><strong>Total Tax Price: </strong><%= "$ %.2f" + @reservation.try(:tax_total_price).to_s %></p>
+      <p><strong>Total Price: </strong><%= "$ %.2f" +  @total_price %></p>
+      <p>A SEPARATE RESERVATION CONFIRMATION EMAIL WILL BE EMAILED TO YOU SOON WITH IMPORTANT INFORMATION REGARDING YOUR RESERVATION</p>
+
+      <div class="res_email_special_information">
+        
+        <p>Thank you again for choosing PawBookings.com to reserve your pet’s holiday!</p>
+        <p>This email was sent to you by PawBookings.com. Please do not respond to this email.© 2016. PawBookings.com, Inc. All Rights Reserved</p>
+      </div>
+    </div>
+  </div>
+</div>

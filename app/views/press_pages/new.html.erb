@@ -1,0 +1,29 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <br />
+      <br />
+      <h5 class="main_title arvo_font">New Press Entry</h5>
+      <%= form_for(@press_page) do |f| %>
+        <%= f.label :title %>
+        <br />
+        <%= f.text_field :title %>
+        <br />
+        <br />
+        <%= f.label :body %>
+        <br />
+        <%= f.text_area :body %>
+        <br />
+        <br />
+        <%= f.label :link_to_press %>
+        <br />
+        <%= f.text_field :link_to_press %>
+        <br />
+        <br />
+        <%= f.submit "Add", class:"btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid leto_font login_div_container">
+  <div class="row text-center">
+    <div class="">
+        <% if current_user.nil? %>
+
+        <div class="col-md-4">
+          <div class="login_div">
+            <h5 class="login_title default_green_color">Login</h5>
+              <%= form_for("user", :url => user_session_path) do |f|%>
+                <div class="field">
+                  <%= f.label :email, class: "default_green_color" %><br />
+                  <%= f.email_field :email, class:"login_input", placeholder: " Email", autofocus: true %>
+                </div>
+
+                <div class="field">
+                  <%= f.label :password, class: "default_green_color" %><br />
+                  <%= f.password_field :password, class: "login_input", placeholder: " Password", autocomplete: "off" %>
+                </div>
+
+                <% if devise_mapping.rememberable? -%>
+                  <div class="field default_green_color">
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me %>
+                  </div>
+                <% end -%>
+
+                <div class="actions">
+                  <%= f.submit "Login", class: "login_submit_btn" %>
+                </div>
+              <% end %>
+              <%= render "devise/shared/links" %>
+              <br>
+              <%= link_to "Sign Up", kennel_or_customer_path, class:"link_color" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-6 text-center">
+          <div class="login_message_div">
+            <h1 class="arvo_font line_height_1_5_em">Welcome back, we hope you enjoy your experience with <span class="default_green_color">PawBookings</span></h1>
+            <br />
+          </div>
+        </div>
+    </div>
+  </div>
+  <br />
+  <br />
+  <br />
+</div>
+
+
+<%= render partial: "shared/footer" %>

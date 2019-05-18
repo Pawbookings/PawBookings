@@ -1,0 +1,17 @@
+
+<%= render partial: "shared/top_info" %>
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="main_title arvo_font">Refund a Reservation</h5>
+      <%= form_tag({controller: "pawbookings_admins", action: "refund_reservation_select"}, method: "get") do %>
+        <%= label_tag :reservation_id, "Enter the ReservationID" %>
+        <br />
+        <%= text_field_tag :reservation_id %>
+        <br />
+        <br />
+        <%= submit_tag "Search", class:"btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

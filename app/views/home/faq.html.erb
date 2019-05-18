@@ -1,0 +1,127 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-2"></div>
+    <div class="col-xs-12 col-md-8">
+      <% if current_user.nil? || current_user[:kennel_or_customer] == "customer" %>
+        <h5 class="main_title arvo_font">Pet Owner FAQ's</h5>
+        <div class="border"></div>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">What is Pawbookings.com?</h3>
+        <p class="text-left poppins_font font_1_1_em">Pawbookings.com is a website dedicated to connecting pet owners with pet kennel operators based on criteria you enter. We instantly provide a list of kennels along with information and availability for boarding, allowing you to book a reservation for your dog or cat.  It’s as easy to book a stay for your pet now, as it is to book a hotel reservation for yourself!</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">Do I have to register on PawBookings.com to make a reservation?</h3>
+        <p class="text-left poppins_font font_1_1_em">Yes, you are required to create an account to book a reservation with us. But don’t worry! The process is simple, only takes a couple of minutes and your information is secure. Having an account means you can update your personal information, enter in your pet’s information and manage your reservations. Then each time you book a stay at your kennel, you will save time by having all the information stored on our secure platform.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">Will I get confirmation when I book a reservation?</h3>
+        <p class="text-left poppins_font font_1_1_em">We will send you an email confirmation immediately after completing your booking. This confirmation email will contain your Reservation Confirmation Number (RCN), details of the reservation, summary of charges, and important information about your pet’s stay.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">What should I do if I didn't receive a confirmation email after making my reservation?</h3>
+        <p class="text-left poppins_font font_1_1_em">If you didn’t receive an email confirming your reservation, please check that your email address is correct via your Customer Dashboard. Then check the Spam folder in your email to make sure your confirmation email was not blocked. Please be sure to add pawbookings.com to your &quot;allowed&quot; senders list to receive confirmation emails and additional information about your reservation or account. You can also contact us for help via email (support@pawbookings.com), by using our web support form, or by calling us at 1-844- 944-3333.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">How can I see a listing of reservations I have booked?</h3>
+        <p class="text-left poppins_font font_1_1_em">Login to your account, and click on the ‘My Reservations’ in your Customer Dashboard.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">What vaccinations does my pet need prior to boarding?</h3>
+        <p class="text-left poppins_font font_1_1_em">Vaccinations may vary from kennel to kennel. Most boarding facilities require Rabies, DHLPP, and Bordetella for dogs and Cat Flu, Feline Infectious Enteritis and Feline Leukaemia Virus. In general, most vaccinations should be administered at least 2 weeks prior to boarding. Check with your vet and our website to see which vaccinations are required prior to check-in of your pet.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">When do I pay for my reservation?</h3>
+        <p class="text-left poppins_font font_1_1_em">Like most online booking sites, we charge your card immediately upon confirming the reservation to secure the room for your pet. Because of the high-demand for quality, safe boarding kennels, we offer you the peace of mind in knowing your pet is receiving 1 st rate care so that you can enjoy your holiday or business trip knowing that your furry family member is well looked after.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">Is my credit card information secure?</h3>
+        <p class="text-left poppins_font font_1_1_em">PawBookings.com keeps all your information safe. All transactions are encrypted with powerful Secure Sockets Layer (SSL) encryption technology which encrypts your credit card number, name, address, and telephone number before they travel over the internet. This makes doing business over the Internet as secure as the possible.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">What if I need to change or cancel my reservation?</h3>
+        <p class="text-left poppins_font font_1_1_em">Life happens! Plans fall through! And we understand that pet owners may need to change or cancel their booking. Each Kennel Operator has their own change/cancellation policy, which you will receive when a reservation is made. You can also view the change/cancellation/refund policy on our website. PawBookings.com adheres to the individual policies of each Kennel Operator.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">How do I modify my reservation?</h3>
+        <p class="text-left poppins_font font_1_1_em">To modify a reservation, you can log in to your account and modify your reservation via your dashboard. Any additional charges will be immediately due. If any refund or partial refund is owed, the difference will be added back to the credit card you used to make the reservation. Or you can call us at 844.944.3333.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">What happens if I forget to cancel a reservation?</h3>
+        <p class="text-left poppins_font font_1_1_em">Just as if you had a plane ticket or hotel reservation, a ‘no-show’ means you forfeit the reservation for your pet. If you forget to cancel a reservation, you will not be entitled to any refund of charges already paid. Change and cancellation requirements and penalties vary by pet care provider, so please check your reservation confirmation email for details or check with your Kennel Operator.</p>
+        <br />
+        <br />
+        <br />
+      <% elsif !current_user.nil? && current_user[:kennel_or_customer] == "kennel" %>
+        <h5 class="main_title arvo_font">Kennel Operator FAQ's</h5>
+        <div class="border"></div>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">Why Partner with PawBookings.com?</h3>
+        <p class="text-left poppins_font font_1_1_em">The single-most time consuming task Kennel Operators deal with is managing their reservations. PawBookings.com handles that task for you and automates the process, allowing pet owners to book reservations with you any time, any day and without the hassle of forms, whiteboards, calendars and call-backs. In addition, our marketing efforts help boarding kennels increase bookings! Our goal is to make finding and reserving quality stays at boarding kennels for dogs and cats as easy as booking a hotel room online. Pet owners want to research and get information on where they can board their pet. PawBookings.com gives them the ability to do that instantly.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">How do I add my kennel? Is there any cost to list?</h3>
+        <p class="text-left poppins_font font_1_1_em">Partnering with PawBookings.com is easy, and there is no cost or set-up fee to be listed on our website. To ensure that the kennels we partner with are exceptional choices for pet owners, we have a few requirements. Meeting these requirements helps our staff in the evaluation and approval process.<br /><br /> 1. Begin the sign-up process on our website, completing information that is required.<br /><br /> 2. Upload at least 4 pictures of your facility (you are welcome to upload as many as 20).<br /><br /> That’s it! We’ll take care of the rest. A member of our staff may contact you to verify information provided.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">What does it cost to list with PawBookings.com?</h3>
+        <p class="text-left poppins_font font_1_1_em">There are no listing fees to join our service. Nor do we charge a set-up fee. And there are NO monthly charges. We simply charge a percentage of the reservation.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">What percent of the reservation do you charge?  Do you invoice me?</h3>
+        <p class="text-left poppins_font font_1_1_em">The percentage of the reservation we assess our Kennel Operators is based on the contract you have with us.  Because there are no listing, setup or monthly fees to participate in our program, PawBookings.com believes this fee to be nominal.  We do not invoice you – we simply remit the Amount Paid by your customer minus the percentage charged and deposit the funds in your bank account upon check-out of your customer.  Through your Kennel Dashboard, you get real-time financial reporting of how much you have collected in bookings.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">Speaking of a contract, do I have to sign one and am I locked into a long contract with PawBookings.com?</h3>
+        <p class="text-left poppins_font font_1_1_em">Yes, you do have to sign a simple one-page contract that outlines and discloses the terms of the agreement between PawBookings.com and you, the Kennel Operator.  We are confident that when you recognize the value of the service we provide, you will never leave us. However, if for any reason you want to cancel, we simply require a 30 day notice of your intent to cancel and that’s it.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">What if we require a behavioral analysis or screening of a pet before boarding?</h3>
+        <p class="text-left poppins_font font_1_1_em">The safety of all your guests, as well as your staff, is of paramount importance. Your kennel profile will indicate to PawBookings.com what requirements you have.  If a pet owner tries to book a reservation, and you have a screening requirement, they will be advised and instructions will be given to them accordingly.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">What if we have holiday-specific prices…can we change our pricing?</h3>
+        <p class="text-left poppins_font font_1_1_em">You can change pricing at any time via your Kennel Dashboard.  We also have the ability to let you set pricing that is different around major holidays/peak demand.  If you need help setting that up, please call one of our friendly staffers to assist you with that.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">What about dogs in the same family sharing a run?  Can we do that?</h3>
+        <p class="text-left poppins_font font_1_1_em">Of course! Our program is advanced enough to understand your policies, which you set up via your Kennel Dashboard.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">How do I get notified of a reservation?</h3>
+        <p class="text-left poppins_font font_1_1_em">Your Kennel Dashboard shows you all current and future reservations via a calendar.  Our calendar displays the number of check-in / check-out clients for that day.  Simply clicking on ‘Details’ will give you all the guests for the day you choose.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">Is there a potential for overbooks?</h3>
+        <p class="text-left poppins_font font_1_1_em">No one knows your business better than you, and you may have identified that your reservations has a certain percentage of cancellations that you can anticipate.  You can set up custom rules to either prevent or allow overbookings.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">What amenities or services can I customize for my kennel?</h3>
+        <p class="text-left poppins_font font_1_1_em">Besides inputing your rooms or ‘runs’, we give each facility the ability to add amenities and value-added services. Offering a walk/play service, special treats or a day-of-check-out grooming is a great way to not only make our furry friends’ stay at your kennel an exceptional experience, it can add to your bottom line!  Let US do the upselling for you…. we are quite good at it.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">We’re not on the web.  Can we still use PawBookings.com?</h3>
+        <p class="text-left poppins_font font_1_1_em">The beauty of being listed on PawBookings.com is that you do not need to have a website… we provide the web presence for you! While we strongly recommend you have your own website, as well as social media accounts, any pet owner looking to make a reservation will find you on PawBookings.com if you meet their criteria (eg. location).</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">What if we have our own website?  Can people book a reservation on our site?</h3>
+        <p class="text-left poppins_font font_1_1_em">Absolutely!  We have a ‘Book Now’ button that we will set up for your webpage that works with our system to allow your customers to make a reservation 24/7/365.  There is a small one-time fee for setting that up, and we work with you to integrate it onto your website.  There is no need for programing or coding on your end.  We handle that.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">Is the Kennel Dashboard easy to use?</h3>
+        <p class="text-left poppins_font font_1_1_em">You bet it is.  PawBookings.com was founded by Patrick McDonnell who worked at a Kennel in Upstate New York for over a decade.  He has worked with world-class web designers and developers to make the site as user friendly as possible.  Of course, our U.S.-based customer support experts are just an email or phone call away should you need any help.</p>
+        <br />
+        <br />
+        <h3 class="default_green_color text-left arvo_font">Have more questions? Give us a call!</h3>
+        <p class="text-left poppins_font font_1_1_em">Is there something we didn’t cover?  Don’t worry – we won’t bark or hiss at you! Simply call us at 844-944-3333 or email us at support@pawbookings.com and we will answer your questions.</p>
+        <br />
+        <br />
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render partial: "shared/footer" %>

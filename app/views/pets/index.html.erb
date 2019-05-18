@@ -1,0 +1,71 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid customer_dashboard_container">
+  <div class="customer_dashboard_desktop">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h5 class="title_customer">My Pets</h5>
+        <br />
+        <br />
+      </div>
+    </div>
+    <div class="row pets_container">
+      <% if @pets.length != 0 %>
+        <% @pets.each_with_index do |pet, index| %>
+          <div class="pet_container" style="margin-right: 50px; margin-bottom: 80px;">
+            <%= image_tag pet.avatar.url, class: "pet_image kennel_dashboard_avatar" if !pet.avatar.url.nil? %>
+            <p class="under text_info"><%= pet.name %></p>
+            <br>
+            <p class="font-18 vet_h pet_text" style="margin-right: 100px;"><strong>Type:</strong><%= " #{pet.cat_or_dog.capitalize}" %></p>
+            <p class="font-18 vet_h pet_text"><strong>Weight:</strong><%= " #{pet.weight}" %></p>
+            <p class="font-18 vet_h pet_text"><strong>Age:</strong><%= " #{pet.age || '-'}" %></p>
+            <% if pet.cat_or_dog == "dog"%>
+              <p class="font-18 vet_h pet_text"><strong>Breed:</strong><%= " #{pet.breed}" %></p>
+            <% end %>
+            <p class="font-18 vet_h pet_text"><strong>Spay or neutered:</strong><%= " #{pet.spay_or_neutered}" %></p>
+            <% if pet.vaccination_record_file_name.nil? %>
+                <p class="font-18 vet_h pet_text"><strong>Vaccination current:</strong>False</p>
+                <p class="font-18 vet_h pet_text"><strong>Vaccination record:</strong>-</p>
+            <% else %>
+                <p class="font-18 vet_h pet_text"><strong>Vaccination current:</strong>True</p>
+                <p class="font-18 vet_h pet_text"><strong>Vaccination record:</strong><br><%= link_to "#{pet[:vaccination_record_file_name]}", pet.vaccination_record.url %></p>
+            <% end %>
+            <% if pet.special_instructions.nil? %>
+                <p class="font-18 vet_h pet_text"><strong>Special instructions:</strong>none</p>
+            <% else %>
+                <p class="font-18 vet_h pet_text"><strong>Special instructions:<br></strong><%= " #{pet.special_instructions}" %></p>
+            <% end %>
+            <% if pet.cat_or_dog == "cat"%>
+              <%= link_to 'Edit this pet', edit_pet_path(pet), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_link', id: 'edit_customer_vet_info_link', style:"margin-top: 39px" } %>
+            <% else %>
+                <% if pet.vaccination_record_file_name.nil? %>
+                    <%= link_to 'Edit this pet', edit_pet_path(pet), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_link', id: 'edit_customer_vet_info_link', style:'margin-top: 19px' } %>
+                <% else %>
+                    <%= link_to 'Edit this pet', edit_pet_path(pet), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_link', id: 'edit_customer_vet_info_link' } %>
+                <% end %>
+            <% end %>
+            <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content"></div>
+                  </div>
+              </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="row", style="text-align: center;vertical-align: middle;line-height: 90px;  ">
+        <%= link_to 'Add a new pet', new_pet_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window9', class: 'text_info bold-text link_edit', style:'margin-left: calc(100%/2 - 70px); margin-top: 30px;'} %>
+        <div id="modal-window9" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content"></div>
+                  </div>
+              </div>
+          </div>
+        <br>
+        <%= link_to 'Return to dashboard', customer_dashboard_path, class: 'text_info bold-text link_edit',style:'margin-left: calc(100%/2 - 90px); margin-top: -20px;' %>
+    </div>
+  </div>
+</div>
+
+
+<%= render partial: "shared/footer" %>

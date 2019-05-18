@@ -1,0 +1,40 @@
+<%# <%= render partial: "shared/top_info" %> 
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">x</button>
+  <h4 class="modal-title" id="myModalLabel1" style="font-family: 'Roboto'; font-size:20px;">Edit Existing</h4>
+</div>
+<div class="modal-body" style="color: black;height: auto; margin-top:0 !important; background-color: white; float: none;
+    text-align : center;">
+   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, id:"form") do |f| %>
+          <br>
+           <p class="font-18">Personal contact email:</p>
+           <%= f.email_field :email, value: current_user.email, autofocus: true, class:"form-control payment_input input_new_reserv black_18" %>
+            <br>
+            <p class="font-18">First name:</p>
+            <%= f.text_field :first_name, value: current_user.first_name, autofocus: true, class:"form-control payment_input input_new_reserv black_18" %>
+            <br>
+            <p class="font-18">Last name:</p>
+            <%= f.text_field :last_name, value: current_user.last_name, autofocus: true, class:"form-control payment_input input_new_reserv black_18" %>
+            <br>
+            <p class="font-18">Personal contact phone:</p>
+            <%= f.text_field :phone, value: current_user.phone, autofocus: true, class:"form-control payment_input input_new_reserv black_18" %>
+            <br>
+            <p class="font-18">Time zone:</p>
+            <%= f.text_field :time_zone, value: current_user.time_zone, autofocus: true, class:"form-control payment_input input_new_reserv black_18" %>
+            <br>
+            <br>
+            <br>
+          <div class="form-actions">
+            <p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="text-align:center; float: none; margin:0; padding:0;">Save</p>
+            </div>  
+      <% end %>
+</div>
+
+<script type="text/javascript">
+     function submitForm() {
+        $("#new_user").submit();
+    }
+</script>
+
+
+<%# <%= render partial: "shared/footer" %> 

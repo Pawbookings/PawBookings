@@ -1,0 +1,22 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container">
+  <div class="row back_to_results_row">
+    <div class="col-xs-12 text-center">
+      <p class="back_button_p"><span class="glyphicon glyphicon-arrow-left default_green_color"></span> <%= link_to "Back to results", :back, class:"back_button_a" %></p>
+      <h2 class="arvo_font text_underline"><%= @kennel[:name] %></h2>
+      <span class="glyphicon glyphicon-map-marker"><small class="arvo_font"><%= "#{@kennel[:address]} #{@kennel[:city]}, #{@kennel[:state]} #{@kennel[:zip]}" %></small></span>
+      <br />
+      <br />
+      <h4 class="arvo_font letter_spacing_0_p_08_em line_height_1_5_em">This kennel is not available for online reservations. Click "Notify Kennel" if you wanted to book a reservation online and we will let them know!</h4>
+      <%= link_to "Notify!", notify_kennel_path(id: @kennel[:id]), class:'btn-lg btn-success', method: :post %>
+      <br />
+      <br />
+      <h4 class="arvo_font letter_spacing_0_p_08_em line_height_1_5_em">Is this your business?</h4>
+      <%= link_to "Claim This Business!", claim_business_path(id: @kennel[:id]), class:'btn-lg btn-success' %>
+      <br />
+      <br />
+      <br />
+      <br />
+    </div>
+  </div>

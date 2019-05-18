@@ -1,0 +1,150 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid kennel_dashboard_desktop">
+  <div class="row">
+    <div class="col-md-2">
+      <ul id="vert_ul" class="nav nav-pills nav-stacked vert_ul">
+        <li class="<%= @tab == 'owner' ? 'active' : ''%> vert_li"><a href="#tab_a" data-toggle="pill" style="background-color: transparent !important;">Owner Personal Info</a></li>
+        <li class="<%= @tab == 'kennel' ? 'active' : ''%> vert_li"><a href="#tab_b" data-toggle="pill" style="background-color: transparent !important;">Kennel Information</a></li>
+        <li class="<%= @tab == 'runs' ? 'active' : ''%> vert_li"><a href="#tab_c" data-toggle="pill" style="background-color: transparent !important;">Accomodations</a></li>
+        <li class="<%= @tab == 'amenities' ? 'active' : ''%> vert_li"><a href="#tab_d" data-toggle="pill" style="background-color: transparent !important;">Amenities</a></li>
+        <li class="<%= @tab == 'hours' ? 'active' : ''%> vert_li"><a href="#tab_e" data-toggle="pill" style="background-color: transparent !important;">Hours of Operation</a></li>
+        <li class="<%= @tab == 'holidays' ? 'active' : ''%> vert_li"><a href="#tab_f" data-toggle="pill" style="background-color: transparent !important;">Holidays</a></li>
+        <li class="<%= @tab == 'policies' ? 'active' : ''%> vert_li"><a href="#tab_g" data-toggle="pill" style="background-color: transparent !important;">Policies</a></li>
+        <li class="<%= @tab == 'breed' ? 'active' : ''%> vert_li"><a href="#tab_h" style="background-color: transparent !important;" data-toggle="pill">Breed Restrictions</a></li>
+        <li class="<%= @tab == 'photos' ? 'active' : ''%> vert_li"><a href="#tab_i" style="background-color: transparent !important;"  data-toggle="pill">Kennel Pictures</a></li>
+      </ul>
+    </div>
+    <div class="col-md-10">
+      <div class="container_tabs">
+        <p style="color: black; font-size: 24px; text-align: center; font-weight: normal;"> Kennel Management </p>
+        <div class="tab-content">
+          <div id="tab_a" class="tab-pane <%= @tab == 'owner' ? 'active' : ''%>">
+               <p class="kennel_h2">Owner personal information</p>
+              <%= render partial: 'kennels/nav_tabs/owner_info', user: current_user%>
+							<div id="modal-window2" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :template => "devise/registrations/edit" %>
+									</div>
+                </div>
+            	</div>
+          </div>
+          <div class="tab-pane <%= @tab == 'kennel' ? 'active' : ''%>" id="tab_b">
+              <p class="kennel_h2">Kennel information</p>
+              <%= render partial: 'kennels/nav_tabs/kennel_info'%>
+          </div>
+          <div class="tab-pane <%= @tab == 'runs' ? 'active' : ''%>" id="tab_c">
+              <p class="kennel_h2">Accomodations</p>
+              <%= render partial: 'kennels/nav_tabs/runs_info'%>
+              <div id="modal-window3" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+							<div id="modal-window4" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+          </div>
+          <div class="tab-pane <%= @tab == 'amenities' ? 'active' : ''%>" id="tab_d">
+						<p class="kennel_h2" style="padding-bottom:50px;">Amenities</p>
+              <%= render partial: 'kennels/nav_tabs/amenities_info'%>
+              <div id="modal-window5" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+							<div id="modal-window6" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+          </div>
+          <div class="tab-pane <%= @tab == 'hours' ? 'active' : ''%>" id="tab_e">
+            <p class="kennel_h2">Hours of Operation</p>
+              <%= render partial: 'kennels/nav_tabs/hours_info'%>
+          </div>
+          <div class="tab-pane <%= @tab == 'holidays' ? 'active' : ''%>" id="tab_f">
+              <p class="kennel_h2">Holidays</p>
+              <%= render partial: 'kennels/nav_tabs/holidays_info'%>
+              <div id="modal-window7" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+							<div id="modal-window15" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+							<div id="modal-window8" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+          </div>
+          <div class="tab-pane <%= @tab == 'policies' ? 'active' : ''%>" id="tab_g">
+             <p class="kennel_h2">Policies</p>
+              <%= render partial: 'kennels/nav_tabs/policies_info'%>
+              <div id="modal-window9" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+							<div id="modal-window10" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+          </div>
+          <div class="tab-pane <%= @tab == 'breed' ? 'active' : ''%>" id="tab_h">
+						<p class="kennel_h2">Breed restrictions</p>
+              <%= render partial: 'kennels/nav_tabs/breeds_info'%>
+              <div id="modal-window11" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+							<div id="modal-window12" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+          </div>
+          <div class="tab-pane <%= @tab == 'photos' ? 'active' : ''%>" id="tab_i">
+              <p class="kennel_h2">Kennel pictures</p>
+              <%= render partial: 'kennels/nav_tabs/pictures_info'%>
+              <div id="modal-window13" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+							<div id="modal-window14" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+										<div class="modal-content">
+										</div>
+								</div>
+							</div>
+          </div>
+      </div><!-- tab content -->
+    </div>
+  </div>
+</div>
+
+
+
+<%= render partial: "shared/footer" %>

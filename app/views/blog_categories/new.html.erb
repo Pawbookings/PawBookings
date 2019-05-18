@@ -1,0 +1,26 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="main_title arvo_font">New Blog Category</h5>
+      <br />
+      <%= form_for @blog_category do |f| %>
+        <strong>Title:</strong>
+        <br>
+        <%= f.text_field :title, placeholder: " Title", class:"general_input" %>
+        <br>
+        <br>
+        <strong>Publish Date:</strong>
+        <br />
+        <%= f.text_field :publish_date, placeholder: " Publish Date", class:"general_input blog_publish_date_picker" %>
+        <br>
+        <br>
+        <%= f.submit "Submit", class:"btn btn-success" %>
+        <br>
+        <br>
+        <br>
+      <% end %>
+    </div>
+  </div>
+</div>

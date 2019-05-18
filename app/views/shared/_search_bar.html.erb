@@ -1,0 +1,92 @@
+<%= form_tag({controller: "searches", action: "create"}, {method: "post"}) do %>
+  <div class="mobile_search_div">
+    <div class="row text-center">
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-6">
+              <%= label_tag "Zip code", nil, class: "search_label" %>
+              <br />
+              <%= text_field_tag(:search_zip, nil, placeholder: " Zip Code", class: "common_search_field search_zip", onkeypress: "return isNumber(event);", maxlength: "5", required: true, value: params[:search_zip]) %>
+            </div>
+            <div class="col-xs-6">
+              <%= label_tag "Distance", nil, class: "search_label" %>
+              <br />
+              <%= text_field_tag(:radius, nil, type: 'number', placeholder: " Distance", class: "common_search_field", onkeypress: "return isNumber(event);", maxlength: "3", max: '100', value: params[:radius]) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div style="margin-top: 1em;" class="row text-center">
+      <div class="col-xs-12">
+        <%= label_tag "Reservation dates", nil, class: "search_label" %>
+        <%= text_field_tag(:reservation_dates, nil, class: "daterange_check_in common_search_field text-center", required: true, name: "reservation_dates", value: params[:reservation_dates]) %>
+      </div>
+    </div>
+
+    <div style="margin-top: 1em;" class="row text-center">
+      <div class="col-xs-6">
+        <%= label_tag "Number of Dogs", nil, class: "search_label" %>
+        <%= select_tag(:number_of_dogs, options_for_select(number_of_pets_option, params[:number_of_dogs]), class: "form-control common_search_field") %>
+      </div>
+
+      <div class="col-xs-6">
+        <%= label_tag "Number of cats", nil, class: "search_label" %>
+        <%= select_tag(:number_of_cats, options_for_select(number_of_pets_option, params[:number_of_cats]), class: "form-control common_search_field") %>
+      </div>
+    </div>
+
+    <div style="margin-top: 1em;" class="row text-center">
+      <div class="col-xs-12">
+        <%= label_tag "Number of rooms", nil, class: "search_label" %>
+        <%= select_tag(:number_of_rooms, options_for_select(number_of_rooms_option, params[:number_of_rooms]), class: "form-control common_search_field") %>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-xs-12">
+        <%= button_to "Search", "#", class: "search_submit_btn" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+<script type='text/javascript'>
+  $(".search_submit_btn").on("click", function(){
+    var search_zip = $("#search_zip").val();
+    var radius = $("#radius").val();
+    var reservation_dates = $("#reservation_dates").val();
+    var number_of_dogs = $("#number_of_dogs").val();
+    var number_of_cats = $("#number_of_cats").val();
+    var number_of_rooms = $("#number_of_rooms").val();
+
+    // $.ajax({ url: "/searches?", data: my_key_vals, type: "POST" });
+    if(search_zip != ""){
+      $.redirectPost("/searches", {search_zip: search_zip, radius: radius, reservation_dates: reservation_dates, number_of_dogs: number_of_dogs, number_of_cats: number_of_cats, number_of_rooms: number_of_rooms});
+    }
+  });
+
+  $.extend(
+{
+    redirectPost: function(location, args)
+    {
+        var form = $('<form></form>');
+        form.attr("method", "post");
+        form.attr("action", location);
+
+        $.each( args, function( key, value ) {
+            var field = $('<input></input>');
+
+            field.attr("type", "hidden");
+            field.attr("name", key);
+            field.attr("value", value);
+
+            form.append(field);
+        });
+        $(form).appendTo('body').submit();
+    }
+});
+
+
+</script>

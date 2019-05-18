@@ -1,0 +1,164 @@
+.payment_div {
+  background-color: #3c3c3c;
+  padding-bottom: 2em;
+}
+
+.payment_container {
+  /*background-color: #43ac6a;*/
+}
+
+.payment_main_title {
+  margin-top: 3em;
+}
+
+.payment_room_details_div, .payment_amenity_details_div {
+  background-color: #48cd7e;
+  border-radius: 0.4em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  margin-bottom: 1em;
+  color: #5f5f5f;
+}
+
+.payment_room_details_title, .payment_amenity_details_title {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 1em;
+  color: white;
+}
+
+.payment_room_individual_div, .payment_amenity_individual_div {
+  background-color: #3c3c3c;
+  color: #48cd7e;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  box-shadow: inset 0 0 10px;
+  margin-bottom: 2em;
+  padding-top: 0.1em;
+}
+
+.payment_top_details_border_div {
+  border: 1px solid #b1b1b1;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  margin-left: 1em;
+}
+
+.payment_top_details_ul {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.payment_top_details_li {
+  font-size: 0.75em;
+}
+
+.payment_amenity_title {
+  margin-top: 2em;
+}
+
+.payment_total_div, .payment_tax_div {
+  background-color: #48cd7e;
+  border-radius: 0.4em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.payment_total_title, .payment_tax_title {
+  font-size: 2em;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.payment_grand_total_div {
+  background-color: #ffffff;
+  border-radius: 0.4em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.payment_grand_total_title {
+  font-size: 2em;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.payment_owner_info_title {
+  font-size: 2.5em;
+  margin-top: 1em;
+  text-decoration: underline;
+}
+
+.payment_credit_card_info_div, .payment_pets_contact_div {
+  text-align: left;
+}
+
+.payment_owner_info_container {
+  margin-bottom: 3em;
+}
+
+.payment_pets_info_title {
+  font-size: 2.5em;
+  margin-top: 1.5em;
+  text-decoration: underline;
+}
+
+.payment_pet_details_div {
+}
+
+.payment_submt_btn {
+  width: 75%;
+  height: 3em;
+  margin-top: 1.5em;
+  background: linear-gradient(#42b370, #51d888);
+  color: #ffffff;
+}
+
+.payment_input {
+  width: 100%;
+  height: 2.5em;
+  border-radius: 0.4em;
+}
+
+.payment_res_dates {
+  line-height: 1.5em;
+}
+
+.payment_confirm_booking_div {
+  background-color: #f1f1f1;
+  padding: 1em;
+  border-radius: 1em;
+}
+
+@media (max-width: 991px) {
+  .payment_top_details_desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .payment_top_details_mobile, .payment_room_details_mobile {
+    display: none;
+  }
+
+  .payment_res_dates_desktop {
+    font-size: 0.8em;
+  }
+
+  .payment_room_details_div, .payment_amenity_details_div {
+    text-align: center;
+  }
+
+  .payment_room_individual_div, .payment_amenity_individual_div {
+    font-size: 2em;
+  }
+}

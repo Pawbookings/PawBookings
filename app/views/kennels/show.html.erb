@@ -1,0 +1,505 @@
+<% set_meta_tags title: @searched_kennel[:name].capitalize %>
+<% set_meta_tags description: "Booking search results for kennels available to make a reservation. Kennel searched results." %>
+<% set_meta_tags keywords: [@searched_kennel[:name], @searched_kennel[:address], @searched_kennel[:city], @searched_kennel[:state], @searched_kennel[:zip], @searched_kennel[:email], @searched_kennel[:phone], "pet booking", "kennel", "pet hotel", "pet reservation", "local pet kennels", "pawbookings"] %>
+
+<%= render partial: "shared/top_info" %>
+
+
+<div class="container">
+  <div class="row back_to_results_row">
+    <div class="col-xs-12">
+      <p class="back_button_p"><span class="glyphicon glyphicon-arrow-left default_green_color"></span> 
+        <% if params[:inbound] %>
+          <%= link_to "Search", root_path , class:"back_button_a" %>
+        <% else %>
+          <%= link_to "Back to results", :back, class:"back_button_a" %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-4">
+      <h1 class="arvo_font kennel_show_title"><%= @searched_kennel[:name] %></h1>
+      <p class="kennel_show_address"><span class="glyphicon glyphicon-map-marker"></span> <%= "#{@searched_kennel[:address]} #{@searched_kennel[:city]}, #{@searched_kennel[:state]} #{@searched_kennel[:zip]}" %></p>
+      <div class="kennel_show_logo_div">
+        <%= image_tag @searched_kennel.avatar.url, class:"kennel_show_logo" if !@searched_kennel.nil? %>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-6 hidden_if_mobile">
+      <div class="kennel_show_btn_option_div">
+        <div class="kennel_show_option_display_div kennel_show_description_div">
+          <h3 class="arvo_font default_green_color">Description</h3>
+          <p><%= @searched_kennel[:mission_statement] %></p>
+        </div>
+        <div class="kennel_show_option_display_div kennel_show_amenities_div">
+          <% if @amenities.blank? %>
+            <h3 class="arvo_font default_green_color">Amenities</h3>
+            <strong>•No Amenities Listed.</strong>
+          <% else %>
+            <h3 class="arvo_font default_green_color">Amenities</h3>
+            <% @amenities.each do |amenity| %>
+              <strong><%= "•#{amenity[:title]} - #{amenity[:description]} - $#{amenity[:price]}" %></strong>
+              <br />
+              <br />
+            <% end %>
+          <% end %>
+        </div>
+        <div class="kennel_show_option_display_div kennel_show_policies_div">
+          <% if @policies.blank? && @breeds_restricted.blank? %>
+            <h3 class="arvo_font default_green_color">Policies</h3>
+            <strong>•No Policies or Breed Restrictions Listed.</strong>
+            <br />
+            <br />
+          <% elsif !@policies.blank? && !@breeds_restricted.blank? %>
+            <h4 class="arvo_font default_green_color">Breeds Restricted:</h4>
+            <% @breeds_restricted.each do |breed| %>
+              <strong>•<%= breed[:breed] %></strong>
+              <br />
+            <% end %>
+            <h4 class="arvo_font default_green_color">Policies:</h4>
+            <% @policies.each do |policy| %>
+            <strong>•<%= policy[:title] %></strong>
+            <strong>- <%= policy[:description] %></strong>
+            <br />
+            <br />
+            <% end %>
+          <% elsif @policies.blank? && !@breeds_restricted.blank? %>
+            <h4 class="arvo_font default_green_color">Breeds Restricted:</h4>
+            <% @breeds_restricted.each do |breed| %>
+              <strong>•<%= breed[:breed] %></strong>
+              <br />
+            <% end %>
+          <% else %>
+            <h3 class="arvo_font default_green_color">Policies</h3>
+            <% @policies.each do |policy| %>
+              <strong>•<%= policy[:title] %></strong>
+              <strong>- <%= policy[:description] %></strong>
+              <br />
+              <br />
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row text-center kennel_show_options_btn_row">
+    <div class="col-xs-4 border_right">
+      <p class="arvo_font default_green_color kennel_show_options_btns description_btn">Description</p>
+    </div>
+    <div class="col-xs-4 border_right">
+      <p class="arvo_font default_green_color kennel_show_options_btns amenities_btn">Amenities</p>
+    </div>
+    <div class="col-xs-4">
+      <p class="arvo_font default_green_color kennel_show_options_btns policies_btn">Policies</p>
+    </div>
+  </div>
+
+  <div class="border"></div>
+
+  <br />
+
+  <div class="row kennel_show_option_display_row hidden_if_desktop">
+    <div class="col-xs-12">
+      <div class="kennel_show_option_display_div kennel_show_description_div">
+        <h3 class="arvo_font default_green_color">Description</h3>
+        <p><%= @searched_kennel[:mission_statement] %></p>
+      </div>
+      <div class="kennel_show_option_display_div kennel_show_amenities_div">
+        <% if @amenities.blank? %>
+          <h3 class="arvo_font default_green_color">Amenities</h3>
+          <strong>•No Amenities Listed.</strong>
+        <% else %>
+          <h3 class="arvo_font default_green_color">Amenities</h3>
+          <% @amenities.each do |amenity| %>
+            <strong><%= "•#{amenity[:title]} - #{amenity[:description]} - $#{amenity[:price]}" %></strong>
+            <br />
+            <br />
+          <% end %>
+        <% end %>
+      </div>
+      <div class="kennel_show_option_display_div kennel_show_policies_div">
+        <% if @policies.blank? && @breeds_restricted.blank? %>
+          <h3 class="arvo_font default_green_color">Policies</h3>
+          <strong>•No Policies or Breed Restrictions Listed.</strong>
+          <br />
+          <br />
+        <% elsif @policies.blank? && !@breeds_restricted.blank? %>
+          <h4 class="arvo_font default_green_color">Breeds Restricted:</h4>
+          <% @breeds_restricted.each do |breed| %>
+            <strong>•<%= breed[:breed] %></strong>
+          <% end %>
+        <% else %>
+          <h3 class="arvo_font default_green_color">Policies</h3>
+          <% @policies.each do |policy| %>
+            <strong>•<%= policy[:description] %></strong>
+            <br />
+            <br />
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="hidden_if_desktop">
+    <br />
+    <% if !@photos.blank? %>
+      <div class="text-center">
+        <div class="owl-carousel-kennel-show">
+          <% @photos.each do |photo| %>
+            <div><%= image_tag photo.image.url, class:"width_100_percent" %></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <br />
+    <div class="row text-center">
+      <div class="col-xs-12">
+        <div class="div_border">
+          <h1 class="arvo_font default_green_color"><%= "$#{@run_price_range[0]}-$#{@run_price_range.last}" %></h1>
+          <p class="per_night_p">per night</p>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="div_border">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4 class="arvo_font">Pickup &amp; Dropoff Times</h4>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>SUN</strong></p>
+          </div>
+        </div>
+        <div class="col-xs-10">
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:sunday_open]} - #{@hours_of_operation[:sunday_close]}" %></p>
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>MON</strong></p>
+          </div>
+        </div>
+        <div class="col-xs-10">
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:monday_open]} - #{@hours_of_operation[:monday_close]}" %></p>
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>TUE</strong></p>
+          </div>
+        </div>
+        <div class="col-xs-10">
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:tuesday_open]} - #{@hours_of_operation[:tuesday_close]}" %></p>
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>WED</strong></p>
+          </div>
+        </div>
+        <div class="col-xs-10">
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:wednesday_open]} - #{@hours_of_operation[:wednesday_close]}" %></p>
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>THU</strong></p>
+          </div>
+        </div>
+        <div class="col-xs-10">
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:thursday_open]} - #{@hours_of_operation[:thursday_close]}" %></p>
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>FRI</strong></p>
+          </div>
+        </div>
+        <div class="col-xs-10">
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:friday_open]} - #{@hours_of_operation[:friday_close]}" %></p>
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>SAT</strong></p>
+          </div>
+        </div>
+        <div class="col-xs-10">
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:saturday_open]} - #{@hours_of_operation[:saturday_close]}" %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+
+  <div class="row text-center">
+    <div class="col-xs-12 col-md-8">
+      <% if !@photos.blank? %>
+        <div class="hidden_if_mobile">
+          <div class="owl-carousel-kennel-show">
+            <% @photos.each do |photo| %>
+              <div><%= image_tag photo.image.url %></div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <br />
+      <h4 class="arvo_font kennel_show_select_rooms_title">Select Room(s)</h4>
+      <% counter = params[:search_info][:number_of_rooms].to_i %>
+      <ul class="nav nav-tabs" role="tablist">
+        <% counter.times do %>
+          <% if counter == 1 %>
+          <li role="presentation" class="active"><a href="#room_<%= counter %>_selection" aria-controls="room_<%= counter %>_selection" role="tab" data-toggle="tab"><%= "Room #{counter}" %></a></li>
+          <% else %>
+          <li role="presentation"><a href="#room_<%= counter %>_selection" aria-controls="room_<%= counter %>_selection" role="tab" data-toggle="tab"><%= "Room #{counter}" %></a></li>
+          <% end %>
+          <% counter -= 1 %>
+        <% end %>
+      </ul>
+      <% counter = params[:search_info][:number_of_rooms].to_i %>
+      <div class="tab-content">
+        <% params[:search_info][:number_of_rooms].to_i.times do %>
+          <% if counter == 1 %>
+            <br />
+            <div role="tabpanel" class="tab-pane active" id="room_<%= counter %>_selection">
+          <% else %>
+            <br />
+            <div role="tabpanel" class="tab-pane" id="room_<%= counter %>_selection">
+          <% end %>
+            <div class="run_container_<%= counter %> div_border_green_background">
+              <h5 class="arvo_font">Room <%= counter %> selection:</h5>
+              <% @runs.each do |run| %>
+                <div class="div_border">
+                  <h3 class="arvo_font text_underline"><%= run[:title] %></h3>
+                  <%= image_tag run.image.url, class:"run_image" %>
+                  <% if run.type_of_pets_allowed == "dog" || run.type_of_pets_allowed == "cat" %>
+                    <p>•Only <%= run.type_of_pets_allowed.capitalize %>s allowed</span></strong></p>
+                  <% else %>
+                    <p>•Both Cats and Dogs allowed</span></strong></p>
+                  <% end %>
+                  <p class="poppins_font margin_l_r_5em"><%= run.description %></p>
+                  <h1 class="default_green_color arvo_font"><%= "$#{run[:price]}" %></h1>
+                  <p><strong>Max Occupancy:</strong> <%= run.pets_per_run %> pets</p>
+                  <% if run.weight_limit.nil? %>
+                    <p><strong>Weight-Limit:</strong> n/a</p>
+                  <% else %>
+                    <p><strong>Weight-Limit:</strong> <%= run.weight_limit %>lbs</p>
+                  <% end %>
+                  <p><strong>Size:</strong> <%= run.size_length %>ft x <%= run.size_length %>ft</p>
+                  <% if !@run_ids_maxed.nil? %>
+                    <% if @run_ids_maxed.include? run.id.to_s %>
+                      <p style="color:#ff5151;"><strong>**This Room is currently unavailable**</strong></p>
+                      <%= link_to "Notify me when this room becomes available!", new_stand_by_reservation_path(kennel_id: @searched_kennel[:id], run_id: run.id, check_in_date: @customer_check_in_date, check_out_date: @customer_check_out_date ) %>
+                    <% else %>
+                      <button style="height:2.5em;" type="button" class="btn add_room_btn" onclick='addRunToRoom("<%= run.title %>", "room_<%= counter %>", <%= run.id %>, <%= run.price %>, "<%= run.type_of_pets_allowed %>", "<%= run.pets_per_run %>");'>Select Room</p>
+                    <% end %>
+                  <% else %>
+                    <button style="height:2.5em;" type="button" class="btn add_room_btn" onclick='addRunToRoom("<%= run.title %>", "room_<%= counter %>", <%= run.id %>, <%= run.price %>, "<%= run.type_of_pets_allowed %>", "<%= run.pets_per_run %>");'>Select Room</p>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <% counter -= 1 %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-4 hidden_if_mobile">
+      <br />
+      <br />
+      <div class="div_border">
+        <h1 class="arvo_font default_green_color"><%= "$#{@run_price_range[0]}-$#{@run_price_range.last}" %></h1>
+        <p class="per_night_p">per night</p>
+      </div>
+
+      <br />
+        <div class="div_border">
+          <h4 class="arvo_font">Pickup &amp; Dropoff Times</h4>
+
+          <br />
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>SUN</strong></p>
+          </div>
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:sunday_open]} - #{@hours_of_operation[:sunday_close]}" %></p>
+          </div>
+
+          <br />
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>MON</strong></p>
+          </div>
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:monday_open]} - #{@hours_of_operation[:monday_close]}" %></p>
+          </div>
+
+          <br />
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>TUE</strong></p>
+          </div>
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:tuesday_open]} - #{@hours_of_operation[:tuesday_close]}" %></p>
+          </div>
+
+          <br />
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>WED</strong></p>
+          </div>
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:wednesday_open]} - #{@hours_of_operation[:wednesday_close]}" %></p>
+          </div>
+
+          <br />
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>THU</strong></p>
+          </div>
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:thursday_open]} - #{@hours_of_operation[:thursday_close]}" %></p>
+          </div>
+
+          <br />
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>FRI</strong></p>
+          </div>
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:friday_open]} - #{@hours_of_operation[:friday_close]}" %></p>
+          </div>
+
+          <br />
+          <div class="text-center">
+            <p class="margin_top_1em default_green_color"><strong>SAT</strong></p>
+          </div>
+          <div class="pickup_dropoff_time_div">
+            <p class="leto_font font_1_1_em"><%= "#{@hours_of_operation[:saturday_open]} - #{@hours_of_operation[:saturday_close]}" %></p>
+          </div>
+          <br />
+        </div>
+        <br />
+        <br />
+    </div>
+  </div>
+<br />
+<br />
+  <div class="row my_booking_info_row">
+    <div class="col-xs-12">
+      <br />
+      <h1 class="arvo_font default_green_color text-center">My Booking Info</h1>
+      <br />
+      <div class="searches_show_res_details_div">
+        <p><strong class="default_green_color">Date:</strong> <%= "#{@customer_check_in_date} to #{@customer_check_out_date}" %></p>
+        <p><strong class="default_green_color">Pets:</strong> <%= "Dogs #{params[:search_info][:number_of_dogs]}, Cats #{params[:search_info][:number_of_cats]}" %></p>
+        <p><strong class="default_green_color">Number of rooms:</strong> <%= params[:search_info][:number_of_rooms] %></p>
+        <p><strong class="default_green_color">Number of nights:</strong> <%= params[:search_info][:number_of_nights].to_i %></p>
+        <% counter = params[:search_info][:number_of_rooms].to_i %>
+        <% params[:search_info][:number_of_rooms].to_i.times do %>
+          <div id="room_<%= counter %>">
+            <strong class="searches_show_strong_res_details_txt default_green_color text_underline">Room <%= counter %>:</strong>
+            <p style="font-style:italic;">Nothing Selected</p>
+          </div>
+          <div class="room_<%= counter %>_input">
+            <p></p>
+          </div>
+          <% counter -= 1 %>
+        <% end %>
+        <div class="searches_show_my_booking_info_border"></div>
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".amenities_container">Book Room(s)</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<%= render partial: "shared/footer" %>
+
+<%= render partial: "shared/amenities_modal" %>
+
+<script text/javascript>
+  $(".description_btn").on("click", function(){
+    $(".kennel_show_description_div").show();
+
+    $(".kennel_show_amenities_div").hide();
+    $(".kennel_show_policies_div").hide();
+  });
+
+  $(".amenities_btn").on("click", function(){
+    $(".kennel_show_amenities_div").show();
+
+    $(".kennel_show_description_div").hide();
+    $(".kennel_show_policies_div").hide();
+  });
+
+  $(".policies_btn").on("click", function(){
+    $(".kennel_show_policies_div").show();
+
+    $(".kennel_show_description_div").hide();
+    $(".kennel_show_amenities_div").hide();
+  });
+
+  function addRunToRoom(title, room_number, id, price, type_of_pets_allowed, pets_per_run){
+    $("#"+room_number + " p").first().remove();
+    $("#"+room_number).append("<p style='font-style:italic;' class='"+room_number+"'>"+title+"</p>");
+
+    $("#"+room_number+"_input"+ " p").first().remove();
+    $("#"+room_number+"_input").append("<input type='hidden' name='"+room_number+"_id' value='runid_"+id+"'><input type='hidden' name='"+room_number+"_price' value='"+price+"'><input type='hidden' name='"+room_number+"_name' value='"+title+"'><input type='hidden' name='"+room_number+"_type_of_pets_allowed' value='"+type_of_pets_allowed+"'><input type='hidden' name='"+room_number+"_pets_per_run' value='"+pets_per_run+"'>");
+  }
+
+  $(document).ready(function(){
+    $(".owl-carousel-kennel-show").owlCarousel({
+      autoPlay: 3000,
+      singleItem: true
+    });
+  });
+</script>

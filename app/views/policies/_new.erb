@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">x</button>
+  <h4 class="modal-title" id="myModalLabel1" style="font-family: 'Roboto'; font-size:20px; text-align: center;">Add New</h4>
+</div>
+<div class="modal-body" style="color: black; width: 1000px;height: auto; margin-top:0 !important; background-color: white; float: none;text-align : center;">
+		<%= form_for @policy, html: {multipart: true}, id:'form4' do |f| %>
+			<br>
+			<p class="font-18">Policy Title:</p>
+			<%= f.text_field :title, placeholder: 'Policy title', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+			<br>
+			<p class="font-18">Description:</p>
+			<%= f.text_field :description, placeholder: 'Description', class: "form-control payment_input input_new_reserv black_18 margin-0-auto"%>
+			<br>
+				 <%= f.submit "Save", class:'text_info bold-text link_edit vet_link submit_link font-20', style:"border: none;text-align:center; float: none; margin:0; padding:0; background-color: transparent" %> 
+			<br>
+		<% end %>
+</div>
