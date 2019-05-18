@@ -1,9 +1,238 @@
 .kennel_dashboard_title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto';
   color: #48cd7e;
   font-size: 2.5em;
   margin-top: 3.7em;
   text-decoration:underline;
+}
+
+.kennel_dashboard_desktop{
+  background: linear-gradient(180deg, #EEEEEE 64.06%, #30A05A 100%);
+  width: 100%;
+  height: auto;
+  position: absolute;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.chart_kennel {
+  margin-bottom: 20px;
+  height: auto !important; 
+}
+
+.booking_button{
+  width: 120px !important;
+}
+
+.kennel_button{
+  background: #30A05A;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.24), 0px 0px 2px rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+  color: white;
+  font-size: 14px;
+  line-height: 16px;
+  width: 160px;
+  height: 40px;
+  margin-top: 10px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.kennel_top {
+  position: relative;
+  margin-top: 180px;
+  margin-left: -50px;
+  position: relative;
+}
+
+.main_info {
+  padding-top: 1px;
+  font-family: Roboto;
+  color: black;
+  position: relative;
+  width: 550px;
+  height: 175px;
+  left: 100px;
+  margin-top: 130px;
+  text-align: center;
+  background: #FAFAFA;
+  box-shadow: 0px 19px 38px rgba(0, 0, 0, 0.3), 0px 15px 12px rgba(0, 0, 0, 0.22);
+  border-radius: 2px;
+}
+
+.check_info {
+  text-align: left;
+  margin-left: 25px;
+  padding-top: 8px;
+}
+.center_text {
+  text-align: center;
+}
+
+.kennel_check_in {
+  overflow-y: scroll;
+}
+
+.without_underline:hover {
+  text-decoration: none;
+}
+
+.a_as_button:hover{
+  text-decoration: none;
+  color: black;
+}
+
+.base_kennel {
+  font-family: Roboto;
+  color: black;
+  position: relative;
+  width: 550px;
+  height: 175px;
+  left: 100px;
+  margin-top: 17px;
+  height: 175px;
+  text-align: center;
+  padding-bottom: 15px;
+  background: #FAFAFA;
+  box-shadow: 0px 19px 38px rgba(0, 0, 0, 0.3), 0px 15px 12px rgba(0, 0, 0, 0.22);
+  border-radius: 2px;
+}
+
+tr {
+  padding-bottom: 10px;
+}
+
+.chart {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.arrow_style {
+  color: black;
+  font-size: 30px;
+}
+
+.font-18{
+  font-size: 18px !important;
+}
+
+.padding-10{
+  padding-top: 15px !important;
+}
+
+.white_td {
+  background-color: white;
+}
+
+.arrow_style:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.kennel_dashboard_res_search {
+  font-family: Roboto;
+  color: black;
+  position: relative;
+  width: 850px;
+  left: 100px;
+  margin-top: 130px !important;
+  text-align: center;
+  height: 135px;
+  padding-bottom: 15px;
+  background: #FAFAFA;
+  box-shadow: 0px 19px 38px rgba(0, 0, 0, 0.3), 0px 15px 12px rgba(0, 0, 0, 0.22);
+  border-radius: 2px;
+}
+
+.kennel_grey_list {
+  margin-top: -20px;
+  border-collapse: separate;
+  border: none;
+  width: 525px;
+  border-spacing: 0 8px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.reservation_table {
+  border-collapse: separate;
+  border: none;
+  width: 100%;
+  border-spacing: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.dialog {
+  width: 750px;
+  margin: auto;
+}
+
+.reservation_table tbody{
+  overflow-y: scroll;      
+  height: 600px;
+  width: calc(100% - 30px);
+  position: absolute;
+}
+
+td {
+  border: none;
+  background: #C4C4C4;
+}
+
+.kennel_info_style_h3{
+  font-size: 24px;
+  line-height: 28px;
+  color: black;
+  margin-bottom: 20px;
+  margin-top: 24px;
+}
+
+.kennel_info_p{
+  font-size: 20px;
+  line-height: 23px;
+  color: black;
+  /* margin-bottom: 25px; */
+}
+
+.kennel_dashboard_main_title {
+  margin-bottom: 1em;
+}
+
+.kennel_dashboard_option_btns_div {
+  line-height: 1em;
+  text-align: left;
+  margin-left: 6em;
+  margin-top: 4em;
+}
+
+.kennel_dashboard_option_btns_div_mobile {
+  line-height: 1em;
+}
+
+.kennel_dashboard_input {
+  width: 20%;
+}
+
+.kennel_reservations_body {
+  background-color: #3c3c3c;
+}
+
+.kennel_reservation_th {
+  background-color: #5e5e5e;
+}
+
+.kennel_reservation_td {
+  color: black !important;
+  width: 150px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px !important;
+}
+
+.vertical_center{
+  vertical-align: inherit !important;
 }
 
 .nav > li.active {
@@ -302,7 +531,7 @@ a:active {
 /* Kennel Registration*/
 
 .kennel_registration_title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto';
   color: #48cd7e;
   font-size: 2.5em;
   margin-top: 3.7em;
@@ -313,7 +542,7 @@ a:active {
 /* Run Registration */
 
 .run_registration_title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto';
   color: #48cd7e;
   font-size: 2.5em;
   margin-top: 3.7em;
@@ -324,7 +553,7 @@ a:active {
 /* Amenity Registration */
 
 .amenities_title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto';
   color: #48cd7e;
   font-size: 2.5em;
   margin-top: 3.7em;
@@ -336,7 +565,7 @@ a:active {
 /* Hours or Operation Registration */
 
 .hours_of_operation_title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto';
   color: #48cd7e;
   font-size: 2.5em;
   margin-top: 3.7em;
@@ -347,7 +576,7 @@ a:active {
 /* Holiday Registration */
 
 .holiday_registration_title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto';
   color: #48cd7e;
   font-size: 2.5em;
   margin-top: 3.7em;
@@ -362,7 +591,7 @@ a:active {
 /* Holiday Edit */
 
 .edit_holiday_title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto';
   color: #48cd7e;
   font-size: 2.5em;
   margin-top: 3.7em;
@@ -373,7 +602,7 @@ a:active {
 /* Policy Registration */
 
 .policy_registration_title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto';
   color: #48cd7e;
   font-size: 2.5em;
   margin-top: 3.7em;
@@ -381,15 +610,98 @@ a:active {
   text-decoration: underline;
 }
 
-@media (max-width: 679px) {
-  .kennel_dashboard_calendar {
-    display: none;
-  }
-}
 
 @media (max-width: 991px){
- .kennel_reservation_desktop, .searched_res_desktop, .kennel_dashboard_desktop {
+ /* .kennel_reservation_desktop, .searched_res_desktop, .kennel_dashboard_desktop {
     display: none;
+  } */
+
+  .main_info {
+    float: left;
+    left: unset !important;
+    margin-right: 150px;
+    margin-top: 120px;
+    margin-left: calc(100%/4 - 70px);
+    width:400px;
+  }
+
+  .kennel_check_in {
+    float: left;
+    left: unset !important;
+    margin-right: 150px;
+    margin-top: 40px;
+    margin-left: calc(100%/4 - 70px);
+    width:400px;
+  }
+
+  .kennel_grey_list {
+    width: auto !important;
+  }
+
+  #booking_row {
+    margin-left: unset !important;
+  }
+
+  .kennel_dashboard_res_search{
+    left: unset !important;
+    margin-left: 50px;
+    margin-right: 50px;
+    height: 230px;
+    width: auto;
+  }
+
+  #kennel_cont {
+    width: auto !important;
+    margin: 0 auto !important;
+    float: none !important;
+    height: 650px !important;
+  }
+
+  #amenity{
+    width: auto !important;
+  }
+
+  #runs_cont {
+    width: auto;
+    height: 750px !important;
+    margin-right: 50px !important;
+    float: left !important;
+    margin-left: unset !important;
+    margin-bottom: 100px;
+    padding-right: 50px;
+  }
+
+  #last_span {
+    float: left;
+    margin-left: 20px;
+  }
+
+  #p_kennel_info{
+    margin-left: unset !important;
+  }
+
+  #kennel_edit_button{
+    margin: 0 !important;
+    margin-top: 10px !important;
+    padding: 0;
+    margin-left: calc(100%/2 - 45px) !important;
+  }
+
+  .simple_calendar {
+    display: none;
+  }
+
+  #booking_button{
+    margin: 0 auto !important;
+  }
+
+  .chart_kennel {
+    float: left;
+    left: unset !important;
+    margin-right: 150px;
+    margin-top: 40px;
+    margin-left: calc(100%/4 - 70px);
+    width:400px;
   }
 }
 
@@ -426,235 +738,4 @@ a:active {
   html, body {
     overflow-x: hidden;
   }
-
-  .kennel_dashboard_desktop{
-    background: linear-gradient(180deg, #EEEEEE 64.06%, #30A05A 100%);
-    width: 100%;
-    height: auto;
-    position: absolute;
-    margin-left: -10px;
-    margin-right: -10px;
-  }
-
-  .chart_kennel {
-    margin-bottom: 20px;
-    height: auto !important; 
-  }
-
-  .booking_button{
-    width: 120px !important;
-  }
-
-  .kennel_button{
-    background: #30A05A;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.24), 0px 0px 2px rgba(0, 0, 0, 0.12);
-    border-radius: 2px;
-    color: white;
-    font-size: 14px;
-    line-height: 16px;
-    width: 160px;
-    height: 40px;
-    margin-top: 10px;
-    font-style: normal;
-    font-weight: 500;
-  }
-
-  .kennel_top {
-    position: relative;
-    margin-top: 180px;
-    margin-left: -50px;
-    position: relative;
-  }
-
-  .main_info {
-    padding-top: 1px;
-    font-family: Roboto;
-    color: black;
-    position: relative;
-    width: 550px;
-    height: 175px;
-    left: 100px;
-    margin-top: 130px;
-    text-align: center;
-    background: #FAFAFA;
-    box-shadow: 0px 19px 38px rgba(0, 0, 0, 0.3), 0px 15px 12px rgba(0, 0, 0, 0.22);
-    border-radius: 2px;
-  }
-
-  .check_info {
-    text-align: left;
-    margin-left: 25px;
-    padding-top: 8px;
-  }
-  .center_text {
-    text-align: center;
-  }
-  
-  .kennel_check_in {
-    overflow-y: scroll;
-  }
-
-  .without_underline:hover {
-    text-decoration: none;
-  }
-
-  .a_as_button:hover{
-    text-decoration: none;
-    color: black;
-  }
-
-  .base_kennel {
-    font-family: Roboto;
-    color: black;
-    position: relative;
-    width: 550px;
-    height: 175px;
-    left: 100px;
-    margin-top: 17px;
-    height: 175px;
-    text-align: center;
-    padding-bottom: 15px;
-    background: #FAFAFA;
-    box-shadow: 0px 19px 38px rgba(0, 0, 0, 0.3), 0px 15px 12px rgba(0, 0, 0, 0.22);
-    border-radius: 2px;
-  }
-
-  tr {
-    padding-bottom: 10px;
-  }
-
-  .chart {
-    margin-right: 20px;
-    margin-left: 20px;
-  }
-
-  .arrow_style {
-    color: black;
-    font-size: 30px;
-  }
-
-  .font-18{
-    font-size: 18px !important;
-  }
-
-  .padding-10{
-    padding-top: 15px !important;
-  }
-
-  .white_td {
-    background-color: white;
-  }
-
-  .arrow_style:hover {
-    color: black;
-    text-decoration: none;
-  }
-
-  .kennel_dashboard_res_search {
-    font-family: Roboto;
-    color: black;
-    position: relative;
-    width: 850px;
-    left: 100px;
-    margin-top: 130px !important;
-    text-align: center;
-    height: 135px;
-    padding-bottom: 15px;
-    background: #FAFAFA;
-    box-shadow: 0px 19px 38px rgba(0, 0, 0, 0.3), 0px 15px 12px rgba(0, 0, 0, 0.22);
-    border-radius: 2px;
-  }
-
-  .kennel_grey_list {
-    margin-top: -20px;
-    border-collapse: separate;
-    border: none;
-    width: 525px;
-    border-spacing: 0 8px;
-    margin-left: 10px;
-    text-align: center;
-  }
-
-  .reservation_table {
-    border-collapse: separate;
-    border: none;
-    width: 100%;
-    border-spacing: 0;
-    margin-left: 10px;
-    margin-right: 10px;
-    text-align: center;
-  }
-
-  .dialog {
-    width: 750px;
-    margin: auto;
-  }
-
-  .reservation_table tbody{
-    overflow-y: scroll;      
-    height: 600px;
-    width: calc(100% - 30px);
-    position: absolute;
-  }
-
-  td {
-    border: none;
-    background: #C4C4C4;
-  }
-
-  .kennel_info_style_h3{
-    font-size: 24px;
-    line-height: 28px;
-    color: black;
-    margin-bottom: 20px;
-    margin-top: 24px;
-  }
-
-  .kennel_info_p{
-    font-size: 20px;
-    line-height: 23px;
-    color: black;
-    /* margin-bottom: 25px; */
-  }
-
-  .kennel_dashboard_main_title {
-    margin-bottom: 1em;
-  }
-
-  .kennel_dashboard_option_btns_div {
-    line-height: 1em;
-    text-align: left;
-    margin-left: 6em;
-    margin-top: 4em;
-  }
-
-  .kennel_dashboard_option_btns_div_mobile {
-    line-height: 1em;
-  }
-
-  .kennel_dashboard_input {
-    width: 20%;
-  }
-
-  .kennel_reservations_body {
-    background-color: #3c3c3c;
-  }
-
-  .kennel_reservation_th {
-    background-color: #5e5e5e;
-  }
-
-  .kennel_reservation_td {
-    color: black !important;
-    width: 150px;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 18px !important;
-  }
-
-  .vertical_center{
-    vertical-align: inherit !important;
-  }
-
-
 }

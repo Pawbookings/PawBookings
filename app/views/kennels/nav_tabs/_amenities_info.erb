@@ -1,7 +1,7 @@
 <div style="height: auto; position: relative; overflow: hidden;">
 	<% if !@kennel.nil? %>
 	<% @amenities.each_with_index do |amenity, i| %>
-		<div class="pet_container" style="margin-top: 50px;width: 600px;height: 300px;padding-top: 50px;padding-right: 50px;  <%= (@amenities.length == 1) ? 'float: none; margin: 0 auto !important;' : 'margin-right: 50px !important;float: left !important;margin-left: 125px; margin-bottom: 100px;' %>" >
+		<div id="amenity" class="pet_container" style="margin-top: 50px;width: 600px;height: 300px;padding-top: 50px;padding-right: 50px;  <%= (@amenities.length == 1) ? 'float: none; margin: 0 auto !important;' : 'margin-right: 50px !important;float: left !important;margin-left: 125px; margin-bottom: 100px;' %>" >
 			<br>
             <p class="font-18 vet_h pet_text no-float"><strong>Title:</strong><%= " #{amenity.title}" %></p>
             <p class="font-18 vet_h pet_text no-float"><strong>Description:</strong><%= " #{amenity.description}" %></p>

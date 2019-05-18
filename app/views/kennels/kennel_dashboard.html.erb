@@ -75,9 +75,9 @@
           <% end %>
         </div>
       </div>
-      <div class="col-md-6", style="margin-left: 100px;">
+      <div class="col-md-6" id="booking_row" style="margin-left: 100px;">
         <div class="row">
-          <div class="col-md-2 kennel_top kennel_button booking_button" style="width: 150px !important;padding-top: 10px;padding-left: 25px;margin-left: -30px;">
+          <div id="booking_button" class="col-md-2 kennel_top kennel_button booking_button" style="width: 150px !important;padding-top: 10px;padding-left: 25px;margin-left: -30px;">
             <%= link_to "Add a Booking", new_reservation_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window1',style:"color: white;", class: 'a_as_button'} %>
           </div>
           <div id="modal-window1" class="modal fade modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
@@ -94,7 +94,7 @@
                   <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "reservationID", active: true) %> ReservationID</span>
                   <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_last_name") %> Last Name</span>
                   <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_email") %> Email</span>
-                  <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_phone") %> Phone</span>
+                  <span id="last_span" class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_phone") %> Phone</span>
                 </div>
                 <div id="modal-window" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document" style="margin-top: 100px;">

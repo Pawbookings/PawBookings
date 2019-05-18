@@ -15,14 +15,14 @@
         <div class="col-md-4">
           <div class="customer_main_info">
             <div class="col-md-4 small_image">
-              <%= image_tag @customer.user_image.url(:thumb).gsub!('http', 'https'), class:"kennel_dashboard_avatar" %>
+              <%= image_tag @customer.user_image.url(:thumb).gsub!('http', 'https'), class:"kennel_dashboard_avatar", id:'avatar' %>
             </div>
             <div class="col-md-6">
               <p class="text_info bold-text"><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
               <p class="text_info bold-text"><%= current_user.email %></p>
               <p class="text_info bold-text"><%= current_user.phone %></p>
               <p class="text_info bold-text "><%= current_user.time_zone %></p>
-              <%= link_to 'Edit', edit_user_registration_path(current_user), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window5', class: 'text_info bold-text link_edit'} %>
+              <%= link_to 'Edit', edit_user_registration_path(current_user), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window5', class: 'text_info bold-text link_edit float-none'} %>
               <div id="modal-window5" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
 									<div class="modal-content">
@@ -35,11 +35,12 @@
         </div>
         <div class="col-md-8">
           <div class="pets_customer">
-            <p class="text_info text-center bold-text"> My Pets </p>
+            <p class="text_info text-center bold-text" id="my_pets"> My Pets </p>
             <% if current_user.pets.length == 0 %>
               <p class="nil_pets_text">Click Manage My Pets to add a pet!</p>
-              <%= link_to "Manage My Pets", pets_path, class:"text_info bold-text manage_pets font-18 nil_manage_pets", method: :get %>
+              <%= link_to "Manage My Pets", pets_path, class:"text_info bold-text manage_pets font-18 nil_manage_pets", id: 'manage_pets',method: :get %>
             <% else %>
+              <div id="pets_cont">
               <% current_user.pets.each_with_index do |pet, index| %>
                 <% if index < 3 %>
                   <div class="col-md-3">
@@ -49,7 +50,8 @@
                   
                 <% end %>
               <% end %>
-              <%= link_to "Manage My Pets", pets_path, class:"text_info bold-text manage_pets", method: :get %>
+              </div>
+              <%= link_to "Manage My Pets", pets_path, id:'manage_pets', class:"text_info bold-text manage_pets", method: :get %>
             <% end %>
           </div>
         </div>
@@ -66,7 +68,7 @@
               <p class="font-18 vet_h"><strong>Phone:</strong><%= " #{@customer_vet_info.phone}" %></p>
               <p class="font-18 vet_h"><strong>Emergency Phone:</strong><%= " #{@customer_vet_info.emergency_phone}" %></p>
               <p class="font-18 vet_h" style="margin-right: 100px;"><strong>Address:</strong><%= " #{@customer_vet_info.address}" %></p>
-              <%= link_to 'Edit', edit_customer_vet_info_path(@customer_vet_info), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_link', id: 'edit_customer_vet_info_link' } %>
+              <%= link_to 'Edit', edit_customer_vet_info_path(@customer_vet_info), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_link editt', id: 'edit_customer_vet_info_link' } %>
               <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                       <div class="modal-content"></div>
@@ -74,7 +76,7 @@
               </div>
             <% else%>
               <p class="text_info vet_h vet_hh" style="margin-top: 50px;">Veterinarian</p>
-              <%= link_to "Add your vet's contact information", new_customer_vet_info_path,{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_no_text' } %>
+              <%= link_to "Add your vet's contact information", new_customer_vet_info_path,{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_no_text editt' } %>
               <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                       <div class="modal-content"></div>

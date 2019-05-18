@@ -1,7 +1,7 @@
 <div style="height: auto; position: relative; overflow: hidden;">
 	<% if !@kennel.nil? %>
 	<% @runs.each_with_index do |run, i| %>
-		<div class="pet_container" style="width: 700px;height: 550px; margin-right: 50px !important; float: left !important; <%= (i % 2 == 0) ? 'margin-left: 125px; margin-bottom: 100px;' : 'margin-bottom: 100px;' %>">
+		<div id="runs_cont" class="pet_container" style="width: 700px;height: 550px; margin-right: 50px !important; float: left !important; <%= (i % 2 == 0) ? 'margin-left: 125px; margin-bottom: 100px;' : 'margin-bottom: 100px;' %>">
 			<%= image_tag run.image.url, class: "accom_image kennel_dashboard_avatar" %>
 			<br>
 			<br>
