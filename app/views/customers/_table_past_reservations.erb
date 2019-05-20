@@ -9,7 +9,9 @@
 </tr>
 <% if !@past_reservations.nil? %>
     <% @past_reservations.each do |res| %>
+         <% if !Kennel.find_by(id: res.kennel_id).nil? %>
         <tr>
+           
             <% kennel = Kennel.find(res[:kennel_id]) %>
             <td>
                 <%= "#{unsanitize_date(res[:check_in_date].to_s)} -" %>
@@ -55,6 +57,7 @@
                 <%= res.id %>
             </td>
         </tr>
+        <% end %>
     <%end %>
     <% else %>
     You have no past reservations

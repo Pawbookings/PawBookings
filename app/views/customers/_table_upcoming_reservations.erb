@@ -9,6 +9,7 @@
     </tr>
     <% if !@upcoming_reservations.nil? %>
     <% @upcoming_reservations.each do |res| %>
+         <% if !Kennel.find_by(id: res.kennel_id).nil? %>
         <tr>
         <% kennel = Kennel.find(res[:kennel_id]) %>
         <td>
@@ -56,6 +57,7 @@
             <%= res.id %>
         </td>
         </tr>
+        <% end %>
     <%end %>
     <% else %>
     You have no upcoming reservations
