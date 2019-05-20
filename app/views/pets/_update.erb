@@ -1,0 +1,75 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">x</button>
+  <h4 class="modal-title" id="myModalLabel">Enter Your Pet Details</h4>
+</div>
+<div class="modal-body" style="height: auto; background-color: white; float: none;
+    text-align : center;">
+    <%= simple_form_for(@pet, :html => { :class => 'form-vertical simple_form', id:"form" },  action: :update ) do |f| %>
+  <fieldset>
+      <br>
+       <%= image_tag @pet.avatar.url, class: "kennel_dashboard_avatar", style: 'margin-right: 500px; margin-left: calc(100%/2 - 70px);' if !@pet.avatar.url.nil? %>
+      <br>
+      <p id="p_image" onclick="showLink()" class="font-20 link_edit submit_link">Upload pet image</p>
+      <div class="image_hide" style="display: none;">
+        <%= f.file_field :avatar, class: "text_info bold-text link_edit", style: 'background-color: white;margin-left: calc(100%/2 - 130px); margin-right: 800px; margin-top: 30px; margin-bottom: 40px;'%>
+      </div>
+      <p class="font-20">Pet Name: <%= f.input :name, label: false, input_html: {class: 'input_style'} %></p>
+      <p class="font-20">Cat or dog:</p><%=f.collection_radio_buttons :cat_or_dog, [['cat', 'cat'],['dog', 'dog']], :first, :last, { checked: @pet.cat_or_dog }, onchange:"return petsChangeBreed(this);", id: 'pet_cat_or_dog' %></p>
+      <% if @pet.cat_or_dog == 'dog'%>
+        <div class="pets_new_breed_div">
+                <br>
+                <p class="font-20">Breed:</p>
+                <%= f.select :breed, options_for_select(breed_option) %>
+                <br>
+            </div>
+      <% else %>
+      <div class="pets_new_breed_div", style="display: none">
+        <br>
+        <p class="font-20">Breed:</p>
+        <%= f.select :breed, options_for_select(breed_option) %>
+        <br>
+      </div>
+      <% end %>
+      
+      <br />
+      <p class="font-20">Weight:<%= f.input :weight, label: false, input_html: {class: 'input_style'}  %></p>
+      <p class="font-20">Spay or neutered:<%=f.collection_radio_buttons :spay_or_neutered, [['spay', 'spay'],['neutered', 'neutered']], :first, :last, { checked: @pet.spay_or_neutered } %></p>
+      <p class="font-20">Age:<%= f.input :age, label: false, input_html: {class: 'input_style'}  %></p>
+      <p class="font-20">Special instructions:<%= f.input :special_instructions, label: false, input_html: {class: 'input_style'}  %></p>
+      <p class="font-20">Vaccinations current?<%=f.collection_radio_buttons :vaccinations, [['true', 'true'],['false', 'false']], :first, :last, { checked: @pet.vaccinations } %></p>
+      <% if !@pet[:vaccination_record_file_name].nil? %>
+        <%= link_to "#{@pet[:vaccination_record_file_name]}", @pet.vaccination_record.url, style: 'font-size: 18px;' %>
+      <% else %>
+        <%= f.label :vaccination_record, "Vaccination record (optional) PDF or Word" %>
+            <br />
+            <%= f.file_field :vaccination_record %>
+      <% end %>
+      <br>
+</fieldset>
+      <div class="form-actions">
+      <p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="margin-left: 200px;">Save</p>
+      </div>
+      <br>
+  <% end %>
+</div>
+
+
+
+<script type="text/javascript">
+    function submitForm() {
+        $("#form").submit();
+    }
+
+  function showLink() {
+    $('.image_hide').show();
+  }
+
+  function petsChangeBreed(type){
+    var cat_or_dog = type.value;
+    if(cat_or_dog == "dog"){
+      $(".pets_new_breed_div").show();
+    } else {
+      $(".pets_new_breed_div").hide();
+    }
+  }
+</script>

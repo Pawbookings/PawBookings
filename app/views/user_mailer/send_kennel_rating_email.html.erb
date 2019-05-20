@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h1>Would you like to rate the Kennel your pet(s) stayed at?</h1>
+
+      <h3>You must sign into your account first</h3>
+      <%= link_to "Sign in first", "https://pawbookings-app.herokuapp.com/user/sign_in" %>
+      <p>If you don't know your password, follow the "Forgot your password?" instructions at the bottom of the page.</p>
+
+      <h3>After signing in, you are ready to rate this Kennel</h3>
+      <%= link_to "Rate Your Experience!", "https://pawbookings-app.herokuapp.com/kennel_ratings/new?kennel_id=#{@kennel_id}&user_id=#{@user_id}&reservation_id=#{@reservation_id}" %>
+    </div>
+  </div>
+</div>

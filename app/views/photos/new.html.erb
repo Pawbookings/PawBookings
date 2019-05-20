@@ -1,0 +1,58 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid dashboard_default_background_color">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h5 class="main_title arvo_font">My Pictures</h5>
+      <br />
+    </div>
+  </div>
+</div>
+<div class="border"></div>
+<div class="border"></div>
+<br />
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h3 class="poppins_font default_green_color">Add New Picture</h3>
+      <br />
+      <%= form_for @photo, url: photos_path, html: { multipart: true } do |f| %>
+      <%= f.label :choose_image %>:
+      <div class="row text-center">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <%= f.file_field :image, class:"btn btn-primary width_100_percent" %>
+        </div>
+      </div>
+      <br />
+      <br />
+      <%= f.submit "Save Picture", class:"btn btn-success" %> or
+      <%= f.submit "Save and Add Another Picture", class:"btn btn-success", name:"create_another_picture" %>
+      <% end %>
+    </div>
+  </div>
+  <br />
+  <br />
+  <div class="border"></div>
+  <br />
+  <br />
+  <div class="row">
+    <% @photos.each do |photo| %>
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <%= form_for photo, url: {action: "update", id: photo[:id]} do |f| %>
+          <%= image_tag photo.image.url(:thumb)  %>
+          <br />
+          <%= f.file_field :image, class:"btn btn-primary kennel_dashboard_input_edit" %>
+          <br />
+          <%= f.submit "Update", class:"btn btn-primary" %>
+          <br />
+          <br />
+        <% end %>
+        <%= link_to "Delete", photo_path(photo), class:"btn btn-danger", data: {confirm: "Are you sure you want to delete this Picture?"}, method: :delete %>
+        <br />
+        <br />
+        <br />
+      </div>
+    <% end %>
+  </div>
+</div>

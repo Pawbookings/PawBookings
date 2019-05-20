@@ -1,0 +1,8 @@
+<h1>Edit Important Information for check in contract</h1>
+<%= form_for @important_information do |f| %>
+  <%= f.text_field :title %>
+  <br>
+  <%= f.cktext_area :body %>
+  <br>
+  <%= f.submit "Update" %>
+<% end %>

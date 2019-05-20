@@ -1,0 +1,49 @@
+<div class="modal fade bs-example-modal-lg amenities_container leto_font" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content amenities_div default_white_color">
+      <%= form_tag({action: 'new', controller: 'payments'}, method: :get) %>
+        <% counter = params[:search_info][:number_of_rooms].to_i %>
+        <% params[:search_info][:number_of_rooms].to_i.times do %>
+        <div id="room_<%= counter %>_input">
+          <p></p>
+        </div>
+        <% counter -= 1 %>
+        <% end %>
+        <p></p>
+        <input type="hidden" name="kennel_id" value="<%= @searched_kennel[:id] %>">
+        <input type="hidden" name="name" value="<%= @searched_kennel[:name] %>">
+        <input type="hidden" name="address" value="<%= @searched_kennel[:address] %>">
+        <input type="hidden" name="kennel_city" value="<%= @searched_kennel[:city] %>">
+        <input type="hidden" name="kennel_state" value="<%= @searched_kennel[:state] %>">
+        <input type="hidden" name="kennel_zip" value="<%= @searched_kennel[:zip] %>">
+        <input type="hidden" name="kennel_phone" value="<%= @searched_kennel[:phone] %>">
+        <input type="hidden" name="kennel_sales_tax" value="<%= @searched_kennel[:sales_tax] %>">
+        <input type="hidden" name="kennel_user_email" value="<%= @kennel_user[:email] %>">
+        <input type="hidden" name="number_of_nights" value="<%= (params[:search_info][:number_of_nights].to_i) %>">
+        <input type="hidden" name="number_of_rooms" value="<%= params[:search_info][:number_of_rooms] %>">
+        <input type="hidden" name="number_of_cats" value="<%= params[:search_info][:number_of_cats] %>">
+        <input type="hidden" name="number_of_dogs" value="<%= params[:search_info][:number_of_dogs] %>">
+        <input type="hidden" name="check_in" value="<%= params[:search_info][:check_in] %>">
+        <input type="hidden" name="check_out" value="<%= params[:search_info][:check_out] %>">
+
+        <h3 class="text-center amenities_offered_title">Amenities Offered:</h3>
+        <% if @amenities.blank? %>
+          <strong class="default_white_color">•No Amenities Offered</strong>
+        <% else %>
+          <% @amenities.to_a.each do |amenity| %>
+            <div class="amenities_individual_div">
+              <h6 class="amenity_title default_green_color"><strong>• <%= amenity.title %></strong></h6>
+              <p class="default_amenity_description">"<%= amenity.description %>"</p>
+              <p class="default_amenity_description amenity_price"><%= check_box_tag "amenities[]", amenity.id %> $<%= amenity.price %></p>
+              <%#= select_tag "amenity_id_#{amenity.id}", options_for_select(0..20), class: "amenities_selection_tab" %>
+            </div>
+
+            <input type="hidden" name="amenity_title_<%= amenity.id %>" value="<%= amenity.title %>">
+            <input type="hidden" name="amenity_description_<%= amenity.id %>" value="<%= amenity.description %>">
+            <input type="hidden" name="amenity_price_<%= amenity.id %>" value="<%= amenity.price %>">
+          <% end %>
+        <% end %>
+        <div class="text-center"><%= submit_tag "Continue", class: "btn btn-primary" %></div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,255 @@
+.main_hero_bg {
+  background: url("/assets/pawbookings_hero_bg.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Lato', sans-serif;
+  padding-top: 5em;
+}
+
+.main_hero_text {
+  color: white;
+  margin-top: 2em;
+}
+
+.top_hero_text {
+  font-size: 2.3em;
+}
+
+.bottom_hero_text {
+  font-size: 1.1em;
+  letter-spacing: 0.04em;
+  line-height: 1.3em;
+}
+
+/* _why_pawbookings */
+
+.why_pawbookings_container {
+  background-color: #f9fafb;
+  padding-bottom: 5em;
+}
+
+.why_top_text {
+  font-size: 2em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  color: #48cd7e;
+}
+
+.why_bottom_text {
+  color: #5f5f5f;
+  font-size: 1em;
+  letter-spacing: 0.01em;
+  line-height: 1.3em;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.icon_div {
+  padding: 1em;
+  background-color: #ffffff;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 2em;
+  border-radius: 0.04em;
+}
+
+.why_features_titles {
+  color: #48cd7e;
+  margin-top: 1.5em;
+  font-family: 'Lato', sans-serif;
+}
+
+.why_features_details {
+  font-size: 0.9em;
+  color: #afafaf;
+}
+
+.why_paw {
+  font-size: 6em;
+  color: #48cd7e;
+}
+
+/* _testimonials */
+
+.testimonial_container {
+  padding-bottom: 5em;
+}
+
+.testimonials_top_text {
+  font-size: 2em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  color: #48cd7e;
+}
+
+.testimonials_bottom_text {
+  color: #5f5f5f;
+  font-size: 1em;
+  letter-spacing: 0.01em;
+  line-height: 1.3em;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.testimonial_row {
+  border: 1px solid black;
+  border-radius: 0.4em;
+  padding: 1em;
+  margin-right: 2em;
+  margin-left: 2em;
+  margin-top: 2em;
+}
+
+.testimonial_avatar {
+  height: 4em;
+  border-radius: 100%;
+}
+
+.testimonial_person_name {
+  color: #51d888;
+  font-size: 1em;
+}
+
+.testimonial_comment {
+  color: #6c707d;
+  font-size: 1.3em;
+  line-height: 1.4em;
+  font-style: italic;
+}
+
+.testimonial_kennel_details {
+  color: #51d888;
+  font-size: 1em;
+  line-height: 0.5em;
+}
+
+.testimonials_pawbookings_word {
+  font-style: italic;
+  color: #48cd7e;
+}
+
+/* kennel_or_customer */
+
+.kennel_or_customer_div {
+  background-color: #43ac6a;
+  margin-top: 6.7em;
+}
+
+.kennel_or_customer_bottom_div {
+  background: linear-gradient(#42b370, #51d888);
+  padding-bottom: 3em;
+  padding-top: 3em;
+  font-size: 1.5em;
+}
+
+.kennel_or_customer_title {
+  font-size: 2.5em;
+  color: #ffffff;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.kennel_or_customer_link {
+  color: #3276b0;
+  text-decoration: underline;
+  text-shadow: 0px 0px 1px #ffffff;
+}
+
+.kennel_or_customer_image {
+  width: 100%;
+}
+
+.kennel_or_customer_styled_containers {
+  background-color: rgba(255, 255, 255, 0.79);
+  border-radius: 1em;
+  padding: 2em;
+}
+
+/* Policies and Terms */
+
+.disclaimer_box {
+  border: 1px solid black;
+  padding: 1em;
+  margin-bottom: 3em;
+}
+
+@media (min-width: 768px) {
+  .testimonials_bottom_text, .why_bottom_text {
+    margin-left: 10em;
+    margin-right: 10em;
+  }
+}
+
+@media (max-width: 991px){
+  .testimonial_desktop, .kennel_or_customer_desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .kennel_or_customer_container {
+    background: url("/assets//kennel_or_customer_image.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-bottom: 3em;
+  }
+
+  .icon_div {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 3em;
+  }
+
+  .testimonial_mobile, .kennel_or_customer_mobile {
+    display: none;
+  }
+
+  .testimonials_top_text, .why_top_text, .top_hero_text {
+    font-size: 3em;
+  }
+
+  .testimonials_bottom_text, .why_bottom_text {
+    margin-left: 10em;
+    margin-right: 10em;
+    font-size: 1.2em;
+  }
+
+  .why_features_details {
+    font-size: 1em;
+    line-height: 1.8em;
+  }
+
+  .testimonial_row {
+    margin-right: 15em;
+    margin-left: 15em;
+  }
+
+  .kennel_or_customer_link {
+    font-size: 3em;
+  }
+
+  .kennel_or_customer_title {
+    margin-top: 3.7em;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .testimonial_row {
+    margin-right: 25em;
+    margin-left: 25em;
+  }
+
+  .bottom_hero_text {
+    font-size: 1.5em;
+  }
+
+  .testimonials_bottom_text, .why_bottom_text {
+    margin-left: 18em;
+    margin-right: 18em;
+  }
+}

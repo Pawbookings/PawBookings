@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <h1>Stand-by reservation alert email</h1>
+      <p>Hello, <%= @customer_email %>! We are pleased to inform you that the room titled: <%= @run_title %>, is now available. Hurry though, there are only <%= @num_of_runs_available %> left!</p>
+      <%= link_to "Go to booking", @original_search_url %>
+    </div>
+  </div>
+</div>

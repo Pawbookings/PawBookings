@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">x</button>
+  <h4 class="modal-title" id="myModalLabel">Search Results</h4>
+</div>
+<div class="modal-body" style="height: 660px; margin-top:0 !important; background-color: white; float: none;
+    text-align : center;">
+    <table class="reservation_table" style="width: 550px;">
+        <% if @reservation_search_results.nil?%>
+            <p>nothing</p>
+        <% else%>
+        <% @reservation_search_results.each_with_index do |res, ind| %>
+            <tr style="font-size: 18px !important; height: 80px;">
+                <td>
+                    <p style="font-size: 18px; text-align:left; margin-left:60px"><strong>Name:</strong><%= " #{res.customer_first_name} #{res.customer_last_name}" %>
+                    <br>
+                    <br>
+                    <strong>Room:</strong><%= eval(res.room_details)[0][0] %></p>
+                </td>
+                <td>
+                    <p style="font-size: 18px; text-align:left; margin-left:60px; margin-right: 20px;"><strong>Check-in:</strong><%= " #{res.check_in_date}" %>
+                    <br>
+                    <br>
+                    <strong>Check-out:</strong><%= " #{res.check_out_date}" %></p>
+                </td>
+
+            </tr>
+            <tr style=" margin-bottom: 20px; height: 40px; "><td colspan="2" style="font-size: 18px !important;"><%= link_to 'View', kennel_searched_reservation_path(id: res.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window2', style: 'font-weight: bold; color: #00F;' } %></td></tr>
+            <div id="modal-window" class="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog dialog" role="document">
+                    <div class="modal-content"></div>
+                </div>
+            </div>    
+            <tr style="height:40px; background-color: white;"></tr>
+        <% end %>
+        <% end %>
+    </table>
+</div>

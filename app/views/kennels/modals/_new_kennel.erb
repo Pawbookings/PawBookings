@@ -1,0 +1,67 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">x</button>
+  <h4 class="modal-title" id="myModalLabel1" style="font-family: 'Roboto'; text-align: center;font-size:20px;">Add New</h4>
+</div>
+<div class="modal-body" style="width: auto; color: black;height: auto; margin-top:0 !important; background-color: white; float: none;
+    text-align : center;">
+   <%= form_for @kennel, html: {multipart: true}, id:'form' do |f| %>
+			<br>
+      <%= f.hidden_field :taken_ownership, value: true %>
+				<div class="row">
+					<div class="col-md-6">
+						<p class="font-18">Name:</p>
+						<%= f.text_field :name, placeholder: 'Name', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+						<br>
+						<p class="font-18">Email:</p>
+						<%= f.text_field :email, placeholder: 'Email', class: "form-control payment_input input_new_reserv black_18 margin-0-auto"%>
+						<br>
+            <p class="font-18">Phone:</p>
+						<%= f.text_field :phone, placeholder: 'Phone', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+						<br>
+						<p class="font-18">Address:</p>
+						<%= f.text_field :address, placeholder: 'Address', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+						<br>
+						<p class="font-18">City:</p>
+						<%= f.text_field :city, placeholder: 'City', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+						<br>
+					</div>
+
+
+				<div class="col-md-6">
+          <p class="font-18">State:</p>
+          <%= f.text_field :state, placeholder: 'State', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+          <br>
+          <p class="font-18">Zip:</p>
+          <%= f.text_field :zip, placeholder: 'Zip', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+          <br>
+					<p class="font-18">Type of pets allowed:</p>
+					<%= f.select :cats_or_dogs, options_for_select(cat_or_dog_options), class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+					<br>
+          <br>
+					<p class="font-18">Mission statement:</p>
+					<%= f.text_field :mission_statement, placeholder: 'Mission statement', class: "form-control payment_input input_new_reserv black_18 margin-0-auto", style: 'width:200px !important;height: 35px !important;'%>
+					<br>
+					<p class="font-18">Sales tax:</p>
+					<%= f.text_field :sales_tax, placeholder: 'Sales tax', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+					<br>
+				</div>
+			</div>
+      <div class="row">
+        <div style="margin: 0 auto;">
+          <p class="font-18">Avatar:</p>
+					<%= f.file_field :avatar, placeholder:'Choose file', class:"form-control payment_input input_new_reserv black_18 margin-0-auto", style:'height: 40px;' %>
+					<br>
+        </div>
+      </div>
+			<br>
+			<br>
+				 <%= f.submit "Save", class:'text_info bold-text link_edit vet_link submit_link font-20', style:"border: none;text-align:center; float: none; margin:0; padding:0; background-color: transparent" %> 
+			<br>
+		<% end %>
+</div>
+
+<script type="text/javascript">
+     function submitForm() {
+        $("#form").submit();
+    }
+</script>

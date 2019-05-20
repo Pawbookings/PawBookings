@@ -1,0 +1,130 @@
+<h1>Customer Check-in Contract</h1>
+
+<h3>Kennel Information:</h3>
+<%= params[:kennel_name] %>
+<br>
+<%= params[:kennel_address] %>
+<br>
+<%= params[:kennel_city] %>
+<br>
+<%= params[:kennel_state] %>
+<br>
+<%= params[:kennel_zip] %>
+<br>
+<%= params[:kennel_email] %>
+<br>
+<%= params[:kennel_phone] %>
+
+<h3>Customer Information:</h3>
+<%= params[:customer_first_name] %>
+<br>
+<%= params[:customer_last_name] %>
+<br>
+<%= params[:customer_email] %>
+<br>
+<%= params[:customer_phone] %>
+
+<h3>Customer Emergency Contact:</h3>
+<% if !@emergency_contact.blank? %>
+  <p><strong>Emergency Contact Name</strong></p>
+  <%= @emergency_contact.name %>
+  <p><strong>Emergency Contact Email</strong></p>
+  <%= @emergency_contact.email %>
+  <p><strong>Emergency Phone</strong></p>
+  <%= @emergency_contact.phone %>
+<% else %>
+  <p><strong>None provided.</strong></p>
+<% end %>
+
+<h3>Veterinarian Info</h3>
+<% if !@vet_info.blank? %>
+  <p><strong>Vet Name</strong></p>
+  <p><strong>Vet Address</strong></p>
+  <p><strong>Vet Email</strong></p>
+  <p><strong>Vet Phone</strong></p>
+  <p><strong>Vet Emergency Phone</strong></p>
+<% else %>
+  <p><strong>None provided.</strong></p>
+<% end %>
+
+<h3>Reservation Details:</h3>
+<p><strong>Reservation ID:</strong></p>
+<%= params[:reservation_id] %>
+
+<p><strong>Pets Staying</strong></p>
+<% @pets.each do |pet| %>
+  <%= pet[:name] %>
+  <br>
+  <%= pet[:cat_or_dog] %>
+  <br>
+  <%= pet[:breed] %>
+  <br>
+  <%= pet[:weight] %>
+  <br>
+  <%= pet[:vaccinations] %>
+  <br>
+  <%= pet[:spay_or_neutered] %>
+  <br>
+  <%= pet[:special_instructions] %>
+  <br>
+  <br>
+<% end %>
+
+<p><strong>Number of Rooms</strong></p>
+<%= JSON.parse(params[:run_ids]).length %>
+
+<p><strong>Room Details</strong></p>
+<% JSON.parse(params[:room_details]).each do |name, price| %>
+  <%= "#{name}, $#{price}" %>
+  <br>
+<% end %>
+
+<p><strong>Stay Dates</strong></p>
+<%= unsanitize_date(params[:check_in_date]) %> --
+<%= unsanitize_date(params[:check_out_date]) %>
+
+<p><strong>Amenities</strong></p>
+<p><strong>Subtotal</strong></p>
+<p><strong>Sales Tax</strong></p>
+<p><strong>Total Charges</strong></p>
+<%= "$#{params[:total_price]}" %>
+
+<br>
+<br>
+<strong><%= @check_in_important_information.title %></strong>
+<br>
+<%= @check_in_important_information.body.html_safe %>
+<br>
+<br>
+<strong><%= @check_in_reservation_change.title %></strong>
+<br>
+<%= @check_in_reservation_change.body.html_safe %>
+<br>
+<br>
+<strong><%= @check_in_refund_policy.title %></strong>
+<br>
+<%= @check_in_refund_policy.body.html_safe %>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-2">
+      <div class="contract_signature">
+        <p>Signature:</p>
+      </div>
+    </div>
+    <div class="col-xs-8">
+      <img src="/assets/signature_line.png">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <div class="contract_date">
+        <p>Date:</p>
+      </div>
+    </div>
+    <div class="col-xs-8">
+      <img src="/assets/signature_line.png">
+    </div>
+  </div>
+</div>

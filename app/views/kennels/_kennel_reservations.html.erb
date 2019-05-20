@@ -1,0 +1,63 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">x</button>
+</div>
+<div class="modal-body" style="height: auto; margin-top:0 !important; background-color: white; float: none;
+    text-align : center;">
+    <table class="kennel_reservation_customer_table">
+      <% @current_reservations.each_with_index do |res, ind|%>
+            <tr style="height: 50px;">
+              <th style="border: none; text-align: center;">Res-ID</th>
+              <th style="border: none; text-align: center;">Picture</th>
+              <th style="border: none; text-align: center;">First Name</th>
+              <th style="border: none; text-align: center;">Last Name</th>
+              <th style="border: none; text-align: center;">Email</th>
+              <th style="border: none; text-align: center;">Phone</th>
+              <th style="border: none; text-align: center;">Room Details</th>
+              <th style="border: none; text-align: center;">Amenities</th>
+              <th style="border: none; text-align: center;">Check-In</th>
+              <th style="border: none; text-align: center;">Check-Out</th>
+              <th style="border: none; text-align: center;">Total</th>
+            </tr>
+            <tr style="background-color: #C4C4C4;">
+
+              <td class="kennel_reservation_td vertical_center"><%= res[:id] %></td>
+              <% user = User.find(res[:user_id]) %>
+              <td class="kennel_reservation_td vertical_center"><%= image_tag user.user_image.url(:thumb), class: "kennel_dashboard_avatar", style: 'margin-top: 20px; margin-right: 0px;' if !user.user_image.url.nil? %></td>
+              <td class="kennel_reservation_td vertical_center"><%= res[:customer_first_name].capitalize %></td>
+              <td class="kennel_reservation_td vertical_center"><%= res[:customer_last_name].capitalize %></td>
+              <td class="kennel_reservation_td vertical_center"><%= res[:customer_email].capitalize %></td>
+              <td class="kennel_reservation_td vertical_center"><%= res[:customer_phone] %></td>
+              <% JSON.parse(res[:room_details]).each do |title, price| %>
+                <td class="kennel_reservation_td vertical_center">
+                  <%= "#{title}" %>
+                </td>
+              <% end %>
+              <% if res[:amenity_details].nil? %>
+                <td class="kennel_reservation_td vertical_center">
+                  No Amenities Chosen.
+                </td>
+              <% else %>
+                <% hash = JSON.parse(res[:amenity_details]) rescue {}%>
+                <% hash.each do |title, description, price, quantity| %>
+                  <td class="kennel_reservation_td vertical_center">
+                    <%= "#{title}" %>
+                    <br />
+                    <br />
+                  </td>
+                <% end %>
+              <% end %>
+              <td class="kennel_reservation_td vertical_center"><%= unsanitize_date(res[:check_in_date].to_s) %></td>
+              <td class="kennel_reservation_td vertical_center"><%= unsanitize_date(res[:check_out_date].to_s) %></td>
+              <td class="kennel_reservation_td vertical_center"><%= "$#{res[:total_price]}" %></td>
+            </tr>
+      
+          <% end %>
+          </table>
+</div>
+
+<script>
+document.getElementsByClassName("day").onmouseover = function() 
+{
+    this.style.transform = "none";
+}
+</script>

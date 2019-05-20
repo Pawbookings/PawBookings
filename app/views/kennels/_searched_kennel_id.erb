@@ -1,0 +1,92 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">x</button>
+</div>
+<div class="modal-body" style="height: auto; margin-top:0 !important; background-color: white; float: none;
+    text-align : center;">
+    <table class="kennel_reservation_customer_table">
+            <tr style="height: 50px;">
+              <th style="border: none; text-align: center;">Res-ID</th>
+              <th style="border: none; text-align: center;">Picture</th>
+              <th style="border: none; text-align: center;">First Name</th>
+              <th style="border: none; text-align: center;">Last Name</th>
+              <th style="border: none; text-align: center;">Email</th>
+              <th style="border: none; text-align: center;">Phone</th>
+              <th style="border: none; text-align: center;">Room Details</th>
+              <th style="border: none; text-align: center;">Amenities</th>
+              <th style="border: none; text-align: center;">Check-In</th>
+              <th style="border: none; text-align: center;">Check-Out</th>
+              <th style="border: none; text-align: center;">Total</th>
+            </tr>
+            <tr style="background-color: #C4C4C4;">
+
+              <td class="kennel_reservation_td"><%= @reservation[:id] %></td>
+              <% user = User.find(@reservation[:user_id]) %>
+              <td class="kennel_reservation_td"><%= image_tag user.user_image.url(:thumb), class: "kennel_dashboard_avatar", style: 'margin-top: 20px; margin-right: 0px;' if !user.user_image.url.nil? %></td>
+              <td class="kennel_reservation_td"><%= @reservation[:customer_first_name].capitalize %></td>
+              <td class="kennel_reservation_td"><%= @reservation[:customer_last_name].capitalize %></td>
+              <td class="kennel_reservation_td"><%= @reservation[:customer_email].capitalize %></td>
+              <td class="kennel_reservation_td"><%= @reservation[:customer_phone] %></td>
+              <% JSON.parse(@reservation[:room_details]).each do |title, price| %>
+                <td class="kennel_reservation_td">
+                  <%= "#{title}" %>
+                </td>
+              <% end %>
+              <% if @reservation[:amenity_details].nil? %>
+                <td class="kennel_reservation_td">
+                  No Amenities Chosen.
+                </td>
+              <% else %>
+                <% hash = JSON.parse(@reservation[:amenity_details]) rescue {}%>
+                <% hash.each do |title, description, price, quantity| %>
+                  <td class="kennel_reservation_td">
+                    <%= "#{title}" %>
+                    <br />
+                    <br />
+                  </td>
+                <% end %>
+              <% end %>
+              <td class="kennel_reservation_td"><%= unsanitize_date(@reservation[:check_in_date].to_s) %></td>
+              <td class="kennel_reservation_td"><%= unsanitize_date(@reservation[:check_out_date].to_s) %></td>
+              <td class="kennel_reservation_td"><%= "$#{@reservation[:total_price]}" %></td>
+            </tr>
+          </table>
+          <p class="kennel_info_p" style="padding-top: 30px; font-size: 24px !important;">Pets</p>
+          <br />
+          <br />
+          <table class="kennel_reservation_customer_table", style="width: 100%; border-collapse: separate; border-spacing: 0 30px;">
+            <tr>
+                <th style="border: none; text-align: center;">Picture</th>
+                <th style="border: none; text-align: center;">Name</th>
+                <th style="border: none; text-align: center;">Type</th>
+                <th style="border: none; text-align: center;">Breed</th>
+                <th style="border: none; text-align: center;">Weight</th>
+                <th style="border: none; text-align: center;">Spay or Neutered</th>
+                <th style="border: none; text-align: center;">Vaccinations</th>
+                <th style="border: none; text-align: center;">Special Instructions</th>
+            </tr>
+            <% @pets.each do |pet| %>
+              <tr style="background-color: #C4C4C4;" >
+                <td class="kennel_reservation_td"><%= image_tag pet.avatar.url(:thumb), class: "kennel_dashboard_avatar", style: 'margin-top: 20px; margin-right: 0px;' if !pet.avatar.url.nil? %></td>
+                <td class="kennel_reservation_td"><%= pet[:name].capitalize %></td>
+                <td class="kennel_reservation_td"><%= pet[:cat_or_dog].capitalize %></td>
+                <td class="kennel_reservation_td"><%= pet[:breed] %></td>
+                <td class="kennel_reservation_td"><%= pet[:weight] %> lbs</td>
+                <td class="kennel_reservation_td"><%= pet[:spay_or_neutered].capitalize %></td>
+                <% if pet[:vaccinations] == "true" %>
+                  <% if pet[:vaccination_record_file_name].nil? %>
+                    <td class="kennel_reservation_td">Did not upload record</td>
+                  <% else %>
+                    <td class="kennel_reservation_td"><%= link_to "#{pet[:vaccination_record_file_name]}", pet.vaccination_record.url, style: 'color: #0000FF;' %></td>
+                  <% end %>
+                <% else %>
+                  <td class="kennel_reservation_td"><strong>False</strong></td>
+                <% end %>
+                <% if pet[:special_instructions].blank? %>
+                  <td class="kennel_reservation_td"><strong>n/a</strong></td>
+                <% else %>
+                  <td class="kennel_reservation_td"><%= pet[:special_instructions] %></td>
+                <% end %>
+          <% end %>
+           </tr>
+          </table>
+</div>

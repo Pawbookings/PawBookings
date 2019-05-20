@@ -1,0 +1,131 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid">
+  <div class="row text-left">
+    <div class="col-md-4"></div>
+    <div class="col-xs-12 col-md-8">
+      <h5 class="main_title arvo_font">Select what to Refund/Remove</h5>
+      <p>(Make button to check all boxes and refund entire reservation)</p>
+      <%= form_tag({controller: "pawbookings_admins", action: "refund_reservation_confirm"}, method: "get") do %>
+        <%= hidden_field_tag :reservation_id, @reservation[:id] %>
+        <h3 class="poppins_font default_green_color">Pricing:</h3>
+        <%= label_tag :total_price_without_tax %>:
+        <br />
+        $<%= text_field_tag :total_price_without_tax_show, @reservation[:total_price_without_tax], readonly: true, class:"general_input" %>
+        <br />
+        <br />
+        <%= label_tag :tax_total, "Tax total(#{@reservation[:tax_percentage]})%" %>:
+        <br />
+        $<%= text_field_tag :tax_total_price_show, @reservation[:tax_total_price], readonly: true, class:"general_input" %>
+        <br />
+        <br />
+        <%= label_tag :total_price_with_tax %>:
+        <br />
+        $<%= text_field_tag :total_price_with_tax_show, @reservation[:total_price], readonly: true, class:"general_input" %>
+        <br />
+        <strong>(Total price with tax cannot exceed $<%= @reservation[:total_price] %>)</strong>
+
+        <h3 class="poppins_font default_green_color">Check-In/Check-Out Dates</h3>
+        <%= text_field_tag(:reservation_dates, ("#{unsanitize_date(@reservation[:check_in_date].to_s)} - #{unsanitize_date(@reservation[:check_out_date].to_s)}"), class: "admin_daterange_check_in general_input", name: "reservation_dates") %>
+        <br />
+        <p class="btn btn-primary" onclick='checkBoxTogglePrice("<%= @number_of_rooms %>", "<%= @number_of_amenities %>");'>Refresh Price After Date Change</p>
+
+        <h3 class="poppins_font default_green_color">Rooms/Accommodations</h3>
+        <% counter = @runs.count %>
+        <% @runs.each do |run| %>
+          <p><input id="run_<%= counter %>" name="run_<%= counter %>_id_<%= run[:id] %>" type="checkbox" value="<%= run[:price] %>" onchange='checkBoxTogglePrice("<%= @number_of_rooms %>", "<%= @number_of_amenities %>");'/>
+            <%= "#{run[:title]} - $#{run[:price]}" %></p>
+          <% counter -= 1 %>
+        <% end %>
+
+        <h3 class="poppins_font default_green_color">Amenities</h3>
+        <% counter = @amenities.count %>
+        <% @amenities.each do |amenity| %>
+          <p><input id="amenity_<%= counter %>" name="amenity_<%= counter %>_id_<%= amenity[:id] %>" type="checkbox" value="<%= amenity[:price] %>" onchange='checkBoxTogglePrice("<%= @number_of_rooms %>", "<%= @number_of_amenities %>");'/>
+            <%= "#{amenity[:title]} - #{amenity[:description]} - $#{amenity[:price]}" %></p>
+          <% counter -= 1 %>
+        <% end %>
+
+        <h3 class="poppins_font default_green_color">Pets</h3>
+        <% counter = @pets.count %>
+        <% @pets.each do |pet| %>
+          <p><%= check_box_tag "pet_#{counter}", pet[:id] %> <%= "#{pet[:name]} - #{pet[:breed]} - #{pet[:weight]}lbs" %></p>
+        <% end %>
+        <br />
+        <%= submit_tag "Next", class:"btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<br />
+
+<script type="text/javascript">
+  var tax_percentage = parseFloat("<%= @reservation[:tax_percentage] %>");
+
+
+  function checkBoxTogglePrice(number_of_rooms, number_of_amenities){
+    var number_of_nights = getDatesChosen($("#reservation_dates").val());
+    var total_price_without_tax = getCurrentPriceWithoutTax(number_of_rooms, number_of_nights, number_of_amenities);
+    var new_tax_total_price = (total_price_without_tax * (tax_percentage * 0.01)).toFixed(2);
+    var new_total = (parseFloat(total_price_without_tax) + parseFloat(new_tax_total_price)).toFixed(2);
+
+    $("#total_price_without_tax_show").val(total_price_without_tax);
+    $("#tax_total_price_show").val(new_tax_total_price);
+    $("#total_price_with_tax_show").val(new_total);
+  }
+
+
+  function getCurrentPriceWithoutTax(number_of_rooms, number_of_nights, number_of_amenities){
+    rooms_price = 0;
+    amenities_price = 0;
+    total_price = 0;
+    var number_of_rooms = parseInt(number_of_rooms);
+    var number_of_nights = parseInt(number_of_nights);
+    var number_of_amenities = parseInt(number_of_amenities);
+    while(number_of_rooms > 0){
+      if(boxChecked("run_"+number_of_rooms) != true){
+        rooms_price += parseFloat($("#run_"+number_of_rooms).val());
+      }
+      number_of_rooms -= 1;
+    }
+    rooms_price *= number_of_nights;
+    while(number_of_amenities > 0){
+      console.log(number_of_amenities);
+      if(boxChecked("amenity_"+number_of_amenities) != true){
+        console.log("TRUE", amenities_price);
+        amenities_price += parseFloat($("#amenity_"+number_of_amenities).val());
+      }
+      number_of_amenities -= 1;
+    }
+    return (rooms_price + amenities_price).toFixed(2);
+  }
+
+
+  function getDatesChosen(reservation_dates){
+    var startDate = reservation_dates.split(" ")[0];
+    var stopDate = reservation_dates.split(" ")[2];
+    if (startDate == stopDate){
+      return 1;
+    } else {
+      var counter = 0;
+      var currentDate = moment(startDate);
+      var stopDate = moment(stopDate);
+      while (currentDate <= stopDate) {
+        counter++;
+        currentDate = moment(currentDate).add(1, 'days');
+      }
+      return counter - 1;
+    }
+  }
+
+
+  function boxChecked(box_id){
+    if($("#"+box_id).prop("checked") == true){
+      return true;
+    } else {
+      return false;
+    }
+  }
+</script>

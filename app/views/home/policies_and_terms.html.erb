@@ -1,0 +1,32 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-md-2"></div>
+    <div class="col-xs-12 col-md-8">
+      <h5 class="main_title arvo_font text-center">Policies/Terms</h5>
+      <div class="border"></div>
+      <br />
+      <br />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-xs-12 col-md-8">
+      <h3 class="arvo_font default_green_color">Changes/Cancellations/Refund Policy</h3>
+      <p class="poppins_font font_1_1_em line_height_1p5"><%= truncate("Changes to your reservation must be made by calling our reservation specialists at 1-844-944-3333. Or you can send an email to reservations@pawbookings.com. All changes to your booking must be made in accordance with our Change/Cancellation/Refund policy. Please note that changes to a reservation may not be possible due to the vacancy/non-vacancy capacity of our Kennel Operators.", length: 345, omission: "... ") %><%= link_to "read more", changes_cancellations_refunds_path %></p>
+      <br />
+      <h3 class="arvo_font default_green_color">Terms of Service</h3>
+      <p class="poppins_font font_1_1_em line_height_1p5"><%= truncate('Welcome to the PawBookings.com, Inc. ("PawBookings.com, Inc.") service (the "Service"). The following Terms of Service govern all use of the Service via the website located at www.pawbookings.com including, but not limited to, researching and gathering data from pet boarding kennels and other pet service and product providers; making reservations; and all content, services, and products available at or through the Website. Any use of the site/service for purposes other than intended is strictly prohibited.', length: 345, omission: "... ") %><%= link_to "read more", terms_of_service_path %></p>
+      <br />
+      <h3 class="arvo_font default_green_color">Privacy Policy</h3>
+      <p class="poppins_font font_1_1_em line_height_1p5"><%= truncate('This privacy policy (Policy) sets out how PawBookings.com uses and protects any information that you give PawBookings.com when you use this website. PawBookings.com is committed to ensuring that your privacy is protected. In the event you are asked to provide personal information when using this website, then you can be assured that it will only be used in accordance with this privacy statement. PawBookings.com may change this policy from time to time by updating this page.', length: 345, omission: "... ") %><%= link_to "read more", privacy_policy_path %></p>
+      <br />
+    </div>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+<%= render partial: "shared/footer" %>

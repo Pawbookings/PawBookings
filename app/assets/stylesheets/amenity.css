@@ -1,0 +1,51 @@
+.amenities_container {
+  /*background-color: #43ac6a;*/
+}
+
+.amenities_offered_title {
+    text-decoration: underline;
+}
+
+.amenities_div {
+  background-color: rgb(81, 216, 136);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 2em;
+}
+
+.amenity_title {
+  font-size: 1.3em;
+}
+
+
+.default_amenity_description {
+  letter-spacing: 0.03em;
+  font-size: 1.05em;
+  font-style: italic;
+  padding-left: 1em;
+  padding-right: 1em;
+  color: #6c707d;
+}
+
+.amenities_individual_div {
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  border-radius: 0.4em;
+  color: black;
+  background-color: white;
+}
+
+.amenities_selection_tab {
+  width: 15%;
+  background-color: #ffffff;
+  color: black;
+  height: 2.5em;
+}
+
+.amenity_price {
+  font-size: 1.1em;
+}

@@ -1,0 +1,340 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require jquery-ui
+ *= require simple_calendar
+ *= require_self
+ *= require scaffolds
+ *= require home
+ *= require top_info
+ *= require search_bar
+ *= require footer
+ *= require about
+ *= require contact_message
+ *= require blog
+ *= require devise
+ *= require search
+ *= require amenity
+ *= require reservation
+ *= require payment
+ *= require kennel
+ *= require customer
+ *= require pawbookings_admins
+ *= require owl.carousel
+ *= require owl.theme
+ *= require bootstrap-multiselect
+ */
+
+/*
+.wday-0 {
+  background-color: red;
+}*/
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+input {
+  font-style: italic;
+}
+
+.flash_notice_div {
+  position: fixed;
+  z-index: 4;
+  width:100%;
+}
+
+.flash_notice_background_color {
+  background-color: #a0fbc4;
+}
+
+.relative_position {
+  position: relative;
+}
+
+.absolute_position {
+  position: absolute;
+}
+
+.font_1_1_em {
+  font-size: 1.1em;
+}
+
+.no_left_right_margin {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.margin_bottom_p5em {
+  margin: 0.5em;
+}
+
+.margin_right_1em {
+  margin-right: 1em;
+}
+
+.margin_left_1em {
+  margin-left: 1em;
+}
+
+.margin_top_1em {
+  margin-top: 1em;
+}
+
+.margin_bottom_1em {
+  margin-bottom: 1em;
+}
+
+.margin_bottom_2em {
+  margin-bottom: 2em;
+}
+
+.margin_top_n1em {
+  margin-top: -1em;
+}
+
+.margin_top_np5em {
+  margin-top: -0.5em;
+}
+
+.margin_l_r_5em {
+  margin-left: 5em;
+  margin-right: 5em;
+}
+
+.padding_1em{
+  padding: 1em;
+}
+
+.padding_bottom_1em {
+  padding-bottom: 1em;
+}
+
+.padding_bottom_2em {
+  padding-bottom: 2em;
+}
+
+.line_height_1p5{
+  line-height: 1.5em;
+}
+
+.font_italic {
+  font-style: italic;
+}
+
+.default_green_color {
+	color: #48cd7e;
+}
+
+.default_white_color {
+  color: #ffffff;
+}
+
+.link_color {
+  color: #1dcfe7;
+}
+
+.color_black {
+  color: black;
+}
+
+.line_height_1em {
+  line-height: 1em;
+}
+
+.line_height_1_5_em {
+  line-height: 1.5em;
+}
+
+.letter_spacing_0_p_08_em {
+  letter-spacing: 0.08em;
+}
+
+.leto_font {
+  font-family: 'Lato', sans-serif;
+}
+
+.open_sanz_font {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.arvo_font {
+  font-family: 'Arvo', serif;
+}
+
+.kaushan_font {
+  font-family: 'Kaushan Script', cursive;
+}
+
+.patrick_hand_font {
+  font-family: 'Patrick Hand', cursive;
+}
+
+.poppins_font {
+  font-family: 'Poppins', sans-serif;
+}
+
+.pet_icon {
+  width: 35%;
+  margin-top: 2em;
+}
+
+.blog_footer_wrap {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.border {
+  /*border: 1px solid #9a9a9a;*/
+  /*border: 1px solid #5f5f5f;*/
+  border: 1px solid #51d888;
+  width: 100%;
+}
+
+.border_right {
+  /*border-right: 1px solid #828282;*/
+  border-right: 1px solid #51d888;
+}
+
+.border_left {
+  /*border-left: 1px solid #828282;*/
+  border-left: 1px solid #51d888;
+}
+
+.border_radius_100 {
+  border-radius: 100%;
+}
+
+.main_title {
+  color: #48cd7e;
+  font-size: 2.5em;
+  margin-top: 3.7em;
+}
+
+.margin_top_5em {
+  margin-top: 5em;
+}
+
+.general_input_edit, .general_input {
+  width: 75%;
+  height: 2.5em;
+  border-radius: 0.4em;
+}
+
+.text_underline {
+  text-decoration: underline;
+}
+
+.text_underline_green {
+  text-decoration: underline;
+  color: #48cd7e;
+}
+
+.footer_bottom_addon {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.simple-calendar .today {
+  background-color: rgba(115, 255, 115, 0.42);
+}
+
+.width_50_percent {
+  width: 50%;
+}
+
+.width_75_percent {
+  width: 75%;
+}
+
+.width_100_percent {
+  width: 100%;
+}
+
+.back_button_p {
+  font-size: 1.1em;
+  margin-top: 7.5em;
+}
+
+.back_button_a {
+  color: #35a55e;
+}
+
+.div_border {
+  border: 2px solid #6d6e71;
+  padding: 1em;
+  border-radius: 1em;
+  background-color: #ffffff;
+}
+
+.div_border_green_background {
+  border: 2px solid #6d6e71;
+  padding: 1em;
+  border-radius: 1em;
+  background-color: #48cd7e;
+}
+
+.display_none {
+  display: none;
+}
+
+.dashboard_default_background_color {
+  background-color: #3c3c3c;
+}
+
+.z_index_2 {
+  z-index: 2;
+}
+
+
+@media (min-width: 740px){
+  .pet_icon {
+    width: 25%;
+  }
+}
+
+@media (max-width: 991px){
+  .br_if_desktop{
+    display: none;
+  }
+
+  .hidden_if_mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+
+  .hidden_if_desktop {
+    display: none;
+  }
+
+  .calendar-title {
+    font-size: 1.5em;
+  }
+
+  .general_input {
+    width: 20%;
+  }
+
+  .pet_icon {
+    width: 20%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .pet_icon {
+    width: 30%;
+  }
+}

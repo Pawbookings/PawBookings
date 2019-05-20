@@ -1,0 +1,63 @@
+<table class="reserv_table">
+    <tr>
+    <th>Dates</th>
+    <th>Kennel</th>
+    <th>Pets</th>
+    <th>Room</th>
+    <th>Amenities</th>
+    <th>Confirmation ID</th>
+    </tr>
+    <% if !@upcoming_reservations.nil? %>
+    <% @upcoming_reservations.each do |res| %>
+        <tr>
+        <% kennel = Kennel.find(res[:kennel_id]) %>
+        <td>
+            <%= "#{unsanitize_date(res[:check_in_date].to_s)} -" %>
+            <br>
+            <%= "#{unsanitize_date(res[:check_out_date].to_s)}" %>
+        </td>
+        <td>
+            <span style="color: #0000FF;"><%= kennel.name%></span>
+            <br>
+            <%= kennel.address%>
+            <br>
+            <%= "#{kennel.city}, #{kennel.state} #{kennel.zip}"%>
+        </td>
+        <td>
+            <% eval(res.pet_ids).each_with_index do |pet, index|%>
+            <%= Pet.find(pet).name%>
+            <% if index != (eval(res.pet_ids).length - 1)%>
+                <%= ","%>
+                <br>
+            <% end %>
+            <% end %>
+        </td>
+        <td>
+            <% hash = JSON.parse(res[:room_details]) rescue {} %>
+            <% hash.each do |key, val| %>
+            <p><strong><%= key %></strong></p>
+            <% end %> 
+        </td>
+        <td>
+            <% if res[:amenity_details].nil? %>
+                <p><strong>No amenties chosen.</strong></p>
+            <% else %>
+                <% hash = JSON.parse(res[:amenity_details]) rescue {} %>
+            <% hash.each_with_index do |(title, description, price, quantity), index| %>
+                <p><strong><%= title %></strong></p>
+                <% if index != (hash.length - 1)%>
+                    <%= ","%>
+                    <br>
+                <% end %>
+                <% end %>
+            <% end %>  
+        </td>
+        <td>
+            <%= res.id %>
+        </td>
+        </tr>
+    <%end %>
+    <% else %>
+    You have no upcoming reservations
+    <% end %>
+</table>

@@ -1,0 +1,29 @@
+<p class="kennel_h2">Kennel information</p>
+<% if !@kennel.nil? %>
+<div class="pet_container" id="kennel_cont" style="width: 700px;height: 550px; margin: 0 auto; float: none !important;">
+	
+		<%= image_tag @kennel.avatar.url, class: "pet_image kennel_dashboard_avatar" if !@kennel.avatar.url.nil? %>
+		<br>
+		<br>
+		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Name:</strong><%= " #{@kennel.name}" %></p>
+		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Address:</strong><%= " #{@kennel.address}" %></p>
+		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Email:</strong><%= " #{@kennel.email}" %></p>
+		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Phone:</strong><%= " #{@kennel.phone}" %></p>
+		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Zip:</strong><%= " #{@kennel.zip}" %></p>
+		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Sales tax:</strong><%= " #{@kennel.sales_tax}" %></p>
+		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text" style="margin-right: 100px !important;"><strong>Mission statement:</strong><%= " #{@kennel.mission_statement[0, 100]}..."%></p>
+		<%= link_to 'Edit', edit_kennel_path(@kennel), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_link', style:"margin-left: 330px; margin-right: unset; margin-top: 10px; padding: 0;", id:'kennel_edit_button' } %>
+		<div id="modal-window" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		</div>
+	<% else %>
+		<div class="kennel_button booking_button" style="padding-top:10px; margin-right: auto;margin-left: auto; text-align: center;width: 150px !important; position: absolute; bottom: 0; right: 0; left: 0;">                 
+				<%= link_to 'Add New', new_kennel_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window15', style:"color: white;", class: 'a_as_button' } %>
+			</div>
+	<% end %>

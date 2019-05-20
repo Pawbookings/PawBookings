@@ -1,0 +1,127 @@
+<%= render partial: "shared/top_info" %>
+
+<div class="search_container" style="padding-top:7em;text-align:center;padding-bottom:1em;">
+  <h1 style="text-shadow:1px 1px 18px black;" class="default_white_color arvo_font text_underline">Search for Kennels:</h1>
+  <div class="search_parent_div hidden_if_mobile" style="color:black;">
+    <div class="row no_left_right_margin">
+      <div class="col-md-1"></div>
+      <div class="col-xs-12 col-md-4">
+        <% if controller_name == "searches" && action_name == "search_results" %>
+          <div class="fixed_search_bar">
+            <%= render partial: "shared/search_bar" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-7">
+        <% if !@final_search_results.blank? %>
+            <% @final_search_results.reverse.each do |fr| %>
+              <div class="search_results_individual_div">
+                <% if fr[:taken_ownership] %>
+                  <h4><%= link_to fr.name, kennel_path(fr, search_info: params), class:"searched_kennel_title_link default_green_color" %></h4>
+                <% else %>
+                  <h4><%= link_to fr.name, csv_kennel_path(id: fr), class:"searched_kennel_title_link default_green_color" %></h4>
+                <% end %>
+                <p class="kennel_show_address"><span class="glyphicon glyphicon-map-marker"></span> <%= "#{fr[:address]} #{fr[:city]}, #{fr[:state]} #{fr[:zip]}" %></p>
+                <% if fr[:taken_ownership] %>
+                  <p class="search_results_mission_statement"><%= truncate(fr.mission_statement, length: 150, omission: "... ") %><%= link_to "read more", kennel_path(fr, search_info: params) %></p>
+                <% else %>
+                  <p class="search_results_mission_statement"><%= link_to "read more", csv_kennel_path(id: fr) %></p>
+                <% end %>
+                <br />
+                <div class="row margin_top_n1em text-center">
+                  <div class="col-xs-4">
+                    <%= image_tag fr.avatar.url(:thumb), class:"border_radius_100 kennel_dashboard_avatar" %>
+                  </div>
+                  <div class="col-xs-4">
+                    <% if fr[:taken_ownership] %>
+                      <p class="text-center view_details_btn"><%= link_to "View Details", kennel_path(fr, search_info: params), class: "default_white_color btn btn-success" %></p>
+                    <% else %>
+                      <p class="text-center view_details_btn"><%= link_to "View Details", csv_kennel_path(id: fr), class: "default_white_color btn btn-success" %></p>
+                    <% end %>
+                  </div>
+                  <div class="col-xs-4">
+                    <% if fr.cats_or_dogs == "both" %>
+                      <img class="pet_icon" src="/assets/dog_icon.png"><img class="pet_icon" src="/assets/cat_icon.png">
+                    <% elsif fr.cats_or_dogs = "dogs" %>
+                      <img class="pet_icon" src="/assets/dog_icon.png">
+                    <% elsif fr.cats_or_dogs = "cats" %>
+                      <img class="pet_icon" src="/assets/cat_icon.png">
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-center no_results_found default_white_color poppins_font">No results found…</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row no_left_right_margin hidden_if_desktop">
+    <div class="col-xs-12">
+      <%= render partial: "shared/search_bar" %>
+      <% if !@final_search_results.blank? %>
+          <% @final_search_results.reverse.each do |fr| %>
+            <div class="search_results_individual_div">
+              <% if fr[:taken_ownership] %>
+                <h4><%= link_to fr.name, kennel_path(fr, search_info: params), class:"searched_kennel_title_link default_green_color" %></h4>
+              <% else %>
+                <h4><%= link_to fr.name, csv_kennel_path(id: fr), class:"searched_kennel_title_link default_green_color" %></h4>
+              <% end %>
+              <p class="kennel_show_address"><span class="glyphicon glyphicon-map-marker"></span> <%= "#{fr[:address]} #{fr[:city]}, #{fr[:state]} #{fr[:zip]}" %></p>
+              <% if fr[:taken_ownership] %>
+                <p class="search_results_mission_statement"><%= truncate(fr.mission_statement, length: 150, omission: "... ") %><%= link_to "read more", kennel_path(fr, search_info: params) %></p>
+              <% else %>
+                <p class="search_results_mission_statement"><%= truncate(fr.mission_statement, length: 150, omission: "... ") %><%= link_to "read more", csv_kennel_path(id: fr) %></p>
+              <% end %>
+              <div class="row margin_top_n1em text-center">
+                <div class="col-xs-4">
+                  <%= image_tag fr.avatar.url(:thumb), class:"border_radius_100 kennel_dashboard_avatar" %>
+                </div>
+                <div class="col-xs-4">
+                  <% if fr[:taken_ownership] %>
+                    <p class="text-center view_details_btn"><%= link_to "View Details", kennel_path(fr, search_info: params), class: "default_white_color btn btn-success" %></p>
+                  <% else %>
+                    <p class="text-center view_details_btn"><%= link_to "View Details", csv_kennel_path(id: fr), class: "default_white_color btn btn-success" %></p>
+                  <% end %>
+                </div>
+                <div class="col-xs-4">
+                  <% if fr.cats_or_dogs == "both" %>
+                    <img class="pet_icon" src="/assets/dog_icon.png"><img class="pet_icon" src="/assets/cat_icon.png">
+                  <% elsif fr.cats_or_dogs = "dogs" %>
+                    <img class="pet_icon" src="/assets/dog_icon.png">
+                  <% elsif fr.cats_or_dogs = "cats" %>
+                    <img class="pet_icon" src="/assets/cat_icon.png">
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-center no_results_found default_white_color">No results found…</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- <%# if !@negative_kennels.blank? %>
+  <h1>The Kennels listed below do NOT meet your reservation dates selected.</h1>
+  <%# @negative_kennels.each do |fr| %>
+    <%#= link_to fr.name, search_path(fr.id, search_info: params) %>
+    <br>
+    <%# if fr.cats_or_dogs == "both" %>
+      Cats and Dogs
+    <%# else %>
+      <%#= fr.cats_or_dogs.capitalize %>
+    <%# end %>
+    <br>
+    <%#= fr.address %>
+    <br>
+    <br>
+  <%# end %>
+<%# end %> -->
+
+<div class="relative_position">
+  <%= render partial: "shared/footer" %>
+</div>

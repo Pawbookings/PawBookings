@@ -1,0 +1,495 @@
+<%= render partial: "shared/top_info" %>
+<div class="container-fluid kennel_dashboard_container poppins_font">
+  <div class="kennel_dashboard_desktop">
+    <div class="bigger">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="main_info" id="main_main">
+                <% if !@kennel.nil? %>
+                    <h3 class="kennel_info_style_h3"> <%= @kennel.name %> </h3>
+                    <p class="kennel_info_p" style="padding-bottom:10px;"> <%= "#{@kennel.address} #{@kennel.city}, #{@kennel.state} #{@kennel.zip}"%></p>
+                    <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;">
+                      <%= link_to "Manage My Kennel", kennels_path(id: @kennel.id), style:"color: white;", class: 'a_as_button' %>
+                    </div>
+                <% else %>
+                  <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                    <%= link_to "Manage My Kennel", kennels_path(tab: 'owner'), class: 'a_as_button', style:"color: white; " %>
+                  </div>
+                <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="base_kennel kennel_check_in">
+              <p class="kennel_info_p check_info" style="padding-bottom: 10px;"> Check-in Today </p>
+              <% if !@kennel.nil? %>
+              <table class="kennel_grey_list" >
+                <% if @check_in_today.length == 0 %>
+                  <p style="font-size: 18px;padding-top: 30px;">You don't have any check-in today</p>
+                <% end %>
+                <% @check_in_today.each_with_index do |val, ind|%>
+                  <tr style="height: 50px; margin-bottom:10px;">
+                    <td><%= "#{val.customer_first_name} #{val.customer_last_name}" %></td>
+                    <td>
+                      <% if val.pet_ids.length == 1 %>
+                        1 pet
+                      <% else %>
+                        <%= "#{eval(val.pet_ids).length} pets"%>
+                      <% end %>
+                    </td>
+                    <td><%= eval(val.room_details)[0][0] %></td>
+                  </tr>
+                <% end %>
+              </table>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="base_kennel kennel_check_in kennel_check_out">
+              <p class="kennel_info_p check_info" style="padding-bottom: 10px; margin-bottom:10px;"> Check-out Today </p>
+              <% if !@kennel.nil? %>
+              <table class="kennel_grey_list" >
+                <% if @check_out_today.length == 0 %>
+                  <p style="font-size: 18px;padding-top: 30px;">You don't have any check-out today</p>
+                <% end %>
+                <% @check_out_today.each_with_index do |val, ind|%>
+                  <tr style="height: 50px; margin-bottom:10px;">
+                    <td><%= "#{val.customer_first_name} #{val.customer_last_name}" %></td>
+                    <td>
+                      <% if val.pet_ids.length == 1 %>
+                        1 pet
+                      <% else %>
+                        <%= "#{eval(val.pet_ids).length} pets"%>
+                      <% end %>
+                    </td>
+                    <td><%= eval(val.room_details)[0][0] %></td>
+                  </tr>
+                <% end %>
+              </table>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <% if !@reservations.nil? %>
+            <div class="base_kennel text-center chart_kennel">
+              <p class="kennel_info_p check_info center_text">Most Booked Rooms</p>
+              <div class="chart">
+                <%= pie_chart @run_names_and_counts, colors: ["green", "grey", "orange", "blue"], library: {legend: {position: "right", align: 'center'}, lineWidths: '10px', chartArea:{right: '20px', width: '80%'}}  %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-8" id="booking_row" >
+          <div class="row">
+              <div id="booking_buttonn" class="col-md-2 kennel_top kennel_button booking_button" style="width: 150px !important;padding-top: 10px;padding-left: 25px; margin-right: unset !important; margin-bottom: unset !important; margin-left: 130px; margin-top: 200px !important;">
+                <%= link_to "Add a Booking", new_reservation_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window1',style:"color: white;", class: 'a_as_button'} %>
+              </div>
+              <div id="modal-window1" class="modal fade modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="margin-top: 100px;">
+                    <div class="modal-content"></div>
+                </div>
+              </div>
+              <div class="kennel_dashboard_res_search", style="float: right !important; margin-right: 200px; width:650px;">
+                <%= form_tag({controller: 'kennels', action: 'kennel_dashboard'}, method: 'get', :remote => true ) do %>
+                  <%= text_field_tag :reservation_search, nil, placeholder: "", class: "kennel_dashboard_input_desktop", style: "margin-top: 20px;height: 50px; width:57% !important;" %>
+                  <%= submit_tag "Search Now", class: "kennel_button", 'data-toggle' =>  "modal", 'data-target' => '#modal-window' %>
+                  <div class="spans_kennel", style="float: left; margin-left: 20px;margin-top: 10px;">
+                    <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "reservationID", active: true) %> ReservationID</span>
+                    <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_last_name") %> Last Name</span>
+                    <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_email") %> Email</span>
+                    <span id="last_span" class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_phone") %> Phone</span>
+                  </div>
+                  <div id="modal-window" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document" style="margin-top: 100px;">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+                <div id="modal-window2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document" style="margin-top: 100px;">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+              <% end %>
+              </div>
+          </div>
+        </div>
+          <div class="row">
+          <!-- Start of Kennel Dashboard monthly_calendar container -->
+            <% res_check = false %>
+            <%= month_calendar(attribute: :check_in_date) do |date| %>
+              <span class="poppins_font"><%= unsanitize_date(date.to_s) %></span>
+              <% res_counter = [] %>
+              <% if !@reservations.nil? %>
+                <% @reservations.each do |res| %>
+                  <% @pet_stay_date_range = (res[:check_in_date]..res[:check_out_date]).map{|date| date} %>
+
+                  <% if @pet_stay_date_range.include?(date) %>
+
+                    <% res_counter << res %>
+                    <% res_check = true %>
+                  <% end %>
+                <% end %>
+                <% if res_check == true %>
+                  <br>
+                  <span class="glyphicon glyphicon-ok", style="font-size: 30px;"></span>
+                  <br />
+                  <% res_check = false %>
+                <% else %>
+                  <br />
+                <% end %>
+              <% end %>
+              <% if res_counter.length == 0 %>
+                <br>
+                <br>
+                <br>
+              <% else %>
+                <%= link_to "View", kennel_reservations_path(reservation_ids: res_counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window3', class: 'text_info link_edit', style: 'float: none !important;'} %>
+                <div id="modal-window3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document" style="margin-top: 100px;">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+              <% end %>
+            <% end %>
+            <!-- End of Kennel Dashboard monthly_calendar container -->
+      
+
+        </div>
+        
+      </div>
+      <div class="smallest">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="main_info" id="main_main">
+                <% if !@kennel.nil? %>
+                    <h3 class="kennel_info_style_h3"> <%= @kennel.name %> </h3>
+                    <p class="kennel_info_p" style="padding-bottom:10px;"> <%= "#{@kennel.address} #{@kennel.city}, #{@kennel.state} #{@kennel.zip}"%></p>
+                    <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;">
+                      <%= link_to "Manage My Kennel", kennels_path(id: @kennel.id), style:"color: white;", class: 'a_as_button' %>
+                    </div>
+                <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="base_kennel kennel_check_in">
+              <p class="kennel_info_p check_info" style="padding-bottom: 10px;"> Check-in Today </p>
+              <% if !@kennel.nil? %>
+              <table class="kennel_grey_list" >
+                <% if @check_in_today.length == 0 %>
+                  <p style="font-size: 18px;padding-top: 30px;">You don't have any check-in today</p>
+                <% end %>
+                <% @check_in_today.each_with_index do |val, ind|%>
+                  <tr style="height: 50px; margin-bottom:10px;">
+                    <td><%= "#{val.customer_first_name} #{val.customer_last_name}" %></td>
+                    <td>
+                      <% if val.pet_ids.length == 1 %>
+                        1 pet
+                      <% else %>
+                        <%= "#{eval(val.pet_ids).length} pets"%>
+                      <% end %>
+                    </td>
+                    <td><%= eval(val.room_details)[0][0] %></td>
+                  </tr>
+                <% end %>
+              </table>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="base_kennel kennel_check_in kennel_check_out">
+              <p class="kennel_info_p check_info" style="padding-bottom: 10px; margin-bottom:10px;"> Check-out Today </p>
+              <% if !@kennel.nil? %>
+              <table class="kennel_grey_list" >
+                <% if @check_out_today.length == 0 %>
+                  <p style="font-size: 18px;padding-top: 30px;">You don't have any check-out today</p>
+                <% end %>
+                <% @check_out_today.each_with_index do |val, ind|%>
+                  <tr style="height: 50px; margin-bottom:10px;">
+                    <td><%= "#{val.customer_first_name} #{val.customer_last_name}" %></td>
+                    <td>
+                      <% if val.pet_ids.length == 1 %>
+                        1 pet
+                      <% else %>
+                        <%= "#{eval(val.pet_ids).length} pets"%>
+                      <% end %>
+                    </td>
+                    <td><%= eval(val.room_details)[0][0] %></td>
+                  </tr>
+                <% end %>
+              </table>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <% if !@reservations.nil? %>
+            <div class="base_kennel text-center chart_kennel">
+              <p class="kennel_info_p check_info center_text">Most Booked Rooms</p>
+              <div class="chart">
+                <%= pie_chart @run_names_and_counts, colors: ["green", "grey", "orange", "blue"], library: {legend: {position: "right", align: 'center'}, lineWidths: '10px', chartArea:{right: '20px', width: '80%'}}  %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-8" id="booking_row" >
+          <div class="row">
+            <div class="row">
+              <div class="kennel_dashboard_res_search", style="float: right !important; margin-right: 200px; width:650px;">
+                <%= form_tag({controller: 'kennels', action: 'kennel_dashboard'}, method: 'get', :remote => true ) do %>
+                  <%= text_field_tag :reservation_search, nil, placeholder: "", class: "kennel_dashboard_input_desktop", style: "margin-top: 20px;height: 50px; width:57% !important;" %>
+                  <%= submit_tag "Search Now", class: "kennel_button", 'data-toggle' =>  "modal", 'data-target' => '#modal-window' %>
+                  <div class="spans_kennel", style="float: left; margin-left: 20px;margin-top: 10px;">
+                    <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "reservationID", active: true) %> ReservationID</span>
+                    <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_last_name") %> Last Name</span>
+                    <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_email") %> Email</span>
+                    <span id="last_span" class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_phone") %> Phone</span>
+                  </div>
+                  <div id="modal-window" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document" style="margin-top: 100px;">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+                <div id="modal-window2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document" style="margin-top: 100px;">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+              <% end %>
+              </div>
+              <div class="row">
+                <div id="booking_buttonn" class="kennel_top kennel_button booking_button" style="width: 150px !important;padding-top: 10px;padding-left: 25px; margin-right: unset !important; margin-bottom: unset !important; margin-left: 130px; margin-top: 200px !important;">
+                  <%= link_to "Add a Booking", new_reservation_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window1',style:"color: white;", class: 'a_as_button'} %>
+                </div>
+                <div id="modal-window1" class="modal fade modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                  <div class="modal-dialog" role="document" style="margin-top: 100px;">
+                      <div class="modal-content"></div>
+                  </div>
+                </div>
+              </div>
+              </div>
+          </div>
+        </div>
+          <div class="row">
+          <!-- Start of Kennel Dashboard monthly_calendar container -->
+            <% res_check = false %>
+            <%= month_calendar(attribute: :check_in_date) do |date| %>
+              <span class="poppins_font"><%= unsanitize_date(date.to_s) %></span>
+              <% res_counter = [] %>
+              <% if !@reservations.nil? %>
+                <% @reservations.each do |res| %>
+                  <% @pet_stay_date_range = (res[:check_in_date]..res[:check_out_date]).map{|date| date} %>
+
+                  <% if @pet_stay_date_range.include?(date) %>
+
+                    <% res_counter << res %>
+                    <% res_check = true %>
+                  <% end %>
+                <% end %>
+                <% if res_check == true %>
+                  <br>
+                  <span class="glyphicon glyphicon-ok", style="font-size: 30px;"></span>
+                  <br />
+                  <% res_check = false %>
+                <% else %>
+                  <br />
+                <% end %>
+              <% end %>
+              <% if res_counter.length == 0 %>
+                <br>
+                <br>
+                <br>
+              <% else %>
+                <%= link_to "View", kennel_reservations_path(reservation_ids: res_counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window3', class: 'text_info link_edit', style: 'float: none !important;'} %>
+                <div id="modal-window3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document" style="margin-top: 100px;">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+              <% end %>
+            <% end %>
+            <!-- End of Kennel Dashboard monthly_calendar container -->
+      
+
+        </div>
+        
+      </div>
+      <div class="smaller">
+        <div class="row">
+      <div class="col-md-10" id="col-10-main">
+        <div class="row">
+          <div class="main_info" id="main_main">
+              <% if !@kennel.nil? %>
+                  <h3 class="kennel_info_style_h3"> <%= @kennel.name %> </h3>
+                  <p class="kennel_info_p" style="padding-bottom:10px;"> <%= "#{@kennel.address} #{@kennel.city}, #{@kennel.state} #{@kennel.zip}"%></p>
+                  <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;">
+                    <%= link_to "Manage My Kennel", kennels_path(id: @kennel.id), style:"color: white;", class: 'a_as_button' %>
+                  </div>
+              <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="base_kennel kennel_check_in">
+            <p class="kennel_info_p check_info" style="padding-bottom: 10px;"> Check-in Today </p>
+            <% if !@kennel.nil? %>
+            <table class="kennel_grey_list" >
+              <% if @check_in_today.length == 0 %>
+                <p style="font-size: 18px;padding-top: 30px;">You don't have any check-in today</p>
+              <% end %>
+              <% @check_in_today.each_with_index do |val, ind|%>
+                <tr style="height: 50px; margin-bottom:10px;">
+                  <td><%= "#{val.customer_first_name} #{val.customer_last_name}" %></td>
+                  <td>
+                    <% if val.pet_ids.length == 1 %>
+                      1 pet
+                    <% else %>
+                      <%= "#{eval(val.pet_ids).length} pets"%>
+                    <% end %>
+                  </td>
+                  <td><%= eval(val.room_details)[0][0] %></td>
+                </tr>
+              <% end %>
+            </table>
+             <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="base_kennel kennel_check_in kennel_check_out">
+            <p class="kennel_info_p check_info" style="padding-bottom: 10px; margin-bottom:10px;"> Check-out Today </p>
+            <% if !@kennel.nil? %>
+            <table class="kennel_grey_list" >
+              <% if @check_out_today.length == 0 %>
+                <p style="font-size: 18px;padding-top: 30px;">You don't have any check-out today</p>
+              <% end %>
+              <% @check_out_today.each_with_index do |val, ind|%>
+                <tr style="height: 50px; margin-bottom:10px;">
+                  <td><%= "#{val.customer_first_name} #{val.customer_last_name}" %></td>
+                  <td>
+                    <% if val.pet_ids.length == 1 %>
+                      1 pet
+                    <% else %>
+                      <%= "#{eval(val.pet_ids).length} pets"%>
+                    <% end %>
+                  </td>
+                  <td><%= eval(val.room_details)[0][0] %></td>
+                </tr>
+              <% end %>
+            </table>
+            <% end %>
+          </div>
+        </div>
+         <div class="row">
+          <% if !@reservations.nil? %>
+          <div class="base_kennel text-center chart_kennel">
+            <p class="kennel_info_p check_info center_text">Most Booked Rooms</p>
+            <div class="chart">
+              <%= pie_chart @run_names_and_counts, colors: ["green", "grey", "orange", "blue"], library: {legend: {position: "right", align: 'center'}, lineWidths: '10px', chartArea:{right: '20px', width: '80%'}}  %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-10" id="booking_row" >
+        <div class="row">
+                <div id="booking_buttonn" class="kennel_top kennel_button booking_button" style="padding-top: 10px;padding-left: 25px; ">
+                  <%= link_to "Add a Booking", new_reservation_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window1',style:"color: white;", class: 'a_as_button'} %>
+                </div>
+              <div id="modal-window1" class="modal fade modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document" style="margin-top: 100px;">
+                    <div class="modal-content"></div>
+                </div>
+              </div>
+            </div>
+        <div class="row">
+            <div class="kennel_dashboard_res_search", style="margin-right: 200px; width:650px;">
+              <%= form_tag({controller: 'kennels', action: 'kennel_dashboard'}, method: 'get', :remote => true ) do %>
+                <%= text_field_tag :reservation_search, nil, placeholder: "", class: "kennel_dashboard_input_desktop", style: "margin-top: 20px;height: 50px; width:57% !important;" %>
+                <%= submit_tag "Search Now", class: "kennel_button", 'data-toggle' =>  "modal", 'data-target' => '#modal-window' %>
+                <div class="spans_kennel", style="float: left; margin-left: 20px;margin-top: 10px;">
+                  <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "reservationID", active: true) %> ReservationID</span>
+                  <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_last_name") %> Last Name</span>
+                  <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_email") %> Email</span>
+                  <span id="last_span" class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_phone") %> Phone</span>
+                </div>
+                <div id="modal-window" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document" style="margin-top: 100px;">
+                      <div class="modal-content"></div>
+                  </div>
+              </div>
+              <div id="modal-window2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document" style="margin-top: 100px;">
+                      <div class="modal-content"></div>
+                  </div>
+              </div>
+            <% end %>
+            </div>
+        </div>
+      </div>
+        <div class="row">
+        <!-- Start of Kennel Dashboard monthly_calendar container -->
+          <% res_check = false %>
+          <%= month_calendar(attribute: :check_in_date) do |date| %>
+            <span class="poppins_font"><%= unsanitize_date(date.to_s) %></span>
+            <% res_counter = [] %>
+            <% if !@reservations.nil? %>
+              <% @reservations.each do |res| %>
+                <% @pet_stay_date_range = (res[:check_in_date]..res[:check_out_date]).map{|date| date} %>
+
+                <% if @pet_stay_date_range.include?(date) %>
+
+                  <% res_counter << res %>
+                  <% res_check = true %>
+                <% end %>
+              <% end %>
+              <% if res_check == true %>
+                <br>
+                <span class="glyphicon glyphicon-ok", style="font-size: 30px;"></span>
+                <br />
+                <% res_check = false %>
+              <% else %>
+                <br />
+              <% end %>
+            <% end %>
+            <% if res_counter.length == 0 %>
+              <br>
+              <br>
+              <br>
+            <% else %>
+              <%= link_to "View", kennel_reservations_path(reservation_ids: res_counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window3', class: 'text_info link_edit', style: 'float: none !important;'} %>
+              <div id="modal-window3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document" style="margin-top: 100px;">
+                      <div class="modal-content"></div>
+                  </div>
+              </div>
+            <% end %>
+          <% end %>
+          <!-- End of Kennel Dashboard monthly_calendar container -->
+    
+
+      </div>
+    </div>
+        <%= render partial: "shared/footer" %>
+      </div>
+
+  </div>
+</div>
+
+<script>
+  $(window).on('resize', function() {
+    if($(window).width() < 1500) {
+        $('#booking_row').addClass('col-md-10');
+        $('#booking_row').addClass('col-md-8');
+        $('#calend_div').addClass('col-md-10');
+        $('#calend_div').addClass('calendar_down');
+        $('#calend_div').removeClass('col-xs-6');
+    }else{
+        $('#booking_row').addClass('col-md-8');
+        $('#booking_row').addClass('col-md-10');
+        $('#calend_div').addClass('col-xs-6');
+        $('#calend_div').removeClass('col-md-10');
+        $('#calend_div').addClass('calendar_down');
+    }
+})
+</script>
+

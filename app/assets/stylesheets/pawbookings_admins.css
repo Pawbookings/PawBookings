@@ -1,0 +1,13 @@
+.admin_directory_container {
+    margin-bottom: 2em;
+}
+
+.admin_directory_title {
+  font-family: 'Open Sans', sans-serif;
+  color: #48cd7e;
+  margin-top: 3.5em;
+}
+
+.admin_directory_links {
+  line-height: 3em;
+}

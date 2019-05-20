@@ -1,0 +1,44 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">x</button>
+  <h4 class="modal-title" id="myModalLabel1" style="font-family: 'Roboto'; text-align: center;font-size:20px;">Edit Existing</h4>
+</div>
+<div class="modal-body" style="color: black;height: auto; margin-top:0 !important; background-color: white; float: none;
+    text-align : center;">
+   <%= form_tag @kennel, method: :put, id: 'form', multipart: true do %>
+          <br>
+          <%= hidden_field_tag :id, @kennel.id %>
+          <p class="font-18">Avatar:</p>
+					<%= file_field_tag :avatar, placeholder:'Choose file', class:"form-control payment_input input_new_reserv black_18 margin-0-auto", style:'height: 40px;' %>
+            <br>
+           <p class="font-18">Name:</p>
+            <%= text_field_tag :name, nil, value: @kennel.name, class: "form-control payment_input input_new_reserv black_18" %>
+            <br>
+            <p class="font-18">Address:</p>
+            <%= text_field_tag :address, nil, value: @kennel.address, class: "form-control payment_input input_new_reserv black_18"%>
+            <br>
+            <p class="font-18">Email:</p>
+            <%= text_field_tag :email, nil, value: @kennel.email, class: "form-control payment_input input_new_reserv black_18" %>
+            <br>
+            <p class="font-18">Phone:</p>
+            <%= text_field_tag :phone, nil, value: @kennel.phone, class: "form-control payment_input input_new_reserv black_18" %>
+            <br>
+            <p class="font-18">Zip:</p>
+            <%= text_field_tag :zip, nil, value: @kennel.zip, class: "form-control payment_input input_new_reserv black_18" %>
+            <br>
+            <p class="font-18">Sales tax:</p>
+            <%= text_field_tag :sales_tax, nil, value: @kennel.sales_tax, class: "form-control payment_input input_new_reserv black_18" %>
+            <br>
+            <p class="font-18">Mission statement:</p>
+            <%= text_field_tag :mission_statement, nil, value: @kennel.mission_statement, class: "form-control payment_input input_new_reserv black_18" %>
+            <br>
+          <div class="form-actions">
+            <p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="text-align:center; float: none; margin:0; padding:0;">Save</p>
+            </div>  
+      <% end %>
+</div>
+
+<script type="text/javascript">
+     function submitForm() {
+        $("#form").submit();
+    }
+</script>
