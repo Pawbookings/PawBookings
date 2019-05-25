@@ -13,7 +13,7 @@ class Pet < ActiveRecord::Base
                     :s3_permissions => { :original => :private },
                     url: ":s3_domain_url",
                     path: "/files/:id/:filename",
-                    s3_region: "ENV["aws_region"]",
+                    s3_region: "ENV['aws_region']",
                     s3_protocol: :https,
                     :s3_credentials => Proc.new{|a| a.instance.s3_credentials }
   validates_attachment_file_name :vaccination_record, matches: [/\.pdf$/, /\.docx?$/, /\.doc?$/, /\.odt$/, /\.ods$/]
@@ -25,7 +25,7 @@ class Pet < ActiveRecord::Base
                     :convert_options => { :all => "-quality 100" },
                     url: ":s3_domain_url",
                     path: "/image/:id/:filename",
-                    s3_region: "ENV["aws_region"]",
+                    s3_region: "ENV['aws_region']",
                     s3_protocol: :https,
                     :s3_credentials => Proc.new{|a| a.instance.s3_credentials }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
