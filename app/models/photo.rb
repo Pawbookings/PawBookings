@@ -8,7 +8,7 @@ class Photo < ActiveRecord::Base
                 :convert_options => { :all => "-quality 100" },
                 url: ":s3_domain_url",
                 path: "/image/:id/:filename",
-                s3_region: "ENV['aws_region']",
+                s3_region: ENV['aws_region'],
                 s3_protocol: :https,
                 default_url: "/images/:style/missing.png",
                 :s3_credentials => Proc.new{|a| a.instance.s3_credentials }
