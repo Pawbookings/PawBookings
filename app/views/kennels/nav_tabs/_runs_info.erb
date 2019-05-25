@@ -1,6 +1,6 @@
 <p class="kennel_h2">Accomodations</p>
 <div style="height: auto; position: relative; overflow: hidden;">
-	<% if !@kennel.nil? %>
+	<% if !@kennel.nil? && @changed_time == true %>
 	<% @runs.each_with_index do |run, i| %>
 		<div id="runs_cont" class="pet_container" style="width: 700px;height: 550px; float: none;margin: 0 auto !important; margin-bottom: 50px !important;">
 			<%= image_tag run.image.url, class: "accom_image kennel_dashboard_avatar" %>

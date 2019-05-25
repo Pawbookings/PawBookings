@@ -51,9 +51,9 @@ class PetsController < ApplicationController
       pet.vaccination_record = params[:pet][:vaccination_record] if !params[:pet][:vaccination_record].nil?
     end
     pet.avatar = params[:pet][:avatar] if !params[:pet][:avatar].nil?
-    pet.spay_or_neutered = params[:pet][:spay_or_neutered] if !params[:pet][:spay_or_neutered].nil?
+    pet.spay_or_neutered = params[:pet][:spay_or_neutered]
     pet.special_instructions = params[:pet][:special_instructions] if !params[:pet][:special_instructions].nil?
-    if pet.save!
+    if pet.save
       flash[:notice] = "Your Pet was successfully updated!"
       redirect_to request.referrer
     else
@@ -63,9 +63,8 @@ class PetsController < ApplicationController
   end
 
   def destroy
-    pet = Pet.where(id: params[:id], user_id: current_user.id).first
-    pet.delete
-    redirect_to new_pet_path
+    Pet.find(params[:id]).delete
+    redirect_to pets_path
   end
 
   private

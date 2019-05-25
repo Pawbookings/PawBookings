@@ -2,6 +2,10 @@
 html{
   font-family: 'Roboto' !important;
 }
+
+.customer_dashboard_desktop{
+  font-family: 'Roboto' !important;
+}
 .customer_dashboard_amenity_div {
   background-color: rgba(152, 152, 152, 0.17);
   margin-left: 2em;
@@ -462,4 +466,116 @@ input,textarea {
     padding-bottom: 3em;
   }
 
+  .ok{
+    display: unset;
+  }
+
+  .small_size{
+    display: none;
+  }
+
+}
+
+@media (max-width: 990px) {
+  .ok{
+    display: unset;
+  }
+
+  .small_size{
+    display: none;
+  }
+}
+
+@media (min-width:1750px) and (max-width: 4000px) {
+  .big_pets {
+    display: unset;
+  }
+
+  .small_pets {
+    display: none;
+  }
+
+  .smaller_pets {
+    display: none;
+  }
+
+  .ok{
+    display: unset;
+  }
+
+  .small_size{
+    display: none;
+  }
+}
+
+@media (min-width:1400px) and (max-width: 1749px) {
+  .big_pets {
+    display: none;
+  }
+
+  .small_pets {
+    display: unset;
+  }
+
+  .smaller_pets {
+    display: none;
+  }
+
+  .pets_customer {
+    width: calc(100% - 400px);
+    margin-left: calc(100%/3);
+  }
+  .ok{
+    display: unset;
+  }
+
+  .small_size{
+    display: none;
+  }
+
+  .customer_reservations{
+    width: calc(100% - 100px);
+    margin-left: 50px;
+  }
+}
+
+@media (min-width:990px) and (max-width: 1400px) {
+  .big_pets {
+    display: none;
+  }
+
+  .small_pets {
+    display: none;
+  }
+
+  .smaller_pets {
+    display: unset;
+  }
+
+  .ok{
+    display: none;
+  }
+
+  .small_size{
+    display: unset;
+  }
+
+  .pets_customer{
+    margin: 0 auto;
+    margin-top:80px;
+  }
+
+  .veterinarian_info {
+    margin: 0 auto;
+    margin-top:80px;
+  }
+
+  .customer_reservations{
+    margin: 0 auto;
+    margin-top:80px;
+  }
+
+  .customer_main_info{
+    margin: 0 auto;
+  }
 }

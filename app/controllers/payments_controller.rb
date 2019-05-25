@@ -420,7 +420,7 @@ class PaymentsController < ApplicationController
         reservation.kennelID = reservation[:kennel_id]
         reservation.userID = reservation[:user_id]
         reservation.reservationID = reservation[:id]
-        reservation.save!
+        reservation.save
         UserMailer.reservation_confirmation(reservation[:id], params[:total_price]).deliver_now
         flash[:notice] = "Your payment was processed!"
         return redirect_to reservation_path(id: @user[:id], customer_email: params[:customer_email], transID: params[:transId], res_id: reservation[:id])

@@ -6,6 +6,16 @@
   text-decoration:underline;
 }
 
+.kennel_reservation_td {
+  border: none !important;
+  border-top: solid black 1px !important;
+  border-bottom: solid black 1px !important;
+}
+
+#one_in_row {
+  margin-left: calc(100%/2 - 180px);
+}
+
 .kennel_dashboard_desktop{
   background: linear-gradient(180deg, #EEEEEE 64.06%, #30A05A 100%);
   width: 100%;
@@ -367,6 +377,14 @@ a:active {
   transform-origin:center;
   border: 1px solid black;
   cursor: pointer;
+}
+
+.kennel_reservation_td:hover {
+  transform: none !important;
+}
+
+.nohover:hover{
+  transform: none !important;
 }
 
 .vert_li {
@@ -840,7 +858,37 @@ a:active {
   }
 }
 
+@media (min-width: 1600px) {
+  #two_in_row {
+    margin-left: calc(100%/3 - 100px);
+  }
+
+  #three_in_row {
+    margin-left: calc(100%/8);
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 1599px) {
+  #calend_div {
+    background-color: white;
+    margin-right: calc(100%/4) !important;
+    margin-bottom: 100px;
+  }
+
+  #two_in_row {
+    margin-left: calc(100%/5);
+  }
+
+  #three_in_row {
+    margin-left:50px;
+  }
+}
+
 @media (max-width: 1499px) and (min-width: 900px)  {
+  .simple-calendar{
+    display: unset !important;
+  }
   .bigger {
     display: none;
   }

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :pets, only: [:index, :new, :edit, :create, :update, :destroy]
   resources :amenities, only: [:new, :create, :update, :destroy, :edit]
   resources :policies, only: [:new, :create, :update, :destroy, :edit]
-  resources :photos
+  resources :photos, only: [:new, :create, :update, :destroy, :edit]
   get '/reservations/old', to: "reservations#old_reservations", as: :old_reservation
   get '/get_pets', to: "reservations#get_pets", as: :get_pets
 
@@ -55,7 +55,7 @@ Rails.application.routes.draw do
     get "/vaccination_upload_after_payment", to: "payments#vaccination_upload_after_payment", as: :vaccination_upload_after_payment
 
   # KennelsController
-    resources :kennels, only: [:new, :create, :update, :show, :edit, :index]
+    resources :kennels, only: [:new, :create, :update, :show, :edit, :index, :destroy]
     get "/kennel_dashboard",   to: "kennels#kennel_dashboard",   as: :kennel_dashboard
     get "/kennel_reservations", to: "kennels#kennel_reservations", as: :kennel_reservations
     get "/kennel_view_pets", to: "kennels#kennel_view_pets", as: :kennel_view_pets

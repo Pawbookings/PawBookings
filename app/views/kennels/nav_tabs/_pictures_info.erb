@@ -1,6 +1,6 @@
 <p class="kennel_h2">Kennel pictures</p>
 <div style="height: auto; position: relative; overflow: hidden;">
-	<% if !@kennel.nil? %>
+	<% if !@kennel.nil? && !@runs.nil?%>
 	<% @photos.each_with_index do |photo, i| %>
 		<div class="pet_container" style="width: 700px;height: 550px; float: none; margin: 0 auto !important; margin-bottom: 50px !important;">
 			<br>

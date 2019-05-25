@@ -13,9 +13,9 @@ class BlogsController < ApplicationController
   def create
     params[:blog][:publish_date] = Date.parse(sanitize_date(params[:blog][:publish_date]))
     blog = Blog.new(blog_params)
-    if blog.save!
+    if blog.save
       blog.blogID = blog[:id]
-      blog.save!
+      blog.save
       redirect_to blog_path(blog[:id])
     else
       redirect_to request.referrer

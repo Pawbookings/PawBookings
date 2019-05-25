@@ -4,15 +4,15 @@
   <div class="row">
     <div class="col-md-2">
       <ul id="vert_ul" class="nav nav-pills nav-stacked vert_ul">
-        <li class="<%= @tab == 'owner' ? 'active' : ''%> vert_li"><a href="#tab_a" data-toggle="pill" style="background-color: transparent !important;">Owner Personal Info</a></li>
-        <li class="<%= @tab == 'kennel' ? 'active' : ''%> vert_li"><a href="#tab_b" data-toggle="pill" style="background-color: transparent !important;">Kennel Information</a></li>
-        <li class="<%= @tab == 'runs' ? 'active' : ''%> vert_li"><a href="#tab_c" data-toggle="pill" style="background-color: transparent !important;">Accomodations</a></li>
-        <li class="<%= @tab == 'amenities' ? 'active' : ''%> vert_li"><a href="#tab_d" data-toggle="pill" style="background-color: transparent !important;">Amenities</a></li>
-        <li class="<%= @tab == 'hours' ? 'active' : ''%> vert_li"><a href="#tab_e" data-toggle="pill" style="background-color: transparent !important;">Hours of Operation</a></li>
-        <li class="<%= @tab == 'holidays' ? 'active' : ''%> vert_li"><a href="#tab_f" data-toggle="pill" style="background-color: transparent !important;">Holidays</a></li>
-        <li class="<%= @tab == 'policies' ? 'active' : ''%> vert_li"><a href="#tab_g" data-toggle="pill" style="background-color: transparent !important;">Policies</a></li>
-        <li class="<%= @tab == 'breed' ? 'active' : ''%> vert_li"><a href="#tab_h" style="background-color: transparent !important;" data-toggle="pill">Breed Restrictions</a></li>
-        <li class="<%= @tab == 'photos' ? 'active' : ''%> vert_li"><a href="#tab_i" style="background-color: transparent !important;"  data-toggle="pill">Kennel Pictures</a></li>
+        <li class="<%= @tab == 'owner' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_a" data-toggle="pill" style="background-color: transparent !important;">Owner Personal Info</a></li>
+        <li class="<%= @tab == 'kennel' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_b" data-toggle="pill" style="background-color: transparent !important;">Kennel Information</a></li>
+        <li class="<%= @tab == 'runs' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_c" data-toggle="pill" style="background-color: transparent !important;">Accomodations</a></li>
+        <li class="<%= @tab == 'amenities' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_d" data-toggle="pill" style="background-color: transparent !important;">Amenities</a></li>
+        <li class="<%= @tab == 'hours' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_e" data-toggle="pill" style="background-color: transparent !important;">Hours of Operation</a></li>
+        <li class="<%= @tab == 'holidays' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_f" data-toggle="pill" style="background-color: transparent !important;">Holidays</a></li>
+        <li class="<%= @tab == 'policies' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_g" data-toggle="pill" style="background-color: transparent !important;">Policies</a></li>
+        <li class="<%= @tab == 'breed' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_h" style="background-color: transparent !important;" data-toggle="pill">Breed Restrictions</a></li>
+        <li class="<%= @tab == 'photos' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_i" style="background-color: transparent !important;"  data-toggle="pill">Kennel Pictures</a></li>
       </ul>
     </div>
     <div class="col-md-10">
@@ -28,15 +28,50 @@
 									</div>
                 </div>
             	</div>
+							<% if !@devise_update.nil? %>
+                <script>
+                  $(window).load(function () {
+                    $('#modal-window2').modal('show');
+                  });
+                </script>
+							<% end %>
           </div>
           <div class="tab-pane <%= @tab == 'kennel' ? 'active' : ''%>" id="tab_b">
               <%= render partial: 'kennels/nav_tabs/kennel_info'%>
-			  <div id="modal-window15" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  			<div id="modal-window15" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:85% !important;">
 								<div class="modal-dialog" role="document">
 										<div class="modal-content">
 										</div>
 								</div>
 							</div>
+							<% if !@kennel_create.nil? %>
+                <div id="modal-window123" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 100px);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "kennels/modals/new_kennel", kennel_create: @kennel_create %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window123').modal('show');
+                  });
+              </script>
+            <% end %>
+						<% if !@kennel_update.nil? %>
+                <div id="modal-window121" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 50px);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "kennels/modals/edit_kennel_info", kennel_update: @kennel_update %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window121').modal('show');
+                  });
+              </script>
+            <% end %>
           </div>
           <div class="tab-pane <%= @tab == 'runs' ? 'active' : ''%>" id="tab_c">
               <%= render partial: 'kennels/nav_tabs/runs_info'%>
@@ -46,12 +81,44 @@
 										</div>
 								</div>
 							</div>
-							<div id="modal-window4" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<% if @runs.nil? %>
+								<div id="modal-window4" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: <%= (@runs.nil?) ? '85%' : '45%' %> !important;">
+							<% else %>
+								<div id="modal-window4" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: <%= (@runs.length.zero?) ? '85%' : '45%' %> !important;">
+								<% end %>
 								<div class="modal-dialog" role="document">
 										<div class="modal-content">
 										</div>
 								</div>
 							</div>
+							<% if !@runs_create.nil? %>
+                <div id="modal-window124" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 100px);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "runs/new_run", runs_create: @runs_create %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window124').modal('show');
+                  });
+              </script>
+            <% end %>
+						<% if !@runs_update.nil? %>
+                <div id="modal-window125" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 50px);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "runs/edit_run_info", runs_update: @runs_update %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window125').modal('show');
+                  });
+              </script>
+            <% end %>
           </div>
           <div class="tab-pane <%= @tab == 'amenities' ? 'active' : ''%>" id="tab_d">
               <%= render partial: 'kennels/nav_tabs/amenities_info'%>
@@ -67,6 +134,34 @@
 										</div>
 								</div>
 							</div>
+							<% if !@amenity_create.nil? %>
+                <div id="modal-window126" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 100px);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "amenities/new", amenity_create: @amenity_create %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window126').modal('show');
+                  });
+              </script>
+            <% end %>
+						<% if !@amenity_update.nil? %>
+                <div id="modal-window127" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 50px);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "amenities/update", amenity_update: @amenity_update %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window127').modal('show');
+                  });
+              </script>
+            <% end %>
           </div>
           <div class="tab-pane <%= @tab == 'hours' ? 'active' : ''%>" id="tab_e">
               <%= render partial: 'kennels/nav_tabs/hours_info'%>
@@ -91,6 +186,34 @@
 										</div>
 								</div>
 							</div>
+							<% if !@holiday_create.nil? %>
+                <div id="modal-window128" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 100px);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "holidays/new", holiday_create: @holiday_create %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window128').modal('show');
+                  });
+              </script>
+            <% end %>
+						<% if !@holiday_update.nil? %>
+                <div id="modal-window129" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 50px);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "holidays/update", holiday_update: @holiday_update %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window129').modal('show');
+                  });
+              </script>
+            <% end %>
           </div>
           <div class="tab-pane <%= @tab == 'policies' ? 'active' : ''%>" id="tab_g">
               <%= render partial: 'kennels/nav_tabs/policies_info'%>
@@ -106,6 +229,34 @@
 										</div>
 								</div>
 							</div>
+							<% if !@policy_create.nil? %>
+                <div id="modal-window130" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 100px);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "policies/new", policy_create: @policy_create %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window130').modal('show');
+                  });
+              </script>
+            <% end %>
+						<% if !@policy_update.nil? %>
+                <div id="modal-window131" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 50px);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "policies/update", policy_update: @policy_update %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window131').modal('show');
+                  });
+              </script>
+            <% end %>
           </div>
           <div class="tab-pane <%= @tab == 'breed' ? 'active' : ''%>" id="tab_h">
               <%= render partial: 'kennels/nav_tabs/breeds_info'%>
@@ -121,6 +272,34 @@
 										</div>
 								</div>
 							</div>
+							<% if !@breed_create.nil? %>
+                <div id="modal-window132" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 100px);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "breed_restrictions/new", breed_create: @breed_create %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window132').modal('show');
+                  });
+              </script>
+            <% end %>
+						<% if !@breed_update.nil? %>
+                <div id="modal-window133" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 50px); top: 30%;">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "breed_restrictions/update", breed_update: @breed_update %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window133').modal('show');
+                  });
+              </script>
+            <% end %>
           </div>
           <div class="tab-pane <%= @tab == 'photos' ? 'active' : ''%>" id="tab_i">
               <%= render partial: 'kennels/nav_tabs/pictures_info'%>
@@ -130,12 +309,44 @@
 										</div>
 								</div>
 							</div>
-							<div id="modal-window14" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<% if @photos.nil? %>
+								<div id="modal-window14" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:  <%= (@photos.nil?) ? '85%' : '45%' %>  !important">
+							<% else %>
+								<div id="modal-window14" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:  <%= (@photos.length.zero?) ? '85%' : '45%' %>  !important">
+							<% end %>
 								<div class="modal-dialog" role="document">
 										<div class="modal-content">
 										</div>
 								</div>
 							</div>
+								<% if !@photo_create.nil? %>
+                <div id="modal-window134" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 100px);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "photos/new", photo_create: @photo_create %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window134').modal('show');
+                  });
+              </script>
+            <% end %>
+						<% if !@photo_update.nil? %>
+                <div id="modal-window135" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left: calc(100%/3 + 50px); top: 30%;">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "photos/update", photo_update: @photo_update %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window135').modal('show');
+                  });
+              </script>
+            <% end %>
           </div>
       </div><!-- tab content -->
     </div>
@@ -145,3 +356,5 @@
 
 
 <%= render partial: "shared/footer" %>
+
+

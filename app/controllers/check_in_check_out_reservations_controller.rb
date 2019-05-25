@@ -7,7 +7,7 @@ class CheckInCheckOutReservationsController < ApplicationController
     else
       reservation.checked_out = params[:checked_out]
     end
-    reservation.save!
+    reservation.save
     return redirect_to request.referrer
   end
 end

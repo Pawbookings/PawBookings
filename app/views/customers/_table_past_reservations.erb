@@ -19,7 +19,7 @@
                 <%= "#{unsanitize_date(res[:check_out_date].to_s)}" %>
             </td>
             <td>
-                <span style="color: #0000FF;"><%= kennel.name%></span>
+                <span style="color: #0000FF;"><%= link_to kennel.name, kennel_path(id: kennel.id), style: 'color: #0000FF;'%></span>
                 <br>
                 <%= kennel.address%>
                 <br>

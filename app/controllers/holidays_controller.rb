@@ -18,22 +18,27 @@ class HolidaysController < ApplicationController
   end
 
   def create
-    if params[:holiday][:holiday_date].blank? || params[:holiday][:description].blank?
-      flash[:notice] = "Date and/or description invalid. Cannot be blank."
-      return redirect_to new_holiday_path
-    else
-      sanitize_date(params[:holiday][:holiday_date])
-      params[:holiday][:holiday_date] = Date.parse(@new_date)
-      holiday = Holiday.new(holiday_params)
-      kennel = Kennel.where(user_id: current_user.id).first
+    if params[:holiday][:holiday_date] == ''
+      errors = []
+      errors << 'title' if params[:holiday][:description] == ''
+      errors << 'date'
+
+      return redirect_to kennels_path(tab: 'holidays', holiday_create: errors)
     end
+
+    sanitize_date(params[:holiday][:holiday_date])
+    params[:holiday][:holiday_date] = Date.parse(@new_date)
+    holiday = Holiday.new(holiday_params)
+
     if holiday.valid? && kennel.holidays.create!(kennel_id: kennel.id, holiday_date: holiday.holiday_date, description: holiday.description)
       flash[:notice] = "Your Holiday was created successfully!"
-      redirect_to kennels_path(tab: 'holidays')
+      redirect_to kennels_path(tab: 'holidays', holiday_create: nil)
     else
-      error_message = "There was an error saving your Holiday."
-      flash[:notice] = error_message
-      redirect_to kennels_path(tab: 'holidays')
+      error_message = []
+      holiday.errors.each do |attr,err|
+        error_message << attr
+      end
+      redirect_to kennels_path(tab: 'holidays', holiday_create: error_message.uniq)
     end
   end
 
@@ -42,30 +47,45 @@ class HolidaysController < ApplicationController
   end
 
   def update
+    holiday = Holiday.find(params[:id])
+    if params[:holiday][:holiday_date] == ''
+      errors = []
+      errors << 'title' if params[:holiday][:description] == ''
+      errors << 'date'
+
+      return redirect_to kennels_path(tab: 'holidays', holiday_update: errors, holiday_id: holiday.id)
+    end
+
     sanitize_date(params[:holiday][:holiday_date])
     params[:holiday][:holiday_date] = Date.parse(@new_date)
-    holiday = Holiday.find(params[:id])
     holiday.holiday_date = params[:holiday][:holiday_date]
     holiday.description = params[:holiday][:description]
-    if holiday.save!
+    if holiday.save
       flash[:notice] = "Your Holiday was updated successfully!"
-      redirect_to kennels_path(tab: 'holidays')
+      redirect_to kennels_path(tab: 'holidays', holiday: nil)
     else
-      flash[:notice] = "There was an error updating your Holiday. Please try again."
-      redirect_to kennels_path(tab: 'holidays')
+      error_message = []
+      holiday.errors.each do |attr, err|
+        error_message << attr
+      end
+
+      return redirect_to kennels_path(tab: 'holidays', holiday_update: error_message.uniq, holiday_id: holiday.id)
     end
   end
 
   def destroy
-    kennel = Kennel.where(user_id: current_user.id).first
-    holiday = Holiday.where(id: params[:id], kennel_id: kennel[:id]).first
-    holiday.delete
-    redirect_to new_holiday_path
+    Holiday.find(params[:id]).delete
+    flash[:notice] = "Your Holiday was deleted successfully."
+    redirect_to kennels_path(tab: 'holidays')
   end
 
   private
 
   def holiday_params
     return params.require(:holiday).permit(:holiday_date, :description)
+  end
+
+  def kennel
+    Kennel.where(user_id: current_user.id).first
   end
 end

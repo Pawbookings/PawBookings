@@ -20,7 +20,7 @@ module PawBookings
     config.action_mailer.smtp_settings = {
       address:              'smtp.sendgrid.net',
       port:                 587,
-      domain:               'pawbookings-app.herokuapp.com',
+      domain:               'pawbookings.com',
       user_name:            ENV["sendgrid_username"],
       password:             ENV["sendgrid_password"],
       authentication:       'plain',

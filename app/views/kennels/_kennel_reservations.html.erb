@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal">x</button>
+  <button type="button" class="close" data-dismiss="modal" onclick="changeTdHovers();">x</button>
 </div>
 <div class="modal-body" style="height: auto; margin-top:0 !important; background-color: white; float: none;
     text-align : center;">
@@ -26,15 +26,15 @@
               <td class="kennel_reservation_td vertical_center"><%= res[:customer_first_name].capitalize %></td>
               <td class="kennel_reservation_td vertical_center"><%= res[:customer_last_name].capitalize %></td>
               <td class="kennel_reservation_td vertical_center"><%= res[:customer_email].capitalize %></td>
-              <td class="kennel_reservation_td vertical_center"><%= res[:customer_phone] %></td>
+              <td class="kennel_reservation_td vertical_center"><%= number_to_phone(res[:customer_phone], area_code: true) %></td>
               <% JSON.parse(res[:room_details]).each do |title, price| %>
                 <td class="kennel_reservation_td vertical_center">
                   <%= "#{title}" %>
                 </td>
               <% end %>
-              <% if res[:amenity_details].nil? %>
+              <% if res[:amenity_details] == '' %>
                 <td class="kennel_reservation_td vertical_center">
-                  No Amenities Chosen.
+                  -
                 </td>
               <% else %>
                 <% hash = JSON.parse(res[:amenity_details]) rescue {}%>
@@ -50,14 +50,61 @@
               <td class="kennel_reservation_td vertical_center"><%= unsanitize_date(res[:check_out_date].to_s) %></td>
               <td class="kennel_reservation_td vertical_center"><%= "$#{res[:total_price]}" %></td>
             </tr>
-      
-          <% end %>
+
           </table>
+          <p class="kennel_info_p" style="padding-top: 30px; font-size: 24px !important;">Pets</p>
+          <br />
+          <br />
+          <table class="kennel_reservation_customer_table">
+            <tr>
+                <th style="border: none; text-align: center;">Picture</th>
+                <th style="border: none; text-align: center;">Name</th>
+                <th style="border: none; text-align: center;">Type</th>
+                <th style="border: none; text-align: center;">Breed</th>
+                <th style="border: none; text-align: center;">Weight</th>
+                <th style="border: none; text-align: center;">Spay or Neutered</th>
+                <th style="border: none; text-align: center;">Vaccinations</th>
+                <th style="border: none; text-align: center;">Special Instructions</th>
+            </tr>
+            <% eval(res.pet_ids).each do |pet_id| %>
+              <% pet = Pet.find(pet_id) %>
+              <tr style="background-color: #C4C4C4;" >
+                <td class="kennel_reservation_td vertical_center"><%= image_tag pet.avatar.url(:thumb), class: "kennel_dashboard_avatar", style: 'margin-top: 20px; margin-right: 0px;' if !pet.avatar.url.nil? %></td>
+                <td class="kennel_reservation_td vertical_center"><%= pet[:name].capitalize %></td>
+                <td class="kennel_reservation_td vertical_center"><%= pet[:cat_or_dog].capitalize %></td>
+                <td class="kennel_reservation_td vertical_center"><%= pet[:breed] %></td>
+                <td class="kennel_reservation_td vertical_center"><%= pet[:weight] %> lbs</td>
+                <td class="kennel_reservation_td vertical_center"><%= pet[:spay_or_neutered].capitalize %></td>
+                <% if pet[:vaccinations] == "true" %>
+                  <% if pet[:vaccination_record_file_name].nil? %>
+                    <td class="kennel_reservation_td vertical_center">Did not upload record</td>
+                  <% else %>
+                    <td class="kennel_reservation_td vertical_center"><%= link_to "#{pet[:vaccination_record_file_name]}", pet.vaccination_record.url, style: 'color: #0000FF;' %></td>
+                  <% end %>
+                <% else %>
+                  <td class="kennel_reservation_td vertical_center"><strong>False</strong></td>
+                <% end %>
+                <% if pet[:special_instructions].blank? %>
+                  <td class="kennel_reservation_td vertical_center"><strong>n/a</strong></td>
+                <% else %>
+                  <td class="kennel_reservation_td vertical_center"><%= pet[:special_instructions] %></td>
+                <% end %>
+          <% end %>
+           </tr>
+          </table>
+          <% end %>
 </div>
 
 <script>
-document.getElementsByClassName("day").onmouseover = function() 
-{
-    this.style.transform = "none";
+$('.day').hover = function() {
+  console.log('<%= @current_reservations[0][:amenity_details].nil?%>')
+  if ($('#modal-window3').hasClass( "in" )) {
+    console.log(this, 'in')
+    $(this).addClass('nohover');
+  } else {
+    console.log(this, 'out')
+    $(this).removeClass('nohover');
+  }
+  
 }
 </script>

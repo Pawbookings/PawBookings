@@ -18,44 +18,50 @@ class PhotosController < ApplicationController
   end
 
   def create
+    return redirect_to kennels_path(tab: 'photos', photo_create: ['image']) if params[:photo].nil?
+
     photo = Photo.new(photo_params)
-    kennel = Kennel.where(user_id: current_user.id).first
     if kennel.photos.create!(kennel_id: kennel.id, image: photo.image)
       flash[:notice] = "Your Picture was created successfully!"
-      redirect_to kennels_path(tab: 'photos')
+      redirect_to kennels_path(tab: 'photos', photo_create: nil)
     else
-      flash[:notice] = "Unable to save this Picture. Please try again or choose another Picture."
-      redirect_to kennels_path(tab: 'photos')
+      error_message = []
+      photo.errors.each do |attr, err|
+        error_message << attr
+      end
+
+      redirect_to kennels_path(tab: 'photos', photo_create: error_message.uniq)
     end
   end
 
   def update
     photo = Photo.find(params[:id])
     photo.image = params[:photo][:image] if !params[:photo].nil?
-    if photo.save!
+    if photo.save
       flash[:notice] = "Your Picture was updated successfully!"
+      redirect_to kennels_path(tab: 'photos', photo_update: nil)
     else
-      flash[:notice] = "Your Picture was not updated. Please try again."
+      error_message = []
+      photo.errors.each do |attr, err|
+        error_message << attr
+      end
+      redirect_to kennels_path(tab: 'photos', photo_update: error_message.uniq, photo_id: photo.id)
     end
-    redirect_to kennels_path(tab: 'photos')
   end
 
   def destroy
-    photo = Photo.find(params[:id])
-    if photo.delete
-      flash[:notice] = "Your Picture was deleted successfully!"
-    else
-      flash[:notice] = "Your Picture was not deleted. Please try again."
-    end
-    redirect_to request.referrer
+    Photo.find(params[:id]).delete
+    flash[:notice] = "Your Picture was deleted successfully!"
+    redirect_to kennels_path(tab: 'photos')
   end
 
   private
 
-  # Use strong_parameters for attribute whitelisting
-  # Be sure to update your create() and update() controller methods.
-
   def photo_params
     params.require(:photo).permit(:image, :kennel_id)
+  end
+
+  def kennel
+    Kennel.where(user_id: current_user.id).first
   end
 end

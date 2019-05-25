@@ -6,7 +6,7 @@ class BlogCategoriesController < ApplicationController
 
   def create
     blog_category = BlogCategory.new(blog_category_params)
-    if blog_category.save!
+    if blog_category.save
       redirect_to all_blog_categories_path
     else
       redirect_to request.referrer
@@ -25,7 +25,7 @@ class BlogCategoriesController < ApplicationController
     blog_category = BlogCategory.find(params[:id])
     blog_category.title = params[:blog_category][:title]
     blog_category.publish_date = params[:blog_category][:publish_date]
-    if blog_category.save!
+    if blog_category.save
       redirect_to all_blog_categories_path
     else
       redirect_to request.referrer

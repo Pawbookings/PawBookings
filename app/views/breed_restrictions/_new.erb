@@ -3,10 +3,18 @@
   <h4 class="modal-title" id="myModalLabel1" style="font-family: 'Roboto'; font-size:20px; text-align: center;">Add New</h4>
 </div>
 <div class="modal-body" style="color: black; width: 1000px;height: auto; margin-top:0 !important; background-color: white; float: none;text-align : center;">
+		<% @breed_restriction ||= BreedRestriction.new %>
 		<%= form_for @breed_restriction, html: {multipart: true}, id:'form4' do |f| %>
 			<br>
 			<p class="font-18">Breed:</p>
 			<%= f.text_field :breed, placeholder: 'Breed', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+			<br>
+			<% if !@breed_create.nil? %>
+        <% @breed_create.each do |error|%>
+          <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+        <% end %>
+      <% end %>
+			<br>
 			<br>
 				 <%= f.submit "Save", class:'text_info bold-text link_edit vet_link submit_link font-20', style:"border: none;text-align:center; float: none; margin:0; padding:0; background-color: transparent" %> 
 			<br>

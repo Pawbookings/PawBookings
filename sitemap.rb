@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sitemap_generator'
 
-SitemapGenerator::Sitemap.default_host = 'https://pawbookings-app.herokuapp.com'
+SitemapGenerator::Sitemap.default_host = 'https://pawbookings.com'
 SitemapGenerator::Sitemap.create do
   add '/home', :changefreq => 'daily', :priority => 0.9
   add '/contact_us', :changefreq => 'weekly'

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require ahoy
+//= require jquery.mask
 //= require popper
 //  require turbolinks
 //= require ckeditor/init

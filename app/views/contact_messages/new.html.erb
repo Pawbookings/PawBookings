@@ -67,6 +67,7 @@
             <br>
             <%= f.text_area :details, placeholder: " Message", class: "contact_form_field" %>
             <br>
+            <div class="g-recaptcha signup_recaptcha contact_form_field" data-sitekey="<%= ENV['recaptcha_public_key'] %>" style="margin: 0 auto; margin-bottom: 70px; padding-left: 40px;"></div>
             <%= f.submit "Send", class: "contact_submit_btn" %>
           <% end %>
         </div>

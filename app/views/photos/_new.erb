@@ -3,6 +3,7 @@
   <h4 class="modal-title" id="myModalLabel1" style="font-family: 'Roboto'; font-size:20px; text-align: center;">Add New</h4>
 </div>
 <div class="modal-body" style="color: black; width: 1000px;height: auto; margin-top:0 !important; background-color: white; float: none;text-align : center;">
+	<% @photo ||= Photo.new %>
 	<%= form_for @photo, url: photos_path, html: { multipart: true } do |f| %>
 			<br>
 			<div style="margin-top:180px">
@@ -10,6 +11,10 @@
 				<%= f.file_field :image, class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
 				<br>
 			</div>
+			<% if !@photo_create.nil? %>
+          <p style="color:red; font-weight: bold;"><%= "Image is invalid" %></p>
+					<% end %>
+			<br>
 			<div style="margin-top:280px">
 				<%= f.submit "Save", class:'text_info bold-text link_edit vet_link submit_link font-20', style:"border: none;text-align:center; float: none; margin:0; padding:0; background-color: transparent" %> 
 				<br>

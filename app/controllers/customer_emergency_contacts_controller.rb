@@ -19,37 +19,45 @@ class CustomerEmergencyContactsController < ApplicationController
 
   def create
     customer_emergency_contact = CustomerEmergencyContact.new(customer_emergency_contact_params)
+    customer_emergency_contact.update(phone: params[:customer_emergency_contact][:phone].scan(/\d/).join)
     user = User.where(id: current_user.id).first
-    if customer_emergency_contact.valid? && customer_emergency_contact.save! && user.customer_emergency_contact = customer_emergency_contact
+    if customer_emergency_contact.valid? && customer_emergency_contact.save && user.customer_emergency_contact = customer_emergency_contact
       flash[:notice] = "Your Emergency Contact was saved successfully!"
-      redirect_to customer_dashboard_path
+      redirect_to customer_dashboard_path(customer_emergency_errors_create: nil)
     else
-      error_message = "The record could not be saved."
-      customer_emergency_contact.errors.full_messages.each do |err|
-        error_message << " #{err}."
+      error_message = []
+      customer_emergency_contact.errors.each do |attr,err|
+        error_message << attr
       end
-      flash[:notice] = error_message
-      redirect_to request.referrer
+      redirect_to customer_dashboard_path(customer_emergency_errors_create: error_message.uniq)
     end
   end
 
   def update
-    customer_emergency_contact = CustomerEmergencyContact.where(id: params[:id], user_id: current_user.id).first
+    customer_emergency_contact = CustomerEmergencyContact.find(params[:id])
     customer_emergency_contact.name = params[:customer_emergency_contact][:name]
     customer_emergency_contact.email = params[:customer_emergency_contact][:email]
-    customer_emergency_contact.phone = params[:customer_emergency_contact][:phone]
-    customer_emergency_contact.save!
-    redirect_to customer_dashboard_path
+    customer_emergency_contact.update(phone: params[:customer_emergency_contact][:phone].scan(/\d/).join)
+    if customer_emergency_contact.save
+      flash[:notice] = "Your Emergency Contact was successfully updated!"
+      redirect_to customer_dashboard_path(customer_emergency_errors_update: nil)
+    else
+      error_message = []
+      customer_emergency_contact.errors.each do |attr,err|
+        error_message << attr
+      end
+      redirect_to customer_dashboard_path(customer_emergency_errors_update: error_message.uniq)
+    end
   end
 
   def destroy
-    CustomerEmergencyContact.where(id: params[:id], user_id: current_user.id).first.delete
+    CustomerEmergencyContact.find(params[:id]).delete
     redirect_to customer_dashboard_path
   end
 
   private
 
   def customer_emergency_contact_params
-    return params.require(:customer_emergency_contact).permit(:name, :email, :phone)
+    params.require(:customer_emergency_contact).permit(:name, :email)
   end
 end

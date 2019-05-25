@@ -81,5 +81,88 @@
         </div>
       </div>
     </div>
+
+
+
+    <div class="smaller">
+      <div class="col-xs-6" id="calend_div" style="margin-top: 50px; float: right;margin-right: 100px;">
+        <div class="simple-calendar">
+          <div class="calendar-heading">
+            <p style="float: left;margin-left: 50px;margin-top: 15px;margin-bottom: 20px;font-size: 20px;"><span class="glyphicon glyphicon-ok text-success", style="font-size: 35px;"></span> = Reservation(s) booked.</p>
+            <p style="padding-top: 30px;font-size: 20px; text-align: start;"><span class="calendar-title", style="margin-left: calc(100%/4 - 100px);"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span></p>
+            <%= link_to t('simple_calendar.previous', default: '⭠'), calendar.url_for_previous_view, style: 'margin-top: -30px;float: right;margin-right: 120px;font-size: 40px;color: black;', class:'without_underline' %>
+            <%= link_to t('simple_calendar.next', default: '⭢'), calendar.url_for_next_view, style: 'float: right;margin-top: -30px;margin-right: 60px;font-size: 40px;color: black;', class:'without_underline' %>
+          </div>
+          <br />
+
+          <table class="table table-striped", id="table-calendar", style="background-color: white !important;border-top: none;border-right: none;border-left: none;">
+            <thead>
+              <% dates = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']%>
+              <tr>
+                <% dates.each do |day| %>
+                  <th style="border: none; text-align: center;"><%= day %></th>
+                <% end %>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% date_range.each_slice(7) do |week| %>
+                <tr>
+                  <% week.each do |day| %>
+                    <%= content_tag :td, class: calendar.td_classes_for(day), style: 'background-color: white !important;font-weight: bold; color: green;' do %>
+                      <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(block) %>
+                        <% capture_haml(day, sorted_events.fetch(day, []), &block) %>
+                      <% else %>
+                        <% block.call day, sorted_events.fetch(day, []) %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="smaller" style="display: none;">
+      <div class="col-md-10" id="calend_div" style="margin-top: 50px; float: right;margin-right: 100px;">
+        <div class="simple-calendar">
+          <div class="calendar-heading">
+            <p style="float: left;margin-left: 50px;margin-top: 15px;margin-bottom: 20px;font-size: 20px;"><span class="glyphicon glyphicon-ok text-success", style="font-size: 35px;"></span> = Reservation(s) booked.</p>
+            <p style="padding-top: 30px;font-size: 20px; text-align: start;"><span class="calendar-title", style="margin-left: calc(100%/4 - 100px);"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span></p>
+            <%= link_to t('simple_calendar.previous', default: '⭠'), calendar.url_for_previous_view, style: 'margin-top: -30px;float: right;margin-right: 120px;font-size: 40px;color: black;', class:'without_underline' %>
+            <%= link_to t('simple_calendar.next', default: '⭢'), calendar.url_for_next_view, style: 'float: right;margin-top: -30px;margin-right: 60px;font-size: 40px;color: black;', class:'without_underline' %>
+          </div>
+          <br />
+
+          <table class="table table-striped", id="table-calendar", style="background-color: white !important;border-top: none;border-right: none;border-left: none;">
+            <thead>
+              <% dates = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']%>
+              <tr>
+                <% dates.each do |day| %>
+                  <th style="border: none; text-align: center;"><%= day %></th>
+                <% end %>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% date_range.each_slice(7) do |week| %>
+                <tr>
+                  <% week.each do |day| %>
+                    <%= content_tag :td, class: calendar.td_classes_for(day), style: 'background-color: white !important;font-weight: bold; color: green;' do %>
+                      <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(block) %>
+                        <% capture_haml(day, sorted_events.fetch(day, []), &block) %>
+                      <% else %>
+                        <% block.call day, sorted_events.fetch(day, []) %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
-</div>

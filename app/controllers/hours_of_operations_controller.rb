@@ -23,7 +23,7 @@ class HoursOfOperationsController < ApplicationController
     hours_of_operation.sunday_close = "closed"
     kennel = Kennel.find(kennel_id)
     hours_of_operation.kennel_id = kennel_id
-    hours_of_operation.valid? && hours_of_operation.save!
+    hours_of_operation.valid? && hours_of_operation.save
   end
 
   def update
@@ -65,7 +65,7 @@ class HoursOfOperationsController < ApplicationController
     # hours_of_operation_1.sunday_open = params[:hours_of_operation_1][:sunday_open]
     # hours_of_operation_1.sunday_close = params[:hours_of_operation_1][:sunday_close]
 
-    if hours_of_operation.save! && hours_of_operation_1.save!
+    if hours_of_operation.save && hours_of_operation_1.save
       flash[:notice] = "Your Hours of Operation time-frame has been updated!"
       redirect_to kennels_path(tab: 'hours')
     else

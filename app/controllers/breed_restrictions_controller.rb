@@ -19,40 +19,39 @@ class BreedRestrictionsController < ApplicationController
 
   def create
     breed_restriction = BreedRestriction.new(breed_restriction_params)
-    kennel = Kennel.where(user_id: current_user).first
     if breed_restriction.valid? && kennel.breed_restrictions.create!(kennel_id: kennel[:id], breed: breed_restriction[:breed])
       flash[:notice] = "A Breed Restriction was created successfully!"
-      redirect_to kennels_path(tab: 'breed')
+      redirect_to kennels_path(tab: 'breed', breed_create: nil)
     else
-      error_message = "Unable to create Breed Restriction."
-      flash[:notice] = error_message
-      redirect_to kennels_path(tab: 'breed')
+      error_message = []
+      breed_restriction.errors.each do |attr,err|
+        error_message << attr
+      end
+      redirect_to kennels_path(tab: 'breed', breed_create: error_message.uniq)
     end
   end
 
   def update
     breed_restriction = BreedRestriction.find(params[:id])
     breed_restriction.breed = params[:breed_restriction][:breed]
-    if breed_restriction.valid? && breed_restriction.save!
+    if breed_restriction.valid? && breed_restriction.save
       flash[:notice] = "Your Breed Restriction was updated successfully!"
-      redirect_to kennels_path(tab: 'breed')
+      redirect_to kennels_path(tab: 'breed', breed_update: nil)
     else
-      error_message = "Your Breed Restriction failed to update."
-      flash[:notice] = error_message
-      redirect_to kennels_path(tab: 'breed')
+      error_message = []
+      breed_restriction.errors.each do |attr, err|
+        error_message << attr
+      end
+
+      return redirect_to kennels_path(tab: 'breed', breed_update: error_message.uniq, breed_id: breed_restriction.id)
     end
   end
 
   def destroy
-    kennel = Kennel.where(user_id: current_user.id).first
-    breed_restriction = BreedRestriction.where(id: params[:id], kennel_id: kennel[:id]).first
-    if breed_restriction.delete
-      flash[:notice] = "Your Breed Restriction was deleted."
-      redirect_to request.referrer
-    end
+    BreedRestriction.find(params[:id]).delete
+    flash[:notice] = "Your Breed Restriction was deleted."
+    redirect_to kennels_path(tab: 'breed')
   end
-
-
 
   private
 
@@ -60,4 +59,7 @@ class BreedRestrictionsController < ApplicationController
     params.require(:breed_restriction).permit(:breed)
   end
 
+  def kennel
+    Kennel.where(user_id: current_user).first
+  end
 end

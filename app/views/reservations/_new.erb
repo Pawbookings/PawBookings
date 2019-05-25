@@ -4,6 +4,15 @@
 </div>
 <div class="modal-body" style="color: black;height: auto; margin-top:0 !important; background-color: white; float: none;
     text-align : center;">
+   <% if @reservation.nil? %>
+    <% @reservation = Reservation.new %>
+    <% @runs = [] %>
+  	<% @amenities = [] %>
+  	<% @kennel = current_user.kennel %>
+  	<% @runs = @kennel.runs %>
+  	<% @amenities = @kennel.amenities %>
+   <% end %>
+
    <%= form_tag @reservation, method: :post, id: 'form' do %>
           <p style="font-size: 20px !important;">Pet-Owner Info</p>
           <br>
@@ -14,7 +23,7 @@
             <%= text_field_tag :customer_last_name, nil, placeholder: "", class: "form-control payment_input input_new_reserv"%>
             <br>
             <p class="font-18">Phone:</p>
-            <%= text_field_tag :customer_phone, nil, placeholder: "", class: "form-control payment_input input_new_reserv" %>
+            <%= text_field_tag :customer_phone, nil, placeholder: "", class: "customer_phone form-control payment_input input_new_reserv" %>
             <br>
             <p class="font-18">Email:</p>
             <%= text_field_tag :customer_email, nil, placeholder: "", class: "form-control payment_input input_new_reserv" %>
@@ -30,21 +39,23 @@
               </select>
               <br>
               <br>
-              <p class="font-18">Check-in:</p>
+              <p class="font-18">Check-in (MM/DD/YYYY):</p>
               <div style="width: auto; margin: 0 auto; margin-left: calc(100%/3 + 10px);">
-                <%= text_field_tag :month_in, nil, placeholder: "Month", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
-                <%= text_field_tag :day_in, nil, placeholder: "Day", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
-                <%= text_field_tag :year_in, nil, placeholder: "Year", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 140px !important; margin-left: 5px !important;' %>
+                <%= text_field_tag :month_in, nil, placeholder: "MM", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
+                <%= text_field_tag :day_in, nil, placeholder: "DD", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
+                <%= text_field_tag :year_in, nil, placeholder: "YYYY", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 140px !important; margin-left: 5px !important;' %>
                 <br>
               </div>
               <br>
-              <p class="font-18">Check-out:</p>
+              <br>
+              <p class="font-18">Check-out (MM/DD/YYYY):</p>
               <div style="width: auto; margin: 0 auto; margin-left: calc(100%/3 + 10px);">
-                <%= text_field_tag :month_out, nil, placeholder: "Month", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
-                <%= text_field_tag :day_out, nil, placeholder: "Day", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
-                <%= text_field_tag :year_out, nil, placeholder: "Year", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 140px !important; margin-left: 5px !important;' %>
+                <%= text_field_tag :month_out, nil, placeholder: "MM", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
+                <%= text_field_tag :day_out, nil, placeholder: "DD", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
+                <%= text_field_tag :year_out, nil, placeholder: "YYYY", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 140px !important; margin-left: 5px !important;' %>
                 <br>
               </div>
+              <br>
               <br>
               <p class="font-18">Select amenities:</p>
               <select id="amenities" multiple="multiple" name="amenities[]" class="input_new_reserv">
@@ -53,6 +64,12 @@
                 <% end %>
               </select>
               <br>
+              <br>
+              <% if !@reservation_errors.nil? %>
+                <% @reservation_errors.each do |error|%>
+                  <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+                <% end %>
+              <% end %>
               <br>
               <br>
           <div class="form-actions">
@@ -66,6 +83,10 @@
      function submitForm() {
         $("#form").submit();
     }
+
+    $(document).ready(function() {
+      $("#customer_phone").mask("(999) 999-9999");
+    })
 
   function paymentChangeBreed(){
     var total_pets = parseInt("<%= @total_pets %>");

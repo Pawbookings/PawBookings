@@ -3,7 +3,7 @@ class CheckInContractRefundPoliciesController < ApplicationController
     refund_policy = CheckInContractRefundPolicy.first
     refund_policy.title = params[:check_in_contract_refund_policy][:title]
     refund_policy.body = params[:check_in_contract_refund_policy][:body]
-    refund_policy.save!
+    refund_policy.save
     redirect_to pawbookings_admins_path
   end
 

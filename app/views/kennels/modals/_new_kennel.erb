@@ -4,6 +4,7 @@
 </div>
 <div class="modal-body" style="width: auto; color: black;height: auto; margin-top:0 !important; background-color: white; float: none;
     text-align : center;">
+		<% @kennel ||= Kennel.new %>
    <%= form_for @kennel, html: {multipart: true}, id:'form' do |f| %>
 			<br>
       <%= f.hidden_field :taken_ownership, value: true %>
@@ -54,6 +55,12 @@
         </div>
       </div>
 			<br>
+			<% if !@kennel_create.nil? %>
+        <% @kennel_create.each do |error|%>
+          <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+        <% end %>
+      <% end %>
+			<br>
 			<br>
 				 <%= f.submit "Save", class:'text_info bold-text link_edit vet_link submit_link font-20', style:"border: none;text-align:center; float: none; margin:0; padding:0; background-color: transparent" %> 
 			<br>
@@ -64,4 +71,8 @@
      function submitForm() {
         $("#form").submit();
     }
+
+		 $(document).ready(function() {
+      $("#kennel_phone").mask("(999) 999-9999");
+    })
 </script>

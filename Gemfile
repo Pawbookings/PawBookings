@@ -11,6 +11,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'devise', git: 'https://github.com/plataformatec/devise'
 gem 'figaro'
+gem 'jquery_mask_rails', '~> 0.1.0'
 gem 'paperclip', '~> 5.0.0.beta1'
 gem 'ahoy_matey'
 gem 'geocoder'

@@ -4,6 +4,7 @@
 </div>
 <div class="modal-body" style="height: 500px; background-color: white; float: none;
     text-align : center;">
+  <% @customer_emergency_contact ||= CustomerEmergencyContact.new %>
  <%= simple_form_for(@customer_emergency_contact, :html => { id:'form',:class => 'form-vertical simple_form' }) do |f| %>
   <fieldset>
       <p class="font-20" style="margin-top: 50px;">Name: <%= f.input :name, label: false, input_html: {class: 'input_style'} %></p>
@@ -11,6 +12,11 @@
       <p class="font-20">Phone:<%= f.input :phone, label: false, input_html: {class: 'input_style'}  %></p>
   </fieldset>
       <br>
+      <% if !@customer_emergency_errors_create.nil? %>
+        <% @customer_emergency_errors_create.each do |error|%>
+          <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+        <% end %>
+      <% end %>
       <br>
       <div class="form-actions">
             <p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="text-align:center; float: none; margin:0; padding:0;">Save</p>
@@ -22,4 +28,8 @@
      function submitForm() {
         $("#form").submit();
     }
+
+    $(document).ready(function() {
+      $("#customer_emergency_contact_phone").mask("(999) 999-9999");
+    })
 </script>

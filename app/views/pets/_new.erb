@@ -13,9 +13,9 @@
                 <%= f.select :breed, options_for_select(breed_option) %>
                 <br>
             </div>
-        <p class="font-20">Weight:<%= f.input :weight, label: false, input_html: {class: 'input_style'}  %></p>
-        <p class="font-20">Spay or neutered:<%=f.collection_radio_buttons :spay_or_neutered, [['spay', 'spay'],['neutered', 'neutered']], :first, :last %></p>
-        <p class="font-20">Age:<%= f.input :age, label: false, input_html: {class: 'input_style'}  %></p>
+        <p class="font-20">Weight:<%= f.input :weight, label: false, input_html: {class: 'input_style', style: 'margin-left: 40px;'}  %></p>
+        <p class="font-20">Spay or neutered:<%=f.collection_radio_buttons :spay_or_neutered, [['spay', 'spay'],['neutered', 'neutered'], ['false', 'none']], :first, :last, { checked: 'false' } %></p>
+        <p class="font-20">Age:<%= f.input :age, label: false, input_html: {class: 'input_style', style: 'margin-left: 50px;'}  %></p>
         <p class="font-20">Special instructions:<%= f.input :special_instructions, label: false, input_html: {class: 'input_style'}  %></p>
         <p class="font-20">Vaccinations current?<%=f.collection_radio_buttons :vaccinations, [['true', 'true'],['false', 'false']], :first, :last, { checked: 'false'}, onchange: "return petsChangeVaccinations(this)" %></p>
         <div class="vaccination_record_div" style="display: none;">
@@ -37,6 +37,11 @@
     function submitForm() {
         $("#form").submit();
     }
+
+    $(document).ready(function(){
+      $('#pet_age').after("<span>years</span");
+      $('#pet_weight').after("<span>lbs</span");
+    })
 
   function petsChangeVaccinations(vacc) {
     if(vacc.value == 'true') {

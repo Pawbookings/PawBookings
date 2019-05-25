@@ -6,26 +6,61 @@
         <div class="col-md-4">
           <div class="row">
             <div class="main_info" id="main_main">
-                <% if !@kennel.nil? %>
-                    <h3 class="kennel_info_style_h3"> <%= @kennel.name %> </h3>
-                    <p class="kennel_info_p" style="padding-bottom:10px;"> <%= "#{@kennel.address} #{@kennel.city}, #{@kennel.state} #{@kennel.zip}"%></p>
-                    <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;">
-                      <%= link_to "Manage My Kennel", kennels_path(id: @kennel.id), style:"color: white;", class: 'a_as_button' %>
-                    </div>
-                <% else %>
-                  <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
-                    <%= link_to "Manage My Kennel", kennels_path(tab: 'owner'), class: 'a_as_button', style:"color: white; " %>
-                  </div>
-                <% end %>
+              <% if @kennel.nil? %>
+                <p style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
+                <br>
+                <span id="register" style="padding-left: 50px;float: left;margin-right: 100px;">— Register your kennel.</span>
+                <span id="modify" style="padding-left: 50px;float: left;margin-right: 100px;">— Modify your hours of operation.</span>
+                <span id="create_accomodation" style="padding-left: 50px;float: left;">— Create an accomodation type.</span>
+                <br>
+                <p style="color: green;float: left;padding-left: 20px;padding-top: 5px;">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
+                <br>
+                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                  <%= link_to "Manage My Kennel", kennels_path(tab: 'owner'), class: 'a_as_button', style:"color: white; " %>
+                </div>
+              <% end %>
+              <% if !@kennel.nil? && @changed_time == false && @kennel_run.nil? %>
+                <p style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
+                <br>
+                <span id="register" style="padding-left: 50px;float: left;margin-right: 100px;"><i class="fa fa-check" aria-hidden="true" style="color: green;padding-right:10px;"></i>Register your kennel.</span>
+                <span id="modify" style="padding-left: 50px;float: left;margin-right: 100px;">— Modify your hours of operation.</span>
+                <span id="create_accomodation" style="padding-left: 50px;float: left;">— Create an accomodation type.</span>
+                <br>
+                <p style="color: green;float: left;padding-left: 20px;padding-top: 5px;">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
+                <br>
+                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                  <%= link_to "Manage My Kennel", kennels_path(tab: 'owner'), class: 'a_as_button', style:"color: white; " %>
+                </div>
+              <% end %>
+              <% if !@kennel.nil? && @changed_time == true && @kennel_run.nil? %>
+                <p style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
+                <br>
+                <span id="register" style="padding-left: 50px;float: left;margin-right: 100px;"><i class="fa fa-check" aria-hidden="true" style="color: green;padding-right:10px;"></i>Register your kennel.</span>
+                <span id="modify" style="padding-left: 50px;float: left;margin-right: 100px;"><i class="fa fa-check" aria-hidden="true" style="color: green;padding-right:10px;"></i>Modify your hours of operation.</span>
+                <span id="create_accomodation" style="padding-left: 50px;float: left;">— Create an accomodation type.</span>
+                <br>
+                <p style="color: green;float: left;padding-left: 20px;padding-top: 5px;">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
+                <br>
+                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                  <%= link_to "Manage My Kennel", kennels_path(tab: 'owner'), class: 'a_as_button', style:"color: white; " %>
+                </div>
+              <% end %>
+              <% if !@kennel.nil? && @changed_time == true && !@kennel_run.nil? %>
+                <h3 class="kennel_info_style_h3"> <%= @kennel.name %> </h3>
+                <p class="kennel_info_p" style="padding-bottom:10px;"> <%= "#{@kennel.address} #{@kennel.city}, #{@kennel.state} #{@kennel.zip}"%></p>
+                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;">
+                  <%= link_to "Manage My Kennel", kennels_path(id: @kennel.id), style:"color: white;", class: 'a_as_button' %>
+                </div>
+              <% end %>
             </div>
           </div>
           <div class="row">
             <div class="base_kennel kennel_check_in">
               <p class="kennel_info_p check_info" style="padding-bottom: 10px;"> Check-in Today </p>
-              <% if !@kennel.nil? %>
+              <% if !@kennel.nil? && @changed_time == true && !@kennel_run.nil? %>
               <table class="kennel_grey_list" >
                 <% if @check_in_today.length == 0 %>
-                  <p style="font-size: 18px;padding-top: 30px;">You don't have any check-in today</p>
+                  <p style="font-size: 18px;padding-top: 30px;">You don't have any check-ins today</p>
                 <% end %>
                 <% @check_in_today.each_with_index do |val, ind|%>
                   <tr style="height: 50px; margin-bottom:10px;">
@@ -47,10 +82,10 @@
           <div class="row">
             <div class="base_kennel kennel_check_in kennel_check_out">
               <p class="kennel_info_p check_info" style="padding-bottom: 10px; margin-bottom:10px;"> Check-out Today </p>
-              <% if !@kennel.nil? %>
+              <% if !@kennel.nil? && @changed_time == true && !@kennel_run.nil? %>
               <table class="kennel_grey_list" >
                 <% if @check_out_today.length == 0 %>
-                  <p style="font-size: 18px;padding-top: 30px;">You don't have any check-out today</p>
+                  <p style="font-size: 18px;padding-top: 30px;">You don't have any check-outs today</p>
                 <% end %>
                 <% @check_out_today.each_with_index do |val, ind|%>
                   <tr style="height: 50px; margin-bottom:10px;">
@@ -81,10 +116,30 @@
           </div>
         </div>
         <div class="col-md-8" id="booking_row" >
+          <% if !@reservation_errors.nil? %>
+                <div id="modal-window110" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left:calc(100%/3);">
+                <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									<%= render :partial => "reservations/new", reservation_errors: @reservation_errors %>
+									</div>
+                </div>
+            	</div>
+              <script>
+                $(window).load(function () {
+                  $('#modal-window110').modal('show');
+                  });
+              </script>
+            <% end %>
           <div class="row">
-              <div id="booking_buttonn" class="col-md-2 kennel_top kennel_button booking_button" style="width: 150px !important;padding-top: 10px;padding-left: 25px; margin-right: unset !important; margin-bottom: unset !important; margin-left: 130px; margin-top: 200px !important;">
-                <%= link_to "Add a Booking", new_reservation_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window1',style:"color: white;", class: 'a_as_button'} %>
-              </div>
+              <% if !@kennel.nil? && @changed_time == true && !@kennel_run.nil? %>
+                 <div id="booking_buttonn" class="col-md-2 kennel_top kennel_button booking_button" style="width: 150px !important;padding-top: 10px;padding-left: 25px; margin-right: unset !important; margin-bottom: unset !important; margin-left: 130px; margin-top: 200px !important;">
+                  <%= link_to "Add a Booking", new_reservation_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window1',style:"color: white;", class: 'a_as_button'} %>
+                </div>
+              <% else %>
+                <div id="booking_buttonn" class="col-md-2 kennel_top kennel_button booking_button" style="width: 150px !important;padding-top: 10px;padding-left: 25px; margin-right: unset !important; margin-bottom: unset !important; margin-left: 130px; margin-top: 200px !important; background-color: darkgrey !important;">
+                  <p style="color: lightgrey !important; padding-left:5px;">Add a Booking</p>
+                </div>
+              <% end %>
               <div id="modal-window1" class="modal fade modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                 <div class="modal-dialog" role="document" style="margin-top: 100px;">
                     <div class="modal-content"></div>
@@ -476,6 +531,14 @@
 </div>
 
 <script>
+$('.day').hover(function(){
+  if ($('#modal-window3').hasClass( "in" )) {
+    $(this).addClass('nohover');
+  } else {
+    $(this).removeClass('nohover');
+  }
+});
+
   $(window).on('resize', function() {
     if($(window).width() < 1500) {
         $('#booking_row').addClass('col-md-10');

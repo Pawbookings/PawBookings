@@ -12,118 +12,421 @@
     </div>
     <div class="row">
       <div class="row text-center">
-        <div class="col-md-4">
-          <div class="customer_main_info">
-            <div class="col-md-4 small_image">
-              <%= image_tag @customer.user_image.url(:thumb), class:"kennel_dashboard_avatar", id:'avatar' %>
-            </div>
-            <div class="col-md-6">
-              <p class="text_info bold-text"><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
-              <p class="text_info bold-text"><%= current_user.email %></p>
-              <p class="text_info bold-text"><%= current_user.phone %></p>
-              <p class="text_info bold-text "><%= current_user.time_zone %></p>
-              <%= link_to 'Edit', edit_user_registration_path(current_user), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window5', class: 'text_info bold-text link_edit float-none'} %>
-              <div id="modal-window5" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-									<div class="modal-content">
-									<%= render :template => "devise/registrations/edit" %>
-									</div>
-                </div>
-            	</div> 
+        <div class="ok">
+          <div class="col-md-4">
+            <div class="customer_main_info">
+              <div class="col-md-4 small_image">
+                <%= image_tag @customer.user_image.url(:thumb), class:"kennel_dashboard_avatar", id:'avatar' %>
+              </div>
+              <div class="col-md-6">
+                <p class="text_info bold-text"><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
+                <p class="text_info bold-text"><%= current_user.email %></p>
+                <p class="text_info bold-text"><%= number_to_phone(current_user.phone, area_code: true) %></p>
+                <p class="text_info bold-text "><%= current_user.time_zone %></p>
+                <%= link_to 'Edit', edit_user_registration_path(current_user), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window5', class: 'text_info bold-text link_edit float-none'} %>
+                <% if !@devise_update.nil? %>
+                  <script>
+                    $(window).load(function () {
+                      $('#modal-window5').modal('show');
+                      });
+                  </script>
+              <% end %>
+                <div id="modal-window5" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <%= render :template => "devise/registrations/edit" %>
+                    </div>
+                  </div>
+                </div> 
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-md-8">
-          <div class="pets_customer">
-            <p class="text_info text-center bold-text" id="my_pets"> My Pets </p>
-            <% if current_user.pets.length == 0 %>
-              <p class="nil_pets_text">Click Manage My Pets to add a pet!</p>
-              <%= link_to "Manage My Pets", pets_path, class:"text_info bold-text manage_pets font-18 nil_manage_pets", id: 'manage_pets',method: :get %>
-            <% else %>
-              <div id="pets_cont">
-              <% current_user.pets.each_with_index do |pet, index| %>
-                <% if index < 3 %>
-                  <div class="col-md-3">
-                    <%= image_tag pet.avatar.url, class: "kennel_dashboard_avatar margin-each-10" if !pet.avatar.url.nil? %>
-                    <p class="under text_info bold-text"><%=pet.name %></p>
-                  </div>
-                  
-                <% end %>
-              <% end %>
+        <div class="small_size">
+          <div class="col-md-12">
+            <div class="customer_main_info">
+              <div class="col-md-4 small_image">
+                <%= image_tag @customer.user_image.url(:thumb), class:"kennel_dashboard_avatar", id:'avatar' %>
               </div>
-              <%= link_to "Manage My Pets", pets_path, id:'manage_pets', class:"text_info bold-text manage_pets", method: :get %>
-            <% end %>
+              <div class="col-md-6">
+                <p class="text_info bold-text"><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
+                <p class="text_info bold-text"><%= current_user.email %></p>
+                <p class="text_info bold-text"><%= number_to_phone(current_user.phone, area_code: true) %></p>
+                <p class="text_info bold-text "><%= current_user.time_zone %></p>
+                <%= link_to 'Edit', edit_user_registration_path(current_user), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window5', class: 'text_info bold-text link_edit float-none'} %>
+                <% if !@devise_update.nil? %>
+                  <script>
+                    $(window).load(function () {
+                      $('#modal-window5').modal('show');
+                      });
+                  </script>
+              <% end %>
+                <div id="modal-window5" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <%= render :template => "devise/registrations/edit" %>
+                    </div>
+                  </div>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ok">
+          <div class="col-md-8">
+            <div class="pets_customer">
+              <p class="text_info text-center bold-text" id="my_pets"> My Pets </p>
+              <% if current_user.pets.length == 0 %>
+                <p class="nil_pets_text">Click Manage My Pets to add a pet!</p>
+                <%= link_to "Manage My Pets", pets_path, class:"text_info bold-text manage_pets font-18 nil_manage_pets", id: 'manage_pets',method: :get %>
+              <% else %>
+                <div class="big_pets">
+                  <div id="pets_cont">
+                  <% current_user.pets.each_with_index do |pet, index| %>
+                    <% if index < 3 %>
+                      <div class="col-md-3">
+                        <%= image_tag pet.avatar.url, class: "kennel_dashboard_avatar margin-each-10" if !pet.avatar.url.nil? %>
+                        <p class="under text_info bold-text"><%=pet.name %></p>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  </div>
+                </div>
+                <div class="small_pes">
+                  <div id="pets_cont">
+                  <% current_user.pets.each_with_index do |pet, index| %>
+                    <% if index < 2 %>
+                      <div class="col-md-3">
+                        <%= image_tag pet.avatar.url, class: "kennel_dashboard_avatar margin-each-10" if !pet.avatar.url.nil? %>
+                        <p class="under text_info bold-text"><%=pet.name %></p>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  </div>
+                </div>
+                <div class="smaller_pets">
+                  <div id="pets_cont">
+                  <% current_user.pets.each_with_index do |pet, index| %>
+                    <% if index < 1 %>
+                      <div class="col-md-3">
+                        <%= image_tag pet.avatar.url, class: "kennel_dashboard_avatar margin-each-10" if !pet.avatar.url.nil? %>
+                        <p class="under text_info bold-text"><%=pet.name %></p>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  </div>
+                </div>
+                <%= link_to "Manage My Pets", pets_path, id:'manage_pets', class:"text_info bold-text manage_pets", method: :get %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="small_size">
+          <div class="col-md-12">
+            <div class="pets_customer">
+              <p class="text_info text-center bold-text" id="my_pets"> My Pets </p>
+              <% if current_user.pets.length == 0 %>
+                <p class="nil_pets_text">Click Manage My Pets to add a pet!</p>
+                <%= link_to "Manage My Pets", pets_path, class:"text_info bold-text manage_pets font-18 nil_manage_pets", id: 'manage_pets',method: :get %>
+              <% else %>
+                <div class="big_pets">
+                  <div id="pets_cont">
+                  <% current_user.pets.each_with_index do |pet, index| %>
+                    <% if index < 3 %>
+                      <div class="col-md-3">
+                        <%= image_tag pet.avatar.url, class: "kennel_dashboard_avatar margin-each-10" if !pet.avatar.url.nil? %>
+                        <p class="under text_info bold-text"><%=pet.name %></p>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  </div>
+                </div>
+                <div class="small_pes">
+                  <div id="pets_cont">
+                  <% current_user.pets.each_with_index do |pet, index| %>
+                    <% if index < 2 %>
+                      <div class="col-md-3">
+                        <%= image_tag pet.avatar.url, class: "kennel_dashboard_avatar margin-each-10" if !pet.avatar.url.nil? %>
+                        <p class="under text_info bold-text"><%=pet.name %></p>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  </div>
+                </div>
+                <div class="smaller_pets">
+                  <div id="pets_cont">
+                  <% current_user.pets.each_with_index do |pet, index| %>
+                    <% if index < 1 %>
+                      <div class="col-md-3">
+                        <%= image_tag pet.avatar.url, class: "kennel_dashboard_avatar margin-each-10" if !pet.avatar.url.nil? %>
+                        <p class="under text_info bold-text"><%=pet.name %></p>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  </div>
+                </div>
+                <%= link_to "Manage My Pets", pets_path, id:'manage_pets', class:"text_info bold-text manage_pets", method: :get %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
-        <div class="veterinarian_info">
-          <div class="vet">
-            <% if !@customer_vet_info.nil?%>
-              <p class="text_info vet_h vet_hh">Veterinarian</p>
-              <p class="font-18 vet_h"><strong>Name:</strong><%= " #{@customer_vet_info.name}" %></p>
-              <p class="font-18 vet_h"><strong>Email:</strong><%= " #{@customer_vet_info.email}" %></p>
-              <p class="font-18 vet_h"><strong>Phone:</strong><%= " #{@customer_vet_info.phone}" %></p>
-              <p class="font-18 vet_h"><strong>Emergency Phone:</strong><%= " #{@customer_vet_info.emergency_phone}" %></p>
-              <p class="font-18 vet_h" style="margin-right: 100px;"><strong>Address:</strong><%= " #{@customer_vet_info.address}" %></p>
-              <%= link_to 'Edit', edit_customer_vet_info_path(@customer_vet_info), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_link editt', id: 'edit_customer_vet_info_link' } %>
-              <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="ok">
+        <div class="col-md-4">
+          <div class="veterinarian_info">
+            <div class="vet">
+              <% if !@customer_vet_infos_errors_update.nil? %>
+                  <div id="modal-window11" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
-                      <div class="modal-content"></div>
+                    <div class="modal-content">
+                    <%= render :partial => "customer_vet_infos/update", customer_vet_infos_errors_update: @customer_vet_infos_errors_update %>
+                    </div>
                   </div>
-              </div>
-            <% else%>
-              <p class="text_info vet_h vet_hh" style="margin-top: 50px;">Veterinarian</p>
-              <%= link_to "Add your vet's contact information", new_customer_vet_info_path,{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_no_text editt' } %>
-              <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                </div>
+                <script>
+                  $(window).load(function () {
+                    $('#modal-window11').modal('show');
+                    });
+                </script>
+              <% end %>
+              <% if !@customer_vet_infos_errors_create.nil? %>
+                  <div id="modal-window12" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
-                      <div class="modal-content"></div>
+                    <div class="modal-content">
+                    <%= render :partial => "customer_vet_infos/new", customer_vet_infos_errors_create: @customer_vet_infos_errors_create %>
+                    </div>
                   </div>
-              </div>
-            <% end %>
-          </div>
-          <div class="emerg">
-            <p class="text_info vet_h vet_hh" style="margin-right: 0px;">Secondary Emergency Contact</p>
-            <% if !@customer_emergency_contact.nil?%>
-              <p class="font-18 vet_h"><strong>Name:</strong><%= " #{@customer_emergency_contact.name}" %></p>
-              <p class="font-18 vet_h"><strong>Email:</strong><%= " #{@customer_emergency_contact.email}" %></p>
-              <p class="font-18 vet_h"><strong>Phone:</strong><%= " #{@customer_emergency_contact.phone}" %></p>
-              <%= link_to 'Edit', edit_customer_emergency_contact_path(@customer_emergency_contact), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info  bold-text link_edit vet_link', id: 'edit_customer_emergency_contact_link' } %>
-              <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                      <div class="modal-content"></div>
-                  </div>
-              </div>
-            <% else %>
-              <%= link_to "Add a secondary emergency contact", new_customer_emergency_contact_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info  bold-text link_edit vet_link'} %>
-              <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                      <div class="modal-content"></div>
-                  </div>
-              </div>
-            <% end %>
+                </div>
+                <script>
+                  $(window).load(function () {
+                    $('#modal-window12').modal('show');
+                    });
+                </script>
+              <% end %>
+              <% if !@customer_vet_info.nil? && @customer_vet_infos_errors_create.nil? %>
+                <p class="text_info vet_h vet_hh">Veterinarian</p>
+                <p class="font-18 vet_h"><strong>Name:</strong><%= " #{@customer_vet_info.name}" %></p>
+                <p class="font-18 vet_h"><strong>Email:</strong><%= " #{@customer_vet_info.email}" %></p>
+                <p class="font-18 vet_h"><strong>Phone:</strong><%= " #{number_to_phone(@customer_vet_info.phone, area_code: true)}" %></p>
+                <p class="font-18 vet_h"><strong>Emergency Phone:</strong><%= " #{number_to_phone(@customer_vet_info.emergency_phone, area_code: true)}" %></p>
+                <p class="font-18 vet_h" style="margin-right: 100px;"><strong>Address:</strong><%= " #{@customer_vet_info.address}" %></p>
+                <%= link_to 'Edit', edit_customer_vet_info_path(@customer_vet_info), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#edit_modal', class: 'text_info bold-text link_edit vet_link editt', id: 'edit_customer_vet_info_link' } %>
+                <div id="edit_modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+              <% else%>
+                <p class="text_info vet_h vet_hh" style="margin-top: 50px;">Veterinarian</p>
+                <%= link_to "Add your vet's contact information", new_customer_vet_info_path,{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window10', class: 'text_info bold-text link_edit vet_no_text editt' } %>
+                <div id="modal-window10" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+              <% end %>
             </div>
-          </div>
+            <div class="emerg">
+              <% if !@customer_emergency_errors_update.nil? %>
+                  <div id="modal-window13" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <%= render :partial => "customer_emergency_contacts/update", customer_emergency_errors_update: @customer_emergency_errors_update %>
+                    </div>
+                  </div>
+                </div>
+                <script>
+                  $(window).load(function () {
+                    $('#modal-window13').modal('show');
+                    });
+                </script>
+              <% end %>
+              <% if !@customer_emergency_errors_create.nil? %>
+                  <div id="modal-window14" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <%= render :partial => "customer_emergency_contacts/new", customer_emergency_errors_create: @customer_emergency_errors_create %>
+                    </div>
+                  </div>
+                </div>
+                <script>
+                  $(window).load(function () {
+                    $('#modal-window14').modal('show');
+                    });
+                </script>
+              <% end %>
+              <p class="text_info vet_h vet_hh" style="margin-right: 0px;">Secondary Emergency Contact</p>
+              <% if !@customer_emergency_contact.nil? && @customer_emergency_errors_create.nil? %>
+                <p class="font-18 vet_h"><strong>Name:</strong><%= " #{@customer_emergency_contact.name}" %></p>
+                <p class="font-18 vet_h"><strong>Email:</strong><%= " #{@customer_emergency_contact.email}" %></p>
+                <p class="font-18 vet_h"><strong>Phone:</strong><%= " #{number_to_phone(@customer_emergency_contact.phone, area_code: true)}" %></p>
+                <%= link_to 'Edit', edit_customer_emergency_contact_path(@customer_emergency_contact), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info  bold-text link_edit vet_link', id: 'edit_customer_emergency_contact_link' } %>
+                <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+              <% else %>
+                <%= link_to "Add a secondary emergency contact", new_customer_emergency_contact_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info  bold-text link_edit vet_link'} %>
+                <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+              <% end %>
+              </div>
+            </div>
+        </div>
       </div>
-      <div class="col-md-8">
-        <div class="customer_reservations">
-          <p class="text_info bold-text text-center">My Reservations</p>
-          <ul class="nav nav-tabs top_reserv_table nav-justified">
-            <li class="text_info active"><a data-toggle="tab" style="color: black;" href="#panel1">Past Reservation</a></li>
-            <li class=" text_info"><a data-toggle="tab" style="color: black;" href="#panel2">Upcoming Reservation</a></li>
-          </ul>
-          <div class="tab-content">
-            <div id="panel1" class="tab-pane fade in active">
-              <%= render partial: "table_past_reservations", past_reservations: @past_reservations %>
+      <div class="small_size">
+        <div class="col-md-12">
+          <div class="veterinarian_info">
+            <div class="vet">
+              <% if !@customer_vet_infos_errors_update.nil? %>
+                  <div id="modal-window11" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <%= render :partial => "customer_vet_infos/update", customer_vet_infos_errors_update: @customer_vet_infos_errors_update %>
+                    </div>
+                  </div>
+                </div>
+                <script>
+                  $(window).load(function () {
+                    $('#modal-window11').modal('show');
+                    });
+                </script>
+              <% end %>
+              <% if !@customer_vet_infos_errors_create.nil? %>
+                  <div id="modal-window12" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <%= render :partial => "customer_vet_infos/new", customer_vet_infos_errors_create: @customer_vet_infos_errors_create %>
+                    </div>
+                  </div>
+                </div>
+                <script>
+                  $(window).load(function () {
+                    $('#modal-window12').modal('show');
+                    });
+                </script>
+              <% end %>
+              <% if !@customer_vet_info.nil? && @customer_vet_infos_errors_create.nil? %>
+                <p class="text_info vet_h vet_hh">Veterinarian</p>
+                <p class="font-18 vet_h"><strong>Name:</strong><%= " #{@customer_vet_info.name}" %></p>
+                <p class="font-18 vet_h"><strong>Email:</strong><%= " #{@customer_vet_info.email}" %></p>
+                <p class="font-18 vet_h"><strong>Phone:</strong><%= " #{number_to_phone(@customer_vet_info.phone, area_code: true)}" %></p>
+                <p class="font-18 vet_h"><strong>Emergency Phone:</strong><%= " #{number_to_phone(@customer_vet_info.emergency_phone, area_code: true)}" %></p>
+                <p class="font-18 vet_h" style="margin-right: 100px;"><strong>Address:</strong><%= " #{@customer_vet_info.address}" %></p>
+                <%= link_to 'Edit', edit_customer_vet_info_path(@customer_vet_info), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#edit_modal', class: 'text_info bold-text link_edit vet_link editt', id: 'edit_customer_vet_info_link' } %>
+                <div id="edit_modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+              <% else%>
+                <p class="text_info vet_h vet_hh" style="margin-top: 50px;">Veterinarian</p>
+                <%= link_to "Add your vet's contact information", new_customer_vet_info_path,{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window10', class: 'text_info bold-text link_edit vet_no_text editt' } %>
+                <div id="modal-window10" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+              <% end %>
             </div>
-            <div id="panel2" class="tab-pane fade">
-              <%= render partial: "table_upcoming_reservations", upcoming_reservations: @upcoming_reservations %>
+            <div class="emerg">
+              <% if !@customer_emergency_errors_update.nil? %>
+                  <div id="modal-window13" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <%= render :partial => "customer_emergency_contacts/update", customer_emergency_errors_update: @customer_emergency_errors_update %>
+                    </div>
+                  </div>
+                </div>
+                <script>
+                  $(window).load(function () {
+                    $('#modal-window13').modal('show');
+                    });
+                </script>
+              <% end %>
+              <% if !@customer_emergency_errors_create.nil? %>
+                  <div id="modal-window14" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <%= render :partial => "customer_emergency_contacts/new", customer_emergency_errors_create: @customer_emergency_errors_create %>
+                    </div>
+                  </div>
+                </div>
+                <script>
+                  $(window).load(function () {
+                    $('#modal-window14').modal('show');
+                    });
+                </script>
+              <% end %>
+              <p class="text_info vet_h vet_hh" style="margin-right: 0px;">Secondary Emergency Contact</p>
+              <% if !@customer_emergency_contact.nil? && @customer_emergency_errors_create.nil? %>
+                <p class="font-18 vet_h"><strong>Name:</strong><%= " #{@customer_emergency_contact.name}" %></p>
+                <p class="font-18 vet_h"><strong>Email:</strong><%= " #{@customer_emergency_contact.email}" %></p>
+                <p class="font-18 vet_h"><strong>Phone:</strong><%= " #{number_to_phone(@customer_emergency_contact.phone, area_code: true)}" %></p>
+                <%= link_to 'Edit', edit_customer_emergency_contact_path(@customer_emergency_contact), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info  bold-text link_edit vet_link', id: 'edit_customer_emergency_contact_link' } %>
+                <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+              <% else %>
+                <%= link_to "Add a secondary emergency contact", new_customer_emergency_contact_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info  bold-text link_edit vet_link'} %>
+                <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content"></div>
+                    </div>
+                </div>
+              <% end %>
+              </div>
             </div>
+        </div>
+      </div>
+      <div class="ok">
+        <div class="col-md-8">
+          <div class="customer_reservations">
+            <p class="text_info bold-text text-center">My Reservations</p>
+            <ul class="nav nav-tabs top_reserv_table nav-justified">
+              <li class="text_info active"><a data-toggle="tab" style="color: black;" href="#panel1">Past Reservations</a></li>
+              <li class=" text_info"><a data-toggle="tab" style="color: black;" href="#panel2">Upcoming Reservations</a></li>
+            </ul>
+            <div class="tab-content">
+              <div id="panel1" class="tab-pane fade in active">
+                <%= render partial: "table_past_reservations", past_reservations: @past_reservations %>
+              </div>
+              <div id="panel2" class="tab-pane fade">
+                <%= render partial: "table_upcoming_reservations", upcoming_reservations: @upcoming_reservations %>
+              </div>
+            </div>
+            <%= link_to "Make a Reservation", "https://pawbookings.com/search_results?no_params=true", class:" btn kennel_button reserv_button" %>
+            <%= link_to "Contact Support", "https://pawbookings.com/contact_messages/new", class:"btn kennel_button reserv_button" %>
           </div>
-          <%= link_to "Make a Reservation", "https://pawbookings-app.herokuapp.com/search_results?no_params=true", class:" btn kennel_button reserv_button" %>
-          <%= link_to "Contact Support", "https://pawbookings-app.herokuapp.com/contact_messages/new", class:"btn kennel_button reserv_button" %>
+        </div>
+      </div>
+      <div class="small_size">
+        <div class="col-md-12">
+          <div class="customer_reservations">
+            <p class="text_info bold-text text-center">My Reservations</p>
+            <ul class="nav nav-tabs top_reserv_table nav-justified">
+              <li class="text_info active"><a data-toggle="tab" style="color: black;" href="#panel1">Past Reservations</a></li>
+              <li class=" text_info"><a data-toggle="tab" style="color: black;" href="#panel2">Upcoming Reservations</a></li>
+            </ul>
+            <div class="tab-content">
+              <div id="panel1" class="tab-pane fade in active">
+                <%= render partial: "table_past_reservations", past_reservations: @past_reservations %>
+              </div>
+              <div id="panel2" class="tab-pane fade">
+                <%= render partial: "table_upcoming_reservations", upcoming_reservations: @upcoming_reservations %>
+              </div>
+            </div>
+            <%= link_to "Make a Reservation", "https://pawbookings.com/search_results?no_params=true", class:" btn kennel_button reserv_button" %>
+            <%= link_to "Contact Support", "https://pawbookings.com/contact_messages/new", class:"btn kennel_button reserv_button" %>
+          </div>
         </div>
       </div>
     </div>

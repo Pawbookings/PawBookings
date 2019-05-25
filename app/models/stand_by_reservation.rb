@@ -73,7 +73,7 @@ class StandByReservation < ActiveRecord::Base
         UserMailer.stand_by_reservation_alert(num_available, run[:title], @stand_by_res[:original_search_url], @stand_by_res[:customer_email])
         @stand_by_res.email_sent = "true"
         @stand_by_res.expired = "true"
-        @stand_by_res.save!
+        @stand_by_res.save
       end
     end
   end

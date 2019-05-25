@@ -28,7 +28,7 @@ class SearchesController < ApplicationController
     search.number_of_dogs = params[:number_of_dogs].to_i
     search.number_of_cats = params[:number_of_cats].to_i
     search.number_of_rooms = params[:number_of_rooms].to_i
-    if search.valid? && search.save!
+    if search.valid? && search.save
       redirect_to search_results_path(params)
     else
       flash[:notice] = search.errors.messages.values.flatten[0].to_s
@@ -98,8 +98,11 @@ class SearchesController < ApplicationController
   def hours_of_operation_filtering
     @kennels_that_are_closed = []
     @negative_kennels = []
+    puts 'pet_type_filtered_results'
+    puts @pet_type_filtered_results
     @pet_type_filtered_results.each do |fr|
       kennel = Kennel.find(fr.id)
+      hours_of_operation = HoursOfOperation.where(kennel_id: kennel[:id])
       hours_of_operation = HoursOfOperation.where(kennel_id: kennel[:id])
       @kennels_that_are_closed << kennel if hours_of_operation.empty?
       hours_of_operation.to_a.each do |h|

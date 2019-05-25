@@ -1,6 +1,6 @@
 <p class="kennel_h2">Holidays</p>
 <div style="height: auto; position: relative; overflow: hidden;">
-	<% if !@kennel.nil? %>
+	<% if !@kennel.nil? && !@runs.nil?%>
 	<% @holidays.each_with_index do |holiday, i| %>
 		<div class="pet_container" style="margin-top: 50px;width: 600px;height: 300px;padding-top: 50px;padding-right: 50px;  <%= (@holidays.length == 1) ? 'float: none; margin: 0 auto !important;' : 'margin-right: 50px !important;float: left !important;margin-left: 125px; margin-bottom: 100px;' %>" >
 			<br>

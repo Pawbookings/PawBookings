@@ -11,9 +11,15 @@
       <p class="font-20">Phone:<%= f.input :phone, label: false, input_html: {class: 'input_style'}  %></p>
   </fieldset>
       <br>
+      <% if !@customer_emergency_errors_update.nil? %>
+        <% @customer_emergency_errors_update.each do |error|%>
+          <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+        <% end %>
+      <% end %>
       <br>
         <div class="form-actions">
             <p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="text-align:center; float: none; margin:0; padding:0;">Save</p>
+            <%= link_to "Delete", customer_emergency_contact_path(@customer_emergency_contact.id), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, style: 'color: red !important; font-weight: bold; font-size: 16px;'%>
       </div>
   <% end %>
 </div>
@@ -22,4 +28,8 @@
      function submitForm() {
         $("#form").submit();
     }
+
+    $(document).ready(function() {
+      $("#customer_emergency_contact_phone").mask("(999) 999-9999");
+    })
 </script>

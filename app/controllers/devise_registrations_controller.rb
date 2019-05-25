@@ -39,7 +39,7 @@ class DeviseRegistrationsController < Devise::RegistrationsController
 
     user = User.find(resource[:id])
     user.userID = user[:id]
-    user.save!
+    user.save
 
     # UserMailer.user_confirm_email(current_user).deliver_now if params[:confirm_email] == "true"
     # UserMailer.new_customer_registration(user).deliver_now if user[:kennel_or_customer] == "customer"
@@ -48,20 +48,25 @@ class DeviseRegistrationsController < Devise::RegistrationsController
 
   def update
     @user = current_user
-    puts '____________'
-    puts params[:user]
-    if @user.update!(user_params)
-      @user.update_attributes(user_image: params[:user][:user_image]) if !params[:user][:user_image].nil?
+    params_user = params[:user]
+    puts '_________'
+    puts params
+    if @user.update(first_name: params_user[:first_name], last_name: params_user[:last_name], email: params_user[:email], time_zone: params_user[:time_zone], phone: params_user[:phone].scan(/\d/).join, user_image: (params_user[:user_image] if !params_user[:user_image].nil?))
       if params[:user][:customer_edit] == ''
-        redirect_to kennels_path(tab: 'owner'), notice: 'You successfully updated owner personal insoramtion!'
+        redirect_to kennels_path(tab: 'owner', devise_update: nil), notice: 'You successfully updated owner personal information!'
       else
-        redirect_to customer_dashboard_path, notice: 'You successfully updated owner personal insoramtion!'
+        redirect_to customer_dashboard_path(devise_update: nil), notice: 'You successfully updated owner personal information!'
       end
     else
+      error_message = []
+      @user.errors.each do |attr,err|
+        error_message << attr
+      end
+
       if params[:user][:customer_edit] == ''
-        redirect_to kennels_path(tab: 'owner'), notice: 'You had errors. Try again!'
+        redirect_to kennels_path(tab: 'owner', devise_update: error_message.uniq)
       else
-        redirect_to customer_dashboard_path, notice: 'You had errors. Try again!'
+        redirect_to customer_dashboard_path(devise_update: error_message.uniq)
       end
     end
   end
@@ -85,6 +90,6 @@ class DeviseRegistrationsController < Devise::RegistrationsController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :phone, :time_zone, :user_image)
+    params.require(:user).permit(:first_name, :last_name, :email, :time_zone)
   end
 end

@@ -4,6 +4,7 @@
 </div>
 <div class="modal-body" style="color: black; width: 1000px;height: auto; margin-top:0 !important; background-color: white; float: none;
     text-align : center;">
+	<% @run ||= Run.new %>
 		<%= form_for @run, html: {multipart: true}, id:'form2' do |f| %>
 			<br>
 				<div class="row">
@@ -47,6 +48,12 @@
 					<br>
 				</div>
 			</div>
+			<br>
+			<% if !@runs_create.nil? %>
+        <% @runs_create.each do |error|%>
+          <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+        <% end %>
+      <% end %>
 			<br>
 			<br>
 				 <%= f.submit "Save", class:'text_info bold-text link_edit vet_link submit_link font-20', style:"border: none;text-align:center; float: none; margin:0; padding:0; background-color: transparent" %> 

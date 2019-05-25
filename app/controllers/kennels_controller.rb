@@ -15,6 +15,7 @@ class KennelsController < ApplicationController
 
   def index
     @tab = params[:tab] || 'kennel'
+    @kennel_create = params[:kennel_create]
 
     if !Kennel.where(user_id: current_user.id).first.nil?
       @kennel = Kennel.where(user_id: current_user.id).first
@@ -26,31 +27,59 @@ class KennelsController < ApplicationController
       @photos = Photo.where(kennel_id: @kennel.id)
       @hours_of_operation = HoursOfOperation.where(kennel_id: @kennel.id).first
       @hours_of_operation_1 = (HoursOfOperation.where(kennel_id: @kennel.id).count == 2) ? HoursOfOperation.where(kennel_id: @kennel.id).last : HoursOfOperationsController.new.create(@kennel[:id])
+      @devise_update = params[:devise_update]
+      @kennel_update = params[:kennel_update]
+      @runs_create = params[:runs_create]
+      @runs_update = params[:runs_update]
+      @run_id = params[:run_id]
+      @amenity_create = params[:amenity_create]
+      @amenity_update = params[:amenity_update]
+      @amenity_id = params[:amenity_id]
+      @holiday_create = params[:holiday_create]
+      @holiday_update = params[:holiday_update]
+      @holiday_id = params[:holiday_id]
+      @policy_create = params[:policy_create]
+      @policy_update = params[:policy_update]
+      @policy_id = params[:policy_id]
+      @breed_create = params[:breed_create]
+      @breed_update = params[:breed_update]
+      @breed_id = params[:breed_id]
+      @photo_create = params[:photo_create]
+      @photo_update = params[:photo_update]
+      @photo_id = params[:photo_id]
+
+
+      check_if_hours_of_operation_exist
     end
   end
 
   def create
     kennel = Kennel.new(kennel_params)
-    if sales_tax_invalid?(params[:kennel][:sales_tax])
-      error_message = "Sales Tax invalid."
-      flash[:notice] = error_message
-      return redirect_to kennels_path(tab: 'kennel')
+    kennel.update(phone: params[:kennel][:phone].scan(/\d/).join)
+    
+    if params[:kennel][:sales_tax] == ''
+      kennel.update(sales_tax: '0')
+    else
+      kennel.update(sales_tax: params[:kennel][:sales_tax])
     end
+
     user = User.where(id: current_user.id).first
-    if kennel.valid? && !kennel_completed_registration? && kennel.save! && user.kennel = kennel
+    if kennel.valid? && !kennel_completed_registration? && kennel.save && user.kennel = kennel
       flash[:notice] = "Your Kennel was created successfully!"
       kennel.userID = user[:id]
       kennel.kennelID = kennel[:id]
-      kennel.save!
+      kennel.save
       HoursOfOperationsController.new.create(kennel[:id])
       HoursOfOperationsController.new.create(kennel[:id])
       user.completed_registration = "true"
-      user.save!
-      return redirect_to kennels_path(tab: 'kennel')
+      user.save
+      return redirect_to kennels_path(tab: 'kennel', kennel_create: nil)
     else
-      error_message = "Unable to register your Kennel, validation failed."
-      flash[:notice] = error_message
-      return redirect_to kennels_path(tab: 'kennel')
+      error_message = []
+      kennel.errors.each do |attr,err|
+        error_message << attr
+      end
+      return redirect_to kennels_path(tab: 'kennel', kennel_create: error_message.uniq)
     end
   end
 
@@ -67,33 +96,25 @@ class KennelsController < ApplicationController
 
   def update
     kennel = Kennel.find(params[:id])
-    if sales_tax_invalid?(params[:sales_tax])
-      error_message = "Sales Tax invalid."
-      flash[:notice] = error_message
-      return redirect_to kennels_path(tab: 'kennel')
+    if params[:sales_tax] == ''
+      kennel.update(sales_tax: '0')
+    else
+      kennel.update(sales_tax: params[:sales_tax])
     end
     
-    kennel.update(name: params[:name], address: params[:address], mission_statement: params[:mission_statement], zip: params[:zip], phone: params[:phone], email: params[:email], sales_tax: params[:sales_tax])
+    kennel.update(name: params[:name], address: params[:address], mission_statement: params[:mission_statement], zip: params[:zip], email: params[:email])
     kennel.update(avatar: params[:avatar]) if !params[:avatar].nil?
-    # kennel.name = params[:name]
-    # kennel.address = params[:address]
-    # kennel.mission_statement = params[:mission_statement]
-    # kennel.zip = params[:zip]
-    # kennel.phone = params[:phone]
-    # kennel.email = params[:email]
-    # kennel.sales_tax = params[:sales_tax]
-    # kennel.avatar = params[:avatar] if !params[:avatar].nil? 
-    if kennel.valid? && kennel.save!
+    kennel.update(phone: params[:phone].scan(/\d/).join)
+ 
+    if kennel.save
       flash[:notice] = "Your Kennel updated successfully!"
-      redirect_to kennels_path(tab: 'kennel')
+      redirect_to kennels_path(tab: 'kennel', kennel_update: nil)
     else
-      error_message = "Unable to update your Kennel:"
-      kennel.errors.full_messages.each do |msg|
-        error_message << " #{msg}"
+      error_message = []
+      kennel.errors.each do |attr, err|
+        error_message << attr
       end
-      flash[:notice] = error_message
-      @kennel = kennel
-      redirect_to kennels_path(tab: 'kennel')
+      redirect_to kennels_path(tab: 'kennel', kennel_update: error_message.uniq)
     end
   end
 
@@ -240,19 +261,12 @@ class KennelsController < ApplicationController
         @check_out_today = Reservation.where(check_out_date: Time.now.strftime("%a, %d %B %Y"))
         @reservation_search_results = filter_reservation_search if !params[:search_by].blank?
         reservations = Reservation.where(kennel_id: @kennel[:id])
-        puts params
         @reservations = reservations if !reservations.blank?
         @hours_of_operation = HoursOfOperation.where(kennel_id: @kennel[:id]).first
-        week_check_array = %w(monday_open tuesday_open wednesday_open thursday_open friday_open saturday_open sunday_open)
-        week_check_array.each do |weekday|
-          if @hours_of_operation[weekday] != "closed"
-            @changed_time = true
-            break
-          else
-            @changed_time = false
-          end
-        end
-        @run = Run.where(kennel_id: @kennel[:id]).first
+        check_if_hours_of_operation_exist
+        @kennel_run = Run.where(kennel_id: @kennel[:id]).first || nil
+        @runs = Run.where(kennel_id: @kennel.id).to_a
+        @reservation_errors = params[:reservation]
         session[:hours_of_operation_id] = @hours_of_operation[:id]
       end
     end
@@ -296,6 +310,8 @@ class KennelsController < ApplicationController
       @current_reservations = params[:reservation_ids].map do |i|
         Reservation.find(i)
       end
+      puts '____________'
+      @current_reservations.each {|res| puts res.attributes}
       @date = []
       split_date = params[:date].split("/")
       @date << split_date[2]
@@ -405,15 +421,22 @@ class KennelsController < ApplicationController
     end
   end
 
-  private
-
-  def sales_tax_invalid?(sales_tax)
-    sales_tax = sales_tax.to_f
-    sales_tax < 1 ? true : false
+  def check_if_hours_of_operation_exist
+    week_check_array = %w(monday_open tuesday_open wednesday_open thursday_open friday_open saturday_open sunday_open)
+    week_check_array.each do |weekday|
+      if @hours_of_operation[weekday] != "closed"
+        @changed_time = true
+        break
+      else
+        @changed_time = false
+      end
+    end
   end
 
+  private
+
   def kennel_params
-    params.require(:kennel).permit(:avatar, :name, :cats_or_dogs, :address, :city, :state, :zip, :phone, :email, :mission_statement, :sales_tax, :taken_ownership )
+    params.require(:kennel).permit(:avatar, :name, :cats_or_dogs, :address, :city, :state, :zip, :email, :mission_statement, :taken_ownership )
   end
 
 end

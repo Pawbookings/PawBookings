@@ -1,7 +1,7 @@
 <%# <%= render partial: "shared/top_info" %> 
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal">x</button>
-  <h4 class="modal-title" id="myModalLabel1" style="font-family: 'Roboto'; font-size:20px;">Edit Existing</h4>
+  <h4 class="modal-title" id="myModalLabel1" style="font-family: 'Roboto'; font-size:20px; text-align:center;">Update Your Information</h4>
 </div>
 <div class="modal-body" style="color: black;height: auto; margin-top:0 !important; background-color: white; float: none;
     text-align : center;">
@@ -9,7 +9,7 @@
           <br>
           <%= f.hidden_field :customer_edit, value: (request.path.include? 'customer') ? 'customer' : nil %>
            <p class="font-18">Upload avatar:</p>
-           <%= f.file_field :user_image, class: "text_info bold-text link_edit", style: 'background-color: white;margin-left: 120px; margin-top: 30px; margin-bottom: 50px;'%>
+           <%= f.file_field :user_image, class: "text_info bold-text link_edit", style: 'background-color: white;margin-left: 120px; margin-top: 30px; margin-bottom: 50px; margin-right:100px;'%>
            <br>
            <p class="font-18">Personal contact email:</p>
            <%= f.email_field :email, value: current_user.email, autofocus: true, class:"form-control payment_input input_new_reserv black_18" %>
@@ -21,11 +21,16 @@
             <%= f.text_field :last_name, value: current_user.last_name, autofocus: true, class:"form-control payment_input input_new_reserv black_18" %>
             <br>
             <p class="font-18">Personal contact phone:</p>
-            <%= f.text_field :phone, value: current_user.phone, autofocus: true, class:"form-control payment_input input_new_reserv black_18" %>
+            <%= f.text_field :phone, value: current_user.phone, autofocus: true, class:"form-control payment_input input_new_reserv black_18 phone" %>
             <br>
             <p class="font-18">Time zone:</p>
-            <%= f.text_field :time_zone, value: current_user.time_zone, autofocus: true, class:"form-control payment_input input_new_reserv black_18" %>
+            <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {default: "Eastern Time (US & Canada)"}, {class: "form-control payment_input input_new_reserv black_18"} %>
             <br>
+            <% if !@devise_update.nil? %>
+              <% @devise_update.each do |error|%>
+                <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+              <% end %>
+            <% end %>
             <br>
             <br>
           <div class="form-actions">
@@ -38,6 +43,10 @@
      function submitForm() {
         $("#new_user").submit();
     }
+
+    $(document).ready(function() {
+      $("#user_phone").mask("(999) 999-9999");
+    })
 </script>
 
 

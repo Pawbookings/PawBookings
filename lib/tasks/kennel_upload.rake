@@ -25,7 +25,7 @@ task :upload_kennel_csv => :environment do
       u.password_confirmation = u.password
       u.kennel_or_customer = "kennel"
       u.phone = row['phone'].blank? ? '0000000000' : row['phone'].tr("()", "").tr(" ", "")
-      u.save!
+      u.save
 
       # Create Kennel
       row['zip'].prepend("0") if row['zip'].length == 4

@@ -12,7 +12,7 @@ class KennelRatingsController < ApplicationController
       if KennelRating.where(reservation_id: reservationID, userID: current_user.id, kennelID: params[:kennelID]).nil?
         kennel_rating = (reservation.kennel_rating = kennel_rating)
         kennel_rating[:reservationID] = kennel_rating[:reservation_id]
-        kennel_rating.save!
+        kennel_rating.save
       else
         return redirect_to request.referrer
         false

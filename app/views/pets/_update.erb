@@ -9,10 +9,12 @@
       <br>
        <%= image_tag @pet.avatar.url, class: "kennel_dashboard_avatar", style: 'margin-right: 500px; margin-left: calc(100%/2 - 70px);' if !@pet.avatar.url.nil? %>
       <br>
-      <p id="p_image" onclick="showLink()" class="font-20 link_edit submit_link">Upload pet image</p>
-      <div class="image_hide" style="display: none;">
-        <%= f.file_field :avatar, class: "text_info bold-text link_edit", style: 'background-color: white;margin-left: calc(100%/2 - 130px); margin-right: 800px; margin-top: 30px; margin-bottom: 40px;'%>
+      <div class="image_hide">
+        <%= f.file_field :avatar, class: "text_info bold-text link_edit", style: 'background-color: white;margin-left: calc(100%/2 - 130px); margin-right: 100px; margin-top: 30px; margin-bottom: 40px;'%>
       </div>
+      <br>
+      <br>
+      <br>
       <p class="font-20">Pet Name: <%= f.input :name, label: false, input_html: {class: 'input_style'} %></p>
       <p class="font-20">Cat or dog:</p><%=f.collection_radio_buttons :cat_or_dog, [['cat', 'cat'],['dog', 'dog']], :first, :last, { checked: @pet.cat_or_dog }, onchange:"return petsChangeBreed(this);", id: 'pet_cat_or_dog' %></p>
       <% if @pet.cat_or_dog == 'dog'%>
@@ -33,8 +35,8 @@
       
       <br />
       <p class="font-20">Weight:<%= f.input :weight, label: false, input_html: {class: 'input_style'}  %></p>
-      <p class="font-20">Spay or neutered:<%=f.collection_radio_buttons :spay_or_neutered, [['spay', 'spay'],['neutered', 'neutered']], :first, :last, { checked: @pet.spay_or_neutered } %></p>
-      <p class="font-20">Age:<%= f.input :age, label: false, input_html: {class: 'input_style'}  %></p>
+      <p class="font-20">Spay or neutered:<%=f.collection_radio_buttons :spay_or_neutered, [['spay', 'spay'],['neutered', 'neutered'], ['false', 'none']], :first, :last, { checked: @pet.spay_or_neutered } %></p>
+      <p class="font-20">Age:<%= f.input :age, label: false, input_html: {class: 'input_style', oninput:"this.value = this.value.replace(/[^0-9.]/g, '');"}  %></p>
       <p class="font-20">Special instructions:<%= f.input :special_instructions, label: false, input_html: {class: 'input_style'}  %></p>
       <p class="font-20">Vaccinations current?<%=f.collection_radio_buttons :vaccinations, [['true', 'true'],['false', 'false']], :first, :last, { checked: @pet.vaccinations } %></p>
       <% if !@pet[:vaccination_record_file_name].nil? %>
@@ -45,9 +47,11 @@
             <%= f.file_field :vaccination_record %>
       <% end %>
       <br>
+      <br>
 </fieldset>
-      <div class="form-actions">
-      <p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="margin-left: 200px;">Save</p>
+      <div class="form-actions" style="margin-top: 20px;">
+      <p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="margin-top: -5px !important; margin-right: 0 !important; margin-left: 120px !important;">Save</p>
+      <%= link_to "Delete", pet_path(@pet.id), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, style: 'color: red !important;'%>
       </div>
       <br>
   <% end %>
@@ -59,10 +63,6 @@
     function submitForm() {
         $("#form").submit();
     }
-
-  function showLink() {
-    $('.image_hide').show();
-  }
 
   function petsChangeBreed(type){
     var cat_or_dog = type.value;

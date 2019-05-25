@@ -19,14 +19,15 @@ class AmenitiesController < ApplicationController
 
   def create
     amenity = Amenity.new(amenity_params)
-    kennel = Kennel.where(user_id: current_user.id).first
     if amenity.valid? && kennel.amenities.create(kennel_id: kennel.id, title: amenity.title, description: amenity.description, price: amenity.price)
       flash[:notice] = "Your Amenity was created successfully!"
-      return redirect_to kennels_path(tab: 'amenities')
+      return redirect_to kennels_path(tab: 'amenities', amenity_create: nil)
     else
-      error_message = "Your Amenity failed to be saved."
-      flash[:notice] = error_message
-      return redirect_to kennels_path(tab: 'amenities')
+      error_message = []
+      amenity.errors.each do |attr, err|
+        error_message << attr
+      end
+      return redirect_to kennels_path(tab: 'amenities', amenity_create: error_message.uniq)
     end
   end
 
@@ -35,29 +36,32 @@ class AmenitiesController < ApplicationController
     amenity.title = params[:amenity][:title]
     amenity.description = params[:amenity][:description]
     amenity.price = params[:amenity][:price]
-    if amenity.valid? && amenity.save!
+    if amenity.save
       flash[:notice] = "Your Amenity was updated successfully!"
-      return redirect_to kennels_path(tab: 'amenities')
+      return redirect_to kennels_path(tab: 'amenities', amenity_update: nil)
     else
-      error_message = "Your Amenity failed to update."
-      flash[:notice] = error_message
-      return redirect_to kennels_path(tab: 'amenities')
+      error_message = []
+      amenity.errors.each do |attr, err|
+        error_message << attr
+      end
+      return redirect_to kennels_path(tab: 'amenities', amenity_update: error_message.uniq, amenity_id: amenity.id)
     end
   end
 
   def destroy
-    kennel = Kennel.where(user_id: current_user.id).first
-    amenity = Amenity.where(id: params[:id], kennel_id: kennel[:id]).first
-    if amenity.delete
-      flash[:notice] = "Your Amenity was deleted successfully."
-      redirect_to request.referrer
-    end
+    Amenity.find(params[:id]).delete
+    flash[:notice] = "Your Amenity was deleted successfully."
+    redirect_to kennels_path(tab: 'amenities')
   end
 
   private
 
   def amenity_params
     return params.require(:amenity).permit(:title, :description, :price)
+  end
+
+  def kennel
+    Kennel.where(user_id: current_user.id).first
   end
 
 end

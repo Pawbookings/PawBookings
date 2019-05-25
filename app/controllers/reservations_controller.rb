@@ -23,12 +23,21 @@ class ReservationsController < ApplicationController
     pet_ids = []
     amenity_ids = []
 
-    if(params[:customer_first_name] == '' || params[:customer_last_name] == '' || params[:customer_email] == '' || params[:customer_phone] == '' || params[:month_in] == '' || params[:month_out] == '' || params[:day_in] == '' || params[:date_out] == '' || params[:year_in] == '' || params[:year_out] == '')
-      return redirect_to kennel_dashboard_path
+    if(user.nil? || !params['room-units'].present? || params[:customer_first_name] == '' || params[:customer_last_name] == '' || params[:customer_email] == '' || params[:customer_phone] == '' || params[:month_in] == '' || params[:month_out] == '' || params[:day_in] == '' || params[:date_out] == '' || params[:year_in] == '' || params[:year_out] == '')
+      all_params = [:customer_first_name, :customer_last_name, :customer_email, :customer_phone, :month_in, :month_out, :day_in, :date_out, :year_in, :year_out]
+      error_message = []
+      all_params.each do |par|
+        if params[par] == ''
+          error_message << par
+        end
+      end
+      error_message << 'user' if user == nil
+      error_message << 'room-unit' if !params['room-units'].present?
+      return redirect_to kennel_dashboard_path(reservation: error_message)
     end
 
     if (!Date.valid_date? params[:year_in].to_i, params[:month_in].to_i, params[:day_in].to_i) || (!Date.valid_date? params[:year_out].to_i, params[:month_out].to_i, params[:day_out].to_i)
-      return redirect_to kennel_dashboard_path
+      return redirect_to kennel_dashboard_path(reservation: 'dates')
     end
 
     check_in_date_params = params[:month_in] + '/' +params[:day_in] +'/' + params[:year_in]
@@ -114,7 +123,7 @@ class ReservationsController < ApplicationController
                                 customer_first_name: params[:customer_first_name].downcase,
                                 customer_last_name: params[:customer_last_name].downcase,
                                 customer_email: params[:customer_email].downcase,
-                                customer_phone: params[:customer_phone],
+                                customer_phone: params[:customer_phone].scan(/\d/).join,
                                 pet_ids: pet_ids.map(&:to_i).to_s,
                                 run_ids: run_ids.map(&:to_i).to_s,
                                 amenity_ids: amenity_ids.map(&:to_i).to_s,
@@ -126,16 +135,21 @@ class ReservationsController < ApplicationController
                                 checked_out: "false",
                                 three_weeks_before_email_reminder: "false",
                                 one_week_before_email_reminder: "false",
-                                day_before_email_reminder: "false")
-    if reservation.valid?
-      reservation.kennelID = reservation[:kennel_id]
-      reservation.userID = reservation[:user_id]
-      reservation.reservationID = reservation[:id]
-      reservation.save!
+                                day_before_email_reminder: "false",
+                                kennelID: @kennel.id,
+                                userID: user.id)
+    if reservation.save
+      reservation.update(reservationID: reservation.id)
       UserMailer.reservation_confirmation(reservation[:id], total_price.to_s).deliver_now
       flash[:notice] = "Reservation Saved in the System!"
+      redirect_to kennel_dashboard_path(reservation: nil)
+    else
+      error_message = []
+      reservation.errors.each do |attr,err|
+        error_message << attr
+      end
+      redirect_to kennel_dashboard_path(reservation: error_message.uniq)
     end
-    return redirect_to kennel_dashboard_path
   end
 
   def get_pets
@@ -150,7 +164,7 @@ class ReservationsController < ApplicationController
           User.create!(email: params[:email], 
                    first_name: params[:customer_first_name], 
                    last_name: params[:customer_last_name], 
-                   phone: params[:customer_phone], 
+                   phone: params[:customer_phone].scan(/\d/).join, 
                    password: "12345678Paw!", 
                    password_confirmation: "12345678Paw!", 
                    kennel_or_customer: "customer")

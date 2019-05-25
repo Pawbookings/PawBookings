@@ -4,6 +4,7 @@
 </div>
 <div class="modal-body" style="color: black; width: 1000px;height: auto; margin-top:0 !important; background-color: white; float: none;
     text-align : center;">
+	<% @run = Run.find(@run_id) if params[:run_id] %>
    <%= form_tag @run, method: :put, id: 'form' do %>
 			<br>
 			<%= hidden_field_tag :id, @run.id %>
@@ -48,10 +49,16 @@
 				</div>
 			</div>
 			<br>
-				
+			<% if !@runs_update.nil? %>
+        <% @runs_update.each do |error|%>
+          <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+        <% end %>
+      <% end %>
 			<br>
-			<div class="form-actions">
-				<p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="text-align:center; float: none; margin:0; padding:0;">Save</p>
+			<br>
+			<div class="form-actions" style="padding-left: 100px;">
+				<p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="margin-top: -5px !important; margin-right: 0 !important; margin-left: 120px !important;">Save</p>
+      			<%= link_to "Delete", run_path(@run.id), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, style: 'color: red !important; font-weight: bold; font-size: 16px;'%>
 				</div>  
 	<% end %>
 </div>

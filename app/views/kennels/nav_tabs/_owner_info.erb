@@ -1,11 +1,11 @@
 <p class="kennel_h2">Owner personal information</p>
 <div id="kennel_cont" class="pet_container" style="width: 700px;height: 550px; margin: 0 auto; float: none !important;">
 	<br>
-	<%= image_tag resource.user_image.url(:thumb), class:"kennel_dashboard_avatar", style: 'margin-left: 30px; margin-bottom: 70px;'%>
+	<%= image_tag current_user.user_image.url, class:"kennel_dashboard_avatar", style: 'margin-left: 30px; margin-bottom: 70px;'%>
 	<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Personal contact email:</strong><%= " #{current_user.email.capitalize}" %></p>
 	<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>First name:</strong><%= " #{current_user.first_name}" %></p>
 	<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Last name:</strong><%= " #{current_user.last_name}" %></p>
-	<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Personal contact phone:</strong><%= " #{current_user.phone}" %></p>
+	<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Personal contact phone:</strong><%= " #{number_to_phone(current_user.phone, area_code: true)}" %></p>
 	<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Time zone:</strong><%= " #{current_user.time_zone}" %></p>
 	<%= link_to 'Edit', edit_user_registration_path(current_user), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window2', class: 'text_info bold-text link_edit vet_link', style:"margin-left: 330px; margin-right: unset; margin-top: 10px; padding: 0;", id:'kennel_edit_button'  } %>
 	<br>
