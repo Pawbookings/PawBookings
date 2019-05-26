@@ -2,7 +2,7 @@
 <div style="height: auto; position: relative; overflow: hidden;">
 	<% if !@kennel.nil? && !@runs.nil?%>
 	<% @breed_restrictions.each_with_index do |breed, i| %>
-		<div class="pet_container" style="margin-top: 50px;width: 600px;height: 300px;padding-top: 50px;padding-right: 50px;  <%= (@breed_restrictions.length == 1) ? 'float: none; margin: 0 auto !important;' : 'margin-right: 50px !important;float: left !important;margin-left: 125px; margin-bottom: 100px;' %>" >
+		<div class="pet_container" style="width: 600px;height: 300px;padding-top: 50px;padding-right: 50px; float: none !important; margin: 0 auto !important; margin-top: 50px !important;" >
 			<br>
       <p class="font-18 vet_h pet_text no-float"><strong>Breed restricted:</strong><%= " #{breed.breed}" %></p>  
 			<%= link_to 'Edit', edit_breed_restriction_path(breed), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window11', class: 'text_info bold-text link_edit vet_link', style:"margin-left: 270px; margin-right: unset; margin-top: 30px; padding: 0;" } %>
