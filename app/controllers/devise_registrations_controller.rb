@@ -49,8 +49,6 @@ class DeviseRegistrationsController < Devise::RegistrationsController
   def update
     @user = current_user
     params_user = params[:user]
-    puts '_________'
-    puts params
     if @user.update(first_name: params_user[:first_name], last_name: params_user[:last_name], email: params_user[:email], time_zone: params_user[:time_zone], phone: params_user[:phone].scan(/\d/).join, user_image: (params_user[:user_image] if !params_user[:user_image].nil?))
       if params[:user][:customer_edit] == ''
         redirect_to kennels_path(tab: 'owner', devise_update: nil), notice: 'You successfully updated owner personal information!'

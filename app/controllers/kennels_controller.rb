@@ -310,7 +310,6 @@ class KennelsController < ApplicationController
       @current_reservations = params[:reservation_ids].map do |i|
         Reservation.find(i)
       end
-      puts '____________'
       @current_reservations.each {|res| puts res.attributes}
       @date = []
       split_date = params[:date].split("/")

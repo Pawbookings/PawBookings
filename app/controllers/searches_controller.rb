@@ -62,6 +62,7 @@ class SearchesController < ApplicationController
   def location_filtering
     params[:radius] = "5" if params[:radius].blank?
     @relevant_locations = Kennel.where(taken_ownership: true).near(params[:search_zip], params[:radius]).to_a
+    return @relevant_locations
   end
 
   def pet_type_filtering
@@ -98,29 +99,27 @@ class SearchesController < ApplicationController
   def hours_of_operation_filtering
     @kennels_that_are_closed = []
     @negative_kennels = []
-    puts 'pet_type_filtered_results'
-    puts @pet_type_filtered_results
-    @pet_type_filtered_results.each do |fr|
-      kennel = Kennel.find(fr.id)
-      hours_of_operation = HoursOfOperation.where(kennel_id: kennel[:id])
-      hours_of_operation = HoursOfOperation.where(kennel_id: kennel[:id])
-      @kennels_that_are_closed << kennel if hours_of_operation.empty?
-      hours_of_operation.to_a.each do |h|
-        counter = 0
-        @pet_stay_date_range.each do |ps|
-          days_of_week.each do |num, day|
-            counter += 1 if ps.wday.to_s == num && h.send(day) == "closed"
-          end
-        end
-        @kennels_that_are_closed << kennel if counter > 0
-      end
-    end
-    @kennels_that_are_closed.each do |k|
-      @negative_kennels << k
-      @pet_type_filtered_results.each do |fr|
-        @pet_type_filtered_results.delete fr if k === fr
-      end
-    end
+    # @pet_type_filtered_results.each do |fr|
+    #   kennel = Kennel.find(fr.id)
+    #   hours_of_operation = HoursOfOperation.where(kennel_id: kennel[:id])
+    #   @kennels_that_are_closed << kennel if hours_of_operation.empty?
+    #   puts hours_of_operation.to_a
+    #   hours_of_operation.to_a.each do |h|
+    #     counter = 0
+    #     @pet_stay_date_range.each do |ps|
+    #       days_of_week.each do |num, day|
+    #         counter += 1 if ps.wday.to_s == num && h.send(day) == "closed"
+    #       end
+    #     end
+    #     @kennels_that_are_closed << kennel if counter > 0
+    #   end
+    # end
+    # @kennels_that_are_closed.each do |k|
+    #   @negative_kennels << k
+    #   @pet_type_filtered_results.each do |fr|
+    #     @pet_type_filtered_results.delete fr if k === fr
+    #   end
+    # end
     @hours_of_operation_results = @pet_type_filtered_results
   end
 
