@@ -257,8 +257,8 @@ class KennelsController < ApplicationController
       @user = User.find(current_user.id)
       @kennel = Kennel.where(user_id: current_user.id).first
       if !@kennel.nil?
-        @check_in_today = Reservation.where(check_in_date: Time.now.strftime("%a, %d %B %Y"))
-        @check_out_today = Reservation.where(check_out_date: Time.now.strftime("%a, %d %B %Y"))
+        @check_in_today = Reservation.where(check_in_date: Time.now.strftime("%a, %d %B %Y"), kennel_id: @kennel.id)
+        @check_out_today = Reservation.where(check_out_date: Time.now.strftime("%a, %d %B %Y"), kennel_id: @kennel.id)
         @reservation_search_results = filter_reservation_search if !params[:search_by].blank?
         reservations = Reservation.where(kennel_id: @kennel[:id])
         @reservations = reservations if !reservations.blank?
