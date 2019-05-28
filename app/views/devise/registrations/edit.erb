@@ -24,7 +24,7 @@
             <%= f.text_field :phone, value: current_user.phone, autofocus: true, class:"form-control payment_input input_new_reserv black_18 phone" %>
             <br>
             <p class="font-18">Time zone:</p>
-            <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {default: "Eastern Time (US & Canada)"}, {class: "form-control payment_input input_new_reserv black_18"} %>
+            <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {default: current_user.time_zone || "Eastern Time (US & Canada)" }, {class: "form-control payment_input input_new_reserv black_18"} %>
             <br>
             <% if !@devise_update.nil? %>
               <% @devise_update.each do |error|%>
