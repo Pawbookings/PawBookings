@@ -218,13 +218,52 @@
         <div class="col-md-4">
           <div class="row">
             <div class="main_info" id="main_main">
-                <% if !@kennel.nil? %>
-                    <h3 class="kennel_info_style_h3"> <%= @kennel.name %> </h3>
-                    <p class="kennel_info_p" style="padding-bottom:10px;"> <%= "#{@kennel.address} #{@kennel.city}, #{@kennel.state} #{@kennel.zip}"%></p>
-                    <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;">
-                      <%= link_to "Manage My Kennel", kennels_path(id: @kennel.id), style:"color: white;", class: 'a_as_button' %>
-                    </div>
-                <% end %>
+                <% if @kennel.nil? %>
+                <p style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
+                <br>
+                <span id="register" style="padding-left: 50px;float: left;margin-right: 100px;">— Register your kennel.</span>
+                <span id="modify" style="padding-left: 50px;float: left;margin-right: 100px;">— Modify your hours of operation.</span>
+                <span id="create_accomodation" style="padding-left: 50px;float: left;">— Create an accomodation type.</span>
+                <br>
+                <p style="color: green;float: left;padding-left: 10px;">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
+                <br>
+                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                  <%= link_to "Register My Kennel", kennels_path(tab: 'kennel'), class: 'a_as_button', style:"color: white; " %>
+                </div>
+              <% end %>
+              <% if !@kennel.nil? && @changed_time == false && @kennel_run.nil? %>
+                <p style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
+                <br>
+                <span id="register" style="padding-left: 50px;float: left;margin-right: 100px;"><i class="fa fa-check" aria-hidden="true" style="color: green;padding-right:10px;"></i>Register your kennel.</span>
+                <span id="modify" style="padding-left: 50px;float: left;margin-right: 100px;">— Modify your hours of operation.</span>
+                <span id="create_accomodation" style="padding-left: 50px;float: left;">— Create an accomodation type.</span>
+                <br>
+                <p style="color: green;float: left;padding-left: 10px;">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
+                <br>
+                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                  <%= link_to "Manage My Kennel", kennels_path(tab: 'owner'), class: 'a_as_button', style:"color: white; " %>
+                </div>
+              <% end %>
+              <% if !@kennel.nil? && @changed_time == true && @kennel_run.nil? %>
+                <p style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
+                <br>
+                <span id="register" style="padding-left: 50px;float: left;margin-right: 100px;"><i class="fa fa-check" aria-hidden="true" style="color: green;padding-right:10px;"></i>Register your kennel.</span>
+                <span id="modify" style="padding-left: 50px;float: left;margin-right: 100px;"><i class="fa fa-check" aria-hidden="true" style="color: green;padding-right:10px;"></i>Modify your hours of operation.</span>
+                <span id="create_accomodation" style="padding-left: 50px;float: left;">— Create an accomodation type.</span>
+                <br>
+                <p style="color: green;float: left;padding-left: 10px;">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
+                <br>
+                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                  <%= link_to "Manage My Kennel", kennels_path(tab: 'owner'), class: 'a_as_button', style:"color: white; " %>
+                </div>
+              <% end %>
+              <% if !@kennel.nil? && @changed_time == true && !@kennel_run.nil? %>
+                <h3 class="kennel_info_style_h3"> <%= @kennel.name %> </h3>
+                <p class="kennel_info_p" style="padding-bottom:10px;"> <%= "#{@kennel.address} #{@kennel.city}, #{@kennel.state} #{@kennel.zip}"%></p>
+                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;">
+                  <%= link_to "Manage My Kennel", kennels_path(id: @kennel.id), style:"color: white;", class: 'a_as_button' %>
+                </div>
+              <% end %>
             </div>
           </div>
           <div class="row">
@@ -375,12 +414,51 @@
       <div class="col-md-10" id="col-10-main">
         <div class="row">
           <div class="main_info" id="main_main">
-              <% if !@kennel.nil? %>
-                  <h3 class="kennel_info_style_h3"> <%= @kennel.name %> </h3>
-                  <p class="kennel_info_p" style="padding-bottom:10px;"> <%= "#{@kennel.address} #{@kennel.city}, #{@kennel.state} #{@kennel.zip}"%></p>
-                  <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;">
-                    <%= link_to "Manage My Kennel", kennels_path(id: @kennel.id), style:"color: white;", class: 'a_as_button' %>
-                  </div>
+              <% if @kennel.nil? %>
+                <p style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
+                <br>
+                <span id="register" style="padding-left: 50px;float: left;margin-right: 100px;">— Register your kennel.</span>
+                <span id="modify" style="padding-left: 50px;float: left;margin-right: 100px;">— Modify your hours of operation.</span>
+                <span id="create_accomodation" style="padding-left: 50px;float: left;">— Create an accomodation type.</span>
+                <br>
+                <p style="color: green;float: left;padding-left: 10px;">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
+                <br>
+                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                  <%= link_to "Register My Kennel", kennels_path(tab: 'kennel'), class: 'a_as_button', style:"color: white; " %>
+                </div>
+              <% end %>
+              <% if !@kennel.nil? && @changed_time == false && @kennel_run.nil? %>
+                <p style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
+                <br>
+                <span id="register" style="padding-left: 50px;float: left;margin-right: 100px;"><i class="fa fa-check" aria-hidden="true" style="color: green;padding-right:10px;"></i>Register your kennel.</span>
+                <span id="modify" style="padding-left: 50px;float: left;margin-right: 100px;">— Modify your hours of operation.</span>
+                <span id="create_accomodation" style="padding-left: 50px;float: left;">— Create an accomodation type.</span>
+                <br>
+                <p style="color: green;float: left;padding-left: 10px;">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
+                <br>
+                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                  <%= link_to "Manage My Kennel", kennels_path(tab: 'owner'), class: 'a_as_button', style:"color: white; " %>
+                </div>
+              <% end %>
+              <% if !@kennel.nil? && @changed_time == true && @kennel_run.nil? %>
+                <p style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
+                <br>
+                <span id="register" style="padding-left: 50px;float: left;margin-right: 100px;"><i class="fa fa-check" aria-hidden="true" style="color: green;padding-right:10px;"></i>Register your kennel.</span>
+                <span id="modify" style="padding-left: 50px;float: left;margin-right: 100px;"><i class="fa fa-check" aria-hidden="true" style="color: green;padding-right:10px;"></i>Modify your hours of operation.</span>
+                <span id="create_accomodation" style="padding-left: 50px;float: left;">— Create an accomodation type.</span>
+                <br>
+                <p style="color: green;float: left;padding-left: 10px;">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
+                <br>
+                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                  <%= link_to "Manage My Kennel", kennels_path(tab: 'owner'), class: 'a_as_button', style:"color: white; " %>
+                </div>
+              <% end %>
+              <% if !@kennel.nil? && @changed_time == true && !@kennel_run.nil? %>
+                <h3 class="kennel_info_style_h3"> <%= @kennel.name %> </h3>
+                <p class="kennel_info_p" style="padding-bottom:10px;"> <%= "#{@kennel.address} #{@kennel.city}, #{@kennel.state} #{@kennel.zip}"%></p>
+                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;">
+                  <%= link_to "Manage My Kennel", kennels_path(id: @kennel.id), style:"color: white;", class: 'a_as_button' %>
+                </div>
               <% end %>
           </div>
         </div>

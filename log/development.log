@@ -1,0 +1,73 @@
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-28 21:40:00 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (1.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Redirected to http://localhost:3000/kennel_dashboard
+  [1m[36mKennelRating Load (0.9ms)[0m  [1mSELECT  "kennel_ratings".* FROM "kennel_ratings" WHERE "kennel_ratings"."rating" = $1  ORDER BY "kennel_ratings"."id" DESC LIMIT 3[0m  [["rating", 5]]
+Completed 302 Found in 212ms (ActiveRecord: 16.2ms)
+
+
+Started GET "/kennel_dashboard" for 127.0.0.1 at 2019-05-28 21:40:01 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[35mUser Load (1.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mKennel Load (1.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 1]]
+  Rendered shared/_top_info.html.erb (12.0ms)
+  Rendered simple_calendar/_month_calendar.html.erb (195.7ms)
+  Rendered simple_calendar/_month_calendar.html.erb (185.3ms)
+  Rendered simple_calendar/_month_calendar.html.erb (193.3ms)
+  Rendered shared/_footer.html.erb (2.2ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (702.0ms)
+Completed 200 OK in 7118ms (Views: 6895.6ms | ActiveRecord: 21.7ms)
+
+
+Started GET "/assets/active_admin/jquery_ui.self-01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.js?body=[FILTERED]" for 127.0.0.1 at 2019-05-28 21:40:12 +0300
+
+
+Started GET "/assets/active_admin/base.self-ab2cb3098b53fe7d229937d768d701e8f4013f2a5aea7988d8f2149fa40426db.js?body=[FILTERED]" for 127.0.0.1 at 2019-05-28 21:40:12 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (11.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/active_admin/ext/jquery-ui.self-f96f2ec2a32c4bc4da4292cc74bddeca0bb223d81a421c98c4d613632860945e.js?body=[FILTERED]" for 127.0.0.1 at 2019-05-28 21:40:14 +0300
+
+
+Started GET "/assets/jquery-ui/core.self-23329dbe1961b938278306c019037fe36ff6ccb28193f1038e52ccbf52858163.css?body=[FILTERED]" for 127.0.0.1 at 2019-05-28 21:40:14 +0300
+
+
+Started GET "/assets/jquery-ui/accordion.self-ab9f397561a07488cf14279bc7186619e859cdd485b81d3a6439e85b81d32a05.css?body=[FILTERED]" for 127.0.0.1 at 2019-05-28 21:40:15 +0300
+
+
+Started GET "/assets/jquery-ui/slider.self-57c4d255d192836d85e1253fe091b5b01fed1c389b0dbdedd71c129dcf1cfd35.css?body=[FILTERED]" for 127.0.0.1 at 2019-05-28 21:40:16 +0300
+
+
+Started GET "/assets/jquery-ui/spinner.self-2d292d2e83f1281032010a5acb9cb23492aeecdc95395a5d93f2a3bba9a2c400.css?body=[FILTERED]" for 127.0.0.1 at 2019-05-28 21:40:16 +0300
+
+
+Started GET "/assets/jquery-ui/tabs.self-3dec02555ec77af087a252cdd5be276e714d0059e052a2c92dc2c5401e9df63d.css?body=[FILTERED]" for 127.0.0.1 at 2019-05-28 21:40:16 +0300
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-05-28 21:40:17 +0300
+
+
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-05-28 21:40:17 +0300
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-05-28 21:40:17 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-05-28 21:40:17 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-05-28 21:40:17 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-05-28 21:40:17 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-05-28 21:40:17 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-05-28 21:40:17 +0300
