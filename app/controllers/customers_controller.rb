@@ -12,18 +12,6 @@ class CustomersController < ApplicationController
     @customer_emergency_errors_create = params[:customer_emergency_errors_create]
     @customer_emergency_errors_update = params[:customer_emergency_errors_update]
     @devise_update = params[:devise_update]
-    @past_reservations.each do |res|
-      eval(res.pet_ids).each do |pet_id|
-        puts pet_id
-        eval(res.pet_ids).delete(pet_id) if Pet.find_by(id: pet_id).nil?
-      end
-    end
-    @upcoming_reservations.each do |res|
-      eval(res.pet_ids).each do |pet_id|
-        puts pet_id
-        eval(res.pet_ids).delete(pet_id) if Pet.find_by(id: pet_id).nil?
-      end
-    end
   end
 
   def create_user_image
