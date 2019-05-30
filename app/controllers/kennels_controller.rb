@@ -409,7 +409,7 @@ class KennelsController < ApplicationController
     @pets = []
     @pet_ids = []
     JSON.parse(@reservation[:pet_ids]).each do |p_id|
-      if !Pet.find_by(id: pet_id).nil?
+      if !Pet.find_by(id: p_id).nil?
         pet = Pet.find(p_id)
         @pets << pet
         @pet_ids << pet[:id]
