@@ -26,7 +26,11 @@
         </td>
         <td>
             <% eval(res.pet_ids).each_with_index do |pet, index|%>
-            <%= Pet.find(pet).name%>
+            <% if !Pet.find_by(id: pet).nil? %>
+							<%= Pet.find(pet).name %>
+						<% else %>
+							<%= 'Pet was deleted by its owner' %>
+						<% end %>
             <% if index != (eval(res.pet_ids).length - 1)%>
                 <%= ","%>
                 <br>
