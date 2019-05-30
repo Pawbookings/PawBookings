@@ -67,27 +67,29 @@
                 <th style="border: none; text-align: center;">Special Instructions</th>
             </tr>
             <% eval(res.pet_ids).each do |pet_id| %>
-              <% pet = Pet.find(pet_id) %>
-              <tr style="background-color: #C4C4C4;" >
-                <td class="kennel_reservation_td vertical_center"><%= image_tag pet.avatar.url(:thumb), class: "kennel_dashboard_avatar", style: 'margin-top: 20px; margin-right: 0px;' if !pet.avatar.url.nil? %></td>
-                <td class="kennel_reservation_td vertical_center"><%= pet[:name].capitalize %></td>
-                <td class="kennel_reservation_td vertical_center"><%= pet[:cat_or_dog].capitalize %></td>
-                <td class="kennel_reservation_td vertical_center"><%= pet[:breed] %></td>
-                <td class="kennel_reservation_td vertical_center"><%= pet[:weight] %> lbs</td>
-                <td class="kennel_reservation_td vertical_center"><%= pet[:spay_or_neutered].capitalize %></td>
-                <% if pet[:vaccinations] == "true" %>
-                  <% if pet[:vaccination_record_file_name].nil? %>
-                    <td class="kennel_reservation_td vertical_center">Did not upload record</td>
+              <% if !Pet.find_by(id: pet_id).nil? %>
+                <% pet = Pet.find(pet_id) %>
+                <tr style="background-color: #C4C4C4;" >
+                  <td class="kennel_reservation_td vertical_center"><%= image_tag pet.avatar.url(:thumb), class: "kennel_dashboard_avatar", style: 'margin-top: 20px; margin-right: 0px;' if !pet.avatar.url.nil? %></td>
+                  <td class="kennel_reservation_td vertical_center"><%= pet[:name].capitalize %></td>
+                  <td class="kennel_reservation_td vertical_center"><%= pet[:cat_or_dog].capitalize %></td>
+                  <td class="kennel_reservation_td vertical_center"><%= pet[:breed] %></td>
+                  <td class="kennel_reservation_td vertical_center"><%= pet[:weight] %> lbs</td>
+                  <td class="kennel_reservation_td vertical_center"><%= pet[:spay_or_neutered].capitalize %></td>
+                  <% if pet[:vaccinations] == "true" %>
+                    <% if pet[:vaccination_record_file_name].nil? %>
+                      <td class="kennel_reservation_td vertical_center">Did not upload record</td>
+                    <% else %>
+                      <td class="kennel_reservation_td vertical_center"><%= link_to "#{pet[:vaccination_record_file_name]}", pet.vaccination_record.url, style: 'color: #0000FF;' %></td>
+                    <% end %>
                   <% else %>
-                    <td class="kennel_reservation_td vertical_center"><%= link_to "#{pet[:vaccination_record_file_name]}", pet.vaccination_record.url, style: 'color: #0000FF;' %></td>
+                    <td class="kennel_reservation_td vertical_center"><strong>False</strong></td>
                   <% end %>
-                <% else %>
-                  <td class="kennel_reservation_td vertical_center"><strong>False</strong></td>
-                <% end %>
-                <% if pet[:special_instructions].blank? %>
-                  <td class="kennel_reservation_td vertical_center"><strong>n/a</strong></td>
-                <% else %>
-                  <td class="kennel_reservation_td vertical_center"><%= pet[:special_instructions] %></td>
+                  <% if pet[:special_instructions].blank? %>
+                    <td class="kennel_reservation_td vertical_center"><strong>n/a</strong></td>
+                  <% else %>
+                    <td class="kennel_reservation_td vertical_center"><%= pet[:special_instructions] %></td>
+                  <% end %>
                 <% end %>
           <% end %>
            </tr>
