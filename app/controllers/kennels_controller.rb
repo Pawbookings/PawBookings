@@ -409,9 +409,11 @@ class KennelsController < ApplicationController
     @pets = []
     @pet_ids = []
     JSON.parse(@reservation[:pet_ids]).each do |p_id|
-      pet = Pet.find(p_id)
-      @pets << pet
-      @pet_ids << pet[:id]
+      if !Pet.find_by(id: pet_id).nil?
+        pet = Pet.find(p_id)
+        @pets << pet
+        @pet_ids << pet[:id]
+      end
     end
     @counter = @pets.length
     respond_to do |format|
