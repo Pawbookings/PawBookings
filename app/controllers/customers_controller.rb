@@ -6,7 +6,7 @@ class CustomersController < ApplicationController
     @customer_emergency_contact = CustomerEmergencyContact.find_by(user_id: current_user.id)
     @customer_vet_info = CustomerVetInfo.find_by(user_id: current_user.id)
     @upcoming_reservations = Reservation.where(user_id: current_user.id, completed: "false")
-    @past_reservations = Reservation.where('check_out_date < ?', Date.today)
+    @past_reservations = Reservation.where('check_out_date < ?', Date.today).where(user_id: current_user.id)
     @customer_vet_infos_errors_create = params[:customer_vet_infos_errors_create]
     @customer_vet_infos_errors_update = params[:customer_vet_infos_errors_update]
     @customer_emergency_errors_create = params[:customer_emergency_errors_create]
