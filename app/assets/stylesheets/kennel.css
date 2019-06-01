@@ -12,8 +12,26 @@
   border-bottom: solid black 1px !important;
 }
 
+.booking_button {
+  margin: 0 auto;
+}
+
+.margin-0-auto {
+  margin: 0 auto;
+}
+
 #one_in_row {
   margin-left: calc(100%/2 - 180px);
+}
+
+#profile_full_button {
+  margin-top: 0px !important;
+}
+
+@media (max-width: 780px) {
+  #reserv_button {
+    margin-top: -50px !important;
+  }
 }
 
 .kennel_dashboard_desktop{
@@ -628,6 +646,40 @@ a:active {
   text-decoration: underline;
 }
 
+@media (min-width: 1300px) {
+  .desktop {
+    display: unset;
+  }
+
+  .non-desktop {
+    display: none;
+  }
+}
+
+@media (max-width: 1300px) {
+  .desktop {
+    display: none;
+  }
+
+  .non-desktop {
+    display: unset;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 823px) {
+  #mission {
+    margin-bottom: 50px;
+  }
+
+  #kennel_cont {
+    height: 550px !important;
+  }
+
+  #p_kennel_info {
+    margin-left: 120px !important;
+  }
+}
+
 
 @media (max-width: 991px){
 
@@ -664,7 +716,13 @@ a:active {
   }
 
   .kennel_grey_list {
-    width: auto !important;
+    width: 95% !important;
+  }
+
+  .chart_kennel {
+    width: 500px !important;
+    float: unset !important;
+    margin: 0 auto;
   }
 
   #booking_row {
@@ -784,12 +842,88 @@ a:active {
   .smallest {
     display: none;
   }
+
+  .add_booking_resolution {
+    top: 27% !important;
+  }
+
+  .search_result_resolution {
+    top: 27% !important;
+  }
+}
+
+@media (max-width: 580px) and (min-width: 400px) {
+  .add_booking_resolution {
+    width: 105%;
+    height: 100%;
+    top: 75% !important;
+  }
+
+  .search_result_resolution {
+    top: 60% !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .add_booking_resolution {
+    width: 95%;
+    height: 100%;
+    top: 90% !important;
+  }
+
+  .search_result_resolution {
+    top: 60% !important;
+  }
+
+  #customer_first_name, #customer_last_name, #customer_phone, #customer_email {
+    margin-right: unset;
+    margin-left: unset;
+    margin: 0 auto !important;
+  }
+
+  #year_in, #year_out {
+    margin: 0 auto !important;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1500px) {
+  .add_booking_resolution {
+    top: 49% !important;
+  }
+
+  .search_result_resolution {
+    top: 49% !important;
+  }
+}
+
+@media (min-width:580px) and (max-width: 900px) {
+  .add_booking_resolution {
+    top: 62% !important;
+  }
+
+  .search_result_resolution {
+    top: 62% !important;
+  }
+}
+
+@media (min-width: 315px) and (max-width: 4000px) {
+  .kennel_dashboard_res_search {
+    height: 135px;
+  }
 }
 
 @media only screen and (max-width: 1700px) and (min-width: 1500px)  {
   .kennel_dashboard_res_search{
     width: 490px !important;
     margin-right: 180px !important;
+  }
+
+  .add_booking_resolution {
+    top: 27% !important;
+  }
+
+  .search_result_resolution {
+    top: 27% !important;
   }
 
   .booking_button {
@@ -840,8 +974,9 @@ a:active {
 
   .chart_kennel {
     width: auto !important;
-    margin-right: 40px;
-    margin-left: 40px;
+    float: unset !important;
+    margin: 0 auto;
+    margin-top: 70px;
   }
 
   .kennel_dashboard_res_search {
@@ -869,19 +1004,185 @@ a:active {
   }
 }
 
-@media (max-width: 1599px) {
+@media (max-width: 1499px) {
   #calend_div {
     background-color: white;
-    margin-right: calc(100%/4) !important;
+    margin-right: calc(100%/5) !important;
     margin-bottom: 100px;
   }
 
+  .col-xs--6 {
+    width: 60% !important;
+  }
+}
+
+@media (max-width: 1599px) {
   #two_in_row {
     margin-left: calc(100%/5);
   }
 
   #three_in_row {
     margin-left:50px;
+  }
+
+  .kennel_dashboard_res_search {
+    height: 140px !important;
+  }
+}
+
+@media (max-width: 570px) {
+  #main_main {
+    margin: 0 auto !important;
+    margin-top: 150px !important;
+    width: calc(100% - 100px) !important;
+    left: unset !important;
+    float: unset !important;
+  }
+
+  .kennel_check_in {
+    float: unset !important;
+    width: calc(100% - 100px) !important;
+    margin: 0 auto !important;
+    margin-top: 70px !important;
+  }
+
+  .kennel_dashboard_res_search {
+    width: calc(100% - 100px) !important;
+    margin: 0 auto !important;
+    margin-top: 70px !important;
+    height: 140px !important;
+  }
+
+  .booking_button {
+    margin-top:10px !important;
+  }
+
+  .chart_kennel {
+    width: calc(100% - 100px) !important;
+    float: unset !important;
+    margin: 0 auto;
+    margin-top: 70px;
+  }
+}
+
+@media (max-width: 415px) {
+  #modify {
+    margin-right: unset !important;
+  }
+
+  #getting {
+    padding-right: 100px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #register {
+    margin-right: unset !important;
+  }
+
+  .kennel_dashboard_res_search {
+    height: 220px !important;
+  }
+}
+
+@media (min-width: 315px) and (max-width: 900px) {
+  .booking_button {
+    margin-top: 60px !important;
+  }
+
+  .kennel_dashboard_res_search {
+    height: 220px;
+  }
+}
+
+@media (max-width: 315px) {
+  #register {
+    padding-left: 20px !important;
+  }
+
+  #modify {
+    padding-left: 20px !important;
+  }
+
+  #create_accomodation {
+    padding-left: 20px !important;
+  }
+
+  #getting {
+    padding-left: 10px !important;
+    padding-right: unset !important;
+  }
+
+  #main_main {
+    height: 200px;
+  }
+
+  .kennel_dashboard_res_search {
+    height: 220px ;
+  }
+}
+
+@media (max-width: 315px) and (min-width: 302px) {
+  .booking_button {
+    margin-top: 85px !important;
+  }
+
+  .kennel_dashboard_res_search {
+    height: 220px ;
+  }
+
+  #getting {
+    padding-right: unset !important;
+  }
+}
+
+@media (max-width: 301px) {
+  .booking_button {
+    margin-top: 105px !important;
+  }
+
+  #main_main {
+    height: 220px;
+  }
+
+  .kennel_dashboard_res_search {
+    height: 220px ;
+  }
+}
+
+@media (max-width: 990px) and (min-width: 570px) {
+  #main_main {
+    width: 500px !important;
+    left: unset !important;
+    float: unset !important;
+    margin-top: 150px !important;
+  }
+
+  .kennel_check_in {
+    float: unset !important;
+    width: 500px !important;
+    margin: 0 auto;
+    margin-top: 70px;
+  }
+
+  #booking_buttonn {
+    left: unset !important;
+    margin: 0 auto !important;
+    margin-top: 70px !important;
+  }
+
+  .kennel_dashboard_res_search {
+    height: 140px !important;
+    width: calc(100% - 200px) !important;
+    margin: 0 auto !important;
+    margin-top: 70px !important;
+    float: unset !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .kennel_dashboard_res_search {
+    height: 220px !important;
   }
 }
 
@@ -891,6 +1192,16 @@ a:active {
   }
   .bigger {
     display: none;
+  }
+
+  .col-xs--6 {
+    width: 75% !important;
+  }
+
+  #calend_div {
+    background-color: white;
+    margin-right: calc(100%/9) !important;
+    margin-bottom: 100px;
   }
 
   .smaller {

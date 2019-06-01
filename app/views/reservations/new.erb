@@ -1,0 +1,163 @@
+<div class="container">
+	<% if @reservation.nil? %>
+    <% @reservation = Reservation.new %>
+    <% @runs = [] %>
+  	<% @amenities = [] %>
+  	<% @kennel = current_user.kennel %>
+  	<% @runs = @kennel.runs %>
+  	<% @amenities = @kennel.amenities %>
+   <% end %>
+
+   <%= form_tag @reservation, method: :post, id: 'form', style: 'text-align: center' do %>
+	 <div class="row" style="margin-top: -40px;float: right;margin-right: 10px;"><span style="font-size: 25px;cursor: pointer;" onclick="location.href='/kennel_dashboard'">x</span></div>
+	 <p style="font-size: 20px !important; margin-top: 50px; margin-bottom: 50px;">Enter Reservation</p>
+		<p style="font-size: 20px !important;">Pet-Owner Info</p>
+		<br>
+			<%= hidden_field_tag "mobile", "true" %>
+			<p class="font-18">First name:</p>
+			<%= text_field_tag :customer_first_name, nil, placeholder: "", class: "form-control payment_input input_new_reserv margin-0-auto" %>
+			<br>
+			<p class="font-18">Last name:</p>
+			<%= text_field_tag :customer_last_name, nil, placeholder: "", class: "form-control payment_input input_new_reserv margin-0-auto"%>
+			<br>
+			<p class="font-18">Phone:</p>
+			<%= text_field_tag :customer_phone, nil, placeholder: "", class: "customer_phone form-control payment_input input_new_reserv margin-0-auto" %>
+			<br>
+			<p class="font-18">Email:</p>
+			<%= text_field_tag :customer_email, nil, placeholder: "", class: "form-control payment_input input_new_reserv margin-0-auto" %>
+			<br>
+			<section id="pets-section" style="font-family: Roboto; font-weight: normal !important; font-size: 18px !important;">
+			<br>
+			</section>
+				<p class="font-18">Select room units:</p>
+				<select id="room-units" multiple="multiple" name="room-units[]" class="input_new_reserv">
+					<% @runs.each do |run| %>
+						<option value="<%= run.id %>"><%= "#{run.title} ($#{run.price})"%></option>
+					<% end %>
+				</select>
+				<br>
+				<br>
+				<p class="font-18">Check-in (MM/DD/YYYY):</p>
+				<div class="check_in_resolution" style="width: auto; margin: 0 auto; margin-left: calc(100%/3 + 10px);">
+					<%= text_field_tag :month_in, nil, placeholder: "MM", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
+					<%= text_field_tag :day_in, nil, placeholder: "DD", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
+					<%= text_field_tag :year_in, nil, placeholder: "YYYY", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-left: 0px !important;' %>
+					<br>
+				</div>
+				<br>
+				<br>
+				<p class="font-18">Check-out (MM/DD/YYYY):</p>
+				<div class="check_in_resolution" style="width: auto; margin: 0 auto; margin-left: calc(100%/3 + 10px);">
+					<%= text_field_tag :month_out, nil, placeholder: "MM", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
+					<%= text_field_tag :day_out, nil, placeholder: "DD", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
+					<%= text_field_tag :year_out, nil, placeholder: "YYYY", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 140px; margin-left: 0px !important;' %>
+					<br>
+				</div>
+				<br>
+				<br>
+				<p class="font-18">Select amenities:</p>
+				<select id="amenities" multiple="multiple" name="amenities[]" class="input_new_reserv">
+					<% @amenities.each do |amenity| %>
+						<option value="<%= amenity.id %>"><%= "#{amenity.title} ($#{amenity.price})"%></option>
+					<% end %>
+				</select>
+				<br>
+				<br>
+				<% if !@reservation_errors.nil? %>
+					<% @reservation_errors.each do |error|%>
+						<p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+					<% end %>
+				<% end %>
+				<br>
+				<br>
+		<div class="form-actions">
+			<p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="text-align:center; float: none; margin:0; padding:0;">Save</p>
+			</div>  
+  <% end %>
+	<br>
+	<br>
+</div>
+
+
+<script type="text/javascript">
+
+	function close() {
+		console.log('here')
+		window.location.href="/kennel_dashboard";
+		location.reload();
+	};
+
+     function submitForm() {
+        $("#form").submit();
+    }
+
+    $(document).ready(function() {
+      $("#customer_phone").mask("(999) 999-9999");
+    })
+
+  function paymentChangeBreed(){
+    var total_pets = parseInt("<%= @total_pets %>");
+    while(total_pets > 0 ){
+      if ($("#pet_type_"+total_pets).val() == "dog"){
+        console.log($("#pet_type_"+total_pets).val());
+        $(".pet_breed_selection_"+total_pets).show();
+      } else {
+        $(".pet_breed_selection_"+total_pets).hide();
+      }
+      total_pets -= 1;
+    }
+  }
+
+  function addSelectedPetToForm(pet_number, name, cat_or_dog, breed, weight, vaccinations, spay_or_neutered, special_instructions){
+
+    // NEEDS TO BE SWITCHED TO TARGET CLASS SO BOTH MOBILE AND DESKTOP CHANGE
+    $(".pet_name_" + pet_number).val(name);
+    $(".pet_type_" + pet_number).val(cat_or_dog);
+    $(".pet_breed_" + pet_number).val(breed);
+    $(".pet_weight_" + pet_number).val(weight);
+    $(".pet_vaccinations_" + pet_number).val(vaccinations);
+    $(".pet_spay_or_neutered_" + pet_number).val(spay_or_neutered);
+    $(".pet_special_instructions_" + pet_number).val(special_instructions);
+
+    if(cat_or_dog == "cat"){
+      $(".pet_breed_selection_" + pet_number).hide();
+    } else {
+      $(".pet_breed_selection_" + pet_number).show();
+    }
+  }
+
+  $(document).ready(function() {
+    $('#pets').multiselect();
+    $('#room-units').multiselect();
+    $('#amenities').multiselect();
+
+
+
+    $("#customer_email").blur(function(){
+      // alert("This input field has lost its focus.");
+
+
+      $.ajax({
+          url: '/get_pets',
+          type: 'GET',
+          dataType: 'HTML',
+          data: {
+                  email: $('#customer_email').val(),
+                  customer_first_name: $('#customer_first_name').val(),
+                  customer_last_name: $('#customer_last_name').val(),
+                  customer_phone: $('#customer_phone').val()
+                 },
+          success: function(result) {
+            // console.log(result);
+            $('#pets-section').html(result);
+            $('#pets').multiselect();
+            $('#pets').multiselect('rebuild');
+
+          }
+        });
+    });
+  });
+
+
+
+</script>

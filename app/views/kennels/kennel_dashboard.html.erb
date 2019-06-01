@@ -1,6 +1,40 @@
 <%= render partial: "shared/top_info" %>
 <div class="container-fluid kennel_dashboard_container poppins_font">
   <div class="kennel_dashboard_desktop">
+    <div id="modal-window" class="modal modal-2 fade search_result_resolution" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document" style="margin-top: 100px;">
+          <div class="modal-content"></div>
+      </div>
+  </div>
+  <div id="modal-window2" class="modal modal-2 fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 35% !important;" >
+      <div class="modal-dialog" role="document" style="margin-top: 100px;">
+          <div class="modal-content"></div>
+      </div>
+  </div>
+  <% if !@reservation_errors.nil? %>
+    <div id="modal-window110" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left:calc(100%/3);">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <%= render :partial => "reservations/new", reservation_errors: @reservation_errors %>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(window).load(function () {
+        $('#modal-window110').modal('show');
+      });
+    </script>
+  <% end %>
+<div id="modal-window3" class="modal modal-2 fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="margin-top: 100px;">
+        <div class="modal-content"></div>
+    </div>
+</div>
+<div id="modal-window1" class="modal fade modal-2 add_booking_resolution" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="margin-top: 100px;">
+      <div class="modal-content"></div>
+  </div>
+</div>
     <div class="bigger">
       <div class="row">
         <div class="col-md-4">
@@ -116,20 +150,7 @@
           </div>
         </div>
         <div class="col-md-8" id="booking_row" >
-          <% if !@reservation_errors.nil? %>
-                <div id="modal-window110" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-left:calc(100%/3);">
-                <div class="modal-dialog" role="document">
-									<div class="modal-content">
-									<%= render :partial => "reservations/new", reservation_errors: @reservation_errors %>
-									</div>
-                </div>
-            	</div>
-              <script>
-                $(window).load(function () {
-                  $('#modal-window110').modal('show');
-                  });
-              </script>
-            <% end %>
+          
           <div class="row">
               <% if !@kennel.nil? && @changed_time == true && !@kennel_run.nil? %>
                  <div id="booking_buttonn" class="col-md-2 kennel_top kennel_button booking_button" style="width: 150px !important;padding-top: 10px;padding-left: 25px; margin-right: unset !important; margin-bottom: unset !important; margin-left: 130px; margin-top: 200px !important;">
@@ -140,11 +161,6 @@
                   <p style="color: lightgrey !important; padding-left:5px;">Add a Booking</p>
                 </div>
               <% end %>
-              <div id="modal-window1" class="modal fade modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-                <div class="modal-dialog" role="document" style="margin-top: 100px;">
-                    <div class="modal-content"></div>
-                </div>
-              </div>
               <div class="kennel_dashboard_res_search", style="float: right !important; margin-right: 200px; width:650px;">
                 <%= form_tag({controller: 'kennels', action: 'kennel_dashboard'}, method: 'get', :remote => true ) do %>
                   <%= text_field_tag :reservation_search, nil, placeholder: "", class: "kennel_dashboard_input_desktop", style: "margin-top: 20px;height: 50px; width:57% !important;" %>
@@ -155,16 +171,6 @@
                     <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_email") %> Email</span>
                     <span id="last_span" class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_phone") %> Phone</span>
                   </div>
-                  <div id="modal-window" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document" style="margin-top: 100px;">
-                        <div class="modal-content"></div>
-                    </div>
-                </div>
-                <div id="modal-window2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document" style="margin-top: 100px;">
-                        <div class="modal-content"></div>
-                    </div>
-                </div>
               <% end %>
               </div>
           </div>
@@ -200,11 +206,6 @@
                 <br>
               <% else %>
                 <%= link_to "View", kennel_reservations_path(reservation_ids: res_counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window3', class: 'text_info link_edit', style: 'float: none !important;'} %>
-                <div id="modal-window3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document" style="margin-top: 100px;">
-                        <div class="modal-content"></div>
-                    </div>
-                </div>
               <% end %>
             <% end %>
             <!-- End of Kennel Dashboard monthly_calendar container -->
@@ -219,7 +220,7 @@
           <div class="row">
             <div class="main_info" id="main_main">
                 <% if @kennel.nil? %>
-                <p style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
+                <p id="getting" style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
                 <br>
                 <span id="register" style="padding-left: 50px;float: left;margin-right: 100px;">— Register your kennel.</span>
                 <span id="modify" style="padding-left: 50px;float: left;margin-right: 100px;">— Modify your hours of operation.</span>
@@ -227,12 +228,12 @@
                 <br>
                 <p style="color: green;float: left;padding-left: 10px;">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
                 <br>
-                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                <div class="kennel_button booking_button" style="width: 150px !important; padding-top: 10px;">
                   <%= link_to "Register My Kennel", kennels_path(tab: 'kennel'), class: 'a_as_button', style:"color: white; " %>
                 </div>
               <% end %>
               <% if !@kennel.nil? && @changed_time == false && @kennel_run.nil? %>
-                <p style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
+                <p id="getting" style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
                 <br>
                 <span id="register" style="padding-left: 50px;float: left;margin-right: 100px;"><i class="fa fa-check" aria-hidden="true" style="color: green;padding-right:10px;"></i>Register your kennel.</span>
                 <span id="modify" style="padding-left: 50px;float: left;margin-right: 100px;">— Modify your hours of operation.</span>
@@ -240,12 +241,12 @@
                 <br>
                 <p style="color: green;float: left;padding-left: 10px;">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
                 <br>
-                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                <div class="kennel_button booking_button" style="width: 150px !important; padding-top: 10px;">
                   <%= link_to "Manage My Kennel", kennels_path(tab: 'owner'), class: 'a_as_button', style:"color: white; " %>
                 </div>
               <% end %>
               <% if !@kennel.nil? && @changed_time == true && @kennel_run.nil? %>
-                <p style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
+                <p id="getting" style="color: green; padding-top: 10px;font-size: 18px;float: left;padding-right: 200px;padding-left: 20px;">Getting started:<p>
                 <br>
                 <span id="register" style="padding-left: 50px;float: left;margin-right: 100px;"><i class="fa fa-check" aria-hidden="true" style="color: green;padding-right:10px;"></i>Register your kennel.</span>
                 <span id="modify" style="padding-left: 50px;float: left;margin-right: 100px;"><i class="fa fa-check" aria-hidden="true" style="color: green;padding-right:10px;"></i>Modify your hours of operation.</span>
@@ -253,14 +254,14 @@
                 <br>
                 <p style="color: green;float: left;padding-left: 10px;">Once these steps are complete, you are eligible to be searched by Pet-Owners.</p>
                 <br>
-                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;margin-top: 60px !important;">
+                <div class="kennel_button booking_button" style="width: 150px !important; padding-top: 10px;">
                   <%= link_to "Manage My Kennel", kennels_path(tab: 'owner'), class: 'a_as_button', style:"color: white; " %>
                 </div>
               <% end %>
               <% if !@kennel.nil? && @changed_time == true && !@kennel_run.nil? %>
                 <h3 class="kennel_info_style_h3"> <%= @kennel.name %> </h3>
-                <p class="kennel_info_p" style="padding-bottom:10px;"> <%= "#{@kennel.address} #{@kennel.city}, #{@kennel.state} #{@kennel.zip}"%></p>
-                <div class="kennel_button booking_button" style="width: 150px !important; margin: 0 auto !important; padding-top: 10px;">
+                <p class="kennel_info_p"> <%= "#{@kennel.address} #{@kennel.city}, #{@kennel.state} #{@kennel.zip}"%></p>
+                <div id="profile_full_button" class="kennel_button booking_button" style="width: 150px !important; padding-top: 10px;">
                   <%= link_to "Manage My Kennel", kennels_path(id: @kennel.id), style:"color: white;", class: 'a_as_button' %>
                 </div>
               <% end %>
@@ -270,7 +271,7 @@
             <div class="base_kennel kennel_check_in">
               <p class="kennel_info_p check_info" style="padding-bottom: 10px;"> Check-in Today </p>
               <% if !@kennel.nil? %>
-              <table class="kennel_grey_list" >
+              <table class="kennel_grey_list" style="width:95% !important;">
                 <% if @check_in_today.length == 0 %>
                   <p style="font-size: 18px;padding-top: 30px;">You don't have any check-in today</p>
                 <% end %>
@@ -295,7 +296,7 @@
             <div class="base_kennel kennel_check_in kennel_check_out">
               <p class="kennel_info_p check_info" style="padding-bottom: 10px; margin-bottom:10px;"> Check-out Today </p>
               <% if !@kennel.nil? %>
-              <table class="kennel_grey_list" >
+              <table class="kennel_grey_list" style="width:95% !important;">
                 <% if @check_out_today.length == 0 %>
                   <p style="font-size: 18px;padding-top: 30px;">You don't have any check-out today</p>
                 <% end %>
@@ -318,7 +319,7 @@
           </div>
           <div class="row">
             <% if !@reservations.nil? %>
-            <div class="base_kennel text-center chart_kennel">
+            <div class="base_kennel text-center chart_kennel" style="width:320px !important;">
               <p class="kennel_info_p check_info center_text">Most Booked Rooms</p>
               <div class="chart">
                 <%= pie_chart @run_names_and_counts, colors: ["green", "grey", "orange", "blue"], library: {legend: {position: "right", align: 'center'}, lineWidths: '10px', chartArea:{right: '20px', width: '80%'}}  %>
@@ -330,37 +331,28 @@
         <div class="col-md-8" id="booking_row" >
           <div class="row">
             <div class="row">
-              <div class="kennel_dashboard_res_search", style="float: right !important; margin-right: 200px; width:650px;">
-                <%= form_tag({controller: 'kennels', action: 'kennel_dashboard'}, method: 'get', :remote => true ) do %>
+              <div class="kennel_dashboard_res_search", style="margin-right: 200px; width:650px;">
+                <%= form_tag({controller: 'kennels', action: 'search_reservations'}, method: 'get' ) do %>
                   <%= text_field_tag :reservation_search, nil, placeholder: "", class: "kennel_dashboard_input_desktop", style: "margin-top: 20px;height: 50px; width:57% !important;" %>
-                  <%= submit_tag "Search Now", class: "kennel_button", 'data-toggle' =>  "modal", 'data-target' => '#modal-window' %>
+                  <%= submit_tag "Search Now", class: "kennel_button" %>
                   <div class="spans_kennel", style="float: left; margin-left: 20px;margin-top: 10px;">
                     <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "reservationID", active: true) %> ReservationID</span>
                     <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_last_name") %> Last Name</span>
                     <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_email") %> Email</span>
                     <span id="last_span" class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_phone") %> Phone</span>
                   </div>
-                  <div id="modal-window" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document" style="margin-top: 100px;">
-                        <div class="modal-content"></div>
-                    </div>
-                </div>
-                <div id="modal-window2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document" style="margin-top: 100px;">
-                        <div class="modal-content"></div>
-                    </div>
-                </div>
               <% end %>
               </div>
               <div class="row">
-                <div id="booking_buttonn" class="kennel_top kennel_button booking_button" style="width: 150px !important;padding-top: 10px;padding-left: 25px; margin-right: unset !important; margin-bottom: unset !important; margin-left: 130px; margin-top: 200px !important;">
-                  <%= link_to "Add a Booking", new_reservation_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window1',style:"color: white;", class: 'a_as_button'} %>
+                <% if !@kennel.nil? && @changed_time == true && !@kennel_run.nil? %>
+                 <div id="booking_buttonn" class="kennel_top kennel_button booking_button" style="width: 150px !important;padding-top: 10px;padding-left: 25px; margin-right: unset !important; margin-bottom: unset !important; margin: 0 auto !important; margin-top: 70px !important;">
+                  <%= link_to "Add a Booking", new_reservation_path(mobile: true), style:"color: white;", class: 'a_as_button' %>
                 </div>
-                <div id="modal-window1" class="modal fade modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-                  <div class="modal-dialog" role="document" style="margin-top: 100px;">
-                      <div class="modal-content"></div>
-                  </div>
+              <% else %>
+                <div id="booking_buttonn" class="kennel_top kennel_button booking_button" style="width: 150px !important;padding-top: 10px;padding-left: 25px; margin-right: unset !important; margin-bottom: unset !important; background-color: darkgrey !important;margin: 0 auto !important; margin-top: 70px !important;">
+                  <p style="color: lightgrey !important; padding-left:5px;">Add a Booking</p>
                 </div>
+              <% end %>
               </div>
               </div>
           </div>
@@ -396,11 +388,6 @@
                 <br>
               <% else %>
                 <%= link_to "View", kennel_reservations_path(reservation_ids: res_counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window3', class: 'text_info link_edit', style: 'float: none !important;'} %>
-                <div id="modal-window3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document" style="margin-top: 100px;">
-                        <div class="modal-content"></div>
-                    </div>
-                </div>
               <% end %>
             <% end %>
             <!-- End of Kennel Dashboard monthly_calendar container -->
@@ -525,14 +512,16 @@
       </div>
       <div class="col-md-10" id="booking_row" >
         <div class="row">
-                <div id="booking_buttonn" class="kennel_top kennel_button booking_button" style="padding-top: 10px;padding-left: 25px; ">
+          <% if !@kennel.nil? && @changed_time == true && !@kennel_run.nil? %>
+                 <div id="booking_buttonn" class="kennel_top kennel_button booking_button" style="padding-top: 10px;padding-left: 25px;">
                   <%= link_to "Add a Booking", new_reservation_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window1',style:"color: white;", class: 'a_as_button'} %>
                 </div>
-              <div id="modal-window1" class="modal fade modal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-                <div class="modal-dialog" role="document" style="margin-top: 100px;">
-                    <div class="modal-content"></div>
+              <% else %>
+                <div id="booking_buttonn" class="kennel_top kennel_button booking_button" style="padding-top: 10px;padding-left: 25px; background-color: darkgrey !important;">
+                  <p style="color: lightgrey !important; padding-left:5px;">Add a Booking</p>
                 </div>
-              </div>
+              <% end %>
+
             </div>
         <div class="row">
             <div class="kennel_dashboard_res_search", style="margin-right: 200px; width:650px;">
@@ -545,16 +534,6 @@
                   <span class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_email") %> Email</span>
                   <span id="last_span" class="res_search_radio_btn_text"><%= radio_button_tag(:search_by, "customer_phone") %> Phone</span>
                 </div>
-                <div id="modal-window" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document" style="margin-top: 100px;">
-                      <div class="modal-content"></div>
-                  </div>
-              </div>
-              <div id="modal-window2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document" style="margin-top: 100px;">
-                      <div class="modal-content"></div>
-                  </div>
-              </div>
             <% end %>
             </div>
         </div>
@@ -590,11 +569,6 @@
               <br>
             <% else %>
               <%= link_to "View", kennel_reservations_path(reservation_ids: res_counter, date: unsanitize_date(date.to_s), kennel_id: @kennel[:id]), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window3', class: 'text_info link_edit', style: 'float: none !important;'} %>
-              <div id="modal-window3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document" style="margin-top: 100px;">
-                      <div class="modal-content"></div>
-                  </div>
-              </div>
             <% end %>
           <% end %>
           <!-- End of Kennel Dashboard monthly_calendar container -->
@@ -621,14 +595,10 @@ $('.day').hover(function(){
     if($(window).width() < 1500) {
         $('#booking_row').addClass('col-md-10');
         $('#booking_row').addClass('col-md-8');
-        $('#calend_div').addClass('col-md-10');
         $('#calend_div').addClass('calendar_down');
-        $('#calend_div').removeClass('col-xs-6');
     }else{
         $('#booking_row').addClass('col-md-8');
         $('#booking_row').addClass('col-md-10');
-        $('#calend_div').addClass('col-xs-6');
-        $('#calend_div').removeClass('col-md-10');
         $('#calend_div').addClass('calendar_down');
     }
 })

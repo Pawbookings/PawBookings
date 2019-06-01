@@ -2,18 +2,39 @@
 
 <div class="container-fluid kennel_dashboard_desktop">
   <div class="row">
-    <div class="col-md-2">
-      <ul id="vert_ul" class="nav nav-pills nav-stacked vert_ul">
-        <li class="<%= @tab == 'owner' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_a" data-toggle="pill" style="background-color: transparent !important;">Owner Personal Info</a></li>
-        <li class="<%= @tab == 'kennel' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_b" data-toggle="pill" style="background-color: transparent !important;">Kennel Information</a></li>
-        <li class="<%= @tab == 'runs' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_c" data-toggle="pill" style="background-color: transparent !important;">Accomodations</a></li>
-        <li class="<%= @tab == 'amenities' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_d" data-toggle="pill" style="background-color: transparent !important;">Amenities</a></li>
-        <li class="<%= @tab == 'hours' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_e" data-toggle="pill" style="background-color: transparent !important;">Hours of Operation</a></li>
-        <li class="<%= @tab == 'holidays' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_f" data-toggle="pill" style="background-color: transparent !important;">Holidays</a></li>
-        <li class="<%= @tab == 'policies' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_g" data-toggle="pill" style="background-color: transparent !important;">Policies</a></li>
-        <li class="<%= @tab == 'breed' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_h" style="background-color: transparent !important;" data-toggle="pill">Breed Restrictions</a></li>
-        <li class="<%= @tab == 'photos' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_i" style="background-color: transparent !important;"  data-toggle="pill">Kennel Pictures</a></li>
-      </ul>
+    <div class="desktop">
+      <div class="col-md-2">
+        <ul id="vert_ul" class="nav nav-pills nav-stacked vert_ul">
+          <li class="<%= @tab == 'owner' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_a" data-toggle="pill" style="background-color: transparent !important;">Owner Personal Info</a></li>
+          <li class="<%= @tab == 'kennel' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_b" data-toggle="pill" style="background-color: transparent !important;">Kennel Information</a></li>
+          <li class="<%= @tab == 'runs' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_c" data-toggle="pill" style="background-color: transparent !important;">Accomodations</a></li>
+          <li class="<%= @tab == 'amenities' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_d" data-toggle="pill" style="background-color: transparent !important;">Amenities</a></li>
+          <li class="<%= @tab == 'hours' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_e" data-toggle="pill" style="background-color: transparent !important;">Hours of Operation</a></li>
+          <li class="<%= @tab == 'holidays' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_f" data-toggle="pill" style="background-color: transparent !important;">Holidays</a></li>
+          <li class="<%= @tab == 'policies' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_g" data-toggle="pill" style="background-color: transparent !important;">Policies</a></li>
+          <li class="<%= @tab == 'breed' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_h" style="background-color: transparent !important;" data-toggle="pill">Breed Restrictions</a></li>
+          <li class="<%= @tab == 'photos' ? 'active' : ''%> vert_li" onclick="changeVariables(this);"><a href="#tab_i" style="background-color: transparent !important;"  data-toggle="pill">Kennel Pictures</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="non-desktop">
+      <div class="col-md-12" style="margin-top: 130px;">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <ul id="vert_ul" class="nav navbar-nav" style="margin-left: calc(100%/8);">
+              <li class="<%= @tab == 'owner' ? 'active' : ''%> vert_li" onclick="changeVariables(this);" style="display: inline-block;"><a href="#tab_a" data-toggle="pill" style="background-color: transparent !important; color: white;">Owner Personal Info</a></li>
+              <li class="<%= @tab == 'kennel' ? 'active' : ''%> vert_li" onclick="changeVariables(this);" style="display: inline-block;"><a href="#tab_b" data-toggle="pill" style="background-color: transparent !important;color: white;">Kennel Information</a></li>
+              <li class="<%= @tab == 'runs' ? 'active' : ''%> vert_li" onclick="changeVariables(this);" style="display: inline-block;"><a href="#tab_c" data-toggle="pill" style="background-color: transparent !important;color: white;">Accomodations</a></li>
+              <li class="<%= @tab == 'amenities' ? 'active' : ''%> vert_li" onclick="changeVariables(this);" style="display: inline-block;"><a href="#tab_d" data-toggle="pill" style="background-color: transparent !important;color: white;">Amenities</a></li>
+              <li class="<%= @tab == 'hours' ? 'active' : ''%> vert_li" onclick="changeVariables(this);" style="display: inline-block;"><a href="#tab_e" data-toggle="pill" style="background-color: transparent !important;color: white;">Hours of Operation</a></li>
+              <li class="<%= @tab == 'holidays' ? 'active' : ''%> vert_li" onclick="changeVariables(this);" style="display: inline-block;"><a href="#tab_f" data-toggle="pill" style="background-color: transparent !important;color: white;">Holidays</a></li>
+              <li class="<%= @tab == 'policies' ? 'active' : ''%> vert_li" onclick="changeVariables(this);" style="display: inline-block;"><a href="#tab_g" data-toggle="pill" style="background-color: transparent !important;color: white;">Policies</a></li>
+              <li class="<%= @tab == 'breed' ? 'active' : ''%> vert_li" onclick="changeVariables(this);" style="display: inline-block;"><a href="#tab_h" style="background-color: transparent !important;color: white;" data-toggle="pill">Breed Restrictions</a></li>
+              <li class="<%= @tab == 'photos' ? 'active' : ''%> vert_li" onclick="changeVariables(this);" style="display: inline-block;"><a href="#tab_i" style="background-color: transparent !important;color: white;"  data-toggle="pill">Kennel Pictures</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </div>
     <div class="col-md-10">
       <div class="container_tabs">

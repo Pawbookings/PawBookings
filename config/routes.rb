@@ -59,6 +59,7 @@ Rails.application.routes.draw do
     get "/kennel_dashboard",   to: "kennels#kennel_dashboard",   as: :kennel_dashboard
     get "/kennel_reservations", to: "kennels#kennel_reservations", as: :kennel_reservations
     get "/kennel_view_pets", to: "kennels#kennel_view_pets", as: :kennel_view_pets
+    get '/search_reservations', to: "kennels#search_reservations", as: :search_reservations
     match "/kennel_searched_reservation", to: "kennels#kennel_searched_reservation", as: :kennel_searched_reservation, via: [:get, :post]
 
   # CustomersController

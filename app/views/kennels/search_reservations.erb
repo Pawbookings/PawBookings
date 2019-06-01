@@ -1,0 +1,116 @@
+<div class="container">
+<div class="row" style="margin-top: 20px;float: right;margin-right: 10px;"><span style="font-size: 25px;cursor: pointer;" onclick="location.href='/kennel_dashboard'">x</span></div>
+	 <p style="font-size: 20px !important; margin-top: 50px; margin-bottom: 50px; text-align: center;">Search Results</p>
+		<% if @reservation_search_results.nil?%>
+				<p>nothing</p>
+		<% else%>
+			<% @reservation_search_results.each_with_index do |res, ind| %>
+				<table class="reservation_table" style="margin-left: 0px !important;">
+				<tbody style="position: relative !important; margin: 0 auto; height: unset !important;">
+					<tr style="font-size: 18px !important; height: 80px;">
+						<td>
+							<p style="font-size: 18px; text-align:left; margin-left:60px; padding-top: 20px;"><strong>Name:</strong><%= " #{res.customer_first_name} #{res.customer_last_name}" %>
+							<br>
+							<br>
+							<strong>Room:</strong><%= " #{eval(res.room_details)[0][0]}" %></p>
+						</td>
+						<td>
+							<p style="font-size: 18px; text-align:left; margin-left:60px; margin-right: 20px; padding-top: 20px;"><strong>Check-in:</strong><%= " #{res.check_in_date}" %>
+							<br>
+							<br>
+							<strong>Check-out:</strong><%= " #{res.check_out_date}" %></p>
+						</td>
+					</tr>
+					<tr style=" margin-bottom: 20px; height: 40px; "><td colspan="2" style="font-size: 18px !important; color: #00F; cursor: pointer;" onclick="openClosed('<%= ind %>')">View</td></tr>   
+					<tr style="height:40px; background-color: white;"></tr>
+				</tbody>
+				</table>
+				<table  id="customer_<%= ind %>_tbody" style="display: none; position: relative; margin: 0 auto;" >
+				<tbody class="reservation_table" >
+					<tr style="font-size: 18px !important; height: 80px;">
+						<td>Res-ID: <%= res.id%></td>
+						<td>Name: <%= "#{res.customer_first_name.capitalize} #{res.customer_last_name.capitalize}"%></td>
+					</tr>
+					<tr style="font-size: 18px !important; height: 80px;">
+						<td>Email: <%= res.customer_email %></td>
+						<td>Phone: <%= number_to_phone(res.customer_phone, area_code: true) %></td>
+					</tr>
+					<tr style="font-size: 18px !important; height: 80px;">
+						<% JSON.parse(res[:room_details]).each do |title, price| %>
+                <td>
+                  <%= "Room details: #{title}" %>
+                </td>
+              <% end %>
+						<% if res[:amenity_details].blank? %>
+                <td>
+                  No Amenities Chosen.
+                </td>
+              <% else %>
+                <% hash = JSON.parse(res[:amenity_details]) rescue {}%>
+                <% hash.each do |title, description, price, quantity| %>
+                  <td>
+                    <%= "Amenity: #{title}" %>
+                  </td>
+                <% end %>
+              <% end %>
+					</tr>
+					<tr style="font-size: 18px !important; height: 80px;">
+						<td>Check-in date: <%= unsanitize_date(res.check_in_date.to_s) %></td>
+						<td>Check-out date: <%= unsanitize_date(res.check_out_date.to_s) %></td>
+					</tr>
+					<tr style=" margin-bottom: 20px; height: 40px; "><td colspan="2" style="font-size: 18px !important;"><%= "Total price: $#{res.total_price}" %></td></tr>   
+					<tr style="height:40px; background-color: white;"></tr>
+				<% @pets = [] %>
+				<% JSON.parse(res[:pet_ids]).each do |p_id| %>
+					<% if !Pet.find_by(id: p_id).nil? %>
+						<% pet = Pet.find(p_id) %>
+					<% 	@pets << pet %>
+					<% end %>
+				<% end %>
+				<% @pets.each_with_index do |pet, pet_ind| %>
+          <% if !pet.nil?%>
+							<tr style="font-size: 18px !important; height: 80px;">
+								<td>Name: <%= pet.name %></td>
+								<td>Cat or dog: <%= pet.cat_or_dog %></td>
+							</tr>
+							<tr style="font-size: 18px !important; height: 80px;">
+								<td>Breed: <%= pet.breed %></td>
+								<td>Weight: <%= pet.weight %></td>
+							</tr>
+							<tr style="font-size: 18px !important; height: 80px;">
+								<td>Spay or neutered: <%= pet.spay_or_neutered %></td>
+								<% if pet[:vaccinations] == "true" %>
+                    <% if pet[:vaccination_record_file_name].nil? %>
+                      <td>Did not upload record</td>
+                    <% else %>
+                      <td><%= link_to "#{pet[:vaccination_record_file_name]}", pet.vaccination_record.url, style: 'color: #0000FF;' %></td>
+                    <% end %>
+                  <% else %>
+                    <td>False</td>
+                  <% end %>
+							</tr style="font-size: 18px !important; height: 80px;">
+							<tr style=" margin-bottom: 20px; height: 40px; "><td colspan="2" style="font-size: 18px !important;">
+								<% if pet[:special_instructions].blank? %>
+                    n/a
+                  <% else %>
+                    <%= pet[:special_instructions] %>
+                  <% end %>
+							</td></tr>   
+							<tr style="height:40px; background-color: white;"></tr>
+						</tbody>
+				<% end %>
+				<% end %>
+			<% end %>
+		<% end %>
+  </table>
+</div>
+
+<script>
+	function openClosed(res_index) {
+		if($(`#customer_${res_index}_tbody`).css('display') == 'none') {
+			$(`#customer_${res_index}_tbody`).css('display', 'revert');
+		} else {
+			$(`#customer_${res_index}_tbody`).css('display', 'none');
+		}
+	}
+</script>

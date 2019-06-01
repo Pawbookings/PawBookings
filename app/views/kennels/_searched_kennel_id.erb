@@ -31,7 +31,7 @@
                   <%= "#{title}" %>
                 </td>
               <% end %>
-              <% if @reservation[:amenity_details].nil? %>
+              <% if @reservation[:amenity_details] == "" %>
                 <td class="kennel_reservation_td">
                   No Amenities Chosen.
                 </td>

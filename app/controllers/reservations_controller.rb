@@ -6,18 +6,22 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = Reservation.new
+    @reservation_errors = params[:reservation]
     @runs = []
   	@amenities = []
   	@kennel = current_user.kennel
   	@runs = @kennel.runs
-  	@amenities = @kennel.amenities
-    respond_to do |format|
-      format.html
-      format.js
+    @amenities = @kennel.amenities
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 
   def create
+    puts params
     user = User.find_by_email(params[:customer_email])
     run_ids = []
     pet_ids = []
@@ -33,11 +37,19 @@ class ReservationsController < ApplicationController
       end
       error_message << 'user' if user == nil
       error_message << 'room-unit' if !params['room-units'].present?
-      return redirect_to kennel_dashboard_path(reservation: error_message)
+      if params[:mobile].nil?
+        return redirect_to kennel_dashboard_path(reservation: error_message)
+      else
+        return redirect_to new_reservation_path(reservation: error_message)
+      end
     end
 
     if (!Date.valid_date? params[:year_in].to_i, params[:month_in].to_i, params[:day_in].to_i) || (!Date.valid_date? params[:year_out].to_i, params[:month_out].to_i, params[:day_out].to_i)
-      return redirect_to kennel_dashboard_path(reservation: 'dates')
+      if params[:mobile].nil?
+        return redirect_to kennel_dashboard_path(reservation: 'dates')
+      else
+        return redirect_to new_reservation_path(reservation: 'dates')
+      end
     end
 
     check_in_date_params = params[:month_in] + '/' +params[:day_in] +'/' + params[:year_in]
@@ -148,7 +160,11 @@ class ReservationsController < ApplicationController
       reservation.errors.each do |attr,err|
         error_message << attr
       end
-      redirect_to kennel_dashboard_path(reservation: error_message.uniq)
+      if params[:mobile].nil?
+        redirect_to kennel_dashboard_path(reservation: error_message.uniq)
+      else
+        redirect_to new_reservation_path(reservation: error_message.uniq)
+      end
     end
   end
 

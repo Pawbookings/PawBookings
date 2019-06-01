@@ -277,6 +277,12 @@ class KennelsController < ApplicationController
     end
   end
 
+  def search_reservations
+    puts params
+    @kennel = Kennel.where(user_id: current_user.id).first
+    @reservation_search_results = filter_reservation_search if !params[:search_by].blank?
+  end
+
   def kennel_view_pets
     @pets = []
     JSON.parse(params[:pet_ids]).each do |pet_id|
@@ -416,9 +422,11 @@ class KennelsController < ApplicationController
       end
     end
     @counter = @pets.length
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 

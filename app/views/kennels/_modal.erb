@@ -4,11 +4,12 @@
 </div>
 <div class="modal-body" style="height: 660px; margin-top:0 !important; background-color: white; float: none;
     text-align : center;">
-    <table class="reservation_table" style="width: 550px;">
+    <table class="reservation_table" style="width: 100%; margin-left: 0px !important;">
         <% if @reservation_search_results.nil?%>
             <p>nothing</p>
         <% else%>
         <% @reservation_search_results.each_with_index do |res, ind| %>
+        <tbody style="position: relative !important; height: unset !important;">
             <tr style="font-size: 18px !important; height: 80px;">
                 <td>
                     <p style="font-size: 18px; text-align:left; margin-left:60px"><strong>Name:</strong><%= " #{res.customer_first_name} #{res.customer_last_name}" %>
@@ -31,6 +32,7 @@
                 </div>
             </div>    
             <tr style="height:40px; background-color: white;"></tr>
+            </tbody>
         <% end %>
         <% end %>
     </table>
