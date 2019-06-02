@@ -1,18 +1,33 @@
-<%= render partial: "shared/top_info" %>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-12">
-      <h5 class="main_title arvo_font">Edit Existing Holiday</h5>
-      <div class="edit_holiday_div">
-        <%= form_for(@holiday, {action: :update}) do |f| %>
-          <%= f.text_field :holiday_date, class:"kennel_dashboard_input holiday_datepicker" %>
-          <br />
-          <%= f.text_field :description, class:"kennel_dashboard_input" %>
-          <br />
-          <%= f.submit "Submit", class:"btn btn-success" %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+<div class="container">
+  <% @holiday ||= Holiday.find(@holiday_id) %>
+  <%= form_for @holiday, html: {multipart: true, id:'form2', style: 'text-align: center;'} do |f| %>
+    <div class="row" style="margin-top: -40px;float: right;margin-right: 10px;"><span style="font-size: 25px;cursor: pointer;" onclick="location.href='/kennels?tab=holidays'">x</span></div>
+	 	<p style="font-size: 20px !important; margin-top: 50px; margin-bottom: 50px;">Edit Existing Holiday</p>
+    <br>
+    <%= f.hidden_field :mobile, value: true %>
+    <p class="font-18">Title:</p>
+    <%= f.text_field :description, placeholder: 'Title', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+    <br>
+    <p class="font-18">Holiday date (MM/DD/YYYY):</p>
+    <%= f.text_field :holiday_date, placeholder: 'Description', class: "form-control payment_input input_new_reserv black_18 margin-0-auto"%>
+    <br>
+    <% @holiday_update ||= params[:holiday_update] %>
+    <% if !@holiday_update.nil? %>
+      <% @holiday_update.each do |error|%>
+        <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+      <% end %>
+    <% end %>
+    <br>
+    <br>
+    <div class="form-actions">
+      <p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="margin-top: -5px !important; margin-right: 0 !important; margin-left: 0 !important; text-align: center; padding-left: 0px !important;">Save</p>
+          <%= link_to "Delete", holiday_path(@holiday.id), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, style: 'color: red !important; font-weight: bold; font-size: 16px; text-align: center; display: block;'%>
+      </div> 
+  <% end %>
 </div>
+
+<script type="text/javascript">
+     function submitForm() {
+        $("#form2").submit();
+    }
+	</script>

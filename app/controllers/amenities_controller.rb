@@ -3,17 +3,26 @@ class AmenitiesController < ApplicationController
 
   def new
     @amenity = Amenity.new
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @amenity_create = params[:amenity_create]
     end
   end
 
   def edit
     @amenity = Amenity.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @amenity_update = params[:amenity_update]
+      @amenity_id = params[:amenity_id]
     end
   end
 
@@ -27,7 +36,11 @@ class AmenitiesController < ApplicationController
       amenity.errors.each do |attr, err|
         error_message << attr
       end
-      return redirect_to kennels_path(tab: 'amenities', amenity_create: error_message.uniq)
+      if params[:amenity][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'amenities', amenity_create: error_message.uniq)
+      else
+        redirect_to new_amenity_path(mobile: true, amenity_create: error_message.uniq)
+      end
     end
   end
 
@@ -44,7 +57,11 @@ class AmenitiesController < ApplicationController
       amenity.errors.each do |attr, err|
         error_message << attr
       end
-      return redirect_to kennels_path(tab: 'amenities', amenity_update: error_message.uniq, amenity_id: amenity.id)
+      if params[:amenity][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'amenities', amenity_update: error_message.uniq, amenity_id: amenity.id)
+      else
+        redirect_to edit_amenity_path(mobile: true, amenity_update: error_message.uniq, amenity_id: amenity.id)
+      end
     end
   end
 

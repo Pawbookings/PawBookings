@@ -1,0 +1,22 @@
+<div class="container">
+  <% @breed_restriction ||= BreedRestriction.new %>
+  <%= form_for @breed_restriction, html: {multipart: true, style: 'text-align: center;'}, id:'form4' do |f| %>
+    <div class="row" style="margin-top: -40px;float: right;margin-right: 10px;"><span style="font-size: 25px;cursor: pointer;" onclick="location.href='/kennels?tab=breed'">x</span></div>
+	 	<p style="font-size: 20px !important; margin-top: 50px; margin-bottom: 50px;">Add New Breed Restriction</p>
+    <br>
+    <%= f.hidden_field :mobile, value: true %>
+    <p class="font-18">Breed:</p>
+    <%= f.text_field :breed, placeholder: 'Breed', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+    <br>
+    <% @breed_create ||= params[:breed_create] %>
+    <% if !@breed_create.nil? %>
+      <% @breed_create.each do |error|%>
+        <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+      <% end %>
+    <% end %>
+    <br>
+    <br>
+        <%= f.submit "Save", class:'text_info bold-text link_edit vet_link submit_link font-20', style:"border: none;text-align:center; float: none; margin:0; padding:0; background-color: transparent" %> 
+    <br>
+  <% end %>
+</div>

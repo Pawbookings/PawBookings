@@ -4,12 +4,16 @@ class KennelsController < ApplicationController
 
   def new
     @kennel = Kennel.new
-    respond_to do |format|
-      format.html
-      format.js {
-        render :template => "kennels/modals/new_kennel.js", 
-           :layout => false 
-      }
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js {
+          render :template => "kennels/modals/new_kennel.js", 
+            :layout => false 
+        }
+      end
+    else
+      @kennel_create = params[:kennel_create]
     end
   end
 
@@ -79,18 +83,26 @@ class KennelsController < ApplicationController
       kennel.errors.each do |attr,err|
         error_message << attr
       end
-      return redirect_to kennels_path(tab: 'kennel', kennel_create: error_message.uniq)
+      if params[:kennel][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'kennel', kennel_create: error_message.uniq)
+      else
+        redirect_to new_kennels_path(mobile: true, kennel_create: error_message.uniq)
+      end
     end
   end
 
   def edit
     @kennel = Kennel.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.js {
-        render :template => "kennels/modals/edit_kennel_info.js", 
-           :layout => false 
-      }
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js {
+          render :template => "kennels/modals/edit_kennel_info.js", 
+            :layout => false 
+        }
+      end
+    else
+      @kennel_update = params[:kennel_update]
     end
   end
 
@@ -114,7 +126,11 @@ class KennelsController < ApplicationController
       kennel.errors.each do |attr, err|
         error_message << attr
       end
-      redirect_to kennels_path(tab: 'kennel', kennel_update: error_message.uniq)
+      if params[:mobile] != 'true'
+        redirect_to kennels_path(tab: 'kennel', kennel_update: error_message.uniq)
+      else
+        redirect_to edit_kennel_path(id: kennel, mobile: true, kennel_update: error_message.uniq)
+      end
     end
   end
 

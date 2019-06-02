@@ -3,17 +3,26 @@ class BreedRestrictionsController < ApplicationController
 
   def new
     @breed_restriction = BreedRestriction.new
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @breed_create = params[:breed_create]
     end
   end
 
   def edit
     @breed_restriction = BreedRestriction.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @breed_update = params[:breed_update]
+      @breed_id = params[:breed_id]
     end
   end
 
@@ -27,7 +36,11 @@ class BreedRestrictionsController < ApplicationController
       breed_restriction.errors.each do |attr,err|
         error_message << attr
       end
-      redirect_to kennels_path(tab: 'breed', breed_create: error_message.uniq)
+      if params[:breed_restriction][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'breed', breed_create: error_message.uniq)
+      else
+        redirect_to new_breed_restriction_path(mobile: true, breed_create: error_message.uniq)
+      end
     end
   end
 
@@ -42,8 +55,11 @@ class BreedRestrictionsController < ApplicationController
       breed_restriction.errors.each do |attr, err|
         error_message << attr
       end
-
-      return redirect_to kennels_path(tab: 'breed', breed_update: error_message.uniq, breed_id: breed_restriction.id)
+      if params[:breed_restriction][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'breed', breed_update: error_message.uniq, breed_id: breed_restriction.id)
+      else
+        redirect_to edit_breed_restriction_path(mobile: true, breed_update: error_message.uniq, breed_id: breed_restriction.id)
+      end
     end
   end
 

@@ -1,0 +1,30 @@
+<div class="container">
+  <% @photo ||= Photo.find(@photo_id) %>
+  <%= form_for @photo, html: { multipart: true, id:'form', style: 'text-align: center;'} do |f| %>
+    <div class="row" style="margin-top: -40px;float: right;margin-right: 10px;"><span style="font-size: 25px;cursor: pointer;" onclick="location.href='/kennels?tab=photos'">x</span></div>
+	 	<p style="font-size: 20px !important; margin-top: 50px; margin-bottom: 50px;">Edit Existing Photo</p>
+    <br>
+    <%= f.hidden_field :mobile, value: true %>
+    <div style="margin-top:180px">
+      <p class="font-18">Kennel photo:</p>
+      <%= f.file_field :image, class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+      <br>
+    </div>
+    <br>
+    <% @photo_update ||= params[:photo_update] %>
+    <% if !@photo_update.nil? %>
+        <p style="color:red; font-weight: bold;"><%= "Image is invalid" %></p>
+        <% end %>
+    <br>
+    <div class="form-actions">
+      <p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="margin-top: -5px !important; margin-right: 0 !important; margin-left: 0px !important; text-align: center; padding-left: 0 !important;">Save</p>
+        <%= link_to "Delete", photo_path(@photo.id), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, style: 'color: red !important; font-weight: bold; font-size: 16px; text-align: center; display: block;'%>
+      </div> 
+  <% end %>
+</div>
+
+<script type="text/javascript">
+     function submitForm() {
+        $("#form").submit();
+    }
+		</script>

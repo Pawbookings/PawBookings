@@ -1,0 +1,36 @@
+<div class="container">
+  <% @amenity ||= Amenity.find(@amenity_id) %>
+  <%= form_for @amenity, html: {multipart: true, id:'form2', style: 'text-align: center;'} do |f| %>
+    <div class="row" style="margin-top: -40px;float: right;margin-right: 10px;"><span style="font-size: 25px;cursor: pointer;" onclick="location.href='/kennels?tab=amenities'">x</span></div>
+	 	<p style="font-size: 20px !important; margin-top: 50px; margin-bottom: 50px;">Edit Existing Amenity</p>
+    <br>
+    <%= f.hidden_field :mobile, value: true %>
+    <p class="font-18">Title:</p>
+    <%= f.text_field :title, placeholder: 'Title', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+    <br>
+    <p class="font-18">Description:</p>
+    <%= f.text_field :description, placeholder: 'Description', class: "form-control payment_input input_new_reserv black_18 margin-0-auto"%>
+    <br>
+    <p class="font-18">Price:</p>
+    <%= f.text_field :price, placeholder: 'Price', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+    <br>
+    <% @amenity_update ||= params[:amenity_update] %>
+    <% if !@amenity_update.nil? %>
+      <% @amenity_update.each do |error|%>
+        <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+      <% end %>
+    <% end %>
+    <br>
+    <br>
+    <div class="form-actions">
+      <p onclick="return submitForm()", class="text_info bold-text link_edit vet_link submit_link font-20", style="margin-top: -5px !important; margin-right: 0 !important; margin-left: 0px !important; padding-left: 0 !important; text-align: center;">Save</p>
+          <%= link_to "Delete", amenity_path(@amenity.id), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }, style: 'color: red !important; font-weight: bold; font-size: 16px;'%>
+      </div> 
+  <% end %>
+</div>
+
+<script type="text/javascript">
+     function submitForm() {
+        $("#form2").submit();
+    }
+</script>

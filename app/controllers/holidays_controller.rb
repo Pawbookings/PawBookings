@@ -3,17 +3,26 @@ class HolidaysController < ApplicationController
 
   def new
     @holiday = Holiday.new
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @holiday_create = params[:holiday_create]
     end
   end
 
   def edit
-    @holiday = Holiday.fint(params[:id])
-    respond_to do |format|
-      format.html
-      format.js
+    @holiday = Holiday.find(params[:id])
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @holiday_update = params[:holiday_update]
+      @holiday_id = params[:holiday_id]
     end
   end
 
@@ -23,7 +32,11 @@ class HolidaysController < ApplicationController
       errors << 'title' if params[:holiday][:description] == ''
       errors << 'date'
 
-      return redirect_to kennels_path(tab: 'holidays', holiday_create: errors)
+      if params[:holiday][:mobile] != 'true'
+        return redirect_to kennels_path(tab: 'holidays', holiday_create: errors)
+      else
+        return redirect_to new_holiday_path(mobile: true, holiday_create: errors)
+      end
     end
 
     sanitize_date(params[:holiday][:holiday_date])
@@ -38,12 +51,12 @@ class HolidaysController < ApplicationController
       holiday.errors.each do |attr,err|
         error_message << attr
       end
-      redirect_to kennels_path(tab: 'holidays', holiday_create: error_message.uniq)
+      if params[:holiday][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'holidays', holiday_create: error_message.uniq)
+      else
+        redirect_to new_holiday_path(mobile: true, holiday_create: error_message.uniq)
+      end
     end
-  end
-
-  def edit
-    @holiday = Holiday.find(params[:id])
   end
 
   def update
@@ -52,14 +65,19 @@ class HolidaysController < ApplicationController
       errors = []
       errors << 'title' if params[:holiday][:description] == ''
       errors << 'date'
-
-      return redirect_to kennels_path(tab: 'holidays', holiday_update: errors, holiday_id: holiday.id)
+      
+      if params[:holiday][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'holidays', holiday_update: errors, holiday_id: holiday.id)
+      else
+        redirect_to edit_holiday_path(mobile: true, holiday_update: errors, holiday_id: holiday.id)
+      end
     end
 
     sanitize_date(params[:holiday][:holiday_date])
     params[:holiday][:holiday_date] = Date.parse(@new_date)
     holiday.holiday_date = params[:holiday][:holiday_date]
     holiday.description = params[:holiday][:description]
+
     if holiday.save
       flash[:notice] = "Your Holiday was updated successfully!"
       redirect_to kennels_path(tab: 'holidays', holiday: nil)
@@ -68,8 +86,11 @@ class HolidaysController < ApplicationController
       holiday.errors.each do |attr, err|
         error_message << attr
       end
-
-      return redirect_to kennels_path(tab: 'holidays', holiday_update: error_message.uniq, holiday_id: holiday.id)
+      if params[:holiday][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'holidays', holiday_update: error_message.uniq, holiday_id: holiday.id)
+      else
+        redirect_to edit_holiday_path(mobile: true, holiday_update: error_message.uniq, holiday_id: holiday.id)
+      end
     end
   end
 

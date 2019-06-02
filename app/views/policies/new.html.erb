@@ -1,79 +1,25 @@
-<%= render partial: "shared/top_info" %>
-
-<div class="container-fluid">
-  <div class="row text-center dashboard_default_background_color">
-    <h5 class="main_title arvo_font">Policies</h5>
-    <%= link_to "View Existing", "#edit_existing" if !@policies.blank? %>
-    <br />
-    <br />
-  </div>
-</div>
-<div class="border"></div>
-<div class="border"></div>
-<br />
 <div class="container">
-  <div class="row text-center">
-    <div class="col-xs-12">
-      <div class="br_if_desktop"><br /></div>
-      <%= render partial: "shared/kennel_dashboard_option_btn_div" %>
-      <div class="br_if_desktop"><br /></div>
-      <br />
-      <div class="policy_registration_div">
-        <h3 class="default_green_color poppins_font text_underline">Add New</h3>
-        <br />
-        <%= form_for @policy do |f| %>
-          <%= f.label :title, "Policy Title" %>
-          <br />
-          <%= f.text_field :title, placeholder: " Vaccination Policy", class:"kennel_dashboard_input", maxlength: 100 %>
-          <br />
-          <%= f.label :description, "Policy Description" %>
-          <br />
-          <%= f.text_area :description, placeholder: " All Pets must show vaccination records before arrival.", class:"kennel_dashboard_input", maxlength: 300 %>
-          <br>
-          <br>
-          <br>
-          <%= f.submit "Add Policy", class:"btn btn-success" %>
-          <%= f.submit "Save and Add Another Policy", class:"btn btn-success", name: "create_another_policy" %>
-          <br>
-          <br>
-          <br>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="border"></div>
-  <br />
-  <div id="edit_existing" class="row text-center">
-    <div class="all_policies_div">
-      <% if !@policies.blank? %>
-        <h3 class="default_green_color poppins_font text_underline">Edit Existing</h3>
-        <br />
-        <% @policies.each do |policy| %>
-          <div class="col-sm-6 col-xs-4 col-md-3">
-            <%= form_for(policy, url: {action: :update, id: policy[:id]}) do |f| %>
-              <%= f.label :title %>
-              <br />
-              <%= f.text_field :title, class:"kennel_dashboard_input_edit", value: policy[:title], maxlength: 100 %>
-              <br />
-              <%= f.label :policy_description %>
-              <br />
-              <%= f.text_area :description, class:"kennel_dashboard_input_edit", value: policy[:description], maxlength: 300 %>
-              <br />
-              <br />
-              <%= f.submit "Update", class:"btn btn-primary" %>
-              <br />
-              <br />
-            <% end %>
-            <%= button_to "Delete", policy_path(policy[:id]), data: {confirm: "Are you sure you want to delete this policy?"}, class:"btn btn-danger", method: :delete %>
-            <br />
-            <br />
-            <br />
-          </div>
-        <% end %>
+  <% @policy ||= Policy.new %>
+  <%= form_for @policy, html: {multipart: true, style: 'text-align: center;'}, id:'form4' do |f| %>
+    <br>
+    <div class="row" style="margin-top: -40px;float: right;margin-right: 10px;"><span style="font-size: 25px;cursor: pointer;" onclick="location.href='/kennels?tab=policies'">x</span></div>
+	 	<p style="font-size: 20px !important; margin-top: 50px; margin-bottom: 50px;">Add New Policy</p>
+    <%= f.hidden_field :mobile, value: true %>
+    <p class="font-18">Policy Title:</p>
+    <%= f.text_field :title, placeholder: 'Policy title', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+    <br>
+    <p class="font-18">Description:</p>
+    <%= f.text_field :description, placeholder: 'Description', class: "form-control payment_input input_new_reserv black_18 margin-0-auto"%>
+    <br>
+    <% @policy_create ||= params[:policy_create] %>
+    <% if !@policy_create.nil? %>
+      <% @policy_create.each do |error|%>
+        <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
       <% end %>
-    </div>
-  </div>
+    <% end %>
+    <br>
+    <br>
+        <%= f.submit "Save", class:'text_info bold-text link_edit vet_link submit_link font-20', style:"border: none;text-align:center; float: none; margin:0; padding:0; background-color: transparent" %> 
+    <br>
+  <% end %>
 </div>
-
-
-<%= render partial: "shared/footer" %>

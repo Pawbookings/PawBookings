@@ -6,6 +6,7 @@
   text-decoration:underline;
 }
 
+
 .kennel_reservation_td {
   border: none !important;
   border-top: solid black 1px !important;
@@ -363,7 +364,7 @@ a:active {
 
 .modal-2{
   position: absolute !important;
-  top: 45%;
+  top: 25%;
   left: 50% !important;
   right: unset;
   bottom: unset;
@@ -646,6 +647,44 @@ a:active {
   text-decoration: underline;
 }
 
+.icon-bar {
+  background-color: green;
+}
+
+@media (max-width: 1000px) {
+  .input_new_reserv {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin: 0 auto !important;
+  }
+
+  .link_edit {
+    float: unset !important;
+    margin: 0 auto !important;
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+    padding-left: 50px;
+  }
+
+  .show_smaller {
+    display: unset;
+  }
+
+  .show_bigger {
+    display: none;
+  }
+}
+
+@media (min-width: 1000px) {
+  .show_smaller {
+    display: none;
+  }
+
+  .show_bigger {
+    display: unset;
+  }
+}
+
 @media (min-width: 1300px) {
   .desktop {
     display: unset;
@@ -654,15 +693,101 @@ a:active {
   .non-desktop {
     display: none;
   }
+
+  .mobile-version {
+    display: none;
+  }
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1300px) and (min-width: 500px) {
   .desktop {
     display: none;
   }
 
   .non-desktop {
     display: unset;
+  }
+
+  .mobile-version {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .desktop {
+    display: none;
+  }
+
+  .non-desktop {
+    display: none;
+  }
+
+  .mobile-version {
+    display: unset;
+  }
+
+  .vert_li {
+    display: block !important;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+
+  #vert_url {
+    margin-left: 10px;
+  }
+}
+
+@media (min-width: 991px) {
+  #mission {
+    margin-right: 100px !important;
+    margin-bottom: 30px !important;
+  }
+
+  #add_new {
+    margin-bottom: 50px !important;
+  }
+}
+
+@media (max-width: 992px) {
+  #p_kennel_info, #mission {
+    float: unset !important;
+    margin: 0 !important;
+    margin-bottom: 10px !important;
+    padding-left: 0 !important;
+    text-align: center;
+  }
+
+  #mission { 
+    margin-bottom: 30px !important;
+  }
+
+  .small_button {
+    margin-top: 30px;
+  }
+
+  #kennel_edit_button {
+    float: unset !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  #kennel_cont, #runs_cont {
+    height: auto !important;
+  }
+
+  .pet_text {
+    text-align: center !important;
+  }
+
+  #edit_run {
+    margin: 0 !important;
+    float: none !important;
+    margin-left: 50px !important;
+  }
+
+  .like_a {
+    padding-left: 50px;
   }
 }
 
@@ -672,7 +797,7 @@ a:active {
   }
 
   #kennel_cont {
-    height: 550px !important;
+    /* height: 550px !important; */
   }
 
   #p_kennel_info {
@@ -680,22 +805,37 @@ a:active {
   }
 }
 
+.hours_div {
+  padding-top: 1px;
+  font-family: Roboto;
+  color: black;
+  position: relative;
+  width: 95%;
+  height: 580px;
+  padding-top: 20px;
+  margin-right: 150px;
+  float: left;
+  text-align: center;
+  background: #FFFFFF;
+  box-shadow: 0px 15px 12px rgba(0, 0, 0, 0.22), 0px 19px 38px rgba(0, 0, 0, 0.3), 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+}
+
 
 @media (max-width: 991px){
-
+  .hours_div {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+  
   .simple-calendar{
     display: none;
-  }
-
-  #runs_cont{
-    width: 100% !important;
   }
 
   .pet_container{
     width: 100% !important;
     margin-right: 0 !important;
     margin-left: 0 !important;
-
   }
 
   .main_info {
@@ -741,7 +881,7 @@ a:active {
     width: auto !important;
     margin: 0 auto !important;
     float: none !important;
-    height: 650px !important;
+    /* height: 650px !important; */
   }
 
   #amenity{
@@ -750,7 +890,6 @@ a:active {
 
   #runs_cont {
     width: auto;
-    height: 750px !important;
     margin-right: 50px !important;
     float: left !important;
     margin-left: unset !important;
@@ -765,13 +904,6 @@ a:active {
 
   #p_kennel_info{
     margin-left: unset !important;
-  }
-
-  #kennel_edit_button{
-    margin: 0 !important;
-    margin-top: 10px !important;
-    padding: 0;
-    margin-left: calc(100%/2 - 45px) !important;
   }
 
   .simple_calendar {
@@ -801,6 +933,11 @@ a:active {
     height: 181px;
     width: 301px;
   }
+
+  /* .hours_div {
+    margin-right: unset !important;
+    margin-left: calc(100%/2 - 180px) !important;
+  } */
 
  .kennel_reservation_mobile, .searched_res_mobile, .kennel_dashboard_mobile {
     display: none;

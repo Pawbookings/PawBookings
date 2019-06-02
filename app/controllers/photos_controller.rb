@@ -3,22 +3,37 @@ class PhotosController < ApplicationController
 
   def new
     @photo = Photo.new
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @photo_create = params[:photo_create]
     end
   end
 
   def edit
     @photo = Photo.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @photo_update = params[:photo_update]
+      @photo_id = params[:photo_id]
     end
   end
 
   def create
-    return redirect_to kennels_path(tab: 'photos', photo_create: ['image']) if params[:photo].nil?
+    if params[:photo].nil?
+      if params[:photo][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'photos', photo_create: ['image']) 
+      else
+        redirect_to new_photo_path(mobile: true, photo_create: ['image'])
+      end
+    end
 
     photo = Photo.new(photo_params)
     if kennel.photos.create!(kennel_id: kennel.id, image: photo.image)
@@ -29,8 +44,11 @@ class PhotosController < ApplicationController
       photo.errors.each do |attr, err|
         error_message << attr
       end
-
-      redirect_to kennels_path(tab: 'photos', photo_create: error_message.uniq)
+      if params[:photo][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'photos', photo_create: error_message.uniq)
+      else
+        redirect_to new_photo_path(mobile: true, photo_create: error_message.uniq)
+      end
     end
   end
 
@@ -45,7 +63,11 @@ class PhotosController < ApplicationController
       photo.errors.each do |attr, err|
         error_message << attr
       end
-      redirect_to kennels_path(tab: 'photos', photo_update: error_message.uniq, photo_id: photo.id)
+      if params[:photo][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'photos', photo_update: error_message.uniq, photo_id: photo.id)
+      else
+        redirect_to edit_photo_path(mobile: true, photo_update: error_message.uniq, photo_id: photo.id)
+      end
     end
   end
 

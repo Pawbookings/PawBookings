@@ -1,104 +1,69 @@
-<%= render partial: "shared/top_info" %>
-
-<div class="container-fluid">
-  <div class="row dashboard_default_background_color text-center">
-    <div class="col-xs-12">
-      <h5 class="main_title arvo_font">Register My Kennel:</h5>
-      <br />
-    </div>
-  </div>
-  <div class="border"></div>
-  <div class="border"></div>
-  <br />
-  <br />
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="kennel_registration_form_div text-center">
-        <%= form_for @kennel do |f| %>
-        <div class="row text-center">
-          <div class="col-md-2"></div>
-          <div class="col-md-4">
-            <%= f.hidden_field :taken_ownership, value: true %>
-            <%= f.label :name %>
-            <br />
-            <%= f.text_field :name, placeholder: " Kennel-Name", class: "kennel_dashboard_input_edit", maxlength: 50 %>
-            <br />
-            <br />
-            <%= f.label :pets_allowed %>
-            <br />
-            <%= f.select :cats_or_dogs, options_for_select(cat_or_dog_options), class: "kennel_dashboard_input_edit" %>
-            <br />
-            <br />
-            <%= f.label :address %>
-            <br />
-            <%= f.text_field :address, placeholder: " Address", class: "kennel_dashboard_input_edit", maxlength: 100 %>
-            <br />
-            <br />
-            <%= f.label :city %>
-            <br />
-            <%= f.text_field :city, placeholder: " City", class: "kennel_dashboard_input_edit", maxlength: 100 %>
-            <br />
-            <br />
-            <%= f.label :state %>
-            <br />
-            <%= f.select :state, options_for_select(states_options), class: "kennel_dashboard_input_edit" %>
-            <br />
-            <br />
-            <div class="row text-center">
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-                <%= f.label :kennel_logo %>
-              </div>
-            </div>
-            <div class="row text-center">
-              <div class="col-md-4">
-                <%= f.file_field :avatar, class: "text-center btn btn-primary" %>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <%= f.label :zip %>
-            <br />
-            <%= f.text_field :zip, placeholder: " Zip", class: "kennel_dashboard_input_edit", onkeypress: "return isNumber(event);", maxlength: 5 %>
-            <br />
-            <br />
-            <%= f.label :phone, "Phone where Pet-Owners can reach you at" %>
-            <br />
-            <%= f.text_field :phone, placeholder: " Kennel-Phone", class: "kennel_dashboard_input_edit", onkeypress: "return isNumber(event);", maxlength: 11 %>
-            <br />
-            <br />
-            <%= f.label :email, "Email where Pet-Owners can reach you at" %>
-            <br />
-            <%= f.text_field :email, placeholder: " Kennel-Email", class: "kennel_dashboard_input_edit", maxlength: 100 %>
-            <br />
-            <br />
-            <%= f.label :sales_tax %>
-            <br />
-            <%= f.text_field :sales_tax, placeholder: " 6.5", class: "kennel_dashboard_input_edit", maxlength: 5 %> %
-            <br />
-            <br />
-            <%= f.label :mission_statement %>
-            <br />
-            <%= f.text_area :mission_statement, placeholder: " Mission Statement", class: "kennel_dashboard_input_edit", maxlength: 600 %>
-            <br />
-            <br />
-          </div>
-        </div>
-        <br />
-        <div class="border"></div>
-        <br />
-        <br />
-        <%= f.submit "Save Kennel", class: "btn-lg btn-success" %>
-        <br />
-        <br />
-        <br />
-
-        <% end %>
-
-
+<div class="container">
+  <% @kennel ||= Kennel.new %>
+   <%= form_for @kennel, html: {multipart: true}, id:'form', style: 'text-align: true;' do |f| %>
+    <div class="row" style="margin-top: -40px;float: right;margin-right: 10px;"><span style="font-size: 25px;cursor: pointer;" onclick="location.href='/kennels?tab=kennel'">x</span></div>
+	  <p style="font-size: 20px !important; margin-top: 50px; margin-bottom: 50px;">Create Kennel</p>
+			<br>
+      <%= f.hidden_field :taken_ownership, value: true %>
+				<div class="row">
+          <p class="font-18">Name:</p>
+          <%= f.text_field :name, placeholder: 'Name', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+          <br>
+          <p class="font-18">Email:</p>
+          <%= f.text_field :email, placeholder: 'Email', class: "form-control payment_input input_new_reserv black_18 margin-0-auto"%>
+          <br>
+          <p class="font-18">Phone:</p>
+          <%= f.text_field :phone, placeholder: 'Phone', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+          <br>
+          <p class="font-18">Address:</p>
+          <%= f.text_field :address, placeholder: 'Address', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+          <br>
+          <p class="font-18">City:</p>
+          <%= f.text_field :city, placeholder: 'City', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+          <br>
+          <p class="font-18">State:</p>
+          <%= f.text_field :state, placeholder: 'State', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+          <br>
+          <p class="font-18">Zip:</p>
+          <%= f.text_field :zip, placeholder: 'Zip', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+          <br>
+					<p class="font-18">Type of pets allowed:</p>
+					<%= f.select :cats_or_dogs, options_for_select(cat_or_dog_options), class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+					<br>
+          <br>
+					<p class="font-18">Mission statement:</p>
+					<%= f.text_field :mission_statement, placeholder: 'Mission statement', class: "form-control payment_input input_new_reserv black_18 margin-0-auto", style: 'width:200px !important;height: 35px !important;'%>
+					<br>
+					<p class="font-18">Sales tax:</p>
+					<%= f.text_field :sales_tax, placeholder: 'Sales tax', class: "form-control payment_input input_new_reserv black_18 margin-0-auto" %>
+					<br>
+			</div>
+      <div style="margin: 0 auto;">
+        <p class="font-18">Avatar:</p>
+        <%= f.file_field :avatar, placeholder:'Choose file', class:"form-control payment_input input_new_reserv black_18 margin-0-auto", style:'height: 40px;' %>
+        <br>
       </div>
-    </div>
-  </div>
+			<br>
+      <% @kennel_create ||= params[:kennel_create] %>
+			<% if !@kennel_create.nil? %>
+        <% @kennel_create.each do |error|%>
+          <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+        <% end %>
+      <% end %>
+			<br>
+			<br>
+				 <%= f.submit "Save", class:'text_info bold-text link_edit vet_link submit_link font-20', style:"border: none;text-align:center; float: none; margin:0; padding:0; background-color: transparent" %> 
+			<br>
+	<% end %>
 </div>
 
-<%= render partial: "shared/footer" %>
+
+<script type="text/javascript">
+  function submitForm() {
+    $("#form").submit();
+  };
+
+  $(document).ready(function() {
+    $("#kennel_phone").mask("(999) 999-9999");
+  });
+</script>

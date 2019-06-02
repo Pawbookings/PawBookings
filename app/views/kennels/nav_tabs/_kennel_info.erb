@@ -11,13 +11,12 @@
 		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Phone:</strong><%= " #{number_to_phone(@kennel.phone, area_code: true)}" %></p>
 		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Zip:</strong><%= " #{@kennel.zip}" %></p>
 		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Sales tax:</strong><%= " #{@kennel.sales_tax}" %></p>
-		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text" style="margin-right: 100px !important;" id="mission"><strong>Mission statement:</strong><%= " #{@kennel.mission_statement[0, 100]}..."%></p>
-		<%= link_to 'Edit', edit_kennel_path(@kennel.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_link', style:"margin-left: 330px; margin-right: unset; margin-top: 10px; padding: 0;", id:'kennel_edit_button' } %>
-		<div id="modal-window" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-					<div class="modal-content">
-					</div>
-			</div>
+		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text" id="mission"><strong>Mission statement:</strong><%= " #{@kennel.mission_statement[0, 100]}..."%></p>
+		<div id="biggger_than_1000">
+			<%= link_to 'Edit', edit_kennel_path(@kennel.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_link', style:"margin-left: 330px; margin-right: unset; margin-top: 10px; padding: 0;", id:'kennel_edit_button' } %>
+		</div>
+		<div id="smalller_than_1000">
+			<%= link_to 'Edit', edit_kennel_path(@kennel.id, mobile: true), class: 'text_info bold-text link_edit vet_link', style:"margin-left: 330px; margin-right: unset; margin-top: 10px; padding: 0;", id:'kennel_edit_button' %>
 		</div>
 		<br>
 		<br>
@@ -27,3 +26,26 @@
 				<%= link_to 'Add New', new_kennel_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window15', style:"color: white;", class: 'a_as_button' } %>
 			</div>
 	<% end %>
+
+
+	<script>
+	$(window).on('resize', function() {
+  if($(window).width() < 1000) {
+    $('#smalller_than_1000').css('display', 'unset');
+		$('#biggger_than_1000').css('display', 'none');
+  }else{
+    $('#biggger_than_1000').css('display', 'unset');
+		$('#smalller_than_1000').css('display', 'none');
+  }
+});
+
+$(document).ready(function() {
+  if($(window).width() < 1000) {
+    $('#smalller_than_1000').css('display', 'unset');
+		$('#biggger_than_1000').css('display', 'none');
+  }else{
+    $('#biggger_than_1000').css('display', 'unset');
+		$('#smalller_than_1000').css('display', 'none');
+  }
+});
+</script>

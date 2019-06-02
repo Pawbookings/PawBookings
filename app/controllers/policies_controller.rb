@@ -3,17 +3,26 @@ class PoliciesController < ApplicationController
 
   def new
     @policy = Policy.new
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @policy_create = params[:policy_create]
     end
   end
 
   def edit
     @policy = Policy.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @policy_update = params[:policy_update]
+      @policy_id = params[:policy_id]
     end
   end
 
@@ -31,7 +40,11 @@ class PoliciesController < ApplicationController
       policy.errors.each do |attr,err|
         error_message << attr
       end
-      redirect_to kennels_path(tab: 'policies', policy_create: error_message.uniq)
+      if params[:policy][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'policies', policy_create: error_message.uniq)
+      else
+        redirect_to new_policy_path(mobile: true, policy_create: error_message.uniq)
+      end
     end
   end
 
@@ -47,8 +60,11 @@ class PoliciesController < ApplicationController
       policy.errors.each do |attr, err|
         error_message << attr
       end
-
-      return redirect_to kennels_path(tab: 'policies', policy_update: error_message.uniq, policy_id: policy.id)
+      if params[:policy][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'policies', policy_update: error_message.uniq, policy_id: policy.id)
+      else
+        redirect_to edit_policy_path(policy_update: error_message.uniq, policy_id: policy.id, mobile: true)
+      end
     end
   end
 

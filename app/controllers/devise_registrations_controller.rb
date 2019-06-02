@@ -49,6 +49,7 @@ class DeviseRegistrationsController < Devise::RegistrationsController
   def update
     @user = current_user
     params_user = params[:user]
+    puts params
     if @user.update(first_name: params_user[:first_name], last_name: params_user[:last_name], email: params_user[:email], time_zone: params_user[:time_zone], phone: params_user[:phone].scan(/\d/).join) && set_image
       if params[:user][:customer_edit] == ''
         redirect_to kennels_path(tab: 'owner', devise_update: nil), notice: 'You successfully updated owner personal information!'
@@ -60,11 +61,15 @@ class DeviseRegistrationsController < Devise::RegistrationsController
       @user.errors.each do |attr,err|
         error_message << attr
       end
-
-      if params[:user][:customer_edit] == ''
-        redirect_to kennels_path(tab: 'owner', devise_update: error_message.uniq)
+      return redirect_to kennels_path(tab: 'owner', devise_update: nil), notice: 'You successfully updated owner personal information!' if error_message.length.zero?
+      if params[:user][:mobile] != 'true'
+        if params[:user][:customer_edit] == ''
+          redirect_to kennels_path(tab: 'owner', devise_update: error_message.uniq)
+        else
+          redirect_to customer_dashboard_path(devise_update: error_message.uniq)
+        end
       else
-        redirect_to customer_dashboard_path(devise_update: error_message.uniq)
+        redirect_to edit_user_registration_path(current_user, mobile: true, devise_update: error_message.uniq)
       end
     end
   end

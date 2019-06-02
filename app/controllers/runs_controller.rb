@@ -3,17 +3,25 @@ class RunsController < ApplicationController
 
   def new
     @run = Run.new
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @runs_create = params[:runs_create]
     end
   end
 
   def edit
     @run = Run.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:mobile].nil?
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      @runs_update = params[:runs_update]
     end
   end
 
@@ -28,7 +36,11 @@ class RunsController < ApplicationController
       run.errors.each do |attr,err|
         error_message << attr
       end
-      redirect_to kennels_path(tab: 'runs', runs_create: error_message.uniq)
+      if params[:run][:mobile] != 'true'
+        redirect_to kennels_path(tab: 'runs', runs_create: error_message.uniq)
+      else
+        redirect_to new_run_path(mobile: true, runs_create: error_message.uniq)
+      end
     end
   end
 
@@ -54,7 +66,11 @@ class RunsController < ApplicationController
       run.errors.each do |attr, err|
         error_message << attr
       end
-      return redirect_to kennels_path(tab: 'runs', runs_update: error_message.uniq, run_id: run.id)
+      if params[:mobile] != 'true'
+        redirect_to kennels_path(tab: 'runs', runs_update: error_message.uniq, run_id: run.id)
+      else
+        redirect_to edit_run_path(runs_update: error_message.uniq, run_id: run.id, mobile: true)
+      end
     end
   end
 
