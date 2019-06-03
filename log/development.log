@@ -1,0 +1,679 @@
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-06-03 08:53:36 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (19.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Devise::SessionsController#new as HTML
+  [1m[35m (0.9ms)[0m  BEGIN
+  [1m[36mSQL (20.7ms)[0m  [1mINSERT INTO "visits" ("id", "visitor_id", "started_at", "ip", "user_agent", "landing_page", "browser", "os", "device_type", "country", "latitude", "longitude") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING "id"[0m  [["id", "7c8e0698-717f-4a13-b669-d27bc8569506"], ["visitor_id", "2ebc384b-ea7f-4bc5-bce4-831c0a86dfcb"], ["started_at", "2019-06-03 05:53:37.478737"], ["ip", "127.0.0.1"], ["user_agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0"], ["landing_page", "http://localhost:3000/users/sign_in"], ["browser", "Firefox"], ["os", "Ubuntu"], ["device_type", "Desktop"], ["country", "Reserved"], ["latitude", "0.0"], ["longitude", "0.0"]]
+  [1m[35m (14.9ms)[0m  COMMIT
+  Rendered shared/_top_info.html.erb (9.8ms)
+  Rendered devise/shared/_links.html.erb (12.6ms)
+  Rendered shared/_footer.html.erb (5.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (145.5ms)
+Completed 200 OK in 11338ms (Views: 10438.5ms | ActiveRecord: 139.4ms)
+
+
+Started GET "/assets/jquery-ui/effect-fade.self-42d542a5253e0a610717460102ee6bee339c656cc188e491d89eb0779043c963.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:49 +0300
+
+
+Started GET "/assets/jquery-ui.self-52111578aa54225c9ebfe06f78a62771020ee548bb27d62228ee3f5e6633969d.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:49 +0300
+
+
+Started GET "/assets/ckeditor/init.self-2f3e80b764bc18c9362e6f3326e1f32d4a8bdceff67345a3453a93b111626ff3.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:49 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (11.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/active_admin/jquery_ui.self-01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:50 +0300
+
+
+Started GET "/assets/active_admin/base.self-ab2cb3098b53fe7d229937d768d701e8f4013f2a5aea7988d8f2149fa40426db.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:50 +0300
+
+
+Started GET "/assets/active_admin/ext/jquery-ui.self-f96f2ec2a32c4bc4da4292cc74bddeca0bb223d81a421c98c4d613632860945e.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:51 +0300
+
+
+Started GET "/assets/active_admin/ext/jquery.self-da8dafbbe883092bcae73f35a8caf4ae6170fe7d8130ae7039a233f9b509c757.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:51 +0300
+
+
+Started GET "/assets/active_admin/initializers/batch_actions.self-f5c360e8640b40f00640f6e5c7cfe0addeb244ed72e1a9828c52919515d23cf1.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:51 +0300
+
+
+Started GET "/assets/active_admin/initializers/datepicker.self-f8ac66c85afd35ee1555c09a2418efc7a7930e1f6dd783461379c2bb2184f80e.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:51 +0300
+
+
+Started GET "/assets/active_admin/initializers/filters.self-32bfae855dd5b3ae411a41daa2081625c6f9500958554e31a2decc297f13398b.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:51 +0300
+
+
+Started GET "/assets/active_admin/initializers/tabs.self-65de8b1688d4f8782c04bf07ba6314d3c8b33b9391a482a07214ac4df99dd904.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:51 +0300
+
+
+Started GET "/assets/active_admin.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:51 +0300
+
+
+Started GET "/assets/csv_kennels.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:52 +0300
+
+
+Started GET "/assets/press_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:52 +0300
+
+
+Started GET "/assets/jquery-ui/theme.self-a025c4093e6f0fb2155e4cfbeb4ee33c68f65e4ac1f7898c304408d37579cc25.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:52 +0300
+
+
+Started GET "/assets/jquery-ui/core.self-23329dbe1961b938278306c019037fe36ff6ccb28193f1038e52ccbf52858163.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:52 +0300
+
+
+Started GET "/assets/jquery-ui/accordion.self-ab9f397561a07488cf14279bc7186619e859cdd485b81d3a6439e85b81d32a05.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:53 +0300
+
+
+Started GET "/assets/jquery-ui/menu.self-5277268fc75b8d6e851ccb5ca12e162c7440315d70974f34db800bc70330f135.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:53 +0300
+
+
+Started GET "/assets/jquery-ui/autocomplete.self-2d6dfccae4fba2fe27d00372b974d4540d75a00cea6ceaa0a6aa33852b9d3ac3.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:53 +0300
+
+
+Started GET "/assets/jquery-ui/button.self-524bbf2d9cf9547e14eda3866ad90726890ff390563ea46013c1ca019694c320.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:53 +0300
+
+
+Started GET "/assets/jquery-ui/datepicker.self-bf92a2196df590f06fad4ab5bb7ed4db1874a9bef0c9af85ea0490d2108b9966.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:53 +0300
+
+
+
+
+Started GET "/assets/jquery-ui/draggable.self-ff524fb7ae3023ef910b4e6c5cd7260e4f4dc6fb2eca9a525dd478017639bbba.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:53 +0300
+Started GET "/assets/jquery-ui/resizable.self-3a16663ae8d70cc7f633554daff3a5875f54915ae3071fc3f3a1aeb0f7c8ab24.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:53 +0300
+
+
+Started GET "/assets/jquery-ui/dialog.self-3e41d6ad769c697e76dceeef1bf376008c8e93e85c144fea25437fa3188d86b8.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:53 +0300
+
+
+Started GET "/assets/jquery-ui/progressbar.self-de3d9f82b3ceaaa88bb0686e77f2548a3cfea1cf4dc37df4f3bc70f99d86a95a.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/jquery-ui/selectable.self-fa1d88ada89c5a57dae84c7cb4f17bf153cb1cff063ed4ba2091b5b5f54e77e6.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/jquery-ui/selectmenu.self-9a2b20dc7f10d3a7b09d0dc5d038d02dd1aff160e97abf8eaa3d3f5ab09fbb4b.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/jquery-ui/sortable.self-bd8078895e9d12cd8586eb9b507ccb4d533daadd0f103f7387554c30cc96313f.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/jquery-ui/slider.self-57c4d255d192836d85e1253fe091b5b01fed1c389b0dbdedd71c129dcf1cfd35.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/jquery-ui/spinner.self-2d292d2e83f1281032010a5acb9cb23492aeecdc95395a5d93f2a3bba9a2c400.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/jquery-ui/tabs.self-3dec02555ec77af087a252cdd5be276e714d0059e052a2c92dc2c5401e9df63d.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/jquery-ui/tooltip.self-a349b3ba7b1458eed72dc3ffba597af53b9ceb622e7a324cdfd1c01c7b351f1f.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/jquery-ui/base.self-1b94b6a8eaf399d6f662a2ffe0b9b52a958c6180e15b6e07a7ecab0087c9234d.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/jquery-ui/all.self-a9629accff9d629face2489f3b6d620ded83dd62f6f04f69e5b33eea2b8d73b6.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/jquery-ui.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/simple_calendar.self-5111620c8b47f0fa598c8f62891886bd22e38d00f6b011840357867e02c2c8e3.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/application.self-ae842d12700fa2b026009cef8704a9fa41942f0182c6563af0c34ca66ca3540f.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:54 +0300
+
+
+Started GET "/assets/scaffolds.self-519c943355bc2921c491aefd0128220a600468faa4d0df48853ee07b9367ce97.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/home.self-822675c132df58323d739ba5a446ffaf5e12d6fb1d7b82f93b40b179378b2da1.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/top_info.self-d08f17689afc8deaa649213e611fa4b42bb3541be31adc8b44d3b2073a20ca9d.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/search_bar.self-76056ea116d9af4e96ad7a85218960de3bb438a3d8e8fea1e80c5dd261bad8cb.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/footer.self-90e0c227266325402a2d07bd855a08fae899149e3f658533a7dde5683fec248e.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/about.self-f2e0b7ebefd3059ef2cdf395c235a7f9fb58da10ab7739b47f9f8ae0c082889c.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/contact_message.self-df3a28d996eea0c13d1d9172a199fa598558b8293000207742f11f039322d20b.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/blog.self-356e7e610089e5e3db34f7dd694877840a86481d0649972b9c7bdfc11993885a.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/devise.self-258d09ac1ddc502340fa6f4fba14a83c0402eff48361338f6315a9d2a84e1ae7.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/search.self-c4fc90a601ce9f152b053773154f60189b1d94a8f08b41b90acf37e5e3a54a91.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/amenity.self-2df06988e873991112130bb6f48ffc07a6ac979410179b74fb81a0f38edee2cc.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/reservation.self-87824fdd267bbeb9b4892c9ba958d5368f6f724bd8c6196a778081578f9802f8.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/payment.self-ca71900b05abe09de671bdc28cdf99e33e209851e63eca1d33863d9b1de38eb4.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/kennel.self-4a58b0e0eb8727d457ebf7bebbfa2cf09453cec0e117108611183abd9b145c84.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/customer.self-a921593a285628ef9bd4a9e4e714da90733380ea077189756c08369272cee3ae.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/pawbookings_admins.self-44241953534d25c2d27531cadf770ad522002fc71b45beecb3c9af2cdfb659e1.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/owl.carousel.self-8bdce040286fb9b851d53a7af378ae135e1ef93e85f6d1082630d6729cf59337.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/owl.theme.self-99f17f686c3688674da27273015b38595e327678fc04f0ae0740f12c1fda0e53.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/bootstrap-multiselect.self-8fa614edbfaf0cceba257f7ca461003a699441d4b80c44b8681ef77e840e6e83.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-06-03 08:53:55 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-06-03 08:53:56 +0300
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-06-03 08:53:56 +0300
+
+
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-06-03 08:53:56 +0300
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-06-03 08:53:56 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-06-03 08:53:56 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-06-03 08:53:56 +0300
+
+
+Started GET "/assets/pb_login_image.jpg" for 127.0.0.1 at 2019-06-03 08:53:56 +0300
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-06-03 08:54:03 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"[FILTERED]", "authenticity_token"=>"[FILTERED]", "user"=>"[FILTERED]", "commit"=>"[FILTERED]"}
+  [1m[35mUser Load (41.8ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["email", "hello@gmail.com"]]
+  [1m[36mVisit Load (3.2ms)[0m  [1mSELECT  "visits".* FROM "visits" WHERE "visits"."id" = $1  ORDER BY "visits"."id" ASC LIMIT 1[0m  [["id", "7c8e0698-717f-4a13-b669-d27bc8569506"]]
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE "visits" SET "user_id" = $1 WHERE "visits"."id" = $2[0m  [["user_id", 1], ["id", "7c8e0698-717f-4a13-b669-d27bc8569506"]]
+  [1m[35m (11.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE "users" SET "last_sign_in_at" = $1, "current_sign_in_at" = $2, "sign_in_count" = $3, "updated_at" = $4 WHERE "users"."id" = $5  [["last_sign_in_at", "2019-06-02 18:25:18.136439"], ["current_sign_in_at", "2019-06-03 05:54:04.285130"], ["sign_in_count", 23], ["updated_at", "2019-06-03 05:54:04.287709"], ["id", 1]]
+  [1m[36m (16.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 610ms (ActiveRecord: 89.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-06-03 08:54:04 +0300
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Redirected to http://localhost:3000/kennel_dashboard
+  [1m[36mKennelRating Load (6.5ms)[0m  [1mSELECT  "kennel_ratings".* FROM "kennel_ratings" WHERE "kennel_ratings"."rating" = $1  ORDER BY "kennel_ratings"."id" DESC LIMIT 3[0m  [["rating", 5]]
+Completed 302 Found in 68ms (ActiveRecord: 20.0ms)
+
+
+Started GET "/kennel_dashboard" for 127.0.0.1 at 2019-06-03 08:54:04 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[35mUser Load (1.9ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (2.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mKennel Load (45.6ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 1]]
+  [1m[36mReservation Load (16.9ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 1]]
+  [1m[35mHoursOfOperation Load (1.6ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 1]]
+  [1m[36mRun Load (33.9ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 1]]
+  [1m[35mRun Load (0.5ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 1]]
+  Rendered shared/_top_info.html.erb (5.5ms)
+  [1m[36mReservation Load (0.7ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_in_date", "2019-06-03"], ["kennel_id", 1]]
+  [1m[35mReservation Load (0.6ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2  [["check_out_date", "2019-06-03"], ["kennel_id", 1]]
+  Rendered simple_calendar/_month_calendar.html.erb (126.0ms)
+  Rendered simple_calendar/_month_calendar.html.erb (123.5ms)
+  Rendered simple_calendar/_month_calendar.html.erb (191.2ms)
+  Rendered shared/_footer.html.erb (3.7ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (554.0ms)
+Completed 200 OK in 4039ms (Views: 3419.3ms | ActiveRecord: 142.4ms)
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-06-03 08:54:11 +0300
+
+
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-06-03 08:54:11 +0300
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-06-03 08:54:11 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-06-03 08:54:12 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-06-03 08:54:12 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-06-03 08:54:12 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-06-03 08:54:12 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-06-03 08:54:12 +0300
+
+
+Started GET "/reservations/new" for 127.0.0.1 at 2019-06-03 08:54:20 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (4.8ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mKennel Load (1.3ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 1]]
+  [1m[35mRun Load (1.1ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 1]]
+  [1m[36mAmenity Load (9.6ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 1]]
+  Rendered reservations/_new.erb (240.9ms)
+  Rendered reservations/new.js (277.3ms)
+Completed 200 OK in 760ms (Views: 350.9ms | ActiveRecord: 35.2ms)
+
+
+Started GET "/kennel_dashboard" for 127.0.0.1 at 2019-06-03 08:56:44 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[35mUser Load (6.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mKennel Load (0.8ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 1]]
+  [1m[36mReservation Load (3.4ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 1]]
+  [1m[35mHoursOfOperation Load (1.1ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 1]]
+  [1m[36mRun Load (0.7ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 1]]
+  [1m[35mRun Load (3.9ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 1]]
+  Rendered shared/_top_info.html.erb (10.5ms)
+  [1m[36mReservation Load (0.7ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_in_date", "2019-06-03"], ["kennel_id", 1]]
+  [1m[35mReservation Load (2.4ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2  [["check_out_date", "2019-06-03"], ["kennel_id", 1]]
+  Rendered simple_calendar/_month_calendar.html.erb (207.6ms)
+  Rendered simple_calendar/_month_calendar.html.erb (179.4ms)
+  Rendered simple_calendar/_month_calendar.html.erb (183.8ms)
+  Rendered shared/_footer.html.erb (7.2ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (731.7ms)
+Completed 200 OK in 5771ms (Views: 5613.2ms | ActiveRecord: 24.7ms)
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/core.self-93be4d22eda916787802a64d8f88b52db8a9027d4ccbbc0942625324a7d12d44.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/widget.self-c1602241ddc51216b58391768667068867b8e15b9efc722befcd25771eda6819.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/accordion.self-c95f320275150a94241b004a91e21eef9c5ae9965a793cb3e2475f6078a1670d.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/position.self-e693ced4ecfa1a276f0b794f32c1d30d792764b08788bf68ecfa3b388c291333.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/menu.self-7abc1c9401509a7e4fc609b1e461be6fd17e8116e8fda19cc59d05ba79aefb68.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/autocomplete.self-3befc48aba87cead090cfd014562b2771a662ac6d2c8197b24c08b2d9f3d9f2d.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/button.self-4d4f21ba77bbf8cc08ae65e2b6329a7a1b952b32c3ba7bffca8313e7e8c93d0c.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/datepicker.self-6267be6d4d0f0e8665be3b4d6ac07f40ba23a32aff8eaa5d1bfc00f76a9eeae7.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/mouse.self-c513294e8da73f31f84ba3ef11e2a1180a47faea0eb2fea4a53fc26153dd21fd.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/draggable.self-debcca3d0d5d9afe2fe91a6fd1aebdb41ca0a55f2f6017352e6c02b6d8a6e64c.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/resizable.self-60b870565f3cd62982c1907828119bb51f42ec8228d5e23868153edc3abc685c.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/dialog.self-5a6c7980dfa3f6b74445b0f4b20eed799ee65363163500ed7f032e603d6b022d.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:51 +0300
+
+
+Started GET "/assets/jquery-ui/droppable.self-a7a2b4c2cec8fc176f51e4e4291d92bfd3eec40b6a580b47fc54c16334d52882.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect.self-3acdb29e7da09c8f0195b994d2f04d73bfef50dc539c84fd2c835d964d33e5c1.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-blind.self-ed102209d7aa0b7374f3db8478cc7dcff5f9980d3146e8bf9fbfab959c6d5d8a.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-bounce.self-bfcb9288797ecd234ddeedf4fbc5b4c9de94a4e6d8d44e6faa5b5e9836fad9fd.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-clip.self-7368e4597c32360b162d264ff8bbd0cf9fb1535eb9b4564e6eb7c1db3c774bf3.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-drop.self-294aaa72126ad9c94d6558cca792eb3716754713aca98f18a9dd7c493150ed92.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-explode.self-68e74dc114a52f3f4d7033e40c39196961bdcf439652daa2e98baa115c7bb44b.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-fade.self-42d542a5253e0a610717460102ee6bee339c656cc188e491d89eb0779043c963.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-fold.self-ad9967f153423916300dbf1104b00f7ad7bbd6a222a0fcc1012ebe251bcb13c8.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-highlight.self-f922b7179ab8ccfa7865141f38865bba0a3d2bdceba7561c27ca14544dbfd996.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-size.self-368aecefa09656a2be5c72dc8e685b120363a3df812134cbd2dd998bafa179fd.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-scale.self-884a5abcb6d90fcd9f9a071aa8329638184df688afced1b1d3b6be6c69f4dd7f.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-puff.self-93415831093923a70f671d73e8d0b3d94deb37ac7472a036a4add545f565c166.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-pulsate.self-eb107c0d136eccdfbd8a2f0f2ee71e0f6911cb300c6b63cc2fe4f6532e6a9a97.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-shake.self-63bcc14897aac5b84e10690be94d64d5724f864aa14c913b4d1030c461a256ad.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:52 +0300
+
+
+Started GET "/assets/jquery-ui/effect-slide.self-c93054a4a80d1f986760806d81ab067e4a4120bf103337e152ecc24d36e785f6.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/jquery-ui/effect-transfer.self-181245634ec522320fc1081f6dbf94fd982f34eefa03555f76817dedfcdea336.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/jquery-ui/progressbar.self-a259ff5a2a5e7aef0ec21bda94edd0f6bc1e9821128d901de415956edf212b0d.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/jquery-ui/selectable.self-42e53fc2f95211314e36a8094c42560f869c207f16d68cfc206aa37201dcdc03.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/jquery-ui/selectmenu.self-09dbcac573f0e508194bd9deff254db090889b380d030261857860309c0918e8.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/jquery-ui/slider.self-8af8d2a0661743ba88b4cfb99d5c8c874cfa3fc6528ae4e9252366b388def0b7.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/jquery-ui/sortable.self-df2d80a36f9dfbe0facc596ccd92af83ca50d38e4cd6a84810aaf5d40b8cd181.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/jquery-ui/spinner.self-3c8c95a7bc9c877d0f9c16789246bbedda6b8e8fbf5927951babdab775aed02e.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/jquery-ui/tabs.self-dc07b44bf1b926c8d28ccd2658e30933881e5329348caf70cf305c3943f6bbd7.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/jquery-ui/tooltip.self-38f04ac3a6c8fb2391ec6832b68845671cc9013a94371b7eb239478f4835eb73.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/ahoy.self-40cd3ba93f7808972753bfa893dd2aead877646b6e50efa210e61eaeb6b973be.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/jquery.mask.self-3b775d6e0b0f5cff98aca4daaa7f27a7c3678f39d1f5186776bb14b63cc2f625.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/popper.self-70e1b2b78096eb80eb35ebac513e7a8007033ee3e881919cfdca4ece7779cffd.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/ckeditor/ckeditor.self-3bf56bf393bee65859bc77ba70e26a11bb7e07f0991ba908d1e9a37446e7022b.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/Chart.bundle.self-cd9a160bd0322483536f8c947282f9e45b27ccdb594f702944c5e94c0e815377.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/chartkick.self-e9487cc6503413bc0fa51025930fcccdf68f1a637ab649419352730501cbd222.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:53 +0300
+
+
+Started GET "/assets/owl.carousel.self-aed126d4aa315202147b9de700e302c5b7f1b68cc8c44a68b116efb60671cd80.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:54 +0300
+
+
+Started GET "/assets/bootstrap-multiselect.self-dbe6e440652931172c32343f9a520a37ceca1f34eb949208bf32130c691c2664.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:54 +0300
+
+
+Started GET "/assets/active_admin/lib/batch_actions.self-fbed82dc1e31cf860056cce6c02f5bc5831ad5343d68ac3ab17471c9e05e9195.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:54 +0300
+
+
+Started GET "/assets/active_admin/lib/checkbox-toggler.self-ffdc88fc1b3b6bcfac3e314f191fc486175ab5a4b5daab87af6bd208cb483bd8.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:54 +0300
+
+
+Started GET "/assets/active_admin/lib/dropdown-menu.self-8ccb356121a1c40094bb429d6cfac85d9c8ad114fb93730892d9df9986730a0a.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:54 +0300
+
+
+Started GET "/assets/active_admin/lib/flash.self-8f05a5d9328ea28fca100b057787fbfb567986513c5f1735ea48fad8f9571c10.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:54 +0300
+
+
+Started GET "/assets/active_admin/lib/has_many.self-ece319debdc01ca5096ae8ac6c130ffc0decab382543b4b94e18591375d3d3bb.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:54 +0300
+
+
+Started GET "/assets/active_admin/lib/modal_dialog.self-0e86d9de4b99cb242de337a342f957f4872f686afc40f31f32d855672b1cd878.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:54 +0300
+
+
+Started GET "/assets/active_admin/lib/per_page.self-d7697643296439a8f6aadbf22a229d8ce9b4e8e530ca854164398141006bcfda.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:54 +0300
+
+
+Started GET "/assets/active_admin/lib/table-checkbox-toggler.self-f5200d732ec9ffd4ee8fd1fe11524ad7b54a67f6c0ef447a29d119ece2dcecdb.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:54 +0300
+
+
+Started GET "/assets/ckeditor/config.self-cbe7680e5d1f2f457d0924cf4a609390a592e91ea5ae20a8ebcd1c82d87d3b02.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:55 +0300
+
+
+Started GET "/assets/application.self-d53bd12dccf646bbac7157b575cb132b1ef17dac4a68b032283ed495c4ab72bc.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:55 +0300
+
+
+Started GET "/assets/jquery-ui.self-52111578aa54225c9ebfe06f78a62771020ee548bb27d62228ee3f5e6633969d.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:56 +0300
+
+
+Started GET "/assets/ckeditor/init.self-2f3e80b764bc18c9362e6f3326e1f32d4a8bdceff67345a3453a93b111626ff3.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:56 +0300
+
+
+Started GET "/assets/active_admin/jquery_ui.self-01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:56 +0300
+
+
+Started GET "/assets/active_admin/base.self-ab2cb3098b53fe7d229937d768d701e8f4013f2a5aea7988d8f2149fa40426db.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:57 +0300
+
+
+Started GET "/assets/active_admin/ext/jquery-ui.self-f96f2ec2a32c4bc4da4292cc74bddeca0bb223d81a421c98c4d613632860945e.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:57 +0300
+
+
+Started GET "/assets/active_admin/ext/jquery.self-da8dafbbe883092bcae73f35a8caf4ae6170fe7d8130ae7039a233f9b509c757.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:57 +0300
+
+
+Started GET "/assets/active_admin/initializers/batch_actions.self-f5c360e8640b40f00640f6e5c7cfe0addeb244ed72e1a9828c52919515d23cf1.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:57 +0300
+
+
+Started GET "/assets/active_admin/initializers/datepicker.self-f8ac66c85afd35ee1555c09a2418efc7a7930e1f6dd783461379c2bb2184f80e.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:57 +0300
+
+
+Started GET "/assets/active_admin/initializers/filters.self-32bfae855dd5b3ae411a41daa2081625c6f9500958554e31a2decc297f13398b.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:57 +0300
+
+
+Started GET "/assets/active_admin/initializers/tabs.self-65de8b1688d4f8782c04bf07ba6314d3c8b33b9391a482a07214ac4df99dd904.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:57 +0300
+
+
+Started GET "/assets/active_admin.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:58 +0300
+
+
+Started GET "/assets/csv_kennels.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:58 +0300
+
+
+Started GET "/assets/press_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:58 +0300
+
+
+Started GET "/assets/jquery-ui/theme.self-a025c4093e6f0fb2155e4cfbeb4ee33c68f65e4ac1f7898c304408d37579cc25.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:58 +0300
+
+
+Started GET "/assets/jquery-ui/core.self-23329dbe1961b938278306c019037fe36ff6ccb28193f1038e52ccbf52858163.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:58 +0300
+
+
+Started GET "/assets/jquery-ui/accordion.self-ab9f397561a07488cf14279bc7186619e859cdd485b81d3a6439e85b81d32a05.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:58 +0300
+
+
+Started GET "/assets/jquery-ui/menu.self-5277268fc75b8d6e851ccb5ca12e162c7440315d70974f34db800bc70330f135.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:58 +0300
+
+
+Started GET "/assets/jquery-ui/autocomplete.self-2d6dfccae4fba2fe27d00372b974d4540d75a00cea6ceaa0a6aa33852b9d3ac3.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:58 +0300
+
+
+Started GET "/assets/jquery-ui/button.self-524bbf2d9cf9547e14eda3866ad90726890ff390563ea46013c1ca019694c320.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:58 +0300
+
+
+Started GET "/assets/jquery-ui/datepicker.self-bf92a2196df590f06fad4ab5bb7ed4db1874a9bef0c9af85ea0490d2108b9966.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:58 +0300
+
+
+Started GET "/assets/jquery-ui/draggable.self-ff524fb7ae3023ef910b4e6c5cd7260e4f4dc6fb2eca9a525dd478017639bbba.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:59 +0300
+
+
+Started GET "/assets/jquery-ui/resizable.self-3a16663ae8d70cc7f633554daff3a5875f54915ae3071fc3f3a1aeb0f7c8ab24.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:59 +0300
+
+
+Started GET "/assets/jquery-ui/dialog.self-3e41d6ad769c697e76dceeef1bf376008c8e93e85c144fea25437fa3188d86b8.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:59 +0300
+
+
+Started GET "/assets/jquery-ui/progressbar.self-de3d9f82b3ceaaa88bb0686e77f2548a3cfea1cf4dc37df4f3bc70f99d86a95a.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:59 +0300
+
+
+Started GET "/assets/jquery-ui/selectable.self-fa1d88ada89c5a57dae84c7cb4f17bf153cb1cff063ed4ba2091b5b5f54e77e6.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:59 +0300
+
+
+Started GET "/assets/jquery-ui/selectmenu.self-9a2b20dc7f10d3a7b09d0dc5d038d02dd1aff160e97abf8eaa3d3f5ab09fbb4b.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:59 +0300
+
+
+Started GET "/assets/jquery-ui/sortable.self-bd8078895e9d12cd8586eb9b507ccb4d533daadd0f103f7387554c30cc96313f.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:59 +0300
+
+
+Started GET "/assets/jquery-ui/slider.self-57c4d255d192836d85e1253fe091b5b01fed1c389b0dbdedd71c129dcf1cfd35.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:59 +0300
+
+
+Started GET "/assets/jquery-ui/spinner.self-2d292d2e83f1281032010a5acb9cb23492aeecdc95395a5d93f2a3bba9a2c400.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:59 +0300
+
+
+Started GET "/assets/jquery-ui/tabs.self-3dec02555ec77af087a252cdd5be276e714d0059e052a2c92dc2c5401e9df63d.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:56:59 +0300
+
+
+Started GET "/assets/jquery-ui/tooltip.self-a349b3ba7b1458eed72dc3ffba597af53b9ceb622e7a324cdfd1c01c7b351f1f.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:00 +0300
+
+
+Started GET "/assets/jquery-ui/base.self-1b94b6a8eaf399d6f662a2ffe0b9b52a958c6180e15b6e07a7ecab0087c9234d.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:00 +0300
+
+
+Started GET "/assets/jquery-ui/all.self-a9629accff9d629face2489f3b6d620ded83dd62f6f04f69e5b33eea2b8d73b6.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:00 +0300
+
+
+Started GET "/assets/jquery-ui.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:00 +0300
+
+
+Started GET "/assets/simple_calendar.self-5111620c8b47f0fa598c8f62891886bd22e38d00f6b011840357867e02c2c8e3.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:00 +0300
+
+
+Started GET "/assets/application.self-ae842d12700fa2b026009cef8704a9fa41942f0182c6563af0c34ca66ca3540f.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:00 +0300
+
+
+Started GET "/assets/scaffolds.self-519c943355bc2921c491aefd0128220a600468faa4d0df48853ee07b9367ce97.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:00 +0300
+
+
+Started GET "/assets/home.self-822675c132df58323d739ba5a446ffaf5e12d6fb1d7b82f93b40b179378b2da1.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:00 +0300
+
+
+Started GET "/assets/top_info.self-d08f17689afc8deaa649213e611fa4b42bb3541be31adc8b44d3b2073a20ca9d.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:00 +0300
+
+
+Started GET "/assets/search_bar.self-76056ea116d9af4e96ad7a85218960de3bb438a3d8e8fea1e80c5dd261bad8cb.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/footer.self-90e0c227266325402a2d07bd855a08fae899149e3f658533a7dde5683fec248e.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/about.self-f2e0b7ebefd3059ef2cdf395c235a7f9fb58da10ab7739b47f9f8ae0c082889c.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/contact_message.self-df3a28d996eea0c13d1d9172a199fa598558b8293000207742f11f039322d20b.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/blog.self-356e7e610089e5e3db34f7dd694877840a86481d0649972b9c7bdfc11993885a.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/devise.self-258d09ac1ddc502340fa6f4fba14a83c0402eff48361338f6315a9d2a84e1ae7.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/search.self-c4fc90a601ce9f152b053773154f60189b1d94a8f08b41b90acf37e5e3a54a91.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/amenity.self-2df06988e873991112130bb6f48ffc07a6ac979410179b74fb81a0f38edee2cc.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/reservation.self-87824fdd267bbeb9b4892c9ba958d5368f6f724bd8c6196a778081578f9802f8.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/payment.self-ca71900b05abe09de671bdc28cdf99e33e209851e63eca1d33863d9b1de38eb4.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/kennel.self-4a58b0e0eb8727d457ebf7bebbfa2cf09453cec0e117108611183abd9b145c84.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/customer.self-a921593a285628ef9bd4a9e4e714da90733380ea077189756c08369272cee3ae.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/pawbookings_admins.self-44241953534d25c2d27531cadf770ad522002fc71b45beecb3c9af2cdfb659e1.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/owl.carousel.self-8bdce040286fb9b851d53a7af378ae135e1ef93e85f6d1082630d6729cf59337.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/owl.theme.self-99f17f686c3688674da27273015b38595e327678fc04f0ae0740f12c1fda0e53.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/bootstrap-multiselect.self-8fa614edbfaf0cceba257f7ca461003a699441d4b80c44b8681ef77e840e6e83.css?body=[FILTERED]" for 127.0.0.1 at 2019-06-03 08:57:01 +0300
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-06-03 08:57:04 +0300
+
+
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-06-03 08:57:04 +0300
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-06-03 08:57:05 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-06-03 08:57:05 +0300
+
+
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-06-03 08:57:05 +0300
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-06-03 08:57:05 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-06-03 08:57:05 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-06-03 08:57:05 +0300
+
+
+Started GET "/reservations/new" for 127.0.0.1 at 2019-06-03 08:57:15 +0300
+Processing by ReservationsController#new as JS
+  [1m[36mUser Load (5.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mKennel Load (0.6ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1  [["user_id", 1]]
+  [1m[36mRun Load (2.3ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 1]]
+  [1m[35mAmenity Load (2.8ms)[0m  SELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1  [["kennel_id", 1]]
+  Rendered reservations/_new.erb (27.7ms)
+  Rendered reservations/new.js (32.6ms)
+Completed 200 OK in 70ms (Views: 49.0ms | ActiveRecord: 11.1ms)
