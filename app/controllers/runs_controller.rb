@@ -56,7 +56,7 @@ class RunsController < ApplicationController
     run.price = params[:price]
     run.weight_limit = params[:weight_limit]
     run.number_of_rooms = params[:number_of_rooms]
-    run.image = params[:image] if !params[:image].nil?
+    run.update(image: params[:image]) if !params[:image].nil?
 
     if run.save
       flash[:notice] = "Your Accommodation was updated successfully!"
