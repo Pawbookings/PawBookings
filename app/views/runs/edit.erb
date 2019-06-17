@@ -1,6 +1,6 @@
 <div class="container">
 	<% @run ||= Run.find(@run_id) %>
-   <%= form_tag @run, method: :put, id: 'form', style: 'text-align: center;' do %>
+   <%= form_tag @run, method: :put, id: 'form', html: { multipart: true }, style: 'text-align: center;' do %>
 			<div class="row" style="margin-top: -40px;float: right;margin-right: 10px;"><span style="font-size: 25px;cursor: pointer;" onclick="location.href='/kennels?tab=runs'">x</span></div>
 	 		<p style="font-size: 20px !important; margin-top: 50px; margin-bottom: 50px;">Edit Existing Run</p>
 			<%= hidden_field_tag :id, @run.id %>

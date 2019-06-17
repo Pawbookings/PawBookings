@@ -8,7 +8,7 @@
 
 # # # User
 # # # 1 -Kennel
-user = User.create!(first_name: "christopher", last_name: "pelnar", email: 'hello@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4074081234', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'kennel')
+user = User.create!(first_name: "christopher", last_name: "pelnar", email: 'helloitsme@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '4074081234', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'kennel')
 user.userID = user[:id]
 user.save
 
@@ -85,7 +85,7 @@ user.save
 # kennel.userID = kennel[:user_id]
 # kennel.save
 
-# # HoursOfOperation.create!(kennel_id: Kennel.last.id, monday_open: "closed", monday_close: "closed", tuesday_open: "closed", tuesday_close: "closed", wednesday_open: "closed", wednesday_close: "closed", thursday_open: "closed", thursday_close: "closed", friday_open: "closed", friday_close: "closed", saturday_open: "closed", saturday_close: "closed", sunday_open: "closed", sunday_close: "closed")
+HoursOfOperation.create!(kennel_id: Kennel.last.id, monday_open: "closed", monday_close: "closed", tuesday_open: "closed", tuesday_close: "closed", wednesday_open: "closed", wednesday_close: "closed", thursday_open: "closed", thursday_close: "closed", friday_open: "closed", friday_close: "closed", saturday_open: "closed", saturday_close: "closed", sunday_open: "closed", sunday_close: "closed")
 # user = User.create!(first_name: "tony", last_name: "montana", email: 'nexttt@gmail.com', password: 'helloworld', password_confirmation: 'helloworld', phone: '3059569404', time_zone: 'Eastern Time (US & Canada)', kennel_or_customer: 'kennel')
 # user.userID = user[:id]
 # user.save

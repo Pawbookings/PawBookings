@@ -60,6 +60,7 @@ class KennelsController < ApplicationController
   def create
     kennel = Kennel.new(kennel_params)
     kennel.update(phone: params[:kennel][:phone].scan(/\d/).join)
+    kennel.update(mission_statement: kennel_params[:mission_statement])
     
     if params[:kennel][:sales_tax] == ''
       kennel.update(sales_tax: '0')
@@ -73,7 +74,6 @@ class KennelsController < ApplicationController
       kennel.userID = user[:id]
       kennel.kennelID = kennel[:id]
       kennel.save
-      HoursOfOperationsController.new.create(kennel[:id])
       HoursOfOperationsController.new.create(kennel[:id])
       user.completed_registration = "true"
       user.save

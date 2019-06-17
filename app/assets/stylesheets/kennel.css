@@ -363,8 +363,8 @@ a:active {
 }
 
 .modal-2{
-  position: absolute !important;
-  top: 25%;
+  position: fixed !important;
+  top: 45% !important;
   left: 50% !important;
   right: unset;
   bottom: unset;

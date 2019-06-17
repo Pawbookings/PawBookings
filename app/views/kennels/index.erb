@@ -3,7 +3,12 @@
 <div class="container-fluid kennel_dashboard_desktop">
   <div class="row">
 
-
+    <div id="modal-window" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
     <div id="modal-window2" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -18,7 +23,7 @@
         });
       </script>
     <% end %>
-    <div id="modal-window15" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:85% !important;">
+    <div id="modal-window15" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
           </div>
@@ -59,9 +64,9 @@
       </div>
     </div>
     <% if @runs.nil? %>
-      <div id="modal-window4" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: <%= (@runs.nil?) ? '85%' : '45%' %> !important;">
+      <div id="modal-window4" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <% else %>
-      <div id="modal-window4" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: <%= (@runs.length.zero?) ? '85%' : '45%' %> !important;">
+      <div id="modal-window4" class="modal modal-2 fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <% end %>
       <div class="modal-dialog" role="document">
           <div class="modal-content">
