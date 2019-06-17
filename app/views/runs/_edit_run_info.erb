@@ -5,7 +5,7 @@
 <div class="modal-body" style="color: black; width: 1000px;height: auto; margin-top:0 !important; background-color: white; float: none;
     text-align : center;">
 	<% @run = Run.find(@run_id) if params[:run_id] %>
-   <%= form_tag @run, html: { multipart: true }, id: 'form', method: :put do %>
+   <%= form_tag @run, multipart: true, id: 'form', method: :put do %>
 			<br>
 			<%= hidden_field_tag :id, @run.id %>
 			<div class="row">
