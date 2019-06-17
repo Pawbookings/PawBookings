@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190515111821) do
+ActiveRecord::Schema.define(version: 20190617110511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -218,7 +218,10 @@ ActiveRecord::Schema.define(version: 20190515111821) do
     t.string   "check_out"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "kennel_id"
   end
+
+  add_index "kennel_check_in_check_outs", ["kennel_id"], name: "index_kennel_check_in_check_outs_on_kennel_id", using: :btree
 
   create_table "kennel_ratings", force: :cascade do |t|
     t.integer  "reservation_id"
@@ -476,4 +479,5 @@ ActiveRecord::Schema.define(version: 20190515111821) do
 
   add_index "visits", ["user_id"], name: "index_visits_on_user_id", using: :btree
 
+  add_foreign_key "kennel_check_in_check_outs", "kennels"
 end
