@@ -1,5 +1,5 @@
 <p class="kennel_h2">Kennel Information</p>
-<% if !@kennel.nil? %>
+<% if !@kennel.nil? && !@kennel.id.nil? %>
 <div class="pet_container" id="kennel_cont" style="width: 700px;height: 550px; margin: 0 auto; float: none !important;">
 	
 		<%= image_tag @kennel.avatar.url, class: "pet_image kennel_dashboard_avatar" if !@kennel.avatar.url.nil? %>
@@ -11,7 +11,11 @@
 		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Phone:</strong><%= " #{number_to_phone(@kennel.phone, area_code: true)}" %></p>
 		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Zip:</strong><%= " #{@kennel.zip}" %></p>
 		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text"><strong>Sales tax:</strong><%= " #{@kennel.sales_tax}" %></p>
-		<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text" id="mission"><strong>Mission statement:</strong><%= " #{@kennel.mission_statement[0, 100]}..."%></p>
+		<% if @kennel.mission_statement %>
+			<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text" id="mission"><strong>Mission statement:</strong><%= " #{@kennel.mission_statement[0, 100]}..."%></p>
+		<% else %>
+			<p id="p_kennel_info" class="font-18 vet_h pet_text kennel_info_text" id="mission"></p>
+		<% end %>
 		<div id="biggger_than_1000">
 			<%= link_to 'Edit', edit_kennel_path(@kennel.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'text_info bold-text link_edit vet_link', style:"margin-left: 330px; margin-right: unset; margin-top: 10px; padding: 0;", id:'kennel_edit_button' } %>
 		</div>

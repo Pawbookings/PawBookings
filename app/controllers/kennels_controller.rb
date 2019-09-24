@@ -30,7 +30,8 @@ class KennelsController < ApplicationController
       @breed_restrictions = BreedRestriction.where(kennel_id: @kennel.id)
       @photos = Photo.where(kennel_id: @kennel.id)
       @hours_of_operation = HoursOfOperation.where(kennel_id: @kennel.id).first
-      @hours_of_operation_1 = (HoursOfOperation.where(kennel_id: @kennel.id).count == 2) ? HoursOfOperation.where(kennel_id: @kennel.id).last : HoursOfOperationsController.new.create(@kennel[:id])
+      create_new = (HoursOfOperation.where(kennel_id: @kennel.id).count == 2) ? HoursOfOperation.where(kennel_id: @kennel.id).last : HoursOfOperationsController.new.create(@kennel[:id])
+      @hours_of_operation_1 = HoursOfOperation.where(kennel_id: @kennel.id).last
       @devise_update = params[:devise_update]
       @kennel_update = params[:kennel_update]
       @runs_create = params[:runs_create]
@@ -58,18 +59,15 @@ class KennelsController < ApplicationController
   end
 
   def create
-    kennel = Kennel.new(kennel_params)
-    kennel.update(phone: params[:kennel][:phone].scan(/\d/).join)
-    kennel.update(mission_statement: kennel_params[:mission_statement])
-    
-    if params[:kennel][:sales_tax] == ''
-      kennel.update(sales_tax: '0')
-    else
-      kennel.update(sales_tax: params[:kennel][:sales_tax])
-    end
-
     user = User.where(id: current_user.id).first
-    if kennel.valid? && !kennel_completed_registration? && kennel.save && user.kennel = kennel
+
+    tax = params[:kennel][:sales_tax] == '' ? '0' : params[:kennel][:sales_tax]
+    kennel = Kennel.new(kennel_params.merge(phone: params[:kennel][:phone].scan(/\d/).join,
+                                            mission_statement: kennel_params[:mission_statement],
+                                            sales_tax: tax, user_id: user.id))
+
+
+    if kennel.valid? && kennel.save && user.kennel == kennel
       flash[:notice] = "Your Kennel was created successfully!"
       kennel.userID = user[:id]
       kennel.kennelID = kennel[:id]
@@ -80,7 +78,7 @@ class KennelsController < ApplicationController
       return redirect_to kennels_path(tab: 'kennel', kennel_create: nil)
     else
       error_message = []
-      kennel.errors.each do |attr,err|
+      kennel.errors.each do |attr, err|
         error_message << attr
       end
       if params[:kennel][:mobile] != 'true'

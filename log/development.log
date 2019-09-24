@@ -3635,3 +3635,2368 @@ WHERE c.contype = 'f'
   AND t3.nspname = ANY (current_schemas(false))
 ORDER BY c.conname
 
+
+
+Started GET "/kennels?kennel_create%5B%5D=[FILTERED]&tab=[FILTERED]" for 127.0.0.1 at 2019-09-24 11:01:33 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by KennelsController#index as HTML
+  Parameters: {"kennel_create"=>"[FILTERED]", "tab"=>"[FILTERED]"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.4ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  Rendered shared/_top_info.html.erb (2.0ms)
+  Rendered devise/registrations/edit.erb (598.0ms)
+  Rendered kennels/modals/_new_kennel.erb (11.1ms)
+  Rendered kennels/nav_tabs/_owner_info.erb (5.9ms)
+  Rendered kennels/nav_tabs/_kennel_info.erb (0.7ms)
+  Rendered kennels/nav_tabs/_runs_info.erb (0.5ms)
+  Rendered kennels/nav_tabs/_amenities_info.erb (0.6ms)
+  Rendered kennels/nav_tabs/_hours_info.erb (1.4ms)
+  Rendered kennels/nav_tabs/_holidays_info.erb (0.5ms)
+  Rendered kennels/nav_tabs/_policies_info.erb (0.5ms)
+  Rendered kennels/nav_tabs/_breeds_info.erb (0.4ms)
+  Rendered kennels/nav_tabs/_pictures_info.erb (0.4ms)
+  Rendered shared/_footer.html.erb (0.7ms)
+  Rendered kennels/index.erb within layouts/application (642.6ms)
+Completed 200 OK in 2586ms (Views: 2540.8ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 11:01:35 +0300
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 11:01:35 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 11:01:35 +0300
+
+
+Started GET "/assets/default_photo_image.png" for 127.0.0.1 at 2019-09-24 11:01:35 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 11:01:35 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 11:01:35 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 11:01:36 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 11:01:36 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 11:01:36 +0300
+
+
+Started GET "/kennels/new" for 127.0.0.1 at 2019-09-24 11:01:43 +0300
+Processing by KennelsController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  Rendered kennels/modals/_new_kennel.erb (1.7ms)
+  Rendered kennels/modals/new_kennel.js (3.0ms)
+Completed 200 OK in 6ms (Views: 3.9ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/kennels" for 127.0.0.1 at 2019-09-24 11:01:50 +0300
+Processing by KennelsController#create as HTML
+  Parameters: {"utf8"=>"[FILTERED]", "authenticity_token"=>"[FILTERED]", "kennel"=>"[FILTERED]", "commit"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+Unpermitted parameters: phone, sales_tax
+Unpermitted parameters: phone, sales_tax
+  [1m[36mKennel Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "kennels" WHERE ("kennels"."id" IS NOT NULL) AND "kennels"."slug" = $1 LIMIT 1[0m  [["slug", "new"]]
+  [1m[35mKennel Exists (0.3ms)[0m  SELECT  1 AS one FROM "kennels" WHERE "kennels"."email" = 'main@main.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mKennel Exists (0.2ms)[0m  SELECT  1 AS one FROM "kennels" WHERE ("kennels"."id" IS NOT NULL) AND "kennels"."slug" = $1 LIMIT 1  [["slug", "new"]]
+  [1m[36mKennel Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "kennels" WHERE "kennels"."email" = 'main@main.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "kennels" ("name", "cats_or_dogs", "address", "city", "state", "zip", "email", "mission_statement", "taken_ownership", "phone", "sales_tax", "user_id", "slug", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING "id"  [["name", "new"], ["cats_or_dogs", "dogs"], ["address", "address"], ["city", "Kyiv"], ["state", "state"], ["zip", "45000"], ["email", "main@main.com"], ["mission_statement", "state"], ["taken_ownership", "t"], ["phone", "2222222222"], ["sales_tax", 0.0], ["user_id", 36], ["slug", "new"], ["created_at", "2019-09-24 08:01:50.973817"], ["updated_at", "2019-09-24 08:01:50.973817"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1  [["user_id", 36]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mKennel Exists (0.4ms)[0m  SELECT  1 AS one FROM "kennels" WHERE ("kennels"."email" = 'main@main.com' AND "kennels"."id" != 8) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "kennels" SET "userID" = $1, "kennelID" = $2, "updated_at" = $3 WHERE "kennels"."id" = $4[0m  [["userID", 36], ["kennelID", 8], ["updated_at", "2019-09-24 08:01:50.990658"], ["id", 8]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."id" = $1 LIMIT 1[0m  [["id", 8]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "hours_of_operations" ("monday_open", "monday_close", "tuesday_open", "tuesday_close", "wednesday_open", "wednesday_close", "thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "kennel_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["monday_open", "closed"], ["monday_close", "closed"], ["tuesday_open", "closed"], ["tuesday_close", "closed"], ["wednesday_open", "closed"], ["wednesday_close", "closed"], ["thursday_open", "closed"], ["thursday_close", "closed"], ["friday_open", "closed"], ["friday_close", "closed"], ["saturday_open", "closed"], ["saturday_close", "closed"], ["sunday_open", "closed"], ["sunday_close", "closed"], ["kennel_id", 8], ["created_at", "2019-09-24 08:01:51.012812"], ["updated_at", "2019-09-24 08:01:51.012812"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+Redirected to http://localhost:3000/kennels?tab=kennel
+Completed 302 Found in 902ms (ActiveRecord: 5.8ms)
+
+
+Started GET "/kennels?tab=[FILTERED]" for 127.0.0.1 at 2019-09-24 11:01:51 +0300
+Processing by KennelsController#index as HTML
+  Parameters: {"tab"=>"[FILTERED]"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.5ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mRun Load (0.3ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mAmenity Load (0.3ms)[0m  SELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.3ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."id" = $1 LIMIT 1[0m  [["id", 8]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "hours_of_operations" ("monday_open", "monday_close", "tuesday_open", "tuesday_close", "wednesday_open", "wednesday_close", "thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "kennel_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING "id"[0m  [["monday_open", "closed"], ["monday_close", "closed"], ["tuesday_open", "closed"], ["tuesday_close", "closed"], ["wednesday_open", "closed"], ["wednesday_close", "closed"], ["thursday_open", "closed"], ["thursday_close", "closed"], ["friday_open", "closed"], ["friday_close", "closed"], ["saturday_open", "closed"], ["saturday_close", "closed"], ["sunday_open", "closed"], ["sunday_close", "closed"], ["kennel_id", 8], ["created_at", "2019-09-24 08:01:51.104658"], ["updated_at", "2019-09-24 08:01:51.104658"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mHoursOfOperation Load (0.2ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1[0m  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (1.8ms)
+  Rendered devise/registrations/edit.erb (576.2ms)
+  [1m[35mPhoto Load (0.3ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_owner_info.erb (5.1ms)
+  Rendered kennels/nav_tabs/_kennel_info.erb (1.0ms)
+  Rendered kennels/nav_tabs/_runs_info.erb (0.6ms)
+  Rendered kennels/nav_tabs/_amenities_info.erb (0.7ms)
+  Rendered kennels/nav_tabs/_hours_info.erb (33.7ms)
+  [1m[36mHoliday Load (0.3ms)[0m  [1mSELECT "holidays".* FROM "holidays" WHERE "holidays"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_holidays_info.erb (1.9ms)
+  [1m[35mPolicy Load (0.2ms)[0m  SELECT "policies".* FROM "policies" WHERE "policies"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_policies_info.erb (1.5ms)
+  [1m[36mBreedRestriction Load (0.3ms)[0m  [1mSELECT "breed_restrictions".* FROM "breed_restrictions" WHERE "breed_restrictions"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_breeds_info.erb (1.6ms)
+  Rendered kennels/nav_tabs/_pictures_info.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.7ms)
+  Rendered kennels/index.erb within layouts/application (638.2ms)
+Completed 200 OK in 2485ms (Views: 2420.7ms | ActiveRecord: 8.8ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 11:01:53 +0300
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 11:01:53 +0300
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 11:01:53 +0300
+
+
+Started GET "/assets/default_photo_image.png" for 127.0.0.1 at 2019-09-24 11:01:53 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 11:01:53 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 11:01:53 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 11:01:53 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 11:01:53 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 11:01:53 +0300
+
+
+Started GET "/photos/new" for 127.0.0.1 at 2019-09-24 11:01:56 +0300
+Processing by PhotosController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  Rendered photos/_new.erb (1.1ms)
+  Rendered photos/new.js (3.0ms)
+Completed 200 OK in 20ms (Views: 14.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/kennels?tab=[FILTERED]" for 127.0.0.1 at 2019-09-24 11:05:17 +0300
+Processing by KennelsController#index as HTML
+  Parameters: {"tab"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.2ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.2ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.1ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1[0m  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  Rendered devise/registrations/edit.erb (47.9ms)
+  [1m[35mPhoto Load (0.2ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_owner_info.erb (0.4ms)
+  Rendered kennels/nav_tabs/_kennel_info.erb (0.4ms)
+  Rendered kennels/nav_tabs/_runs_info.erb (0.0ms)
+  Rendered kennels/nav_tabs/_amenities_info.erb (0.3ms)
+  Rendered kennels/nav_tabs/_hours_info.erb (11.4ms)
+  [1m[36mHoliday Load (0.2ms)[0m  [1mSELECT "holidays".* FROM "holidays" WHERE "holidays"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_holidays_info.erb (0.8ms)
+  [1m[35mPolicy Load (0.2ms)[0m  SELECT "policies".* FROM "policies" WHERE "policies"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_policies_info.erb (0.6ms)
+  [1m[36mBreedRestriction Load (0.2ms)[0m  [1mSELECT "breed_restrictions".* FROM "breed_restrictions" WHERE "breed_restrictions"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_breeds_info.erb (0.7ms)
+  Rendered kennels/nav_tabs/_pictures_info.erb (0.2ms)
+  Rendered shared/_footer.html.erb (0.4ms)
+  Rendered kennels/index.erb within layouts/application (71.0ms)
+Completed 200 OK in 441ms (Views: 433.6ms | ActiveRecord: 1.9ms)
+
+
+
+
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 11:05:17 +0300
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 11:05:17 +0300
+
+
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 11:05:17 +0300
+Started GET "/assets/default_photo_image.png" for 127.0.0.1 at 2019-09-24 11:05:17 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 11:05:17 +0300
+
+
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 11:05:17 +0300
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 11:05:17 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 11:05:18 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 11:05:18 +0300
+
+
+Started GET "/photos/new" for 127.0.0.1 at 2019-09-24 11:05:20 +0300
+Processing by PhotosController#new as JS
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  Rendered photos/_new.erb (0.4ms)
+  Rendered photos/new.js (1.0ms)
+Completed 200 OK in 6ms (Views: 4.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/kennels?tab=[FILTERED]" for 127.0.0.1 at 2019-09-24 11:20:08 +0300
+Processing by KennelsController#index as HTML
+  Parameters: {"tab"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.1ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.1ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.2ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.1ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1[0m  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.8ms)
+  Rendered devise/registrations/edit.erb (52.2ms)
+  [1m[35mPhoto Load (0.3ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_owner_info.erb (0.5ms)
+  Rendered kennels/nav_tabs/_kennel_info.erb (0.4ms)
+  Rendered kennels/nav_tabs/_runs_info.erb (0.0ms)
+  Rendered kennels/nav_tabs/_amenities_info.erb (0.2ms)
+  Rendered kennels/nav_tabs/_hours_info.erb (11.3ms)
+  [1m[36mHoliday Load (0.4ms)[0m  [1mSELECT "holidays".* FROM "holidays" WHERE "holidays"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_holidays_info.erb (1.4ms)
+  [1m[35mPolicy Load (0.3ms)[0m  SELECT "policies".* FROM "policies" WHERE "policies"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_policies_info.erb (0.9ms)
+  [1m[36mBreedRestriction Load (0.2ms)[0m  [1mSELECT "breed_restrictions".* FROM "breed_restrictions" WHERE "breed_restrictions"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_breeds_info.erb (0.7ms)
+  Rendered kennels/nav_tabs/_pictures_info.erb (0.1ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+  Rendered kennels/index.erb within layouts/application (75.6ms)
+Completed 200 OK in 426ms (Views: 417.7ms | ActiveRecord: 2.2ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 11:20:09 +0300
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 11:20:09 +0300
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 11:20:09 +0300
+
+
+Started GET "/assets/default_photo_image.png" for 127.0.0.1 at 2019-09-24 11:20:09 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 11:20:09 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 11:20:09 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 11:20:09 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 11:20:09 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 11:20:09 +0300
+
+
+Started GET "/photos/new" for 127.0.0.1 at 2019-09-24 11:20:11 +0300
+Processing by PhotosController#new as JS
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  Rendered photos/_new.erb (1.1ms)
+  Rendered photos/new.js (2.1ms)
+Completed 200 OK in 17ms (Views: 8.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/kennels?tab=[FILTERED]" for 127.0.0.1 at 2019-09-24 12:05:18 +0300
+Processing by KennelsController#index as HTML
+  Parameters: {"tab"=>"[FILTERED]"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mRun Load (0.3ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mAmenity Load (0.3ms)[0m  SELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.3ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.2ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  Rendered devise/registrations/edit.erb (47.4ms)
+  [1m[36mPhoto Load (0.3ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_owner_info.erb (0.4ms)
+  Rendered kennels/nav_tabs/_kennel_info.erb (0.3ms)
+  Rendered kennels/nav_tabs/_runs_info.erb (0.0ms)
+  Rendered kennels/nav_tabs/_amenities_info.erb (0.1ms)
+  Rendered kennels/nav_tabs/_hours_info.erb (12.7ms)
+  [1m[35mHoliday Load (0.2ms)[0m  SELECT "holidays".* FROM "holidays" WHERE "holidays"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_holidays_info.erb (0.9ms)
+  [1m[36mPolicy Load (0.2ms)[0m  [1mSELECT "policies".* FROM "policies" WHERE "policies"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_policies_info.erb (0.6ms)
+  [1m[35mBreedRestriction Load (0.2ms)[0m  SELECT "breed_restrictions".* FROM "breed_restrictions" WHERE "breed_restrictions"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_breeds_info.erb (0.6ms)
+  Rendered kennels/nav_tabs/_pictures_info.erb (0.1ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+  Rendered kennels/index.erb within layouts/application (72.3ms)
+Completed 200 OK in 386ms (Views: 365.1ms | ActiveRecord: 4.7ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 12:05:19 +0300
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 12:05:19 +0300
+
+
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 12:05:19 +0300
+Started GET "/assets/default_photo_image.png" for 127.0.0.1 at 2019-09-24 12:05:19 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 12:05:19 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 12:05:19 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 12:05:19 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 12:05:19 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 12:05:19 +0300
+
+
+Started GET "/photos/new" for 127.0.0.1 at 2019-09-24 12:05:21 +0300
+Processing by PhotosController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  Rendered photos/_new.erb (0.4ms)
+  Rendered photos/new.js (1.0ms)
+Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/photos/new" for 127.0.0.1 at 2019-09-24 12:05:25 +0300
+Processing by PhotosController#new as JS
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  Rendered photos/_new.erb (0.4ms)
+  Rendered photos/new.js (0.9ms)
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-09-24 13:06:52 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+Redirected to http://localhost:3000/kennel_dashboard
+  [1m[36mKennelRating Load (0.2ms)[0m  [1mSELECT  "kennel_ratings".* FROM "kennel_ratings" WHERE "kennel_ratings"."rating" = $1  ORDER BY "kennel_ratings"."id" DESC LIMIT 3[0m  [["rating", 5]]
+Completed 302 Found in 41ms (ActiveRecord: 3.7ms)
+
+
+Started GET "/kennel_dashboard" for 127.0.0.1 at 2019-09-24 13:06:52 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.4ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.3ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.3ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.3ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.1ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (1.6ms)
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_in_date", "2019-09-24"], ["kennel_id", 8]]
+  [1m[35mReservation Load (0.1ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2  [["check_out_date", "2019-09-24"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (87.7ms)
+  Rendered simple_calendar/_month_calendar.html.erb (121.0ms)
+  Rendered simple_calendar/_month_calendar.html.erb (87.9ms)
+  Rendered shared/_footer.html.erb (0.8ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (320.8ms)
+Completed 200 OK in 2399ms (Views: 2319.9ms | ActiveRecord: 7.4ms)
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:06:55 +0300
+
+
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:06:55 +0300
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:06:55 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:06:55 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:06:55 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:06:55 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:06:55 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:06:55 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:06:55 +0300
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:06:55 +0300
+
+
+Started GET "/reservations/new" for 127.0.0.1 at 2019-09-24 13:06:57 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.4ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.4ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.3ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (13.4ms)
+  Rendered reservations/new.js (20.0ms)
+Completed 200 OK in 92ms (Views: 35.3ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/get_pets?email=[FILTERED]&customer_first_name=[FILTERED]&customer_last_name=&customer_phone=[FILTERED]" for 127.0.0.1 at 2019-09-24 13:06:59 +0300
+Processing by ReservationsController#get_pets as HTML
+  Parameters: {"email"=>"[FILTERED]", "customer_first_name"=>"[FILTERED]", "customer_last_name"=>"[FILTERED]", "customer_phone"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT 1  [["email", "main@main.com"]]
+  Rendered reservations/_get_pets.html.erb (0.5ms)
+Completed 200 OK in 12ms (Views: 8.5ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/reservations" for 127.0.0.1 at 2019-09-24 13:07:02 +0300
+Processing by ReservationsController#create as HTML
+  Parameters: {"utf8"=>"[FILTERED]", "authenticity_token"=>"[FILTERED]", "customer_first_name"=>"[FILTERED]", "customer_last_name"=>"[FILTERED]", "customer_phone"=>"[FILTERED]", "customer_email"=>"[FILTERED]", "month_in"=>"[FILTERED]", "day_in"=>"[FILTERED]", "year_in"=>"[FILTERED]", "month_out"=>"[FILTERED]", "day_out"=>"[FILTERED]", "year_out"=>"[FILTERED]"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT 1[0m  [["email", "main@main.com"]]
+Redirected to http://localhost:3000/kennel_dashboard?reservation%5B%5D=customer_last_name&reservation%5B%5D=month_in&reservation%5B%5D=month_out&reservation%5B%5D=day_in&reservation%5B%5D=year_in&reservation%5B%5D=year_out&reservation%5B%5D=user&reservation%5B%5D=room-unit
+Completed 302 Found in 5ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/kennel_dashboard?reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]" for 127.0.0.1 at 2019-09-24 13:07:02 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  Parameters: {"reservation"=>"[FILTERED]"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.5ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.4ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.3ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.3ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.3ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (1.3ms)
+  [1m[36mKennel Load (0.3ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.2ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (3.4ms)
+  [1m[35mReservation Load (0.3ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2  [["check_in_date", "2019-09-24"], ["kennel_id", 8]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_out_date", "2019-09-24"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (92.3ms)
+  Rendered simple_calendar/_month_calendar.html.erb (89.7ms)
+  Rendered simple_calendar/_month_calendar.html.erb (87.9ms)
+  Rendered shared/_footer.html.erb (0.6ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (289.1ms)
+Completed 200 OK in 1895ms (Views: 1871.8ms | ActiveRecord: 4.3ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:07:04 +0300
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:07:04 +0300
+
+
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:07:04 +0300
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:07:04 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:07:04 +0300
+
+
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:07:04 +0300
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:07:04 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:07:04 +0300
+
+
+Started GET "/kennel_dashboard?reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]" for 127.0.0.1 at 2019-09-24 13:09:31 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  Parameters: {"reservation"=>"[FILTERED]"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.4ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.3ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.3ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.3ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.1ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (1.4ms)
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.2ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (31.5ms)
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2  [["check_in_date", "2019-09-24"], ["kennel_id", 8]]
+  [1m[36mReservation Load (0.1ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_out_date", "2019-09-24"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (91.3ms)
+  Rendered simple_calendar/_month_calendar.html.erb (89.6ms)
+  Rendered simple_calendar/_month_calendar.html.erb (87.8ms)
+  Rendered shared/_footer.html.erb (0.6ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (320.5ms)
+Completed 200 OK in 2092ms (Views: 2049.2ms | ActiveRecord: 6.6ms)
+
+
+
+
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:09:33 +0300
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:09:33 +0300
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:09:33 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:09:33 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:09:33 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:09:33 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:09:33 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:09:33 +0300
+
+
+Started GET "/kennel_dashboar" for 127.0.0.1 at 2019-09-24 13:09:40 +0300
+
+ActionController::RoutingError (No route matches [GET] "/kennel_dashboar"):
+  actionpack (4.2.8) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.8) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `call'
+  ahoy_matey (1.2.1) lib/ahoy/engine.rb:18:in `call_with_quiet_ahoy'
+  request_store (1.3.1) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.8) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.8) lib/rails/engine.rb:518:in `call'
+  railties (4.2.8) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:562:in `process_client'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:658:in `worker_loop'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:508:in `spawn_missing_workers'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:132:in `start'
+  unicorn-rails (2.2.1) lib/unicorn_rails.rb:33:in `run'
+  rack (1.6.11) lib/rack/server.rb:287:in `start'
+  railties (4.2.8) lib/rails/commands/server.rb:80:in `start'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:80:in `block in server'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:75:in `tap'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:75:in `server'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+  railties (4.2.8) lib/rails/commands.rb:17:in `<top (required)>'
+  bin/rails:9:in `require'
+  bin/rails:9:in `<top (required)>'
+  spring (2.0.2) lib/spring/client/rails.rb:28:in `load'
+  spring (2.0.2) lib/spring/client/rails.rb:28:in `call'
+  spring (2.0.2) lib/spring/client/command.rb:7:in `call'
+  spring (2.0.2) lib/spring/client.rb:30:in `run'
+  spring (2.0.2) bin/spring:49:in `<top (required)>'
+  spring (2.0.2) lib/spring/binstub.rb:31:in `load'
+  spring (2.0.2) lib/spring/binstub.rb:31:in `<top (required)>'
+  /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:65:in `require'
+  /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:65:in `require'
+  bin/spring:13:in `<top (required)>'
+  bin/rails:3:in `load'
+  bin/rails:3:in `<main>'
+
+
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.4ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_table.html.erb (4.7ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (49.4ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (16.0ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (35.3ms)
+
+
+Started GET "/kennel_dashboard" for 127.0.0.1 at 2019-09-24 13:09:43 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.1ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.1ms)[0m  SELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.1ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2  [["check_in_date", "2019-09-24"], ["kennel_id", 8]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_out_date", "2019-09-24"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (89.1ms)
+  Rendered simple_calendar/_month_calendar.html.erb (85.7ms)
+  Rendered simple_calendar/_month_calendar.html.erb (88.3ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (269.6ms)
+Completed 200 OK in 576ms (Views: 569.7ms | ActiveRecord: 1.5ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:09:43 +0300
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:09:43 +0300
+
+
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:09:44 +0300
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:09:44 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:09:44 +0300
+
+
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:09:44 +0300
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:09:44 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:09:44 +0300
+
+
+Started GET "/reservations/new" for 127.0.0.1 at 2019-09-24 13:09:45 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.3ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.2ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.6ms)
+  Rendered reservations/new.js (3.5ms)
+Completed 200 OK in 10ms (Views: 6.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/get_pets?email=[FILTERED]&customer_first_name=[FILTERED]&customer_last_name=&customer_phone=[FILTERED]" for 127.0.0.1 at 2019-09-24 13:09:47 +0300
+Processing by ReservationsController#get_pets as HTML
+  Parameters: {"email"=>"[FILTERED]", "customer_first_name"=>"[FILTERED]", "customer_last_name"=>"[FILTERED]", "customer_phone"=>"[FILTERED]"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT 1[0m  [["email", "main@main.com"]]
+  Rendered reservations/_get_pets.html.erb (0.0ms)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/reservations" for 127.0.0.1 at 2019-09-24 13:09:49 +0300
+Processing by ReservationsController#create as HTML
+  Parameters: {"utf8"=>"[FILTERED]", "authenticity_token"=>"[FILTERED]", "customer_first_name"=>"[FILTERED]", "customer_last_name"=>"[FILTERED]", "customer_phone"=>"[FILTERED]", "customer_email"=>"[FILTERED]", "month_in"=>"[FILTERED]", "day_in"=>"[FILTERED]", "year_in"=>"[FILTERED]", "month_out"=>"[FILTERED]", "day_out"=>"[FILTERED]", "year_out"=>"[FILTERED]"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT 1[0m  [["email", "main@main.com"]]
+Redirected to http://localhost:3000/kennel_dashboard?reservation%5B%5D=customer_last_name&reservation%5B%5D=month_in&reservation%5B%5D=month_out&reservation%5B%5D=day_in&reservation%5B%5D=year_in&reservation%5B%5D=year_out&reservation%5B%5D=user&reservation%5B%5D=room-unit
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/kennel_dashboard?reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]" for 127.0.0.1 at 2019-09-24 13:09:49 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  Parameters: {"reservation"=>"[FILTERED]"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.3ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.2ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.3ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.1ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.1ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.1ms)
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2  [["check_in_date", "2019-09-24"], ["kennel_id", 8]]
+  [1m[36mReservation Load (0.1ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_out_date", "2019-09-24"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (91.0ms)
+  Rendered simple_calendar/_month_calendar.html.erb (86.1ms)
+  Rendered simple_calendar/_month_calendar.html.erb (86.9ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (273.1ms)
+Completed 200 OK in 578ms (Views: 569.0ms | ActiveRecord: 2.1ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:09:49 +0300
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:09:49 +0300
+
+
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:09:49 +0300
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:09:49 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:09:49 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:09:49 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:09:49 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:09:49 +0300
+
+
+Started GET "/kennel_dashboard" for 127.0.0.1 at 2019-09-24 13:09:57 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.1ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.1ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.1ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[36mReservation Load (0.3ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_in_date", "2019-09-24"], ["kennel_id", 8]]
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2  [["check_out_date", "2019-09-24"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (88.5ms)
+  Rendered simple_calendar/_month_calendar.html.erb (101.6ms)
+  Rendered simple_calendar/_month_calendar.html.erb (88.2ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (285.0ms)
+Completed 200 OK in 548ms (Views: 542.0ms | ActiveRecord: 1.5ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:09:58 +0300
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:09:58 +0300
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:09:58 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:09:58 +0300
+
+
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:09:58 +0300
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:09:58 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:09:58 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:09:58 +0300
+
+
+Started GET "/reservations/new" for 127.0.0.1 at 2019-09-24 13:10:09 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.3ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.2ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (4.4ms)
+  Rendered reservations/new.js (6.3ms)
+Completed 200 OK in 39ms (Views: 9.0ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/get_pets?email=[FILTERED]&customer_first_name=[FILTERED]&customer_last_name=&customer_phone=[FILTERED]" for 127.0.0.1 at 2019-09-24 13:10:10 +0300
+Processing by ReservationsController#get_pets as HTML
+  Parameters: {"email"=>"[FILTERED]", "customer_first_name"=>"[FILTERED]", "customer_last_name"=>"[FILTERED]", "customer_phone"=>"[FILTERED]"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT 1[0m  [["email", "main@main.com"]]
+  Rendered reservations/_get_pets.html.erb (0.0ms)
+Completed 200 OK in 4ms (Views: 1.9ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/reservations" for 127.0.0.1 at 2019-09-24 13:10:11 +0300
+Processing by ReservationsController#create as HTML
+  Parameters: {"utf8"=>"[FILTERED]", "authenticity_token"=>"[FILTERED]", "customer_first_name"=>"[FILTERED]", "customer_last_name"=>"[FILTERED]", "customer_phone"=>"[FILTERED]", "customer_email"=>"[FILTERED]", "month_in"=>"[FILTERED]", "day_in"=>"[FILTERED]", "year_in"=>"[FILTERED]", "month_out"=>"[FILTERED]", "day_out"=>"[FILTERED]", "year_out"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT 1  [["email", "main@main.com"]]
+Redirected to http://localhost:3000/kennel_dashboard?reservation%5B%5D=customer_last_name&reservation%5B%5D=month_in&reservation%5B%5D=month_out&reservation%5B%5D=day_in&reservation%5B%5D=year_in&reservation%5B%5D=year_out&reservation%5B%5D=user&reservation%5B%5D=room-unit
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/kennel_dashboard?reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]" for 127.0.0.1 at 2019-09-24 13:10:11 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  Parameters: {"reservation"=>"[FILTERED]"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.4ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.1ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.1ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.1ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.1ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[36mKennel Load (0.3ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.2ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (3.0ms)
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2  [["check_in_date", "2019-09-24"], ["kennel_id", 8]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_out_date", "2019-09-24"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (89.7ms)
+  Rendered simple_calendar/_month_calendar.html.erb (89.0ms)
+  Rendered simple_calendar/_month_calendar.html.erb (92.6ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (281.4ms)
+Completed 200 OK in 543ms (Views: 535.0ms | ActiveRecord: 2.4ms)
+
+
+
+
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:10:11 +0300
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:10:11 +0300
+
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:10:11 +0300
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:10:11 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:10:11 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:10:11 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:10:11 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:10:11 +0300
+
+
+Started GET "/kennel_dashboard?reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]" for 127.0.0.1 at 2019-09-24 13:11:31 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  Parameters: {"reservation"=>"[FILTERED]"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.1ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.1ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.1ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[36mKennel Load (0.3ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.1ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.2ms)
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2  [["check_in_date", "2019-09-24"], ["kennel_id", 8]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_out_date", "2019-09-24"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (90.2ms)
+  Rendered simple_calendar/_month_calendar.html.erb (87.0ms)
+  Rendered simple_calendar/_month_calendar.html.erb (85.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (290.9ms)
+Completed 200 OK in 569ms (Views: 562.4ms | ActiveRecord: 1.9ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:11:32 +0300
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:11:32 +0300
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:11:32 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:11:32 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:11:32 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:11:32 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:11:32 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:11:32 +0300
+
+
+Started GET "/kennel_dashboard?reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]" for 127.0.0.1 at 2019-09-24 13:11:52 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  Parameters: {"reservation"=>"[FILTERED]"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.1ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.2ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.1ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.9ms)
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2  [["check_in_date", "2019-09-24"], ["kennel_id", 8]]
+  [1m[36mReservation Load (0.1ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_out_date", "2019-09-24"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (88.7ms)
+  Rendered simple_calendar/_month_calendar.html.erb (87.3ms)
+  Rendered simple_calendar/_month_calendar.html.erb (85.7ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (277.2ms)
+Completed 200 OK in 584ms (Views: 576.6ms | ActiveRecord: 1.9ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:11:52 +0300
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:11:52 +0300
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:11:52 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:11:52 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:11:52 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:11:52 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:11:52 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:11:52 +0300
+
+
+Started GET "/reservations/new" for 127.0.0.1 at 2019-09-24 13:11:59 +0300
+Processing by ReservationsController#new as JS
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1  [["user_id", 36]]
+  [1m[36mRun Load (0.2ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mAmenity Load (0.1ms)[0m  SELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.5ms)
+  Rendered reservations/new.js (3.6ms)
+Completed 200 OK in 12ms (Views: 9.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/kennel_dashboard?reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]" for 127.0.0.1 at 2019-09-24 13:12:05 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  Parameters: {"reservation"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.2ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.1ms)[0m  SELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.1ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[35mKennel Load (0.3ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1  [["user_id", 36]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mAmenity Load (0.1ms)[0m  SELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.8ms)
+  [1m[36mReservation Load (0.1ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_in_date", "2019-09-24"], ["kennel_id", 8]]
+  [1m[35mReservation Load (0.1ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2  [["check_out_date", "2019-09-24"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (87.0ms)
+  Rendered simple_calendar/_month_calendar.html.erb (86.8ms)
+  Rendered simple_calendar/_month_calendar.html.erb (87.0ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (274.4ms)
+Completed 200 OK in 558ms (Views: 551.1ms | ActiveRecord: 1.8ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:12:05 +0300
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:12:05 +0300
+
+
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:12:05 +0300
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:12:05 +0300
+
+
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:12:05 +0300
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:12:05 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:12:05 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:12:05 +0300
+
+
+Started GET "/kennel_dashboard" for 127.0.0.1 at 2019-09-24 13:12:14 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.2ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.2ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.1ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_in_date", "2019-09-24"], ["kennel_id", 8]]
+  [1m[35mReservation Load (0.3ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2  [["check_out_date", "2019-09-24"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (99.7ms)
+  Rendered simple_calendar/_month_calendar.html.erb (84.0ms)
+  Rendered simple_calendar/_month_calendar.html.erb (93.7ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (284.3ms)
+Completed 200 OK in 581ms (Views: 573.8ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+
+
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+
+
+
+
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+
+
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+
+
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:12:15 +0300
+
+
+Started GET "/reservations/new" for 127.0.0.1 at 2019-09-24 13:12:16 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.1ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.0ms)
+  Rendered reservations/new.js (2.7ms)
+Completed 200 OK in 8ms (Views: 5.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/get_pets?email=[FILTERED]&customer_first_name=[FILTERED]&customer_last_name=&customer_phone=[FILTERED]" for 127.0.0.1 at 2019-09-24 13:12:19 +0300
+Processing by ReservationsController#get_pets as HTML
+  Parameters: {"email"=>"[FILTERED]", "customer_first_name"=>"[FILTERED]", "customer_last_name"=>"[FILTERED]", "customer_phone"=>"[FILTERED]"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT 1[0m  [["email", "main@main.com"]]
+  Rendered reservations/_get_pets.html.erb (0.4ms)
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/reservations" for 127.0.0.1 at 2019-09-24 13:12:20 +0300
+Processing by ReservationsController#create as HTML
+  Parameters: {"utf8"=>"[FILTERED]", "authenticity_token"=>"[FILTERED]", "customer_first_name"=>"[FILTERED]", "customer_last_name"=>"[FILTERED]", "customer_phone"=>"[FILTERED]", "customer_email"=>"[FILTERED]", "month_in"=>"[FILTERED]", "day_in"=>"[FILTERED]", "year_in"=>"[FILTERED]", "month_out"=>"[FILTERED]", "day_out"=>"[FILTERED]", "year_out"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT 1  [["email", "main@main.com"]]
+Redirected to http://localhost:3000/kennel_dashboard?reservation%5B%5D=customer_last_name&reservation%5B%5D=month_in&reservation%5B%5D=month_out&reservation%5B%5D=day_in&reservation%5B%5D=year_in&reservation%5B%5D=year_out&reservation%5B%5D=user&reservation%5B%5D=room-unit
+Completed 302 Found in 2ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/kennel_dashboard?reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]&reservation%5B%5D=[FILTERED]" for 127.0.0.1 at 2019-09-24 13:12:20 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  Parameters: {"reservation"=>"[FILTERED]"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.2ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.2ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.1ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.1ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.0ms)
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2  [["check_in_date", "2019-09-24"], ["kennel_id", 8]]
+  [1m[36mReservation Load (0.1ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_out_date", "2019-09-24"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (89.8ms)
+  Rendered simple_calendar/_month_calendar.html.erb (89.0ms)
+  Rendered simple_calendar/_month_calendar.html.erb (87.0ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (274.7ms)
+Completed 200 OK in 545ms (Views: 536.9ms | ActiveRecord: 2.0ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for 127.0.0.1 at 2019-09-24 13:12:21 +0300
+Started GET "/assets/login_btn.png" for 127.0.0.1 at 2019-09-24 13:12:21 +0300
+
+
+Started GET "/assets/signup_btn.png" for 127.0.0.1 at 2019-09-24 13:12:21 +0300
+
+
+Started GET "/assets/facebook_btn.png" for 127.0.0.1 at 2019-09-24 13:12:21 +0300
+
+
+Started GET "/assets/twitter_btn.png" for 127.0.0.1 at 2019-09-24 13:12:21 +0300
+
+
+
+
+Started GET "/assets/pinterest_btn.png" for 127.0.0.1 at 2019-09-24 13:12:21 +0300
+Started GET "/assets/google_plus_btn.png" for 127.0.0.1 at 2019-09-24 13:12:21 +0300
+
+
+Started GET "/assets/paw.png" for 127.0.0.1 at 2019-09-24 13:12:21 +0300
+
+
+Started GET "/recruits/favicon.ico" for ::1 at 2019-09-25 09:23:29 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+ActionController::RoutingError (No route matches [GET] "/recruits/favicon.ico"):
+  actionpack (4.2.8) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.8) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `call'
+  ahoy_matey (1.2.1) lib/ahoy/engine.rb:18:in `call_with_quiet_ahoy'
+  request_store (1.3.1) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.8) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.8) lib/rails/engine.rb:518:in `call'
+  railties (4.2.8) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:562:in `process_client'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:658:in `worker_loop'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:508:in `spawn_missing_workers'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:132:in `start'
+  unicorn-rails (2.2.1) lib/unicorn_rails.rb:33:in `run'
+  rack (1.6.11) lib/rack/server.rb:287:in `start'
+  railties (4.2.8) lib/rails/commands/server.rb:80:in `start'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:80:in `block in server'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:75:in `tap'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:75:in `server'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+  railties (4.2.8) lib/rails/commands.rb:17:in `<top (required)>'
+  bin/rails:9:in `require'
+  bin/rails:9:in `<top (required)>'
+  spring (2.0.2) lib/spring/client/rails.rb:28:in `load'
+  spring (2.0.2) lib/spring/client/rails.rb:28:in `call'
+  spring (2.0.2) lib/spring/client/command.rb:7:in `call'
+  spring (2.0.2) lib/spring/client.rb:30:in `run'
+  spring (2.0.2) bin/spring:49:in `<top (required)>'
+  spring (2.0.2) lib/spring/binstub.rb:31:in `load'
+  spring (2.0.2) lib/spring/binstub.rb:31:in `<top (required)>'
+  /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:65:in `require'
+  /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:65:in `require'
+  bin/spring:13:in `<top (required)>'
+  bin/rails:3:in `load'
+  bin/rails:3:in `<main>'
+
+
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (4.9ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_table.html.erb (7.6ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (10.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (81.9ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (18.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (39.5ms)
+
+
+Started GET "/" for ::1 at 2019-09-25 09:23:30 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (1.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "visits" ("id", "visitor_id", "user_id", "started_at", "ip", "user_agent", "landing_page", "browser", "os", "device_type", "country", "latitude", "longitude") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING "id"  [["id", "77522063-1635-461c-9547-5c0b77f154f9"], ["visitor_id", "6fc5bf6c-ef3f-41a3-8268-64ef498d0af8"], ["user_id", 36], ["started_at", "2019-09-25 06:23:30.988348"], ["ip", "::1"], ["user_agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"], ["landing_page", "http://localhost:3000/"], ["browser", "Chrome"], ["os", "Mac OS X"], ["device_type", "Desktop"], ["country", "Reserved"], ["latitude", "0.0"], ["longitude", "0.0"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/kennel_dashboard
+  [1m[35mKennelRating Load (0.8ms)[0m  SELECT  "kennel_ratings".* FROM "kennel_ratings" WHERE "kennel_ratings"."rating" = $1  ORDER BY "kennel_ratings"."id" DESC LIMIT 3  [["rating", 5]]
+Completed 302 Found in 158ms (ActiveRecord: 13.2ms)
+
+
+Started GET "/kennel_dashboard" for ::1 at 2019-09-25 09:23:31 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[35mUser Load (0.8ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (1.9ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (1.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (1.3ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (1.1ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (1.3ms)
+  [1m[36mReservation Load (0.7ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_in_date", "2019-09-25"], ["kennel_id", 8]]
+  [1m[35mReservation Load (0.1ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2  [["check_out_date", "2019-09-25"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (96.2ms)
+  Rendered simple_calendar/_month_calendar.html.erb (87.7ms)
+  Rendered simple_calendar/_month_calendar.html.erb (88.2ms)
+  Rendered shared/_footer.html.erb (0.7ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (290.8ms)
+Completed 200 OK in 2523ms (Views: 2413.2ms | ActiveRecord: 16.2ms)
+
+
+Started GET "/assets/login_btn.png" for ::1 at 2019-09-25 09:23:33 +0300
+
+
+Started GET "/assets/pawbookings.png" for ::1 at 2019-09-25 09:23:33 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/assets/signup_btn.png" for ::1 at 2019-09-25 09:23:34 +0300
+
+
+Started GET "/assets/facebook_btn.png" for ::1 at 2019-09-25 09:23:34 +0300
+
+
+Started GET "/assets/twitter_btn.png" for ::1 at 2019-09-25 09:23:34 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for ::1 at 2019-09-25 09:23:34 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for ::1 at 2019-09-25 09:23:34 +0300
+
+
+Started GET "/assets/paw.png" for ::1 at 2019-09-25 09:23:34 +0300
+
+
+Started GET "/kennels?id=[FILTERED]" for ::1 at 2019-09-25 09:23:36 +0300
+Processing by KennelsController#index as HTML
+  Parameters: {"id"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.4ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (1.1ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.9ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.5ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36m (0.6ms)[0m  [1mSELECT COUNT(*) FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.3ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1[0m  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (1.5ms)
+  Rendered devise/registrations/edit.erb (666.8ms)
+  [1m[35mPhoto Load (1.0ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_owner_info.erb (13.5ms)
+  Rendered kennels/nav_tabs/_kennel_info.erb (1.7ms)
+  Rendered kennels/nav_tabs/_runs_info.erb (1.3ms)
+  Rendered kennels/nav_tabs/_amenities_info.erb (0.9ms)
+  Rendered kennels/nav_tabs/_hours_info.erb (19.9ms)
+  [1m[36mHoliday Load (0.5ms)[0m  [1mSELECT "holidays".* FROM "holidays" WHERE "holidays"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_holidays_info.erb (2.1ms)
+  [1m[35mPolicy Load (0.5ms)[0m  SELECT "policies".* FROM "policies" WHERE "policies"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_policies_info.erb (1.8ms)
+  [1m[36mBreedRestriction Load (1.0ms)[0m  [1mSELECT "breed_restrictions".* FROM "breed_restrictions" WHERE "breed_restrictions"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_breeds_info.erb (2.2ms)
+  Rendered kennels/nav_tabs/_pictures_info.erb (0.7ms)
+  Rendered shared/_footer.html.erb (0.6ms)
+  Rendered kennels/index.erb within layouts/application (767.1ms)
+Completed 200 OK in 2404ms (Views: 2327.4ms | ActiveRecord: 16.7ms)
+
+
+
+
+Started GET "/assets/login_btn.png" for ::1 at 2019-09-25 09:23:39 +0300
+Started GET "/assets/pawbookings.png" for ::1 at 2019-09-25 09:23:39 +0300
+
+
+Started GET "/assets/signup_btn.png" for ::1 at 2019-09-25 09:23:39 +0300
+
+
+Started GET "/assets/default_photo_image.png" for ::1 at 2019-09-25 09:23:39 +0300
+
+
+Started GET "/images/original/missing.png" for ::1 at 2019-09-25 09:23:39 +0300
+
+
+Started GET "/assets/facebook_btn.png" for ::1 at 2019-09-25 09:23:39 +0300
+
+ActionController::RoutingError (No route matches [GET] "/images/original/missing.png"):
+  actionpack (4.2.8) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.8) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `call'
+  ahoy_matey (1.2.1) lib/ahoy/engine.rb:18:in `call_with_quiet_ahoy'
+  request_store (1.3.1) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.8) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.8) lib/rails/engine.rb:518:in `call'
+  railties (4.2.8) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:562:in `process_client'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:658:in `worker_loop'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:508:in `spawn_missing_workers'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:132:in `start'
+  unicorn-rails (2.2.1) lib/unicorn_rails.rb:33:in `run'
+  rack (1.6.11) lib/rack/server.rb:287:in `start'
+  railties (4.2.8) lib/rails/commands/server.rb:80:in `start'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:80:in `block in server'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:75:in `tap'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:75:in `server'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+  railties (4.2.8) lib/rails/commands.rb:17:in `<top (required)>'
+  bin/rails:9:in `require'
+  bin/rails:9:in `<top (required)>'
+  spring (2.0.2) lib/spring/client/rails.rb:28:in `load'
+  spring (2.0.2) lib/spring/client/rails.rb:28:in `call'
+  spring (2.0.2) lib/spring/client/command.rb:7:in `call'
+  spring (2.0.2) lib/spring/client.rb:30:in `run'
+  spring (2.0.2) bin/spring:49:in `<top (required)>'
+  spring (2.0.2) lib/spring/binstub.rb:31:in `load'
+  spring (2.0.2) lib/spring/binstub.rb:31:in `<top (required)>'
+  /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:65:in `require'
+  /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:65:in `require'
+  bin/spring:13:in `<top (required)>'
+  bin/rails:3:in `load'
+  bin/rails:3:in `<main>'
+
+
+
+
+Started GET "/assets/twitter_btn.png" for ::1 at 2019-09-25 09:23:39 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for ::1 at 2019-09-25 09:23:39 +0300
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+
+
+Started GET "/assets/google_plus_btn.png" for ::1 at 2019-09-25 09:23:39 +0300
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.9ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.0ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_table.html.erb (4.9ms)
+
+
+Started GET "/assets/paw.png" for ::1 at 2019-09-25 09:23:39 +0300
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (8.6ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (55.5ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (10.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (21.0ms)
+
+
+Started GET "/kennels?id=[FILTERED]" for ::1 at 2019-09-25 09:24:08 +0300
+Processing by KennelsController#index as HTML
+  Parameters: {"id"=>"[FILTERED]"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mRun Load (0.2ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mAmenity Load (0.1ms)[0m  SELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.2ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.2ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  Rendered devise/registrations/edit.erb (46.7ms)
+  [1m[36mPhoto Load (0.2ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_owner_info.erb (0.4ms)
+  Rendered kennels/nav_tabs/_kennel_info.erb (0.3ms)
+  Rendered kennels/nav_tabs/_runs_info.erb (0.4ms)
+  Rendered kennels/nav_tabs/_amenities_info.erb (0.1ms)
+  Rendered kennels/nav_tabs/_hours_info.erb (8.8ms)
+  [1m[35mHoliday Load (0.2ms)[0m  SELECT "holidays".* FROM "holidays" WHERE "holidays"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_holidays_info.erb (0.7ms)
+  [1m[36mPolicy Load (0.1ms)[0m  [1mSELECT "policies".* FROM "policies" WHERE "policies"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_policies_info.erb (0.5ms)
+  [1m[35mBreedRestriction Load (0.1ms)[0m  SELECT "breed_restrictions".* FROM "breed_restrictions" WHERE "breed_restrictions"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_breeds_info.erb (0.7ms)
+  Rendered kennels/nav_tabs/_pictures_info.erb (0.1ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+  Rendered kennels/index.erb within layouts/application (65.4ms)
+Completed 200 OK in 359ms (Views: 351.4ms | ActiveRecord: 1.9ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for ::1 at 2019-09-25 09:24:08 +0300
+Started GET "/assets/login_btn.png" for ::1 at 2019-09-25 09:24:08 +0300
+
+
+Started GET "/assets/signup_btn.png" for ::1 at 2019-09-25 09:24:08 +0300
+
+
+Started GET "/assets/default_photo_image.png" for ::1 at 2019-09-25 09:24:08 +0300
+
+
+Started GET "/images/original/missing.png" for ::1 at 2019-09-25 09:24:08 +0300
+
+
+Started GET "/assets/facebook_btn.png" for ::1 at 2019-09-25 09:24:08 +0300
+
+
+Started GET "/assets/twitter_btn.png" for ::1 at 2019-09-25 09:24:08 +0300
+
+ActionController::RoutingError (No route matches [GET] "/images/original/missing.png"):
+  actionpack (4.2.8) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.8) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `call'
+  ahoy_matey (1.2.1) lib/ahoy/engine.rb:18:in `call_with_quiet_ahoy'
+  request_store (1.3.1) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.8) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.8) lib/rails/engine.rb:518:in `call'
+  railties (4.2.8) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:562:in `process_client'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:658:in `worker_loop'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:508:in `spawn_missing_workers'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:132:in `start'
+  unicorn-rails (2.2.1) lib/unicorn_rails.rb:33:in `run'
+  rack (1.6.11) lib/rack/server.rb:287:in `start'
+  railties (4.2.8) lib/rails/commands/server.rb:80:in `start'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:80:in `block in server'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:75:in `tap'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:75:in `server'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+  railties (4.2.8) lib/rails/commands.rb:17:in `<top (required)>'
+  bin/rails:9:in `require'
+  bin/rails:9:in `<top (required)>'
+  spring (2.0.2) lib/spring/client/rails.rb:28:in `load'
+  spring (2.0.2) lib/spring/client/rails.rb:28:in `call'
+  spring (2.0.2) lib/spring/client/command.rb:7:in `call'
+  spring (2.0.2) lib/spring/client.rb:30:in `run'
+  spring (2.0.2) bin/spring:49:in `<top (required)>'
+  spring (2.0.2) lib/spring/binstub.rb:31:in `load'
+  spring (2.0.2) lib/spring/binstub.rb:31:in `<top (required)>'
+  /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:65:in `require'
+  /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:65:in `require'
+  bin/spring:13:in `<top (required)>'
+  bin/rails:3:in `load'
+  bin/rails:3:in `<main>'
+
+
+
+
+Started GET "/assets/pinterest_btn.png" for ::1 at 2019-09-25 09:24:08 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for ::1 at 2019-09-25 09:24:08 +0300
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+
+
+Started GET "/assets/paw.png" for ::1 at 2019-09-25 09:24:08 +0300
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (4.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_table.html.erb (0.8ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (37.5ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (16.4ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (28.6ms)
+
+
+Started GET "/kennels/8/edit" for ::1 at 2019-09-25 09:24:12 +0300
+Processing by KennelsController#edit as JS
+  Parameters: {"id"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.6ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."slug" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["slug", "8"]]
+  [1m[36mKennel Load (0.5ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."id" = $1 LIMIT 1[0m  [["id", 8]]
+  Rendered kennels/modals/_edit_kennel_info.erb (1.4ms)
+  Rendered kennels/modals/edit_kennel_info.js (3.6ms)
+Completed 200 OK in 9ms (Views: 5.3ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/" for ::1 at 2019-09-25 09:24:18 +0300
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+Redirected to http://localhost:3000/kennel_dashboard
+  [1m[36mKennelRating Load (0.3ms)[0m  [1mSELECT  "kennel_ratings".* FROM "kennel_ratings" WHERE "kennel_ratings"."rating" = $1  ORDER BY "kennel_ratings"."id" DESC LIMIT 3[0m  [["rating", 5]]
+Completed 302 Found in 6ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/kennel_dashboard" for ::1 at 2019-09-25 09:24:18 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mReservation Load (0.4ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.2ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.1ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.6ms)
+  [1m[35mReservation Load (0.3ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2  [["check_in_date", "2019-09-25"], ["kennel_id", 8]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_out_date", "2019-09-25"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (95.4ms)
+  Rendered simple_calendar/_month_calendar.html.erb (86.4ms)
+  Rendered simple_calendar/_month_calendar.html.erb (87.5ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (301.5ms)
+Completed 200 OK in 624ms (Views: 612.0ms | ActiveRecord: 2.4ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for ::1 at 2019-09-25 09:24:19 +0300
+Started GET "/assets/login_btn.png" for ::1 at 2019-09-25 09:24:19 +0300
+
+
+Started GET "/assets/signup_btn.png" for ::1 at 2019-09-25 09:24:19 +0300
+
+
+Started GET "/assets/facebook_btn.png" for ::1 at 2019-09-25 09:24:19 +0300
+
+
+
+
+Started GET "/assets/twitter_btn.png" for ::1 at 2019-09-25 09:24:19 +0300
+Started GET "/assets/pinterest_btn.png" for ::1 at 2019-09-25 09:24:19 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for ::1 at 2019-09-25 09:24:19 +0300
+
+
+Started GET "/assets/paw.png" for ::1 at 2019-09-25 09:24:19 +0300
+
+
+Started GET "/reservations/new" for ::1 at 2019-09-25 09:24:21 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.3ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.3ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.3ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (12.5ms)
+  Rendered reservations/new.js (14.7ms)
+Completed 200 OK in 81ms (Views: 23.5ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/reservations/new" for ::1 at 2019-09-25 09:24:32 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.4ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.3ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (7.9ms)
+  Rendered reservations/new.js (9.6ms)
+Completed 200 OK in 53ms (Views: 17.2ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/reservations/new" for ::1 at 2019-09-25 09:24:49 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.4ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.3ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.2ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.1ms)
+  Rendered reservations/new.js (4.0ms)
+Completed 200 OK in 14ms (Views: 8.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/reservations/new" for ::1 at 2019-09-25 09:25:02 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.3ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.3ms)
+  Rendered reservations/new.js (4.0ms)
+Completed 200 OK in 12ms (Views: 9.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/reservations/new" for ::1 at 2019-09-25 09:25:12 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.3ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.2ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (4.3ms)
+  Rendered reservations/new.js (5.3ms)
+Completed 200 OK in 60ms (Views: 10.9ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/kennels?id=[FILTERED]" for ::1 at 2019-09-25 09:25:15 +0300
+Processing by KennelsController#index as HTML
+  Parameters: {"id"=>"[FILTERED]"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.3ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mRun Load (0.1ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mAmenity Load (0.1ms)[0m  SELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.1ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.1ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  Rendered devise/registrations/edit.erb (46.0ms)
+  [1m[36mPhoto Load (0.3ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_owner_info.erb (0.5ms)
+  Rendered kennels/nav_tabs/_kennel_info.erb (0.4ms)
+  Rendered kennels/nav_tabs/_runs_info.erb (0.4ms)
+  Rendered kennels/nav_tabs/_amenities_info.erb (0.1ms)
+  Rendered kennels/nav_tabs/_hours_info.erb (9.7ms)
+  [1m[35mHoliday Load (0.2ms)[0m  SELECT "holidays".* FROM "holidays" WHERE "holidays"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_holidays_info.erb (0.6ms)
+  [1m[36mPolicy Load (0.1ms)[0m  [1mSELECT "policies".* FROM "policies" WHERE "policies"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_policies_info.erb (0.5ms)
+  [1m[35mBreedRestriction Load (0.1ms)[0m  SELECT "breed_restrictions".* FROM "breed_restrictions" WHERE "breed_restrictions"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_breeds_info.erb (0.5ms)
+  Rendered kennels/nav_tabs/_pictures_info.erb (0.1ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+  Rendered kennels/index.erb within layouts/application (71.6ms)
+Completed 200 OK in 344ms (Views: 325.0ms | ActiveRecord: 1.8ms)
+
+
+
+
+Started GET "/assets/login_btn.png" for ::1 at 2019-09-25 09:25:16 +0300
+Started GET "/assets/pawbookings.png" for ::1 at 2019-09-25 09:25:16 +0300
+
+
+
+
+Started GET "/assets/signup_btn.png" for ::1 at 2019-09-25 09:25:16 +0300
+Started GET "/assets/default_photo_image.png" for ::1 at 2019-09-25 09:25:16 +0300
+
+
+Started GET "/images/original/missing.png" for ::1 at 2019-09-25 09:25:16 +0300
+
+ActionController::RoutingError (No route matches [GET] "/images/original/missing.png"):
+  actionpack (4.2.8) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.8) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `call'
+  ahoy_matey (1.2.1) lib/ahoy/engine.rb:18:in `call_with_quiet_ahoy'
+  request_store (1.3.1) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.8) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.8) lib/rails/engine.rb:518:in `call'
+  railties (4.2.8) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:562:in `process_client'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:658:in `worker_loop'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:508:in `spawn_missing_workers'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:132:in `start'
+  unicorn-rails (2.2.1) lib/unicorn_rails.rb:33:in `run'
+  rack (1.6.11) lib/rack/server.rb:287:in `start'
+  railties (4.2.8) lib/rails/commands/server.rb:80:in `start'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:80:in `block in server'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:75:in `tap'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:75:in `server'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+  railties (4.2.8) lib/rails/commands.rb:17:in `<top (required)>'
+  bin/rails:9:in `require'
+  bin/rails:9:in `<top (required)>'
+  spring (2.0.2) lib/spring/client/rails.rb:28:in `load'
+  spring (2.0.2) lib/spring/client/rails.rb:28:in `call'
+  spring (2.0.2) lib/spring/client/command.rb:7:in `call'
+  spring (2.0.2) lib/spring/client.rb:30:in `run'
+  spring (2.0.2) bin/spring:49:in `<top (required)>'
+  spring (2.0.2) lib/spring/binstub.rb:31:in `load'
+  spring (2.0.2) lib/spring/binstub.rb:31:in `<top (required)>'
+  /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:65:in `require'
+  /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:65:in `require'
+  bin/spring:13:in `<top (required)>'
+  bin/rails:3:in `load'
+  bin/rails:3:in `<main>'
+
+
+
+
+Started GET "/assets/facebook_btn.png" for ::1 at 2019-09-25 09:25:16 +0300
+
+
+Started GET "/assets/twitter_btn.png" for ::1 at 2019-09-25 09:25:16 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for ::1 at 2019-09-25 09:25:16 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for ::1 at 2019-09-25 09:25:16 +0300
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+
+
+Started GET "/assets/paw.png" for ::1 at 2019-09-25 09:25:16 +0300
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.7ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_table.html.erb (3.5ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (61.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (19.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (41.0ms)
+
+
+Started GET "/kennels/8/edit" for ::1 at 2019-09-25 09:25:17 +0300
+Processing by KennelsController#edit as JS
+  Parameters: {"id"=>"[FILTERED]"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."slug" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["slug", "8"]]
+  [1m[35mKennel Load (0.1ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."id" = $1 LIMIT 1  [["id", 8]]
+  Rendered kennels/modals/_edit_kennel_info.erb (1.3ms)
+  Rendered kennels/modals/edit_kennel_info.js (2.8ms)
+Completed 200 OK in 10ms (Views: 6.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/kennels/8/edit" for ::1 at 2019-09-25 09:25:25 +0300
+Processing by KennelsController#edit as JS
+  Parameters: {"id"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."slug" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["slug", "8"]]
+  [1m[36mKennel Load (0.1ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."id" = $1 LIMIT 1[0m  [["id", 8]]
+  Rendered kennels/modals/_edit_kennel_info.erb (0.5ms)
+  Rendered kennels/modals/edit_kennel_info.js (1.3ms)
+Completed 200 OK in 4ms (Views: 2.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for ::1 at 2019-09-25 09:25:33 +0300
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+Redirected to http://localhost:3000/kennel_dashboard
+  [1m[36mKennelRating Load (0.1ms)[0m  [1mSELECT  "kennel_ratings".* FROM "kennel_ratings" WHERE "kennel_ratings"."rating" = $1  ORDER BY "kennel_ratings"."id" DESC LIMIT 3[0m  [["rating", 5]]
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/kennel_dashboard" for ::1 at 2019-09-25 09:25:33 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.2ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.2ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2  [["check_in_date", "2019-09-25"], ["kennel_id", 8]]
+  [1m[36mReservation Load (0.1ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_out_date", "2019-09-25"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (86.9ms)
+  Rendered simple_calendar/_month_calendar.html.erb (86.1ms)
+  Rendered simple_calendar/_month_calendar.html.erb (107.9ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (288.2ms)
+Completed 200 OK in 749ms (Views: 741.9ms | ActiveRecord: 1.5ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for ::1 at 2019-09-25 09:25:33 +0300
+Started GET "/assets/login_btn.png" for ::1 at 2019-09-25 09:25:33 +0300
+
+
+Started GET "/assets/signup_btn.png" for ::1 at 2019-09-25 09:25:34 +0300
+
+
+Started GET "/assets/facebook_btn.png" for ::1 at 2019-09-25 09:25:34 +0300
+
+
+Started GET "/assets/twitter_btn.png" for ::1 at 2019-09-25 09:25:34 +0300
+
+
+
+
+Started GET "/assets/pinterest_btn.png" for ::1 at 2019-09-25 09:25:34 +0300
+Started GET "/assets/google_plus_btn.png" for ::1 at 2019-09-25 09:25:34 +0300
+
+
+Started GET "/assets/paw.png" for ::1 at 2019-09-25 09:25:34 +0300
+
+
+Started GET "/reservations/new" for ::1 at 2019-09-25 09:25:36 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.3ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.2ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.0ms)
+  Rendered reservations/new.js (3.0ms)
+Completed 200 OK in 10ms (Views: 6.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/kennel_dashboard" for ::1 at 2019-09-25 09:26:40 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.3ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.5ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.3ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.2ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (1.3ms)
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_in_date", "2019-09-25"], ["kennel_id", 8]]
+  [1m[35mReservation Load (0.3ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2  [["check_out_date", "2019-09-25"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (108.7ms)
+  Rendered simple_calendar/_month_calendar.html.erb (110.2ms)
+  Rendered simple_calendar/_month_calendar.html.erb (108.9ms)
+  Rendered shared/_footer.html.erb (0.7ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (347.0ms)
+Completed 200 OK in 2044ms (Views: 2021.4ms | ActiveRecord: 3.4ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for ::1 at 2019-09-25 09:26:42 +0300
+Started GET "/assets/login_btn.png" for ::1 at 2019-09-25 09:26:42 +0300
+
+
+Started GET "/assets/signup_btn.png" for ::1 at 2019-09-25 09:26:42 +0300
+
+
+Started GET "/assets/facebook_btn.png" for ::1 at 2019-09-25 09:26:42 +0300
+
+
+Started GET "/assets/twitter_btn.png" for ::1 at 2019-09-25 09:26:42 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for ::1 at 2019-09-25 09:26:42 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for ::1 at 2019-09-25 09:26:42 +0300
+
+
+Started GET "/assets/paw.png" for ::1 at 2019-09-25 09:26:42 +0300
+
+
+Started GET "/reservations/new" for ::1 at 2019-09-25 09:26:44 +0300
+Processing by ReservationsController#new as JS
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1  [["user_id", 36]]
+  [1m[36mRun Load (0.3ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mAmenity Load (0.2ms)[0m  SELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.1ms)
+  Rendered reservations/new.js (4.1ms)
+Completed 200 OK in 13ms (Views: 10.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/kennel_dashboard" for ::1 at 2019-09-25 09:28:43 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.3ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.2ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.2ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.1ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_in_date", "2019-09-25"], ["kennel_id", 8]]
+  [1m[35mReservation Load (0.1ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2  [["check_out_date", "2019-09-25"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (97.4ms)
+  Rendered simple_calendar/_month_calendar.html.erb (110.7ms)
+  Rendered simple_calendar/_month_calendar.html.erb (95.4ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (313.2ms)
+Completed 200 OK in 661ms (Views: 652.6ms | ActiveRecord: 1.8ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for ::1 at 2019-09-25 09:28:43 +0300
+Started GET "/assets/login_btn.png" for ::1 at 2019-09-25 09:28:43 +0300
+
+
+Started GET "/assets/signup_btn.png" for ::1 at 2019-09-25 09:28:44 +0300
+
+
+Started GET "/assets/facebook_btn.png" for ::1 at 2019-09-25 09:28:44 +0300
+
+
+Started GET "/assets/twitter_btn.png" for ::1 at 2019-09-25 09:28:44 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for ::1 at 2019-09-25 09:28:44 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for ::1 at 2019-09-25 09:28:44 +0300
+
+
+Started GET "/assets/paw.png" for ::1 at 2019-09-25 09:28:44 +0300
+
+
+Started GET "/reservations/new" for ::1 at 2019-09-25 09:28:46 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.1ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (1.5ms)
+  Rendered reservations/new.js (3.0ms)
+Completed 200 OK in 10ms (Views: 6.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/reservations/new" for ::1 at 2019-09-25 09:29:17 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.1ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (1.6ms)
+  Rendered reservations/new.js (2.6ms)
+Completed 200 OK in 10ms (Views: 6.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/kennel_dashboard" for ::1 at 2019-09-25 09:30:30 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.1ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.1ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.1ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2  [["check_in_date", "2019-09-25"], ["kennel_id", 8]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_out_date", "2019-09-25"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (90.3ms)
+  Rendered simple_calendar/_month_calendar.html.erb (94.7ms)
+  Rendered simple_calendar/_month_calendar.html.erb (93.2ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (287.9ms)
+Completed 200 OK in 712ms (Views: 705.9ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/assets/kennel.self-5ef73fea69ac3e3c67497bcabcbcd81e0a91afd68f306253aca8492dedbe1402.css?body=[FILTERED]" for ::1 at 2019-09-25 09:30:31 +0300
+
+
+
+
+Started GET "/assets/pawbookings.png" for ::1 at 2019-09-25 09:30:31 +0300
+Started GET "/assets/login_btn.png" for ::1 at 2019-09-25 09:30:31 +0300
+
+
+Started GET "/assets/signup_btn.png" for ::1 at 2019-09-25 09:30:31 +0300
+
+
+
+
+Started GET "/assets/facebook_btn.png" for ::1 at 2019-09-25 09:30:31 +0300
+Started GET "/assets/twitter_btn.png" for ::1 at 2019-09-25 09:30:31 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for ::1 at 2019-09-25 09:30:31 +0300
+
+
+
+
+Started GET "/assets/google_plus_btn.png" for ::1 at 2019-09-25 09:30:31 +0300
+Started GET "/assets/paw.png" for ::1 at 2019-09-25 09:30:31 +0300
+
+
+Started GET "/reservations/new" for ::1 at 2019-09-25 09:30:33 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.2ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (1.9ms)
+  Rendered reservations/new.js (3.7ms)
+Completed 200 OK in 11ms (Views: 7.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/kennel_dashboard" for ::1 at 2019-09-25 09:30:40 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.3ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mReservation Load (0.3ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.2ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.3ms)[0m  SELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.1ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[35mReservation Load (0.3ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2  [["check_in_date", "2019-09-25"], ["kennel_id", 8]]
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_out_date", "2019-09-25"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (99.3ms)
+  Rendered simple_calendar/_month_calendar.html.erb (86.6ms)
+  Rendered simple_calendar/_month_calendar.html.erb (86.5ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (279.7ms)
+Completed 200 OK in 601ms (Views: 591.1ms | ActiveRecord: 2.4ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for ::1 at 2019-09-25 09:30:41 +0300
+Started GET "/assets/login_btn.png" for ::1 at 2019-09-25 09:30:41 +0300
+
+
+Started GET "/assets/signup_btn.png" for ::1 at 2019-09-25 09:30:41 +0300
+
+
+
+
+Started GET "/assets/facebook_btn.png" for ::1 at 2019-09-25 09:30:41 +0300
+Started GET "/assets/twitter_btn.png" for ::1 at 2019-09-25 09:30:41 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for ::1 at 2019-09-25 09:30:41 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for ::1 at 2019-09-25 09:30:41 +0300
+
+
+Started GET "/assets/paw.png" for ::1 at 2019-09-25 09:30:41 +0300
+
+
+Started GET "/reservations/new" for ::1 at 2019-09-25 09:30:42 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.3ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.2ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (1.6ms)
+  Rendered reservations/new.js (2.3ms)
+Completed 200 OK in 8ms (Views: 5.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/reservations/new" for ::1 at 2019-09-25 09:30:53 +0300
+Processing by ReservationsController#new as JS
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.5ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1 LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mRun Load (0.3ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mAmenity Load (0.2ms)[0m  [1mSELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered reservations/_new.erb (2.1ms)
+  Rendered reservations/new.js (2.9ms)
+Completed 200 OK in 12ms (Views: 8.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/" for ::1 at 2019-09-25 09:30:56 +0300
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+Redirected to http://localhost:3000/kennel_dashboard
+  [1m[36mKennelRating Load (0.2ms)[0m  [1mSELECT  "kennel_ratings".* FROM "kennel_ratings" WHERE "kennel_ratings"."rating" = $1  ORDER BY "kennel_ratings"."id" DESC LIMIT 3[0m  [["rating", 5]]
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/kennel_dashboard" for ::1 at 2019-09-25 09:30:56 +0300
+Processing by KennelsController#kennel_dashboard as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.1ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mReservation Load (0.1ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mHoursOfOperation Load (0.1ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1  [["kennel_id", 8]]
+  [1m[36mRun Load (0.2ms)[0m  [1mSELECT  "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  ORDER BY "runs"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mRun Load (0.2ms)[0m  SELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  [1m[36mReservation Load (0.2ms)[0m  [1mSELECT "reservations".* FROM "reservations" WHERE "reservations"."check_in_date" = $1 AND "reservations"."kennel_id" = $2[0m  [["check_in_date", "2019-09-25"], ["kennel_id", 8]]
+  [1m[35mReservation Load (0.2ms)[0m  SELECT "reservations".* FROM "reservations" WHERE "reservations"."check_out_date" = $1 AND "reservations"."kennel_id" = $2  [["check_out_date", "2019-09-25"], ["kennel_id", 8]]
+  Rendered simple_calendar/_month_calendar.html.erb (102.8ms)
+  Rendered simple_calendar/_month_calendar.html.erb (90.4ms)
+  Rendered simple_calendar/_month_calendar.html.erb (89.8ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+  Rendered kennels/kennel_dashboard.html.erb within layouts/application (289.4ms)
+Completed 200 OK in 592ms (Views: 585.5ms | ActiveRecord: 1.5ms)
+
+
+
+
+Started GET "/assets/pawbookings.png" for ::1 at 2019-09-25 09:30:57 +0300
+Started GET "/assets/login_btn.png" for ::1 at 2019-09-25 09:30:57 +0300
+
+
+
+Started GET "/assets/signup_btn.png" for ::1 at 2019-09-25 09:30:57 +0300
+
+Started GET "/assets/facebook_btn.png" for ::1 at 2019-09-25 09:30:57 +0300
+
+
+Started GET "/assets/twitter_btn.png" for ::1 at 2019-09-25 09:30:57 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for ::1 at 2019-09-25 09:30:57 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for ::1 at 2019-09-25 09:30:57 +0300
+
+
+Started GET "/assets/paw.png" for ::1 at 2019-09-25 09:30:57 +0300
+
+
+Started GET "/kennels?id=[FILTERED]" for ::1 at 2019-09-25 09:30:58 +0300
+Processing by KennelsController#index as HTML
+  Parameters: {"id"=>"[FILTERED]"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["user_id", 36]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."user_id" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["user_id", 36]]
+  [1m[36mRun Load (0.1ms)[0m  [1mSELECT "runs".* FROM "runs" WHERE "runs"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  [1m[35mAmenity Load (0.1ms)[0m  SELECT "amenities".* FROM "amenities" WHERE "amenities"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.2ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" ASC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  [["kennel_id", 8]]
+  [1m[36mHoursOfOperation Load (0.2ms)[0m  [1mSELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1[0m  [["kennel_id", 8]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "hours_of_operations".* FROM "hours_of_operations" WHERE "hours_of_operations"."kennel_id" = $1  ORDER BY "hours_of_operations"."id" DESC LIMIT 1  [["kennel_id", 8]]
+  Rendered shared/_top_info.html.erb (0.5ms)
+  Rendered devise/registrations/edit.erb (617.9ms)
+  [1m[36mPhoto Load (0.3ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_owner_info.erb (12.1ms)
+  Rendered kennels/nav_tabs/_kennel_info.erb (1.0ms)
+  Rendered kennels/nav_tabs/_runs_info.erb (1.1ms)
+  Rendered kennels/nav_tabs/_amenities_info.erb (0.8ms)
+  Rendered kennels/nav_tabs/_hours_info.erb (17.5ms)
+  [1m[35mHoliday Load (0.3ms)[0m  SELECT "holidays".* FROM "holidays" WHERE "holidays"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_holidays_info.erb (1.7ms)
+  [1m[36mPolicy Load (0.3ms)[0m  [1mSELECT "policies".* FROM "policies" WHERE "policies"."kennel_id" = $1[0m  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_policies_info.erb (1.5ms)
+  [1m[35mBreedRestriction Load (0.2ms)[0m  SELECT "breed_restrictions".* FROM "breed_restrictions" WHERE "breed_restrictions"."kennel_id" = $1  [["kennel_id", 8]]
+  Rendered kennels/nav_tabs/_breeds_info.erb (1.3ms)
+  Rendered kennels/nav_tabs/_pictures_info.erb (0.6ms)
+  Rendered shared/_footer.html.erb (0.2ms)
+  Rendered kennels/index.erb within layouts/application (671.8ms)
+Completed 200 OK in 1007ms (Views: 987.3ms | ActiveRecord: 3.8ms)
+
+
+
+
+Started GET "/assets/login_btn.png" for ::1 at 2019-09-25 09:30:59 +0300
+Started GET "/assets/pawbookings.png" for ::1 at 2019-09-25 09:30:59 +0300
+
+
+Started GET "/assets/signup_btn.png" for ::1 at 2019-09-25 09:30:59 +0300
+
+
+
+
+Started GET "/assets/default_photo_image.png" for ::1 at 2019-09-25 09:30:59 +0300
+Started GET "/images/original/missing.png" for ::1 at 2019-09-25 09:30:59 +0300
+
+ActionController::RoutingError (No route matches [GET] "/images/original/missing.png"):
+  actionpack (4.2.8) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.8) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `call'
+  ahoy_matey (1.2.1) lib/ahoy/engine.rb:18:in `call_with_quiet_ahoy'
+  request_store (1.3.1) lib/request_store/middleware.rb:9:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.8) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.8) lib/rails/engine.rb:518:in `call'
+  railties (4.2.8) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:562:in `process_client'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:658:in `worker_loop'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:508:in `spawn_missing_workers'
+  unicorn (5.2.0) lib/unicorn/http_server.rb:132:in `start'
+  unicorn-rails (2.2.1) lib/unicorn_rails.rb:33:in `run'
+  rack (1.6.11) lib/rack/server.rb:287:in `start'
+  railties (4.2.8) lib/rails/commands/server.rb:80:in `start'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:80:in `block in server'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:75:in `tap'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:75:in `server'
+  railties (4.2.8) lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+  railties (4.2.8) lib/rails/commands.rb:17:in `<top (required)>'
+  bin/rails:9:in `require'
+  bin/rails:9:in `<top (required)>'
+  spring (2.0.2) lib/spring/client/rails.rb:28:in `load'
+  spring (2.0.2) lib/spring/client/rails.rb:28:in `call'
+  spring (2.0.2) lib/spring/client/command.rb:7:in `call'
+  spring (2.0.2) lib/spring/client.rb:30:in `run'
+  spring (2.0.2) bin/spring:49:in `<top (required)>'
+  spring (2.0.2) lib/spring/binstub.rb:31:in `load'
+  spring (2.0.2) lib/spring/binstub.rb:31:in `<top (required)>'
+  /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:65:in `require'
+  /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0/rubygems/core_ext/kernel_require.rb:65:in `require'
+  bin/spring:13:in `<top (required)>'
+  bin/rails:3:in `load'
+  bin/rails:3:in `<main>'
+
+
+
+
+Started GET "/assets/facebook_btn.png" for ::1 at 2019-09-25 09:30:59 +0300
+
+
+Started GET "/assets/twitter_btn.png" for ::1 at 2019-09-25 09:30:59 +0300
+
+
+Started GET "/assets/pinterest_btn.png" for ::1 at 2019-09-25 09:30:59 +0300
+
+
+Started GET "/assets/google_plus_btn.png" for ::1 at 2019-09-25 09:30:59 +0300
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
+
+
+Started GET "/assets/paw.png" for ::1 at 2019-09-25 09:30:59 +0300
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.7ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (53.1ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (18.9ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/valeriakolisnyk/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (41.3ms)
+
+
+Started GET "/kennels/8/edit" for ::1 at 2019-09-25 09:31:01 +0300
+Processing by KennelsController#edit as JS
+  Parameters: {"id"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."slug" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["slug", "8"]]
+  [1m[36mKennel Load (0.2ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."id" = $1 LIMIT 1[0m  [["id", 8]]
+  Rendered kennels/modals/_edit_kennel_info.erb (0.6ms)
+  Rendered kennels/modals/edit_kennel_info.js (2.2ms)
+Completed 200 OK in 6ms (Views: 3.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/kennels/8/edit" for ::1 at 2019-09-25 09:31:06 +0300
+Processing by KennelsController#edit as JS
+  Parameters: {"id"=>"[FILTERED]"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  [1m[36mKennel Load (0.5ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."slug" = $1  ORDER BY "kennels"."id" ASC LIMIT 1[0m  [["slug", "8"]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."id" = $1 LIMIT 1  [["id", 8]]
+  Rendered kennels/modals/_edit_kennel_info.erb (0.5ms)
+  Rendered kennels/modals/edit_kennel_info.js (1.1ms)
+Completed 200 OK in 11ms (Views: 1.7ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/policies/new" for ::1 at 2019-09-25 09:31:11 +0300
+Processing by PoliciesController#new as JS
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1  [["id", 36]]
+  Rendered policies/_new.erb (1.4ms)
+  Rendered policies/new.js (4.2ms)
+Completed 200 OK in 19ms (Views: 15.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/kennels/8/edit" for ::1 at 2019-09-25 09:31:14 +0300
+Processing by KennelsController#edit as JS
+  Parameters: {"id"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 36]]
+  [1m[35mKennel Load (0.2ms)[0m  SELECT  "kennels".* FROM "kennels" WHERE "kennels"."slug" = $1  ORDER BY "kennels"."id" ASC LIMIT 1  [["slug", "8"]]
+  [1m[36mKennel Load (0.1ms)[0m  [1mSELECT  "kennels".* FROM "kennels" WHERE "kennels"."id" = $1 LIMIT 1[0m  [["id", 8]]
+  Rendered kennels/modals/_edit_kennel_info.erb (1.1ms)
+  Rendered kennels/modals/edit_kennel_info.js (1.9ms)
+Completed 200 OK in 5ms (Views: 2.5ms | ActiveRecord: 0.4ms)

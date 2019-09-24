@@ -16,23 +16,26 @@
    <%= form_tag @reservation, method: :post, id: 'form' do %>
           <p style="font-size: 20px !important;">Pet-Owner Info</p>
           <br>
+          <div class="flex" style="display: flex;">
+          <div style="width:50%;">
            <p class="font-18">First name:</p>
-            <%= text_field_tag :customer_first_name, nil, placeholder: "", class: "form-control payment_input input_new_reserv" %>
+            <%= text_field_tag :customer_first_name, nil, placeholder: "", class: "form-control payment_input grey-background-color" %>
             <br>
             <p class="font-18">Last name:</p>
-            <%= text_field_tag :customer_last_name, nil, placeholder: "", class: "form-control payment_input input_new_reserv"%>
+            <%= text_field_tag :customer_last_name, nil, placeholder: "", class: "form-control payment_input grey-background-color"%>
             <br>
             <p class="font-18">Phone:</p>
-            <%= text_field_tag :customer_phone, nil, placeholder: "", class: "customer_phone form-control payment_input input_new_reserv" %>
+            <%= text_field_tag :customer_phone, nil, placeholder: "", class: "customer_phone form-control payment_input grey-background-color" %>
             <br>
             <p class="font-18">Email:</p>
-            <%= text_field_tag :customer_email, nil, placeholder: "", class: "form-control payment_input input_new_reserv" %>
-            <br>
+            <%= text_field_tag :customer_email, nil, placeholder: "", class: "form-control payment_input grey-background-color" %>
+            </div>
+            <div style="width:50%;">
             <section id="pets-section" style="font-family: Roboto; font-weight: normal !important; font-size: 18px !important;">
             <br>
             </section>
               <p class="font-18">Select room units:</p>
-              <select id="room-units" multiple="multiple" name="room-units[]" class="input_new_reserv">
+              <select id="room-units" multiple="multiple" name="room-units[]" class="grey-background-color">
                 <% @runs.each do |run| %>
                   <option value="<%= run.id %>"><%= "#{run.title} ($#{run.price})"%></option>
                 <% end %>
@@ -40,36 +43,42 @@
               <br>
               <br>
               <p class="font-18">Check-in (MM/DD/YYYY):</p>
-              <div class="check_in_resolution" style="width: auto; margin: 0 auto; margin-left: calc(100%/3 + 10px);">
-                <%= text_field_tag :month_in, nil, placeholder: "MM", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
-                <%= text_field_tag :day_in, nil, placeholder: "DD", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
-                <%= text_field_tag :year_in, nil, placeholder: "YYYY", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-left: 5px !important;' %>
+              <div class="check_in_resolution" style="width: auto; margin: 0 auto;display: flex; justify-content: center;">
+                <%= text_field_tag :month_in, nil, placeholder: "MM", class: "form-control payment_input grey-background-color", style: 'width:50px;' %>
+                <%= text_field_tag :day_in, nil, placeholder: "DD", class: "form-control payment_input grey-background-color", style: 'width:50px;' %>
+                <%= text_field_tag :year_in, nil, placeholder: "YYYY", class: "form-control payment_input grey-background-color", style: 'width:50px;' %>
                 <br>
               </div>
               <br>
               <br>
               <p class="font-18">Check-out (MM/DD/YYYY):</p>
-              <div class="check_in_resolution" style="width: auto; margin: 0 auto; margin-left: calc(100%/3 + 10px);">
-                <%= text_field_tag :month_out, nil, placeholder: "MM", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
-                <%= text_field_tag :day_out, nil, placeholder: "DD", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 5px !important; margin-left: 0px !important;' %>
-                <%= text_field_tag :year_out, nil, placeholder: "YYYY", class: "form-control payment_input input_new_reserv", style: 'width:50px; float: left !important; margin-right: 140px; margin-left: 5px;' %>
+              <div class="check_in_resolution" style="width: auto; margin: 0 auto; display: flex; justify-content: center;">
+                <%= text_field_tag :month_out, nil, placeholder: "MM", class: "form-control payment_input grey-background-color", style: 'width:50px;' %>
+                <%= text_field_tag :day_out, nil, placeholder: "DD", class: "form-control payment_input grey-background-color", style: 'width:50px;' %>
+                <%= text_field_tag :year_out, nil, placeholder: "YYYY", class: "form-control payment_input grey-background-color", style: 'width:50px;' %>
                 <br>
               </div>
               <br>
               <br>
-              <p class="font-18">Select amenities:</p>
-              <select id="amenities" multiple="multiple" name="amenities[]" class="input_new_reserv">
+              </div>
+              </div>
+              <div style="display: flex; flex-direction: column;">
+              <div><p class="font-18">Select amenities:</p></div>
+              <div><select id="amenities" multiple="multiple" name="amenities[]" class="grey-background-color">
                 <% @amenities.each do |amenity| %>
                   <option value="<%= amenity.id %>"><%= "#{amenity.title} ($#{amenity.price})"%></option>
                 <% end %>
-              </select>
+              </select></div>
+              </div>
               <br>
               <br>
+              <div style="display: flex; flex-direction: column;" >
               <% if !@reservation_errors.nil? %>
-                <% @reservation_errors.each do |error|%>
-                  <p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p>
+                <% @reservation_errors.first(3).each do |error|%>
+                  <div><p style="color:red; font-weight: bold;"><%= "#{error.sub(/./, &:capitalize)} is invalid" %></p></div>
                 <% end %>
               <% end %>
+              </div>
               <br>
               <br>
           <div class="form-actions">

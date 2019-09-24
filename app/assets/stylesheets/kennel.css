@@ -339,6 +339,10 @@ a:active {
   background-color: #C4C4C4; 
 }
 
+.grey-background-color {
+  background-color: #C4C4C4; 
+}
+
 .margin-0-auto {
   margin: 0 auto !important;
 }
@@ -369,7 +373,7 @@ a:active {
   right: unset;
   bottom: unset;
   transform: translate(-50%, -50%) !important;
-  margin-top: 100px !important;
+  margin-top: 50px !important;
 }
 
 .modal-header{
@@ -1025,12 +1029,17 @@ a:active {
 
 @media (min-width: 900px) and (max-width: 1500px) {
   .add_booking_resolution {
-    top: 49% !important;
+    top: 43% !important;
   }
 
   .search_result_resolution {
-    top: 49% !important;
+    top: 43% !important;
   }
+}
+
+.modal-body {
+  max-height: calc(100vh - 200px) !important;
+  overflow-y: auto !important;
 }
 
 @media (min-width:580px) and (max-width: 900px) {
