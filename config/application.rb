@@ -12,8 +12,9 @@ module PawBookings
       html_tag
     }
     config.middleware.use PDFKit::Middleware, print_media_type: true
-    Ahoy.track_visits_immediately = true
+    # Ahoy.track_visits_immediately = true
     config.active_record.raise_in_transactional_callbacks = true
+    ActiveSupport.halt_callback_chains_on_return_false = false
     config.filter_parameters << [:card_number, :card_verification]
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {

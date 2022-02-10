@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
-
-gem 'rails', '4.2.6'
-gem 'pg', '~> 0.15'
+ruby "2.5.1"
+gem 'rails', '5.0.0'
+gem 'pg', '0.20'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-ui-rails'
-gem 'sprockets'
+gem 'sprockets', '~> 3.7.2'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
@@ -22,7 +22,7 @@ gem 'sass-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap-multiselect-rails'
 gem 'whenever', :require => false
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', '~> 2.0.0'
 gem 'chartkick'
 gem 'ckeditor'
 gem 'pdfkit'
