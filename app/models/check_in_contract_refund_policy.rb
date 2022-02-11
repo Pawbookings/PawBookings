@@ -1,2 +1,2 @@
-class CheckInContractRefundPolicy < ActiveRecord::Base
+class CheckInContractRefundPolicy < ApplicationRecord
 end

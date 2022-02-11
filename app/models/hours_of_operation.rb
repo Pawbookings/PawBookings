@@ -1,4 +1,4 @@
-class HoursOfOperation < ActiveRecord::Base
+class HoursOfOperation < ApplicationRecord
   belongs_to :kennel
   validates :monday_open, presence: true
   validates :monday_close, presence: true

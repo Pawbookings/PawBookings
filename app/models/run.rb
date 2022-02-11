@@ -1,4 +1,4 @@
-class Run < ActiveRecord::Base
+class Run < ApplicationRecord
 
   has_attached_file :image,
                 :storage => :s3,

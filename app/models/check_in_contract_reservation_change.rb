@@ -1,2 +1,2 @@
-class CheckInContractReservationChange < ActiveRecord::Base
+class CheckInContractReservationChange < ApplicationRecord
 end

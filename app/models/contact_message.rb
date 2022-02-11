@@ -1,2 +1,2 @@
-class ContactMessage < ActiveRecord::Base
+class ContactMessage < ApplicationRecord
 end

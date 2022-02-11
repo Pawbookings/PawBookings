@@ -1,4 +1,4 @@
-class CustomerEmergencyContact < ActiveRecord::Base
+class CustomerEmergencyContact < ApplicationRecord
   belongs_to :user
 
   validates :name, presence: true

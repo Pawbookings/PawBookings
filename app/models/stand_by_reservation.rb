@@ -1,4 +1,4 @@
-class StandByReservation < ActiveRecord::Base
+class StandByReservation < ApplicationRecord
   belongs_to :kennel
 
   validates :check_in_date, presence: true

@@ -1,4 +1,4 @@
-class Amenity < ActiveRecord::Base
+class Amenity < ApplicationRecord
   belongs_to :kennel
 
   validates :title, presence: true

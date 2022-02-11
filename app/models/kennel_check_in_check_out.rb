@@ -1,2 +1,2 @@
-class KennelCheckInCheckOut < ActiveRecord::Base
+class KennelCheckInCheckOut < ApplicationRecord
 end

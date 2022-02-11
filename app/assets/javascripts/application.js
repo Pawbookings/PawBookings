@@ -13,17 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require ahoy
 //  require turbolinks
-//= require ckeditor/init
 //= require Chart.bundle
 //= require chartkick
 //= require owl.carousel
 //= require bootstrap-multiselect
 //= require_tree .
-
-ahoy.trackAll();
-
 $(document).click(function(e){
   if(e.target.id == "mobile_nav_btn"){
     showMobileNavMenu();

@@ -1,2 +1,2 @@
-class BlogCategory < ActiveRecord::Base
+class BlogCategory < ApplicationRecord
 end

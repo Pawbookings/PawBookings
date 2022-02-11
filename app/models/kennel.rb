@@ -1,4 +1,4 @@
-class Kennel < ActiveRecord::Base
+class Kennel < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders]
 

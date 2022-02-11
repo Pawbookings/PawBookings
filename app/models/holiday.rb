@@ -1,4 +1,4 @@
-class Holiday < ActiveRecord::Base
+class Holiday < ApplicationRecord
   belongs_to :kennel
 
   validates :holiday_date, presence: true

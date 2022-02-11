@@ -1,4 +1,4 @@
-class Reservation < ActiveRecord::Base
+class Reservation < ApplicationRecord
   has_one :kennel_rating
   belongs_to :user
   belongs_to :kennel

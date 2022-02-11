@@ -1,6 +1,6 @@
 class DeviseRegistrationsController < Devise::RegistrationsController
-  include Recaptcha::ClientHelper
-  include Recaptcha::Verify
+  # include Recaptcha::ClientHelper
+  # include Recaptcha::Verify
 
   def create
     params[:user][:password_confirmation] = params[:user][:password]
@@ -15,7 +15,7 @@ class DeviseRegistrationsController < Devise::RegistrationsController
     end
 
     build_resource(sign_up_params)
-    resource.save if verify_recaptcha(model: @user)
+    resource.save #if verify_recaptcha(model: @user)
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?

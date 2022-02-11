@@ -1,4 +1,4 @@
-class Search < ActiveRecord::Base
+class Search < ApplicationRecord
   validates :search_zip, format: { with: /\A[0-9]{5}\z/i, message: "Zip-Code requires 5 numbers." }
   validates :radius, format: { with: /\A[0-9]{0,3}\z/i, message: "Radius accepts no more than 3 numbers." }
   validates :check_in, presence: { message: "Must give a check-in date."}

@@ -1,2 +1,2 @@
-class PressPage < ActiveRecord::Base
+class PressPage < ApplicationRecord
 end

@@ -1,4 +1,4 @@
-class CustomerVetInfo < ActiveRecord::Base
+class CustomerVetInfo < ApplicationRecord
   belongs_to :user
 
   validates :name, length: { maximum: 50 }

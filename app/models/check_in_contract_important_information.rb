@@ -1,2 +1,2 @@
-class CheckInContractImportantInformation < ActiveRecord::Base
+class CheckInContractImportantInformation < ApplicationRecord
 end

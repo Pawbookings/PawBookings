@@ -1,4 +1,4 @@
-class BreedRestriction < ActiveRecord::Base
+class BreedRestriction < ApplicationRecord
   belongs_to :kennel
 
   validates :breed, presence: true

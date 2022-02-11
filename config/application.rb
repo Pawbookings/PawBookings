@@ -11,6 +11,7 @@ module PawBookings
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       html_tag
     }
+    config.action_mailer.default_url_options = { :host => "localhost:3000" }
     config.middleware.use PDFKit::Middleware, print_media_type: true
     # Ahoy.track_visits_immediately = true
     config.active_record.raise_in_transactional_callbacks = true

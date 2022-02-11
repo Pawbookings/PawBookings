@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   has_one  :kennel
   has_one  :customer_vet_info
   has_one  :customer_emergency_contact
