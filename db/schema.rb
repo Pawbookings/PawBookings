@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -21,15 +20,14 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.text     "body"
     t.string   "resource_id",   null: false
     t.string   "resource_type", null: false
-    t.integer  "author_id"
     t.string   "author_type"
+    t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
   end
-
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -44,10 +42,9 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "ahoy_events", id: :uuid, default: nil, force: :cascade do |t|
     t.uuid     "visit_id"
@@ -55,11 +52,10 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "name"
     t.json     "properties"
     t.datetime "time"
+    t.index ["time"], name: "index_ahoy_events_on_time", using: :btree
+    t.index ["user_id"], name: "index_ahoy_events_on_user_id", using: :btree
+    t.index ["visit_id"], name: "index_ahoy_events_on_visit_id", using: :btree
   end
-
-  add_index "ahoy_events", ["time"], name: "index_ahoy_events_on_time", using: :btree
-  add_index "ahoy_events", ["user_id"], name: "index_ahoy_events_on_user_id", using: :btree
-  add_index "ahoy_events", ["visit_id"], name: "index_ahoy_events_on_visit_id", using: :btree
 
   create_table "amenities", force: :cascade do |t|
     t.integer  "kennel_id"
@@ -68,9 +64,8 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.float    "price"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["kennel_id"], name: "index_amenities_on_kennel_id", using: :btree
   end
-
-  add_index "amenities", ["kennel_id"], name: "index_amenities_on_kennel_id", using: :btree
 
   create_table "blog_categories", force: :cascade do |t|
     t.string   "title"
@@ -96,18 +91,16 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.integer  "blog_display_image_file_size"
     t.datetime "blog_display_image_updated_at"
     t.string   "slug"
+    t.index ["slug"], name: "index_blogs_on_slug", using: :btree
   end
-
-  add_index "blogs", ["slug"], name: "index_blogs_on_slug", using: :btree
 
   create_table "breed_restrictions", force: :cascade do |t|
     t.integer  "kennel_id"
     t.string   "breed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["kennel_id"], name: "index_breed_restrictions_on_kennel_id", using: :btree
   end
-
-  add_index "breed_restrictions", ["kennel_id"], name: "index_breed_restrictions_on_kennel_id", using: :btree
 
   create_table "check_in_contract_important_informations", force: :cascade do |t|
     t.string   "title"
@@ -142,10 +135,9 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.integer  "height"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.index ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+    t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
   end
-
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "contact_messages", force: :cascade do |t|
     t.string   "name"
@@ -164,9 +156,8 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_customer_emergency_contacts_on_user_id", using: :btree
   end
-
-  add_index "customer_emergency_contacts", ["user_id"], name: "index_customer_emergency_contacts_on_user_id", using: :btree
 
   create_table "customer_vet_infos", force: :cascade do |t|
     t.integer  "user_id"
@@ -177,9 +168,8 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "email"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["user_id"], name: "index_customer_vet_infos_on_user_id", using: :btree
   end
-
-  add_index "customer_vet_infos", ["user_id"], name: "index_customer_vet_infos_on_user_id", using: :btree
 
   create_table "holidays", force: :cascade do |t|
     t.integer  "kennel_id"
@@ -187,9 +177,8 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "description"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["kennel_id"], name: "index_holidays_on_kennel_id", using: :btree
   end
-
-  add_index "holidays", ["kennel_id"], name: "index_holidays_on_kennel_id", using: :btree
 
   create_table "hours_of_operations", force: :cascade do |t|
     t.integer  "kennel_id"
@@ -209,9 +198,8 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "sunday_close"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["kennel_id"], name: "index_hours_of_operations_on_kennel_id", using: :btree
   end
-
-  add_index "hours_of_operations", ["kennel_id"], name: "index_hours_of_operations_on_kennel_id", using: :btree
 
   create_table "kennel_check_in_check_outs", force: :cascade do |t|
     t.string   "check_in"
@@ -229,9 +217,8 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "comment"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["reservation_id"], name: "index_kennel_ratings_on_reservation_id", using: :btree
   end
-
-  add_index "kennel_ratings", ["reservation_id"], name: "index_kennel_ratings_on_reservation_id", using: :btree
 
   create_table "kennels", force: :cascade do |t|
     t.integer  "user_id"
@@ -257,10 +244,9 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "slug"
+    t.index ["slug"], name: "index_kennels_on_slug", using: :btree
+    t.index ["user_id"], name: "index_kennels_on_user_id", using: :btree
   end
-
-  add_index "kennels", ["slug"], name: "index_kennels_on_slug", using: :btree
-  add_index "kennels", ["user_id"], name: "index_kennels_on_user_id", using: :btree
 
   create_table "payments", force: :cascade do |t|
     t.string   "name"
@@ -287,9 +273,8 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.index ["user_id"], name: "index_pets_on_user_id", using: :btree
   end
-
-  add_index "pets", ["user_id"], name: "index_pets_on_user_id", using: :btree
 
   create_table "photos", force: :cascade do |t|
     t.integer  "kennel_id"
@@ -300,10 +285,9 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.index ["customer_id"], name: "index_photos_on_customer_id", using: :btree
+    t.index ["kennel_id"], name: "index_photos_on_kennel_id", using: :btree
   end
-
-  add_index "photos", ["customer_id"], name: "index_photos_on_customer_id", using: :btree
-  add_index "photos", ["kennel_id"], name: "index_photos_on_kennel_id", using: :btree
 
   create_table "policies", force: :cascade do |t|
     t.integer  "kennel_id"
@@ -311,9 +295,8 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "title"
+    t.index ["kennel_id"], name: "index_policies_on_kennel_id", using: :btree
   end
-
-  add_index "policies", ["kennel_id"], name: "index_policies_on_kennel_id", using: :btree
 
   create_table "press_pages", force: :cascade do |t|
     t.integer  "press_pageID"
@@ -360,10 +343,9 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "day_before_email_reminder"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.index ["kennel_id"], name: "index_reservations_on_kennel_id", using: :btree
+    t.index ["user_id"], name: "index_reservations_on_user_id", using: :btree
   end
-
-  add_index "reservations", ["kennel_id"], name: "index_reservations_on_kennel_id", using: :btree
-  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id", using: :btree
 
   create_table "runs", force: :cascade do |t|
     t.integer  "kennel_id"
@@ -383,9 +365,8 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.index ["kennel_id"], name: "index_runs_on_kennel_id", using: :btree
   end
-
-  add_index "runs", ["kennel_id"], name: "index_runs_on_kennel_id", using: :btree
 
   create_table "searches", force: :cascade do |t|
     t.integer  "search_zip"
@@ -412,9 +393,8 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "original_search_url"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.index ["kennel_id"], name: "index_stand_by_reservations_on_kennel_id", using: :btree
   end
-
-  add_index "stand_by_reservations", ["kennel_id"], name: "index_stand_by_reservations_on_kennel_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                   default: "", null: false
@@ -440,10 +420,9 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "user_image_content_type"
     t.integer  "user_image_file_size"
     t.datetime "user_image_updated_at"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "visits", id: :uuid, default: nil, force: :cascade do |t|
     t.uuid     "visitor_id"
@@ -471,8 +450,7 @@ ActiveRecord::Schema.define(version: 20171112191407) do
     t.string   "utm_content"
     t.string   "utm_campaign"
     t.datetime "started_at"
+    t.index ["user_id"], name: "index_visits_on_user_id", using: :btree
   end
-
-  add_index "visits", ["user_id"], name: "index_visits_on_user_id", using: :btree
 
 end
