@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby "2.7.3"
-gem 'rails', '5.2.0'
+gem 'rails', '5.2.3'
 gem 'pg', '0.20'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
@@ -32,7 +32,7 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem 'rack-handlers'
 gem 'friendly_id', '~> 5.1.0'
 gem 'meta-tags'
-gem 'therubyracer'
+#gem 'therubyracer'
 gem 'owlcarousel-rails'
 gem 'aws-sdk'
 
