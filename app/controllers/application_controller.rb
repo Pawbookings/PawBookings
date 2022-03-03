@@ -1,7 +1,7 @@
 require "base64"
 
 class ApplicationController < ActionController::Base
-  before_filter :set_time_zone, if: :user_signed_in?
+  before_action :set_time_zone, if: :user_signed_in?
   protect_from_forgery prepend: true, with: :exception
 
   def kennel_completed_registration?
